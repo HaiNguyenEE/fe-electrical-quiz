@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send feedback · FE Electrical &amp; Computer Workshop</title>
+  <meta name="description" content="Report a wrong answer, suggest a topic, or share a screenshot — the feedback page for the FE Electrical &amp; Computer Workshop.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <svg class="topbar-art" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="fbOrbCyan" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#22d3ee" stop-opacity="0.55"/>
+            <stop offset="55%" stop-color="#0891b2" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="fbOrbPurple" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#a78bfa" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#4c1d95" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="fbOrbTeal" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#2dd4bf" stop-opacity="0.42"/>
+            <stop offset="100%" stop-color="#0d9488" stop-opacity="0"/>
+          </radialGradient>
+          <pattern id="fbHex" x="0" y="0" width="64" height="56" patternUnits="userSpaceOnUse">
+            <polygon points="32,2 60,17 60,43 32,58 4,43 4,17" stroke="#a5b4fc" stroke-opacity="0.07" fill="none" stroke-width="0.6"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#fbHex)"/>
+        <circle cx="160" cy="60"  r="200" fill="url(#fbOrbCyan)"/>
+        <circle cx="970" cy="170" r="240" fill="url(#fbOrbPurple)"/>
+        <circle cx="600" cy="210" r="180" fill="url(#fbOrbTeal)"/>
+        <g fill="#fff">
+          <circle cx="118" cy="48" r="1.0"/>
+          <circle cx="282" cy="158" r="0.8"/>
+          <circle cx="350" cy="42" r="1.2"/>
+          <circle cx="640" cy="62" r="1.0"/>
+          <circle cx="800" cy="20" r="1.1"/>
+          <circle cx="958" cy="42" r="0.7"/>
+          <circle cx="1040" cy="102" r="1.0"/>
+          <circle cx="1158" cy="32" r="0.9"/>
+          <circle cx="240" cy="90" r="0.6"/>
+          <circle cx="460" cy="148" r="0.7"/>
+          <circle cx="540" cy="108" r="0.6"/>
+          <circle cx="740" cy="42" r="0.8"/>
+          <circle cx="828" cy="78" r="0.6"/>
+          <circle cx="988" cy="118" r="1.1"/>
+          <circle cx="1128" cy="128" r="0.9"/>
+        </g>
+        <g>
+          <circle cx="800" cy="20" r="1.6" fill="#c4b5fd">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.6s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="350" cy="42" r="1.7" fill="#f9a8d4">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="4.4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="1040" cy="102" r="1.5" fill="#5eead4">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        <g stroke="#a5b4fc" stroke-opacity="0.22" stroke-width="0.5" fill="none">
+          <line x1="350" y1="42" x2="640" y2="62"/>
+          <line x1="640" y1="62" x2="800" y2="20"/>
+          <line x1="800" y1="20" x2="958" y2="42"/>
+          <line x1="958" y1="42" x2="1040" y2="102"/>
+        </g>
+      </svg>
+
+      <div class="controls">
+        <a class="btn-ghost" href="index.html" style="text-decoration:none">← Back to workshop</a>
+        <button class="btn-ghost" id="themeBtn" type="button" style="margin-left:.5rem">🌙 Dark</button>
+      </div>
+      <div class="topbar-content">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 56 56" width="44" height="44">
+              <defs>
+                <radialGradient id="fbMarkCore" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"  stop-color="#ffffff" stop-opacity="1"/>
+                  <stop offset="32%" stop-color="#a5f3fc" stop-opacity="0.95"/>
+                  <stop offset="70%" stop-color="#06b6d4" stop-opacity="0.45"/>
+                  <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="fbMarkGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2"/>
+                </filter>
+              </defs>
+              <ellipse cx="28" cy="28" rx="24" ry="9" stroke="#67e8f9" stroke-width="1.4" fill="none" stroke-opacity="0.90"/>
+              <ellipse cx="28" cy="28" rx="24" ry="9" stroke="#c4b5fd" stroke-width="1.4" fill="none" stroke-opacity="0.90" transform="rotate(60 28 28)"/>
+              <ellipse cx="28" cy="28" rx="24" ry="9" stroke="#5eead4" stroke-width="1.4" fill="none" stroke-opacity="0.90" transform="rotate(-60 28 28)"/>
+              <g><circle cx="52" cy="28" r="1.6" fill="#67e8f9"><animateTransform attributeName="transform" type="rotate" from="0 28 28" to="360 28 28" dur="6s" repeatCount="indefinite"/></circle></g>
+              <g transform="rotate(60 28 28)"><circle cx="52" cy="28" r="1.6" fill="#c4b5fd"><animateTransform attributeName="transform" type="rotate" from="0 28 28" to="-360 28 28" dur="8s" repeatCount="indefinite"/></circle></g>
+              <g transform="rotate(-60 28 28)"><circle cx="52" cy="28" r="1.6" fill="#5eead4"><animateTransform attributeName="transform" type="rotate" from="0 28 28" to="360 28 28" dur="7s" repeatCount="indefinite"/></circle></g>
+              <circle cx="28" cy="28" r="8" fill="url(#fbMarkCore)" filter="url(#fbMarkGlow)"/>
+              <circle cx="28" cy="28" r="3" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Send feedback</h1>
+            <div class="sub">
+              Found a typo, wrong answer, or have a suggestion? Drop a note — attach a screenshot or video if it helps explain.
+              <br><i style="opacity:.92">Gửi phản hồi · Đính kèm screenshot hoặc video tối đa 10MB / file</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <form id="feedbackForm" class="card" method="POST" enctype="multipart/form-data" action="">
+        <!-- FormSubmit.co hidden config -->
+        <input type="hidden" name="_subject" value="FE Workshop — User feedback">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="nextUrl" value="">
+        <input type="hidden" name="page_url" id="pageUrl" value="">
+        <input type="hidden" name="user_agent" id="userAgent" value="">
+
+        <!-- Category -->
+        <div class="field-row">
+          <label class="field-label">What is this about? <span class="vn">/ Loại phản hồi</span> <span class="req">*</span></label>
+          <div class="cat-grid">
+            <label class="cat-card"><input type="radio" name="category" value="Wrong answer" required><span>📐 Wrong answer<small>Lời giải hoặc đáp án sai</small></span></label>
+            <label class="cat-card"><input type="radio" name="category" value="Typo / display bug"><span>🐛 Typo / display<small>Lỗi chữ hoặc hiển thị</small></span></label>
+            <label class="cat-card"><input type="radio" name="category" value="Suggestion"><span>💡 Suggestion<small>Ý tưởng cải tiến</small></span></label>
+            <label class="cat-card"><input type="radio" name="category" value="Other"><span>✉️ Other<small>Khác</small></span></label>
+          </div>
+        </div>
+
+        <!-- Chapter -->
+        <div class="field-row two-col">
+          <div>
+            <label class="field-label" for="chapter">Chapter <span class="vn">/ Chương</span></label>
+            <select id="chapter" name="chapter">
+              <option value="(general)">— General / Không thuộc chương cụ thể —</option>
+              <option value="1 — Mathematics">1 — Mathematics</option>
+              <option value="2 — Probability &amp; Statistics">2 — Probability &amp; Statistics</option>
+              <option value="3 — Ethics &amp; Professional Practice">3 — Ethics &amp; Professional Practice</option>
+              <option value="4 — Engineering Economics">4 — Engineering Economics</option>
+              <option value="5 — Properties of Electrical Materials">5 — Properties of Electrical Materials</option>
+              <option value="6 — Circuit Analysis (DC &amp; AC)">6 — Circuit Analysis (DC &amp; AC)</option>
+              <option value="7 — Linear Systems">7 — Linear Systems</option>
+              <option value="8 — Signal Processing">8 — Signal Processing</option>
+              <option value="9 — Electronics">9 — Electronics</option>
+              <option value="10 — Power Systems">10 — Power Systems</option>
+              <option value="11 — Electromagnetics">11 — Electromagnetics</option>
+              <option value="12 — Control Systems">12 — Control Systems</option>
+              <option value="13 — Communications">13 — Communications</option>
+              <option value="14 — Computer Networks">14 — Computer Networks</option>
+              <option value="15 — Digital Systems">15 — Digital Systems</option>
+              <option value="16 — Computer Systems">16 — Computer Systems</option>
+              <option value="17 — Software Engineering">17 — Software Engineering</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label" for="questionId">Question ID <span class="vn">/ Mã câu hỏi</span></label>
+            <input type="text" id="questionId" name="question_id" placeholder='e.g. "Câu 12" or skip if not specific'>
+          </div>
+        </div>
+
+        <!-- Subject -->
+        <div class="field-row">
+          <label class="field-label" for="subject">Short title <span class="vn">/ Tiêu đề ngắn</span> <span class="req">*</span></label>
+          <input type="text" id="subject" name="title" maxlength="120" required placeholder="One-line summary of the issue or idea">
+        </div>
+
+        <!-- Message -->
+        <div class="field-row">
+          <label class="field-label" for="message">Details <span class="vn">/ Mô tả chi tiết</span> <span class="req">*</span></label>
+          <textarea id="message" name="message" rows="7" required placeholder="What went wrong, or what would make the workshop better?
+Càng cụ thể càng tốt — chương, số câu, công thức, dòng nào sai, đề xuất cụ thể…"></textarea>
+        </div>
+
+        <!-- Optional reply email -->
+        <div class="field-row">
+          <label class="field-label" for="senderEmail">Your email <span class="vn">/ Email của bạn</span> <span class="opt">optional · for reply only</span></label>
+          <input type="email" id="senderEmail" name="reply_email" placeholder="you@example.com — leave blank to stay anonymous">
+        </div>
+
+        <!-- Attachments -->
+        <div class="field-row">
+          <label class="field-label">Attachments <span class="vn">/ Tệp đính kèm</span> <span class="opt">images or video · up to 10 MB each</span></label>
+
+          <div class="attach-toolbar">
+            <button type="button" class="btn-attach" id="btnPickFile">📎 Choose files</button>
+            <button type="button" class="btn-attach" id="btnScreenshot" title="Opens the quiz in a popup; drag-select a region; the screenshot is sent back here automatically.">📸 Capture from quiz page</button>
+            <button type="button" class="btn-attach" id="btnPasteHint">📋 Paste (Cmd/Ctrl-V)</button>
+            <input type="file" id="filePicker" multiple accept="image/*,video/*" hidden>
+          </div>
+
+          <div id="dropZone" class="drop-zone" tabindex="0">
+            <div class="drop-empty" id="dropEmptyMsg">
+              <div class="drop-icon">⬇️</div>
+              <div><b>Drag &amp; drop files here</b></div>
+              <div class="muted">or click <b>📎 Choose files</b>, <b>📸 Take screenshot</b>, or paste (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd>+<kbd>V</kbd>) anywhere on this page</div>
+            </div>
+            <div class="thumb-grid" id="thumbGrid"></div>
+          </div>
+
+          <div class="attach-meta">
+            <span id="attachCount">0 file(s) attached</span> ·
+            <span id="attachSize">0.00 MB total</span>
+          </div>
+        </div>
+
+        <!-- Submit row -->
+        <div class="submit-row">
+          <button type="submit" class="btn-primary" id="btnSubmit">📨 Send feedback</button>
+          <a href="index.html" class="btn-link">Cancel</a>
+        </div>
+
+        <!-- Status -->
+        <div id="formStatus" class="form-status" hidden></div>
+      </form>
+
+      <!-- Privacy note -->
+      <div class="card privacy-note">
+        <p><b>Privacy.</b> Your message is delivered through <a href="https://formsubmit.co" target="_blank" rel="noopener">FormSubmit.co</a>, a free static-site form relay. The recipient address is obfuscated in the page source. If you provide your email, it is used <i>only</i> to reply to you — never published or added to any list.</p>
+          <p class="muted">No tracking, no analytics, no cookies set by this page.</p>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <div class="foot-ribbon" aria-hidden="true"></div>
+      <p class="foot-line">FE Electrical &amp; Computer Exam Workshop · feedback channel</p>
+      <p class="foot-line muted">Independent personal study tool. Not affiliated with NCEES or any review provider. No content from official NCEES exams is reproduced.</p>
+    </footer>
+  </div>
+
+  <script src="feedback-widget.js"></script>
+  <script src="feedback.js"></script>
+</body>
+</html>

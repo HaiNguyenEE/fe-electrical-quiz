@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FE Electrical &amp; Computer — Interactive Practice Workshop</title>
+  <meta name="description" content="Bilingual EN/VN FE Electrical practice workshop — chapter drills, full timed mocks, step-by-step worked solutions, MathJax rendering, 15-minute break.">
+  <link rel="stylesheet" href="styles.css">
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <!-- Cosmic banner art: nebula glow + star field + constellations + hex grid -->
+      <svg class="topbar-art" viewBox="0 0 1200 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="orbCyan" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#22d3ee" stop-opacity="0.55"/>
+            <stop offset="55%" stop-color="#0891b2" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="orbPurple" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#a78bfa" stop-opacity="0.55"/>
+            <stop offset="55%" stop-color="#7c3aed" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#4c1d95" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="orbTeal" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#2dd4bf" stop-opacity="0.42"/>
+            <stop offset="100%" stop-color="#0d9488" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="orbPink" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#f472b6" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#be185d" stop-opacity="0"/>
+          </radialGradient>
+          <pattern id="hexgrid" x="0" y="0" width="64" height="56" patternUnits="userSpaceOnUse">
+            <polygon points="32,2 60,17 60,43 32,58 4,43 4,17" stroke="#a5b4fc" stroke-opacity="0.07" fill="none" stroke-width="0.6"/>
+          </pattern>
+          <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="0.6"/>
+          </filter>
+        </defs>
+
+        <!-- Subtle hex-grid base (suggests structured space / tech) -->
+        <rect width="100%" height="100%" fill="url(#hexgrid)"/>
+
+        <!-- Nebula orbs -->
+        <circle cx="160" cy="60"  r="200" fill="url(#orbCyan)"/>
+        <circle cx="970" cy="170" r="240" fill="url(#orbPurple)"/>
+        <circle cx="600" cy="210" r="180" fill="url(#orbTeal)"/>
+        <circle cx="420" cy="-20" r="160" fill="url(#orbPink)"/>
+
+        <!-- Star field (white pin-dots, varied size) -->
+        <g fill="#fff" filter="url(#starGlow)">
+          <circle cx="35"   cy="22"  r="0.7"/>
+          <circle cx="118"  cy="48"  r="1.0"/>
+          <circle cx="202"  cy="18"  r="0.6"/>
+          <circle cx="282"  cy="158" r="0.8"/>
+          <circle cx="350"  cy="42"  r="1.2"/>
+          <circle cx="418"  cy="102" r="0.5"/>
+          <circle cx="498"  cy="32"  r="0.9"/>
+          <circle cx="568"  cy="178" r="0.7"/>
+          <circle cx="640"  cy="62"  r="1.0"/>
+          <circle cx="720"  cy="120" r="0.6"/>
+          <circle cx="800"  cy="20"  r="1.1"/>
+          <circle cx="878"  cy="170" r="0.8"/>
+          <circle cx="958"  cy="42"  r="0.7"/>
+          <circle cx="1040" cy="102" r="1.0"/>
+          <circle cx="1098" cy="178" r="0.6"/>
+          <circle cx="1158" cy="32"  r="0.9"/>
+          <circle cx="80"   cy="180" r="0.6"/>
+          <circle cx="160"  cy="118" r="0.8"/>
+          <circle cx="238"  cy="88"  r="0.5"/>
+          <circle cx="380"  cy="198" r="1.0"/>
+          <circle cx="458"  cy="148" r="0.7"/>
+          <circle cx="540"  cy="108" r="0.6"/>
+          <circle cx="658"  cy="158" r="0.9"/>
+          <circle cx="740"  cy="42"  r="0.8"/>
+          <circle cx="828"  cy="78"  r="0.6"/>
+          <circle cx="908"  cy="200" r="0.7"/>
+          <circle cx="988"  cy="118" r="1.1"/>
+          <circle cx="1068" cy="58"  r="0.5"/>
+          <circle cx="1128" cy="128" r="0.9"/>
+          <circle cx="50"   cy="100" r="0.7"/>
+          <circle cx="250"  cy="60"  r="0.5"/>
+          <circle cx="310"  cy="180" r="0.8"/>
+          <circle cx="455"  cy="40"  r="0.6"/>
+          <circle cx="600"  cy="100" r="0.9"/>
+          <circle cx="685"  cy="195" r="0.5"/>
+          <circle cx="775"  cy="78"  r="0.7"/>
+          <circle cx="855"  cy="32"  r="0.6"/>
+          <circle cx="935"  cy="98"  r="0.8"/>
+          <circle cx="1020" cy="36"  r="0.7"/>
+          <circle cx="1110" cy="98"  r="0.5"/>
+          <circle cx="1180" cy="160" r="0.9"/>
+        </g>
+
+        <!-- Brighter accent stars that twinkle -->
+        <g>
+          <circle cx="118" cy="48" r="1.5" fill="#a5f3fc">
+            <animate attributeName="opacity" values="1;0.25;1" dur="3.2s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="1.5;2.2;1.5" dur="3.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="800" cy="20" r="1.6" fill="#c4b5fd">
+            <animate attributeName="opacity" values="0.45;1;0.45" dur="2.6s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="1.6;2.4;1.6" dur="2.6s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="640" cy="62" r="1.5" fill="#a5b4fc">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="1040" cy="102" r="1.6" fill="#5eead4">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="350" cy="42" r="1.7" fill="#f9a8d4">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="4.4s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- Constellation lines -->
+        <g stroke="#a5b4fc" stroke-opacity="0.22" stroke-width="0.5" fill="none" stroke-linecap="round">
+          <line x1="118"  y1="48"  x2="202"  y2="18"/>
+          <line x1="202"  y1="18"  x2="282"  y2="158"/>
+          <line x1="350"  y1="42"  x2="498"  y2="32"/>
+          <line x1="498"  y1="32"  x2="640"  y2="62"/>
+          <line x1="640"  y1="62"  x2="800"  y2="20"/>
+          <line x1="800"  y1="20"  x2="958"  y2="42"/>
+          <line x1="958"  y1="42"  x2="1040" y2="102"/>
+          <line x1="1040" y1="102" x2="1158" y2="32"/>
+          <line x1="282"  y1="158" x2="418"  y2="102"/>
+          <line x1="418"  y1="102" x2="568"  y2="178"/>
+        </g>
+      </svg>
+
+      <div class="controls">
+        <button class="btn-ghost" id="themeBtn" type="button">🌙 Dark</button>
+      </div>
+      <div class="topbar-content">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 56 56" width="44" height="44">
+              <defs>
+                <radialGradient id="markCore" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"  stop-color="#ffffff" stop-opacity="1"/>
+                  <stop offset="32%" stop-color="#a5f3fc" stop-opacity="0.95"/>
+                  <stop offset="70%" stop-color="#06b6d4" stop-opacity="0.45"/>
+                  <stop offset="100%" stop-color="#0e7490" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="markGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="1.2"/>
+                </filter>
+              </defs>
+              <!-- Three orbital ellipses (rotated 0°, +60°, −60°) -->
+              <ellipse cx="28" cy="28" rx="24" ry="9" stroke="#67e8f9" stroke-width="1.4" fill="none" stroke-opacity="0.90"/>
+              <ellipse cx="28" cy="28" rx="24" ry="9" stroke="#c4b5fd" stroke-width="1.4" fill="none" stroke-opacity="0.90" transform="rotate(60 28 28)"/>
+              <ellipse cx="28" cy="28" rx="24" ry="9" stroke="#5eead4" stroke-width="1.4" fill="none" stroke-opacity="0.90" transform="rotate(-60 28 28)"/>
+              <!-- Electron dots on each orbit (animated rotation) -->
+              <g>
+                <circle cx="52" cy="28" r="1.6" fill="#67e8f9">
+                  <animateTransform attributeName="transform" type="rotate" from="0 28 28" to="360 28 28" dur="6s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+              <g transform="rotate(60 28 28)">
+                <circle cx="52" cy="28" r="1.6" fill="#c4b5fd">
+                  <animateTransform attributeName="transform" type="rotate" from="0 28 28" to="-360 28 28" dur="8s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+              <g transform="rotate(-60 28 28)">
+                <circle cx="52" cy="28" r="1.6" fill="#5eead4">
+                  <animateTransform attributeName="transform" type="rotate" from="0 28 28" to="360 28 28" dur="7s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+              <!-- Glowing nucleus -->
+              <circle cx="28" cy="28" r="8" fill="url(#markCore)" filter="url(#markGlow)"/>
+              <circle cx="28" cy="28" r="3" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div>
+            <h1>FE Electrical &amp; Computer · Exam Workshop</h1>
+            <div class="sub">
+              Chapter drills · Full timed mocks · Step-by-step worked solutions · Bilingual EN / VN
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="card"><p>Loading question bank…</p></div>
+    </main>
+
+    <footer class="foot">
+      <div class="foot-ribbon" aria-hidden="true"></div>
+      <p class="foot-quote">"Excellence lives in the details — practice deliberately, understand deeply, sit the exam with quiet confidence."</p>
+      <p class="foot-line">
+        FE Electrical &amp; Computer Exam Workshop · curated by <b>Hai Nguyen</b>, B.S. Electrical Engineering, California State University, Long Beach.
+      </p>
+      <p class="foot-line muted">
+        <b>Disclaimer.</b> This workshop is an independent, personal study tool. It is <i>not</i> affiliated with, endorsed by, or sponsored by NCEES, any state licensing board, any review provider, or any educational publisher. No NCEES exam content is reproduced; all questions are original or paraphrased from public-domain references. Problem statements, numeric values, and worked solutions are provided as study aids and may contain errors — always verify against the official <i>NCEES FE Reference Handbook</i> and trusted references. No warranty, express or implied, is given as to accuracy or fitness for any purpose. Use of this site does not guarantee any exam result; the user assumes full responsibility for their own preparation.
+      </p>
+      <p class="foot-line muted">
+        On exam day, use only the materials and tools permitted by NCEES. Educational content here is for offline practice only — not for any commercial purpose.
+      </p>
+    </footer>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="questions-extra.js"></script>
+  <script src="questions-extra2.js"></script>
+  <script src="questions-extra3.js"></script>
+  <script src="questions-extra4.js"></script>
+  <script src="questions-extra5.js"></script>
+  <script src="questions-extra6.js"></script>
+  <script src="questions-extra7.js"></script>
+  <script src="questions-extra8.js"></script>
+  <script src="questions-extra9.js"></script>
+  <script src="questions-extra10.js"></script>
+  <script src="questions-extra11.js"></script>
+  <script src="questions-extra12.js"></script>
+  <script src="questions-extra13.js"></script>
+  <script src="quiz.js"></script>
+  <script src="feedback-modal.js"></script>
+  <script src="feedback-widget.js"></script>
+</body>
+</html>

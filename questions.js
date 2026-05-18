@@ -1,0 +1,2542 @@
+// FE Electrical Question Bank — v2 with structured detailed solutions
+// (c) Hai Nguyen — for personal study use
+
+// ============================================================
+// Solution renderer helper
+//   S({ c: concept, s: [step1, step2, ...], a: answer, v: verify })
+// All fields optional; MathJax processes $...$ inside any of them.
+// ============================================================
+function S(p) {
+  let h = '';
+  if (p.c) h += `<div class="sol-concept"><b>📐 Khái niệm / Concept:</b> ${p.c}</div>`;
+  if (p.s && p.s.length) {
+    h += '<ol class="sol-steps">';
+    p.s.forEach(step => { h += `<li>${step}</li>`; });
+    h += '</ol>';
+  }
+  if (p.a) h += `<div class="sol-answer"><b>✅ Đáp án / Answer:</b> ${p.a}</div>`;
+  if (p.v) h += `<div class="sol-check"><i>🔍 Kiểm tra / Check:</i> ${p.v}</div>`;
+  return h;
+}
+
+const QUESTION_BANK = {
+  meta: {
+    handbook: "NCEES FE Reference Handbook v10.0",
+    spec: "FE Electrical & Computer CBT Exam Specifications, effective July 2020",
+    total_test_questions: 110,
+    time_minutes: 330,
+  },
+  chapters: [
+    // ====================== Ch 1: Mathematics ======================
+    {
+      id: 1, name_en: "Mathematics", name_vn: "Toán học", fe_count: [11, 17],
+      questions: [
+        { q: "Solve $2x^2 - 4x + 5 = 0$. Express roots in $a+bj$ form.",
+          choices: ["$1 \\pm j\\sqrt{6}/2$", "$2 \\pm j\\sqrt{3}$", "$1 \\pm j2$", "$-1 \\pm j\\sqrt{6}/2$"],
+          correct: 0,
+          solution: S({
+            c: "Quadratic formula $x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$ works for any $ax^2+bx+c=0$; $\\Delta<0$ gives complex conjugate roots.",
+            s: [
+              "Identify coefficients: $a=2$, $b=-4$, $c=5$.",
+              "Compute discriminant: $\\Delta = b^2 - 4ac = (-4)^2 - 4(2)(5) = 16 - 40 = -24$.",
+              "Since $\\Delta < 0$, expect complex conjugates. $\\sqrt{-24} = j\\sqrt{24} = 2j\\sqrt{6}$.",
+              "Substitute: $x = \\frac{4 \\pm 2j\\sqrt{6}}{2(2)} = \\frac{4 \\pm 2j\\sqrt{6}}{4} = 1 \\pm \\frac{j\\sqrt{6}}{2}$."
+            ],
+            a: "$x = 1 \\pm \\dfrac{j\\sqrt{6}}{2}$",
+            v: "Numerically: $\\sqrt{6}\\approx 2.449$, so $x \\approx 1 \\pm 1.225j$."
+          }),
+          ref: "Handbook p.35" },
+
+        { q: "Convert $z = 6\\angle 30°$ to rectangular form.",
+          choices: ["$5.20 + j3.00$", "$3.00 + j5.20$", "$6\\cos 30° + j6\\sin 30°$ which equals $5.20+j3.00$", "Both A and C"],
+          correct: 3,
+          solution: S({
+            c: "Polar to rectangular: $z = r\\cos\\theta + jr\\sin\\theta$.",
+            s: [
+              "Real part: $r\\cos\\theta = 6\\cos 30° = 6(\\sqrt{3}/2) = 6(0.866) = 5.196$.",
+              "Imag part: $r\\sin\\theta = 6\\sin 30° = 6(0.5) = 3.000$.",
+              "So $z = 5.196 + j3.000$. Both choices A (numerical) and C (symbolic) are correct expressions."
+            ],
+            a: "$z \\approx 5.20 + j3.00$ — Both A and C state this.",
+            v: "$|z| = \\sqrt{5.196^2 + 3^2} = \\sqrt{27 + 9} = 6$ ✓"
+          }),
+          ref: "Handbook p.36" },
+
+        { q: "Find $z_1 \\cdot z_2$ where $z_1 = 4\\angle 60°$, $z_2 = 2\\angle 30°$.",
+          choices: ["$8\\angle 90°$", "$8\\angle 30°$", "$6\\angle 90°$", "$2\\angle 30°$"],
+          correct: 0,
+          solution: S({
+            c: "Multiplying complex numbers in polar form: <b>multiply magnitudes, add angles</b>: $(r_1\\angle\\theta_1)(r_2\\angle\\theta_2) = r_1 r_2 \\angle(\\theta_1+\\theta_2)$.",
+            s: [
+              "Magnitudes: $r_1 r_2 = (4)(2) = 8$.",
+              "Angles: $\\theta_1 + \\theta_2 = 60° + 30° = 90°$.",
+              "Combine: $z_1 z_2 = 8\\angle 90° = 0 + j8$."
+            ],
+            a: "$z_1 z_2 = 8\\angle 90°$",
+            v: "Rectangular check: $z_1 = 2+j(2\\sqrt{3})$, $z_2 = \\sqrt{3}+j$. Product = $(2)(\\sqrt{3}) - (2\\sqrt{3})(1) + j[(2)(1)+(2\\sqrt{3})(\\sqrt{3})] = 0 + j8$ ✓"
+          }),
+          ref: "Handbook p.36" },
+
+        { q: "Find $\\sin(2\\theta)$ if $\\sin\\theta = 0.6$, $\\cos\\theta = 0.8$.",
+          choices: ["$0.48$", "$0.96$", "$0.28$", "$1.4$"],
+          correct: 1,
+          solution: S({
+            c: "Double-angle identity: $\\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$.",
+            s: [
+              "Substitute: $\\sin 2\\theta = 2(0.6)(0.8)$.",
+              "Multiply: $= 2 \\cdot 0.48 = 0.96$."
+            ],
+            a: "$\\sin 2\\theta = 0.96$",
+            v: "Pythagorean check: $\\sin^2\\theta + \\cos^2\\theta = 0.36 + 0.64 = 1$ ✓ (consistent values)."
+          }),
+          ref: "Handbook p.37" },
+
+        { q: "In a triangle with $a=8$, $b=10$, included angle $C=60°$, find side $c$.",
+          choices: ["$9.17$", "$8.66$", "$11.49$", "$6.93$"],
+          correct: 0,
+          solution: S({
+            c: "Law of cosines: $c^2 = a^2 + b^2 - 2ab\\cos C$. Use when two sides and the included angle are known (SAS).",
+            s: [
+              "Substitute: $c^2 = 8^2 + 10^2 - 2(8)(10)\\cos 60°$.",
+              "Compute squares: $c^2 = 64 + 100 - 160(0.5)$.",
+              "Simplify: $c^2 = 164 - 80 = 84$.",
+              "Square root: $c = \\sqrt{84} \\approx 9.165$."
+            ],
+            a: "$c \\approx 9.17$",
+            v: "Sanity check: $c$ is between $|a-b|=2$ and $a+b=18$ ✓."
+          }),
+          ref: "Handbook p.37" },
+
+        { q: "Determinant of $A = \\begin{pmatrix}2&1&3\\\\0&4&-1\\\\5&2&0\\end{pmatrix}$ is:",
+          choices: ["$-61$", "$61$", "$-19$", "$23$"],
+          correct: 0,
+          solution: S({
+            c: "Cofactor expansion along row 1: $|A| = a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}$ where $M_{ij}$ is the $2\\times 2$ minor obtained by deleting row $i$, column $j$.",
+            s: [
+              "$M_{11} = \\det\\begin{pmatrix}4&-1\\\\2&0\\end{pmatrix} = 4\\cdot 0 - (-1)(2) = 2$.",
+              "$M_{12} = \\det\\begin{pmatrix}0&-1\\\\5&0\\end{pmatrix} = 0\\cdot 0 - (-1)(5) = 5$.",
+              "$M_{13} = \\det\\begin{pmatrix}0&4\\\\5&2\\end{pmatrix} = 0\\cdot 2 - 4\\cdot 5 = -20$.",
+              "Combine with cofactor signs $(+,-,+)$: $|A| = 2(2) - 1(5) + 3(-20) = 4 - 5 - 60$."
+            ],
+            a: "$|A| = -61$",
+            v: "Singular check: $|A|\\ne 0$, so $A$ is invertible."
+          }),
+          ref: "Handbook p.57" },
+
+        { q: "If $A$ is $3\\times 4$ and $B$ is $4\\times 2$, dimension of $AB$ is:",
+          choices: ["$3\\times 2$", "$4\\times 4$", "$2\\times 3$", "Undefined"],
+          correct: 0,
+          solution: S({
+            c: "Matrix multiplication rule: $(m\\times n)(n\\times p) = (m\\times p)$. <b>Inner dimensions must match.</b>",
+            s: [
+              "Inner dimensions: $A$ has 4 columns, $B$ has 4 rows → 4 = 4 ✓.",
+              "Outer dimensions form the result: $m \\times p = 3 \\times 2$."
+            ],
+            a: "$AB$ is $3 \\times 2$.",
+            v: "Note: $BA$ would be undefined (inner: 2 vs 3)."
+          }),
+          ref: "Handbook p.57" },
+
+        { q: "Inverse of $A = \\begin{pmatrix}3&4\\\\2&5\\end{pmatrix}$:",
+          choices: ["$\\frac{1}{7}\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$", "$\\frac{1}{23}\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$", "$\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$", "$\\frac{1}{7}\\begin{pmatrix}3&-4\\\\-2&5\\end{pmatrix}$"],
+          correct: 0,
+          solution: S({
+            c: "$2\\times 2$ inverse: $A^{-1} = \\dfrac{1}{|A|}\\begin{pmatrix}d & -b\\\\-c & a\\end{pmatrix}$ for $A = \\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$. <b>Swap diagonal, negate off-diagonal, divide by determinant.</b>",
+            s: [
+              "Determinant: $|A| = ad - bc = (3)(5) - (4)(2) = 15 - 8 = 7$.",
+              "Swap diagonals: $a\\leftrightarrow d$ gives $\\begin{pmatrix}5 & 4\\\\2 & 3\\end{pmatrix}$.",
+              "Negate off-diagonals: $\\begin{pmatrix}5 & -4\\\\-2 & 3\\end{pmatrix}$.",
+              "Divide by $|A|=7$: $A^{-1} = \\dfrac{1}{7}\\begin{pmatrix}5 & -4\\\\-2 & 3\\end{pmatrix}$."
+            ],
+            a: "$A^{-1} = \\dfrac{1}{7}\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$",
+            v: "$A\\cdot A^{-1}$ top-left: $\\frac{1}{7}[(3)(5)+(4)(-2)] = \\frac{15-8}{7} = 1$ ✓"
+          }),
+          ref: "Handbook p.57" },
+
+        { q: "Solve by Cramer's rule: $3x+2y=7$, $x-y=1$. Find $x$.",
+          choices: ["$1.8$", "$1.0$", "$0.8$", "$2.5$"],
+          correct: 0,
+          solution: S({
+            c: "Cramer's rule: for $A\\vec{x}=\\vec{b}$, each unknown $x_i = |A_i|/|A|$, where $A_i$ is $A$ with column $i$ replaced by $\\vec{b}$.",
+            s: [
+              "Write coefficient matrix: $A = \\begin{pmatrix}3&2\\\\1&-1\\end{pmatrix}$, $\\vec{b} = \\begin{pmatrix}7\\\\1\\end{pmatrix}$.",
+              "$|A| = (3)(-1) - (2)(1) = -3 - 2 = -5$.",
+              "Replace column 1 with $\\vec{b}$: $A_x = \\begin{pmatrix}7&2\\\\1&-1\\end{pmatrix}$, $|A_x| = (7)(-1) - (2)(1) = -9$.",
+              "Divide: $x = \\dfrac{|A_x|}{|A|} = \\dfrac{-9}{-5} = 1.8$."
+            ],
+            a: "$x = 1.8$",
+            v: "By inspection $y = x - 1 = 0.8$. Check eq.1: $3(1.8)+2(0.8) = 5.4+1.6 = 7$ ✓"
+          }),
+          ref: "Handbook p.57" },
+
+        { q: "Eigenvalues of $A = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$:",
+          choices: ["$5, 2$", "$4, 3$", "$3, -2$", "$6, 1$"],
+          correct: 0,
+          solution: S({
+            c: "Eigenvalues satisfy $\\det(A-\\lambda I) = 0$. For $2\\times 2$: $\\lambda^2 - \\text{tr}(A)\\lambda + |A| = 0$.",
+            s: [
+              "Trace: $\\text{tr}(A) = 4 + 3 = 7$.",
+              "Determinant: $|A| = (4)(3) - (1)(2) = 10$.",
+              "Characteristic polynomial: $\\lambda^2 - 7\\lambda + 10 = 0$.",
+              "Factor: $(\\lambda - 5)(\\lambda - 2) = 0 \\Rightarrow \\lambda = 5, 2$."
+            ],
+            a: "$\\lambda_1 = 5$, $\\lambda_2 = 2$",
+            v: "Sum check: $5+2 = 7 = $ trace ✓ ; Product: $5\\cdot 2 = 10 = $ det ✓"
+          }),
+          ref: "Handbook p.58" },
+
+        { q: "Find $x$ that minimizes $f(x) = x^2 - 6x + 11$.",
+          choices: ["$3$", "$2$", "$6$", "$-3$"],
+          correct: 0,
+          solution: S({
+            c: "For optimization: set $f'(x) = 0$ to find critical points, then check $f''$ — if $f''>0$ it's a minimum.",
+            s: [
+              "$f'(x) = 2x - 6$.",
+              "Set to 0: $2x - 6 = 0 \\Rightarrow x = 3$.",
+              "$f''(x) = 2 > 0$ → confirms minimum.",
+              "Minimum value: $f(3) = 9 - 18 + 11 = 2$."
+            ],
+            a: "$x = 3$ (and $f_{\\min} = 2$)",
+            v: "Alternative: parabola vertex at $x = -b/(2a) = 6/2 = 3$ ✓"
+          }),
+          ref: "Handbook p.47-49" },
+
+        { q: "Evaluate $\\int_0^2 (3x^2 + 2x)\\,dx$.",
+          choices: ["$12$", "$10$", "$14$", "$8$"],
+          correct: 0,
+          solution: S({
+            c: "Power rule: $\\int x^n dx = \\dfrac{x^{n+1}}{n+1} + C$. Fundamental theorem: $\\int_a^b f\\,dx = F(b) - F(a)$.",
+            s: [
+              "Antiderivative: $\\int (3x^2 + 2x)\\,dx = x^3 + x^2 + C$.",
+              "Evaluate at $x=2$: $F(2) = 8 + 4 = 12$.",
+              "Evaluate at $x=0$: $F(0) = 0$.",
+              "Subtract: $F(2) - F(0) = 12 - 0 = 12$."
+            ],
+            a: "$\\int_0^2 = 12$",
+            v: "Geometric: the curve grows on $[0,2]$ and the area is bounded by $f(2)=16$ times width 2 = 32, so 12 is reasonable."
+          }),
+          ref: "Handbook p.49" },
+
+        { q: "$\\frac{d}{dx}[x^2 \\ln x]$ equals:",
+          choices: ["$2x\\ln x + x$", "$2x\\ln x$", "$x + \\ln x$", "$2/x$"],
+          correct: 0,
+          solution: S({
+            c: "Product rule: $(uv)' = u'v + uv'$. Here $u = x^2$, $v = \\ln x$.",
+            s: [
+              "$u' = 2x$, $v' = 1/x$.",
+              "Apply product rule: $\\frac{d}{dx}[x^2\\ln x] = (2x)(\\ln x) + (x^2)(1/x)$.",
+              "Simplify: $= 2x\\ln x + x$."
+            ],
+            a: "$2x\\ln x + x$",
+            v: "At $x=1$: derivative $= 2(1)(0) + 1 = 1$. Numerical check confirms slope ≈ 1 there."
+          }),
+          ref: "Handbook p.47" },
+
+        { q: "Find general solution of $y' + 3y = 0$.",
+          choices: ["$y = Ce^{-3x}$", "$y = Ce^{3x}$", "$y = C\\cos 3x$", "$y = Cx^{-3}$"],
+          correct: 0,
+          solution: S({
+            c: "First-order linear homogeneous ODE: $y' + ay = 0$ has solution $y = Ce^{-ax}$. Equivalently, characteristic equation $r + a = 0$ gives $r = -a$.",
+            s: [
+              "Characteristic equation: $r + 3 = 0 \\Rightarrow r = -3$.",
+              "General solution: $y = Ce^{rx} = Ce^{-3x}$ ($C$ is integration constant)."
+            ],
+            a: "$y(x) = Ce^{-3x}$",
+            v: "Plug back: $y' = -3Ce^{-3x}$, so $y'+3y = -3Ce^{-3x}+3Ce^{-3x} = 0$ ✓"
+          }),
+          ref: "Handbook p.54-55" },
+
+        { q: "Solve $y'' + 4y' + 13y = 0$. The roots of the char eq are:",
+          choices: ["$-2 \\pm 3j$", "$2 \\pm 3j$", "$-4 \\pm \\sqrt{36}$", "$-2, -13$"],
+          correct: 0,
+          solution: S({
+            c: "Second-order ODE $ay''+by'+cy=0$ → characteristic equation $ar^2+br+c=0$. Solve for $r$.",
+            s: [
+              "Char eq: $r^2 + 4r + 13 = 0$.",
+              "Discriminant: $b^2 - 4ac = 16 - 52 = -36 < 0$ → complex conjugate roots.",
+              "Quadratic formula: $r = \\dfrac{-4 \\pm \\sqrt{-36}}{2} = \\dfrac{-4 \\pm 6j}{2} = -2 \\pm 3j$.",
+              "General solution: $y = e^{-2x}(C_1 \\cos 3x + C_2 \\sin 3x)$ (under-damped oscillation)."
+            ],
+            a: "$r = -2 \\pm 3j$",
+            v: "Real part $-2$ → solution decays; imag part $3$ → oscillation freq."
+          }),
+          ref: "Handbook p.55" },
+
+        { q: "Find angle between $\\vec{A} = 3\\hat{i}+4\\hat{j}$ and $\\vec{B} = \\hat{i}+2\\hat{j}+2\\hat{k}$.",
+          choices: ["$42.8°$", "$60°$", "$30°$", "$48°$"],
+          correct: 0,
+          solution: S({
+            c: "Dot product gives angle: $\\cos\\theta = \\dfrac{\\vec{A}\\cdot\\vec{B}}{|\\vec{A}||\\vec{B}|}$.",
+            s: [
+              "Dot product: $\\vec{A}\\cdot\\vec{B} = (3)(1)+(4)(2)+(0)(2) = 3+8+0 = 11$.",
+              "Magnitudes: $|\\vec{A}| = \\sqrt{9+16+0} = 5$; $|\\vec{B}| = \\sqrt{1+4+4} = 3$.",
+              "Cosine: $\\cos\\theta = 11/(5\\cdot 3) = 11/15 = 0.7333$.",
+              "Inverse: $\\theta = \\arccos(0.7333) \\approx 42.83°$."
+            ],
+            a: "$\\theta \\approx 42.8°$",
+            v: "If vectors were parallel, $\\theta = 0°$; perpendicular = 90°. Got 42.8° — between, reasonable."
+          }),
+          ref: "Handbook p.38" },
+
+        { q: "$\\vec{A} \\times \\vec{B}$ for $\\vec{A}=2\\hat{i}+\\hat{k}$, $\\vec{B}=\\hat{i}+\\hat{j}-\\hat{k}$:",
+          choices: ["$-\\hat{i}+3\\hat{j}+2\\hat{k}$", "$\\hat{i}-3\\hat{j}+2\\hat{k}$", "$3\\hat{i}+\\hat{j}-\\hat{k}$", "$-\\hat{i}-3\\hat{j}-2\\hat{k}$"],
+          correct: 0,
+          solution: S({
+            c: "Cross product via determinant: $\\vec{A}\\times\\vec{B} = \\det\\begin{pmatrix}\\hat{i}&\\hat{j}&\\hat{k}\\\\A_x&A_y&A_z\\\\B_x&B_y&B_z\\end{pmatrix}$.",
+            s: [
+              "Set up: $A = (2, 0, 1)$, $B = (1, 1, -1)$.",
+              "$\\hat{i}$ component: $A_y B_z - A_z B_y = (0)(-1) - (1)(1) = -1$.",
+              "$\\hat{j}$ component (with negative sign): $-(A_x B_z - A_z B_x) = -((2)(-1) - (1)(1)) = -(-3) = 3$.",
+              "$\\hat{k}$ component: $A_x B_y - A_y B_x = (2)(1) - (0)(1) = 2$.",
+              "Combine: $\\vec{A}\\times\\vec{B} = -\\hat{i} + 3\\hat{j} + 2\\hat{k}$."
+            ],
+            a: "$-\\hat{i} + 3\\hat{j} + 2\\hat{k}$",
+            v: "Perpendicularity: $(\\vec{A}\\times\\vec{B})\\cdot\\vec{A} = (-1)(2)+(3)(0)+(2)(1) = 0$ ✓ (perp to $\\vec{A}$ as expected)."
+          }),
+          ref: "Handbook p.38" },
+
+        { q: "$\\log_2(64) + \\log_3(81)$ equals:",
+          choices: ["$10$", "$12$", "$8$", "$14$"],
+          correct: 0,
+          solution: S({
+            c: "Log identity: $\\log_b(b^n) = n$. Find what power gives the argument.",
+            s: [
+              "$\\log_2 64 = \\log_2 2^6 = 6$ (since $2^6 = 64$).",
+              "$\\log_3 81 = \\log_3 3^4 = 4$ (since $3^4 = 81$).",
+              "Sum: $6 + 4 = 10$."
+            ],
+            a: "$10$",
+            v: "All powers of 2/3 verified by mental math."
+          }),
+          ref: "Handbook p.36" },
+
+        { q: "Find $\\lim_{x\\to 0} \\dfrac{\\sin 3x}{x}$.",
+          choices: ["$3$", "$1$", "$0$", "$\\infty$"],
+          correct: 0,
+          solution: S({
+            c: "Key limit: $\\lim_{u\\to 0}\\dfrac{\\sin u}{u} = 1$. Manipulate to match.",
+            s: [
+              "Multiply top and bottom by 3: $\\dfrac{\\sin 3x}{x} = 3\\cdot\\dfrac{\\sin 3x}{3x}$.",
+              "As $x\\to 0$, $3x\\to 0$, so $\\dfrac{\\sin 3x}{3x}\\to 1$.",
+              "Limit = $3 \\cdot 1 = 3$."
+            ],
+            a: "Limit $= 3$",
+            v: "Alternatively L'Hôpital: $\\lim \\dfrac{3\\cos 3x}{1}\\bigg|_{x=0} = 3$ ✓"
+          }),
+          ref: "Handbook p.47" },
+
+        { q: "Series Taylor expansion of $e^x$ around $x=0$, first 3 terms:",
+          choices: ["$1 + x + x^2/2$", "$1 - x + x^2/2$", "$x + x^2/2 + x^3/6$", "$1 + x + x^2$"],
+          correct: 0,
+          solution: S({
+            c: "Maclaurin series: $f(x) = \\sum_{n=0}^{\\infty}\\dfrac{f^{(n)}(0)}{n!}x^n$. For $e^x$, all derivatives equal $e^x$, so $f^{(n)}(0)=1$.",
+            s: [
+              "Term 0: $\\dfrac{1}{0!}x^0 = 1$.",
+              "Term 1: $\\dfrac{1}{1!}x^1 = x$.",
+              "Term 2: $\\dfrac{1}{2!}x^2 = x^2/2$.",
+              "First 3 terms: $1 + x + \\dfrac{x^2}{2}$."
+            ],
+            a: "$1 + x + \\dfrac{x^2}{2}$",
+            v: "At $x=0.1$: series gives $1 + 0.1 + 0.005 = 1.105$; actual $e^{0.1}\\approx 1.105$ ✓"
+          }),
+          ref: "Handbook p.50" },
+      ],
+    },
+    // ====================== Ch 2: Probability & Statistics ======================
+    {
+      id: 2, name_en: "Probability & Statistics", name_vn: "Xác suất – Thống kê", fe_count: [4, 6],
+      questions: [
+        { q: "Sample mean of {4, 8, 6, 5, 7}:",
+          choices: ["$6.0$", "$5.5$", "$6.5$", "$7.0$"],
+          correct: 0,
+          solution: S({
+            c: "Sample mean: $\\bar{x} = \\dfrac{1}{n}\\sum x_i$ — sum divided by count.",
+            s: [
+              "Sum: $4+8+6+5+7 = 30$.",
+              "Count: $n = 5$.",
+              "Divide: $\\bar{x} = 30/5 = 6.0$."
+            ],
+            a: "$\\bar{x} = 6.0$"
+          }),
+          ref: "Handbook p.63" },
+
+        { q: "Sample standard deviation of {4, 8, 6, 5, 7}:",
+          choices: ["$1.581$", "$1.414$", "$2.0$", "$2.5$"],
+          correct: 0,
+          solution: S({
+            c: "Sample std: $s = \\sqrt{\\dfrac{1}{n-1}\\sum (x_i-\\bar{x})^2}$. The Bessel correction $(n-1)$ gives an unbiased estimator.",
+            s: [
+              "First $\\bar{x} = 6$ (from previous question).",
+              "Squared deviations: $(4-6)^2 = 4$; $(8-6)^2 = 4$; $(6-6)^2 = 0$; $(5-6)^2 = 1$; $(7-6)^2 = 1$.",
+              "Sum of squares: $4+4+0+1+1 = 10$.",
+              "Sample variance: $s^2 = 10/(5-1) = 2.5$.",
+              "Std dev: $s = \\sqrt{2.5} \\approx 1.581$."
+            ],
+            a: "$s \\approx 1.581$",
+            v: "Note: population std (divide by $n$) would give $\\sqrt{2} \\approx 1.414$ — that's choice B (wrong)."
+          }),
+          ref: "Handbook p.63" },
+
+        { q: "Probability of drawing 2 aces in a row from a 52-card deck without replacement:",
+          choices: ["$1/221$", "$1/169$", "$1/52$", "$1/26$"],
+          correct: 0,
+          solution: S({
+            c: "Dependent events: $P(A_1\\cap A_2) = P(A_1)\\cdot P(A_2|A_1)$. After drawing first ace, only 3 aces left in 51 cards.",
+            s: [
+              "$P(\\text{1st ace}) = 4/52 = 1/13$.",
+              "$P(\\text{2nd ace} | \\text{1st ace}) = 3/51 = 1/17$.",
+              "Joint: $P = (1/13)(1/17) = 1/221$."
+            ],
+            a: "$P = 1/221 \\approx 0.452\\%$",
+            v: "If with replacement, it would be $(4/52)^2 = 1/169$ (choice B). Without replacement is slightly less likely."
+          }),
+          ref: "Handbook p.64-65" },
+
+        { q: "Test scores are $N(\\mu=75, \\sigma=10)$. What % score above 90?",
+          choices: ["$6.68\\%$", "$15\\%$", "$1\\%$", "$32\\%$"],
+          correct: 0,
+          solution: S({
+            c: "Standardize using $z = (x-\\mu)/\\sigma$, then look up $P(Z>z)$ in the standard normal table (Handbook p.67).",
+            s: [
+              "Compute z-score: $z = (90-75)/10 = 1.5$.",
+              "From z-table: $P(Z \\le 1.5) = 0.9332$.",
+              "Complement: $P(Z > 1.5) = 1 - 0.9332 = 0.0668 = 6.68\\%$."
+            ],
+            a: "$\\approx 6.68\\%$",
+            v: "Empirical rule check: at $z=2$ (i.e. score 95), only ~2.5% above; at $z=1$ (score 85), ~16% above. So 90 → 6.68% is consistent."
+          }),
+          ref: "Handbook p.67" },
+
+        { q: "Game pays $5 with $p=0.2$, $2 with $p=0.5$, $0 otherwise. Expected payout:",
+          choices: ["$\\$2.00$", "$\\$3.50$", "$\\$1.00$", "$\\$2.30$"],
+          correct: 0,
+          solution: S({
+            c: "Expected value: $E[X] = \\sum x_i \\cdot P(x_i)$. Find missing prob first if needed.",
+            s: [
+              "Missing prob: $P(\\$0) = 1 - 0.2 - 0.5 = 0.3$.",
+              "Multiply each value by prob: $5(0.2) = 1.0$; $2(0.5) = 1.0$; $0(0.3) = 0$.",
+              "Sum: $E[X] = 1.0 + 1.0 + 0 = \\$2.00$."
+            ],
+            a: "$E[X] = \\$2.00$",
+            v: "If game cost > $2 to play, expected loss; if cost < $2, expected profit."
+          }),
+          ref: "Handbook p.65" },
+
+        { q: "Variance of a binomial distribution $B(n,p)$:",
+          choices: ["$np(1-p)$", "$np$", "$n(1-p)$", "$p(1-p)$"],
+          correct: 0,
+          solution: S({
+            c: "Binomial RV: count of successes in $n$ Bernoulli trials with prob $p$. Standard parameters: $\\mu=np$, $\\sigma^2=np(1-p)$.",
+            s: [
+              "Mean: $\\mu = np$ (so choice B is the mean, not variance).",
+              "Variance: $\\sigma^2 = np(1-p)$.",
+              "Note: variance maxes at $p=0.5$ (most uncertainty)."
+            ],
+            a: "$\\sigma^2 = np(1-p)$",
+            v: "Coin flip $n=100$, $p=0.5$: $\\mu=50$, $\\sigma^2=25$, $\\sigma=5$ (familiar)."
+          }),
+          ref: "Handbook p.66" },
+
+        { q: "If A and B are independent events with $P(A)=0.4$, $P(B)=0.3$, find $P(A\\cup B)$.",
+          choices: ["$0.58$", "$0.70$", "$0.12$", "$0.42$"],
+          correct: 0,
+          solution: S({
+            c: "Union formula: $P(A\\cup B) = P(A) + P(B) - P(A\\cap B)$. For independent events $P(A\\cap B) = P(A)\\cdot P(B)$.",
+            s: [
+              "$P(A\\cap B) = 0.4 \\cdot 0.3 = 0.12$ (independence).",
+              "Apply inclusion-exclusion: $P(A\\cup B) = 0.4 + 0.3 - 0.12 = 0.58$."
+            ],
+            a: "$P(A\\cup B) = 0.58$",
+            v: "If $A,B$ were mutually exclusive (impossible together): $P(A\\cup B) = 0.4+0.3 = 0.7$ (choice B is that case)."
+          }),
+          ref: "Handbook p.64-65" },
+
+        { q: "Six-sided die rolled. $P(\\text{prime number})$ where primes among 1-6 are {2,3,5}:",
+          choices: ["$1/2$", "$1/3$", "$2/3$", "$1/4$"],
+          correct: 0,
+          solution: S({
+            c: "Classical probability: $P = \\dfrac{\\text{favorable outcomes}}{\\text{total outcomes}}$.",
+            s: [
+              "Favorable: {2, 3, 5} → 3 outcomes.",
+              "Total: {1,2,3,4,5,6} → 6 outcomes.",
+              "$P = 3/6 = 1/2$."
+            ],
+            a: "$P = 1/2$",
+            v: "Note: 1 is NOT prime by definition."
+          }),
+          ref: "Handbook p.64" },
+      ],
+    },
+    // ====================== Ch 3: Ethics ======================
+    {
+      id: 3, name_en: "Ethics & Professional Practice", name_vn: "Đạo đức & Nghề nghiệp", fe_count: [4, 6],
+      questions: [
+        { q: "Per NCEES Model Rules, engineers shall hold paramount the:",
+          choices: ["Safety, health, and welfare of the public", "Client's financial interest", "Employer's profitability", "Engineering society's reputation"],
+          correct: 0,
+          solution: S({
+            c: "NCEES Rule of Professional Conduct #1 — the foundational ethic in engineering.",
+            s: [
+              "Rule 1 (verbatim): 'Engineers shall, in the performance of their services for clients, employers, and customers, be cognizant that their first and foremost responsibility is to the safety, health, and welfare of the public.'",
+              "Client/employer interest comes <i>after</i> public welfare, never before.",
+              "When in doubt, the test answer is almost always 'public safety'."
+            ],
+            a: "Public safety, health, and welfare",
+            v: "This is also why engineers can refuse unsafe work even if directed by the boss."
+          }),
+          ref: "Handbook p.4-5" },
+
+        { q: "An engineer is offered consulting work outside their area of expertise. The most ethical response is:",
+          choices: ["Decline or partner with someone qualified", "Accept and learn on the job", "Subcontract anonymously", "Refuse all outside consulting"],
+          correct: 0,
+          solution: S({
+            c: "NCEES Rule #2: Engineers shall perform services only in areas of their competence. Outside expertise = potential public harm.",
+            s: [
+              "Choice A complies with Rule 2 (decline or partner with someone qualified).",
+              "Choice B violates Rule 2 (working unqualified).",
+              "Choice C still violates if the engineer's name is on the work — must disclose.",
+              "Choice D is too restrictive; consulting <i>within</i> competence is fine."
+            ],
+            a: "Decline or partner with a qualified engineer.",
+            v: "You can stamp work outside your specialty <i>only</i> if you've reviewed it thoroughly and accept responsibility."
+          }),
+          ref: "Handbook p.4" },
+
+        { q: "Coca-Cola's secret formula is protected as a:",
+          choices: ["Trade secret", "Patent", "Copyright", "Trademark"],
+          correct: 0,
+          solution: S({
+            c: "IP categories: <b>Patent</b> protects inventions (20 years); <b>Copyright</b> protects creative works (life+70); <b>Trademark</b> protects brand identifiers; <b>Trade secret</b> protects confidential business info indefinitely while kept secret.",
+            s: [
+              "Coke formula has been protected > 100 years — far longer than a patent's 20 years.",
+              "Patents require public disclosure; secrets do not.",
+              "Trade secret is the only category with indefinite duration."
+            ],
+            a: "Trade secret",
+            v: "Other famous trade secrets: KFC's 11 herbs & spices, Google's search algorithm, WD-40 formula."
+          }),
+          ref: "Handbook p.11" },
+
+        { q: "A patent on an invention typically lasts:",
+          choices: ["20 years", "10 years", "Life + 70 years", "Indefinite"],
+          correct: 0,
+          solution: S({
+            c: "US utility patent: 20 years from filing date (not granted date). Design patent: 15 years. After expiry, invention enters public domain.",
+            s: [
+              "20 years is the standard period for utility patents.",
+              "After 20 years, anyone can freely use the invention.",
+              "Renewal fees must be paid throughout the term."
+            ],
+            a: "20 years",
+            v: "Choice C ('life + 70') is copyright duration."
+          }),
+          ref: "Handbook p.11" },
+
+        { q: "An engineer should disclose conflicts of interest to:",
+          choices: ["All affected parties in writing", "Only the immediate supervisor", "No one, to avoid problems", "Only after the project is complete"],
+          correct: 0,
+          solution: S({
+            c: "Rule 4 (faithful agent / trustee): disclose all conflicts proactively, in writing, so clients can make informed decisions.",
+            s: [
+              "Written disclosure protects both engineer and client (provides paper trail).",
+              "Disclose <i>before</i> work begins, not after (Choice D).",
+              "All affected parties, not just the boss (Choice B)."
+            ],
+            a: "All affected parties, in writing.",
+            v: "Even apparent conflicts must be disclosed — perception matters."
+          }),
+          ref: "Handbook p.4" },
+
+        { q: "Reviewing another engineer's work without permission is permitted when:",
+          choices: ["Required by public safety", "Asked by a friend", "Competing for the same project", "Never"],
+          correct: 0,
+          solution: S({
+            c: "General rule: don't review another engineer's work without their knowledge. <b>Exception:</b> when public safety is at risk.",
+            s: [
+              "If safety is at risk, the duty to the public (Rule 1) overrides courtesy to the colleague.",
+              "Otherwise, get the original engineer's consent first.",
+              "Competing for the same project is NEVER an excuse (B, C wrong)."
+            ],
+            a: "When required by public safety.",
+            v: "Even then, document your concerns and report to the proper authority."
+          }),
+          ref: "Handbook p.5-7" },
+      ],
+    },
+    // ====================== Ch 4: Engineering Economics ======================
+    {
+      id: 4, name_en: "Engineering Economics", name_vn: "Kinh tế Kỹ thuật", fe_count: [5, 8],
+      questions: [
+        { q: "How much to invest today at 8%/yr to have $10,000 in 5 years?",
+          choices: ["$\\$6,806$", "$\\$8,500$", "$\\$7,350$", "$\\$5,000$"],
+          correct: 0,
+          solution: S({
+            c: "Present worth from future amount: $P = \\dfrac{F}{(1+i)^n}$. Discount the future $F$ back $n$ periods.",
+            s: [
+              "Identify: $F = 10{,}000$, $i = 0.08$, $n = 5$.",
+              "Compute growth factor: $(1+0.08)^5 = (1.08)^5 = 1.4693$.",
+              "Divide: $P = 10{,}000 / 1.4693 = \\$6{,}806$."
+            ],
+            a: "$P \\approx \\$6{,}806$",
+            v: "Verify: $\\$6{,}806 \\cdot (1.08)^5 = \\$6{,}806 \\cdot 1.4693 \\approx \\$10{,}000$ ✓"
+          }),
+          ref: "Handbook p.230" },
+
+        { q: "Annual payment to amortize $20,000 loan at 6% over 4 years:",
+          choices: ["$\\$5,772$", "$\\$5,000$", "$\\$6,500$", "$\\$4,800$"],
+          correct: 0,
+          solution: S({
+            c: "Capital recovery factor (CRF): $A = P \\cdot \\dfrac{i(1+i)^n}{(1+i)^n - 1}$ converts present principal to uniform annual payment.",
+            s: [
+              "Identify: $P = 20{,}000$, $i = 0.06$, $n = 4$.",
+              "$(1+i)^n = (1.06)^4 = 1.2625$.",
+              "Numerator: $i(1+i)^n = 0.06 \\cdot 1.2625 = 0.07575$.",
+              "Denominator: $(1+i)^n - 1 = 0.2625$.",
+              "CRF: $A/P = 0.07575 / 0.2625 = 0.2886$.",
+              "Annual payment: $A = 20{,}000 \\cdot 0.2886 = \\$5{,}772$."
+            ],
+            a: "$A \\approx \\$5{,}772$/year",
+            v: "Total paid: $4 \\cdot 5772 = \\$23{,}088$; interest = $\\$3{,}088$ on $\\$20{,}000$ over 4 years — reasonable for 6%."
+          }),
+          ref: "Handbook p.232" },
+
+        { q: "Fixed cost $50k/yr, variable $30/unit, price $80/unit. Break-even quantity:",
+          choices: ["$1000$ units", "$625$ units", "$1667$ units", "$2500$ units"],
+          correct: 0,
+          solution: S({
+            c: "Break-even point: revenue = total cost. $P\\cdot Q = FC + VC\\cdot Q$, solve for $Q$.",
+            s: [
+              "Contribution margin per unit: $P - VC = 80 - 30 = \\$50$.",
+              "Each unit covers $\\$50$ of fixed cost.",
+              "Break-even: $Q = FC / (P - VC) = 50{,}000 / 50 = 1{,}000$ units."
+            ],
+            a: "$Q = 1{,}000$ units",
+            v: "At $Q=1000$: revenue $= 80{,}000$; cost $= 50{,}000 + 30(1000) = 80{,}000$ ✓"
+          }),
+          ref: "Handbook p.232" },
+
+        { q: "Equipment costs $50k, salvage $5k after 10 yrs. Straight-line book value after 6 years:",
+          choices: ["$\\$23,000$", "$\\$27,000$", "$\\$20,000$", "$\\$30,000$"],
+          correct: 0,
+          solution: S({
+            c: "Straight-line depreciation: equal yearly amount $D = (C - SV)/n$. Book value after $t$ years: $BV_t = C - tD$.",
+            s: [
+              "Annual depreciation: $D = (50{,}000 - 5{,}000) / 10 = \\$4{,}500$ /year.",
+              "Cumulative depreciation after 6 years: $6 \\cdot 4{,}500 = 27{,}000$.",
+              "Book value: $BV_6 = 50{,}000 - 27{,}000 = \\$23{,}000$."
+            ],
+            a: "$BV_6 = \\$23{,}000$",
+            v: "At year 10: $BV_{10} = 50000 - 10(4500) = \\$5{,}000 = SV$ ✓"
+          }),
+          ref: "Handbook p.230" },
+
+        { q: "Future value of $1000 invested at 10% for 5 years:",
+          choices: ["$\\$1,611$", "$\\$1,500$", "$\\$1,700$", "$\\$1,100$"],
+          correct: 0,
+          solution: S({
+            c: "Compound growth: $F = P(1+i)^n$.",
+            s: [
+              "Identify: $P = 1000$, $i = 0.10$, $n = 5$.",
+              "$(1.10)^5 = 1.6105$.",
+              "$F = 1000 \\cdot 1.6105 = \\$1{,}610.51$."
+            ],
+            a: "$F \\approx \\$1{,}611$",
+            v: "Rule of 72: at 10%, money doubles in ~7.2 years. After 5 years, about $\\$1{,}600$ — consistent."
+          }),
+          ref: "Handbook p.230" },
+
+        { q: "$2000$ deposited annually for 10 years at 5%. Future value:",
+          choices: ["$\\$25,156$", "$\\$20,000$", "$\\$30,000$", "$\\$18,500$"],
+          correct: 0,
+          solution: S({
+            c: "Future value of an annuity: $F = A\\cdot\\dfrac{(1+i)^n - 1}{i}$. (Each deposit grows for fewer years; sum is a geometric series.)",
+            s: [
+              "Identify: $A = 2000$, $i = 0.05$, $n = 10$.",
+              "$(1.05)^{10} = 1.6289$.",
+              "$F/A$ factor: $(1.6289 - 1)/0.05 = 12.578$.",
+              "Future value: $F = 2000 \\cdot 12.578 = \\$25{,}157$."
+            ],
+            a: "$F \\approx \\$25{,}157$",
+            v: "Without interest: $10 \\cdot 2000 = \\$20{,}000$. Compound interest adds ~$5{,}157$."
+          }),
+          ref: "Handbook p.231" },
+
+        { q: "Two projects A: NPV=$50k, life=5yr; B: NPV=$80k, life=10yr. Which is better if at same i?",
+          choices: ["Need EUAW comparison for unequal lives", "B (higher NPV)", "A (faster payback)", "Same"],
+          correct: 0,
+          solution: S({
+            c: "<b>Unequal lives</b> rule: cannot compare NPVs directly. Convert to Equivalent Uniform Annual Worth (EUAW) using $A/P$ factor — this normalizes to per-year values.",
+            s: [
+              "Higher NPV alone doesn't win — Project A could be repeated twice over 10 years.",
+              "Standard methods: (1) convert each to EUAW, or (2) use a common multiple study period.",
+              "EUAW formula: $EUAW = NPV \\cdot (A/P, i, n)$."
+            ],
+            a: "Need EUAW comparison",
+            v: "If $i=10\\%$: $EUAW_A = 50k(0.2638) = \\$13{,}190$/yr; $EUAW_B = 80k(0.1627) = \\$13{,}016$/yr. A wins slightly!"
+          }),
+          ref: "Handbook p.232" },
+
+        { q: "Inflation rate $f=3\\%$, real rate $i_r = 5\\%$. Nominal interest rate:",
+          choices: ["$8.15\\%$", "$8\\%$", "$2\\%$", "$15\\%$"],
+          correct: 0,
+          solution: S({
+            c: "Fisher equation: $(1+i_{nominal}) = (1+i_{real})(1+f)$, NOT simple addition.",
+            s: [
+              "Multiply: $(1+i_r)(1+f) = (1.05)(1.03) = 1.0815$.",
+              "Solve: $i_{nominal} = 1.0815 - 1 = 0.0815 = 8.15\\%$."
+            ],
+            a: "$i_{nominal} \\approx 8.15\\%$",
+            v: "Quick approximation: $i_r + f = 8\\%$ (choice B). Exact answer is slightly higher because compounding."
+          }),
+          ref: "Handbook p.230" },
+      ],
+    },
+    // ====================== Ch 5: Electrical Materials ======================
+    {
+      id: 5, name_en: "Properties of Electrical Materials", name_vn: "Tính chất Vật liệu Điện", fe_count: [4, 6],
+      questions: [
+        { q: "Intrinsic carrier concentration in pure silicon at 300K is approximately:",
+          choices: ["$1.5 \\times 10^{10}$ cm$^{-3}$", "$1 \\times 10^{16}$ cm$^{-3}$", "$1 \\times 10^{22}$ cm$^{-3}$", "$1 \\times 10^{6}$ cm$^{-3}$"],
+          correct: 0,
+          solution: S({
+            c: "Intrinsic carrier concentration $n_i$ depends exponentially on temperature and bandgap. For Si at 300 K it's a memorized constant.",
+            s: [
+              "Standard value: $n_i \\approx 1.5 \\times 10^{10}$ cm$^{-3}$ at 300 K (room temperature).",
+              "Compare: Ge $n_i \\approx 2.4 \\times 10^{13}$ (smaller bandgap → more carriers).",
+              "GaAs $n_i \\approx 2 \\times 10^{6}$ (larger bandgap → fewer carriers)."
+            ],
+            a: "$n_i \\approx 1.5 \\times 10^{10}$ cm$^{-3}$",
+            v: "Atomic density of Si is ~$5 \\times 10^{22}$ cm$^{-3}$, so only 1 in $\\sim 10^{12}$ atoms contributes an intrinsic carrier."
+          }),
+          ref: "Handbook p.354" },
+
+        { q: "n-type Si doped at $N_D = 10^{16}$ cm$^{-3}$. Hole concentration $p$:",
+          choices: ["$2.25\\times 10^4$ cm$^{-3}$", "$10^{16}$ cm$^{-3}$", "$10^{10}$ cm$^{-3}$", "$0$"],
+          correct: 0,
+          solution: S({
+            c: "Mass action law: $n \\cdot p = n_i^2$ in thermal equilibrium. For heavily doped n-type, $n \\approx N_D$.",
+            s: [
+              "Majority: $n \\approx N_D = 10^{16}$ cm$^{-3}$.",
+              "Apply mass action: $p = n_i^2 / n = (1.5 \\times 10^{10})^2 / 10^{16}$.",
+              "Compute: $p = 2.25 \\times 10^{20} / 10^{16} = 2.25 \\times 10^4$ cm$^{-3}$."
+            ],
+            a: "$p \\approx 2.25 \\times 10^4$ cm$^{-3}$",
+            v: "Holes (minority) are $10^{12}\\times$ less than electrons — that's why n-type is dominated by electrons."
+          }),
+          ref: "Handbook p.354" },
+
+        { q: "Copper wire 2 m long, 1 mm² cross-section, $\\rho=1.72\\times 10^{-8}$ $\\Omega$m. Resistance:",
+          choices: ["$0.0344\\ \\Omega$", "$34.4\\ \\Omega$", "$3.44\\ \\Omega$", "$0.344\\ \\Omega$"],
+          correct: 0,
+          solution: S({
+            c: "Resistance of a uniform conductor: $R = \\rho L / A$. Watch the unit conversions!",
+            s: [
+              "Convert area: $1$ mm$^2 = (10^{-3})^2$ m$^2 = 10^{-6}$ m$^2$.",
+              "Plug in: $R = (1.72\\times 10^{-8})(2) / (10^{-6})$.",
+              "Numerator: $1.72\\times 10^{-8} \\cdot 2 = 3.44 \\times 10^{-8}$.",
+              "Divide: $R = 3.44\\times 10^{-8} / 10^{-6} = 3.44 \\times 10^{-2} = 0.0344\\ \\Omega$."
+            ],
+            a: "$R \\approx 34.4$ m$\\Omega$",
+            v: "A short copper wire has very low resistance — about 30 m$\\Omega$ per meter for this size, which matches household wiring."
+          }),
+          ref: "Handbook p.354" },
+
+        { q: "Which material is a typical electrical insulator?",
+          choices: ["Glass", "Aluminum", "Silicon", "Copper"],
+          correct: 0,
+          solution: S({
+            c: "Conductivity hierarchy: <b>conductors</b> $\\sigma > 10^5$ S/m; <b>semiconductors</b> $10^{-6} < \\sigma < 10^4$ S/m; <b>insulators</b> $\\sigma < 10^{-8}$ S/m.",
+            s: [
+              "Glass: $\\sigma \\sim 10^{-12}$ S/m → <b>insulator</b>.",
+              "Aluminum: $\\sigma \\sim 3.5 \\times 10^7$ S/m → conductor.",
+              "Silicon (pure): $\\sigma \\sim 10^{-3}$ S/m → semiconductor.",
+              "Copper: $\\sigma \\sim 5.8 \\times 10^7$ S/m → conductor."
+            ],
+            a: "Glass",
+            v: "Other common insulators: rubber, ceramic, plastic, SiO$_2$."
+          }),
+          ref: "Handbook p.354" },
+
+        { q: "Doping silicon with arsenic (Group V) produces:",
+          choices: ["n-type material", "p-type material", "Intrinsic material", "Insulator"],
+          correct: 0,
+          solution: S({
+            c: "Silicon has 4 valence electrons. Group V (P, As, Sb) donates 1 extra electron → n-type. Group III (B, Al, Ga) accepts 1 (creates hole) → p-type.",
+            s: [
+              "Arsenic is Group V → donor → free electron → n-type.",
+              "Boron (Group III) would have given p-type.",
+              "Replacing Si with same-group Ge wouldn't change conduction type."
+            ],
+            a: "n-type",
+            v: "Mnemonic: <b>D</b>onor → <b>D</b>ominant electrons → <b>n</b>egative carriers → <b>n</b>-type."
+          }),
+          ref: "Handbook p.354" },
+
+        { q: "Drift current density in a semiconductor is:",
+          choices: ["$J = q(n\\mu_n + p\\mu_p)E = \\sigma E$", "$J = -qD\\nabla n$", "$J = nev$", "$J = \\sigma E^2$"],
+          correct: 0,
+          solution: S({
+            c: "Two current mechanisms in semiconductors: <b>drift</b> (response to E-field) and <b>diffusion</b> (response to concentration gradient).",
+            s: [
+              "Drift: $J_{drift} = qn\\mu_n E + qp\\mu_p E = \\sigma E$ (sum of electron and hole drift).",
+              "Diffusion: $J_{diff} = qD_n \\nabla n - qD_p \\nabla p$.",
+              "Choice B is the diffusion formula (one species).",
+              "Choice D is wrong — current is linear in $E$, not quadratic."
+            ],
+            a: "$J = q(n\\mu_n + p\\mu_p)E = \\sigma E$",
+            v: "$\\sigma = q(n\\mu_n + p\\mu_p)$ is the semiconductor conductivity formula."
+          }),
+          ref: "Handbook p.354" },
+      ],
+    },
+    // ====================== Ch 6: Circuit Analysis ======================
+    {
+      id: 6, name_en: "Circuit Analysis (DC & AC)", name_vn: "Phân tích Mạch", fe_count: [11, 17],
+      questions: [
+        { q: "$12$V drives $R_1=2\\Omega$ series with ($R_2=6\\Omega \\| R_3=3\\Omega$). Total current:",
+          choices: ["$3$ A", "$2$ A", "$4$ A", "$6$ A"],
+          correct: 0,
+          solution: S({
+            c: "Reduce series-parallel circuits step by step. Parallel: $R_{12} = R_1 R_2/(R_1+R_2)$. Series: add.",
+            s: [
+              "Parallel combo: $R_2 \\| R_3 = (6)(3)/(6+3) = 18/9 = 2\\ \\Omega$.",
+              "Total equivalent: $R_{eq} = R_1 + (R_2 \\| R_3) = 2 + 2 = 4\\ \\Omega$.",
+              "Ohm's law: $I = V/R_{eq} = 12/4 = 3$ A."
+            ],
+            a: "$I = 3$ A",
+            v: "Check power: $P_{source} = VI = 36$ W. Sum of $I^2R$ on each: $3^2(2) + (V_2/R_2)\\cdot V_2$... can verify but tedious."
+          }),
+          ref: "Handbook p.356" },
+
+        { q: "In a circuit with 24V source, 8Ω series, 4Ω at load terminals. $V_{Th}$ at load is:",
+          choices: ["$24$ V", "$12$ V", "$16$ V", "$0$ V"],
+          correct: 0,
+          solution: S({
+            c: "Thévenin voltage = open-circuit voltage at the terminals. With load disconnected, no current flows → no voltage drop on series resistors.",
+            s: [
+              "Disconnect load: open circuit between terminals.",
+              "No current: $I = 0$ → drops on 8Ω and 4Ω are both 0.",
+              "Voltage at load terminals = source voltage = 24 V."
+            ],
+            a: "$V_{Th} = 24$ V",
+            v: "If the 4Ω were in parallel (not series), then $V_{Th}$ would be different."
+          }),
+          ref: "Handbook p.357" },
+
+        { q: "$R_{Th}$ for above (zero sources): 8Ω in series with 4Ω equals:",
+          choices: ["$12\\ \\Omega$", "$8\\ \\Omega$", "$2.67\\ \\Omega$", "$4\\ \\Omega$"],
+          correct: 0,
+          solution: S({
+            c: "Thévenin resistance = equivalent resistance seen from terminals with all <b>independent</b> sources zeroed (voltage→short, current→open).",
+            s: [
+              "Zero the 24V source: replace with a wire (short).",
+              "Now look from load terminals back: see 4Ω in series with 8Ω (which now connects to short).",
+              "Add: $R_{Th} = 4 + 8 = 12\\ \\Omega$."
+            ],
+            a: "$R_{Th} = 12\\ \\Omega$",
+            v: "Dependent sources (if present) stay — only independent sources are zeroed."
+          }),
+          ref: "Handbook p.357" },
+
+        { q: "Max power transfer occurs when $R_L$ equals:",
+          choices: ["$R_{Th}$", "$R_{Th}^2$", "$2 R_{Th}$", "$R_{Th}/2$"],
+          correct: 0,
+          solution: S({
+            c: "Maximum Power Transfer Theorem: $R_L = R_{Th}$ delivers the most power to the load. Then $P_{max} = V_{Th}^2/(4 R_{Th})$.",
+            s: [
+              "Derivation: $P_L = I^2 R_L = \\dfrac{V_{Th}^2 R_L}{(R_{Th}+R_L)^2}$.",
+              "Take $dP_L/dR_L = 0$ and solve: $R_L = R_{Th}$.",
+              "At that point, half the power dissipates in $R_{Th}$ (efficiency = 50%)."
+            ],
+            a: "$R_L = R_{Th}$",
+            v: "Note: this maximizes power, NOT efficiency. For efficiency, $R_L \\gg R_{Th}$."
+          }),
+          ref: "Handbook p.360" },
+
+        { q: "Impedance of $L=20$ mH at $\\omega=1000$ rad/s:",
+          choices: ["$j20\\ \\Omega$", "$j2\\ \\Omega$", "$-j50\\ \\Omega$", "$j0.02\\ \\Omega$"],
+          correct: 0,
+          solution: S({
+            c: "Inductor impedance: $Z_L = j\\omega L$. Positive imaginary → V leads I by 90°.",
+            s: [
+              "Convert: $L = 20$ mH $= 0.02$ H.",
+              "Multiply: $\\omega L = 1000 \\cdot 0.02 = 20$.",
+              "Add the $j$: $Z_L = j20\\ \\Omega$."
+            ],
+            a: "$Z_L = j20\\ \\Omega$",
+            v: "Pure imaginary — pure inductors store but don't dissipate energy."
+          }),
+          ref: "Handbook p.360" },
+
+        { q: "RLC series at $\\omega=1000$: $R=10$, $X_L=20$, $X_C=10$. Total Z:",
+          choices: ["$10 + j10\\ \\Omega$", "$10\\ \\Omega$", "$10 + j30$", "$30\\ \\Omega$"],
+          correct: 0,
+          solution: S({
+            c: "Series impedance adds: $Z = R + jX_L - jX_C = R + j(X_L - X_C)$.",
+            s: [
+              "Real part: $R = 10$.",
+              "Imag part: $X_L - X_C = 20 - 10 = +10$ (net inductive).",
+              "Total: $Z = 10 + j10\\ \\Omega$."
+            ],
+            a: "$Z = 10 + j10\\ \\Omega$",
+            v: "Magnitude $|Z| = \\sqrt{200} \\approx 14.14\\ \\Omega$; angle $\\arctan(10/10) = 45°$ (lagging)."
+          }),
+          ref: "Handbook p.360" },
+
+        { q: "$V_{RMS}$ of $v(t) = 10\\sin(\\omega t)$ V:",
+          choices: ["$7.07$ V", "$10$ V", "$3.18$ V", "$5$ V"],
+          correct: 0,
+          solution: S({
+            c: "For a pure sinusoid: $V_{RMS} = V_m / \\sqrt{2} = 0.707 V_m$.",
+            s: [
+              "Identify peak: $V_m = 10$ V.",
+              "Divide by $\\sqrt{2}$: $V_{RMS} = 10/\\sqrt{2} = 10/1.414 \\approx 7.07$ V."
+            ],
+            a: "$V_{RMS} \\approx 7.07$ V",
+            v: "Mnemonic: US household 120 V <i>RMS</i> = $120\\sqrt{2} \\approx 170$ V peak."
+          }),
+          ref: "Handbook p.360" },
+
+        { q: "Power factor of a load with $Z = 10+j10$:",
+          choices: ["$0.707$ lagging", "$0.5$ lagging", "$1.0$", "$0.866$ leading"],
+          correct: 0,
+          solution: S({
+            c: "Power factor $pf = \\cos\\theta$ where $\\theta = \\angle Z$. <b>Inductive</b> Z (positive imag) → current lags voltage → <i>lagging</i> pf. Capacitive (negative imag) → leading.",
+            s: [
+              "Angle of $Z$: $\\theta = \\arctan(10/10) = 45°$.",
+              "$pf = \\cos 45° = \\sqrt{2}/2 \\approx 0.707$.",
+              "Z has $+j$ part → inductive → <b>lagging</b>."
+            ],
+            a: "$pf = 0.707$ lagging",
+            v: "Industrial loads (motors) are typically inductive/lagging. PF correction adds capacitors to bring pf toward 1."
+          }),
+          ref: "Handbook p.362" },
+
+        { q: "120 V RMS across $Z=14.14\\angle 45°$. Real power:",
+          choices: ["$720$ W", "$1018$ W", "$510$ W", "$8.49$ W"],
+          correct: 0,
+          solution: S({
+            c: "Real (avg) power dissipated: $P = V_{rms} I_{rms} \\cos\\theta$. The $\\cos\\theta$ factor accounts for the phase shift.",
+            s: [
+              "Current magnitude: $I_{rms} = V_{rms} / |Z| = 120 / 14.14 \\approx 8.485$ A.",
+              "Power factor: $\\cos 45° = 0.707$.",
+              "Real power: $P = (120)(8.485)(0.707) = 720$ W."
+            ],
+            a: "$P = 720$ W",
+            v: "Alternative: $P = I^2 R = (8.485)^2(10) = 720$ W ✓ (only resistor dissipates real power)."
+          }),
+          ref: "Handbook p.362" },
+
+        { q: "RC time constant: $R=1$ k$\\Omega$, $C=100\\ \\mu$F:",
+          choices: ["$0.1$ s", "$0.01$ s", "$1$ s", "$10$ ms"],
+          correct: 0,
+          solution: S({
+            c: "RC time constant: $\\tau = RC$. Units: $\\Omega \\cdot$F $=$ seconds.",
+            s: [
+              "Compute: $\\tau = (1000)(100 \\times 10^{-6}) = 10^3 \\cdot 10^{-4} = 10^{-1}$ s.",
+              "So $\\tau = 0.1$ s = 100 ms."
+            ],
+            a: "$\\tau = 100$ ms",
+            v: "After $5\\tau = 500$ ms, capacitor essentially fully charged (>99%)."
+          }),
+          ref: "Handbook p.358" },
+
+        { q: "Capacitor charged with $\\tau = 0.1$ s. After 1 s, voltage is approximately:",
+          choices: ["$> 99\\%$ of final", "$50\\%$", "$63\\%$", "$Steady too long$"],
+          correct: 0,
+          solution: S({
+            c: "Charging response: $v_C(t) = V_\\infty(1 - e^{-t/\\tau})$. Useful milestones: $1\\tau \\to 63.2\\%$, $3\\tau \\to 95\\%$, $5\\tau \\to 99.3\\%$.",
+            s: [
+              "$t/\\tau = 1/0.1 = 10$ time constants.",
+              "After $5\\tau$ already > 99%; at $10\\tau$ it's $1 - e^{-10} \\approx 1 - 0.0000454 = 99.995\\%$.",
+              "Practically fully charged."
+            ],
+            a: "$> 99\\%$ of final value",
+            v: "Engineers commonly say 'steady state after $5\\tau$' as a rule of thumb."
+          }),
+          ref: "Handbook p.358" },
+
+        { q: "Voltage divider: $V_{in} = 12$V across $R_1 = 4$Ω + $R_2 = 8$Ω. $V_2$:",
+          choices: ["$8$ V", "$4$ V", "$6$ V", "$12$ V"],
+          correct: 0,
+          solution: S({
+            c: "Voltage divider rule: $V_k = V_{in} \\cdot \\dfrac{R_k}{R_{total}}$. Voltage splits proportionally to each resistance in a series chain.",
+            s: [
+              "Total resistance: $R_{total} = 4 + 8 = 12\\ \\Omega$.",
+              "$V_2 = 12 \\cdot (8/12) = 12 \\cdot 0.667 = 8$ V.",
+              "(Equivalently $V_1 = 12 \\cdot (4/12) = 4$ V, and $V_1 + V_2 = 12$ ✓)"
+            ],
+            a: "$V_2 = 8$ V",
+            v: "Larger resistor drops larger voltage — intuitive."
+          }),
+          ref: "Handbook p.356" },
+
+        { q: "Two 6Ω resistors in parallel: equivalent:",
+          choices: ["$3\\ \\Omega$", "$12\\ \\Omega$", "$6\\ \\Omega$", "$2\\ \\Omega$"],
+          correct: 0,
+          solution: S({
+            c: "For $n$ equal resistors $R$ in parallel: $R_{eq} = R/n$. (Special case of $1/R_{eq} = \\sum 1/R_i$.)",
+            s: [
+              "$R = 6\\ \\Omega$, $n = 2$.",
+              "$R_{eq} = 6/2 = 3\\ \\Omega$."
+            ],
+            a: "$R_{eq} = 3\\ \\Omega$",
+            v: "Always less than smallest individual R — parallel adds paths for current."
+          }),
+          ref: "Handbook p.356" },
+
+        { q: "Energy stored in $C = 100\\ \\mu$F at $V = 50$ V:",
+          choices: ["$0.125$ J", "$0.5$ J", "$0.25$ J", "$5$ J"],
+          correct: 0,
+          solution: S({
+            c: "Energy in a capacitor: $W = \\dfrac{1}{2}CV^2$. (Analogous to kinetic energy $\\frac{1}{2}mv^2$.)",
+            s: [
+              "Convert: $C = 100\\ \\mu$F $= 10^{-4}$ F.",
+              "$V^2 = 50^2 = 2500$.",
+              "$W = 0.5 \\cdot 10^{-4} \\cdot 2500 = 0.125$ J."
+            ],
+            a: "$W = 0.125$ J",
+            v: "For comparison, AA battery stores ~10 kJ — this cap holds ~80,000$\\times$ less."
+          }),
+          ref: "Handbook p.358" },
+
+        { q: "Energy stored in $L = 10$ mH at $I = 2$ A:",
+          choices: ["$0.02$ J", "$0.04$ J", "$0.01$ J", "$0.1$ J"],
+          correct: 0,
+          solution: S({
+            c: "Energy in an inductor: $W = \\dfrac{1}{2}LI^2$. Dual of capacitor formula.",
+            s: [
+              "Convert: $L = 10$ mH $= 0.01$ H.",
+              "$I^2 = 4$.",
+              "$W = 0.5 \\cdot 0.01 \\cdot 4 = 0.02$ J."
+            ],
+            a: "$W = 0.02$ J",
+            v: "If circuit broken suddenly, this energy is released as a voltage spike — why we put flyback diodes across relay coils."
+          }),
+          ref: "Handbook p.358" },
+
+        { q: "Current through a $10\\ \\Omega$ resistor dissipating $100$ W:",
+          choices: ["$\\sqrt{10}$ A $\\approx 3.16$ A", "$10$ A", "$1$ A", "$100$ A"],
+          correct: 0,
+          solution: S({
+            c: "Power-current relation: $P = I^2 R$. Solve for $I$.",
+            s: [
+              "Rearrange: $I^2 = P/R$.",
+              "Plug in: $I^2 = 100/10 = 10$.",
+              "Square root: $I = \\sqrt{10} \\approx 3.16$ A."
+            ],
+            a: "$I \\approx 3.16$ A",
+            v: "Voltage check: $V = IR = 3.16(10) = 31.6$ V; then $P = V^2/R = 31.6^2/10 = 99.86$ W ✓"
+          }),
+          ref: "Handbook p.356" },
+
+        { q: "Average value of a half-wave rectified sinusoid with peak $V_m$:",
+          choices: ["$V_m/\\pi$", "$2V_m/\\pi$", "$V_m/2$", "$V_m/\\sqrt{2}$"],
+          correct: 0,
+          solution: S({
+            c: "Half-wave rectifier passes only positive half of input. Average = (area under one half cycle) / (full period).",
+            s: [
+              "Integrate over one cycle: $V_{avg} = \\dfrac{1}{T}\\int_0^{T/2} V_m \\sin(\\omega t)\\,dt$ (other half is 0).",
+              "Result: $V_{DC} = V_m/\\pi \\approx 0.318 V_m$.",
+              "Full-wave rectifier: $V_{DC} = 2V_m/\\pi \\approx 0.637 V_m$ (twice as much)."
+            ],
+            a: "$V_{DC} = V_m/\\pi$",
+            v: "Choice D ($V_m/\\sqrt{2}$) is RMS of full sinusoid, not the DC value of half-wave."
+          }),
+          ref: "Handbook p.383" },
+
+        { q: "Apparent power for $V_{rms}=240$V, $I_{rms}=5$A, $pf=0.8$:",
+          choices: ["$1200$ VA", "$960$ W", "$720$ VAR", "$1500$ VA"],
+          correct: 0,
+          solution: S({
+            c: "Apparent power $|S| = V_{rms} I_{rms}$ — independent of pf. (Real $P$ and reactive $Q$ depend on pf, but $|S|$ does not.)",
+            s: [
+              "$|S| = (240)(5) = 1200$ VA.",
+              "(For reference: $P = |S|\\cos\\theta = 1200 \\cdot 0.8 = 960$ W. $Q = |S|\\sin\\theta = 1200 \\cdot 0.6 = 720$ VAR.)"
+            ],
+            a: "$|S| = 1200$ VA",
+            v: "Units matter: VA = apparent, W = real, VAR = reactive."
+          }),
+          ref: "Handbook p.362" },
+      ],
+    },
+    // ====================== Ch 7: Linear Systems ======================
+    {
+      id: 7, name_en: "Linear Systems", name_vn: "Hệ tuyến tính", fe_count: [5, 8],
+      questions: [
+        { q: "Laplace transform of $\\sin(\\omega t)$:",
+          choices: ["$\\omega/(s^2+\\omega^2)$", "$s/(s^2+\\omega^2)$", "$1/(s^2+\\omega^2)$", "$\\omega/s$"],
+          correct: 0,
+          solution: S({
+            c: "Standard Laplace pairs (must memorize): $\\mathcal{L}\\{\\sin\\omega t\\} = \\dfrac{\\omega}{s^2+\\omega^2}$, $\\mathcal{L}\\{\\cos\\omega t\\} = \\dfrac{s}{s^2+\\omega^2}$.",
+            s: [
+              "Sine pair: $\\omega$ in numerator.",
+              "Cosine pair: $s$ in numerator.",
+              "Both share the same denominator $s^2+\\omega^2$."
+            ],
+            a: "$\\dfrac{\\omega}{s^2+\\omega^2}$",
+            v: "Reality check: as $s\\to 0$ (DC), the transform value goes to $\\omega/\\omega^2 = 1/\\omega$ — sine has zero DC content but the integral isn't zero, that's why."
+          }),
+          ref: "Handbook p.56" },
+
+        { q: "Series RLC with $L=10$ mH, $C=10\\ \\mu$F. Resonant freq $\\omega_0$:",
+          choices: ["$3162$ rad/s", "$1000$ rad/s", "$5000$ rad/s", "$500$ rad/s"],
+          correct: 0,
+          solution: S({
+            c: "Resonance occurs when inductive and capacitive reactances cancel: $\\omega_0 L = 1/(\\omega_0 C)$ → $\\omega_0 = 1/\\sqrt{LC}$.",
+            s: [
+              "Compute $LC = (10\\times 10^{-3})(10\\times 10^{-6}) = 10^{-7}$.",
+              "$\\sqrt{LC} = \\sqrt{10^{-7}} = 3.162 \\times 10^{-4}$ s.",
+              "Reciprocal: $\\omega_0 = 1/3.162\\times 10^{-4} \\approx 3162$ rad/s."
+            ],
+            a: "$\\omega_0 \\approx 3162$ rad/s",
+            v: "In Hz: $f_0 = \\omega_0/(2\\pi) \\approx 503$ Hz. At resonance, $Z = R$ (purely resistive)."
+          }),
+          ref: "Handbook p.361" },
+
+        { q: "Quality factor Q for series RLC ($R=10$, $L=10$ mH, $\\omega_0=3162$ rad/s):",
+          choices: ["$3.16$", "$10$", "$1$", "$31.6$"],
+          correct: 0,
+          solution: S({
+            c: "Quality factor (series RLC): $Q = \\omega_0 L / R$. High Q = narrow bandwidth = sharp resonance.",
+            s: [
+              "$\\omega_0 L = 3162 \\cdot 0.01 = 31.62$.",
+              "$Q = 31.62 / 10 = 3.162$."
+            ],
+            a: "$Q \\approx 3.16$",
+            v: "Typical Q: RLC filter ~10, crystal oscillator > 10,000. Higher Q = more selective."
+          }),
+          ref: "Handbook p.361" },
+
+        { q: "Bandwidth of RLC with $\\omega_0=3162$, $Q=3.16$:",
+          choices: ["$1000$ rad/s", "$3162$ rad/s", "$316$ rad/s", "$10$ rad/s"],
+          correct: 0,
+          solution: S({
+            c: "3-dB bandwidth and Q: $BW = \\omega_0/Q$. High Q → narrow BW. The two -3 dB cutoff frequencies are $\\omega_0 \\pm BW/2$.",
+            s: [
+              "$BW = \\omega_0/Q = 3162/3.162 = 1000$ rad/s.",
+              "In Hz: $BW \\approx 159$ Hz."
+            ],
+            a: "$BW = 1000$ rad/s",
+            v: "Lower cutoff $\\approx \\omega_0 - BW/2 = 2662$ rad/s; upper $\\approx 3662$ rad/s."
+          }),
+          ref: "Handbook p.361" },
+
+        { q: "Inverse Laplace of $1/(s+2)$:",
+          choices: ["$e^{-2t}$", "$e^{2t}$", "$\\sin 2t$", "$2t$"],
+          correct: 0,
+          solution: S({
+            c: "Pair: $\\mathcal{L}\\{e^{at}\\} = \\dfrac{1}{s-a}$. So $1/(s+2) = 1/(s-(-2)) \\to e^{-2t}$.",
+            s: [
+              "Match form: $1/(s-a)$ with $a = -2$.",
+              "Inverse: $e^{at} = e^{-2t}$."
+            ],
+            a: "$f(t) = e^{-2t}$",
+            v: "Decaying exponential. Pole at $s=-2$ in LHP → stable."
+          }),
+          ref: "Handbook p.56" },
+
+        { q: "Solve $y'+2y=6$, $y(0)=0$ via Laplace. $Y(s)$:",
+          choices: ["$6/[s(s+2)]$", "$6/(s+2)$", "$6/s^2$", "$6s/(s^2+2)$"],
+          correct: 0,
+          solution: S({
+            c: "Laplace turns ODEs into algebraic equations. Use $\\mathcal{L}\\{y'\\} = sY(s) - y(0)$ and standard table for forcing terms.",
+            s: [
+              "Transform: $sY(s) - y(0) + 2Y(s) = 6/s$ (constant 6 transforms to $6/s$).",
+              "Apply $y(0)=0$: $sY + 2Y = 6/s$.",
+              "Factor: $Y(s)(s+2) = 6/s$.",
+              "Solve: $Y(s) = \\dfrac{6}{s(s+2)}$."
+            ],
+            a: "$Y(s) = \\dfrac{6}{s(s+2)}$",
+            v: "Partial fractions: $\\dfrac{6}{s(s+2)} = \\dfrac{3}{s} - \\dfrac{3}{s+2}$, so $y(t) = 3(1 - e^{-2t})$."
+          }),
+          ref: "Handbook p.56" },
+
+        { q: "Transfer function $H(s) = 10/(s+5)$. DC gain:",
+          choices: ["$2$", "$10$", "$5$", "$0.5$"],
+          correct: 0,
+          solution: S({
+            c: "DC gain = transfer function value at $s = 0$ (zero frequency).",
+            s: [
+              "Substitute $s = 0$: $H(0) = 10/(0+5) = 10/5 = 2$.",
+              "DC gain interpretation: a constant input is multiplied by 2 at steady state."
+            ],
+            a: "DC gain = 2",
+            v: "Time constant: $\\tau = 1/5 = 0.2$ s. After $5\\tau = 1$ s, output ≈ 99% of $2 \\cdot \\text{input}$."
+          }),
+          ref: "Handbook p.365" },
+
+        { q: "At resonance, series RLC impedance equals:",
+          choices: ["$R$", "$\\omega L$", "$0$", "$\\infty$"],
+          correct: 0,
+          solution: S({
+            c: "At $\\omega = \\omega_0$: $X_L = X_C$. Reactive parts cancel: $Z = R + jX_L - jX_C = R$.",
+            s: [
+              "$X_L = \\omega_0 L$ and $X_C = 1/(\\omega_0 C)$ are equal by definition of resonance.",
+              "Net imaginary impedance = 0.",
+              "$Z = R$ — purely resistive."
+            ],
+            a: "$Z = R$",
+            v: "At resonance, current is maximum (since $Z$ is minimum) and in phase with voltage."
+          }),
+          ref: "Handbook p.361" },
+      ],
+    },
+    // ====================== Ch 8: Signal Processing ======================
+    {
+      id: 8, name_en: "Signal Processing", name_vn: "Xử lý Tín hiệu", fe_count: [5, 8],
+      questions: [
+        { q: "Nyquist rate for a 4 kHz signal:",
+          choices: ["$> 8$ kHz", "$2$ kHz", "$4$ kHz", "$16$ kHz"],
+          correct: 0,
+          solution: S({
+            c: "Nyquist-Shannon sampling theorem: to perfectly reconstruct a band-limited signal of maximum frequency $f_{max}$, the sampling rate must satisfy $f_s > 2 f_{max}$.",
+            s: [
+              "Required: $f_s > 2 \\cdot 4{,}000 = 8{,}000$ Hz.",
+              "So sampling must be strictly greater than 8 kHz.",
+              "If $f_s \\le 8$ kHz, aliasing occurs (high frequencies fold back as lower frequencies)."
+            ],
+            a: "$f_s > 8$ kHz",
+            v: "CD audio uses $f_s = 44.1$ kHz to capture audio up to ~22 kHz (human hearing limit)."
+          }),
+          ref: "Handbook p.375" },
+
+        { q: "70 Hz signal sampled at 100 Hz. Apparent (aliased) frequency:",
+          choices: ["$30$ Hz", "$70$ Hz", "$170$ Hz", "$50$ Hz"],
+          correct: 0,
+          solution: S({
+            c: "If $f_{signal} > f_s/2$, aliasing occurs. The apparent frequency 'folds' around $f_s/2$: $f_{alias} = |f_{signal} - k \\cdot f_s|$ for nearest integer $k$.",
+            s: [
+              "Nyquist freq: $f_s/2 = 50$ Hz.",
+              "Signal at 70 Hz > 50 Hz → aliasing.",
+              "Folded: $f_{alias} = |70 - 100| = 30$ Hz."
+            ],
+            a: "Apparent $f = 30$ Hz",
+            v: "Imagine a strobe light. This is the same effect — under-sampled wheels appear to rotate backward in movies."
+          }),
+          ref: "Handbook p.375" },
+
+        { q: "RC LPF cutoff for $R=1$ k$\\Omega$, $C=0.1\\ \\mu$F:",
+          choices: ["$1592$ Hz", "$10$ kHz", "$159$ Hz", "$100$ Hz"],
+          correct: 0,
+          solution: S({
+            c: "First-order RC low-pass filter cutoff: $f_c = \\dfrac{1}{2\\pi RC}$. At $f_c$, output is -3 dB (about 0.707 of input).",
+            s: [
+              "$RC = 10^3 \\cdot 10^{-7} = 10^{-4}$ s.",
+              "$\\omega_c = 1/RC = 10^4$ rad/s.",
+              "$f_c = \\omega_c/(2\\pi) = 10^4/(2\\pi) \\approx 1591.5$ Hz."
+            ],
+            a: "$f_c \\approx 1592$ Hz",
+            v: "Above $f_c$, gain falls at -20 dB/decade."
+          }),
+          ref: "Handbook p.375" },
+
+        { q: "Magnitude (dB) at cutoff of a 1st-order LPF:",
+          choices: ["$-3$ dB", "$0$ dB", "$-6$ dB", "$-20$ dB"],
+          correct: 0,
+          solution: S({
+            c: "Definition: cutoff (or 'corner') frequency is where the magnitude is reduced by $\\sqrt{2}$. In dB: $20\\log_{10}(1/\\sqrt{2}) = -3.01$ dB.",
+            s: [
+              "At $\\omega = \\omega_c$: $|H(j\\omega_c)| = 1/\\sqrt{2} \\approx 0.707$.",
+              "Convert to dB: $20\\log_{10}(0.707) \\approx -3.01$ dB.",
+              "Hence 'cutoff' is the −3 dB point."
+            ],
+            a: "$-3$ dB",
+            v: "Power-wise, half of input power is lost at $f_c$ — the half-power frequency."
+          }),
+          ref: "Handbook p.375" },
+
+        { q: "Z-transform of $\\delta[n]$:",
+          choices: ["$1$", "$1/(1-z^{-1})$", "$z$", "$0$"],
+          correct: 0,
+          solution: S({
+            c: "Z-transform: $X(z) = \\sum_{n=-\\infty}^{\\infty} x[n] z^{-n}$. For unit impulse $\\delta[n]$ which is 1 only at $n=0$:",
+            s: [
+              "$X(z) = \\sum \\delta[n] z^{-n} = \\delta[0] z^0 = 1$.",
+              "Result: a constant 1 — flat over all frequencies."
+            ],
+            a: "$X(z) = 1$",
+            v: "Mirror of Laplace: $\\mathcal{L}\\{\\delta(t)\\} = 1$."
+          }),
+          ref: "Handbook p.376" },
+
+        { q: "20 log(0.707) =",
+          choices: ["$-3$ dB", "$3$ dB", "$-6$ dB", "$0$ dB"],
+          correct: 0,
+          solution: S({
+            c: "dB conversion for voltage/current: $\\text{dB} = 20\\log_{10}(\\text{ratio})$. For power: $10\\log_{10}$.",
+            s: [
+              "$0.707 = 1/\\sqrt{2}$.",
+              "$\\log_{10}(1/\\sqrt{2}) = -\\log_{10}(\\sqrt{2}) = -0.5 \\log_{10} 2 = -0.5 \\cdot 0.301 = -0.1505$.",
+              "Multiply by 20: $\\approx -3.01$ dB."
+            ],
+            a: "$\\approx -3$ dB",
+            v: "Memorize: $\\times \\sqrt{2} \\to +3$ dB; $\\times 2 \\to +6$ dB; $\\times 10 \\to +20$ dB."
+          }),
+          ref: "Handbook p.375" },
+
+        { q: "Roll-off rate of 1st order filter beyond cutoff:",
+          choices: ["$-20$ dB/decade", "$-40$ dB/decade", "$-10$ dB/decade", "$-6$ dB/decade"],
+          correct: 0,
+          solution: S({
+            c: "An $n$-th order filter rolls off at $-20n$ dB/decade (or $-6n$ dB/octave) in the stop-band.",
+            s: [
+              "1st order: $-20$ dB/decade (a 10x increase in frequency drops magnitude 10x).",
+              "2nd order: $-40$ dB/decade.",
+              "Higher order → steeper rolloff but more complex."
+            ],
+            a: "$-20$ dB/decade",
+            v: "Equivalent: $-6$ dB/octave (each doubling of frequency halves magnitude)."
+          }),
+          ref: "Handbook p.375" },
+
+        { q: "A signal contains components from 0 to 10 kHz. Min sampling rate to avoid aliasing:",
+          choices: ["$> 20$ kHz", "$10$ kHz", "$5$ kHz", "$40$ kHz"],
+          correct: 0,
+          solution: S({
+            c: "Nyquist: $f_s > 2 f_{max}$.",
+            s: [
+              "$f_{max} = 10$ kHz.",
+              "$f_s > 2 \\cdot 10 = 20$ kHz."
+            ],
+            a: "$f_s > 20$ kHz",
+            v: "In practice, use $f_s \\ge 2.2 f_{max}$ to leave a guard band and tolerate finite anti-alias filter rolloff."
+          }),
+          ref: "Handbook p.375" },
+      ],
+    },
+    // ====================== Ch 9: Electronics ======================
+    {
+      id: 9, name_en: "Electronics", name_vn: "Điện tử", fe_count: [7, 11],
+      questions: [
+        { q: "Inverting op-amp: $R_{in}=10$ k$\\Omega$, $R_f=100$ k$\\Omega$, $v_{in}=0.2$ V. $v_{out}$:",
+          choices: ["$-2$ V", "$+2$ V", "$-0.2$ V", "$-20$ V"],
+          correct: 0,
+          solution: S({
+            c: "Inverting amplifier: $v_{out} = -\\dfrac{R_f}{R_{in}} v_{in}$. The output is inverted (negative gain).",
+            s: [
+              "Compute gain: $-R_f/R_{in} = -100/10 = -10$.",
+              "Apply to input: $v_{out} = -10 \\cdot 0.2 = -2$ V."
+            ],
+            a: "$v_{out} = -2$ V",
+            v: "Two golden rules: $v_+ = v_- = 0$ (virtual ground) and no current into op-amp inputs. KCL at inverting input gives the gain formula."
+          }),
+          ref: "Handbook p.380" },
+
+        { q: "Non-inverting op-amp: $R_{in}=10$ k$\\Omega$, $R_f=100$ k$\\Omega$, $v_{in}=0.2$ V. $v_{out}$:",
+          choices: ["$2.2$ V", "$2.0$ V", "$-2.0$ V", "$-2.2$ V"],
+          correct: 0,
+          solution: S({
+            c: "Non-inverting amplifier: $v_{out} = \\left(1 + \\dfrac{R_f}{R_{in}}\\right) v_{in}$. Always at least 1× gain (no inversion).",
+            s: [
+              "Compute gain: $1 + R_f/R_{in} = 1 + 100/10 = 11$.",
+              "Apply to input: $v_{out} = 11 \\cdot 0.2 = 2.2$ V."
+            ],
+            a: "$v_{out} = 2.2$ V",
+            v: "Same R values as Q9.1, but the non-inverting topology gives gain $1+\\frac{R_f}{R_{in}}$ instead of $-\\frac{R_f}{R_{in}}$."
+          }),
+          ref: "Handbook p.380" },
+
+        { q: "BJT with $\\beta=100$, $I_C=5$ mA. Base current:",
+          choices: ["$50\\ \\mu$A", "$5$ mA", "$0.5$ mA", "$5\\ \\mu$A"],
+          correct: 0,
+          solution: S({
+            c: "BJT current relation: $I_C = \\beta I_B$. So $I_B = I_C/\\beta$.",
+            s: [
+              "Divide: $I_B = 5\\text{ mA} / 100 = 0.05$ mA.",
+              "Convert: $0.05$ mA $= 50$ µA."
+            ],
+            a: "$I_B = 50$ µA",
+            v: "$I_E = I_B + I_C = 0.05 + 5 = 5.05$ mA."
+          }),
+          ref: "Handbook p.384" },
+
+        { q: "BJT with $\\beta=100$. $\\alpha$ equals:",
+          choices: ["$0.990$", "$0.500$", "$1.000$", "$100$"],
+          correct: 0,
+          solution: S({
+            c: "BJT parameter conversions: $\\alpha = \\dfrac{\\beta}{\\beta+1}$ and $\\beta = \\dfrac{\\alpha}{1-\\alpha}$.",
+            s: [
+              "$\\alpha = 100/(100+1) = 100/101 = 0.9901$."
+            ],
+            a: "$\\alpha \\approx 0.990$",
+            v: "$\\alpha$ is just under 1 — about 99% of emitter current makes it to collector. The other 1% leaves through the base."
+          }),
+          ref: "Handbook p.384" },
+
+        { q: "Half-wave rectifier with peak 10V across load. $V_{DC}$:",
+          choices: ["$3.18$ V", "$6.37$ V", "$10$ V", "$5$ V"],
+          correct: 0,
+          solution: S({
+            c: "Half-wave rectifier output average: $V_{DC} = V_m/\\pi$ (one half-cycle conducts, other half is zero, average over full period).",
+            s: [
+              "$V_{DC} = 10/\\pi = 10/3.1416 \\approx 3.183$ V."
+            ],
+            a: "$V_{DC} \\approx 3.18$ V",
+            v: "Full-wave version would give $2V_m/\\pi \\approx 6.37$ V (choice B)."
+          }),
+          ref: "Handbook p.383" },
+
+        { q: "Forward voltage drop of an ideal silicon diode in conduction:",
+          choices: ["$0.7$ V", "$0.3$ V", "$1.0$ V", "$0$ V"],
+          correct: 0,
+          solution: S({
+            c: "Standard model for forward-biased silicon diode: $V_D \\approx 0.7$ V (this is a simplified 'constant-voltage drop' model used in design).",
+            s: [
+              "Silicon: 0.6 – 0.7 V (use 0.7 V on FE).",
+              "Germanium: 0.3 V (older technology).",
+              "Schottky: 0.3 – 0.4 V (fast switching).",
+              "LED: 1.5 – 3 V depending on color."
+            ],
+            a: "$V_F = 0.7$ V (Si)",
+            v: "More accurate model (Shockley): $I_D = I_s(e^{V_D/(nV_T)} - 1)$, but 0.7 V is fine for most circuit-level analysis."
+          }),
+          ref: "Handbook p.383" },
+
+        { q: "Two op-amp golden rules (ideal, in negative feedback):",
+          choices: ["$v_+ = v_-$ and $i_+ = i_- = 0$", "Input bias current is finite", "Open-loop gain is finite", "Output impedance is infinite"],
+          correct: 0,
+          solution: S({
+            c: "Ideal op-amp with negative feedback: infinite open-loop gain forces $v_+ = v_-$ (virtual short). Infinite input impedance gives $i_+ = i_- = 0$.",
+            s: [
+              "Rule 1 (Virtual short): output adjusts so that the inverting input matches the non-inverting input voltage.",
+              "Rule 2 (No input current): apply KCL at inputs without worrying about op-amp loading.",
+              "Combined with KCL/KVL, these solve any op-amp circuit."
+            ],
+            a: "$v_+ = v_-$ and $i_+ = i_- = 0$",
+            v: "Choices B, C, D describe non-ideal op-amps."
+          }),
+          ref: "Handbook p.380" },
+
+        { q: "Differential op-amp with all $R = R_f$: $v_{out}=$",
+          choices: ["$v_2 - v_1$", "$v_1 + v_2$", "$v_1 - v_2$", "$-v_1$"],
+          correct: 0,
+          solution: S({
+            c: "Difference amplifier: $v_{out} = \\dfrac{R_f}{R_{in}}(v_2 - v_1)$ when both input resistor pairs match. With $R_f = R_{in}$, gain = 1.",
+            s: [
+              "Standard difference amp inputs: $v_1$ on inverting branch, $v_2$ on non-inverting branch.",
+              "Gain factor: $R_f/R_{in} = 1$.",
+              "$v_{out} = 1 \\cdot (v_2 - v_1) = v_2 - v_1$."
+            ],
+            a: "$v_{out} = v_2 - v_1$",
+            v: "Used in instrumentation amplifiers — measures difference while rejecting common-mode noise."
+          }),
+          ref: "Handbook p.380" },
+
+        { q: "Full-wave bridge rectifier with peak 10V. $V_{DC}$:",
+          choices: ["$6.37$ V", "$3.18$ V", "$10$ V", "$5$ V"],
+          correct: 0,
+          solution: S({
+            c: "Full-wave rectifier average: $V_{DC} = 2V_m/\\pi$ — both half-cycles contribute, so twice the half-wave case.",
+            s: [
+              "$V_{DC} = 2(10)/\\pi = 20/3.1416 \\approx 6.366$ V."
+            ],
+            a: "$V_{DC} \\approx 6.37$ V",
+            v: "Adding a capacitor (smoothing) brings $V_{DC}$ even closer to $V_m$, reducing ripple."
+          }),
+          ref: "Handbook p.383" },
+
+        { q: "MOSFET in saturation: $I_D \\propto$",
+          choices: ["$(V_{GS}-V_{th})^2$", "$V_{DS}$", "$V_{GS}$", "$V_{DS}^2$"],
+          correct: 0,
+          solution: S({
+            c: "MOSFET (long-channel) saturation: $I_D = \\dfrac{1}{2}\\mu_n C_{ox}\\dfrac{W}{L}(V_{GS}-V_{th})^2 = \\dfrac{k_n}{2}(V_{GS}-V_{th})^2$. Quadratic in overdrive voltage $V_{GS}-V_{th}$.",
+            s: [
+              "$V_{GS}-V_{th}$ = overdrive (excess gate voltage above threshold).",
+              "In saturation, $I_D$ is (nearly) independent of $V_{DS}$.",
+              "In triode (ohmic) region, $I_D$ depends on both $V_{GS}$ and $V_{DS}$."
+            ],
+            a: "$I_D \\propto (V_{GS}-V_{th})^2$",
+            v: "Contrast: BJT $I_C \\propto e^{V_{BE}/V_T}$ — exponential, not square-law."
+          }),
+          ref: "Handbook p.386" },
+
+        { q: "Op-amp summing amplifier with $R_f=10$k, $R_1=R_2=5$k, $v_1=1$V, $v_2=2$V:",
+          choices: ["$-6$ V", "$-3$ V", "$6$ V", "$3$ V"],
+          correct: 0,
+          solution: S({
+            c: "Inverting summer: $v_{out} = -R_f \\left(\\dfrac{v_1}{R_1} + \\dfrac{v_2}{R_2}\\right)$. Each input weighted by $R_f/R_k$.",
+            s: [
+              "Per-input gains: $-R_f/R_1 = -10/5 = -2$ and $-R_f/R_2 = -2$.",
+              "Compute: $v_{out} = -2 v_1 - 2 v_2 = -2(1) - 2(2) = -2 - 4 = -6$ V."
+            ],
+            a: "$v_{out} = -6$ V",
+            v: "If $R_f = R_1 = R_2$: $v_{out} = -(v_1 + v_2)$ — direct (negated) sum."
+          }),
+          ref: "Handbook p.380" },
+
+        { q: "Zener diode purpose:",
+          choices: ["Voltage regulation in reverse breakdown", "Forward rectification only", "Amplification", "Switching only"],
+          correct: 0,
+          solution: S({
+            c: "Zener diode is designed to operate in <b>reverse breakdown</b> region where the voltage is nearly constant ($V_Z$) over a wide current range.",
+            s: [
+              "Normal diode: avoid breakdown (can damage device).",
+              "Zener: built to operate in breakdown without damage (within current limits).",
+              "Use cases: voltage references, simple voltage regulators, overvoltage protection."
+            ],
+            a: "Voltage regulation (reverse breakdown)",
+            v: "Series resistor sized so current stays within Zener's safe range across input variation."
+          }),
+          ref: "Handbook p.383" },
+      ],
+    },
+    // ====================== Ch 10: Power Systems ======================
+    {
+      id: 10, name_en: "Power Systems", name_vn: "Hệ thống Điện", fe_count: [8, 12],
+      questions: [
+        { q: "Wye-connected load with $V_{LN}=120$ V. Line-to-line voltage:",
+          choices: ["$208$ V", "$120$ V", "$240$ V", "$69.3$ V"],
+          correct: 0,
+          solution: S({
+            c: "Wye (Y / star) relations: $V_{LL} = \\sqrt{3}\\,V_{LN}$, $I_L = I_\\phi$. (The $\\sqrt{3}$ factor comes from vector subtraction of two phase voltages 120° apart.)",
+            s: [
+              "Multiply: $V_{LL} = \\sqrt{3} \\cdot 120 = 1.732 \\cdot 120 \\approx 207.85$ V."
+            ],
+            a: "$V_{LL} \\approx 208$ V",
+            v: "Standard US 120/208 V system. In Europe: 230/400 V."
+          }),
+          ref: "Handbook p.363" },
+
+        { q: "Delta-connected load. Relationship between line and phase current:",
+          choices: ["$I_L = \\sqrt{3} I_\\phi$", "$I_L = I_\\phi$", "$I_L = I_\\phi/\\sqrt{3}$", "$I_L = 3 I_\\phi$"],
+          correct: 0,
+          solution: S({
+            c: "Delta ($\\Delta$) relations: $V_{LL} = V_\\phi$, $I_L = \\sqrt{3}\\,I_\\phi$. (Dual of Y: in Y, voltage gets $\\sqrt{3}$; in $\\Delta$, current does.)",
+            s: [
+              "Phase current = current through each branch of $\\Delta$.",
+              "Line current = vector sum of two adjacent phase currents (120° apart).",
+              "Result: $I_L = \\sqrt{3}\\,I_\\phi$."
+            ],
+            a: "$I_L = \\sqrt{3}\\,I_\\phi$",
+            v: "Y vs Δ: line current is bigger in Δ; line voltage is bigger in Y. Same total power either way."
+          }),
+          ref: "Handbook p.363" },
+
+        { q: "Balanced 3-φ load: $V_{LL}=480$, $I_L=20$, $pf=0.85$ lagging. Real power:",
+          choices: ["$14.1$ kW", "$10$ kW", "$16.6$ kW", "$8.7$ kW"],
+          correct: 0,
+          solution: S({
+            c: "Three-phase real power (using line quantities): $P_{3\\phi} = \\sqrt{3}\\,V_{LL}\\,I_L\\cos\\theta$.",
+            s: [
+              "Plug in: $P = \\sqrt{3} \\cdot 480 \\cdot 20 \\cdot 0.85$.",
+              "$\\sqrt{3} \\cdot 480 \\cdot 20 = 16{,}628$ VA (this is |S|).",
+              "Multiply by pf: $16{,}628 \\cdot 0.85 = 14{,}134$ W ≈ 14.1 kW."
+            ],
+            a: "$P \\approx 14.1$ kW",
+            v: "Formula works whether Y or Δ — using line quantities."
+          }),
+          ref: "Handbook p.363" },
+
+        { q: "Same load as previous. Apparent power |S|:",
+          choices: ["$16.6$ kVA", "$14.1$ kVA", "$10$ kVA", "$20$ kVA"],
+          correct: 0,
+          solution: S({
+            c: "Apparent power: $|S| = \\sqrt{3}\\,V_{LL}\\,I_L$. Independent of pf.",
+            s: [
+              "$|S| = \\sqrt{3} \\cdot 480 \\cdot 20 \\approx 16{,}628$ VA."
+            ],
+            a: "$|S| \\approx 16.6$ kVA",
+            v: "$|S|^2 = P^2 + Q^2 \\Rightarrow Q = \\sqrt{16.6^2 - 14.1^2} \\approx 8.7$ kVAR (reactive)."
+          }),
+          ref: "Handbook p.363" },
+
+        { q: "Ideal transformer 4800/240 V, 10 kVA. Turns ratio $a$:",
+          choices: ["$20$", "$1/20$", "$48$", "$2$"],
+          correct: 0,
+          solution: S({
+            c: "Turns ratio $a = N_1/N_2 = V_1/V_2$ (primary/secondary).",
+            s: [
+              "$a = 4800/240 = 20$."
+            ],
+            a: "$a = 20$",
+            v: "Step-down ratio: secondary has $1/a = 1/20$ as many turns."
+          }),
+          ref: "Handbook p.364" },
+
+        { q: "Above transformer: primary rated current:",
+          choices: ["$2.08$ A", "$41.7$ A", "$20$ A", "$0.5$ A"],
+          correct: 0,
+          solution: S({
+            c: "Rated current = $S_{rated}/V_{rated}$ on each side. Power ($|S|$) is the same on both sides; current scales inverse to voltage.",
+            s: [
+              "$I_1 = S/V_1 = 10{,}000 / 4800 \\approx 2.083$ A.",
+              "(Secondary: $I_2 = 10{,}000 / 240 \\approx 41.67$ A.)"
+            ],
+            a: "$I_1 \\approx 2.08$ A",
+            v: "Check: $I_1/I_2 = 2.083/41.67 = 0.05 = 1/20 = 1/a$ ✓"
+          }),
+          ref: "Handbook p.364" },
+
+        { q: "PF correction: load draws $P=10$ kW at $pf=0.7$. Find Qc to raise to $pf=0.95$:",
+          choices: ["$\\approx 6.91$ kVAR", "$10$ kVAR", "$3.29$ kVAR", "$2.5$ kVAR"],
+          correct: 0,
+          solution: S({
+            c: "PF correction: add capacitors to supply reactive power $Q_C = P(\\tan\\theta_1 - \\tan\\theta_2)$, where $\\theta = \\arccos(pf)$.",
+            s: [
+              "Old angle: $\\theta_1 = \\arccos(0.70) = 45.57°$, $\\tan\\theta_1 = 1.0202$.",
+              "New angle: $\\theta_2 = \\arccos(0.95) = 18.19°$, $\\tan\\theta_2 = 0.3287$.",
+              "Required: $Q_C = 10{,}000 \\cdot (1.0202 - 0.3287) = 10{,}000 \\cdot 0.6915 \\approx 6{,}915$ VAR."
+            ],
+            a: "$Q_C \\approx 6.91$ kVAR",
+            v: "After correction: smaller |S|, smaller line current, less I²R loss, lower utility bills."
+          }),
+          ref: "Handbook p.364" },
+
+        { q: "Reflected impedance from secondary to primary (ideal xfmr, ratio $a$):",
+          choices: ["$Z'_2 = a^2 Z_2$", "$Z'_2 = Z_2/a$", "$Z'_2 = a Z_2$", "$Z'_2 = Z_2/a^2$"],
+          correct: 0,
+          solution: S({
+            c: "Reflected impedance: $Z'_2 = a^2 Z_2$ (square of turns ratio). Comes from: $Z'_2 = V_1/I_1 = (a V_2)/(I_2/a) = a^2 (V_2/I_2) = a^2 Z_2$.",
+            s: [
+              "Voltage scales by $a$.",
+              "Current scales by $1/a$.",
+              "Impedance ($V/I$) scales by $a^2$."
+            ],
+            a: "$Z'_2 = a^2 Z_2$",
+            v: "Used to combine primary and secondary impedances on one side for analysis."
+          }),
+          ref: "Handbook p.364" },
+
+        { q: "Synchronous speed of a 4-pole motor at 60 Hz:",
+          choices: ["$1800$ rpm", "$3600$ rpm", "$900$ rpm", "$1500$ rpm"],
+          correct: 0,
+          solution: S({
+            c: "Synchronous speed: $n_s = \\dfrac{120 f}{p}$ where $f$ in Hz and $p$ is the number of poles.",
+            s: [
+              "$n_s = 120 \\cdot 60 / 4 = 7200/4 = 1800$ rpm."
+            ],
+            a: "$n_s = 1800$ rpm",
+            v: "Common motors: 2-pole = 3600 rpm; 4-pole = 1800 rpm; 6-pole = 1200 rpm (all at 60 Hz)."
+          }),
+          ref: "Handbook p.365" },
+
+        { q: "Slip $s=0.04$, synchronous 1800 rpm. Rotor speed:",
+          choices: ["$1728$ rpm", "$72$ rpm", "$1872$ rpm", "$1800$ rpm"],
+          correct: 0,
+          solution: S({
+            c: "Induction motor slip: $s = (n_s - n_r)/n_s$, so $n_r = n_s(1-s)$.",
+            s: [
+              "$n_r = 1800(1 - 0.04) = 1800 \\cdot 0.96 = 1728$ rpm."
+            ],
+            a: "$n_r = 1728$ rpm",
+            v: "Typical full-load slip: 2-5%. At no-load, $s \\approx 0$ (rotor nearly synchronous)."
+          }),
+          ref: "Handbook p.365" },
+
+        { q: "Wye-connected with $V_{LN}=120$, $Z_\\phi = 10\\angle 30°$. Phase current:",
+          choices: ["$12\\angle -30°$ A", "$12\\angle 30°$ A", "$20.8\\angle -30°$ A", "$120\\angle 0°$ A"],
+          correct: 0,
+          solution: S({
+            c: "Phase current $I_\\phi = V_\\phi / Z_\\phi$ (use phase voltage for Y, which equals $V_{LN}$).",
+            s: [
+              "$V_\\phi = V_{LN} = 120\\angle 0°$.",
+              "Divide phasors: $I_\\phi = (120\\angle 0°)/(10\\angle 30°)$.",
+              "Magnitudes divide: $120/10 = 12$. Angles subtract: $0° - 30° = -30°$.",
+              "$I_\\phi = 12\\angle -30°$ A."
+            ],
+            a: "$I_\\phi = 12\\angle -30°$ A",
+            v: "Lagging current (negative angle) — load is inductive (positive Z angle)."
+          }),
+          ref: "Handbook p.363" },
+
+        { q: "Voltage regulation (VR) is defined as:",
+          choices: ["$\\frac{V_{NL}-V_{FL}}{V_{FL}}\\times 100\\%$", "$V_{FL}/V_{NL}$", "$V_{NL}+V_{FL}$", "$V_{FL}-V_{NL}$"],
+          correct: 0,
+          solution: S({
+            c: "Voltage regulation = (no-load V − full-load V) / full-load V × 100%. Measures voltage stability of a transformer or generator.",
+            s: [
+              "Ideal transformer: VR = 0% (output independent of load).",
+              "Real transformer: VR a few % due to winding resistance and leakage inductance.",
+              "High VR = poor regulation."
+            ],
+            a: "$VR = \\frac{V_{NL}-V_{FL}}{V_{FL}}\\times 100\\%$",
+            v: "Sometimes written with $V_{NL}$ in the denominator — be careful which convention the question uses."
+          }),
+          ref: "Handbook p.364" },
+      ],
+    },
+    // ====================== Ch 11: Electromagnetics ======================
+    {
+      id: 11, name_en: "Electromagnetics", name_vn: "Điện từ trường", fe_count: [4, 6],
+      questions: [
+        { q: "Parallel-plate capacitor: $A=100$ cm², $d=1$ mm, $\\varepsilon_r=4$. C =",
+          choices: ["$354$ pF", "$354$ nF", "$0.354$ pF", "$3.54\\ \\mu$F"],
+          correct: 0,
+          solution: S({
+            c: "Parallel-plate capacitance: $C = \\dfrac{\\varepsilon_0 \\varepsilon_r A}{d}$. $\\varepsilon_0 = 8.854\\times 10^{-12}$ F/m.",
+            s: [
+              "Convert area: $A = 100$ cm² $= 0.01$ m². Distance: $d = 1$ mm $= 0.001$ m.",
+              "Plug in: $C = (8.854\\times 10^{-12})(4)(0.01)/0.001$.",
+              "Numerator: $8.854\\times 10^{-12} \\cdot 0.04 = 3.54\\times 10^{-13}$.",
+              "Divide by $d=10^{-3}$: $C = 3.54\\times 10^{-10}$ F $= 354$ pF."
+            ],
+            a: "$C \\approx 354$ pF",
+            v: "Higher $\\varepsilon_r$ → more capacitance. Smaller $d$ → more capacitance (but breakdown risk)."
+          }),
+          ref: "Handbook p.355" },
+
+        { q: "Transmission line $Z_0=50\\ \\Omega$ terminated with $Z_L=75+j25\\ \\Omega$. $|\\Gamma|$:",
+          choices: ["$0.277$", "$0.5$", "$0.1$", "$0.707$"],
+          correct: 0,
+          solution: S({
+            c: "Reflection coefficient: $\\Gamma = \\dfrac{Z_L - Z_0}{Z_L + Z_0}$. Magnitude $|\\Gamma|$ between 0 (matched) and 1 (totally reflected).",
+            s: [
+              "Numerator: $Z_L - Z_0 = (75+j25) - 50 = 25 + j25$. $|num| = \\sqrt{625+625} = \\sqrt{1250} \\approx 35.36$.",
+              "Denominator: $Z_L + Z_0 = 125 + j25$. $|den| = \\sqrt{15625+625} = \\sqrt{16250} \\approx 127.48$.",
+              "$|\\Gamma| = 35.36/127.48 \\approx 0.277$."
+            ],
+            a: "$|\\Gamma| \\approx 0.277$",
+            v: "Power reflected ratio: $|\\Gamma|^2 \\approx 0.077 = 7.7\\%$. Power delivered: 92.3% of incident."
+          }),
+          ref: "Handbook p.368" },
+
+        { q: "From above $|\\Gamma|=0.277$. VSWR:",
+          choices: ["$1.77$", "$2.0$", "$1.0$", "$5.0$"],
+          correct: 0,
+          solution: S({
+            c: "Voltage Standing Wave Ratio: $\\text{VSWR} = \\dfrac{1+|\\Gamma|}{1-|\\Gamma|}$. Range: 1 (matched) to ∞ (open/short).",
+            s: [
+              "Numerator: $1 + 0.277 = 1.277$.",
+              "Denominator: $1 - 0.277 = 0.723$.",
+              "VSWR = $1.277/0.723 \\approx 1.766$."
+            ],
+            a: "VSWR ≈ 1.77",
+            v: "Antennas with VSWR < 2 considered well matched. VSWR = 1.5 is ~96% power transfer."
+          }),
+          ref: "Handbook p.368" },
+
+        { q: "Long straight wire carries $I=10$ A. B-field at $r=1$ m ($\\mu_0=4\\pi\\times 10^{-7}$):",
+          choices: ["$2\\ \\mu$T", "$10\\ \\mu$T", "$2$ T", "$0.2$ mT"],
+          correct: 0,
+          solution: S({
+            c: "Ampère's law for an infinite wire: $B = \\dfrac{\\mu_0 I}{2\\pi r}$.",
+            s: [
+              "$\\mu_0 I = (4\\pi\\times 10^{-7})(10) = 4\\pi \\times 10^{-6}$.",
+              "$2\\pi r = 2\\pi$.",
+              "$B = (4\\pi \\times 10^{-6})/(2\\pi) = 2\\times 10^{-6}$ T = 2 µT."
+            ],
+            a: "$B = 2$ µT",
+            v: "Earth's surface B-field is ~50 µT — about 25× stronger than this wire field at 1 m."
+          }),
+          ref: "Handbook p.355" },
+
+        { q: "Energy in inductor $L=10$ mH at $I=2$ A:",
+          choices: ["$0.02$ J", "$0.04$ J", "$0.01$ J", "$0.001$ J"],
+          correct: 0,
+          solution: S({
+            c: "Magnetic energy: $W = \\dfrac{1}{2} L I^2$.",
+            s: [
+              "$L = 0.01$ H, $I^2 = 4$.",
+              "$W = 0.5 \\cdot 0.01 \\cdot 4 = 0.02$ J."
+            ],
+            a: "$W = 0.02$ J",
+            v: "Energy = 20 mJ. This much energy released as spark when current is interrupted suddenly."
+          }),
+          ref: "Handbook p.355" },
+
+        { q: "Coulomb's law constant $k_e$:",
+          choices: ["$8.99\\times 10^9$ N·m²/C²", "$8.85\\times 10^{-12}$ F/m", "$6.626\\times 10^{-34}$ J·s", "$1.6\\times 10^{-19}$ C"],
+          correct: 0,
+          solution: S({
+            c: "Coulomb constant: $k_e = \\dfrac{1}{4\\pi\\varepsilon_0} \\approx 8.99\\times 10^9$ N·m²/C². Used in $F = k_e Q_1 Q_2 / r^2$.",
+            s: [
+              "Choice A: Coulomb constant ✓.",
+              "Choice B: permittivity of free space $\\varepsilon_0$.",
+              "Choice C: Planck's constant $h$.",
+              "Choice D: elementary charge $e$."
+            ],
+            a: "$k_e = 8.99\\times 10^9$ N·m²/C²",
+            v: "Connection: $1/(4\\pi \\cdot 8.854\\times 10^{-12}) \\approx 8.99\\times 10^9$ ✓"
+          }),
+          ref: "Handbook p.355" },
+
+        { q: "Maxwell's equation $\\nabla\\times E$ equals:",
+          choices: ["$-\\partial B/\\partial t$", "$\\rho/\\varepsilon_0$", "$J$", "$0$"],
+          correct: 0,
+          solution: S({
+            c: "Faraday's law (Maxwell #3): $\\nabla\\times \\vec{E} = -\\dfrac{\\partial \\vec{B}}{\\partial t}$. A time-varying magnetic field induces a circulating electric field.",
+            s: [
+              "Choice A: Faraday's law ✓.",
+              "Choice B: Gauss for E: $\\nabla\\cdot \\vec{E} = \\rho/\\varepsilon_0$.",
+              "Choice C: part of Ampère-Maxwell: $\\nabla\\times \\vec{H} = \\vec{J} + \\partial \\vec{D}/\\partial t$.",
+              "Choice D: Gauss for B: $\\nabla\\cdot \\vec{B} = 0$ (no magnetic monopoles)."
+            ],
+            a: "$\\nabla\\times \\vec{E} = -\\partial \\vec{B}/\\partial t$",
+            v: "This law is the basis of electromagnetic induction — transformers, generators, RF antennas."
+          }),
+          ref: "Handbook p.355" },
+      ],
+    },
+    // ====================== Ch 12: Control Systems ======================
+    {
+      id: 12, name_en: "Control Systems", name_vn: "Hệ thống Điều khiển", fe_count: [6, 9],
+      questions: [
+        { q: "Unity feedback, $G(s) = 10/(s+2)$. Closed-loop $T(s)$:",
+          choices: ["$10/(s+12)$", "$10/(s+2)$", "$(s+2)/10$", "$10s/(s+12)$"],
+          correct: 0,
+          solution: S({
+            c: "Closed-loop transfer function for negative unity feedback: $T(s) = \\dfrac{G(s)}{1 + G(s)}$.",
+            s: [
+              "Form: $T = \\dfrac{10/(s+2)}{1 + 10/(s+2)}$.",
+              "Multiply top and bottom by $(s+2)$: $T = \\dfrac{10}{(s+2) + 10} = \\dfrac{10}{s+12}$."
+            ],
+            a: "$T(s) = \\dfrac{10}{s+12}$",
+            v: "The pole moved from $-2$ (open loop) to $-12$ (closed loop) — faster response."
+          }),
+          ref: "Handbook p.365" },
+
+        { q: "DC gain of $T(s) = 10/(s+12)$:",
+          choices: ["$0.833$", "$10$", "$12$", "$1$"],
+          correct: 0,
+          solution: S({
+            c: "DC gain: $T(0)$.",
+            s: [
+              "Substitute $s = 0$: $T(0) = 10/12 = 5/6 \\approx 0.833$."
+            ],
+            a: "DC gain $\\approx 0.833$",
+            v: "Time constant: $\\tau = 1/12$ s; steady-state output of step is $0.833 \\cdot$ input."
+          }),
+          ref: "Handbook p.366" },
+
+        { q: "Poles of $T(s) = 5/(s^2+3s+2)$. System is:",
+          choices: ["Stable (poles at $-1, -2$)", "Unstable", "Marginally stable", "Oscillatory"],
+          correct: 0,
+          solution: S({
+            c: "Stability: all poles must lie in the open left half-plane (negative real parts).",
+            s: [
+              "Factor denominator: $s^2+3s+2 = (s+1)(s+2)$.",
+              "Poles: $s = -1, -2$.",
+              "Both have negative real parts → in LHP → <b>stable</b>."
+            ],
+            a: "Stable; poles at $-1, -2$",
+            v: "Time response is overdamped (two real distinct poles)."
+          }),
+          ref: "Handbook p.365" },
+
+        { q: "Steady-state error to step input for Type-0 system with $K_p = 9$:",
+          choices: ["$1/10$", "$1/9$", "$0$", "$\\infty$"],
+          correct: 0,
+          solution: S({
+            c: "Final value theorem applied: for Type-0 system with unit step input, $e_{ss} = \\dfrac{1}{1+K_p}$, where $K_p = \\lim_{s\\to 0} G(s)H(s)$ (position constant).",
+            s: [
+              "Type 0 has $K_p$ finite (so $e_{ss}$ to step is finite, nonzero).",
+              "Plug in: $e_{ss} = 1/(1+9) = 1/10 = 0.1$ (10%)."
+            ],
+            a: "$e_{ss} = 1/10 = 0.1$",
+            v: "To eliminate step error, use Type 1+ (integrator in loop) which gives $K_p = \\infty$ and $e_{ss}=0$."
+          }),
+          ref: "Handbook p.366" },
+
+        { q: "Series combination of $G_1=4$ and $G_2=5$:",
+          choices: ["$G_{eq}=20$", "$G_{eq}=9$", "$G_{eq}=0.8$", "$G_{eq}=1.25$"],
+          correct: 0,
+          solution: S({
+            c: "Block diagram reduction: blocks in series multiply ($G_1 G_2$); blocks in parallel add ($G_1 + G_2$).",
+            s: [
+              "Series: $G_{eq} = G_1 \\cdot G_2 = 4 \\cdot 5 = 20$."
+            ],
+            a: "$G_{eq} = 20$",
+            v: "If in parallel (summing junction): $G_{eq} = 4 + 5 = 9$ (choice B)."
+          }),
+          ref: "Handbook p.365" },
+
+        { q: "Bode magnitude (dB) at $\\omega=10$ rad/s for $H(s) = 1/s$:",
+          choices: ["$-20$ dB", "$20$ dB", "$0$ dB", "$10$ dB"],
+          correct: 0,
+          solution: S({
+            c: "For $H(s)=1/s$, $|H(j\\omega)| = 1/\\omega$. In dB: $20\\log_{10}(1/\\omega) = -20\\log_{10}\\omega$.",
+            s: [
+              "At $\\omega = 10$: $|H| = 1/10 = 0.1$.",
+              "dB: $20\\log_{10}(0.1) = 20(-1) = -20$ dB."
+            ],
+            a: "$-20$ dB",
+            v: "Integrator $1/s$ has straight-line Bode magnitude with slope $-20$ dB/decade, crossing 0 dB at $\\omega = 1$."
+          }),
+          ref: "Handbook p.366" },
+
+        { q: "Routh array first column: $1, 2, -1, 5$. Number of RHP poles:",
+          choices: ["$2$ (two sign changes)", "$1$", "$0$", "$3$"],
+          correct: 0,
+          solution: S({
+            c: "Routh-Hurwitz criterion: number of sign changes in the first column = number of right-half-plane (unstable) poles.",
+            s: [
+              "Sequence: $1 \\to 2$ (no change), $2 \\to -1$ (sign change #1), $-1 \\to 5$ (sign change #2).",
+              "Total: 2 sign changes → 2 RHP poles."
+            ],
+            a: "2 RHP poles → unstable",
+            v: "Any RHP pole → instability. Routh saves us from explicit factoring."
+          }),
+          ref: "Handbook p.365" },
+
+        { q: "Settling time (2%) of $G(s)=K/(s+a)$ with $a=4$:",
+          choices: ["$\\approx 1$ s", "$\\approx 0.25$ s", "$\\approx 4$ s", "$\\approx 2$ s"],
+          correct: 0,
+          solution: S({
+            c: "First-order system: $\\tau = 1/a$. 2% settling time $t_s \\approx 4\\tau = 4/a$.",
+            s: [
+              "$\\tau = 1/4 = 0.25$ s.",
+              "$t_s \\approx 4 \\cdot 0.25 = 1$ s."
+            ],
+            a: "$t_s \\approx 1$ s",
+            v: "Rule of thumb: 5% settling = $3\\tau$, 2% = $4\\tau$, 1% = $5\\tau$."
+          }),
+          ref: "Handbook p.366" },
+
+        { q: "Phase margin for stability requires PM > $0$. Typical good design:",
+          choices: ["$30°$ to $60°$", "$> 180°$", "$< 0°$", "Exactly $0°$"],
+          correct: 0,
+          solution: S({
+            c: "Phase margin (PM) measures how much added phase delay would cause instability. PM > 0 → stable. Good design: 30-60° for good damping.",
+            s: [
+              "PM = 180° + ∠G(jω_gc) where ω_gc is gain crossover frequency.",
+              "PM < 30°: too oscillatory, ringing.",
+              "PM = 45-60°: well-damped (target).",
+              "PM = 60° corresponds roughly to $\\zeta \\approx 0.6$."
+            ],
+            a: "30° to 60°",
+            v: "Auto-tuning algorithms (Ziegler-Nichols, etc.) typically target PM ≈ 45°."
+          }),
+          ref: "Handbook p.366" },
+
+        { q: "Damping ratio $\\zeta=0.707$ in 2nd-order system gives:",
+          choices: ["Underdamped, about 4% overshoot", "Critically damped, no overshoot", "Overdamped", "Undamped oscillation"],
+          correct: 0,
+          solution: S({
+            c: "2nd-order system damping cases — based on $\\zeta$ (damping ratio): $\\zeta = 0$ undamped (pure oscillation); $0 < \\zeta < 1$ underdamped (overshoots, then decays); $\\zeta = 1$ critically damped (fastest with no overshoot); $\\zeta > 1$ overdamped (slow, no overshoot).",
+            s: [
+              "$\\zeta = 0.707 = 1/\\sqrt{2}$ is in $(0, 1)$ → <b>underdamped</b>.",
+              "Overshoot formula: $M_p = e^{-\\zeta\\pi/\\sqrt{1-\\zeta^2}}$.",
+              "Plug $\\zeta = 0.707$: $M_p = e^{-0.707\\pi/0.707} = e^{-\\pi} \\approx 0.043 = 4.3\\%$ overshoot.",
+              "$\\zeta = 0.707$ is a common target — fast and well-damped."
+            ],
+            a: "Underdamped, ~4.3% overshoot",
+            v: "Common control-design targets: $\\zeta = 0.5$ (~16% overshoot), $\\zeta = 0.707$ (~4% overshoot), $\\zeta = 1$ (0% overshoot but slow)."
+          }),
+          ref: "Handbook p.366" },
+      ],
+    },
+    // ====================== Ch 13: Communications ======================
+    {
+      id: 13, name_en: "Communications", name_vn: "Thông tin Liên lạc", fe_count: [5, 8],
+      questions: [
+        { q: "AM carrier 1 MHz modulated by 5 kHz audio. Bandwidth:",
+          choices: ["$10$ kHz", "$5$ kHz", "$1$ MHz", "$2$ MHz"],
+          correct: 0,
+          solution: S({
+            c: "AM (DSB-LC) bandwidth: $BW = 2 f_m$ where $f_m$ is the highest message frequency. The carrier $f_c$ doesn't affect bandwidth.",
+            s: [
+              "$BW = 2 \\cdot 5{,}000 = 10{,}000$ Hz $= 10$ kHz."
+            ],
+            a: "$BW = 10$ kHz",
+            v: "Two sidebands at $f_c \\pm f_m$ require total bandwidth $2 f_m$. The carrier is in the middle."
+          }),
+          ref: "Handbook p.371" },
+
+        { q: "AM upper sideband frequency for above:",
+          choices: ["$1.005$ MHz", "$0.995$ MHz", "$1.05$ MHz", "$5$ kHz"],
+          correct: 0,
+          solution: S({
+            c: "AM produces two sidebands: $f_{USB} = f_c + f_m$ (upper), $f_{LSB} = f_c - f_m$ (lower).",
+            s: [
+              "$f_{USB} = 1{,}000{,}000 + 5{,}000 = 1{,}005{,}000$ Hz $= 1.005$ MHz."
+            ],
+            a: "$f_{USB} = 1.005$ MHz",
+            v: "$f_{LSB} = 0.995$ MHz. Each sideband carries the same info — that's why SSB (single-sideband) is half the bandwidth of AM."
+          }),
+          ref: "Handbook p.371" },
+
+        { q: "PCM: audio max 4 kHz, Nyquist sampling, 8 bits/sample. Bit rate:",
+          choices: ["$64$ kbps", "$32$ kbps", "$8$ kbps", "$128$ kbps"],
+          correct: 0,
+          solution: S({
+            c: "PCM bit rate: $R_b = f_s \\cdot n_{bits}$. Nyquist sampling: $f_s = 2 f_{max}$.",
+            s: [
+              "$f_s = 2 \\cdot 4 = 8$ kHz.",
+              "$R_b = 8{,}000 \\cdot 8 = 64{,}000$ bps $= 64$ kbps."
+            ],
+            a: "$R_b = 64$ kbps",
+            v: "This is exactly the G.711 telephone codec rate — μ-law/A-law 8 kHz × 8 bits."
+          }),
+          ref: "Handbook p.371" },
+
+        { q: "SQNR for 8-bit uniform quantizer (sinusoid):",
+          choices: ["$\\approx 50$ dB", "$\\approx 6$ dB", "$\\approx 24$ dB", "$\\approx 100$ dB"],
+          correct: 0,
+          solution: S({
+            c: "Quantization SNR for uniform quantization of a full-scale sinusoid: $\\text{SQNR} \\approx 6.02\\,n + 1.76$ dB (memorize).",
+            s: [
+              "Plug $n = 8$ bits: $6.02 \\cdot 8 + 1.76 = 48.16 + 1.76 = 49.92$ dB.",
+              "Each additional bit adds ~6 dB."
+            ],
+            a: "$\\approx 50$ dB",
+            v: "CD audio 16-bit gives $\\approx 98$ dB SQNR — well beyond audible noise floor."
+          }),
+          ref: "Handbook p.371" },
+
+        { q: "FM modulation index $\\beta$ when $\\Delta f = 75$ kHz, $f_m = 15$ kHz:",
+          choices: ["$5$", "$15$", "$0.2$", "$75$"],
+          correct: 0,
+          solution: S({
+            c: "FM modulation index (for tone modulation): $\\beta = \\Delta f / f_m$ where $\\Delta f$ is peak frequency deviation.",
+            s: [
+              "$\\beta = 75/15 = 5$."
+            ],
+            a: "$\\beta = 5$",
+            v: "Commercial FM broadcasting uses $\\Delta f = 75$ kHz max, audio up to 15 kHz, so $\\beta_{max} \\approx 5$."
+          }),
+          ref: "Handbook p.371" },
+
+        { q: "Carson's rule BW for above ($\\Delta f=75$ kHz, $f_m=15$ kHz):",
+          choices: ["$180$ kHz", "$150$ kHz", "$30$ kHz", "$75$ kHz"],
+          correct: 0,
+          solution: S({
+            c: "Carson's rule for FM bandwidth: $BW \\approx 2(\\Delta f + f_m)$. Approximation, captures ~98% of signal power.",
+            s: [
+              "$BW = 2(75 + 15) = 2 \\cdot 90 = 180$ kHz."
+            ],
+            a: "$BW \\approx 180$ kHz",
+            v: "FCC allocates 200 kHz per FM station — Carson's rule (180 kHz) plus guard band."
+          }),
+          ref: "Handbook p.371" },
+
+        { q: "AM modulation index $m=0.5$. Efficiency:",
+          choices: ["$11.1\\%$", "$50\\%$", "$25\\%$", "$100\\%$"],
+          correct: 0,
+          solution: S({
+            c: "AM efficiency (fraction of power in sidebands, the only part carrying information): $\\eta = \\dfrac{m^2}{2 + m^2}$.",
+            s: [
+              "Plug in: $\\eta = (0.5)^2 / (2 + (0.5)^2) = 0.25/2.25 \\approx 0.111 = 11.1\\%$."
+            ],
+            a: "$\\eta \\approx 11.1\\%$",
+            v: "Max efficiency at $m=1$: $\\eta = 1/3 = 33.3\\%$. Most AM power is wasted in the carrier (which carries no info)."
+          }),
+          ref: "Handbook p.371" },
+
+        { q: "TDM, FDM, CDM are types of:",
+          choices: ["Multiplexing", "Modulation", "Coding", "Filtering"],
+          correct: 0,
+          solution: S({
+            c: "Multiplexing: techniques to share a channel among multiple signals.",
+            s: [
+              "TDM (Time Division Multiplexing): users take turns in time slots.",
+              "FDM (Frequency Division): each user on a different frequency band.",
+              "CDM (Code Division): users separated by orthogonal codes (CDMA cell networks)."
+            ],
+            a: "Multiplexing techniques",
+            v: "Modulation (AM, FM, PSK) — different concept: how to put a signal onto a carrier."
+          }),
+          ref: "Handbook p.371" },
+      ],
+    },
+    // ====================== Ch 14: Computer Networks ======================
+    {
+      id: 14, name_en: "Computer Networks", name_vn: "Mạng Máy tính", fe_count: [4, 6],
+      questions: [
+        { q: "Usable host IPs in subnet 10.0.0.0/27:",
+          choices: ["$30$", "$32$", "$28$", "$62$"],
+          correct: 0,
+          solution: S({
+            c: "Subnet math: host bits $h = 32 - \\text{prefix}$. Total addresses $= 2^h$. Subtract 2 for network address (all-0 host) and broadcast (all-1 host).",
+            s: [
+              "Host bits: $32 - 27 = 5$.",
+              "Total addresses: $2^5 = 32$.",
+              "Usable hosts: $32 - 2 = 30$."
+            ],
+            a: "$30$ usable hosts",
+            v: "Common subnet sizes: /24 → 254 hosts; /25 → 126; /26 → 62; /27 → 30; /28 → 14; /29 → 6; /30 → 2 (point-to-point)."
+          }),
+          ref: "Handbook p.393" },
+
+        { q: "OSI layer of routers:",
+          choices: ["Layer 3 (Network)", "Layer 2 (Data Link)", "Layer 4 (Transport)", "Layer 7 (Application)"],
+          correct: 0,
+          solution: S({
+            c: "OSI layers and devices: L1 (Physical) = hubs, cables; L2 (Data Link) = switches, bridges; L3 (Network) = routers; L4 (Transport) = TCP/UDP; L5-7 = software.",
+            s: [
+              "Routers read the IP packet header (which is Layer 3 info) to forward.",
+              "MAC addresses (L2) are used only on each local hop.",
+              "Therefore routers operate at L3."
+            ],
+            a: "Layer 3 (Network)",
+            v: "Modern 'L3 switches' are essentially routers in switch hardware — both forward by IP."
+          }),
+          ref: "Handbook p.399" },
+
+        { q: "OSI layer of switches:",
+          choices: ["Layer 2 (Data Link)", "Layer 3 (Network)", "Layer 1 (Physical)", "Layer 7 (Application)"],
+          correct: 0,
+          solution: S({
+            c: "Switches forward Ethernet frames based on MAC address tables (CAM table). MAC is Layer 2.",
+            s: [
+              "Switch learns: when a frame arrives on a port, record source MAC → port.",
+              "Switch forwards: look up destination MAC in table → send to that port.",
+              "No IP involvement → not L3."
+            ],
+            a: "Layer 2 (Data Link)",
+            v: "Hubs are L1 (just repeat signals to all ports). Switches are smarter — they selectively forward."
+          }),
+          ref: "Handbook p.399" },
+
+        { q: "Mnemonic for OSI layers (top to bottom):",
+          choices: ["All People Seem To Need Data Processing", "Please Do Not Throw Sausage Pizza Away", "Sally Stops Twins Daring Pizzas Plenty", "Apple Pizza Stems"],
+          correct: 0,
+          solution: S({
+            c: "OSI layers (top → bottom): <b>A</b>pplication, <b>P</b>resentation, <b>S</b>ession, <b>T</b>ransport, <b>N</b>etwork, <b>D</b>ata Link, <b>P</b>hysical.",
+            s: [
+              "Top→bottom: APSTNDP → 'All People Seem To Need Data Processing'.",
+              "Bottom→top: PDNTSPA → 'Please Do Not Throw Sausage Pizza Away'.",
+              "Both are standard mnemonics."
+            ],
+            a: "All People Seem To Need Data Processing (top → bottom)",
+            v: "Note: choice B is correct but in reverse order (bottom → top)."
+          }),
+          ref: "Handbook p.399" },
+
+        { q: "TCP is best described as:",
+          choices: ["Connection-oriented, reliable", "Connectionless, fast", "Stateless", "Broadcast-only"],
+          correct: 0,
+          solution: S({
+            c: "TCP (Transmission Control Protocol): reliable, ordered delivery via 3-way handshake (SYN, SYN-ACK, ACK) and ACKs. UDP: connectionless, unreliable, fast (no handshake).",
+            s: [
+              "TCP features: connection setup, sequence numbers, ACKs, retransmission, flow control, congestion control.",
+              "Use cases: web (HTTP), email (SMTP), file transfer (FTP).",
+              "UDP use cases: video streaming, gaming, VoIP — where speed matters more than reliability."
+            ],
+            a: "Connection-oriented, reliable",
+            v: "Both run over IP (L3). TCP/UDP are L4."
+          }),
+          ref: "Handbook p.400" },
+
+        { q: "How many total addresses in /24 subnet:",
+          choices: ["$256$", "$24$", "$254$", "$65,536$"],
+          correct: 0,
+          solution: S({
+            c: "Subnet size: $2^{(32 - \\text{prefix})}$ total addresses.",
+            s: [
+              "$2^{32-24} = 2^8 = 256$ total.",
+              "Usable: $256 - 2 = 254$ (choice C is usable, not total)."
+            ],
+            a: "$256$ total addresses",
+            v: "/24 is the common 'class C' size."
+          }),
+          ref: "Handbook p.393" },
+
+        { q: "Firewall is primarily for:",
+          choices: ["Filtering network traffic", "Routing", "Switching", "Encryption only"],
+          correct: 0,
+          solution: S({
+            c: "Firewall: enforces traffic policies (allow/deny rules) at network boundaries. Can be packet-filter (L3/L4) or stateful or application-aware (L7).",
+            s: [
+              "Common rules: block incoming from internet except port 80/443.",
+              "Stateful firewalls track connection state to distinguish initiation from response.",
+              "Next-generation firewalls do deep packet inspection."
+            ],
+            a: "Filtering network traffic",
+            v: "Encryption is the job of VPN/TLS, though many firewalls support VPN too."
+          }),
+          ref: "Handbook p.412" },
+      ],
+    },
+    // ====================== Ch 15: Digital Systems ======================
+    {
+      id: 15, name_en: "Digital Systems", name_vn: "Hệ thống Số", fe_count: [8, 12],
+      questions: [
+        { q: "Binary 10110101 in decimal:",
+          choices: ["$181$", "$165$", "$201$", "$129$"],
+          correct: 0,
+          solution: S({
+            c: "Binary to decimal: sum $b_i \\cdot 2^i$ over set bits. Or use place values 128, 64, 32, 16, 8, 4, 2, 1 from left.",
+            s: [
+              "Bits: 1 0 1 1 0 1 0 1.",
+              "Place values: 128, 64, 32, 16, 8, 4, 2, 1.",
+              "Active bits: 128 + 32 + 16 + 4 + 1 = 181."
+            ],
+            a: "$181$",
+            v: "Crosscheck: 181 in hex = AD₁₆ (see next problem if relevant)."
+          }),
+          ref: "Handbook p.388" },
+
+        { q: "Decimal 173 in hex:",
+          choices: ["$\\text{AD}$", "$\\text{D7}$", "$\\text{B5}$", "$\\text{AC}$"],
+          correct: 0,
+          solution: S({
+            c: "Decimal to hex: divide by 16 repeatedly, read remainders bottom-up. Or split into upper/lower nibble: $173 = 16 \\cdot q + r$.",
+            s: [
+              "$173 / 16 = 10$ remainder $13$.",
+              "$10 = A_{16}$, $13 = D_{16}$.",
+              "Combine: $173_{10} = \\text{AD}_{16}$."
+            ],
+            a: "$\\text{AD}_{16}$",
+            v: "Hex letters: A=10, B=11, C=12, D=13, E=14, F=15."
+          }),
+          ref: "Handbook p.388" },
+
+        { q: "Hex DEAD in binary:",
+          choices: ["1101 1110 1010 1101", "1101 1110 1010 1110", "1010 1101 1110 1101", "1110 1110 1011 1101"],
+          correct: 0,
+          solution: S({
+            c: "Hex to binary: each hex digit = 4 bits. Direct lookup, no math needed.",
+            s: [
+              "D = 1101, E = 1110, A = 1010, D = 1101.",
+              "Concatenate: 1101 1110 1010 1101."
+            ],
+            a: "1101 1110 1010 1101",
+            v: "0xDEAD = 57,005 in decimal. Famous 'magic number' in programming."
+          }),
+          ref: "Handbook p.388" },
+
+        { q: "$-13$ in 8-bit two's complement:",
+          choices: ["1111 0011", "0000 1101", "1000 1101", "1111 0010"],
+          correct: 0,
+          solution: S({
+            c: "Two's complement of negative number: <b>flip all bits then add 1</b>. Equivalent to: subtract from $2^n$.",
+            s: [
+              "$+13$ in 8 bits: 0000 1101.",
+              "Flip all bits: 1111 0010.",
+              "Add 1: 1111 0011."
+            ],
+            a: "1111 0011 (binary)",
+            v: "Check: as signed 8-bit, $1111\\,0011 = -128 + 64 + 32 + 16 + 2 + 1 = -13$ ✓"
+          }),
+          ref: "Handbook p.389" },
+
+        { q: "Simplify $F = AB + AB' + A'B$:",
+          choices: ["$A + B$", "$AB$", "$A'B'$", "$A \\oplus B$"],
+          correct: 0,
+          solution: S({
+            c: "Boolean simplification: use $X + X' = 1$ and absorption $X + X'Y = X + Y$.",
+            s: [
+              "Group: $AB + AB' = A(B + B') = A \\cdot 1 = A$.",
+              "Now $F = A + A'B$.",
+              "Apply absorption ($X + X'Y = X+Y$): $F = A + B$."
+            ],
+            a: "$F = A + B$",
+            v: "Truth table check: $F = AB+AB'+A'B$ is true when at least one of $A, B$ is true — same as $A+B$ ✓"
+          }),
+          ref: "Handbook p.389" },
+
+        { q: "DeMorgan: $(A \\cdot B)' = $",
+          choices: ["$A' + B'$", "$A' \\cdot B'$", "$A \\oplus B$", "$A + B$"],
+          correct: 0,
+          solution: S({
+            c: "DeMorgan's laws: $(AB)' = A' + B'$ and $(A+B)' = A'B'$. Convert NAND to OR-of-NOTs and NOR to AND-of-NOTs.",
+            s: [
+              "NAND identity: $(A \\cdot B)' = A' + B'$.",
+              "Choice B is $(A+B)'$ — the dual."
+            ],
+            a: "$A' + B'$",
+            v: "Used in logic minimization and to convert gate types (e.g., NAND-only or NOR-only designs)."
+          }),
+          ref: "Handbook p.389" },
+
+        { q: "8-bit signed range (two's complement):",
+          choices: ["$-128$ to $+127$", "$-127$ to $+128$", "$0$ to $255$", "$-255$ to $+255$"],
+          correct: 0,
+          solution: S({
+            c: "$n$-bit two's complement range: $-2^{n-1}$ to $2^{n-1} - 1$. The negative side has one extra value (no $+0/-0$ distinction).",
+            s: [
+              "$n = 8$: $-2^7$ to $2^7 - 1$ = $-128$ to $+127$.",
+              "Unsigned 8-bit: 0 to 255 (choice C)."
+            ],
+            a: "$-128$ to $+127$",
+            v: "16-bit signed: $-32{,}768$ to $+32{,}767$. 32-bit signed: $-2{,}147{,}483{,}648$ to $+2{,}147{,}483{,}647$."
+          }),
+          ref: "Handbook p.389" },
+
+        { q: "JK flip-flop with $J=K=1$ on clock edge:",
+          choices: ["Toggles output", "Sets output", "Resets output", "Holds output"],
+          correct: 0,
+          solution: S({
+            c: "JK truth table: $J=0,K=0$: hold; $J=1,K=0$: set ($Q=1$); $J=0,K=1$: reset ($Q=0$); $J=1,K=1$: toggle ($Q \\to \\bar{Q}$).",
+            s: [
+              "$J=K=1$ is the toggle condition.",
+              "On each clock edge, $Q$ flips state."
+            ],
+            a: "Toggles",
+            v: "JK avoids the indeterminate state of SR latch ($S=R=1$ is forbidden); JK turns that into a useful toggle."
+          }),
+          ref: "Handbook p.391" },
+
+        { q: "D flip-flop output after clock edge:",
+          choices: ["$Q = D$", "$Q$ toggles", "$Q = 0$", "$Q = \\bar{D}$"],
+          correct: 0,
+          solution: S({
+            c: "D (delay) flip-flop: output Q takes the value of D at the clock edge. Effectively delays D by one clock cycle.",
+            s: [
+              "On clock edge: $Q \\leftarrow D$.",
+              "Between edges: $Q$ holds last value.",
+              "Used in registers, pipelines, synchronizers."
+            ],
+            a: "$Q = D$",
+            v: "JK with $J=D, K=\\bar{D}$ behaves identically to a D flip-flop."
+          }),
+          ref: "Handbook p.391" },
+
+        { q: "Boolean: $(A+1)$ equals:",
+          choices: ["$1$", "$A$", "$0$", "$A'$"],
+          correct: 0,
+          solution: S({
+            c: "OR with constant 1: always 1 (one true input already makes the OR true). 'Annihilator' for OR.",
+            s: [
+              "$A + 1 = 1$ regardless of $A$.",
+              "Dual: $A \\cdot 0 = 0$ (annihilator for AND)."
+            ],
+            a: "$1$",
+            v: "Identity laws: $A + 0 = A$, $A \\cdot 1 = A$ (additive/multiplicative identity)."
+          }),
+          ref: "Handbook p.389" },
+
+        { q: "How many flip-flops needed to count from 0 to 15?",
+          choices: ["$4$", "$15$", "$5$", "$3$"],
+          correct: 0,
+          solution: S({
+            c: "$N$ states require $\\lceil \\log_2 N \\rceil$ flip-flops (each FF stores 1 bit = 1 binary digit).",
+            s: [
+              "0 to 15 = 16 distinct states.",
+              "$\\log_2 16 = 4$, so 4 flip-flops."
+            ],
+            a: "4 flip-flops",
+            v: "n flip-flops → $2^n$ states: 1FF=2, 2FF=4, 3FF=8, 4FF=16, ..."
+          }),
+          ref: "Handbook p.391" },
+
+        { q: "AND of $A=1010_2$ with $B=1100_2$:",
+          choices: ["$1000_2$", "$1110_2$", "$0110_2$", "$0010_2$"],
+          correct: 0,
+          solution: S({
+            c: "Bitwise AND: result bit is 1 only where <b>both</b> input bits are 1.",
+            s: [
+              "  1 0 1 0",
+              "AND 1 1 0 0",
+              "  = 1 0 0 0"
+            ],
+            a: "$1000_2$",
+            v: "Bitwise OR would give 1110₂; XOR gives 0110₂ (choice C)."
+          }),
+          ref: "Handbook p.388" },
+      ],
+    },
+    // ====================== Ch 16: Computer Systems ======================
+    {
+      id: 16, name_en: "Computer Systems", name_vn: "Hệ thống Máy tính", fe_count: [5, 8],
+      questions: [
+        { q: "Address lines needed for 4 GB byte-addressable memory:",
+          choices: ["$32$", "$30$", "$28$", "$36$"],
+          correct: 0,
+          solution: S({
+            c: "Address bits needed: $n = \\log_2(\\text{addressable units})$. For $N$ bytes: $n = \\log_2 N$.",
+            s: [
+              "$4$ GB $= 4 \\cdot 2^{30} = 2^2 \\cdot 2^{30} = 2^{32}$ bytes.",
+              "$n = 32$ address lines."
+            ],
+            a: "$32$ address lines",
+            v: "This is why 32-bit CPUs are limited to 4 GB of RAM — out of address space."
+          }),
+          ref: "Handbook p.407" },
+
+        { q: "Cache hit rate $95\\%$, $t_{cache}=2$ ns, $t_{main}=80$ ns. Effective time:",
+          choices: ["$5.9$ ns", "$2$ ns", "$80$ ns", "$50$ ns"],
+          correct: 0,
+          solution: S({
+            c: "Effective access time: $t_{avg} = h \\cdot t_{cache} + (1-h) \\cdot t_{main}$, where $h$ is hit rate. (Simple model; assumes miss goes directly to main memory.)",
+            s: [
+              "Hit contribution: $0.95 \\cdot 2 = 1.9$ ns.",
+              "Miss contribution: $0.05 \\cdot 80 = 4.0$ ns.",
+              "Total: $t_{avg} = 1.9 + 4.0 = 5.9$ ns."
+            ],
+            a: "$t_{avg} = 5.9$ ns",
+            v: "13.5× faster than no cache (80 ns) — huge speedup from a 95% hit rate."
+          }),
+          ref: "Handbook p.407" },
+
+        { q: "Von Neumann vs Harvard architecture:",
+          choices: ["Harvard has separate data and instruction memory", "Von Neumann uses Harvard layout", "Same thing", "Harvard is older"],
+          correct: 0,
+          solution: S({
+            c: "Von Neumann: single shared memory for instructions and data, single bus. Harvard: separate memory + bus for instructions vs data. Harvard allows simultaneous fetch and read.",
+            s: [
+              "Von Neumann (most desktop CPUs, simplicity): one memory, one bus.",
+              "Harvard (DSPs, many microcontrollers): two memories, two buses → parallel access."
+            ],
+            a: "Harvard has separate instruction/data memory",
+            v: "Modern CPUs use 'modified Harvard' — separate L1 caches for instructions and data, but unified main memory."
+          }),
+          ref: "Handbook p.408" },
+
+        { q: "RAM types fastest-to-slowest in access time:",
+          choices: ["SRAM > DRAM > Flash", "DRAM > SRAM > Flash", "Flash > SRAM > DRAM", "All equal"],
+          correct: 0,
+          solution: S({
+            c: "Memory speed/cost tradeoffs: SRAM (fastest, expensive — used for cache); DRAM (cheaper, slower — main RAM, needs refresh); Flash (non-volatile but slower — storage).",
+            s: [
+              "SRAM: ~1-10 ns (used in caches).",
+              "DRAM: ~10-100 ns (main memory).",
+              "Flash/SSD: 25-100 µs read (~1000× slower than DRAM)."
+            ],
+            a: "SRAM > DRAM > Flash",
+            v: "Each level is roughly 100-1000× slower as you go bigger/cheaper."
+          }),
+          ref: "Handbook p.407" },
+
+        { q: "1 KB = ",
+          choices: ["$1024$ bytes", "$1000$ bytes", "$1024$ bits", "$2^{20}$ bytes"],
+          correct: 0,
+          solution: S({
+            c: "In computing (binary): 1 KB = $2^{10}$ = 1024 bytes. (SI 'kilo' = 1000.) Some standards use 'KiB' for the binary unit and 'kB' for 1000.",
+            s: [
+              "Binary: 1 KB = $2^{10}$ = 1024 bytes.",
+              "1 MB = $2^{20}$ = 1,048,576 bytes (choice D).",
+              "1 GB = $2^{30}$, 1 TB = $2^{40}$, ..."
+            ],
+            a: "$1024$ bytes",
+            v: "Disk vendors sometimes use 1000-based for marketing — '500 GB' drive is 500×10⁹ bytes, ~465 GiB."
+          }),
+          ref: "Handbook p.407" },
+
+        { q: "Big-endian stores most significant byte at:",
+          choices: ["Lowest address", "Highest address", "Random", "Middle"],
+          correct: 0,
+          solution: S({
+            c: "Endianness: byte ordering in multi-byte data. Big-endian: MSB first (lowest address). Little-endian: LSB first (lowest address).",
+            s: [
+              "Big-endian (network byte order, IBM, Sun): MSB at low address — 'reads' naturally.",
+              "Little-endian (x86, ARM): LSB at low address — easier arithmetic."
+            ],
+            a: "Lowest address",
+            v: "Mnemonic: 'big-end-first'. TCP/IP uses big-endian — hence 'network byte order'."
+          }),
+          ref: "Handbook p.408" },
+
+        { q: "Memory hierarchy from fastest to largest:",
+          choices: ["Registers→Cache→RAM→SSD→HDD", "HDD→SSD→RAM→Cache→Registers", "Cache→Registers→RAM→HDD", "RAM→Cache→Registers→SSD"],
+          correct: 0,
+          solution: S({
+            c: "Memory hierarchy: trade-off speed vs capacity vs cost. Higher levels = faster, smaller, more expensive.",
+            s: [
+              "Registers (fastest, ~32-64 of them): < 1 ns.",
+              "L1/L2/L3 cache (SRAM): 1-30 ns.",
+              "Main memory (DRAM): 50-100 ns.",
+              "SSD: 25-100 µs.",
+              "HDD: 5-10 ms.",
+              "Tape: seconds."
+            ],
+            a: "Registers → Cache → RAM → SSD → HDD",
+            v: "Each level is typically 10-100× larger and 10-100× slower than the one above."
+          }),
+          ref: "Handbook p.407" },
+
+        { q: "32-bit address space size:",
+          choices: ["$4$ GB", "$4$ MB", "$2$ GB", "$8$ GB"],
+          correct: 0,
+          solution: S({
+            c: "Address space = $2^n$ bytes where $n$ is the address width.",
+            s: [
+              "$2^{32} = 4{,}294{,}967{,}296 \\approx 4.29 \\times 10^9$ bytes.",
+              "$= 4$ GiB (binary) or roughly 4 GB."
+            ],
+            a: "$4$ GB",
+            v: "Why 32-bit OSs are capped at 4 GB RAM (less if some address space reserved for I/O)."
+          }),
+          ref: "Handbook p.407" },
+      ],
+    },
+    // ====================== Ch 17: Software Engineering ======================
+    {
+      id: 17, name_en: "Software Engineering", name_vn: "Kỹ thuật Phần mềm", fe_count: [4, 6],
+      questions: [
+        { q: "Big-O of nested for loops (each 1..n):",
+          choices: ["$O(n^2)$", "$O(n)$", "$O(n\\log n)$", "$O(1)$"],
+          correct: 0,
+          solution: S({
+            c: "Time complexity = product of nested loop counts. Two nested loops over $n$ → $n \\cdot n = n^2$ operations.",
+            s: [
+              "Outer: $n$ iterations.",
+              "Inner: $n$ iterations per outer.",
+              "Total: $n^2$ → $O(n^2)$."
+            ],
+            a: "$O(n^2)$",
+            v: "Three nested loops would be $O(n^3)$, etc."
+          }),
+          ref: "Handbook p.415" },
+
+        { q: "Max comparisons in binary search of 1024 elements:",
+          choices: ["$10$", "$1024$", "$32$", "$512$"],
+          correct: 0,
+          solution: S({
+            c: "Binary search halves the search space each step → $O(\\log_2 n)$ comparisons.",
+            s: [
+              "$\\log_2 1024 = 10$ (since $2^{10} = 1024$).",
+              "Worst case: 10 comparisons to find or rule out any element."
+            ],
+            a: "$10$ comparisons",
+            v: "Linear search would need up to 1024 comparisons — binary is 100× faster here."
+          }),
+          ref: "Handbook p.415" },
+
+        { q: "Big-O of merge sort:",
+          choices: ["$O(n\\log n)$", "$O(n^2)$", "$O(n)$", "$O(\\log n)$"],
+          correct: 0,
+          solution: S({
+            c: "Merge sort: divide-and-conquer. $\\log n$ levels of recursion, each level merges $n$ elements → $O(n \\log n)$.",
+            s: [
+              "Recurrence: $T(n) = 2T(n/2) + O(n)$.",
+              "Solving: $T(n) = O(n \\log n)$.",
+              "Heap sort and quicksort (avg) also $O(n \\log n)$."
+            ],
+            a: "$O(n\\log n)$",
+            v: "Worst case quicksort is $O(n^2)$ but average is $O(n \\log n)$. Merge sort is reliably $O(n \\log n)$."
+          }),
+          ref: "Handbook p.415" },
+
+        { q: "Big-O of bubble sort:",
+          choices: ["$O(n^2)$", "$O(n\\log n)$", "$O(n)$", "$O(2^n)$"],
+          correct: 0,
+          solution: S({
+            c: "Bubble sort makes up to $n$ passes, each comparing up to $n-1$ adjacent pairs and swapping → $O(n^2)$.",
+            s: [
+              "Outer loop: $n$ passes.",
+              "Inner loop: $n-1$ comparisons.",
+              "Total: $n(n-1)/2 \\approx n^2/2 = O(n^2)$."
+            ],
+            a: "$O(n^2)$",
+            v: "Insertion sort and selection sort are also $O(n^2)$. Use for small lists only."
+          }),
+          ref: "Handbook p.415" },
+
+        { q: "Stack data structure follows:",
+          choices: ["LIFO", "FIFO", "Random", "Priority"],
+          correct: 0,
+          solution: S({
+            c: "Stack: Last-In-First-Out. Last item pushed is first popped.",
+            s: [
+              "Operations: push (add to top), pop (remove from top), peek/top (view top without removing).",
+              "Implementation: array with index, or linked list.",
+              "Use cases: function call stack, undo/redo, expression evaluation."
+            ],
+            a: "LIFO",
+            v: "Queue is FIFO (first-in first-out) — opposite ordering."
+          }),
+          ref: "Handbook p.415" },
+
+        { q: "Hash table average lookup complexity (good hash):",
+          choices: ["$O(1)$", "$O(\\log n)$", "$O(n)$", "$O(n^2)$"],
+          correct: 0,
+          solution: S({
+            c: "Hash table with good hash function: average $O(1)$ lookup (constant). Worst case $O(n)$ if all keys collide.",
+            s: [
+              "Hash function maps key → bucket index in $O(1)$.",
+              "With low collision rate, retrieval is $O(1)$ on average.",
+              "Bad hash or full table → degrades toward $O(n)$."
+            ],
+            a: "$O(1)$ average",
+            v: "Why dictionaries/maps are so heavily used in modern programming."
+          }),
+          ref: "Handbook p.415" },
+      ],
+    },
+  ],
+};
+
+if (typeof window !== "undefined") window.QUESTION_BANK = QUESTION_BANK;
+if (typeof module !== "undefined") module.exports = QUESTION_BANK;
