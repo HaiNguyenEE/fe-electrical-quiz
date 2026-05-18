@@ -24,11 +24,12 @@
   // Skip on feedback.html itself — that page already has its own form
   if (/feedback\.html(\?|#|$)/.test(location.pathname + location.search)) return;
 
-  // ---- Configuration (same recipient as feedback.html) ----
-  const USE_HASH        = false;
-  const RECIPIENT_HASH  = "";                            // paste FormSubmit hash here after activation
-  const RECIPIENT_B64   = "bW1tdHJ5bXRAZ21haWwuY29t";
-  const ACTION_BASE     = "https://formsubmit.co/";
+  // ---- Configuration (Web3Forms — same recipient as feedback.html) ----
+  // Web3Forms binds the recipient email to the access key on its side —
+  // the email address never appears in this page source. Access keys are
+  // public-safe (rate-limited, domain-locked on the Web3Forms dashboard).
+  const ACCESS_KEY      = "49bf5f26-bacf-48e0-824b-57e18a3cf28c";
+  const ACTION_URL      = "https://api.web3forms.com/submit";
   const HTML2CANVAS_URL = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
 
   const MAX_FILE_BYTES  = 10 * 1024 * 1024;
@@ -383,13 +384,14 @@
   const modalHtml = `
     <div class="feq-backdrop" data-close="bg"></div>
     <form class="feq-card" id="feqForm" method="POST" enctype="multipart/form-data" novalidate>
-      <input type="hidden" name="_subject" value="FE Workshop — User feedback">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" id="feqNextUrl" value="">
+      <input type="hidden" name="access_key" value="${ACCESS_KEY}">
+      <input type="hidden" name="subject" value="FE Workshop — User feedback">
+      <input type="hidden" name="from_name" value="FE Workshop">
+      <input type="hidden" name="redirect" id="feqNextUrl" value="">
       <input type="hidden" name="page_url" id="feqPageUrl" value="">
       <input type="hidden" name="user_agent" id="feqUserAgent" value="">
       <input type="hidden" name="quiz_question_id" id="feqAutoQid" value="">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
       <div class="feq-header">
         <div class="feq-mini-pill" id="feqMiniPill" title="Click to restore the feedback panel">
@@ -472,8 +474,8 @@
         <div id="feqStatus" class="feq-status" hidden></div>
 
         <p class="feq-privacy">
-          <b>Privacy.</b> Your message is routed through <a href="https://formsubmit.co" target="_blank" rel="noopener">FormSubmit.co</a>.
-          The recipient address is obfuscated in page source. Your email, if you provide it, is used only to reply — never published.
+          <b>Privacy.</b> Messages are routed through <a href="https://web3forms.com" target="_blank" rel="noopener">Web3Forms</a>.
+          The recipient email is bound to the access key on Web3Forms' side and never appears in this page source. Your email, if you provide it, is used only to reply — never published.
         </p>
       </div>
     </form>
@@ -505,8 +507,7 @@
   function wire(root) {
     // Form action
     const form = root.querySelector("#feqForm");
-    const recipient = USE_HASH && RECIPIENT_HASH ? RECIPIENT_HASH : atob(RECIPIENT_B64);
-    form.action = ACTION_BASE + recipient;
+    form.action = ACTION_URL;
     root.querySelector("#feqNextUrl").value = location.href.split("?")[0] + "?fb=ok";
     root.querySelector("#feqPageUrl").value = location.href;
     root.querySelector("#feqUserAgent").value = navigator.userAgent;
@@ -904,7 +905,7 @@
     btn.disabled = true;
     btn.innerHTML = "⏳ Sending…";
     showStatus("info", "Sending your feedback…");
-    // form submits natively to FormSubmit.co
+    // form submits natively to api.web3forms.com
   }
 
   // ============================================================

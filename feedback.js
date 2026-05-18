@@ -1,23 +1,21 @@
 // ============================================================
 // FE Workshop — Feedback page logic
 // Screenshot capture · clipboard paste · drag-drop · size guard
-// Submits via FormSubmit.co (free, GitHub-Pages compatible)
+// Submits via Web3Forms (free, GitHub-Pages compatible)
 // ============================================================
 (function () {
   "use strict";
 
-  // ----- Recipient (base64 encoded so spam crawlers don't see plain text) -----
-  // After first submission, FormSubmit emails an activation link to the
-  // recipient. Once activated they provide a random hash; replace the line
-  // below with: const RECIPIENT_HASH = "your-hash-from-formsubmit";
-  // and toggle USE_HASH = true to fully hide the address from page source.
-  const USE_HASH = false;
-  const RECIPIENT_HASH = "";                    // <- paste hash here after activation
-  const RECIPIENT_B64  = "bW1tdHJ5bXRAZ21haWwuY29t";
-  const ACTION_BASE    = "https://formsubmit.co/";
+  // ----- Web3Forms config -----
+  // Form submissions are routed through api.web3forms.com. The recipient
+  // email is bound to the access key on Web3Forms' side — it never appears
+  // in this page source. Access keys are public-safe by design (rate-limited
+  // and domain-locked on the Web3Forms dashboard).
+  const ACCESS_KEY  = "49bf5f26-bacf-48e0-824b-57e18a3cf28c";
+  const ACTION_URL  = "https://api.web3forms.com/submit";
 
   const MAX_FILE_BYTES   = 10 * 1024 * 1024;    // 10 MB per file
-  const MAX_TOTAL_BYTES  = 25 * 1024 * 1024;    // 25 MB total (FormSubmit free tier)
+  const MAX_TOTAL_BYTES  = 25 * 1024 * 1024;    // 25 MB total (Web3Forms cap)
   const MAX_FILE_COUNT   = 10;
 
   // ----- Helpers -----
@@ -39,8 +37,13 @@
 
   // ----- Wire form action + diagnostics fields -----
   const form = $("#feedbackForm");
-  const recipient = USE_HASH && RECIPIENT_HASH ? RECIPIENT_HASH : atob(RECIPIENT_B64);
-  form.action = ACTION_BASE + recipient;
+  form.action = ACTION_URL;
+  // Ensure access_key hidden input present (in case markup was edited)
+  if (!form.querySelector('input[name="access_key"]')) {
+    const k = document.createElement("input");
+    k.type = "hidden"; k.name = "access_key"; k.value = ACCESS_KEY;
+    form.appendChild(k);
+  }
 
   $("#nextUrl").value = location.origin + location.pathname.replace(/feedback\.html.*$/, "feedback.html") + "?sent=1";
   $("#pageUrl").value = document.referrer || location.href;
