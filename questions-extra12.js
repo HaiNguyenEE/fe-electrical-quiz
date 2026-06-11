@@ -687,19 +687,21 @@
           v: "Damped natural freq $\\omega_d = \\omega_n\\sqrt{1-\\zeta^{2}} \\approx 9682$ rad/s. Quality factor $Q = 1/(2\\zeta) = 2$."
         })
       },
-      { q: "Thevenin equivalent looking into terminals of a circuit: $V_{oc} = 24$ V, short-circuit current $I_{sc} = 2$ A. Max power transferred to a matched load:",
-        choices: ["$72$ W", "$48$ W", "$144$ W", "$12$ W"],
+      { q: "A linear two-terminal network has $V_{oc} = 24$ V across its open terminals and $I_{sc} = 2$ A through a wire shorting the same terminals. Find the maximum power that can be delivered to a load connected across these terminals.",
+        choices: ["$12$ W", "$72$ W", "$48$ W", "$144$ W"],
         correct: 0,
-        ref: "Handbook §5 (Maximum power transfer)",
+        ref: "Handbook §5 (Thevenin equivalent and maximum power transfer)",
         solution: S({
-          c: "$R_{Th} = V_{oc}/I_{sc}$ (Norton/Thevenin relationship). Max power $= V_{oc}^{2}/(4 R_{Th})$.",
+          c: "Any linear two-terminal network can be replaced by a Thevenin equivalent (an ideal voltage source $V_{Th}$ in series with a resistance $R_{Th}$). Maximum power transfer occurs when the load is matched: $R_L = R_{Th}$, in which case $P_{max} = V_{Th}^{2}/(4R_{Th})$.",
           s: [
-            "$R_{Th} = 24/2 = 12\\,\\Omega$.",
-            "Matched load $R_L = R_{Th} = 12\\,\\Omega$.",
-            "$P_{max} = V_{oc}^{2}/(4R_{Th}) = 576/48 = 12$ W. Wait — let me recheck: \\(P_{max}=V_{oc}^2/(4R_{Th})=24^2/(4\\cdot 12)=576/48=12\\,\\text{W}\\). Choice D is the right one. The provided 'correct = 0' = 72W is WRONG. Let me re-examine the formula. Actually for matched load: voltage divides equally → load voltage = $V_{oc}/2 = 12$ V; load current $= 12/12 = 1$ A; power = $12 \\times 1 = 12$ W. So 12 W is correct. The first choice 72 W is wrong — this is a written-test trap."
+            "<b>Step 1 — Extract $V_{Th}$.</b> By definition, the open-circuit voltage IS the Thevenin voltage: $V_{Th} = V_{oc} = 24$ V.",
+            "<b>Step 2 — Extract $R_{Th}$ via the short-circuit current.</b> With the terminals shorted, the entire $V_{Th}$ drops across $R_{Th}$, so $I_{sc} = V_{Th}/R_{Th}$. Solve: $R_{Th} = V_{Th}/I_{sc} = 24/2 = 12\\,\\Omega$.<br><svg viewBox='0 0 300 120' width='280' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.8' fill='none' stroke-linecap='round'><circle cx='40' cy='60' r='18' fill='#fff'/><text x='40' y='53' text-anchor='middle' font-size='12' fill='#1f4e79' stroke='none'>+</text><text x='40' y='73' text-anchor='middle' font-size='12' fill='#1f4e79' stroke='none'>−</text><text x='14' y='64' text-anchor='end' font-size='12' fill='#1f4e79' stroke='none'>V_Th = 24V</text><line x1='40' y1='42' x2='40' y2='20'/><line x1='40' y1='20' x2='110' y2='20'/><polyline points='110,20 118,8 132,32 146,8 160,32 170,20' fill='#fff'/><text x='140' y='2' text-anchor='middle' font-size='12' fill='#1f4e79' stroke='none'>R_Th = 12 Ω</text><line x1='170' y1='20' x2='230' y2='20'/><circle cx='230' cy='20' r='2.5' fill='#1f4e79' stroke='none'/><text x='237' y='24' font-size='12' fill='#1f4e79' stroke='none'>A</text><line x1='230' y1='20' x2='250' y2='20'/><line x1='250' y1='20' x2='250' y2='60'/><polyline points='235,52 240,60 250,52 260,60 265,52 250,60' fill='none'/><text x='270' y='45' font-size='12' fill='#1f4e79' stroke='none'>R_L</text><line x1='250' y1='60' x2='250' y2='100'/><line x1='250' y1='100' x2='40' y2='100'/><line x1='40' y1='100' x2='40' y2='78'/><circle cx='230' cy='100' r='2.5' fill='#1f4e79' stroke='none'/><text x='237' y='104' font-size='12' fill='#1f4e79' stroke='none'>B</text></g></svg>",
+            "<b>Step 3 — Set the matched load.</b> For maximum power transfer, choose $R_L = R_{Th} = 12\\,\\Omega$. The series combination becomes $R_{Th} + R_L = 24\\,\\Omega$.",
+            "<b>Step 4 — Compute the load current and voltage.</b> $I_L = V_{Th}/(R_{Th}+R_L) = 24/24 = 1$ A. Load voltage: $V_L = I_L R_L = 1\\times 12 = 12$ V (exactly half of $V_{Th}$ — the matched-load signature).",
+            "<b>Step 5 — Compute the load power.</b> $P_{max} = V_L I_L = 12\\times 1 = 12$ W. Equivalently $P_{max} = V_{Th}^{2}/(4R_{Th}) = 576/48 = 12$ W."
           ],
-          a: "12 W (matched load) — the listed 'correct = 0' option in the array is mis-labelled; recompute carefully on any exam.",
-          v: "When you see options like this, always derive yourself. $P_{max} = V_{oc}^{2}/(4R_{Th})$ is a key formula."
+          a: "$P_{max} = 12$ W when $R_L = R_{Th} = 12\\,\\Omega$.",
+          v: "Sanity check via energy balance: source power $V_{Th} I_L = 24\\times 1 = 24$ W; of this, half (12 W) is dissipated in $R_{Th}$ and half (12 W) in $R_L$. That 50/50 split is the universal feature of impedance-matched DC networks — it is also why match-and-transfer wastes half the source energy in the source impedance, which is why DC power distribution does NOT match loads to source (they'd waste 50% efficiency)."
         })
       },
       { q: "Sinusoidal source 120 V (rms) at 60 Hz drives $Z = 8 + j6\\,\\Omega$. Real power consumed:",
@@ -717,15 +719,18 @@
           v: "Apparent $S = V_{rms}|I| = 1440$ VA; PF = $R/|Z| = 0.8$ lagging; $Q = S\\sin\\theta = 864$ VAR. $P^{2}+Q^{2} = 1152^{2}+864^{2} \\approx 1440^{2}$ ✓."
         })
       },
-      { q: "A capacitor $C = 100\\,\\mu$F initially charged to 200 V discharges through $R = 5$ kΩ. Time for voltage to fall to 50 V:",
-        choices: ["$\\tau\\ln 4 \\approx 693$ ms", "$\\tau \\approx 500$ ms", "$2\\tau$", "$\\tau/4$"],
+      { q: "A capacitor $C = 100\\,\\mu$F has been charged to $V_0 = 200$ V. At $t = 0$ the source is disconnected and the capacitor discharges through a resistor $R = 5\\,$kΩ connected across its terminals. Find the time for the capacitor voltage to fall to 50 V.",
+        choices: ["$\\tau\\ln 4 \\approx 693$ ms", "$\\tau \\approx 500$ ms", "$2\\tau \\approx 1.0$ s", "$\\tau/4 \\approx 125$ ms"],
         correct: 0,
-        ref: "Handbook §5 (RC discharge)",
+        ref: "Handbook §5 (RC source-free / natural response)",
         solution: S({
-          c: "$v(t) = V_0 e^{-t/RC}$. Solve for $t$ when $v = 50$.",
+          c: "When the energy source is removed and the capacitor is left to discharge through a resistor, the circuit is governed by the natural response of a first-order linear ODE: $RC\\,dv/dt + v = 0$, whose solution is $v(t) = V_0 e^{-t/\\tau}$ with $\\tau = RC$.",
           s: [
-            "$\\tau = RC = 5000\\cdot 10^{-4} = 0.5$ s.",
-            "$50 = 200 e^{-t/0.5}$ ⇒ $e^{-t/0.5} = 0.25$ ⇒ $t = 0.5\\ln 4 = 0.5(1.386) = 0.693$ s = 693 ms."
+            "<b>Step 1 — Draw the discharge loop.</b> After the source is disconnected at $t = 0$, only the capacitor and resistor remain in a closed loop. KCL forces the same current $i$ through both elements; KVL around the loop gives $v_C = v_R = iR$.<br><svg viewBox='0 0 280 120' width='250' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.8' fill='none' stroke-linecap='round'><line x1='40' y1='30' x2='40' y2='50'/><line x1='20' y1='50' x2='60' y2='50'/><line x1='20' y1='58' x2='60' y2='58'/><line x1='40' y1='58' x2='40' y2='80'/><text x='68' y='58' font-size='12' fill='#1f4e79' stroke='none'>C = 100 μF</text><text x='15' y='44' font-size='12' fill='#1f4e79' stroke='none' text-anchor='end'>+ V_C −</text><line x1='40' y1='30' x2='200' y2='30'/><line x1='40' y1='80' x2='200' y2='80'/><polyline points='200,30 200,40 192,46 208,58 192,70 208,82 200,88 200,80' fill='#fff'/><text x='220' y='58' font-size='12' fill='#1f4e79' stroke='none'>R = 5 kΩ</text><text x='130' y='22' text-anchor='middle' font-size='12' fill='#1f4e79' stroke='none'>i(t) →</text></g></svg>",
+            "<b>Step 2 — Compute the time constant.</b> $\\tau = RC = (5\\times 10^{3})(100\\times 10^{-6}) = 0.5$ s. The time constant measures how fast the exponential decays — at one $\\tau$ the voltage falls to 36.8% of its initial value.",
+            "<b>Step 3 — Write the natural response.</b> With initial condition $v(0) = V_0 = 200$ V: $v(t) = 200 e^{-t/0.5}$ V.",
+            "<b>Step 4 — Solve for $t$ when $v(t) = 50$ V.</b> $50 = 200 e^{-t/0.5} \\Rightarrow e^{-t/0.5} = 50/200 = 1/4$. Take natural log: $-t/0.5 = \\ln(1/4) = -\\ln 4$, so $t = 0.5\\,\\ln 4$.",
+            "<b>Step 5 — Numerical evaluation.</b> $\\ln 4 = 2\\ln 2 \\approx 1.3863$. Therefore $t \\approx 0.5 \\times 1.3863 \\approx 0.693$ s = 693 ms."
           ],
           a: "$\\approx 693$ ms",
           v: "Note: $\\ln 4 = 2\\ln 2$, so $t = 2\\tau\\ln 2 \\approx 1.386\\tau$ — 'time for half life' twice over."

@@ -269,13 +269,16 @@
         correct: 0,
         ref: "Handbook §5 (RL transient response)",
         solution: S({
-          c: "$i(t) = (V_S/R)(1 - e^{-t/\\tau})$, $\\tau = L/R$.",
+          c: "First-order RL transient: an inductor opposes any change in current, so the current ramps exponentially from its initial value to its new steady-state value with time constant $\\tau = L/R$. The general step response is $i(t) = i(\\infty) + [i(0^{+}) - i(\\infty)]e^{-t/\\tau}$.",
           s: [
-            "$\\tau = 2/4 = 0.5$ s. $V_S/R = 5$ A.",
-            "At $t = \\tau = 0.5$ s: $i = 5(1 - e^{-1}) = 5(0.632) = 3.16$ A."
+            "<b>Step 1 — Initial condition.</b> Before the switch closes ($t<0$), the source is disconnected and no current can flow: <span style='font-family:monospace'>i_L(0⁻) = 0</span>. Current through an inductor cannot change instantaneously, so the continuity rule gives $i_L(0^{-}) = i_L(0^{+}) = 0$ A.",
+            "<b>Step 2 — Final value (steady state at $t \\to \\infty$).</b> In DC steady state, an inductor behaves as a short circuit (zero voltage drop). The simplified circuit is therefore a 20-V source driving the 4-Ω resistor alone:<br><svg viewBox='0 0 280 140' width='280' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.8' fill='none' stroke-linecap='round'><circle cx='40' cy='80' r='18' fill='#fff'/><text x='40' y='72' text-anchor='middle' font-size='12' fill='#1f4e79' stroke='none'>+</text><text x='40' y='94' text-anchor='middle' font-size='12' fill='#1f4e79' stroke='none'>−</text><text x='14' y='84' text-anchor='end' font-size='12' fill='#1f4e79' stroke='none'>20 V</text><line x1='40' y1='62' x2='40' y2='30'/><line x1='40' y1='30' x2='240' y2='30'/><polyline points='100,30 108,18 122,42 136,18 150,42 160,30' fill='#fff'/><text x='130' y='12' text-anchor='middle' font-size='12' fill='#1f4e79' stroke='none'>R = 4 Ω</text><line x1='240' y1='30' x2='240' y2='62'/><text x='245' y='80' font-size='12' fill='#1f4e79' stroke='none'>L → short</text><line x1='240' y1='98' x2='240' y2='130'/><line x1='240' y1='130' x2='40' y2='130'/><line x1='40' y1='130' x2='40' y2='98'/></g></svg>By Ohm's law on the simplified loop: $i(\\infty) = V_S / R = 20/4 = 5$ A.",
+            "<b>Step 3 — Time constant.</b> $\\tau = L/R = 2 / 4 = 0.5$ s.",
+            "<b>Step 4 — Assemble the response.</b> Plugging $i(0^{+}) = 0$ and $i(\\infty) = 5$ into the general step formula: $i(t) = 5 + (0 - 5)e^{-t/0.5} = 5(1 - e^{-2t})$ A.",
+            "<b>Step 5 — Evaluate at $t = 0.5$ s.</b> $t/\\tau = 0.5/0.5 = 1$, so $i(0.5) = 5(1 - e^{-1}) = 5(1 - 0.3679) = 5 \\times 0.6321 \\approx 3.16$ A."
           ],
-          a: "$i(0.5) \\approx 3.16$ A",
-          v: "Steady state at $t \\to\\infty$: $i = V_S/R = 5$ A. At $t = \\tau$: 63.2%; at $5\\tau$: ~99.3%."
+          a: "$i(0.5) \\approx 3.16$ A — equal to 63.2% of the final 5 A value, which is the textbook signature of evaluating an RL or RC transient at exactly one time constant.",
+          v: "Sanity checks: (1) Units — $V/R$ gives amps ✓; $L/R = H/\\Omega = s$ ✓. (2) Boundary values — $i(0) = 0$ ✓, $i(\\infty) = 5$ ✓. (3) Initial slope — $di/dt|_{0^+} = V_S/L = 20/2 = 10$ A/s, which extrapolates linearly to reach 5 A in $\\tau = 0.5$ s ✓. (4) Power balance at steady state: $P_R = i^{2}R = 25 \\times 4 = 100$ W = $V_S \\cdot i = 20 \\times 5 = 100$ W ✓."
         })
       }
     ],
