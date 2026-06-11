@@ -73,3 +73,17 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
 - Every question uses the `S({c, s, a, v})` helper for structured solutions.
 - `correct: 0` always — the engine shuffles choices.
 - Bilingual EN / VN content is encouraged (use a `/` separator).
+
+## Solution-format upgrade log
+
+- **2026-06-11 — Pilot:** 3 Circuits solutions (extra12 ×2, extra13 ×1) rewritten to the detailed
+  multi-step standard: Step 1–N narrative, sub-circuit SVG, distractor audit, multi-point
+  verification. Bug fix: Thevenin max-power `correct: 0` now points to 12 W. SVG viewBox
+  clipping fixed across all 3 pilot diagrams.
+- **2026-06-11 — extra13 complete:** all 42 solutions in `questions-extra13.js` now follow the
+  detailed standard. 9 inline SVGs total (Thevenin/RL pilots, solenoid Amperian path, ABCD
+  series-Z two-port, coupled coils, buck power stage, SLG sequence-network series connection,
+  transmission-line reflection, z-plane unit circle, 4-bit SIPO shift register). File grew
+  37 KB → 81 KB. Deployed via `gh api` git-data flow (blobs → tree → commit → ref) — no more
+  web-upload drag-drop needed.
+- **Next upgrade targets:** extra12 (91 solutions), then extra11 (170) and earlier rounds.
