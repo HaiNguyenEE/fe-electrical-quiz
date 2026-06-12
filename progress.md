@@ -98,4 +98,11 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   Lesson captured: when batch-replacing solutions keyed by substring, key on the q:-line — a key
   matching text inside an earlier-written solution corrupted one neighbor (caught by the
   per-question Step-format integrity scan, now standard practice).
-- **Next upgrade targets:** extra10 and earlier rounds (questions.js + extra1-10, ~1,400 solutions).
+- **2026-06-11 — extra.js (Round 2) complete (57/57):** teach-from-zero standard. THREE broken
+  answer keys repaired: Cramer 3x3 (z=3 but correct:0 pointed at "2"), PW lump-vs-annuity
+  (A wins at 8% but correct:0 said B), parallel RLC Q-factor (true answer 3.16 was not among
+  the choices — choices rebuilt). All meta-commentary ("wait recompute", "Hmm") removed.
+  Staging now lives on the SSD project folder (Downloads staging deleted).
+- **Remaining upgrade targets:** questions.js (164), extra2 (129), extra3 (101), extra4 (194),
+  extra5 (209), extra6 (181), extra7 (222), extra8 (191) — standard S() format; extra9/extra10
+  (~60 q) use template-literal SVG helpers and need their own careful session.
