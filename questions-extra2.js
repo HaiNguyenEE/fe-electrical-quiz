@@ -454,54 +454,60 @@
         choices: ["Lower", "Higher", "Same", "Zero"],
         correct: 0,
         solution: S({
-          c: "In Si at 300K: $\\mu_n \\approx 1350$ cm²/V·s; $\\mu_p \\approx 480$ cm²/V·s. Holes move slower because they 'move' by adjacent valence electrons hopping.",
+          c: "Mobility ($\\mu$) measures how fast a charge carrier drifts per unit electric field. In silicon, ELECTRONS move freely through the conduction band, but HOLES 'move' only as neighboring valence electrons hop into the vacancy — an inherently clumsier process.",
           s: [
-            "$\\mu_n / \\mu_p \\approx 2.8$ → electrons are about 3× more mobile.",
-            "Consequence: n-channel MOSFETs are faster than p-channel for same size."
+            "<b>Step 1 — The benchmark numbers.</b> Si at 300 K: $\\mu_n \\approx 1350$ cm²/V·s, $\\mu_p \\approx 480$ cm²/V·s.",
+            "<b>Step 2 — Compare.</b> $\\mu_n/\\mu_p \\approx 2.8$ — holes are roughly 3× SLOWER.",
+            "<b>Step 3 — Distractor audit.</b> 'Higher' inverts the physics; 'same' ignores the different conduction mechanisms; 'zero' would mean p-type silicon can't conduct at all."
           ],
-          a: "Lower (≈3× lower)",
-          v: "This asymmetry affects circuit design — pMOS is often made wider to match nMOS drive strength."
+          a: "Lower — about 3× lower than electron mobility.",
+          v: "Design consequence you can verify on any CMOS datasheet: pMOS transistors are made ~2-3× WIDER than nMOS to deliver equal current — directly compensating this mobility gap ✓."
+
         }),
         ref: "Handbook p.354" },
       { q: "Aluminum vs copper conductors of same dimensions: aluminum has ___ resistance.",
         choices: ["Higher (about 1.6×)", "Lower", "Same", "Zero"],
         correct: 0,
         solution: S({
-          c: "Cu $\\rho = 1.72\\times 10^{-8}$ Ω·m. Al $\\rho \\approx 2.82\\times 10^{-8}$ Ω·m. Ratio ≈ 1.64.",
+          c: "With identical geometry, resistance is proportional to the material's resistivity: $R = \\rho L/A$. Copper: $\\rho = 1.72\\times10^{-8}$ Ω·m; aluminum: $\\rho \\approx 2.82\\times10^{-8}$ Ω·m.",
           s: [
-            "Same shape, $R \\propto \\rho$.",
-            "Aluminum has ~1.6× the resistivity of copper.",
-            "Aluminum is preferred for overhead transmission (lighter), copper for buildings (lower R)."
+            "<b>Step 1 — Take the ratio.</b> $2.82/1.72 \\approx 1.64$ — aluminum has ~1.6× the resistance, same dimensions.",
+            "<b>Step 2 — Distractor audit.</b> 'Lower' inverts the materials; 'same' ignores resistivity; 'zero' is superconductor fantasy.",
+            "<b>Step 3 — Why aluminum still wins overhead.</b> It is ~3.3× lighter per volume — per unit of CONDUCTANCE, aluminum weighs about half of copper, which decides transmission-line economics."
           ],
-          a: "Higher, about 1.6×",
-          v: "Same current handling: aluminum wire must be larger gauge than copper."
+          a: "Higher — about 1.6×.",
+          v: "Practical rule that follows: to carry the same current, aluminum wire is sized ~2 gauge numbers larger than copper ✓. Buildings stay copper (compact, better terminations); long spans go aluminum (weight, cost)."
+
         }),
         ref: "Handbook p.354" },
       { q: "Diffusion current density driven by concentration gradient ($n$ varies in $x$):",
         choices: ["$J = qD_n\\,dn/dx$", "$J = q n\\mu E$", "$J = -q\\sigma$", "$J = 0$"],
         correct: 0,
         solution: S({
-          c: "Fick's law for electron diffusion: $J_n = qD_n\\,(dn/dx)$. For holes: $J_p = -qD_p\\,(dp/dx)$ (opposite sign because hole charge is +).",
+          c: "Semiconductors carry current TWO ways: DRIFT (charges pushed by an electric field, $J = qn\\mu E$) and DIFFUSION (charges spreading from crowded regions to empty ones — no field needed). Diffusion follows Fick's law: $J_n = qD_n\\,dn/dx$ for electrons.",
           s: [
-            "$D$ = diffusion coefficient (cm²/s), related to mobility via Einstein: $D = \\mu V_T$.",
-            "Drift (choice B) is a different mechanism — response to E field, not gradient."
+            "<b>Step 1 — Match the mechanism to the question.</b> 'Driven by concentration gradient' = diffusion → $J = qD_n\\,dn/dx$.",
+            "<b>Step 2 — Decode the symbols.</b> $D_n$ = diffusion coefficient (cm²/s); $dn/dx$ = how steeply the carrier density varies; sign for holes flips ($J_p = -qD_p\\,dp/dx$) because their charge is positive.",
+            "<b>Step 3 — Distractor audit.</b> $qn\\mu E$ is DRIFT — field-driven, the other mechanism; the rest are not current expressions."
           ],
-          a: "$J = qD_n\\,dn/dx$ (Fick's law)",
-          v: "In a pn junction, both diffusion AND drift contribute; at equilibrium they balance."
+          a: "$J = qD_n\\,dn/dx$ — Fick's law of diffusion.",
+          v: "The Einstein relation ties the two mechanisms together: $D = \\mu V_T$ ($V_T \\approx 26$ mV at 300 K) — so $D_n \\approx 1350\\times0.026 \\approx 35$ cm²/s ✓. In a pn junction at equilibrium, diffusion and drift currents exactly cancel — that balance builds the depletion region."
+
         }),
         ref: "Handbook p.354" },
       { q: "Insulator breakdown strength of air is approximately:",
         choices: ["$3$ kV/mm", "$0.3$ kV/mm", "$30$ kV/mm", "$300$ kV/mm"],
         correct: 0,
         solution: S({
-          c: "Air dielectric strength: about 3 kV/mm (or 30 kV/cm) at sea level. Above this, ionization → arc breakdown.",
+          c: "Dielectric strength = the maximum field an insulator withstands before it ionizes and arcs. For air at standard conditions: ≈3 kV/mm (same number as 3 MV/m or 30 kV/cm — unit juggling is the whole question).",
           s: [
-            "Memorized value: ~3 kV/mm.",
-            "Practical: lightning needs >100 m air column for many MV.",
-            "Compare: SF6 gas ~89 kV/mm, oil ~12-15 kV/mm."
+            "<b>Step 1 — Recall the benchmark.</b> Air ≈ 3 kV/mm.",
+            "<b>Step 2 — Distractor audit.</b> 0.3, 30, 300 kV/mm are decade shifts; 30 kV/mm is roughly SF₆-class gas, far beyond air.",
+            "<b>Step 3 — Use it.</b> A 10-mm air gap holds off ≈30 kV — the arithmetic behind clearance tables in switchgear and busbar design."
           ],
-          a: "≈ 3 kV/mm",
-          v: "Why high-voltage equipment has large air gaps."
+          a: "≈ 3 kV/mm.",
+          v: "Comparative ladder: air 3, transformer oil 12-15, SF₆ ~9 (at 1 bar; better when pressurized), mylar ~280 kV/mm — engineered insulation exists precisely because air is the weakest common dielectric ✓."
+
         }),
         ref: "Handbook p.354" },
     ],
@@ -512,190 +518,226 @@
         choices: ["$1.6$ A", "$2$ A", "$1.0$ A", "$0.8$ A"],
         correct: 0,
         solution: S({
-          c: "Series-aiding: voltages add. Total V = sum; total R = sum; I = V/R.",
+          c: "'Series-aiding' means the EMFs push current the SAME way, so they add; every resistance in the single loop — including each battery's INTERNAL resistance — adds too. Then plain Ohm's law.",
           s: [
-            "Total EMF: 10 + 6 = 16 V.",
-            "Total R: 1 + 2 + 7 = 10 Ω.",
-            "$I = 16/10 = 1.6$ A."
+            "<b>Step 1 — Total EMF.</b> $10 + 6 = 16$ V.",
+            "<b>Step 2 — Total resistance.</b> $1 + 2 + 7 = 10\\,\\Omega$ (internal resistances are in the loop whether you like it or not).",
+            "<b>Step 3 — Current.</b> $I = 16/10 = 1.6$ A.",
+            "<b>Step 4 — Distractor audit.</b> 2 A forgets the internal resistances ($16/8$... actually $16/7 = 2.3$ — variants of dropping them); 1.0 and 0.8 A halve things arbitrarily."
           ],
           a: "$I = 1.6$ A",
-          v: "If batteries were series-opposing: net EMF = 10 - 6 = 4 V → I = 0.4 A."
+          v: "Voltage bookkeeping: drops are $1.6, 3.2, 11.2$ V across 1, 2, 7 Ω — summing to 16 V ✓. Contrast: series-OPPOSING would net $10 - 6 = 4$ V → 0.4 A — the wiring direction matters as much as the values."
+
         }),
         ref: "Handbook p.356" },
       { q: "Wheatstone bridge: $R_1=100$, $R_2=200$, $R_3=300$. For balance, $R_4$ = ?",
         choices: ["$600\\ \\Omega$", "$150\\ \\Omega$", "$200\\ \\Omega$", "$66.7\\ \\Omega$"],
         correct: 0,
         solution: S({
-          c: "Wheatstone bridge balanced when $R_1/R_2 = R_3/R_4$, so $R_4 = R_2 R_3 / R_1$.",
+          c: "A Wheatstone bridge is two voltage dividers side by side; it is BALANCED when both dividers split the source identically, so no current crosses the middle. Balance condition: $\\dfrac{R_1}{R_2} = \\dfrac{R_3}{R_4}$.",
           s: [
-            "$R_4 = (200)(300)/100 = 600\\ \\Omega$."
+            "<b>Step 1 — Solve for the unknown.</b> $R_4 = \\dfrac{R_2R_3}{R_1} = \\dfrac{200\\times300}{100} = 600\\,\\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> 150 Ω inverts the ratio ($R_1R_3/R_2$); 66.7 Ω inverts twice; 200 Ω just copies $R_2$.",
+            "<b>Step 3 — Check the balance.</b> $R_1/R_2 = 0.5$ and $R_3/R_4 = 300/600 = 0.5$ ✓ — both dividers at the same fraction."
           ],
-          a: "$R_4 = 600\\ \\Omega$",
-          v: "At balance, no current flows through the galvanometer."
+          a: "$R_4 = 600\\,\\Omega$",
+          v: "Why this circuit is everywhere: at balance the detector reads exactly zero, so tiny resistance changes (strain gauges, RTDs) unbalance it measurably — precision measurement by NULL rather than by meter accuracy ✓."
+
         }),
         ref: "Handbook p.357" },
       { q: "An ideal current source (5 A) drives parallel resistors 4Ω and 6Ω. Current through 4Ω resistor:",
         choices: ["$3$ A", "$2$ A", "$5$ A", "$0.5$ A"],
         correct: 0,
         solution: S({
-          c: "Current divider rule (two resistors in parallel): $I_1 = I_{total} \\cdot R_2/(R_1 + R_2)$.",
+          c: "The current divider: parallel resistors share a fixed total current in INVERSE proportion to their resistance — more current takes the easier path. Two-resistor form: $I_1 = I_{total}\\cdot\\dfrac{R_2}{R_1+R_2}$ (note: the OTHER resistor on top).",
           s: [
-            "$I_4 = 5 \\cdot 6/(4+6) = 5 \\cdot 0.6 = 3$ A.",
-            "Note: more current flows through the smaller resistor (4Ω)."
+            "<b>Step 1 — Apply.</b> $I_{4\\Omega} = 5\\times\\dfrac{6}{4+6} = 5\\times0.6 = 3$ A.",
+            "<b>Step 2 — Sanity of direction.</b> The smaller resistor (4 Ω) carries the LARGER share (3 of 5 A) ✓.",
+            "<b>Step 3 — Distractor audit.</b> 2 A is the 6-Ω branch (used the same-resistor numerator — the classic flip); 5 A puts everything in one branch; 0.5 A misapplies Ohm's law."
           ],
           a: "$I_{4\\Omega} = 3$ A",
-          v: "$I_{6\\Omega} = 2$ A. Sum: 3+2 = 5 A ✓"
+          v: "KCL closure: $I_{6\\Omega} = 5\\times0.4 = 2$ A and $3 + 2 = 5$ A ✓. Voltage cross-check: both branches see $V = 3\\times4 = 2\\times6 = 12$ V — equal, as parallel demands ✓."
+
         }),
         ref: "Handbook p.356" },
       { q: "Find equivalent resistance of three 6Ω resistors: two in parallel, the result in series with the third.",
         choices: ["$9\\ \\Omega$", "$12\\ \\Omega$", "$2\\ \\Omega$", "$18\\ \\Omega$"],
         correct: 0,
         solution: S({
-          c: "Reduce step by step.",
+          c: "Mixed networks reduce in stages: collapse the innermost parallel/series group, redraw, repeat. Two equal resistors in parallel halve: $R\\|R = R/2$.",
           s: [
-            "Parallel pair: $6\\|6 = 3\\ \\Omega$.",
-            "Series with the third 6Ω: $3 + 6 = 9\\ \\Omega$."
+            "<b>Step 1 — The parallel pair.</b> $6\\|6 = 3\\,\\Omega$.",
+            "<b>Step 2 — Series with the third.</b> $3 + 6 = 9\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 18 Ω treats all three as series; 2 Ω treats all three as parallel ($6/3$); 12 Ω adds two and ignores one."
           ],
-          a: "$9\\ \\Omega$",
-          v: "All three in parallel would give $6/3 = 2$ Ω; all in series $18$ Ω."
+          a: "$R_{eq} = 9\\,\\Omega$",
+          v: "Bounds check: the answer must land between the all-parallel extreme (2 Ω) and the all-series extreme (18 Ω) — 9 Ω does ✓. The halving shortcut ($N$ equal resistors in parallel = $R/N$) saves time on every FE resistor network."
+
         }),
         ref: "Handbook p.356" },
       { q: "$Z = 20\\angle -60°$ Ω at 120 V RMS. Apparent, real, reactive power:",
         choices: ["$|S|=720$, $P=360$, $Q=-624$", "$|S|=720$, $P=360$, $Q=624$", "$|S|=360$, $P=720$, $Q=0$", "All zero"],
         correct: 0,
         solution: S({
-          c: "$|S| = V_{rms}^2/|Z|$. $P = |S|\\cos\\theta$. $Q = |S|\\sin\\theta$. Negative $\\theta$ → capacitive → Q negative.",
+          c: "AC power from impedance: current magnitude first, then the power triangle. $|S| = V_{rms}I_{rms}$; $P = |S|\\cos\\theta$; $Q = |S|\\sin\\theta$ — where θ is the IMPEDANCE angle, and a NEGATIVE angle means capacitive (current leads).",
           s: [
-            "$I_{rms} = 120/20 = 6$ A.",
-            "$|S| = 120 \\cdot 6 = 720$ VA.",
-            "$P = 720 \\cos(-60°) = 720 \\cdot 0.5 = 360$ W.",
-            "$Q = 720 \\sin(-60°) = 720 \\cdot (-0.866) = -624$ VAR."
+            "<b>Step 1 — Current.</b> $I = 120/20 = 6$ A rms.",
+            "<b>Step 2 — Apparent power.</b> $|S| = 120\\times6 = 720$ VA.",
+            "<b>Step 3 — Real and reactive.</b> $P = 720\\cos(-60°) = 360$ W; $Q = 720\\sin(-60°) = -624$ VAR — negative because the load is capacitive.",
+            "<b>Step 4 — Distractor audit.</b> Choice B flips Q's sign (treats the load as inductive); C swaps P and S."
           ],
-          a: "$|S|=720$, $P=360$, $Q\\approx -624$",
-          v: "Negative Q → capacitive (leading). Cap delivers reactive power back to source."
+          a: "$|S| = 720$ VA, $P = 360$ W, $Q \\approx -624$ VAR (capacitive).",
+          v: "Triangle closure: $\\sqrt{360^{2} + 624^{2}} = 720$ ✓. Sign convention to lock in: inductive loads CONSUME reactive power (Q > 0), capacitive loads SUPPLY it (Q < 0) — exactly why capacitor banks correct lagging power factor."
+
         }),
         ref: "Handbook p.362" },
       { q: "Series RC: $R=1$ k$\\Omega$, $C=1$ µF. Cutoff frequency:",
         choices: ["$\\approx 159$ Hz", "$10$ kHz", "$1000$ Hz", "$0.16$ Hz"],
         correct: 0,
         solution: S({
-          c: "$f_c = 1/(2\\pi RC)$.",
+          c: "Every first-order RC filter corners at the same place: $f_c = \\dfrac{1}{2\\pi RC}$ — the frequency where capacitive reactance equals resistance and the output is 3 dB down.",
           s: [
-            "$RC = 10^{-3}$ s.",
-            "$f_c = 1/(2\\pi \\cdot 10^{-3}) = 159.15$ Hz."
+            "<b>Step 1 — RC product.</b> $(10^{3})(10^{-6}) = 10^{-3}$ s.",
+            "<b>Step 2 — Evaluate.</b> $f_c = \\dfrac{1}{2\\pi\\times10^{-3}} \\approx 159$ Hz.",
+            "<b>Step 3 — Distractor audit.</b> 1000 Hz is $1/RC$ left in rad/s and mislabeled Hz (the perennial $2\\pi$ trap); 10 kHz and 0.16 Hz are decade slips."
           ],
           a: "$f_c \\approx 159$ Hz",
-          v: "Above $f_c$, voltage across C drops at -20 dB/decade (LPF on C, HPF on R)."
+          v: "Reactance check at 159 Hz: $X_C = \\dfrac{1}{2\\pi(159)(10^{-6})} \\approx 1000\\,\\Omega = R$ ✓ — equal magnitudes is exactly the corner condition. Same RC: output across C = low-pass; across R = high-pass."
+
         }),
         ref: "Handbook p.375" },
       { q: "Parallel RLC: $R=10$ k$\\Omega$, $L=100$ mH, $C=100$ nF. Resonant frequency?",
         choices: ["$\\approx 1591$ Hz", "$10$ kHz", "$159$ Hz", "$5$ kHz"],
         correct: 0,
         solution: S({
-          c: "$\\omega_0 = 1/\\sqrt{LC}$ → $f_0 = 1/(2\\pi\\sqrt{LC})$.",
+          c: "Resonant frequency depends only on L and C — never on R: $f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$. (R sets the SHARPNESS, not the location.)",
           s: [
-            "$LC = (0.1)(10^{-7}) = 10^{-8}$.",
-            "$\\sqrt{LC} = 10^{-4}$ s.",
-            "$\\omega_0 = 10^4$ rad/s.",
-            "$f_0 = 10^4/(2\\pi) \\approx 1591.5$ Hz."
+            "<b>Step 1 — LC product.</b> $(0.1)(10^{-7}) = 10^{-8}$.",
+            "<b>Step 2 — Root and invert.</b> $\\sqrt{LC} = 10^{-4}$ → $\\omega_0 = 10^{4}$ rad/s.",
+            "<b>Step 3 — To Hz.</b> $f_0 = 10^{4}/2\\pi \\approx 1591$ Hz.",
+            "<b>Step 4 — Distractor audit.</b> 159 Hz and 10 kHz are decade/2π slips; 5 kHz has no route."
           ],
           a: "$f_0 \\approx 1591$ Hz",
-          v: "At resonance, parallel RLC tank impedance is purely R (very high) — used in oscillators."
+          v: "Behavior at resonance — the part exams probe: a PARALLEL tank's impedance peaks (≈R, here 10 kΩ — nearly open), opposite to a SERIES RLC whose impedance dips to R ✓. Tanks select frequencies in oscillators; series resonators pass them in filters."
+
         }),
         ref: "Handbook p.361" },
       { q: "Capacitor charged to 100V through $R=1$ k$\\Omega$. Time to reach 95% of source voltage:",
         choices: ["$\\approx 3\\tau$", "$1\\tau$", "$\\approx 5\\tau$", "Infinite"],
         correct: 0,
         solution: S({
-          c: "Charging: $v_C(t) = V_\\infty(1 - e^{-t/\\tau})$. Solve for 95%: $1 - e^{-t/\\tau} = 0.95 \\Rightarrow e^{-t/\\tau} = 0.05 \\Rightarrow t/\\tau = -\\ln 0.05 = 2.996$.",
+          c: "Charging follows $v_C(t) = V_{final}(1 - e^{-t/\\tau})$ — the mirror of discharge. To find when it reaches a fraction $f$: solve $e^{-t/\\tau} = 1 - f$, i.e. $t = -\\tau\\ln(1-f)$.",
           s: [
-            "$1 - e^{-3} = 1 - 0.0498 = 0.9502$ → 95.02%, essentially $3\\tau$."
+            "<b>Step 1 — Set the target.</b> 95% → $e^{-t/\\tau} = 0.05$.",
+            "<b>Step 2 — Solve.</b> $t/\\tau = -\\ln(0.05) = 3.0$ — three time constants, almost exactly.",
+            "<b>Step 3 — Distractor audit.</b> 1τ reaches only 63.2%; 5τ reaches 99.3% (the 'fully charged' convention — a different milestone); 'infinite' confuses asymptote with practical arrival."
           ],
           a: "$\\approx 3\\tau$",
-          v: "Milestones: $1\\tau$: 63.2%, $2\\tau$: 86.5%, $3\\tau$: 95%, $5\\tau$: 99.3%."
+          v: "The milestone table worth owning: 1τ → 63.2%, 2τ → 86.5%, 3τ → 95.0%, 4τ → 98.2%, 5τ → 99.3% ✓ — and check: $1 - e^{-3} = 0.9502$, dead on 95%."
+
         }),
         ref: "Handbook p.358" },
       { q: "Three resistors 10Ω, 20Ω, 30Ω in parallel. Equivalent R:",
         choices: ["$\\approx 5.45\\ \\Omega$", "$60\\ \\Omega$", "$10\\ \\Omega$", "$20\\ \\Omega$"],
         correct: 0,
         solution: S({
-          c: "$\\dfrac{1}{R_{eq}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\dfrac{1}{R_3}$.",
+          c: "Parallel resistors: conductances (reciprocals) add — $\\dfrac{1}{R_{eq}} = \\dfrac{1}{10} + \\dfrac{1}{20} + \\dfrac{1}{30}$. A common denominator keeps it exact.",
           s: [
-            "Find common denominator (60): $1/10 + 1/20 + 1/30 = 6/60 + 3/60 + 2/60 = 11/60$.",
-            "$R_{eq} = 60/11 \\approx 5.455\\ \\Omega$."
+            "<b>Step 1 — Common denominator 60.</b> $\\dfrac{6}{60} + \\dfrac{3}{60} + \\dfrac{2}{60} = \\dfrac{11}{60}$.",
+            "<b>Step 2 — Invert.</b> $R_{eq} = \\dfrac{60}{11} \\approx 5.45\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 60 Ω is the SERIES sum; 10 Ω forgets the other branches; 20 Ω averages."
           ],
-          a: "$R_{eq} \\approx 5.45\\ \\Omega$",
-          v: "Always less than smallest individual R (10Ω) — characteristic of parallel."
+          a: "$R_{eq} \\approx 5.45\\,\\Omega$",
+          v: "Bound check: result must be below the smallest branch (10 Ω) ✓. Current view at 60 V: branches draw 6 + 3 + 2 = 11 A → $R = 60/11$ ✓ — same fraction, physical meaning attached."
+
         }),
         ref: "Handbook p.356" },
       { q: "5 V DC source feeds 10 Ω. Power dissipated:",
         choices: ["$2.5$ W", "$50$ W", "$0.5$ W", "$5$ W"],
         correct: 0,
         solution: S({
-          c: "$P = V^2/R$ for a single resistor across known V.",
-          s: ["$P = 5^2 / 10 = 25/10 = 2.5$ W."],
+          c: "Power in a resistor across a known voltage: $P = V^{2}/R$ — one of the three interchangeable forms ($P = VI = I^{2}R = V^{2}/R$); pick whichever uses the data you already have.",
+          s: [
+            "<b>Step 1 — Apply.</b> $P = 5^{2}/10 = 25/10 = 2.5$ W.",
+            "<b>Step 2 — Distractor audit.</b> 50 W multiplies $V^{2}R$; 0.5 W is the current (0.5 A) mislabeled as power; 5 W is $V\\times1$."
+          ],
           a: "$P = 2.5$ W",
-          v: "Verify: $I = 5/10 = 0.5$ A; $P = VI = 5(0.5) = 2.5$ W ✓"
+          v: "Triple-form check: $I = 5/10 = 0.5$ A → $P = VI = 2.5$ W ✓ and $P = I^{2}R = 0.25\\times10 = 2.5$ W ✓ — all three formulas, one answer, zero doubt."
+
         }),
         ref: "Handbook p.356" },
       { q: "AC voltage $v(t) = 50\\cos(377t + 30°)$ V. Frequency in Hz:",
         choices: ["$60$ Hz", "$377$ Hz", "$50$ Hz", "$30$ Hz"],
         correct: 0,
         solution: S({
-          c: "$\\omega = 2\\pi f \\Rightarrow f = \\omega/(2\\pi)$.",
-          s: ["$f = 377/(2\\pi) = 60$ Hz (US power line)."],
+          c: "Read a sinusoid like a sentence: $v(t) = V_m\\cos(\\omega t + \\phi)$ — amplitude $V_m$, angular frequency $\\omega$ (rad/s), phase $\\phi$. Hz comes from $f = \\omega/2\\pi$.",
+          s: [
+            "<b>Step 1 — Extract ω.</b> The number multiplying $t$: $\\omega = 377$ rad/s.",
+            "<b>Step 2 — Convert.</b> $f = 377/(2\\pi) = 60$ Hz.",
+            "<b>Step 3 — Distractor audit.</b> 377 Hz reports ω in the wrong unit; 50 is the AMPLITUDE (volts, not Hz); 30 is the PHASE (degrees)."
+          ],
           a: "$f = 60$ Hz",
-          v: "377 rad/s is the magic number for 60 Hz; 314 rad/s is for 50 Hz (EU)."
+          v: "Numbers worth recognizing on sight: 377 rad/s ↔ 60 Hz (US grid), 314 rad/s ↔ 50 Hz (EU) ✓ — they appear constantly and identifying them instantly saves exam time."
+
         }),
         ref: "Handbook p.360" },
       { q: "Effective (RMS) value of $v(t) = 20\\cos(\\omega t) + 10$ V (sinusoid + DC offset):",
         choices: ["$\\approx 17.32$ V", "$30$ V", "$\\approx 14.14$ V", "$\\approx 22.36$ V"],
         correct: 0,
         solution: S({
-          c: "For sum: $V_{RMS} = \\sqrt{V_{DC}^2 + V_{AC,RMS}^2}$.",
+          c: "RMS of a MIXED signal (DC offset + sinusoid): the components' powers add, so the RMS values combine in QUADRATURE: $V_{rms} = \\sqrt{V_{DC}^{2} + V_{AC,rms}^{2}}$ — never by direct addition.",
           s: [
-            "AC RMS: $20/\\sqrt{2} = 14.14$ V.",
-            "DC: 10 V.",
-            "$V_{RMS} = \\sqrt{14.14^2 + 10^2} = \\sqrt{200 + 100} = \\sqrt{300} \\approx 17.32$ V."
+            "<b>Step 1 — RMS of the sinusoid alone.</b> $20/\\sqrt2 = 14.14$ V.",
+            "<b>Step 2 — Combine with the DC.</b> $\\sqrt{14.14^{2} + 10^{2}} = \\sqrt{200 + 100} = \\sqrt{300} = 17.32$ V.",
+            "<b>Step 3 — Distractor audit.</b> 30 V adds peak + DC linearly; 14.14 V ignores the DC; 22.36 V ($\\sqrt{500}$) wrongly uses the 20-V PEAK in the quadrature."
           ],
-          a: "$V_{RMS} \\approx 17.32$ V",
-          v: "Power dissipated in R is $V_{RMS}^2/R$ regardless of DC/AC split."
+          a: "$V_{rms} \\approx 17.32$ V",
+          v: "Why quadrature: heating power in a resistor is $V_{rms}^{2}/R$, and over a full cycle the DC×AC cross-term averages to zero — only the squares survive ✓. ($300/R$ watts here, from $100/R$ DC + $200/R$ AC.)"
+
         }),
         ref: "Handbook p.360" },
       { q: "Norton current source $I_N = 3$ A, $R_N = 6\\ \\Omega$. Converting to Thevenin: $V_{Th}$ and $R_{Th}$:",
         choices: ["$V_{Th} = 18$ V, $R_{Th} = 6\\ \\Omega$", "$V_{Th} = 3$ V, $R_{Th} = 6\\ \\Omega$", "$V_{Th} = 18$ V, $R_{Th} = 0.5\\ \\Omega$", "$V_{Th} = 0.5$ V, $R_{Th} = 6\\ \\Omega$"],
         correct: 0,
         solution: S({
-          c: "Source transformation: $V_{Th} = I_N \\cdot R_N$. $R_{Th} = R_N$.",
+          c: "Norton → Thevenin source transformation: $V_{Th} = I_NR_N$, resistance unchanged ($R_{Th} = R_N$). The two forms are indistinguishable from the terminals.",
           s: [
-            "$V_{Th} = 3 \\cdot 6 = 18$ V.",
-            "$R_{Th} = 6\\ \\Omega$."
+            "<b>Step 1 — Convert.</b> $V_{Th} = 3\\times6 = 18$ V; $R_{Th} = 6\\,\\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> '$V_{Th} = 3$ V' copies the current as a voltage; the 0.5 variants divide instead of multiplying."
           ],
-          a: "$V_{Th} = 18$ V, $R_{Th} = 6\\ \\Omega$",
-          v: "Test: short circuit gives $V_{Th}/R_{Th} = 3$ A = $I_N$ ✓"
+          a: "$V_{Th} = 18$ V, $R_{Th} = 6\\,\\Omega$",
+          v: "Two-point equivalence test: open-circuit — Norton's 3 A through 6 Ω gives 18 V = $V_{Th}$ ✓; short-circuit — Thevenin gives $18/6 = 3$ A = $I_N$ ✓. Matching at both extremes ⇒ matching for every load."
+
         }),
         ref: "Handbook p.357" },
       { q: "An inductor has $V = L(di/dt)$. If $L=2$ mH and current rises 4 A in 100 µs, voltage across:",
         choices: ["$80$ V", "$8$ V", "$200$ mV", "$0.5$ V"],
         correct: 0,
         solution: S({
-          c: "$V_L = L \\cdot di/dt$.",
+          c: "An inductor resists changes in current; the faster the change, the larger the voltage it develops: $V_L = L\\,\\dfrac{di}{dt}$. Steady current → zero volts; abrupt change → big spike.",
           s: [
-            "$di/dt = 4 / 100\\times 10^{-6} = 4 \\times 10^4$ A/s.",
-            "$V_L = (2\\times 10^{-3})(4\\times 10^4) = 80$ V."
+            "<b>Step 1 — Rate of change.</b> $\\dfrac{di}{dt} = \\dfrac{4}{100\\times10^{-6}} = 4\\times10^{4}$ A/s.",
+            "<b>Step 2 — Multiply by L.</b> $V = (2\\times10^{-3})(4\\times10^{4}) = 80$ V.",
+            "<b>Step 3 — Distractor audit.</b> 8 V and 200 mV are decade slips in the µs conversion; 0.5 V has no route."
           ],
           a: "$V_L = 80$ V",
-          v: "Faster current change → larger inductor voltage. Why interrupting inductive loads creates voltage spikes."
+          v: "The takeaway hiding in the numbers: a measly 2-mH coil generates 80 V from a moderately fast current ramp — interrupt the current in microseconds and the spike reaches kilovolts. That physics is why relay coils get flyback diodes and why switches arc ✓."
+
         }),
         ref: "Handbook p.358" },
       { q: "Energy stored in 100 µF capacitor at 200 V:",
         choices: ["$2$ J", "$20$ mJ", "$10$ J", "$0.04$ J"],
         correct: 0,
         solution: S({
-          c: "$W = \\frac{1}{2}CV^2$.",
-          s: ["$W = 0.5 \\cdot 10^{-4} \\cdot 40000 = 0.5 \\cdot 4 = 2$ J."],
+          c: "Capacitor field energy: $W = \\tfrac12CV^{2}$ — quadratic in voltage, so doubling V quadruples the stored energy.",
+          s: [
+            "<b>Step 1 — Square the voltage.</b> $200^{2} = 40{,}000$.",
+            "<b>Step 2 — Evaluate.</b> $W = 0.5\\times10^{-4}\\times4\\times10^{4} = 2$ J.",
+            "<b>Step 3 — Distractor audit.</b> 20 mJ slips two decades; 10 J drops the ½ and a step; 0.04 J forgets to square."
+          ],
           a: "$W = 2$ J",
-          v: "Enough to give an unpleasant shock. Discharge caps before servicing!"
+          v: "Charge route: $Q = CV = 0.02$ C, $W = \\tfrac12QV = 0.5(0.02)(200) = 2$ J ✓. Safety scale: 2 J at 200 V is a painful, potentially dangerous discharge — the reason power-supply caps carry bleed resistors and 'discharge before servicing' labels ✓."
+
         }),
         ref: "Handbook p.358" },
     ],
