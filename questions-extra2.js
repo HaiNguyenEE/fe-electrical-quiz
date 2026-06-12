@@ -1316,57 +1316,73 @@
         choices: ["$3 \\times 10^8$ m/s", "$3 \\times 10^6$ m/s", "$1.5 \\times 10^8$ m/s", "Depends on frequency"],
         correct: 0,
         solution: S({
-          c: "$c = 1/\\sqrt{\\mu_0 \\varepsilon_0} \\approx 2.998 \\times 10^8$ m/s in vacuum. Independent of frequency.",
-          s: ["Memorize: $c \\approx 3 \\times 10^8$ m/s = 300,000 km/s."],
-          a: "$c = 3 \\times 10^8$ m/s",
-          v: "Wavelength: $\\lambda = c/f$. At 60 Hz: $\\lambda = 5000$ km. At 1 GHz: $\\lambda = 30$ cm."
+          c: "All electromagnetic waves — radio, light, X-rays — travel through vacuum at the same speed: $c = 1/\\sqrt{\\mu_0\\varepsilon_0} \\approx 3\\times10^{8}$ m/s, INDEPENDENT of frequency (vacuum is non-dispersive).",
+          s: [
+            "<b>Step 1 — Recall.</b> $c \\approx 3\\times10^{8}$ m/s = 300,000 km/s.",
+            "<b>Step 2 — Distractor audit.</b> $3\\times10^{6}$ and $1.5\\times10^{8}$ are decade/half slips ($c/2$ happens in $\\varepsilon_r = 4$ dielectric, not vacuum); 'depends on frequency' is true in MATERIALS (dispersion — why prisms split light) but never in vacuum."
+          ],
+          a: "$c = 3\\times10^{8}$ m/s, frequency-independent.",
+          v: "The companion that converts it to engineering: $\\lambda = c/f$ — 60 Hz → 5000 km (why power lines aren't antennas), 1 GHz → 30 cm, 100 MHz → 3 m ✓. Engineer's ruler: light moves ~30 cm per nanosecond."
+
         }),
         ref: "Handbook p.355" },
       { q: "Skin depth $\\delta$ in good conductor decreases as:",
         choices: ["Frequency increases", "Frequency decreases", "Conductivity decreases", "Independent of frequency"],
         correct: 0,
         solution: S({
-          c: "Skin depth: $\\delta = 1/\\sqrt{\\pi f \\mu \\sigma}$. Higher $f$ or higher $\\sigma$ → smaller $\\delta$.",
+          c: "AC current crowds toward a conductor's surface; the skin depth $\\delta = \\dfrac{1}{\\sqrt{\\pi f\\mu\\sigma}}$ marks where current density has fallen to $1/e$. Every term sits under the root in the DENOMINATOR — raise $f$, $\\mu$, or $\\sigma$ and the skin gets thinner.",
           s: [
-            "At 60 Hz in Cu: $\\delta \\approx 8.5$ mm.",
-            "At 1 MHz in Cu: $\\delta \\approx 65$ µm.",
-            "Why high-freq RF needs tube/Litz wire — current only flows in thin outer layer."
+            "<b>Step 1 — Read the formula.</b> $\\delta \\propto 1/\\sqrt f$ → frequency UP, depth DOWN.",
+            "<b>Step 2 — Feel the numbers.</b> Copper: 8.5 mm at 60 Hz → 65 µm at 1 MHz → ~2 µm at 1 GHz.",
+            "<b>Step 3 — Distractor audit.</b> 'Frequency decreases' inverts; 'conductivity decreases' ALSO inverts ($\\sigma$ down → δ UP); 'independent' contradicts the formula."
           ],
-          a: "Decreases with $f$",
-          v: "Beyond a few $\\delta$, current is essentially zero (exponential decay)."
+          a: "Decreases as frequency increases ($\\delta \\propto 1/\\sqrt f$).",
+          v: "Hardware this explains: Litz wire (many insulated strands) for switching supplies, silver-plated and even hollow conductors at RF — past a few δ the copper inside carries nothing, so why pay for it ✓."
+
         }),
         ref: "Handbook p.368" },
       { q: "Force on a 10 cm wire carrying 5 A in a 0.2 T magnetic field (perpendicular):",
         choices: ["$0.1$ N", "$1$ N", "$0.01$ N", "$10$ N"],
         correct: 0,
         solution: S({
-          c: "$F = BIL$ for wire perpendicular to B. (General: $\\vec{F} = I \\vec{L} \\times \\vec{B}$.)",
-          s: ["$F = (0.2)(5)(0.1) = 0.1$ N."],
+          c: "A current-carrying wire in a magnetic field feels $F = BIL\\sin\\theta$; perpendicular ($\\theta = 90°$) gives the maximum, $F = BIL$. Convert the length to meters before plugging in.",
+          s: [
+            "<b>Step 1 — Units.</b> $L = 10$ cm $= 0.1$ m.",
+            "<b>Step 2 — Multiply.</b> $F = 0.2\\times5\\times0.1 = 0.1$ N.",
+            "<b>Step 3 — Distractor audit.</b> 1 N keeps L in 'decimeters of confusion' (×10); 0.01 N double-converts; 10 N is two decades off."
+          ],
           a: "$F = 0.1$ N",
-          v: "This is how motors work — repeatedly applied to a coil rotor."
+          v: "Unit check: T·A·m = N ✓ (1 T = 1 N per amp-meter, literally defined by this force). Scale-up intuition: a motor multiplies this same force by hundreds of turns and a lever arm — 0.1 N per wire becomes real torque ✓."
+
         }),
         ref: "Handbook p.355" },
       { q: "Maxwell's law $\\nabla \\cdot \\vec{B} = 0$ means:",
         choices: ["No magnetic monopoles", "B-field has no divergence-free part", "$\\vec{B} = 0$ everywhere", "Charge is conserved"],
         correct: 0,
         solution: S({
-          c: "Gauss's law for magnetism: magnetic flux through any closed surface is zero. Magnetic field lines have no beginning or end.",
+          c: "Each Maxwell equation is a physical statement. $\\nabla\\cdot\\vec B = 0$ (Gauss's law for magnetism) says the magnetic field has NO sources or sinks: zero net flux out of ANY closed surface — there is no magnetic 'charge' for field lines to start or end on.",
           s: [
-            "Equivalent to: no isolated magnetic charge (monopole).",
-            "Magnetic field lines always close on themselves."
+            "<b>Step 1 — Translate the math.</b> Zero divergence everywhere ⇔ field lines never begin or end — they form closed loops (or extend to infinity).",
+            "<b>Step 2 — Name the consequence.</b> No magnetic MONOPOLES: cut a bar magnet in half and you get two dipoles, never an isolated north.",
+            "<b>Step 3 — Distractor audit.</b> '$\\vec B = 0$ everywhere' confuses zero divergence with zero field; 'charge conservation' belongs to the continuity equation; choice B is word salad."
           ],
-          a: "No isolated magnetic monopoles",
-          v: "Active research areas search for monopoles. If found, this law would need modification."
+          a: "No magnetic monopoles exist.",
+          v: "Contrast with its electric twin nails the meaning: $\\nabla\\cdot\\vec E = \\rho/\\varepsilon_0$ — electric lines DO start on charges; magnetic lines cannot ✓. (Monopole searches continue; a confirmed find would rewrite this equation — and electromagnetics textbooks.)"
+
         }),
         ref: "Handbook p.355" },
       { q: "Wavelength of a 100 MHz FM radio wave:",
         choices: ["$3$ m", "$30$ m", "$30$ cm", "$0.3$ km"],
         correct: 0,
         solution: S({
-          c: "$\\lambda = c/f$.",
-          s: ["$\\lambda = (3\\times 10^8)/(10^8) = 3$ m."],
+          c: "Wavelength from frequency: $\\lambda = c/f$ — the distance one cycle occupies in space.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $\\lambda = \\dfrac{3\\times10^{8}}{100\\times10^{6}} = 3$ m.",
+            "<b>Step 2 — Distractor audit.</b> 30 m belongs to 10 MHz; 30 cm to 1 GHz; 0.3 km misplaces a decade."
+          ],
           a: "$\\lambda = 3$ m",
-          v: "FM antennas are often quarter-wave: $\\lambda/4 = 75$ cm — matches typical car antenna length."
+          v: "The antenna check that makes it real: a quarter-wave whip for FM is $3/4 = 0.75$ m — exactly the length of a classic car radio antenna ✓. FM's 88-108 MHz band spans λ of 3.4 down to 2.8 m, so one antenna serves the whole band tolerably."
+
         }),
         ref: "Handbook p.368" },
     ],
@@ -1377,93 +1393,104 @@
         choices: ["Type 1 system", "Type 0", "Type 2", "Type -1"],
         correct: 0,
         solution: S({
-          c: "System type = number of integrators (poles at origin) in $G(s)H(s)$. Type-1 → zero step error.",
+          c: "System TYPE = how many pure integrators ($1/s$ factors) sit in the open loop. Each integrator zeroes the steady-state error for one more input order: Type 1 → step error 0, ramp error finite.",
           s: [
-            "$G(s)H(s) = K/(s(s+2))$ has one $s$ in denominator → type 1.",
-            "Type-1 to step: $e_{ss} = 0$ (one free integrator).",
-            "Type-1 to ramp: $e_{ss} = 1/K_v$ (finite)."
+            "<b>Step 1 — Count integrators.</b> $\\dfrac{K}{s(s+2)}$ has exactly one factor of $s$ in the denominator → Type 1.",
+            "<b>Step 2 — Why the step error vanishes.</b> The integrator accumulates ANY persistent error without bound — the loop can only settle when error = 0 exactly.",
+            "<b>Step 3 — Distractor audit.</b> Type 0 (no integrator) leaves step error $\\frac{1}{1+K_p}$; Type 2 would ALSO zero ramp error; 'Type −1' doesn't exist."
           ],
-          a: "Type 1",
-          v: "To zero out ramp error, you need Type-2 (two integrators)."
+          a: "Type 1.",
+          v: "The error table in one line per type: T0 — step $\\frac{1}{1+K_p}$, ramp ∞; T1 — step 0, ramp $\\frac{1}{K_v}$; T2 — step 0, ramp 0 ✓. Here $K_v = \\lim sG = K/2$, so the ramp error would be $2/K$ — a nice follow-up to anticipate."
+
         }),
         ref: "Handbook p.366" },
       { q: "Open-loop transfer function $G(s) = 10/(s+1)(s+5)$. DC gain ($s=0$):",
         choices: ["$2$", "$10$", "$50$", "$0.5$"],
         correct: 0,
         solution: S({
-          c: "Substitute $s=0$.",
-          s: ["$G(0) = 10/((1)(5)) = 10/5 = 2$."],
-          a: "$2$",
-          v: "Open-loop step error at infinity: $1/(1+K_p) = 1/3$ if no feedback compensation."
+          c: "DC gain = the transfer function evaluated at $s = 0$ — what the system multiplies a CONSTANT input by, once everything settles.",
+          s: [
+            "<b>Step 1 — Substitute.</b> $G(0) = \\dfrac{10}{(0+1)(0+5)} = \\dfrac{10}{5} = 2$.",
+            "<b>Step 2 — Distractor audit.</b> 10 reads the numerator only; 50 MULTIPLIES the pole constants into the numerator; 0.5 inverts."
+          ],
+          a: "$G(0) = 2$",
+          v: "In dB: $20\\log2 = 6$ dB — the Bode plot's low-frequency flat level ✓. Feedback follow-up: closing unity feedback gives $K_p = 2$ → step error $= 1/(1+2) = 1/3$, exactly the kind of chained question the FE likes."
+
         }),
         ref: "Handbook p.365" },
       { q: "A PI controller has transfer function $K_p + K_i/s$. Effect of integral term:",
         choices: ["Eliminates steady-state error", "Speeds up response", "Reduces overshoot", "Adds damping"],
         correct: 0,
         solution: S({
-          c: "Integral term provides cumulative correction → eliminates DC error. Adds a pole at origin (raises type).",
+          c: "Each letter of P-I-D has ONE signature contribution. INTEGRAL ($K_i/s$) accumulates error over time — it keeps pushing until the error is EXACTLY zero, which is why it eliminates steady-state error (structurally: it adds a pole at the origin, raising the system type).",
           s: [
-            "Proportional: gain only, can't fully eliminate offset.",
-            "Integral: continues correcting until error is zero.",
-            "Derivative: anticipates change, adds damping/speed."
+            "<b>Step 1 — Match the role.</b> Integral term → zero steady-state error. That is its defining job.",
+            "<b>Step 2 — Why P alone can't.</b> Proportional needs a nonzero error to produce any output — so a residual offset always survives.",
+            "<b>Step 3 — Distractor audit.</b> 'Speeds up response' is mostly P (and D); 'reduces overshoot'/'adds damping' is D — integral actually WORSENS overshoot if over-applied."
           ],
-          a: "Eliminates steady-state error",
-          v: "Tradeoff: integral can cause overshoot and integral windup if not tuned."
+          a: "Eliminates steady-state error.",
+          v: "The cost side (every FE answer should know it): integral action erodes phase margin and can 'wind up' when actuators saturate — real controllers add anti-windup clamps ✓. PI is the workhorse: ~80% of industrial loops run PI, not PID."
+
         }),
         ref: "Handbook p.366" },
       { q: "Phase shift of a $G(s) = 1/(s+10)$ at $\\omega = 10$ rad/s:",
         choices: ["$-45°$", "$0°$", "$-90°$", "$45°$"],
         correct: 0,
         solution: S({
-          c: "$G(j\\omega) = 1/(j\\omega + 10)$. Phase = $-\\arctan(\\omega/10)$.",
+          c: "A single real pole at $s = -a$ contributes phase $-\\arctan(\\omega/a)$: 0° at DC, $-45°$ exactly AT the corner $\\omega = a$, sliding to $-90°$ far above it.",
           s: [
-            "At $\\omega = 10$: $\\arctan(1) = 45°$.",
-            "Phase: $-45°$ (negative because pole)."
+            "<b>Step 1 — Identify the corner.</b> Pole at 10 → corner $\\omega = 10$ rad/s — the question asks exactly there.",
+            "<b>Step 2 — Evaluate.</b> $-\\arctan(10/10) = -\\arctan1 = -45°$.",
+            "<b>Step 3 — Distractor audit.</b> 0° is the DC limit; −90° the high-frequency limit; +45° would require a ZERO, not a pole."
           ],
-          a: "$-45°$",
-          v: "At pole frequency $\\omega = a$: magnitude is $-3$ dB, phase is $-45°$. As $\\omega \\to \\infty$, phase $\\to -90°$."
+          a: "$-45°$ at the corner frequency.",
+          v: "The corner-frequency twin facts to bank: at $\\omega = a$ a pole gives −3 dB magnitude AND −45° phase, simultaneously ✓. Zeros mirror everything positive: +3 dB-ish... (+45° phase) — sign of the contribution follows pole vs zero."
+
         }),
         ref: "Handbook p.366" },
       { q: "Lead compensator: $C(s) = (s+z)/(s+p)$ with $z < p$. Effect on phase:",
         choices: ["Adds phase lead (positive phase shift)", "Adds phase lag", "Cancels original phase", "No effect"],
         correct: 0,
         solution: S({
-          c: "Lead: $z < p$ — zero at lower freq than pole. Net phase positive over frequencies between $z$ and $p$.",
+          c: "Compensator taxonomy by pole-zero order: zero BELOW pole ($z < p$) = LEAD — the zero's +90° arrives before the pole's −90°, leaving net POSITIVE phase in between; zero above pole = LAG.",
           s: [
-            "Used to add phase margin → improves transient response.",
-            "Lag: $z > p$ — reverse, adds gain at low freq, reduces error.",
-            "Lead-lag: combines both effects."
+            "<b>Step 1 — Match.</b> $z < p$ → phase lead, peaking at the geometric mean $\\omega_m = \\sqrt{zp}$ with $\\phi_{max} = \\arcsin\\dfrac{p-z}{p+z}$.",
+            "<b>Step 2 — What it buys.</b> Inject that lead near gain crossover → bigger phase margin → less overshoot, faster settling, wider bandwidth.",
+            "<b>Step 3 — Distractor audit.</b> 'Phase lag' is the $z > p$ design (used for steady-state accuracy); 'cancels phase'/'no effect' contradict the pole-zero asymmetry."
           ],
-          a: "Adds phase lead",
-          v: "Max phase lead: $\\phi_{max} = \\arcsin((p-z)/(p+z))$, at $\\omega = \\sqrt{pz}$."
+          a: "Adds phase lead (positive phase) between $z$ and $p$.",
+          v: "Design numbers for intuition: $p/z = 10$ buys $\\phi_{max} = \\arcsin(9/11) \\approx 55°$ — about the practical per-stage ceiling; need more, cascade two ✓. Lead ↔ the D of PID; lag ↔ the I — compensators are PID in pole-zero clothing."
+
         }),
         ref: "Handbook p.366" },
       { q: "Open-loop system $G(s)H(s)$ has 2 RHP zeros and 1 RHP pole. Closed-loop with no encirclement: Nyquist says how many RHP closed-loop poles?",
         choices: ["$1$ (still unstable)", "$0$ (stable)", "$2$", "Cannot tell"],
         correct: 0,
         solution: S({
-          c: "Nyquist criterion: $N = P - Z$ where $N$ is clockwise encirclements of $-1$, $P$ is open-loop RHP poles, $Z$ is closed-loop RHP poles. Solve for $Z$.",
+          c: "The Nyquist criterion counts closed-loop RHP poles without solving anything: $Z = P - N$, where $P$ = OPEN-loop RHP poles, $N$ = counterclockwise encirclements of $-1$ by the Nyquist plot, $Z$ = CLOSED-loop RHP poles. (RHP ZEROS of the open loop never enter the formula — the question plants them as a decoy.)",
           s: [
-            "Given: $N = 0$ (no encirclement), $P = 1$.",
-            "$Z = P - N = 1 - 0 = 1$.",
-            "1 RHP closed-loop pole → unstable."
+            "<b>Step 1 — Inventory.</b> $P = 1$ (the RHP pole); $N = 0$ (no encirclements); the 2 RHP zeros are irrelevant.",
+            "<b>Step 2 — Apply.</b> $Z = P - N = 1 - 0 = 1$.",
+            "<b>Step 3 — Conclude.</b> One closed-loop RHP pole → the closed loop is UNSTABLE."
           ],
-          a: "1 RHP pole (unstable)",
-          v: "Stability requires $Z = 0$, so we'd need $N = P = 1$ encirclement."
+          a: "1 RHP closed-loop pole — still unstable.",
+          v: "What stability would have required: $N = P = 1$ encirclement of $-1$ — an open-loop-unstable plant NEEDS its Nyquist plot to wrap the critical point to be saved by feedback ✓. (The RHP zeros do matter elsewhere: they limit achievable bandwidth — non-minimum-phase behavior.)"
+
         }),
         ref: "Handbook p.365" },
       { q: "A system with $G(s) = K(s+2)/(s(s+5)(s+10))$ — number of branches on root locus:",
         choices: ["$3$ (equal to # poles)", "$2$ (# zeros)", "$1$", "$5$"],
         correct: 0,
         solution: S({
-          c: "Root locus has $n = \\max(P, Z)$ branches, where $P$ is # poles, $Z$ is # zeros (counted in extended complex plane). Usually = # poles.",
+          c: "Root-locus structure rules: the locus has one BRANCH per closed-loop pole = max(#poles, #zeros) of the open loop — in practice, the pole count. Branches START at open-loop poles ($K = 0$) and END at zeros, with the excess heading to infinity along asymptotes.",
           s: [
-            "Poles: $s = 0, -5, -10$. Three poles.",
-            "Zeros: $s = -2$. One finite zero (two at infinity).",
-            "Branches: 3 (matches # poles)."
+            "<b>Step 1 — Count poles.</b> $s = 0, -5, -10$ → three poles → 3 branches.",
+            "<b>Step 2 — Map the destinations.</b> One branch terminates on the finite zero at $-2$; the other two ride asymptotes to infinity at $\\pm90°$ (angles $(2k+1)180°/(P-Z) = (2k+1)180°/2$).",
+            "<b>Step 3 — Distractor audit.</b> 2 counts zeros; 1 and 5 are noise."
           ],
-          a: "3 branches",
-          v: "One branch ends at $s=-2$ (the zero), two go to infinity along asymptotes."
+          a: "3 branches.",
+          v: "Asymptote centroid for the full sketch: $\\sigma = \\dfrac{(0-5-10) - (-2)}{3-1} = \\dfrac{-13}{2} = -6.5$ — the two infinite branches go vertical through $-6.5$ ✓. Counting branches is always the FIRST sanity check of any root-locus sketch."
+
         }),
         ref: "Handbook p.366" },
     ],
