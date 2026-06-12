@@ -741,14 +741,16 @@
         correct: 0,
         ref: "Handbook §5 (Second-order RLC response)",
         solution: S({
-          c: "Series RLC: $\\omega_n = 1/\\sqrt{LC}$, $\\zeta = (R/2)\\sqrt{C/L}$.",
+          c: "A series RLC is the canonical 2nd-order system: $\\omega_n = 1/\\sqrt{LC}$ and damping ratio $\\zeta = \\dfrac{R}{2}\\sqrt{\\dfrac{C}{L}}$ — the resistor is the only damping element.",
           s: [
-            "$\\omega_n = 1/\\sqrt{10^{-2}\\cdot 10^{-6}} = 10^{4}$ rad/s.",
-            "$\\zeta = (50/2)\\sqrt{10^{-6}/10^{-2}} = 25\\sqrt{10^{-4}} = 25(0.01) = 0.25$.",
-            "$0 < \\zeta < 1$ → underdamped, oscillatory decay."
+            "<b>Step 1 — Natural frequency.</b> $\\omega_n = 1/\\sqrt{(10^{-2})(10^{-6})} = 1/\\sqrt{10^{-8}} = 10^{4}$ rad/s.",
+            "<b>Step 2 — Damping ratio.</b> $\\zeta = \\dfrac{50}{2}\\sqrt{\\dfrac{10^{-6}}{10^{-2}}} = 25\\sqrt{10^{-4}} = 25 \\times 0.01 = 0.25$.",
+            "<b>Step 3 — Classify.</b> $0 < \\zeta < 1$ → underdamped: the natural response is a decaying oscillation at $\\omega_d = \\omega_n\\sqrt{1-\\zeta^{2}} \\approx 9682$ rad/s.",
+            "<b>Step 4 — Critical-damping cross-check.</b> Critical damping would need $R_c = 2\\sqrt{L/C} = 2\\sqrt{10^{4}} = 200\\,\\Omega$; our 50 Ω is a quarter of that — consistent with $\\zeta = 50/200 = 0.25$ ✓."
           ],
-          a: "$\\zeta \\approx 0.25$, underdamped",
-          v: "Damped natural freq $\\omega_d = \\omega_n\\sqrt{1-\\zeta^{2}} \\approx 9682$ rad/s. Quality factor $Q = 1/(2\\zeta) = 2$."
+          a: "$\\zeta = 0.25$ — underdamped.",
+          v: "Q-factor link: $Q = 1/(2\\zeta) = 2$ — a mildly resonant circuit. Distractor 4.0 inverts the ratio ($R_c/R$ instead of $R/R_c$); 1.0 assumes critical without computing; 0.5 uses $\\sqrt{C/L}$ without the factor $R/2$ correctly."
+
         })
       },
       { q: "A linear two-terminal network has $V_{oc} = 24$ V across its open terminals and $I_{sc} = 2$ A through a wire shorting the same terminals. Find the maximum power that can be delivered to a load connected across these terminals.",
@@ -773,14 +775,16 @@
         correct: 0,
         ref: "Handbook §5 (AC power)",
         solution: S({
-          c: "$P = V_{rms}^{2}\\cdot R/|Z|^{2}$ or equivalently $P = I_{rms}^{2}R$.",
+          c: "Only the resistance dissipates real power: $P = I_{rms}^{2}R$, with the current magnitude set by the FULL impedance $|Z|$.",
           s: [
-            "$|Z| = \\sqrt{64+36} = 10\\,\\Omega$.",
-            "$|I| = 120/10 = 12$ A (rms).",
-            "$P = 12^{2}\\times 8 = 1152$ W."
+            "<b>Step 1 — Impedance magnitude.</b> $|Z| = \\sqrt{8^{2} + 6^{2}} = \\sqrt{100} = 10\\,\\Omega$ (a 3-4-5 triangle scaled by 2).",
+            "<b>Step 2 — Current.</b> $I_{rms} = V_{rms}/|Z| = 120/10 = 12$ A.",
+            "<b>Step 3 — Real power.</b> $P = I^{2}R = 144 \\times 8 = 1152$ W.",
+            "<b>Step 4 — Distractor audit.</b> 1800 W is $V^{2}/Z$ treated as all-resistive ($120^{2}/8$); 1440 would be the apparent power $S$ (not offered, but 2400 ≈ doubling errors); 720 uses $X$ instead of $R$... actually $144\\times6=864$ is $Q$ — 720 has no consistent origin."
           ],
           a: "$P = 1152$ W",
-          v: "Apparent $S = V_{rms}|I| = 1440$ VA; PF = $R/|Z| = 0.8$ lagging; $Q = S\\sin\\theta = 864$ VAR. $P^{2}+Q^{2} = 1152^{2}+864^{2} \\approx 1440^{2}$ ✓."
+          v: "Power-triangle check: $S = VI = 120 \\times 12 = 1440$ VA; PF $= R/|Z| = 0.8$ → $P = S\\cos\\theta = 1152$ W ✓; $Q = S\\sin\\theta = 864$ VAR; $\\sqrt{1152^{2} + 864^{2}} = 1440$ ✓ — all three sides consistent."
+
         })
       },
       { q: "A capacitor $C = 100\\,\\mu$F has been charged to $V_0 = 200$ V. At $t = 0$ the source is disconnected and the capacitor discharges through a resistor $R = 5\\,$kΩ connected across its terminals. Find the time for the capacitor voltage to fall to 50 V.",
@@ -805,13 +809,15 @@
         correct: 0,
         ref: "Handbook §5 (Parallel resistance)",
         solution: S({
-          c: "$1/R_{eq} = \\sum 1/R_i$.",
+          c: "Parallel conductances add: $\\dfrac{1}{R_{eq}} = \\sum\\dfrac{1}{R_i}$. Use the common denominator (12) to keep the arithmetic exact.",
           s: [
-            "$1/R_{eq} = 1/4 + 1/6 + 1/12 = 3/12 + 2/12 + 1/12 = 6/12 = 1/2$.",
-            "$R_{eq} = 2\\,\\Omega$."
+            "<b>Step 1 — Sum the reciprocals.</b> $\\dfrac{1}{4} + \\dfrac{1}{6} + \\dfrac{1}{12} = \\dfrac{3 + 2 + 1}{12} = \\dfrac{6}{12} = \\dfrac{1}{2}$.",
+            "<b>Step 2 — Invert.</b> $R_{eq} = 2\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 22 Ω ADDS them (series formula); 3 Ω is a 'looks reasonable' middle value; 1 Ω over-shrinks (e.g. miscounting a fourth branch)."
           ],
-          a: "$2\\,\\Omega$",
-          v: "Parallel resistance is always less than the smallest individual resistor (4 Ω) ✓."
+          a: "$R_{eq} = 2\\,\\Omega$",
+          v: "Bound check: parallel result must be smaller than the smallest branch (4 Ω) ✓. Current-divider check at 12 V: branch currents $3 + 2 + 1 = 6$ A → $R_{eq} = 12/6 = 2\\,\\Omega$ ✓ — same answer from the physics."
+
         })
       },
       { q: "An inductor $L = 50$ mH carries 2 A. Energy stored:",
@@ -819,12 +825,14 @@
         correct: 0,
         ref: "Handbook §5 (Energy in inductor)",
         solution: S({
-          c: "$W_L = \\tfrac{1}{2}LI^{2}$.",
+          c: "Magnetic energy stored in an inductor: $W = \\tfrac12 L I^{2}$ — quadratic in current, linear in inductance.",
           s: [
-            "$W = 0.5 \\times 0.05 \\times 4 = 0.1$ J."
+            "<b>Step 1 — Plug in.</b> $W = \\tfrac12 (0.050)(2)^{2} = \\tfrac12 (0.050)(4) = 0.1$ J.",
+            "<b>Step 2 — Distractor audit.</b> 0.05 J forgets to square the current ($\\tfrac12 LI$); 0.2 J drops the $\\tfrac12$; 1 J misplaces the decimal on $L$."
           ],
-          a: "0.1 J",
-          v: "If current is interrupted suddenly, $V = L\\,di/dt$ can be enormous — basis of ignition coils."
+          a: "$W = 0.1$ J",
+          v: "Units: H·A² = V·s/A · A² = W·s = J ✓. Physical consequence: interrupting this current forces $W$ to dissipate somewhere — $v = L\\,di/dt$ spikes, which is why relay coils get flyback diodes and why ignition coils make sparks. Capacitor dual: $W = \\tfrac12 CV^{2}$."
+
         })
       },
       { q: "Star-connected 3φ load: $V_L = 480$ V line-to-line, line current 30 A, PF = 0.85 lagging. Real power:",
@@ -832,12 +840,15 @@
         correct: 0,
         ref: "Handbook §11 (Three-phase power)",
         solution: S({
-          c: "$P_{3\\phi} = \\sqrt 3\\,V_L I_L\\cos\\theta$.",
+          c: "Three-phase real power in line quantities — one formula regardless of Y or Δ: $P = \\sqrt 3\\,V_L I_L\\cos\\theta$.",
           s: [
-            "$P = 1.732 \\times 480 \\times 30 \\times 0.85 = 21{,}199$ W ≈ 21.2 kW."
+            "<b>Step 1 — Plug in line values.</b> $P = \\sqrt 3 \\times 480 \\times 30 \\times 0.85$.",
+            "<b>Step 2 — Evaluate.</b> $1.732 \\times 480 = 831.4$; $\\times 30 = 24{,}942$ (that is $S$ in VA); $\\times 0.85 = 21{,}200$ W.",
+            "<b>Step 3 — Distractor audit.</b> 14.4 kW omits the $\\sqrt 3$ ($480\\times30\\times0.85\\div1000$... = 12.24 — close to the 12 kW choice); 30 kW ≈ ignores PF and fudges $\\sqrt3$; the per-phase route ($3 V_{ph} I_{ph}\\cos\\theta$) gives the same 21.2 kW if you remember $V_{ph} = 277$ V in Y."
           ],
-          a: "$\\approx 21.2$ kW",
-          v: "$S = \\sqrt 3 V_L I_L = 24.94$ kVA; $Q = S\\sin\\theta = 13.13$ kVAR."
+          a: "$P \\approx 21.2$ kW",
+          v: "Cross-check via per-phase: $V_{ph} = 480/\\sqrt3 = 277$ V, $I_{ph} = I_L = 30$ A (Y-connection): $P = 3 \\times 277 \\times 30 \\times 0.85 = 21.2$ kW ✓. Triangle: $S = 24.94$ kVA, $Q = S\\sin\\theta = 13.1$ kVAR."
+
         })
       },
       { q: "Op-amp summing amplifier: $V_{out} = -(R_f/R_1)V_1 - (R_f/R_2)V_2$. With $R_f = 100$ kΩ, $R_1 = R_2 = 10$ kΩ, $V_1 = 2$ V, $V_2 = -1$ V:",
@@ -845,13 +856,16 @@
         correct: 0,
         ref: "Handbook §9 (Op-amp summing configuration)",
         solution: S({
-          c: "Virtual ground at inverting node sums currents; gain per input is $-R_f/R_i$.",
+          c: "The inverting node is a virtual ground, so each input drives its own independent current $V_i/R_i$ into the summing junction; all of it must flow through $R_f$, weighting each input by $-R_f/R_i$.",
           s: [
-            "Gains: $-100/10 = -10$ each.",
-            "$V_{out} = -10(2) - 10(-1) = -20 + 10 = -10$ V."
+            "<b>Step 1 — Draw the summing circuit.</b><br><svg viewBox='-10 0 350 130' width='330' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.6' fill='none' stroke-linecap='round'><text x='2' y='36' font-size='11' fill='#1f4e79' stroke='none'>V₁</text><line x1='18' y1='40' x2='55' y2='40'/><rect x='55' y='30' width='60' height='20'/><text x='85' y='44' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>R₁</text><line x1='115' y1='40' x2='140' y2='40'/><line x1='140' y1='40' x2='140' y2='60'/><text x='2' y='86' font-size='11' fill='#1f4e79' stroke='none'>V₂</text><line x1='18' y1='90' x2='55' y2='90'/><rect x='55' y='80' width='60' height='20'/><text x='85' y='94' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>R₂</text><line x1='115' y1='90' x2='140' y2='90'/><line x1='140' y1='90' x2='140' y2='60'/><circle cx='140' cy='60' r='2.5' fill='#1f4e79' stroke='none'/><line x1='140' y1='60' x2='152' y2='60'/><polygon points='152,42 152,92 225,67' fill='#fff'/><text x='160' y='58' font-size='11' fill='#1f4e79' stroke='none'>−</text><text x='160' y='84' font-size='11' fill='#1f4e79' stroke='none'>+</text><line x1='152' y1='80' x2='136' y2='80' stroke-width='1'/><line x1='130' y1='86' x2='142' y2='86' stroke-width='1'/><line x1='133' y1='90' x2='139' y2='90' stroke-width='1'/><line x1='140' y1='40' x2='140' y2='14'/><line x1='140' y1='14' x2='165' y2='14'/><rect x='165' y='5' width='55' height='18'/><text x='192' y='18' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>R_f</text><line x1='220' y1='14' x2='248' y2='14'/><line x1='248' y1='14' x2='248' y2='67'/><line x1='225' y1='67' x2='290' y2='67'/><circle cx='248' cy='67' r='2.5' fill='#1f4e79' stroke='none'/><text x='296' y='71' font-size='11' fill='#1f4e79' stroke='none'>V_out</text></g></svg>",
+            "<b>Step 2 — Per-input gains.</b> $-R_f/R_1 = -100/10 = -10$ and $-R_f/R_2 = -10$ as well.",
+            "<b>Step 3 — Superpose.</b> $V_{out} = -10(V_1) - 10(V_2) = -10(2) - 10(-1) = -20 + 10 = -10$ V.",
+            "<b>Step 4 — Distractor audit.</b> $+10$ V drops the inversion; 0 V wrongly cancels the inputs ($2 + (-1) \\ne 0$); $-30$ V sums magnitudes ignoring the sign of $V_2$."
           ],
           a: "$V_{out} = -10$ V",
-          v: "Linear superposition — each input independently sees its own gain. Watch output saturation against supply rails."
+          v: "Current bookkeeping at the virtual ground: $I_1 = 2/10\\text{k} = 0.2$ mA in, $I_2 = -1/10\\text{k} = -0.1$ mA in → net 0.1 mA through $R_f$ → drop $= 0.1\\text{mA} \\times 100\\text{k}\\Omega = 10$ V, output pulled BELOW ground: $-10$ V ✓. Practical check: $|{-10}|$ V must be within the op-amp's supply rails or the stage saturates."
+
         })
       },
       { q: "A balanced 3φ Y-source with $V_{LN} = 277$ V supplies a $\\Delta$-connected load $Z_\\Delta = 30 + j40\\,\\Omega$ per phase. Find phase current $|I_\\Delta|$.",
@@ -859,14 +873,16 @@
         correct: 0,
         ref: "Handbook §11 (Y–Δ relations)",
         solution: S({
-          c: "$\\Delta$ phase voltage = line voltage = $\\sqrt 3 V_{LN}$. Phase current $|I_\\Delta| = V_{LL}/|Z_\\Delta|$.",
+          c: "Mixing Y source with Δ load hinges on one mapping: each Δ phase sees the LINE-to-LINE voltage, and $V_{LL} = \\sqrt 3\\,V_{LN}$.",
           s: [
-            "$V_{LL} = \\sqrt 3 \\times 277 = 480$ V.",
-            "$|Z_\\Delta| = \\sqrt{900+1600} = 50\\,\\Omega$.",
-            "$|I_\\Delta| = 480/50 = 9.6$ A."
+            "<b>Step 1 — Picture the Δ load across the lines.</b><br><svg viewBox='-10 0 340 150' width='320' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.6' fill='none' stroke-linecap='round'><circle cx='165' cy='22' r='2.5' fill='#1f4e79' stroke='none'/><text x='165' y='14' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>A</text><circle cx='60' cy='128' r='2.5' fill='#1f4e79' stroke='none'/><text x='46' y='140' font-size='11' fill='#1f4e79' stroke='none'>B</text><circle cx='270' cy='128' r='2.5' fill='#1f4e79' stroke='none'/><text x='278' y='140' font-size='11' fill='#1f4e79' stroke='none'>C</text><line x1='165' y1='22' x2='95' y2='90'/><rect x='75' y='86' width='44' height='16' transform='rotate(-45 97 94)'/><line x1='81' y1='104' x2='60' y2='128'/><line x1='165' y1='22' x2='235' y2='90'/><rect x='211' y='86' width='44' height='16' transform='rotate(45 233 94)'/><line x1='249' y1='104' x2='270' y2='128'/><line x1='60' y1='128' x2='270' y2='128'/><rect x='135' y='120' width='60' height='16'/><text x='165' y='118' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>Z_Δ mỗi cạnh / each edge</text><text x='30' y='60' font-size='10' fill='#1f4e79' stroke='none'>V_LL = 480 V</text></g></svg>Each impedance leg connects line-to-line, so its phase voltage IS $V_{LL}$.",
+            "<b>Step 2 — Line-to-line voltage.</b> $V_{LL} = \\sqrt 3 \\times 277 = 480$ V.",
+            "<b>Step 3 — Impedance magnitude.</b> $|Z_\\Delta| = \\sqrt{30^{2} + 40^{2}} = 50\\,\\Omega$ (3-4-5 ×10).",
+            "<b>Step 4 — Phase current.</b> $|I_\\Delta| = V_{LL}/|Z_\\Delta| = 480/50 = 9.6$ A."
           ],
-          a: "$|I_\\Delta| \\approx 9.6$ A",
-          v: "Line current $|I_L| = \\sqrt 3|I_\\Delta| = 16.6$ A — which is also one of the options! Read carefully: 'phase current' vs 'line current' is the classic trap on Δ loads."
+          a: "$|I_\\Delta| = 9.6$ A per Δ leg.",
+          v: "The planted trap: LINE current is $\\sqrt 3 \\times 9.6 = 16.6$ A — distractor B verbatim. Read 'phase' vs 'line' twice on every Δ problem. Power check: $P = 3 I_\\Delta^{2} R = 3(92.16)(30) = 8.29$ kW = $\\sqrt3 V_L I_L \\cos\\theta = 1.732(480)(16.6)(0.6)$ ✓ (PF $= R/|Z| = 0.6$)."
+
         })
       },
       { q: "Mesh analysis: a single-loop circuit has 12 V source and resistors 4 Ω, 6 Ω, 2 Ω in series. Loop current?",
@@ -874,13 +890,15 @@
         correct: 0,
         ref: "Handbook §5 (Mesh / loop analysis)",
         solution: S({
-          c: "KVL: sum of voltage drops = source voltage.",
+          c: "One loop → one KVL equation: the source EMF equals the sum of resistive drops, and series resistances simply add.",
           s: [
-            "$\\sum R = 4 + 6 + 2 = 12\\,\\Omega$.",
-            "$I = V/R = 12/12 = 1$ A."
+            "<b>Step 1 — Draw the single mesh.</b><br><svg viewBox='-10 0 330 130' width='310' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.6' fill='none' stroke-linecap='round'><circle cx='40' cy='65' r='16' fill='#fff'/><text x='40' y='61' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>+</text><text x='40' y='76' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>−</text><text x='40' y='105' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>12 V</text><line x1='40' y1='49' x2='40' y2='25'/><line x1='40' y1='25' x2='90' y2='25'/><rect x='90' y='16' width='55' height='18'/><text x='117' y='29' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>4 Ω</text><line x1='145' y1='25' x2='195' y2='25'/><rect x='195' y='16' width='55' height='18'/><text x='222' y='29' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>6 Ω</text><line x1='250' y1='25' x2='290' y2='25'/><line x1='290' y1='25' x2='290' y2='105'/><line x1='290' y1='105' x2='195' y2='105'/><rect x='140' y='96' width='55' height='18'/><text x='167' y='109' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>2 Ω</text><line x1='140' y1='105' x2='40' y2='105'/><line x1='40' y1='105' x2='40' y2='81'/><text x='165' y='68' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>I ↻</text></g></svg>",
+            "<b>Step 2 — KVL around the loop.</b> $12 = I(4 + 6 + 2) = 12I$.",
+            "<b>Step 3 — Solve.</b> $I = 12/12 = 1$ A."
           ],
-          a: "1 A",
-          v: "Voltage drops across each: 4 V, 6 V, 2 V — sum = 12 V ✓."
+          a: "$I = 1$ A",
+          v: "Drop audit: $4(1) + 6(1) + 2(1) = 4 + 6 + 2 = 12$ V — matches the source exactly ✓. Power: source delivers $12 \\times 1 = 12$ W; resistors burn $4 + 6 + 2 = 12$ W ✓. Distractor 12 A divides by a single ohm; 2 A and 0.5 A misadd the series string."
+
         })
       }
     ],
@@ -892,13 +910,15 @@
         correct: 0,
         ref: "Handbook §10 (Z-transform ROC)",
         solution: S({
-          c: "For a causal (right-sided) sequence, ROC is the exterior of the outermost pole.",
+          c: "The ROC of a $z$-transform is an annulus bounded by pole magnitudes; CAUSALITY pins which annulus: a right-sided sequence's ROC is the exterior of the OUTERMOST pole.",
           s: [
-            "Poles at $z = 0.5,\\ 0.8$. Outermost: $|z| = 0.8$.",
-            "Causal ⇒ ROC = $|z| > 0.8$."
+            "<b>Step 1 — Locate the poles.</b> Denominator zeros: $z = 0.5$ and $z = 0.8$.",
+            "<b>Step 2 — Apply the causality rule.</b> Right-sided ⇒ ROC $= \\{|z| > 0.8\\}$, outside the outermost pole.",
+            "<b>Step 3 — Map the distractors to the other cases.</b> $|z| < 0.5$ would be the ANTI-causal (left-sided) inverse; the annulus $0.5 < |z| < 0.8$ is the two-sided inverse — same algebra, three different time-domain signals. 'All $z$' is only possible for finite-length sequences."
           ],
           a: "$|z| > 0.8$",
-          v: "Anti-causal (left-sided) would give $|z| < 0.5$; two-sided gives the annulus $0.5 < |z| < 0.8$ — which has different time-domain inverse."
+          v: "Stability bonus check: the ROC $|z| > 0.8$ INCLUDES the unit circle, so this causal system is also stable ($h[n]$ built from $0.5^{n}$ and $0.8^{n}$ terms, both absolutely summable) ✓. Rule pairing to memorize: causal ↔ exterior; stable ↔ contains $|z| = 1$; both ↔ all poles inside the unit circle."
+
         })
       },
       { q: "DFT of $x[n] = \\{1, 0, -1, 0\\}$ (length 4) at $k = 1$:",
@@ -906,14 +926,15 @@
         correct: 0,
         ref: "Handbook §10 (DFT)",
         solution: S({
-          c: "$X[k] = \\sum_{n=0}^{N-1}x[n]e^{-j2\\pi kn/N}$.",
+          c: "Direct evaluation of $X[k] = \\sum_{n=0}^{N-1}x[n]W_N^{kn}$ with $W_4 = e^{-j2\\pi/4} = -j$ — only two nonzero terms survive.",
           s: [
-            "$N = 4,\\ k = 1$. $W_4 = e^{-j2\\pi/4} = -j$.",
-            "$X[1] = x[0]W^{0} + x[1]W^{1} + x[2]W^{2} + x[3]W^{3}$.",
-            "$= 1(1) + 0(-j) + (-1)(-1) + 0(j) = 1 + 0 + 1 + 0 = 2$."
+            "<b>Step 1 — Write the powers of $W_4$ for $k = 1$.</b> $W^{0} = 1,\\ W^{1} = -j,\\ W^{2} = -1,\\ W^{3} = +j$.",
+            "<b>Step 2 — Multiply-accumulate.</b> $X[1] = 1(1) + 0(-j) + (-1)(-1) + 0(j) = 1 + 1 = 2$.",
+            "<b>Step 3 — Interpret.</b> $x[n] = \\{1,0,-1,0\\}$ is exactly $\\cos(2\\pi n/4)$ — a pure bin-1 cosine, so its energy lands in bins 1 and 3 (the conjugate pair)."
           ],
           a: "$X[1] = 2$",
-          v: "Other bins: $X[0] = 0$ (zero DC), $X[2] = 2$, $X[3] = 2$ (real-input symmetry; here input is real and even-symmetric within length-4)."
+          v: "Full-spectrum check: $X[0] = 1+0-1+0 = 0$ (no DC ✓), $X[2] = 1 - 0 + (-1)(1) - 0 = 0$... compute: $W^{2n}$ powers give $1,(-1)^n$: $X[2] = 1(1)+0(-1)+(-1)(1)+0(-1) = 0$ ✓, $X[3] = \\overline{X[1]} = 2$ ✓ (real input symmetry). Parseval: $\\sum|x|^{2} = 2$ and $\\frac{1}{4}\\sum|X|^{2} = \\frac{1}{4}(0+4+0+4) = 2$ ✓."
+
         })
       },
       { q: "Sampling theorem: signal bandlimited to $W$ Hz. Minimum sampling rate to avoid aliasing:",
@@ -921,13 +942,15 @@
         correct: 0,
         ref: "Handbook §10 (Sampling theorem)",
         solution: S({
-          c: "Nyquist: $f_s \\ge 2 f_{max}$.",
+          c: "Nyquist-Shannon: a signal bandlimited to $W$ Hz is fully determined by samples taken at $f_s \\ge 2W$ — below that, spectral images overlap (alias) irrecoverably.",
           s: [
-            "$f_{max} = W$, so $f_s \\ge 2W$.",
-            "$2W$ is the Nyquist rate; oversampling ($f_s > 2W$) gives margin for anti-alias filter."
+            "<b>Step 1 — State the minimum.</b> $f_{s,min} = 2W$ — the Nyquist rate.",
+            "<b>Step 2 — See why.</b> Sampling replicates the spectrum every $f_s$; replicas centered at $0, \\pm f_s, \\ldots$ each span $\\pm W$. Non-overlap requires $f_s - W \\ge W$, i.e. $f_s \\ge 2W$.",
+            "<b>Step 3 — Distractor audit.</b> $W$ under-samples by half (folding); $W/2$ is worse; $4W$ WORKS but is not the minimum asked for."
           ],
-          a: "$f_s = 2W$",
-          v: "CD audio: 44.1 kHz sampling for ≤22 kHz audio (humans hear ≤20 kHz, with margin for filter rolloff)."
+          a: "$f_s = 2W$ minimum.",
+          v: "Reality check: practical systems sample above Nyquist to give the anti-alias filter a transition band — CD audio's 44.1 kHz vs 2×20 kHz leaves 4.1 kHz of rolloff room ✓. Subtlety worth knowing: exactly AT $2W$, a sinusoid at $W$ can be sampled at its zeros — the theorem's strict inequality matters for that edge case."
+
         })
       },
       { q: "8-bit ADC with $V_{ref} = 5$ V has signal-to-quantization-noise ratio (SQNR) approximately:",
@@ -935,12 +958,15 @@
         correct: 0,
         ref: "Handbook §10 (Quantization noise)",
         solution: S({
-          c: "Full-scale sinusoid: $\\text{SQNR}_{dB} \\approx 6.02 N + 1.76$ where $N$ is ADC bits.",
+          c: "Quantization noise for a full-scale sinusoid gives the classic formula $\\text{SQNR} \\approx 6.02N + 1.76$ dB — about 6 dB ('one bit') of SNR per bit.",
           s: [
-            "$N = 8$ ⇒ SQNR $= 6.02(8) + 1.76 = 48.16 + 1.76 = 49.92$ dB."
+            "<b>Step 1 — Apply the formula.</b> $6.02 \\times 8 + 1.76 = 48.16 + 1.76 = 49.92$ dB.",
+            "<b>Step 2 — Know where it comes from.</b> Quantization error is uniform over one LSB step $\\Delta$: noise power $\\Delta^{2}/12$; full-scale sine power $(2^{N}\\Delta)^{2}/8$; the ratio in dB collapses to $6.02N + 1.76$.",
+            "<b>Step 3 — Distractor audit.</b> 8 dB confuses bits with dB; 100 dB belongs to a ~16-bit converter; 256 dB mistakes the code COUNT $2^{8}$ for decibels."
           ],
           a: "$\\approx 49.9$ dB",
-          v: "Each added bit improves SQNR by ~6 dB. 16-bit CD audio: ~98 dB."
+          v: "Ladder check: 12-bit → 74 dB, 16-bit → 98 dB (CD audio) — each step adds $4 \\times 6 = 24$ dB ✓. Note $V_{ref} = 5$ V is a red herring: SQNR for a FULL-SCALE input is independent of the reference; it only sets the absolute LSB size (19.5 mV here)."
+
         })
       },
       { q: "FIR filter with coefficients $\\{0.25, 0.5, 0.25\\}$. Type of filter (by magnitude response):",
@@ -948,14 +974,15 @@
         correct: 0,
         ref: "Handbook §10 (FIR filter classification)",
         solution: S({
-          c: "Symmetric positive coefficients summing to 1 act as a weighted moving average — passes DC, attenuates high frequencies.",
+          c: "Symmetric, all-positive coefficients summing to 1 form a weighted moving average — by construction it passes DC intact and suppresses the fastest alternation.",
           s: [
-            "$H(e^{j\\omega}) = 0.25 + 0.5e^{-j\\omega} + 0.25 e^{-j2\\omega}$.",
-            "Factor: $e^{-j\\omega}(0.5\\cos\\omega + 0.5)$.",
-            "Magnitude: $|0.5(1 + \\cos\\omega)|$ — maximum 1 at $\\omega = 0$, zero at $\\omega = \\pi$."
+            "<b>Step 1 — Check the two frequency extremes.</b> At DC ($\\omega = 0$): gain $= \\sum h = 0.25 + 0.5 + 0.25 = 1$ (full pass). At Nyquist ($\\omega = \\pi$, input $+1,-1,+1,\\ldots$): gain $= 0.25 - 0.5 + 0.25 = 0$ (perfect null).",
+            "<b>Step 2 — Confirm with the response.</b> $H(e^{j\\omega}) = 0.25 + 0.5e^{-j\\omega} + 0.25e^{-j2\\omega} = e^{-j\\omega}\\,\\tfrac12(1 + \\cos\\omega)$ — magnitude decreases monotonically from 1 to 0: textbook low-pass.",
+            "<b>Step 3 — Distractor audit.</b> High-pass would need alternating-sign taps (e.g. $\\{-0.25, 0.5, -0.25\\}$); band-pass needs a null at BOTH extremes; all-pass needs $|H| = 1$ everywhere."
           ],
-          a: "Low-pass (averaging filter)",
-          v: "Linear phase (symmetric coefficients) — constant group delay, no phase distortion."
+          a: "Low-pass (averaging) filter.",
+          v: "Bonus structure check: symmetric taps ⇒ LINEAR phase ($e^{-j\\omega}$ = pure 1-sample delay) — constant group delay, no waveform dispersion ✓. This kernel is also binomial $\\tfrac14(1,2,1)$ — two cascaded 2-point averagers, the building block of Gaussian smoothing."
+
         })
       },
       { q: "Convolution of $x[n] = \\{1, 2\\}$ with $h[n] = \\{3, 1\\}$:",
@@ -963,14 +990,16 @@
         correct: 0,
         ref: "Handbook §10 (Convolution)",
         solution: S({
-          c: "$y[n] = \\sum_k x[k]h[n-k]$ for finite sequences.",
+          c: "Discrete convolution $y[n] = \\sum_k x[k]h[n-k]$: output length $N_x + N_h - 1 = 3$; each output sample collects the products that 'line up' at that shift.",
           s: [
-            "$y[0] = x[0]h[0] = 1\\cdot 3 = 3$.",
-            "$y[1] = x[0]h[1] + x[1]h[0] = 1\\cdot 1 + 2\\cdot 3 = 7$.",
-            "$y[2] = x[1]h[1] = 2\\cdot 1 = 2$."
+            "<b>Step 1 — $y[0]$.</b> Only $x[0]h[0] = 1 \\times 3 = 3$.",
+            "<b>Step 2 — $y[1]$.</b> $x[0]h[1] + x[1]h[0] = 1(1) + 2(3) = 7$.",
+            "<b>Step 3 — $y[2]$.</b> Only $x[1]h[1] = 2 \\times 1 = 2$.",
+            "<b>Step 4 — Distractor audit.</b> $\\{3,5,2\\}$ and $\\{3,6,2\\}$ each miscount the middle cross terms; $\\{3,2\\}$ forgets the overlap sample entirely (wrong length)."
           ],
-          a: "$\\{3, 7, 2\\}$",
-          v: "Length = $N_x + N_h - 1 = 3$. Sum of products check: $\\sum y = 12 = (\\sum x)(\\sum h) = 3 \\cdot 4$ ✓."
+          a: "$y = \\{3,\\ 7,\\ 2\\}$",
+          v: "Sum check (convolution preserves totals): $\\sum y = 12 = (\\sum x)(\\sum h) = 3 \\times 4$ ✓. Polynomial view: $(1 + 2z^{-1})(3 + z^{-1}) = 3 + 7z^{-1} + 2z^{-2}$ — convolution IS polynomial multiplication ✓."
+
         })
       }
     ],
@@ -982,12 +1011,15 @@
         correct: 0,
         ref: "Handbook §7 (Diode small-signal model)",
         solution: S({
-          c: "$r_d = V_T/I_D$ at the bias point.",
+          c: "Small-signal (dynamic) resistance of a forward-biased diode is the local slope of the exponential I-V curve: $r_d = \\dfrac{dV}{dI}\\Big|_{Q} = \\dfrac{nV_T}{I_D}$ (take $n = 1$ unless told otherwise).",
           s: [
-            "$r_d = 0.026/0.001 = 26\\,\\Omega$."
+            "<b>Step 1 — Apply at the bias point.</b> $r_d = V_T/I_D = 26\\,\\text{mV}/1\\,\\text{mA} = 26\\,\\Omega$.",
+            "<b>Step 2 — Understand the scaling.</b> $r_d \\propto 1/I_D$: at 10 mA it would be 2.6 Ω (distractor B), at 0.1 mA it would be 260 Ω (distractor C) — the wrong answers ARE the right answer at other bias currents.",
+            "<b>Step 3 — Scope of validity.</b> This is the AC model around the operating point only; the large-signal forward drop stays ≈0.7 V regardless."
           ],
-          a: "$r_d = 26\\,\\Omega$",
-          v: "Useful rule: at 1 mA, $r_d = 26\\,\\Omega$; at 10 mA, $r_d = 2.6\\,\\Omega$. Inversely proportional to current."
+          a: "$r_d = 26\\,\\Omega$ at 1 mA.",
+          v: "Derivation check: $I = I_S e^{V/V_T} \\Rightarrow dI/dV = I/V_T \\Rightarrow r_d = V_T/I$ ✓. Same physics gives the BJT's $g_m = I_C/V_T$ — the diode rule and transistor transconductance are one identity viewed from two sides."
+
         })
       },
       { q: "BJT common-emitter amp: $I_C = 2$ mA, $\\beta = 100$, $V_T = 26$ mV. Transconductance $g_m$:",
@@ -995,12 +1027,15 @@
         correct: 0,
         ref: "Handbook §7 (BJT small-signal parameters)",
         solution: S({
-          c: "$g_m = I_C/V_T$.",
+          c: "BJT transconductance is bias-set and device-independent: $g_m = I_C/V_T$ — no $\\beta$, no geometry; only the collector current matters.",
           s: [
-            "$g_m = 2\\text{ mA}/26\\text{ mV} = 0.0769$ A/V = 76.9 mA/V."
+            "<b>Step 1 — Plug in.</b> $g_m = \\dfrac{2\\,\\text{mA}}{26\\,\\text{mV}} = 76.9\\,\\text{mA/V} \\approx 77$ mA/V.",
+            "<b>Step 2 — Note what $\\beta$ is for.</b> $\\beta$ enters the INPUT resistance, not $g_m$: $r_\\pi = \\beta/g_m = 100/0.0769 \\approx 1.3$ kΩ.",
+            "<b>Step 3 — Distractor audit.</b> 26 mA/V echoes $V_T$; 7.7 is a decade slip; 50 looks like $I_C \\times \\beta/4$ numerology — none follow the formula."
           ],
           a: "$g_m \\approx 77$ mA/V",
-          v: "$r_\\pi = \\beta/g_m = 100/0.077 \\approx 1300\\,\\Omega$. Input impedance at base."
+          v: "Proportionality check: at 1 mA, $g_m = 38.5$ mA/V — the famous '1/26' rule; doubling $I_C$ doubles $g_m$ ✓. Gain preview: with a 5-kΩ collector load, $|A_v| = g_m R_C \\approx 385$ — the bias current is the gain knob in BJT design."
+
         })
       },
       { q: "MOSFET in saturation: $V_{GS} - V_t = 1.5$ V, $\\mu_n C_{ox}(W/L) = 2$ mA/V², $\\lambda = 0$. Drain current:",
@@ -1008,12 +1043,15 @@
         correct: 0,
         ref: "Handbook §7 (MOSFET saturation current)",
         solution: S({
-          c: "$I_D = \\tfrac12\\mu_n C_{ox}(W/L)(V_{GS}-V_t)^{2}$ in saturation.",
+          c: "Square-law MOSFET in saturation: $I_D = \\tfrac12\\,\\mu_nC_{ox}\\dfrac{W}{L}\\,V_{OV}^{2}$ with overdrive $V_{OV} = V_{GS} - V_t$ (channel-length modulation off, $\\lambda = 0$).",
           s: [
-            "$I_D = 0.5 \\times 2 \\times 10^{-3} \\times 1.5^{2} = 0.5 \\times 2 \\times 2.25 \\times 10^{-3} = 2.25$ mA."
+            "<b>Step 1 — Square the overdrive.</b> $V_{OV}^{2} = 1.5^{2} = 2.25$ V².",
+            "<b>Step 2 — Evaluate.</b> $I_D = \\tfrac12 \\times 2\\,\\text{mA/V}^{2} \\times 2.25 = 2.25$ mA.",
+            "<b>Step 3 — Distractor audit.</b> 4.5 mA drops the $\\tfrac12$; 3 mA multiplies by $V_{OV}$ un-squared ($2\\times1.5$); 1.5 mA just echoes the overdrive."
           ],
           a: "$I_D = 2.25$ mA",
-          v: "Saturation requires $V_{DS} \\ge V_{OV} = 1.5$ V."
+          v: "Region check: saturation requires $V_{DS} \\ge V_{OV} = 1.5$ V — the stated condition ✓. Companion small-signal value: $g_m = \\mu_nC_{ox}\\frac{W}{L}V_{OV} = 2\\times1.5 = 3$ mA/V $= 2I_D/V_{OV}$ ✓ — internal consistency of the square law."
+
         })
       },
       { q: "Inverting op-amp gain: $R_f = 47$ kΩ, $R_{in} = 4.7$ kΩ.",
@@ -1021,12 +1059,15 @@
         correct: 0,
         ref: "Handbook §9 (Inverting amplifier)",
         solution: S({
-          c: "$A_v = -R_f/R_{in}$ assuming ideal op-amp.",
+          c: "Ideal inverting amplifier: virtual ground at the inverting input makes the gain a pure resistor ratio, $A_v = -R_f/R_{in}$.",
           s: [
-            "$A_v = -47/4.7 = -10$."
+            "<b>Step 1 — Compute the ratio.</b> $A_v = -47\\text{k}/4.7\\text{k} = -10$.",
+            "<b>Step 2 — Distractor audit.</b> $+10$ forgets the inversion (that is the NON-inverting topology's sign, whose gain would be $1 + R_f/R_{in} = 11$ — distractor C's magnitude); $0.1$ inverts the ratio.",
+            "<b>Step 3 — Where the formula comes from.</b> Virtual ground → input current $V_{in}/R_{in}$ → all of it through $R_f$ → $V_{out} = -V_{in}(R_f/R_{in})$."
           ],
           a: "$A_v = -10$",
-          v: "Bandwidth: $f_{3dB} = GBW/|A_v|$ — high gain ⇒ narrow bandwidth via gain-bandwidth product."
+          v: "Bandwidth consequence check: with the noise gain $1 + R_f/R_{in} = 11$, a 1-MHz-GBW op-amp gives $f_{3dB} \\approx 1\\,\\text{MHz}/11 \\approx 91$ kHz — gain is traded for bandwidth ✓. Input-impedance note: this stage loads the source with $R_{in} = 4.7$ kΩ (not infinite — that is the non-inverting topology's perk)."
+
         })
       },
       { q: "Full-wave rectifier (bridge) with sinusoidal input, peak $V_m = 10$ V, ideal diodes. Average output voltage:",
@@ -1034,12 +1075,15 @@
         correct: 0,
         ref: "Handbook §7 (Rectifier circuits)",
         solution: S({
-          c: "Full-wave: $V_{avg} = (1/\\pi)\\int_0^\\pi V_m\\sin\\theta\\,d\\theta = 2V_m/\\pi$.",
+          c: "A bridge folds both half-cycles positive; the average of $|V_m\\sin\\theta|$ over a half period is $V_{avg} = \\dfrac{1}{\\pi}\\displaystyle\\int_0^{\\pi}V_m\\sin\\theta\\,d\\theta = \\dfrac{2V_m}{\\pi}$.",
           s: [
-            "$V_{avg} = 2(10)/\\pi = 20/\\pi \\approx 6.37$ V."
+            "<b>Step 1 — Do the integral.</b> $\\int_0^{\\pi}\\sin\\theta\\,d\\theta = [-\\cos\\theta]_0^{\\pi} = 2$, so $V_{avg} = 2V_m/\\pi$.",
+            "<b>Step 2 — Evaluate.</b> $V_{avg} = 2(10)/\\pi = 20/\\pi \\approx 6.37$ V.",
+            "<b>Step 3 — Distractor audit.</b> $V_m/\\pi \\approx 3.18$ V is the HALF-wave average (only one hump per cycle); $V_m/2$ confuses average with a naive midpoint; $V_m\\sqrt2$ confuses peak/RMS conversions."
           ],
-          a: "$\\approx 6.37$ V",
-          v: "Real bridge has 2 diode drops in series: $V_{avg} \\approx 2(V_m - 2V_D)/\\pi$. For Si, subtract 1.4 V from $V_m$ first."
+          a: "$V_{avg} \\approx 6.37$ V",
+          v: "RMS companion: full-wave $V_{rms} = V_m/\\sqrt2 = 7.07$ V > average ✓ (form factor 1.11). Real-diode correction: a bridge conducts through TWO diodes, so practical output ≈ $2(V_m - 2V_D)/\\pi = 2(8.6)/\\pi \\approx 5.5$ V with silicon — the headline formula assumes ideal diodes, as stated."
+
         })
       },
       { q: "Zener regulator: input 18 V, Zener $V_Z = 5.6$ V, series resistor $R_S = 220\\,\\Omega$, no load. Zener current?",
@@ -1047,12 +1091,16 @@
         correct: 0,
         ref: "Handbook §7 (Zener regulator analysis)",
         solution: S({
-          c: "No-load Zener current equals series resistor current: $I_Z = (V_{in} - V_Z)/R_S$.",
+          c: "In the regulation region the Zener pins the output at $V_Z$; with no load, every milliamp through the series resistor flows into the Zener: $I_Z = (V_{in} - V_Z)/R_S$.",
           s: [
-            "$(18 - 5.6)/220 = 12.4/220 = 0.0564$ A = 56.4 mA."
+            "<b>Step 1 — Draw the regulator.</b><br><svg viewBox='-10 0 340 140' width='320' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.6' fill='none' stroke-linecap='round'><circle cx='35' cy='70' r='15' fill='#fff'/><text x='35' y='66' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>+</text><text x='35' y='80' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>−</text><text x='35' y='108' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>18 V</text><line x1='35' y1='55' x2='35' y2='28'/><line x1='35' y1='28' x2='95' y2='28'/><rect x='95' y='19' width='70' height='18'/><text x='130' y='32' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>R_S = 220 Ω</text><line x1='165' y1='28' x2='225' y2='28'/><circle cx='225' cy='28' r='2.5' fill='#1f4e79' stroke='none'/><line x1='225' y1='28' x2='225' y2='52'/><polygon points='217,76 233,76 225,52' fill='#fff'/><line x1='217' y1='52' x2='233' y2='52'/><line x1='213' y1='48' x2='217' y2='52' stroke-width='1.2'/><line x1='233' y1='52' x2='237' y2='56' stroke-width='1.2'/><line x1='225' y1='76' x2='225' y2='112'/><text x='243' y='68' font-size='10' fill='#1f4e79' stroke='none'>V_Z = 5.6 V</text><line x1='225' y1='28' x2='290' y2='28'/><text x='296' y='32' font-size='10' fill='#1f4e79' stroke='none'>V_out</text><line x1='35' y1='112' x2='225' y2='112'/><line x1='35' y1='85' x2='35' y2='112'/></g></svg>The Zener sits reverse-biased; above its knee it clamps the node at 5.6 V.",
+            "<b>Step 2 — Voltage across the series resistor.</b> $V_{R_S} = V_{in} - V_Z = 18 - 5.6 = 12.4$ V.",
+            "<b>Step 3 — Current.</b> $I_Z = 12.4/220 = 56.4$ mA (no load → all of it through the Zener).",
+            "<b>Step 4 — Distractor audit.</b> 18 mA ≈ $V_{in}/1\\text{k}$-style guess; 25 mA ≈ uses 5.6/220; 100 mA rounds 18/220... none track the formula."
           ],
           a: "$I_Z \\approx 56.4$ mA",
-          v: "Check Zener power dissipation: $P_Z = I_Z V_Z = 0.0564 \\times 5.6 = 0.316$ W — must be below Zener's rating (e.g., 500 mW). Watch this in design."
+          v: "Design check the FE loves: Zener dissipation $P_Z = I_ZV_Z = 0.0564 \\times 5.6 = 0.316$ W — needs at least a 500-mW part ✓. Loaded behavior: any load current SUBTRACTS from $I_Z$; regulation holds only while $I_Z$ stays above the knee current (~5 mA), i.e. up to ≈51 mA of load."
+
         })
       }
     ],
@@ -1064,12 +1112,15 @@
         correct: 0,
         ref: "Handbook §11 (Per-unit base change)",
         solution: S({
-          c: "$X_{pu, new} = X_{pu, old}\\cdot(S_{base, new}/S_{base, old})\\cdot(V_{base, old}/V_{base, new})^{2}$. Voltage base unchanged here.",
+          c: "Per-unit impedance re-scales with the base: $X_{new} = X_{old}\\cdot\\dfrac{S_{new}}{S_{old}}\\cdot\\left(\\dfrac{V_{old}}{V_{new}}\\right)^{2}$. Same physical ohms, different yardstick.",
           s: [
-            "$X_{new} = 0.10 \\times (200/100) = 0.20$ pu."
+            "<b>Step 1 — Identify what changed.</b> Only the MVA base doubles (100 → 200 MVA); voltage base is unchanged, so the squared term is 1.",
+            "<b>Step 2 — Scale.</b> $X_{new} = 0.10 \\times \\dfrac{200}{100} = 0.20$ pu.",
+            "<b>Step 3 — Distractor audit.</b> 0.05 pu divides instead of multiplies (the classic direction error); 0.10 'unchanged' forgets that pu values are base-relative; 2.0 misplaces a decade."
           ],
-          a: "$X = 0.20$ pu on 200 MVA base",
-          v: "Doubling the MVA base doubles the pu impedance — higher base means impedances 'look bigger' relative to base."
+          a: "$X = 0.20$ pu on the 200-MVA base.",
+          v: "Physical-ohms check: $Z_{base} = V^{2}/S$ halves when $S$ doubles, so the SAME ohmic reactance is a larger fraction of the smaller base — direction ✓. Memory hook: bigger MVA base → every impedance 'looks bigger' in pu, proportionally."
+
         })
       },
       { q: "3-phase fault at bus: pre-fault voltage 1.0 pu, total reactance to fault $X_{th} = 0.25$ pu. Fault current:",
@@ -1077,12 +1128,15 @@
         correct: 0,
         ref: "Handbook §11 (Symmetrical fault analysis)",
         solution: S({
-          c: "Three-phase symmetrical fault: $I_f = V_{pre}/X_{th}$ in pu.",
+          c: "A bolted three-phase fault is balanced — only the positive-sequence network acts: $I_f = V_{pre}/X_{th}$ in per-unit.",
           s: [
-            "$I_f = 1.0/0.25 = 4.0$ pu."
+            "<b>Step 1 — Apply the formula.</b> $I_f = 1.0/0.25 = 4.0$ pu.",
+            "<b>Step 2 — Interpret.</b> Fault current is 4× the base (roughly 4× rated) — the Thevenin reactance seen from the bus is the ONLY thing limiting it.",
+            "<b>Step 3 — Distractor audit.</b> 0.25 pu echoes the reactance; 10 pu would need $X_{th} = 0.10$; 1.0 pu forgets to divide at all."
           ],
           a: "$I_f = 4.0$ pu",
-          v: "Convert to amps: $I_{base} = S_{base}/(\\sqrt 3 V_{base})$. E.g., on 100 MVA, 138 kV base: $I_{base} = 418$ A, so fault current = 1.67 kA."
+          v: "Ampere conversion check: on a 100-MVA, 138-kV base, $I_{base} = \\dfrac{100\\,\\text{MVA}}{\\sqrt3 \\times 138\\,\\text{kV}} = 418$ A → $I_f = 4 \\times 418 \\approx 1.67$ kA ✓. Context: this 'MVA method' number ($S_{fault} = S_{base}/X_{th} = 400$ MVA) sizes breaker interrupting ratings."
+
         })
       },
       { q: "Synchronous generator: 3-phase, 60 Hz, 12 poles. Speed?",
@@ -1090,12 +1144,14 @@
         correct: 0,
         ref: "Handbook §11 (Synchronous machine speed)",
         solution: S({
-          c: "$n_s = 120 f/P$.",
+          c: "Synchronous speed locks rotor to the rotating field: $n_s = \\dfrac{120f}{P}$ rpm, with $P$ = number of poles (not pole pairs).",
           s: [
-            "$n_s = 120 \\times 60 / 12 = 600$ rpm."
+            "<b>Step 1 — Plug in.</b> $n_s = \\dfrac{120 \\times 60}{12} = 600$ rpm.",
+            "<b>Step 2 — Distractor audit.</b> 3600 rpm is the 2-pole answer; 1800 rpm the 4-pole; 60 rpm misuses $f/P$-type ratios. The formula's 120 comes from 60 s/min × 2 poles per electrical cycle."
           ],
-          a: "600 rpm",
-          v: "Hydroelectric generators are typically slow (large P) — 100-600 rpm. Steam turbines are 2-pole at 3600 rpm (60 Hz)."
+          a: "$n_s = 600$ rpm",
+          v: "Reasonableness: hydro units use many poles (here 12) precisely so the shaft can turn slowly with the water turbine — 100-600 rpm typical ✓; steam turbo-generators run 2-pole/3600 rpm at 60 Hz. Inverse check: $P = 120f/n_s = 7200/600 = 12$ ✓."
+
         })
       },
       { q: "Induction motor full-load slip $s = 0.04$, synchronous speed 1800 rpm. Rotor speed:",
@@ -1103,12 +1159,14 @@
         correct: 0,
         ref: "Handbook §11 (Induction motor slip)",
         solution: S({
-          c: "$n = n_s(1 - s)$.",
+          c: "Slip measures how much the rotor lags the synchronous field: $s = (n_s - n)/n_s$, so the rotor turns at $n = n_s(1 - s)$.",
           s: [
-            "$n = 1800(1 - 0.04) = 1800(0.96) = 1728$ rpm."
+            "<b>Step 1 — Apply.</b> $n = 1800(1 - 0.04) = 1800 \\times 0.96 = 1728$ rpm.",
+            "<b>Step 2 — Distractor audit.</b> 1800 rpm is the SYNCHRONOUS speed (zero slip — induction motors can never quite reach it under load); 1872 adds the slip instead of subtracting; 72 rpm is the slip SPEED $n_s - n$, not the rotor speed."
           ],
-          a: "1728 rpm",
-          v: "Slip increases with load — full-load slip is typically 2-5%; no-load slip is near zero."
+          a: "$n = 1728$ rpm",
+          v: "Physical check: an induction motor MUST slip — rotor torque comes from relative motion between rotor bars and the rotating field; at exactly $n_s$, induced rotor current (and torque) would vanish ✓. Frequency bonus: rotor-circuit frequency $= sf = 0.04 \\times 60 = 2.4$ Hz at full load."
+
         })
       },
       { q: "Power factor correction: 200 kW load at PF = 0.7 lagging. Capacitor kVAR to bring PF to unity:",
@@ -1116,14 +1174,15 @@
         correct: 0,
         ref: "Handbook §11 (PF correction)",
         solution: S({
-          c: "$Q_{required} = P\\tan\\theta$. Need to cancel all of $Q$.",
+          c: "Capacitors supply reactive power locally. To reach UNITY power factor, the capacitor bank must cancel the load's entire reactive demand: $Q_C = Q_{load} = P\\tan\\theta$.",
           s: [
-            "$\\cos\\theta_1 = 0.7$ ⇒ $\\tan\\theta_1 = 1.0202$.",
-            "$Q_1 = P\\tan\\theta_1 = 200(1.0202) = 204.04$ kVAR.",
-            "To reach PF = 1: cancel all Q, so $Q_C = 204$ kVAR."
+            "<b>Step 1 — Find the load's reactive power.</b> $\\cos\\theta = 0.7 \\Rightarrow \\theta = 45.57°,\\ \\tan\\theta = 1.0202$. $Q = 200 \\times 1.0202 = 204$ kVAR.<br><svg viewBox='-10 -10 330 140' width='310' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.8' fill='none' stroke-linecap='round'><line x1='30' y1='110' x2='230' y2='110'/><line x1='230' y1='110' x2='230' y2='10'/><line x1='30' y1='110' x2='230' y2='10'/><text x='130' y='126' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>P = 200 kW</text><text x='240' y='64' font-size='11' fill='#1f4e79' stroke='none'>Q = 204 kVAR</text><text x='105' y='52' font-size='11' fill='#1f4e79' stroke='none'>S = 285.7 kVA</text><path d='M70,110 A40,40 0 0 0 62,87'/><text x='80' y='98' font-size='11' fill='#1f4e79' stroke='none'>θ</text></g></svg>",
+            "<b>Step 2 — Size the bank for unity PF.</b> Target $\\theta_2 = 0 \\Rightarrow Q_2 = 0$, so $Q_C = Q_1 - 0 = 204$ kVAR.",
+            "<b>Step 3 — Distractor audit.</b> 200 kVAR equates Q with P (only true at PF = 0.707); 142 kVAR would correct to about 0.95 PF, not unity; 100 kVAR is half-hearted."
           ],
-          a: "$\\approx 204$ kVAR",
-          v: "Apparent power before: $S = P/PF = 285.7$ kVA. After correction: $S = P = 200$ kVA — savings on transformer/feeder sizing."
+          a: "$Q_C \\approx 204$ kVAR",
+          v: "Payoff check: apparent power drops from $S = 200/0.7 = 285.7$ kVA to $S = P = 200$ kVA — a 30% reduction in feeder/transformer loading and $I^{2}R$ losses ✓. Practice note: utilities usually target 0.95-0.98 rather than exactly 1.0 to avoid overshooting into leading PF at light load."
+
         })
       },
       { q: "Transformer turns ratio 480 V/240 V, secondary loaded at 50 A. Primary current (ideal transformer)?",
@@ -1131,12 +1190,14 @@
         correct: 0,
         ref: "Handbook §11 (Ideal transformer relations)",
         solution: S({
-          c: "$I_1/I_2 = V_2/V_1$ (inverse of voltage ratio).",
+          c: "An ideal transformer conserves power: voltage steps down 2:1, so current steps UP 2:1 in the same ratio — $I_1/I_2 = V_2/V_1 = N_2/N_1$.",
           s: [
-            "$I_1 = I_2(V_2/V_1) = 50(240/480) = 25$ A."
+            "<b>Step 1 — Apply the inverse ratio.</b> $I_1 = I_2\\cdot\\dfrac{V_2}{V_1} = 50 \\times \\dfrac{240}{480} = 25$ A.",
+            "<b>Step 2 — Distractor audit.</b> 100 A applies the ratio the wrong way (multiplying instead of dividing); 50 A pretends 1:1; 12.5 A squares the ratio (that is what happens to IMPEDANCE, not current)."
           ],
-          a: "$25$ A",
-          v: "Power balance: $P_1 = V_1 I_1 = 480(25) = 12$ kW = $V_2 I_2 = 240(50) = 12$ kW ✓."
+          a: "$I_1 = 25$ A",
+          v: "Power balance — the definitive check: $P_1 = 480 \\times 25 = 12$ kW $= P_2 = 240 \\times 50 = 12$ kW ✓. Impedance bonus: a load $Z_2$ on the secondary appears as $(V_1/V_2)^{2}Z_2 = 4Z_2$ from the primary — ratio squared, which is why 12.5 A is the planted trap."
+
         })
       }
     ],
