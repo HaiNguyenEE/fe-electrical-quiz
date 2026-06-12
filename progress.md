@@ -106,9 +106,10 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
 - **2026-06-11 — Bayes notation fix (reader feedback):** extra12 Bayes question now uses the
   standard statistics complement bar-D (not logic neg-D), drops 'Posterior' jargon from the stem,
   and teaches via a 10,000-person counting table before the formula.
-- **2026-06-11 — extra2 (Round 3) IN PROGRESS: Ch 1-4 done (28/129).** RESUME AT CH 5 (Materials,
-  4 q, ~line 446), then Ch 6 Circuits (15 q) onward. Same teach-from-zero standard; key all
-  replacements on the q:-line; run the per-question Step-format integrity scan before each commit.
-- **Remaining upgrade targets:** questions.js (164), extra2 (129), extra3 (101), extra4 (194),
+- **2026-06-11 — extra2 (Round 3) COMPLETE (129/129):** all 17 chapters in the teach-from-zero
+  standard, committed in 9 checkpoints. Bug fixed: Ch 15 K-map minterms {1,3,5,7} — listed answer
+  "F = D" was wrong (needs 8 cells); correct minimal cover F = A'D added as correct:0 choice.
+  Integrity scan: 129/129 Step-format.
+- **Remaining upgrade targets:** questions.js (164), extra3 (101), extra4 (194),
   extra5 (209), extra6 (181), extra7 (222), extra8 (191) — standard S() format; extra9/extra10
   (~60 q) use template-literal SVG helpers and need their own careful session.

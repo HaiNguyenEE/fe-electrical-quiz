@@ -1687,124 +1687,150 @@
         choices: ["$27$", "$25$", "$29$", "$30$"],
         correct: 0,
         solution: S({
-          c: "Place values from right: 1, 2, 4, 8, 16, ...",
-          s: ["1·16 + 1·8 + 0·4 + 1·2 + 1·1 = 16 + 8 + 2 + 1 = 27."],
-          a: "27",
-          v: "Check: 27 = 16+8+2+1 ✓"
+          c: "Binary place values double from the right: 1, 2, 4, 8, 16. Add the values where a 1 appears.",
+          s: [
+            "<b>Step 1 — Weight each bit.</b> $1\\,1\\,0\\,1\\,1 \\to 16, 8, 0, 2, 1$.",
+            "<b>Step 2 — Sum.</b> $16 + 8 + 2 + 1 = 27$.",
+            "<b>Step 3 — Distractor audit.</b> 25 drops the 2; 29 adds a phantom 4 (misreads the 0); 30 misweights."
+          ],
+          a: "$11011_2 = 27_{10}$",
+          v: "Reverse check: $27 = 16 + 11 = 16 + 8 + 3 = 16+8+2+1$ → 11011 ✓. Speed habit: 11111 would be 31 ($2^{5}-1$), and we're missing only the 4 → $31 - 4 = 27$ ✓ — complement counting is often faster."
+
         }),
         ref: "Handbook p.388" },
       { q: "Octal 175 in decimal:",
         choices: ["$125$", "$175$", "$240$", "$93$"],
         correct: 0,
         solution: S({
-          c: "Octal place values: 1, 8, 64, 512, ...",
-          s: ["1·64 + 7·8 + 5·1 = 64 + 56 + 5 = 125."],
-          a: "125",
-          v: "Octal historically used for Unix permissions (3 bits per octal digit ↔ rwx)."
+          c: "Octal is base-8: place values 1, 8, 64, 512 from the right, digits 0-7 only.",
+          s: [
+            "<b>Step 1 — Weight.</b> $1\\times64 + 7\\times8 + 5\\times1$.",
+            "<b>Step 2 — Sum.</b> $64 + 56 + 5 = 125$.",
+            "<b>Step 3 — Distractor audit.</b> 175 reads the octal as decimal; 93 and 240 misweight positions."
+          ],
+          a: "$175_8 = 125_{10}$",
+          v: "Binary route (each octal digit = 3 bits): $1\\,7\\,5 \\to 001\\,111\\,101 = 1111101_2 = 64+32+16+8+4+1 = 125$ ✓. Where octal survives: Unix permissions — 755 means rwxr-xr-x, three bits per digit."
+
         }),
         ref: "Handbook p.388" },
       { q: "$10110_2 + 1101_2$ (binary addition):",
         choices: ["$100011_2 = 35_{10}$", "$11011_2$", "$11111_2$", "$100111_2$"],
         correct: 0,
         solution: S({
-          c: "Add bit by bit with carry. Or convert to decimal, add, convert back.",
+          c: "Binary addition works like decimal with carries at 2 instead of 10 — or, on a timed exam, convert → add in decimal → convert back, then spot-check one carry.",
           s: [
-            "10110 = 22; 1101 = 13. Sum = 35.",
-            "35 in binary: $32+2+1 = 100011$."
+            "<b>Step 1 — Convert.</b> $10110_2 = 22$; $1101_2 = 13$.",
+            "<b>Step 2 — Add.</b> $22 + 13 = 35$.",
+            "<b>Step 3 — Back to binary.</b> $35 = 32 + 2 + 1 = 100011_2$.",
+            "<b>Step 4 — Distractor audit.</b> $11011 = 27$ and $11111 = 31$ are too small (dropped carries); $100111 = 39$ added a stray 4."
           ],
-          a: "$100011_2$",
-          v: "Verify by bitwise add: 10110 + 01101 = 100011 (with carries) ✓"
+          a: "$100011_2$ ($= 35_{10}$)",
+          v: "Bitwise confirmation (right to left): $0+1=1$; $1+0=1$; $1+1=0$ carry 1; $0+1+1=0$ carry 1; $1+1=0$ carry 1; final carry → 100011 ✓ — both routes agree."
+
         }),
         ref: "Handbook p.388" },
       { q: "Boolean function $F = AB + A'C$. With $A=1, B=0, C=1$:",
         choices: ["$F = 0$", "$F = 1$", "$F = A$", "Undefined"],
         correct: 0,
         solution: S({
-          c: "Substitute and evaluate.",
+          c: "Evaluating a Boolean expression is substitution plus the operator rules: AND = both must be 1, OR = either suffices, prime (′) = NOT.",
           s: [
-            "$AB = 1 \\cdot 0 = 0$.",
-            "$A'C = 0 \\cdot 1 = 0$.",
-            "$F = 0 + 0 = 0$."
+            "<b>Step 1 — First term.</b> $AB = 1\\cdot0 = 0$.",
+            "<b>Step 2 — Second term.</b> $A' = 0$, so $A'C = 0\\cdot1 = 0$.",
+            "<b>Step 3 — OR them.</b> $F = 0 + 0 = 0$.",
+            "<b>Step 4 — Distractor audit.</b> 1 requires either AB or A′C true — neither is; '$F = A$' confuses evaluation with simplification; 'undefined' — Boolean functions are total."
           ],
           a: "$F = 0$",
-          v: "Test other cases: A=1, B=1: F=1 (regardless of C); A=0, C=1: F=1; etc."
+          v: "Structure read: this expression is a 2-to-1 MULTIPLEXER — A selects between B (when A=1) and C (when A=0). At A=1 it outputs B=0 ✓ — recognizing mux patterns turns evaluation into a one-glance answer."
+
         }),
         ref: "Handbook p.389" },
       { q: "XOR truth table: $A \\oplus B$ = 1 when:",
         choices: ["Inputs differ", "Both 1", "Both 0", "Either is 1"],
         correct: 0,
         solution: S({
-          c: "XOR is 1 when inputs are different. Equivalent to $AB' + A'B$.",
+          c: "XOR (exclusive OR) = the DIFFERENCE detector: output 1 exactly when the inputs DISAGREE. Algebraically $A\\oplus B = A\\bar B + \\bar AB$.",
           s: [
-            "Truth: 0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0.",
-            "Uses: parity, addition (carry handled separately), encryption."
+            "<b>Step 1 — Table.</b> 0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0 — ones where inputs differ.",
+            "<b>Step 2 — Distractor audit.</b> 'Both 1' is AND; 'both 0' is NOR; 'either is 1' is OR (which stays 1 at 1,1 — XOR's defining difference from OR)."
           ],
-          a: "When inputs differ",
-          v: "XOR with constant 1 = NOT (acts as conditional inverter)."
+          a: "When the inputs differ.",
+          v: "The toggling identities that make XOR ubiquitous: $X\\oplus0 = X$, $X\\oplus1 = \\bar X$ (controlled inverter), $X\\oplus Y\\oplus Y = X$ (self-canceling — basis of parity, checksums, RAID, simple ciphers) ✓."
+
         }),
         ref: "Handbook p.389" },
       { q: "Number of inputs for a 4-to-1 multiplexer's select lines:",
         choices: ["$2$", "$4$", "$3$", "$1$"],
         correct: 0,
         solution: S({
-          c: "MUX select lines: $\\log_2(N)$ for $N$ data inputs.",
+          c: "A multiplexer routes ONE of $N$ data inputs to the output; the select lines form a binary address naming which input — so you need $\\log_2N$ of them.",
           s: [
-            "$\\log_2 4 = 2$ select lines.",
-            "Inputs: 4 data + 2 select = 6 total inputs."
+            "<b>Step 1 — Apply.</b> $\\log_24 = 2$ select lines (addresses 00, 01, 10, 11).",
+            "<b>Step 2 — Distractor audit.</b> 4 counts the data inputs; 3 would address an 8:1 mux; 1 only reaches a 2:1."
           ],
-          a: "2 select lines",
-          v: "8:1 MUX needs 3 select lines; 16:1 needs 4."
+          a: "2 select lines.",
+          v: "The ladder: 2:1→1, 4:1→2, 8:1→3, 16:1→4 ✓. Bonus identity the FE likes: an $N$:1 mux can implement ANY $\\log_2N$-variable logic function by wiring constants to the data inputs — a mux is a tiny lookup table."
+
         }),
         ref: "Handbook p.390" },
       { q: "A 4-bit ripple counter clocked at 10 MHz: output frequency of MSB?",
         choices: ["$625$ kHz", "$10$ MHz", "$2.5$ MHz", "$1.25$ MHz"],
         correct: 0,
         solution: S({
-          c: "Each flip-flop divides frequency by 2. $n$ flip-flops divide by $2^n$.",
-          s: ["MSB frequency: $10\\text{ MHz}/2^4 = 10/16 = 0.625$ MHz $= 625$ kHz."],
-          a: "625 kHz",
-          v: "After 16 input clock cycles, MSB completes one full period (low + high)."
+          c: "Each counter flip-flop toggles half as often as the one before — every stage divides frequency by 2, so $n$ stages divide by $2^{n}$. The MSB of a 4-bit counter runs at $f_{clk}/16$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $10\\,\\text{MHz}/2^{4} = 10/16 = 0.625$ MHz $= 625$ kHz.",
+            "<b>Step 2 — Distractor audit.</b> 2.5 MHz is ÷4 (2 stages); 1.25 MHz is ÷8 (3 stages); 10 MHz forgot to divide."
+          ],
+          a: "625 kHz.",
+          v: "Period view: the MSB completes one low-high cycle per 16 input clocks — $16\\times100\\,\\text{ns} = 1.6$ µs → 625 kHz ✓. 'Ripple' caveat worth knowing: stage delays accumulate, so very fast clocks need SYNCHRONOUS counters instead."
+
         }),
         ref: "Handbook p.391" },
       { q: "Hexadecimal $\\text{2B}_{16}$ in decimal:",
         choices: ["$43$", "$31$", "$53$", "$23$"],
         correct: 0,
         solution: S({
-          c: "Hex: digit × 16^pos. B = 11.",
-          s: ["$2 \\cdot 16 + 11 \\cdot 1 = 32 + 11 = 43$."],
-          a: "$43_{10}$",
-          v: "Convert back: 43 = 2·16 + 11 = 2B₁₆ ✓"
+          c: "Hex digits run 0-9 then A=10 … F=15; place values are powers of 16.",
+          s: [
+            "<b>Step 1 — Decode.</b> $2\\times16 + \\text{B}(=11)\\times1 = 32 + 11 = 43$.",
+            "<b>Step 2 — Distractor audit.</b> 31 reads B as 15... ($2\\times16+15 = 47$, so 31 actually mixes bases); 23 reads '2B' as decimal-ish; 53 misweights."
+          ],
+          a: "$\\text{2B}_{16} = 43_{10}$",
+          v: "Reverse: $43 \\div 16 = 2$ remainder $11 = \\text{B}$ → 2B ✓. Binary bridge: 2B = 0010 1011 — each hex digit is exactly 4 bits, the reason hex dominates addresses and registers."
+
         }),
         ref: "Handbook p.388" },
       { q: "Decimal $-5$ in 4-bit two's complement:",
         choices: ["$1011$", "$0101$", "$1101$", "$1010$"],
         correct: 0,
         solution: S({
-          c: "Two's complement: write +5 in binary, flip bits, add 1.",
+          c: "Two's complement in 4 bits: write the positive value, invert all bits, add 1. The MSB then carries weight $-8$, making arithmetic uniform for both signs.",
           s: [
-            "+5 in 4-bit: 0101.",
-            "Flip: 1010.",
-            "Add 1: 1011.",
-            "Check: 1011 = -8+0+2+1 = -5 (as signed 4-bit) ✓"
+            "<b>Step 1 — Positive.</b> $+5 = 0101$.",
+            "<b>Step 2 — Invert.</b> $1010$.",
+            "<b>Step 3 — Add one.</b> $1011$.",
+            "<b>Step 4 — Distractor audit.</b> 1010 stops at one's complement; 1101 is $-3$; 0101 is $+5$ itself."
           ],
-          a: "1011",
-          v: "4-bit signed range: -8 to +7."
+          a: "$-5 = 1011_2$",
+          v: "Weighted read: $-8 + 0 + 2 + 1 = -5$ ✓; additive check: $0101 + 1011 = 1\\,0000$ → 0 in 4 bits ✓. Range reminder: 4-bit signed spans $-8$ to $+7$ — asymmetric by one, a classic exam factoid."
+
         }),
         ref: "Handbook p.389" },
       { q: "K-map for $F(A,B,C,D)$ has 1s in cells $\\{1,3,5,7\\}$ (binary positions). Simplified:",
-        choices: ["$F = D$ (essentially)", "$F = B$", "$F = A$", "$F = ABCD$"],
+        choices: ["$F = A'D$", "$F = D$", "$F = B$", "$F = ABCD$"],
         correct: 0,
         solution: S({
-          c: "Cells 1, 3, 5, 7 in 4-var K-map correspond to ABCD = 0001, 0011, 0101, 0111 — all have $D=1$. So $F$ doesn't depend on A, B, C.",
+          c: "Decode each minterm number into ABCD bits, then find which variables stay CONSTANT across all the 1-cells — a group of $2^{k}$ cells eliminates exactly $k$ variables, keeping the constant ones.",
           s: [
-            "$0001 = ABCD = 0001 \\Rightarrow D=1$.",
-            "$0011 = 0011 \\Rightarrow D=1$.",
-            "$0101 = 0101 \\Rightarrow D=1$.",
-            "$0111 = 0111 \\Rightarrow D=1$.",
-            "All have $D=1$. So $F = D$ in this simplification (though some of these also have $C$ varying)."
+            "<b>Step 1 — Decode.</b> $1 = 0001$, $3 = 0011$, $5 = 0101$, $7 = 0111$ (A as MSB).",
+            "<b>Step 2 — Scan each variable.</b> A: always 0 → keep as $A'$. D: always 1 → keep as $D$. B and C: take all four combinations → eliminated.",
+            "<b>Step 3 — Assemble.</b> Four cells $= 2^{2}$ → drop 2 variables → $F = A'D$.",
+            "<b>Step 4 — Distractor audit.</b> $F = D$ alone would need EIGHT cells (1,3,5,7,9,11,13,15) — cells 9-15 (where A=1) are absent; $B$ and $ABCD$ contradict the pattern."
           ],
-          a: "$F = D$ (in this specific case)",
-          v: "More rigorously: also $C=1$ in all four. Verify which simplification covers all minterms minimally."
+          a: "$F = A'D$",
+          v: "Spot-checks: cell 9 ($1001$, A=1, D=1) is NOT in the list, and $A'D$ correctly gives 0 there — while plain $D$ would wrongly fire ✓; cell 5 ($0101$): $A'D = 1\\cdot1 = 1$ ✓. Group-size rule: 4 cells → 2 literals survive, exactly $A'$ and $D$."
+
         }),
         ref: "Handbook p.390" },
     ],
@@ -1815,81 +1841,89 @@
         choices: ["DRAM", "SRAM", "Flash", "ROM"],
         correct: 0,
         solution: S({
-          c: "DRAM (Dynamic) uses tiny capacitors that leak — must be refreshed every few ms. SRAM (Static) uses bistable latches, no refresh.",
+          c: "The two RAM families store bits differently: DRAM keeps each bit as charge on a tiny capacitor (1 transistor + 1 cap — dense and cheap, but the charge LEAKS, demanding refresh every few ms); SRAM holds bits in a 6-transistor latch (fast, stable, expensive).",
           s: [
-            "DRAM: 1 transistor + 1 capacitor per bit. Dense, cheap, but needs refresh.",
-            "SRAM: 6 transistors per bit. Faster, no refresh, but expensive.",
-            "Used as: DRAM for main memory; SRAM for caches."
+            "<b>Step 1 — Match the property.</b> 'Requires periodic refresh' = DRAM, by construction.",
+            "<b>Step 2 — Place the others.</b> SRAM: no refresh (bistable latch); Flash/ROM: NON-volatile — they hold data with power off, no refresh concept at all.",
+            "<b>Step 3 — Where each lives.</b> DRAM = main memory (GBs, density wins); SRAM = caches (speed wins)."
           ],
-          a: "DRAM",
-          v: "Refresh overhead in DRAM is ~1-3% of memory bandwidth."
+          a: "DRAM.",
+          v: "Cost logic check: 1T+1C vs 6T per bit explains why you buy gigabytes of DRAM but only megabytes of cache ✓. Refresh overhead steals only ~1-3% of bandwidth — a cheap price for 6× density."
+
         }),
         ref: "Handbook p.407" },
       { q: "USB 2.0 max speed:",
         choices: ["$480$ Mbps", "$12$ Mbps", "$5$ Gbps", "$100$ Mbps"],
         correct: 0,
         solution: S({
-          c: "USB versions: 1.0 (12 Mbps Full Speed), 2.0 (480 Mbps Hi-Speed), 3.0 (5 Gbps SuperSpeed), 3.1/3.2 (10 Gbps), 4 (40 Gbps).",
-          s: ["USB 2.0: 480 Mbps theoretical, ~280 Mbps practical."],
-          a: "480 Mbps",
-          v: "USB 2.0 still common — works with most hubs/devices despite being old."
+          c: "USB generations by headline speed: 1.x = 12 Mbps (Full Speed), 2.0 = 480 Mbps (Hi-Speed), 3.0 = 5 Gbps (SuperSpeed), 3.1/3.2 = 10-20 Gbps, USB4 = 40 Gbps.",
+          s: [
+            "<b>Step 1 — Recall.</b> USB 2.0 = 480 Mbps theoretical.",
+            "<b>Step 2 — Distractor audit.</b> 12 Mbps is USB 1.x; 5 Gbps is USB 3.0; 100 Mbps is Fast Ethernet sneaking into the wrong list."
+          ],
+          a: "480 Mbps.",
+          v: "Practical throughput runs ~280-320 Mbps (~35-40 MB/s) after protocol overhead — the reason copying a movie to a USB-2 stick crawls while the box says '480' ✓. The ratio between marketing rate and real rate is itself a classic exam-day sanity skill."
+
         }),
         ref: "Handbook p.407" },
       { q: "A 4-stage pipeline has theoretical speedup of:",
         choices: ["$4$×", "$2$×", "$8$×", "$0.25$×"],
         correct: 0,
         solution: S({
-          c: "Ideal speedup = pipeline depth. Real-world: less due to hazards.",
+          c: "Pipelining overlaps instruction phases like an assembly line: with $k$ stages, up to $k$ instructions execute simultaneously — IDEAL speedup = the pipeline depth $k$.",
           s: [
-            "4 stages = 4× ideal speedup.",
-            "Reality: data hazards, branch mispredictions reduce to 2-3× typical.",
-            "Modern CPUs have 10-20+ stages."
+            "<b>Step 1 — Apply.</b> 4 stages → 4× ideal speedup.",
+            "<b>Step 2 — Why 'ideal'.</b> Hazards spoil it: data dependencies stall, branch mispredictions flush — real gains land nearer 2.5-3× for a 4-stage design.",
+            "<b>Step 3 — Distractor audit.</b> 2× undersells; 8× doubles; 0.25× inverts."
           ],
-          a: "$4$× (ideal)",
-          v: "Pipeline depth tradeoff: deeper → higher clock + better throughput, but worse branch mis-predict penalty."
+          a: "4× (ideal).",
+          v: "Asymptotic check via the time formula: $(N+k-1)t$ vs $Nkt$ — ratio → $k$ as $N$ grows ✓. Depth trade-off worth quoting: deeper pipelines clock faster but pay bigger flush penalties — why the 31-stage Pentium 4 lost to shallower, smarter designs."
+
         }),
         ref: "Handbook p.408" },
       { q: "Cache miss types include:",
         choices: ["Compulsory, capacity, conflict", "Hit, miss, write", "Read, write, execute", "L1, L2, L3"],
         correct: 0,
         solution: S({
-          c: "3 Cs of cache misses: <b>Compulsory</b> (cold, first access), <b>Capacity</b> (cache too small for working set), <b>Conflict</b> (associativity insufficient).",
+          c: "The '3 Cs' taxonomy sorts cache misses by ROOT CAUSE, each with its own cure: COMPULSORY (first-ever access — unavoidable cold start), CAPACITY (working set bigger than the cache), CONFLICT (too many addresses competing for the same set).",
           s: [
-            "Compulsory: unavoidable for cold cache.",
-            "Capacity: reduce by larger cache.",
-            "Conflict: reduce by higher associativity."
+            "<b>Step 1 — Match.</b> Compulsory, capacity, conflict — the canonical triple.",
+            "<b>Step 2 — Map cause to cure.</b> Compulsory → prefetching; capacity → bigger cache; conflict → higher associativity.",
+            "<b>Step 3 — Distractor audit.</b> 'Hit/miss/write' mixes outcomes with events; 'read/write/execute' are permissions; 'L1/L2/L3' are LEVELS, not miss types."
           ],
-          a: "Compulsory, capacity, conflict",
-          v: "Some authors add 4th: <b>Coherence</b> misses in multiprocessor systems."
+          a: "Compulsory, capacity, conflict.",
+          v: "Diagnostic power is the point: simulate with a fully-associative cache of the same size — remaining misses are compulsory+capacity; the difference from your real cache is conflict ✓. Multiprocessors add a 4th C: COHERENCE misses from other cores' writes."
+
         }),
         ref: "Handbook p.407" },
       { q: "Little-endian: 32-bit value 0x12345678 stored at addresses 100-103. Byte at address 100:",
         choices: ["$\\text{0x78}$ (least significant)", "$\\text{0x12}$", "$\\text{0x34}$", "$\\text{0x56}$"],
         correct: 0,
         solution: S({
-          c: "Little-endian: LSB at lowest address.",
+          c: "Little-endian stores the LEAST significant byte at the LOWEST address — the number is laid down 'little end first'. 0x12345678 splits into bytes 12|34|56|78, most→least significant.",
           s: [
-            "Address 100: 0x78 (LSB).",
-            "Address 101: 0x56.",
-            "Address 102: 0x34.",
-            "Address 103: 0x12 (MSB)."
+            "<b>Step 1 — Identify the LSB.</b> 0x78.",
+            "<b>Step 2 — Place it.</b> Lowest address (100) gets 0x78; then 101→0x56, 102→0x34, 103→0x12.",
+            "<b>Step 3 — Distractor audit.</b> 0x12 at 100 would be BIG-endian; 0x34/0x56 are middle bytes."
           ],
-          a: "0x78",
-          v: "x86, ARM: little-endian. Network protocols: big-endian."
+          a: "0x78 at address 100.",
+          v: "Read-back check: bytes at 100-103 are 78 56 34 12 — reassembled little-endian, that is 0x12345678 ✓. Where it bites: hex dumps of x86 memory look 'backwards', and network code must convert (htonl) because the wire is big-endian."
+
         }),
         ref: "Handbook p.408" },
       { q: "Direct-mapped cache: a memory address maps to:",
         choices: ["Exactly one cache line", "Any cache line", "Two cache lines (2-way)", "Random line"],
         correct: 0,
         solution: S({
-          c: "Cache mapping: <b>Direct</b> (1-way, fixed mapping), <b>Set-associative</b> (N-way, picks from N), <b>Fully associative</b> (any line).",
+          c: "Cache placement policies form a spectrum of freedom: DIRECT-MAPPED — each address has exactly ONE legal line (index bits decide); N-WAY SET-ASSOCIATIVE — one set of N candidate lines; FULLY ASSOCIATIVE — anywhere.",
           s: [
-            "Direct: simple, fast, but conflict-prone.",
-            "N-way: balance complexity and miss rate.",
-            "Fully: lowest miss but expensive to search."
+            "<b>Step 1 — Match.</b> Direct-mapped = exactly one cache line per address.",
+            "<b>Step 2 — The trade.</b> One choice = simplest, fastest lookup, but two hot addresses sharing an index evict each other forever (conflict misses).",
+            "<b>Step 3 — Distractor audit.</b> 'Any line' is fully associative; 'two lines' is 2-way; 'random' confuses placement with REPLACEMENT policy."
           ],
-          a: "Exactly one cache line",
-          v: "Typical L1: 4-8 way set associative. L2/L3: 8-16 way."
+          a: "Exactly one cache line.",
+          v: "The pathological case that justifies associativity: two arrays whose addresses differ by exactly the cache size will thrash a direct-mapped cache at every access — a 2-way design absorbs it ✓. Real CPUs: L1 typically 4-8-way, LLC 12-16-way."
+
         }),
         ref: "Handbook p.407" },
     ],
@@ -1900,69 +1934,75 @@
         choices: ["$O(n^2)$", "$O(n\\log n)$", "$O(n)$", "$O(\\log n)$"],
         correct: 0,
         solution: S({
-          c: "Selection sort: find min, swap to front; repeat. Always $O(n^2)$ — even best case (already sorted).",
+          c: "Selection sort repeatedly scans the unsorted remainder for its minimum and swaps it into place. The scan shrinks by one each pass but stays linear — total comparisons $\\approx n^{2}/2$, i.e. $O(n^{2})$, and ALWAYS so: it never notices the data is already sorted.",
           s: [
-            "Outer loop: $n$ times.",
-            "Inner loop: $O(n)$ to find min in unsorted portion.",
-            "Total: $O(n^2)$."
+            "<b>Step 1 — Count the structure.</b> Outer loop $n$ passes × inner scan $O(n)$ → $O(n^{2})$.",
+            "<b>Step 2 — Best = worst.</b> The min-scan runs fully regardless of order — no early exit, so even sorted input costs $O(n^{2})$ (unlike insertion sort's $O(n)$ best case).",
+            "<b>Step 3 — Distractor audit.</b> $O(n\\log n)$ is merge/quick/heap territory; $O(n)$ violates the comparison-sort bound; $O(\\log n)$ couldn't read the input."
           ],
-          a: "$O(n^2)$",
-          v: "Like bubble and insertion — all $O(n^2)$ comparison sorts. Use only for small lists."
+          a: "$O(n^{2})$ — best, average, and worst.",
+          v: "Its one redeeming stat: exactly $n-1$ SWAPS, the minimum possible — occasionally useful when writes are expensive (flash) ✓. Rule of thumb: the $O(n^{2})$ trio (bubble, selection, insertion) is fine below ~1000 items, libraries use hybrids beyond."
+
         }),
         ref: "Handbook p.415" },
       { q: "Hash table collision is handled by:",
         choices: ["Chaining or open addressing", "Stack overflow", "Recursion", "Allocation error"],
         correct: 0,
         solution: S({
-          c: "When two keys hash to the same bucket: <b>Chaining</b> (linked list at each bucket) or <b>Open addressing</b> (probe sequence to find empty slot).",
+          c: "Collisions — two keys hashing to one bucket — are inevitable (pigeonhole principle), so every hash table ships a resolution strategy: CHAINING (each bucket holds a linked list) or OPEN ADDRESSING (probe a sequence of alternative slots until one is free).",
           s: [
-            "Chaining: simple, handles high load factor.",
-            "Open addressing: better cache locality, but degrades when full."
+            "<b>Step 1 — Match.</b> Chaining or open addressing — the two canonical families.",
+            "<b>Step 2 — The trade.</b> Chaining: simple, tolerates load factor > 1, but pointer-chasing hurts cache. Open addressing: contiguous memory (cache-friendly), but performance collapses as the table fills (hence resize near α ≈ 0.7).",
+            "<b>Step 3 — Distractor audit.</b> Stack overflow, recursion, allocation errors are unrelated failure modes."
           ],
-          a: "Chaining or open addressing",
-          v: "Modern hash tables (Python dict, Java HashMap) use variations of these."
+          a: "Chaining or open addressing.",
+          v: "Real-world census: Python dict and Rust HashMap use open addressing; Java HashMap chains (upgrading hot chains to red-black trees since Java 8 — capping worst case at $O(\\log n)$) ✓."
+
         }),
         ref: "Handbook p.415" },
       { q: "BFS (breadth-first search) typically uses:",
         choices: ["Queue", "Stack", "Heap", "Hashtable"],
         correct: 0,
         solution: S({
-          c: "BFS: explore nodes level by level. Use FIFO queue to process oldest-discovered first.",
+          c: "BFS explores a graph LEVEL by level — all distance-1 nodes, then distance-2, … That ordering requires processing vertices in the order discovered: a FIFO QUEUE.",
           s: [
-            "DFS uses stack (explicit or recursion).",
-            "BFS uses queue.",
-            "Both are O(V+E) time."
+            "<b>Step 1 — Match structure to traversal.</b> BFS ↔ queue; DFS ↔ stack (explicit or the recursion stack).",
+            "<b>Step 2 — Why it matters.</b> The queue ordering is exactly what guarantees BFS finds SHORTEST paths (fewest edges) in unweighted graphs.",
+            "<b>Step 3 — Distractor audit.</b> Heap = priority queue → Dijkstra (weighted shortest path); hash table only tracks 'visited', it doesn't order anything."
           ],
-          a: "Queue (FIFO)",
-          v: "BFS finds shortest path in unweighted graphs. Dijkstra uses priority queue (min-heap)."
+          a: "Queue (FIFO).",
+          v: "Swap test that locks the pairing: take BFS code and replace the queue with a stack — you get DFS, literally ✓. Family tree: BFS (unit weights) → Dijkstra (positive weights, min-heap) → A* (heuristics) — same skeleton, smarter ordering."
+
         }),
         ref: "Handbook p.415" },
       { q: "Big-O of inserting at the end of a dynamic array (amortized):",
         choices: ["$O(1)$ amortized", "$O(n)$ always", "$O(\\log n)$", "$O(n^2)$"],
         correct: 0,
         solution: S({
-          c: "Dynamic array: doubles size when full. Most inserts are $O(1)$, occasional resize is $O(n)$. Amortized analysis: $O(1)$ per insert.",
+          c: "A dynamic array (vector/ArrayList/Python list) usually has spare capacity — append is a plain $O(1)$ write. When full, it DOUBLES capacity and copies everything ($O(n)$) — but doubling makes those copies rare enough that the AVERAGE per append stays constant: $O(1)$ amortized.",
           s: [
-            "Single insert: usually O(1), occasionally O(n).",
-            "Amortized: average over many inserts is O(1).",
-            "Linked list insertion at end: O(1) if tail pointer, else O(n)."
+            "<b>Step 1 — The accounting.</b> After a resize to $2n$, the next $n$ appends are free of copying — the $O(n)$ copy cost spreads over $n$ cheap operations → $O(1)$ each.",
+            "<b>Step 2 — Geometric is the trick.</b> Total copy work for $n$ appends: $1+2+4+\\cdots+n < 2n$ → $O(n)$ total → $O(1)$ amortized. (Growing by a FIXED amount instead would give $O(n)$ per append — the distractor's world.)",
+            "<b>Step 3 — Distractor audit.</b> '$O(n)$ always' describes only the resize instants; $O(\\log n)$ and $O(n^{2})$ have no mechanism."
           ],
-          a: "$O(1)$ amortized",
-          v: "C++ std::vector, Python list, Java ArrayList all use this strategy."
+          a: "$O(1)$ amortized.",
+          v: "Implementation census: C++ vector (×2 or ×1.5), Java ArrayList (×1.5), Python list (~×1.125 over-allocation) — every mainstream language relies on exactly this analysis ✓. Caveat: any SINGLE append might still pause for a copy — real-time code pre-reserves."
+
         }),
         ref: "Handbook p.415" },
       { q: "A binary search tree has $n$ nodes. Average search time (balanced):",
         choices: ["$O(\\log n)$", "$O(n)$", "$O(1)$", "$O(n \\log n)$"],
         correct: 0,
         solution: S({
-          c: "Balanced BST has depth $O(\\log n)$. Each search visits one node per level.",
+          c: "Search in a BST walks one node per LEVEL, discarding half the remaining tree at each comparison — so cost = tree height. BALANCED trees keep height at $O(\\log n)$.",
           s: [
-            "Balanced: $O(\\log n)$.",
-            "Worst case (unbalanced, like inserting sorted): $O(n)$ — degenerates to linked list.",
-            "Self-balancing (AVL, red-black): always $O(\\log n)$."
+            "<b>Step 1 — Apply.</b> Balanced → height $\\approx\\log_2n$ → average search $O(\\log n)$.",
+            "<b>Step 2 — The fine print.</b> UNBALANCED worst case (inserting sorted data) degenerates to a linked list: height $n$, search $O(n)$ — the reason self-balancing variants (AVL, red-black) exist.",
+            "<b>Step 3 — Distractor audit.</b> $O(n)$ is that degenerate case mislabeled 'average-balanced'; $O(1)$ is hashing's promise; $O(n\\log n)$ is a SORT cost, not a search."
           ],
-          a: "$O(\\log n)$",
-          v: "Why std::map (C++) and TreeMap (Java) use red-black trees — guarantees $O(\\log n)$."
+          a: "$O(\\log n)$ for a balanced tree.",
+          v: "Scale feel: $n = 10^{6}$ → ~20 comparisons ✓. The BST-vs-hash decision in one line: hash wins raw lookup ($O(1)$), BST wins ORDER — range queries, min/max, sorted iteration — which is why databases index with trees (B-trees), not hashes."
+
         }),
         ref: "Handbook p.415" },
     ],
