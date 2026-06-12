@@ -577,57 +577,76 @@
         choices: ["$y_{ss} = 2$", "$y_{ss} = 6$", "$y_{ss} = 0$", "$y_{ss} = 3$"],
         correct: 0,
         solution: S({
-          c: "Steady state: $y' = 0$, so equation reduces to $3y_{ss} = 6 \\Rightarrow y_{ss} = 2$.",
-          s: ["Particular solution to constant input: solve $3 y_p = 6 \\Rightarrow y_p = 2$."],
+          c: "For a stable first-order ODE with a CONSTANT input, the steady state is found by the laziest possible move: set $y' = 0$ (nothing changes anymore) and solve what's left.",
+          s: [
+            "<b>Step 1 — Kill the derivative.</b> $0 + 3y_{ss} = 6 \\Rightarrow y_{ss} = 2$.",
+            "<b>Step 2 — See the full picture.</b> Complete solution $y = 2 + Ce^{-3t}$: the transient $Ce^{-3t}$ dies (stable pole at $-3$), leaving the forced value 2.",
+            "<b>Step 3 — Distractor audit.</b> 6 forgets to divide by the coefficient 3; 0 is where the TRANSIENT goes, not the output; 3 echoes the coefficient."
+          ],
           a: "$y_{ss} = 2$",
-          v: "Total solution: $y = 2 + Ce^{-3t}$. Transient decays, leaves $y_{ss} = 2$."
+          v: "Transfer-function check: $H(s) = \\dfrac{1}{s+3}$, DC gain $H(0) = 1/3$, input 6 → output $6\\times\\tfrac13 = 2$ ✓ — 'set $y'=0$' and 'evaluate $H(0)$' are the same trick in two costumes."
+
         }),
         ref: "Handbook p.54" },
       { q: "For $H(s) = (s+2)/(s^2+5s+6)$, the zeros are:",
         choices: ["$s = -2$ (one zero)", "$s = -2$ and $s = -3$", "$s = 2$", "None"],
         correct: 0,
         solution: S({
-          c: "Zeros of $H(s)$: roots of numerator. Poles: roots of denominator.",
-          s: ["Numerator: $s + 2 = 0 \\Rightarrow s = -2$."],
-          a: "$z = -2$ (single zero)",
-          v: "Poles (from denominator $s^2+5s+6 = (s+2)(s+3)$): $s=-2, -3$. Notice pole-zero cancellation at $s=-2$!"
+          c: "Zeros live in the NUMERATOR (inputs the system nulls out); poles live in the denominator (natural response frequencies). Read each from its own polynomial.",
+          s: [
+            "<b>Step 1 — Zeros.</b> $s + 2 = 0 \\Rightarrow z = -2$ — one finite zero.",
+            "<b>Step 2 — Poles for context.</b> $s^{2}+5s+6 = (s+2)(s+3) \\Rightarrow p = -2, -3$.",
+            "<b>Step 3 — Notice the cancellation.</b> The zero at $-2$ cancels the pole at $-2$: the realized dynamics reduce to $1/(s+3)$.",
+            "<b>Step 4 — Distractor audit.</b> '$-2$ and $-3$' lists the POLES; '$s = 2$' flips the sign; 'none' misses the numerator root."
+          ],
+          a: "One zero, at $s = -2$.",
+          v: "Cancellation caveat the FE may probe next: pole-zero cancellation simplifies the TRANSFER FUNCTION, but the internal mode $e^{-2t}$ still exists physically — cancelling an UNSTABLE pole this way is forbidden in practice ✓."
+
         }),
         ref: "Handbook p.365" },
       { q: "Bandwidth of $H(s) = 100/(s+10)$:",
         choices: ["$10$ rad/s", "$100$ rad/s", "$1$ rad/s", "Infinite"],
         correct: 0,
         solution: S({
-          c: "1st-order LPF: -3 dB at pole frequency. $H(s) = K/(s+a)$ has $\\omega_c = a$.",
-          s: ["Pole at $s = -10 \\Rightarrow$ BW = 10 rad/s."],
-          a: "BW = 10 rad/s",
-          v: "In Hz: $f_c = 10/(2\\pi) \\approx 1.59$ Hz."
+          c: "For a first-order low-pass $\\dfrac{K}{s+a}$, the −3 dB bandwidth IS the pole magnitude: $\\omega_{BW} = a$. The numerator only scales the gain.",
+          s: [
+            "<b>Step 1 — Read the pole.</b> $s = -10$ → BW $= 10$ rad/s.",
+            "<b>Step 2 — Verify the −3 dB point.</b> At $\\omega = 10$: $|H| = \\dfrac{100}{\\sqrt{10^{2}+10^{2}}} = \\dfrac{100}{14.14} = 7.07$ — exactly $1/\\sqrt2$ of the DC gain (10) ✓.",
+            "<b>Step 3 — Distractor audit.</b> 100 rad/s reads the numerator as bandwidth; 1 rad/s inverts; 'infinite' belongs to no physical first-order filter."
+          ],
+          a: "BW $= 10$ rad/s ($\\approx 1.59$ Hz).",
+          v: "Time-domain twin: $\\tau = 1/a = 0.1$ s, and BW·τ = 1 always for first order — fast systems are wideband, slow systems narrowband, one number in two units ✓."
+
         }),
         ref: "Handbook p.366" },
       { q: "Damping ratio = 1.5 results in:",
         choices: ["Overdamped (no overshoot)", "Critically damped", "Underdamped", "Undamped"],
         correct: 0,
         solution: S({
-          c: "$\\zeta > 1$ → overdamped: two distinct real poles, slow non-oscillatory response.",
+          c: "The damping ratio classifies second-order behavior at a glance: $\\zeta < 1$ underdamped (rings), $\\zeta = 1$ critically damped (fastest without overshoot), $\\zeta > 1$ overdamped (two real poles, sluggish, NO overshoot).",
           s: [
-            "$\\zeta < 1$: underdamped (oscillates).",
-            "$\\zeta = 1$: critically damped (fastest non-oscillatory).",
-            "$\\zeta > 1$: overdamped (slow, no overshoot)."
+            "<b>Step 1 — Classify.</b> $\\zeta = 1.5 > 1$ → overdamped.",
+            "<b>Step 2 — What that means in poles.</b> Two distinct REAL negative poles ($-\\zeta\\omega_n \\pm \\omega_n\\sqrt{\\zeta^{2}-1}$) — no imaginary part, no oscillation.",
+            "<b>Step 3 — Distractor audit.</b> Critical needs exactly 1; underdamped needs < 1; undamped needs 0."
           ],
-          a: "Overdamped",
-          v: "Overdamped takes longer to settle than critical for same $\\omega_n$."
+          a: "Overdamped — no overshoot, non-oscillatory.",
+          v: "The trade worth knowing: overdamped is SLOWER to settle than critical at the same $\\omega_n$ (the slow pole dominates) — 'more damping' past critical buys nothing but lag, which is why designs target $\\zeta \\approx 0.7$-1 ✓."
+
         }),
         ref: "Handbook p.366" },
       { q: "Pole at origin in $G(s) = K/s$ indicates:",
         choices: ["Pure integrator", "Pure differentiator", "Constant gain", "Oscillator"],
         correct: 0,
         solution: S({
-          c: "$Y(s)/X(s) = 1/s$ → $y(t) = \\int x(\\tau) d\\tau$. Integrator transfer function.",
+          c: "$1/s$ in the Laplace domain IS integration in time: $Y = X/s \\Leftrightarrow y(t) = \\int_0^{t}x\\,d\\tau$. A pole AT the origin is the signature of a pure integrator.",
           s: [
-            "Pure differentiator: $H(s) = s$.",
-            "Constant: $H(s) = K$."
+            "<b>Step 1 — Match.</b> $G = K/s$ → integrator (scaled by K).",
+            "<b>Step 2 — Behavior fingerprints.</b> Step in → ramp out; DC gain infinite; Bode magnitude −20 dB/decade through all frequencies with constant −90° phase.",
+            "<b>Step 3 — Distractor audit.</b> Differentiator is $H = s$ (a ZERO at the origin); constant gain has no $s$ at all; an oscillator needs a conjugate pole PAIR on the $j\\omega$ axis."
           ],
-          a: "Integrator",
-          v: "In a control loop, an integrator raises the type → eliminates steady-state error to step."
+          a: "Pure integrator.",
+          v: "Control significance — the reason this question matters: each origin pole raises the system TYPE, zeroing steady-state error for one more input order; physical integrators are everywhere (capacitor charging from a current, tank filling from a flow) ✓."
+
         }),
         ref: "Handbook p.56" },
     ],
@@ -638,60 +657,75 @@
         choices: ["$3$ kHz (alias)", "$5$ kHz", "$8$ kHz", "$13$ kHz"],
         correct: 0,
         solution: S({
-          c: "$f_{signal} = 5$ kHz, $f_s = 8$ kHz so $f_s/2 = 4$ kHz. Since $5 > 4$, aliasing occurs. $f_{alias} = |5 - 8| = 3$ kHz.",
-          s: ["Apparent: 3 kHz."],
-          a: "3 kHz alias",
-          v: "Folding around $f_s/2$: a 5 kHz signal looks like a 3 kHz signal in the sampled data."
+          c: "Any frequency above the folding frequency $f_s/2$ masquerades as a lower one after sampling: the alias lands at $|f - kf_s|$ for the integer $k$ that drops it below $f_s/2$.",
+          s: [
+            "<b>Step 1 — Check the limit.</b> $f_s/2 = 4$ kHz; the 5-kHz signal exceeds it → aliasing.",
+            "<b>Step 2 — Fold.</b> $|5 - 8| = 3$ kHz — that's where the samples SAY the energy is.",
+            "<b>Step 3 — Distractor audit.</b> 5 kHz survives only if $f_s > 10$ kHz; 8 kHz and 13 kHz aren't even below the folding frequency."
+          ],
+          a: "3 kHz (alias).",
+          v: "Mirror picture: frequencies reflect around $f_s/2 = 4$ kHz — 5 kHz sits 1 kHz above the mirror, lands 1 kHz below it at 3 kHz ✓. Once sampled, the disguise is perfect: no algorithm can tell aliased 3 kHz from real 3 kHz — hence anti-alias filters BEFORE the ADC."
+
         }),
         ref: "Handbook p.375" },
       { q: "Power gain of 25 dB:",
         choices: ["$\\approx 316$", "$\\approx 100$", "$\\approx 25$", "$\\approx 1000$"],
         correct: 0,
         solution: S({
-          c: "Power ratio: $10^{dB/10}$.",
-          s: ["$10^{25/10} = 10^{2.5} \\approx 316.2$."],
-          a: "≈ 316",
-          v: "20 dB = ×100; 30 dB = ×1000. 25 dB is between, geometrically: $\\sqrt{100 \\cdot 1000} \\approx 316$ ✓"
+          c: "Unwrap power dB with $10^{\\text{dB}/10}$. For non-multiples of 10, split the exponent: $10^{2.5} = 10^{2}\\times10^{0.5}$.",
+          s: [
+            "<b>Step 1 — Exponent.</b> $25/10 = 2.5$.",
+            "<b>Step 2 — Evaluate.</b> $10^{2.5} = 100\\times3.162 = 316$.",
+            "<b>Step 3 — Distractor audit.</b> 100 is 20 dB; 1000 is 30 dB; 25 confuses the dB number with the ratio."
+          ],
+          a: "$\\approx 316$",
+          v: "Geometric-mean check: 25 dB sits midway between 20 and 30 dB, and $\\sqrt{100\\times1000} = 316$ ✓ — dB midpoints are geometric midpoints of ratios, a handy mental-math identity. Also: $+5$ dB ≈ ×3.16 ($\\sqrt{10}$) is worth caching alongside +3 dB ≈ ×2."
+
         }),
         ref: "Handbook p.375" },
       { q: "Lowpass filter $f_c = 1$ kHz, signal at 10 kHz, gain (in dB, 1st order):",
         choices: ["$\\approx -20$ dB", "$0$ dB", "$\\approx -3$ dB", "$\\approx -40$ dB"],
         correct: 0,
         solution: S({
-          c: "Beyond cutoff, 1st-order rolls off at -20 dB/decade. From $f_c$ to 10×$f_c$ = 1 decade → -20 dB.",
+          c: "A first-order filter rolls off at −20 dB per DECADE past its corner. From $f_c$ to $10f_c$ is exactly one decade — asymptotically −20 dB.",
           s: [
-            "At $f_c$: -3 dB.",
-            "At $10 f_c$: -3 + (-20) = -23 dB approximately, but the standard asymptotic answer is -20 dB.",
-            "Rule of thumb: at 10× cutoff, |H| ≈ -20 dB."
+            "<b>Step 1 — Count decades.</b> $10\\,\\text{kHz}/1\\,\\text{kHz} = 10\\times$ → 1 decade above cutoff.",
+            "<b>Step 2 — Apply the slope.</b> 1 decade × (−20 dB/dec) = −20 dB (asymptote; the exact value is −20.04 dB).",
+            "<b>Step 3 — Distractor audit.</b> 0 dB is the passband; −3 dB is AT the corner; −40 dB would need a SECOND-order filter (or two decades)."
           ],
-          a: "≈ -20 dB",
-          v: "More precisely: $20\\log(1/\\sqrt{1+100}) = 20\\log(1/10.05) ≈ -20.04$ dB."
+          a: "$\\approx -20$ dB at $10f_c$.",
+          v: "Exact computation seals it: $20\\log\\dfrac{1}{\\sqrt{1+(10)^{2}}} = 20\\log\\dfrac{1}{10.05} = -20.04$ dB — the asymptote is essentially exact one decade out ✓. Slope ladder: nth-order filter → −20n dB/decade."
+
         }),
         ref: "Handbook p.375" },
       { q: "DFT of 8-point signal: how many computations for direct DFT vs FFT?",
         choices: ["64 vs 24 (FFT much faster)", "8 vs 64", "Same", "FFT slower"],
         correct: 0,
         solution: S({
-          c: "Direct DFT: $N^2$ operations. FFT (radix-2): $N\\log_2 N$ operations.",
+          c: "Operation counts: direct DFT does $N^{2}$ multiply-accumulates ($N$ outputs × $N$ terms); the radix-2 FFT reorganizes to $N\\log_2N$.",
           s: [
-            "DFT: $8^2 = 64$.",
-            "FFT: $8 \\log_2 8 = 8 \\cdot 3 = 24$.",
-            "Speedup grows with N — at N=1024, DFT=$10^6$, FFT=10,240, 100× faster."
+            "<b>Step 1 — Direct.</b> $8^{2} = 64$.",
+            "<b>Step 2 — FFT.</b> $8\\times\\log_28 = 8\\times3 = 24$.",
+            "<b>Step 3 — Distractor audit.</b> '8 vs 64' inverts the comparison; 'same'/'FFT slower' deny the algorithm's whole point."
           ],
-          a: "DFT 64, FFT 24",
-          v: "Why FFT revolutionized digital signal processing in 1965 (Cooley-Tukey)."
+          a: "64 vs 24 — FFT wins even at N = 8.",
+          v: "Scaling is the real story: at $N = 1024$ the ratio is $10^{6}$ vs $\\approx10^{4}$ — a 100× speedup that GROWS with N ✓. The 1965 Cooley-Tukey paper made real-time spectrum analysis, OFDM, and modern DSP economically possible — arguably the most consequential algorithm in EE."
+
         }),
         ref: "Handbook p.376" },
       { q: "An ADC has 10 bits and full-scale 5 V. Resolution (smallest voltage step):",
         choices: ["$\\approx 4.88$ mV", "$5$ mV", "$\\approx 50$ mV", "$0.5$ V"],
         correct: 0,
         solution: S({
-          c: "Resolution: $V_{FS}/2^n$ for n-bit ADC.",
+          c: "ADC resolution (1 LSB) = full-scale range ÷ number of steps: $\\Delta = V_{FS}/2^{n}$.",
           s: [
-            "$5/2^{10} = 5/1024 = 0.00488$ V $= 4.88$ mV."
+            "<b>Step 1 — Steps.</b> $2^{10} = 1024$.",
+            "<b>Step 2 — Divide.</b> $5/1024 = 4.88$ mV.",
+            "<b>Step 3 — Distractor audit.</b> 5 mV rounds $5/1000$ (treating 1k = 1024 loosely — close but the exam wants 4.88); 50 mV is a decade slip; 0.5 V divides by 10 (the bit COUNT)."
           ],
-          a: "≈ 4.88 mV",
-          v: "Effective resolution often less due to noise. ENOB (Effective Number of Bits) is the real metric."
+          a: "$\\Delta \\approx 4.88$ mV",
+          v: "Bit ladder at 5 V full scale: 8-bit → 19.5 mV, 10-bit → 4.88 mV, 12-bit → 1.22 mV — each 2 bits divides by 4 ✓. Honest-spec note: noise usually eats the bottom bit or two; ENOB (effective number of bits) is the figure that tells the truth."
+
         }),
         ref: "Handbook p.375" },
     ],
@@ -702,132 +736,149 @@
         choices: ["≈ 10 (limited by feedback)", "$10^5$", "$10^6$", "1"],
         correct: 0,
         solution: S({
-          c: "Negative feedback: closed-loop gain ≈ 1/β (where β is feedback fraction) when open-loop is large.",
+          c: "The central magic of negative feedback: closed-loop gain $= \\dfrac{A}{1 + A\\beta}$, and when the loop gain $A\\beta \\gg 1$, this collapses to $1/\\beta$ — set by the FEEDBACK network (resistors), not the imprecise open-loop gain.",
           s: [
-            "Open-loop $A = 10^5$ >> ideal closed-loop $1/\\beta = 10$.",
-            "Closed-loop: $A/(1 + A\\beta) = 10^5/(1 + 10^4) \\approx 10$."
+            "<b>Step 1 — Identify the target.</b> Feedback configured for gain 10 → $\\beta = 0.1$.",
+            "<b>Step 2 — Compute exactly.</b> $\\dfrac{10^{5}}{1 + 10^{5}(0.1)} = \\dfrac{10^{5}}{10001} = 9.999 \\approx 10$.",
+            "<b>Step 3 — Distractor audit.</b> $10^{5}$ is the open-loop value feedback exists to tame; $10^{6}$ multiplies them; 1 is a unity buffer."
           ],
-          a: "≈ 10",
-          v: "Why op-amps work — feedback determines behavior, not open-loop gain (as long as it's huge)."
+          a: "$\\approx 10$ — set by the feedback, not the op-amp.",
+          v: "Why this matters: the op-amp's $10^{5}$ might vary ±50% with temperature and part lot, yet the closed-loop 9.999 barely moves — desensitization factor $= 1 + A\\beta = 10^{4}$ ✓. Precision comes from resistor ratios, which is exactly what we CAN manufacture precisely."
+
         }),
         ref: "Handbook p.380" },
       { q: "Gain-bandwidth product of an op-amp is 1 MHz. Closed-loop gain of 100: bandwidth?",
         choices: ["$10$ kHz", "$1$ MHz", "$100$ kHz", "$10$ MHz"],
         correct: 0,
         solution: S({
-          c: "Gain × Bandwidth = constant (GBW). $BW = GBW/A_{CL}$.",
-          s: ["$BW = 10^6/100 = 10^4 = 10$ kHz."],
-          a: "10 kHz",
-          v: "Lower gain → wider BW. Tradeoff. Cascade multiple stages instead of one high-gain stage."
+          c: "A dominant-pole op-amp obeys a conservation law: GAIN × BANDWIDTH = constant (the GBW, also the unity-gain frequency). Demand more closed-loop gain and bandwidth shrinks proportionally: $BW = GBW/A_{CL}$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $BW = 10^{6}/100 = 10$ kHz.",
+            "<b>Step 2 — Distractor audit.</b> 1 MHz is the GBW itself (gain 1); 100 kHz would be gain 10; 10 MHz exceeds the op-amp's physics."
+          ],
+          a: "$BW = 10$ kHz",
+          v: "Design consequence: needing gain 100 over 100 kHz of bandwidth requires either a 10-MHz-GBW part or TWO cascaded gain-10 stages (each 100 kHz wide at gain 10) — cascading buys back bandwidth ✓. The product check: $100\\times10\\,\\text{kHz} = 1$ MHz ✓."
+
         }),
         ref: "Handbook p.380" },
       { q: "Common-base BJT amplifier: voltage gain ≈ ",
         choices: ["High, positive, similar to CE", "≈ 1", "Negative", "Always 0"],
         correct: 0,
         solution: S({
-          c: "CB amp: input at emitter, output at collector. Gain $\\approx R_C/r_e$ — same as CE but <b>non-inverting</b>.",
+          c: "The three BJT topologies in one map: COMMON-EMITTER — high gain, INVERTING; COMMON-COLLECTOR (follower) — gain ≈ 1, buffer; COMMON-BASE — high gain like CE but NON-inverting, with very LOW input impedance.",
           s: [
-            "CE: $-R_C/r_e$ (inverting).",
-            "CC (emitter-follower): $\\approx 1$ (no inversion).",
-            "CB: $+R_C/r_e$ (non-inverting, high gain)."
+            "<b>Step 1 — Match.</b> CB: input at emitter, output at collector → $A_v \\approx +R_C/r_e$ — large and positive.",
+            "<b>Step 2 — Distractor audit.</b> '≈1' is the FOLLOWER; 'negative' is the CE; 'always 0' is no amplifier.",
+            "<b>Step 3 — The defining quirk.</b> Input impedance ≈ $r_e$ (a few tens of ohms) — terrible for voltage sources, PERFECT for matching 50-Ω RF lines."
           ],
-          a: "High, non-inverting",
-          v: "CB has very low input impedance ($\\approx r_e$), high output impedance ($R_C$). Used for impedance matching to 50Ω lines."
+          a: "High gain, non-inverting.",
+          v: "Where CB earns its living: RF front-ends (the low $Z_{in}$ matches coax; no Miller-effect capacitance multiplication → wide bandwidth) and as the top device of cascode pairs ✓ — niche but irreplaceable."
+
         }),
         ref: "Handbook p.384" },
       { q: "Emitter degeneration (unbypassed $R_E$) in a CE amplifier:",
         choices: ["Lowers gain, stabilizes against $\\beta$ variation", "Increases gain", "Adds an inverting stage", "No effect"],
         correct: 0,
         solution: S({
-          c: "Adding $R_E$: $A_v \\approx -R_C/(R_E + r_e)$. Gain reduced (the price), but stabilized against device variations and temperature.",
+          c: "An unbypassed emitter resistor adds LOCAL NEGATIVE FEEDBACK: gain drops to $A_v \\approx -\\dfrac{R_C}{R_E + r_e}$, but in exchange the gain stops depending on the transistor's fickle $r_e$ (and β, temperature, lot-to-lot spread).",
           s: [
-            "Negative feedback from $R_E$ stabilizes operating point.",
-            "Often $R_C/R_E \\approx 10$ for ~10× gain, well-controlled.",
-            "Bypass cap on $R_E$: restores AC gain while keeping DC stability."
+            "<b>Step 1 — The trade.</b> Gain falls from $R_C/r_e$ (large, unstable) to roughly $R_C/R_E$ (smaller, set by resistors).",
+            "<b>Step 2 — Why it stabilizes.</b> If current tries to rise, the $R_E$ drop rises, squeezing $V_{BE}$ — self-correcting bias, the feedback loop in miniature.",
+            "<b>Step 3 — Distractor audit.</b> 'Increases gain' inverts the math; no inversion is added (CE stays inverting); 'no effect' ignores the resistor."
           ],
-          a: "Lowers gain, improves stability",
-          v: "Classic tradeoff in analog design. Use $R_E$ + bypass cap to get best of both."
+          a: "Lowers gain but stabilizes it against device variation.",
+          v: "The both-worlds trick: bypass $R_E$ with a capacitor — DC keeps the bias stability, AC sees the full $R_C/r_e$ gain ✓. The same gain-for-robustness exchange as op-amp feedback, implemented with one resistor."
+
         }),
         ref: "Handbook p.384" },
       { q: "An ideal Schmitt trigger:",
         choices: ["Has hysteresis (two thresholds)", "Has single threshold", "Is linear", "Has infinite gain"],
         correct: 0,
         solution: S({
-          c: "Schmitt trigger: comparator with hysteresis — different upper ($V_{T+}$) and lower ($V_{T-}$) thresholds. Output flips at $V_{T+}$ rising, $V_{T-}$ falling.",
+          c: "A Schmitt trigger is a comparator with HYSTERESIS — TWO thresholds: rising input must cross $V_{T+}$; falling input must cross the lower $V_{T-}$. Between them the output remembers its state.",
           s: [
-            "Hysteresis prevents output chatter on noisy inputs.",
-            "Used in: digital input conditioning, square-wave generation, debouncing."
+            "<b>Step 1 — Match.</b> 'Two thresholds' = hysteresis = the Schmitt trigger's definition.",
+            "<b>Step 2 — Why two beat one.</b> A noisy signal wobbling near a SINGLE threshold fires the output repeatedly; with two, noise smaller than the window $V_{T+}-V_{T-}$ cannot retrigger.",
+            "<b>Step 3 — Distractor audit.</b> 'Single threshold' is a plain comparator; 'linear' contradicts its snap action; 'infinite gain' describes the open-loop op-amp inside, not the defining property."
           ],
-          a: "Has hysteresis",
-          v: "TTL/CMOS 'Schmitt' inputs (74HC14) standard part."
+          a: "Has hysteresis (two thresholds).",
+          v: "It's a stock part: the 74HC14 hex inverter has Schmitt inputs, and MCU 'ST' pins debounce buttons with exactly this window ✓. Design rule: make the hysteresis wider than the worst-case input noise."
+
         }),
         ref: "Handbook p.380" },
       { q: "MOSFET cutoff condition (nMOS):",
         choices: ["$V_{GS} < V_{th}$", "$V_{GS} > V_{th}$", "$V_{DS} = 0$", "$V_{GS} > 0$"],
         correct: 0,
         solution: S({
-          c: "Cutoff: insufficient gate voltage to form channel. For nMOS enhancement: $V_{GS} < V_{th}$ (positive threshold).",
+          c: "An nMOS enhancement transistor needs gate voltage above threshold to INVERT the channel surface and connect drain to source. Below it, no channel exists: CUTOFF when $V_{GS} < V_{th}$.",
           s: [
-            "$V_{GS} > V_{th}$: channel forms → ohmic or saturation.",
-            "$V_{GS} < V_{th}$: cutoff, $I_D \\approx 0$ (only subthreshold current)."
+            "<b>Step 1 — Match.</b> $V_{GS} < V_{th}$ → no channel → $I_D \\approx 0$.",
+            "<b>Step 2 — Above threshold.</b> $V_{GS} > V_{th}$ opens the device into triode (small $V_{DS}$) or saturation (large $V_{DS}$).",
+            "<b>Step 3 — Distractor audit.</b> '$V_{GS} > V_{th}$' is the ON condition; '$V_{DS} = 0$' says nothing about the channel; '$V_{GS} > 0$' isn't sufficient if still below $V_{th}$."
           ],
           a: "$V_{GS} < V_{th}$",
-          v: "pMOS: opposite. $V_{GS} > V_{th}$ for cutoff (since $V_{th} < 0$)."
+          v: "Mirror check for pMOS: $V_{th}$ is negative, and cutoff is $V_{GS} > V_{th}$ (less negative) — signs flip across the complementary device, the source of endless CMOS sign errors ✓. Fine print: 'zero' current is really subthreshold leakage — the static power of modern chips."
+
         }),
         ref: "Handbook p.386" },
       { q: "Drain-source on resistance ($R_{DS,on}$) decreases when:",
         choices: ["Gate voltage above threshold increases", "$V_{DS}$ increases", "Temperature increases", "Current decreases"],
         correct: 0,
         solution: S({
-          c: "$R_{DS,on}$ in ohmic region: lower with stronger overdrive ($V_{GS} - V_{th}$ larger → wider conducting channel).",
+          c: "In the triode (ohmic) region a MOSFET acts as a gate-controlled resistor: $R_{DS,on} \\approx \\dfrac{1}{k(V_{GS} - V_{th})}$ — more gate OVERDRIVE → wider, deeper channel → LESS resistance.",
           s: [
-            "$R_{DS,on} \\approx 1/[k(V_{GS}-V_{th})]$ for small $V_{DS}$.",
-            "Higher temperature: typically increases $R_{DS,on}$ (positive temp coefficient — useful for paralleling)."
+            "<b>Step 1 — Match.</b> Raise $V_{GS}$ above threshold → $R_{DS,on}$ falls.",
+            "<b>Step 2 — Distractor audit.</b> Raising $V_{DS}$ pushes TOWARD saturation (resistance concept breaks down); higher temperature RAISES $R_{DS,on}$ (mobility falls); current level doesn't set the resistance — the gate does.",
+            "<b>Step 3 — The temperature aside that matters.</b> The POSITIVE tempco is a feature: paralleled MOSFETs self-balance (the hot one carries less), unlike BJTs which hog current and run away."
           ],
-          a: "Higher $V_{GS}$ over threshold",
-          v: "Power MOSFETs spec'd at $V_{GS}=10$V or 4.5V typically — drive close to full $V_{GS}$ for low loss."
+          a: "When the gate overdrive ($V_{GS} - V_{th}$) increases.",
+          v: "Datasheet confirmation: power MOSFETs spec $R_{DS,on}$ AT a stated $V_{GS}$ (10 V, or 4.5 V for logic-level parts) — drive the gate fully or pay $I^{2}R$ heat ✓. Gate drivers exist precisely to slam $V_{GS}$ high fast."
+
         }),
         ref: "Handbook p.386" },
       { q: "Class A amplifier efficiency limit:",
         choices: ["$25\\%$ (resistive load)", "$50\\%$", "$78.5\\%$", "$100\\%$"],
         correct: 0,
         solution: S({
-          c: "Class A: transistor always conducting. Efficiency: 25% with resistive load, 50% theoretical max with transformer-coupled.",
+          c: "Amplifier classes trade LINEARITY against EFFICIENCY by how long the transistor conducts: Class A conducts 360° of every cycle — maximum fidelity, minimum efficiency: 25% ceiling with a resistive load (50% transformer-coupled).",
           s: [
-            "Class A: 25-50%",
-            "Class B (push-pull, conducts 180°): 78.5%",
-            "Class AB: between A and B",
-            "Class D (switching): 90%+"
+            "<b>Step 1 — Match.</b> Class A, resistive load → 25% theoretical max.",
+            "<b>Step 2 — Where the energy goes.</b> The bias current flows ALWAYS — even at zero signal the stage burns full DC power; at best one quarter reaches the load.",
+            "<b>Step 3 — The class ladder.</b> B (180° conduction, push-pull): 78.5%; AB: between; D (switching): >90% — the distractors are the other classes' numbers."
           ],
-          a: "25% (resistive)",
-          v: "Low efficiency = lots of heat. Audio purists like Class A for linearity; commercial uses AB or D."
+          a: "25% (resistive load).",
+          v: "Thermal reality check: a 100-W Class-A audio amp idles at ~400 W of heat — the giant heatsinks on audiophile gear are this number made visible ✓. Phones and car amps use Class D for exactly the inverse reason."
+
         }),
         ref: "Handbook p.384" },
       { q: "Differential amp common-mode rejection ratio (CMRR) measures:",
         choices: ["Differential gain / common-mode gain", "Output noise / signal", "Slew rate", "Input impedance"],
         correct: 0,
         solution: S({
-          c: "CMRR = $|A_d/A_{cm}|$. High CMRR → amp passes difference, rejects common-mode signal (noise on both inputs).",
+          c: "A differential amplifier should amplify the DIFFERENCE between its inputs and ignore whatever is common to both (interference picked up by both wires). CMRR quantifies that: $CMRR = |A_d/A_{cm}|$, usually in dB.",
           s: [
-            "Typical op-amp CMRR: 80-100+ dB.",
-            "High CMRR critical for instrumentation amps measuring small signals on noisy lines."
+            "<b>Step 1 — Match.</b> Differential gain ÷ common-mode gain — the definition.",
+            "<b>Step 2 — Read a spec.</b> 100 dB CMRR → difference signals amplified $10^{5}$× more than common-mode noise.",
+            "<b>Step 3 — Distractor audit.</b> Noise/signal is SNR; slew rate is a speed spec; input impedance is a loading spec — different datasheet lines entirely."
           ],
-          a: "Ratio of differential to common-mode gain",
-          v: "100 dB CMRR = differential signal amplified $10^5$× more than common-mode noise."
+          a: "Differential gain divided by common-mode gain.",
+          v: "Why it's the king spec in instrumentation: a thermocouple's millivolts ride on volts of mains hum common to both leads — only high CMRR pulls the signal out ✓. The classic CMRR killer: mismatched resistors in the difference-amp network, not the op-amp itself."
+
         }),
         ref: "Handbook p.380" },
       { q: "A boost converter steps voltage:",
         choices: ["UP (output > input)", "Down", "Same", "Either, depending on duty"],
         correct: 0,
         solution: S({
-          c: "Boost (step-up): $V_{out} = V_{in}/(1-D)$. As D approaches 1, $V_{out}$ grows.",
+          c: "Converter naming is literal: BOOST steps UP — $V_{out} = \\dfrac{V_{in}}{1-D}$, always ≥ $V_{in}$, growing without bound as duty cycle D → 1 (in the ideal math).",
           s: [
-            "Buck: step-down.",
-            "Boost: step-up.",
-            "Buck-boost: either polarity, magnitude varies."
+            "<b>Step 1 — Match.</b> Boost = step-up; output exceeds input.",
+            "<b>Step 2 — Mechanism in one line.</b> Switch ON stores energy in the inductor; switch OFF, the inductor's kick ADDS to the input voltage through the diode — stacking, hence boosting.",
+            "<b>Step 3 — Distractor audit.</b> Step-down is the BUCK; 'same' would be a wire; 'either' describes the BUCK-BOOST family."
           ],
-          a: "Up (boost = step-up)",
-          v: "Solar charge controllers: often boost or MPPT (maximum power point tracking) topology."
+          a: "Up — output greater than input.",
+          v: "Limit checks: $D = 0$ → $V_{out} = V_{in}$ (just a diode path) ✓; $D \\to 1$ → ideal blow-up, real parasitics cap practical boosts at ~5× ✓. Everyday sightings: 3.7-V battery → 5-V USB, solar MPPT stages, LED backlight drivers."
+
         }),
         ref: "Handbook p.383" },
     ],
@@ -838,95 +889,119 @@
         choices: ["$\\approx 14{,}968$ W", "$\\approx 5760$ W", "$\\approx 17{,}280$ W", "$\\approx 8640$ W"],
         correct: 0,
         solution: S({
-          c: "For Δ: $V_\\phi = V_{LL}$, $I_\\phi = V_{LL}/|Z_\\phi|$, $P_\\phi = V_\\phi I_\\phi \\cos\\theta$, total = 3×$P_\\phi$.",
+          c: "Delta route to total power: each phase leg sees the FULL line-to-line voltage ($V_\\phi = V_{LL}$ in Δ), so $I_\\phi = V_{LL}/|Z|$, $P_\\phi = V_\\phi I_\\phi\\cos\\theta$, total $= 3P_\\phi$. The impedance ANGLE supplies the power factor: $\\cos30° = 0.866$.",
           s: [
-            "$I_\\phi = 240/10 = 24$ A.",
-            "$P_\\phi = 240 \\cdot 24 \\cdot \\cos 30° = 5760 \\cdot 0.866 = 4988$ W.",
-            "Total: $3 \\cdot 4988 = 14{,}965$ W."
+            "<b>Step 1 — Phase current.</b> $I_\\phi = 240/10 = 24$ A.",
+            "<b>Step 2 — Per-phase power.</b> $P_\\phi = 240\\times24\\times0.866 = 4{,}988$ W.",
+            "<b>Step 3 — Total.</b> $3\\times4{,}988 \\approx 14{,}965$ W ≈ 15 kW.",
+            "<b>Step 4 — Distractor audit.</b> 17,280 forgets the power factor ($3\\times240\\times24$ = apparent); 5,760 is ONE phase's apparent power; 8,640 mixes errors."
           ],
-          a: "$\\approx 14.97$ kW",
-          v: "Verify with $P = \\sqrt{3} V_{LL} I_L \\cos\\theta$: $I_L = \\sqrt{3} \\cdot 24 = 41.57$ A; $P = \\sqrt{3}(240)(41.57)(0.866) = 14962$ ✓"
+          a: "$P \\approx 14.97$ kW",
+          v: "Line-quantity cross-check: $I_L = \\sqrt3\\times24 = 41.6$ A; $P = \\sqrt3(240)(41.6)(0.866) = 14{,}962$ W ✓ — per-phase and line formulas converge, as they always must."
+
         }),
         ref: "Handbook p.363" },
       { q: "Three identical impedances 30Ω in Y → equivalent in Δ:",
         choices: ["$90\\ \\Omega$", "$30\\ \\Omega$", "$10\\ \\Omega$", "$60\\ \\Omega$"],
         correct: 0,
         solution: S({
-          c: "Y to Δ for balanced loads: $Z_\\Delta = 3 Z_Y$.",
-          s: ["$Z_\\Delta = 3 \\cdot 30 = 90\\ \\Omega$."],
-          a: "$90\\ \\Omega$",
-          v: "Reverse: $Z_Y = Z_\\Delta/3$ — gives back 30 Ω."
+          c: "BALANCED Y↔Δ conversion is one factor of three: $Z_\\Delta = 3Z_Y$ (and back: $Z_Y = Z_\\Delta/3$).",
+          s: [
+            "<b>Step 1 — Multiply.</b> $Z_\\Delta = 3\\times30 = 90\\,\\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> 10 Ω divides (the Δ→Y direction); 30 forgets to convert; 60 doubles instead of tripling."
+          ],
+          a: "$Z_\\Delta = 90\\,\\Omega$",
+          v: "Terminal test proves equivalence: between two terminals, Y gives $30+30 = 60\\,\\Omega$; Δ gives $90\\,\\|\\,(90+90) = 90\\|180 = 60\\,\\Omega$ ✓ — identical from outside. Direction memory: Δ values are always the BIGGER ones (×3)."
+
         }),
         ref: "Handbook p.363" },
       { q: "Single-phase 240V supply feeds a 24Ω heater. Power dissipated:",
         choices: ["$2400$ W", "$10$ W", "$24000$ W", "$120$ W"],
         correct: 0,
         solution: S({
-          c: "$P = V^2/R$ for resistive load on AC (RMS values).",
-          s: ["$P = 240^2/24 = 57600/24 = 2400$ W."],
-          a: "$2400$ W",
-          v: "A typical small water heater or large space heater."
+          c: "A heater is purely resistive, so RMS voltage works exactly like DC: $P = V^{2}/R$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $P = 240^{2}/24 = 57{,}600/24 = 2{,}400$ W.",
+            "<b>Step 2 — Distractor audit.</b> 10 W inverts ($R/V$ confusion); 24,000 misplaces a decade; 120 W computes $V/2$ nonsense."
+          ],
+          a: "$P = 2.4$ kW",
+          v: "Triple-form check: $I = 240/24 = 10$ A → $P = VI = 2{,}400$ W ✓ and $I^{2}R = 100\\times24 = 2{,}400$ W ✓. Reality anchor: 2.4 kW is a typical space heater or small water heater — and exactly 10 A at 240 V, a sensible branch circuit ✓."
+
         }),
         ref: "Handbook p.356" },
       { q: "Transformer primary 4 A, secondary 8 A. Step-up or step-down?",
         choices: ["Step-down (V down, I up secondary)", "Step-up", "1:1", "Cannot tell"],
         correct: 0,
         solution: S({
-          c: "If $I_{secondary} > I_{primary}$ → $V_{secondary} < V_{primary}$ → step-down.",
-          s: ["Secondary I (8A) > primary I (4A) → step-DOWN."],
-          a: "Step-down",
-          v: "Turn ratio $a = V_1/V_2 = I_2/I_1 = 8/4 = 2:1$ (step-down)."
+          c: "In an ideal transformer current and voltage trade inversely. Secondary current HIGHER than primary → secondary voltage LOWER → step-DOWN.",
+          s: [
+            "<b>Step 1 — Compare currents.</b> $I_2 = 8 > I_1 = 4$ → current doubled → voltage halved.",
+            "<b>Step 2 — Ratio.</b> $a = I_2/I_1 = V_1/V_2 = 2$ → 2:1 step-down.",
+            "<b>Step 3 — Distractor audit.</b> 'Step-up' reads the inverse relation backwards; '1:1' needs equal currents; 'cannot tell' — the current pair fully determines the ratio for an ideal transformer."
+          ],
+          a: "Step-down (2:1).",
+          v: "Power balance with any test voltage — say $V_1 = 240$: in $= 960$ W; $V_2 = 120$, out $= 120\\times8 = 960$ W ✓. The see-saw never lies: I up means V down, P constant."
+
         }),
         ref: "Handbook p.364" },
       { q: "PF correction adds shunt capacitor. PF moves toward:",
         choices: ["Unity (1.0)", "Zero", "Lagging more", "Cannot affect"],
         correct: 0,
         solution: S({
-          c: "Most loads are inductive (motors). Adding capacitor supplies reactive power → reduces lagging Q drawn from source → PF moves toward 1.",
+          c: "Typical industrial loads are INDUCTIVE (motors) — they draw lagging reactive power. A shunt capacitor SUPPLIES reactive power locally, cancelling part of the load's Q so the source sees less: the power factor climbs toward unity.",
           s: [
-            "$Q_{net} = Q_{load} - Q_{cap}$.",
-            "If $Q_{cap} = Q_{load}$: PF = 1.",
-            "Overcorrection (cap too large): PF becomes leading."
+            "<b>Step 1 — The cancellation.</b> $Q_{net} = Q_{load} - Q_{cap}$; sizing $Q_{cap} = Q_{load}$ lands PF exactly at 1.",
+            "<b>Step 2 — The overshoot warning.</b> Too much capacitance flips the system LEADING — also penalized, and risky at light load.",
+            "<b>Step 3 — Distractor audit.</b> 'Zero' would mean adding pure reactance with no load; 'lagging more' inverts the capacitor's sign; 'cannot affect' denies the whole practice."
           ],
-          a: "Unity (typically)",
-          v: "Utilities charge penalty for poor PF in commercial accounts — incentivizes correction."
+          a: "Toward unity (1.0).",
+          v: "Money trail: utilities bill kVA demand or penalize PF below ~0.9-0.95 — capacitor banks pay for themselves in months at large plants ✓. Practical target: 0.95-0.98, never exactly 1.0 (overshoot margin)."
+
         }),
         ref: "Handbook p.362-363" },
       { q: "Per-unit voltage in a system with base 13.8 kV; actual 14.2 kV:",
         choices: ["$\\approx 1.029$ pu", "$0.971$ pu", "$1.5$ pu", "$13.8$"],
         correct: 0,
         solution: S({
-          c: "Per-unit: actual/base.",
-          s: ["$14.2/13.8 = 1.029$."],
-          a: "1.029 pu",
-          v: "PU is dimensionless — simplifies transformer analysis across voltage levels (impedance pu stays the same)."
+          c: "Per-unit = actual ÷ base — a normalization that makes every healthy bus read 'about 1.0' regardless of voltage class.",
+          s: [
+            "<b>Step 1 — Divide.</b> $14.2/13.8 = 1.029$ pu.",
+            "<b>Step 2 — Read it.</b> The bus runs 2.9% ABOVE nominal — inside the usual ±5% operating band.",
+            "<b>Step 3 — Distractor audit.</b> 0.971 inverts the division ($13.8/14.2$); 1.5 and 13.8 aren't normalizations."
+          ],
+          a: "$\\approx 1.029$ pu",
+          v: "Why operators love pu: 1.029 means the same thing at 13.8 kV or 500 kV — one glance, no mental unit-juggling; alarms set at 0.95/1.05 pu work system-wide ✓. (And transformer impedances keep one pu value seen from either side.)"
+
         }),
         ref: "Handbook p.363" },
       { q: "Wye to Delta conversion: a Y has 5Ω, 10Ω, 15Ω. Find $Z_{AB}$ of equivalent Δ (between same two terminals A,B):",
-        choices: ["$\\approx 13.33\\ \\Omega$", "$15\\ \\Omega$", "$25\\ \\Omega$", "$200\\ \\Omega$"],
+        choices: ["$\\approx 18.33\\ \\Omega$", "$15\\ \\Omega$", "$25\\ \\Omega$", "$200\\ \\Omega$"],
         correct: 0,
         solution: S({
-          c: "Y-Δ for unbalanced: $Z_{AB} = (Z_a Z_b + Z_b Z_c + Z_c Z_a)/Z_c$ where $Z_c$ is the Y impedance NOT connected to A or B.",
+          c: "UNBALANCED Y→Δ uses the sum-of-products formula: $Z_{AB} = \\dfrac{Z_aZ_b + Z_bZ_c + Z_cZ_a}{Z_c}$ — divide by the Y-leg NOT touching terminals A and B.",
           s: [
-            "Let $Z_A = 5$, $Z_B = 10$, $Z_C = 15$ at the Y center.",
-            "$Z_{AB,\\Delta}$ = (sum of products)/$Z_C = (5\\cdot 10 + 10\\cdot 15 + 15\\cdot 5)/15 = (50+150+75)/15 = 275/15 = 18.33\\ \\Omega$. Hmm.",
-            "Let me reconsider the formula. Yes: $Z_{AB} = (Z_aZ_b + Z_bZ_c + Z_cZ_a)/Z_c$. With $Z_a=5,Z_b=10,Z_c=15$: $(50+150+75)/15 = 275/15 ≈ 18.33$. So my problem distractors don't match; correct is 18.33 Ω which I should make choice A."
+            "<b>Step 1 — Sum of pairwise products.</b> $5(10) + 10(15) + 15(5) = 50 + 150 + 75 = 275$.",
+            "<b>Step 2 — Divide by the opposite leg.</b> $Z_c = 15$ (the leg to neither A nor B): $Z_{AB} = 275/15 = 18.33\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 15 echoes a Y leg; 25 sums two legs ($5+10+10$? loosely); 200 garbles the products."
           ],
-          a: "$\\approx 18.33\\ \\Omega$ (correct per formula)",
-          v: "Note: This problem has a typo in choices. Formula yields 18.33 Ω."
+          a: "$Z_{AB} \\approx 18.33\\,\\Omega$",
+          v: "Balanced-case sanity: if all legs were 10 Ω, the formula gives $300/10 = 30 = 3\\times10$ — recovering the familiar $Z_\\Delta = 3Z_Y$ ✓. Pattern: the numerator is the SAME for all three Δ edges; only the divisor changes (always the opposite Y-leg)."
+
         }),
         ref: "Handbook p.363" },
       { q: "Bidirectional power flow (P>0 to/from load) is enabled by:",
         choices: ["Inverters (with grid-tie capability)", "Diodes only", "Always — passive elements", "Only DC supplies"],
         correct: 0,
         solution: S({
-          c: "Bidirectional inverters can convert DC↔AC, allowing power to flow either way. Critical for: solar feed-in, EV-grid (V2G), batteries with grid support.",
+          c: "Power flows backward (from 'load' to grid) only if the interface can convert in BOTH directions. Diode rectifiers are one-way valves; a grid-tie INVERTER actively switches and can push DC-side energy into the AC grid.",
           s: [
-            "Diodes/rectifiers: one-way only.",
-            "Grid-tie inverters with anti-islanding: two-way and safe."
+            "<b>Step 1 — Match.</b> Bidirectional inverters (grid-tie capable) — the enabling hardware.",
+            "<b>Step 2 — Where it matters.</b> Rooftop solar feed-in, vehicle-to-grid (V2G), battery storage doing grid support — all are inverter-mediated reverse flows.",
+            "<b>Step 3 — Distractor audit.</b> Diodes conduct one way by definition; passive elements only CONSUME or store; DC supplies have no AC export path."
           ],
-          a: "Bidirectional inverters",
-          v: "Modern microinverters and string inverters with battery storage do this routinely."
+          a: "Bidirectional (grid-tie) inverters.",
+          v: "The safety string attached: anti-islanding protection — a grid-tie inverter must shut down when the grid fails so it doesn't energize lines workers think are dead ✓ (IEEE 1547). Your meter spinning backwards is this answer in action."
+
         }),
         ref: "Handbook p.383" },
     ],
