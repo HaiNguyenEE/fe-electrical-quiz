@@ -1501,90 +1501,104 @@
         choices: ["bits/sec per Hz", "Hz per bit", "Bits absolute", "Power per Hz"],
         correct: 0,
         solution: S({
-          c: "Spectral (bandwidth) efficiency: information rate per unit bandwidth.",
+          c: "Spectral (bandwidth) efficiency answers 'how many bits per second can I squeeze through each hertz of spectrum?' — units: bits/sec per Hz. It is THE figure of merit when spectrum is the scarce resource.",
           s: [
-            "Higher modulation order (QAM > QPSK > BPSK) → higher bps/Hz but requires higher SNR.",
-            "BPSK: ~1 bps/Hz; QPSK: ~2; 16-QAM: ~4; 64-QAM: ~6."
+            "<b>Step 1 — Match the definition.</b> Information rate ÷ bandwidth = bps/Hz.",
+            "<b>Step 2 — See the ladder.</b> BPSK ≈ 1 bps/Hz, QPSK ≈ 2, 16-QAM ≈ 4, 64-QAM ≈ 6 — denser constellations pack more bits per symbol, paid for with higher SNR demands.",
+            "<b>Step 3 — Distractor audit.</b> 'Hz per bit' inverts; 'bits absolute' drops the per-bandwidth normalization; 'power per Hz' is spectral DENSITY (a different per-Hz quantity)."
           ],
-          a: "bits/sec per Hz",
-          v: "5G aims for >5 bps/Hz spectral efficiency."
+          a: "Bits per second per hertz (bps/Hz).",
+          v: "Shannon ties the ceiling to SNR: max bps/Hz $= \\log_2(1 + SNR)$ — at 30 dB that is ~10 bps/Hz, which is why 1024-QAM (10 bps/Hz) demands pristine links ✓. Wi-Fi/5G marketing numbers are mostly this metric multiplied by bandwidth and antenna streams."
+
         }),
         ref: "Handbook p.371" },
       { q: "Single-Sideband (SSB) AM vs DSB-LC, bandwidth:",
         choices: ["Half (only $f_m$)", "Same ($2 f_m$)", "Double", "Independent"],
         correct: 0,
         solution: S({
-          c: "SSB transmits only one sideband → bandwidth equals message bandwidth. DSB-LC transmits both sidebands plus carrier → BW = $2f_m$.",
+          c: "Plain AM (DSB-LC) transmits a mirror-image PAIR of sidebands around the carrier — the same information twice — occupying $2f_m$. SSB strips the carrier AND one redundant sideband, leaving exactly the message bandwidth $f_m$.",
           s: [
-            "SSB: $BW = f_m$ (half of DSB).",
-            "Tradeoff: SSB needs more complex receiver but uses half spectrum + no carrier waste."
+            "<b>Step 1 — Compare bandwidths.</b> DSB: $2f_m$; SSB: $f_m$ — exactly HALF.",
+            "<b>Step 2 — What it costs.</b> No carrier to lock onto and no envelope to detect — the receiver must regenerate the carrier precisely (frequency error makes voices sound like ducks).",
+            "<b>Step 3 — Distractor audit.</b> 'Same' describes DSB-SC (carrier removed, both sidebands kept); 'double' inverts; 'independent' ignores the arithmetic."
           ],
-          a: "Half ($f_m$)",
-          v: "Why amateur radio uses SSB for voice — efficient spectrum use."
+          a: "Half the bandwidth ($f_m$).",
+          v: "The efficiency double-win that made SSB the amateur/military voice standard: half the spectrum AND no power wasted on a carrier — a 100-W SSB rig competes with a several-hundred-watt AM rig ✓."
+
         }),
         ref: "Handbook p.371" },
       { q: "Information rate for a 4-level signal at symbol rate 5 kbaud:",
         choices: ["$10$ kbps", "$5$ kbps", "$20$ kbps", "$2.5$ kbps"],
         correct: 0,
         solution: S({
-          c: "Bits per symbol: $\\log_2(M)$ where $M$ = number of levels. Bit rate = symbol rate × bits/symbol.",
+          c: "Baud vs bits — the distinction this question exists to teach: BAUD counts SYMBOLS per second; each symbol of an $M$-level alphabet carries $\\log_2M$ BITS. Bit rate $= R_{symbol}\\times\\log_2M$.",
           s: [
-            "$M = 4 \\Rightarrow \\log_2 4 = 2$ bits/symbol.",
-            "$R_b = 5000 \\cdot 2 = 10{,}000$ bps."
+            "<b>Step 1 — Bits per symbol.</b> $M = 4 \\Rightarrow \\log_24 = 2$ bits.",
+            "<b>Step 2 — Multiply.</b> $5000\\times2 = 10$ kbps.",
+            "<b>Step 3 — Distractor audit.</b> 5 kbps equates baud with bps (true only for binary); 20 kbps uses $M$ instead of $\\log_2M$; 2.5 kbps divides."
           ],
-          a: "10 kbps",
-          v: "Baud = symbols/sec; bps = bits/sec. They're equal only for binary signaling."
+          a: "$R_b = 10$ kbps.",
+          v: "Sanity ladder: binary at 5 kbaud → 5 kbps; 4-level → 10; 16-level → 20 ✓ — doubling LEVELS adds only ONE bit per symbol (logarithmic), which is why constellations grow exponentially for linear rate gains."
+
         }),
         ref: "Handbook p.371" },
       { q: "TDM combines two 64 kbps channels onto a single line. Minimum line rate:",
         choices: ["$128$ kbps", "$64$ kbps", "$32$ kbps", "$256$ kbps"],
         correct: 0,
         solution: S({
-          c: "TDM: alternating samples on a single line. Total rate = sum of individual rates (plus minor overhead).",
+          c: "Time-division multiplexing interleaves channels into time slots on one line — nothing is compressed, so the line must carry the SUM of the tributary rates (plus framing overhead in real systems).",
           s: [
-            "$2 \\cdot 64 = 128$ kbps minimum."
+            "<b>Step 1 — Add.</b> $2\\times64 = 128$ kbps minimum.",
+            "<b>Step 2 — Distractor audit.</b> 64 kbps would force the channels to take turns at half speed; 32 halves; 256 doubles needlessly."
           ],
-          a: "128 kbps",
-          v: "DS1 (T-carrier) line is 1.544 Mbps for 24 voice channels (24×64 + framing overhead)."
+          a: "128 kbps.",
+          v: "Scaling to the real thing: T-1 = 24 channels × 64k = 1.536 M + 8k framing = 1.544 Mbps — the same addition, plus the overhead the 'minimum' in this question waves away ✓."
+
         }),
         ref: "Handbook p.371" },
       { q: "BPSK requires SNR of about ___ for $10^{-5}$ BER:",
         choices: ["$\\approx 9.6$ dB", "$\\approx 0$ dB", "$\\approx 30$ dB", "$\\approx -10$ dB"],
         correct: 0,
         solution: S({
-          c: "BPSK theoretical BER vs SNR: $BER = Q(\\sqrt{2 E_b/N_0})$. For BER = $10^{-5}$, $E_b/N_0 \\approx 9.6$ dB.",
+          c: "The BPSK waterfall has a few benchmark points worth memorizing, and $10^{-5}$ BER ↔ $E_b/N_0 \\approx 9.6$ dB is the most-quoted one. It comes from inverting $BER = Q(\\sqrt{2E_b/N_0})$.",
           s: [
-            "$Q(x) = 10^{-5} \\Rightarrow x \\approx 4.265$.",
-            "$\\sqrt{2 E_b/N_0} = 4.265 \\Rightarrow E_b/N_0 \\approx 9.1$ (in linear units) $\\approx 9.6$ dB."
+            "<b>Step 1 — Invert the Q-function.</b> $Q(x) = 10^{-5} \\Rightarrow x \\approx 4.27$.",
+            "<b>Step 2 — Solve for the ratio.</b> $\\sqrt{2E_b/N_0} = 4.27 \\Rightarrow E_b/N_0 = 9.1$ linear $= 9.6$ dB.",
+            "<b>Step 3 — Distractor audit.</b> 0 dB sits near BER $10^{-1.5}$ — unusable; 30 dB is far more than needed; −10 dB is below even coded-system thresholds."
           ],
-          a: "$\\approx 9.6$ dB",
-          v: "Higher-order modulations need more SNR for same BER (more constellation points → smaller min distance)."
+          a: "$\\approx 9.6$ dB for $10^{-5}$ BER.",
+          v: "Anchor points to carry: $10^{-3}$ @ ~6.8 dB, $10^{-5}$ @ 9.6, $10^{-6}$ @ ~10.5 — about +1 dB per decade in this region ✓. Modern codes (LDPC/turbo) reach $10^{-5}$ within ~1 dB of the Shannon limit — the 9.6 dB benchmark is the UNCODED reference."
+
         }),
         ref: "Handbook p.371" },
       { q: "AM modulator output for $m=0$ is:",
         choices: ["Just the carrier (no info)", "Zero signal", "Both sidebands only", "Audio only"],
         correct: 0,
         solution: S({
-          c: "AM: $s(t) = A_c[1 + m\\cos(\\omega_m t)]\\cos(\\omega_c t)$. With $m=0$: $s(t) = A_c \\cos(\\omega_c t)$ — pure carrier.",
+          c: "Read the AM equation at the boundary: $s(t) = A_c[1 + m\\cos\\omega_mt]\\cos\\omega_ct$. Set $m = 0$ and the bracket collapses to 1 — leaving $A_c\\cos\\omega_ct$, a bare unmodulated carrier.",
           s: [
-            "No modulation, only carrier transmitted.",
-            "No info → no sidebands."
+            "<b>Step 1 — Substitute.</b> $m = 0 \\Rightarrow s(t) = A_c\\cos\\omega_ct$.",
+            "<b>Step 2 — Spectrum view.</b> Sideband amplitude scales with $m$ — at zero, the sidebands vanish; only the carrier spike remains. Power still transmitted, information zero.",
+            "<b>Step 3 — Distractor audit.</b> 'Zero signal' confuses no MODULATION with no CARRIER; 'sidebands only' is DSB-SC (the opposite suppression); 'audio only' never exists at RF."
           ],
-          a: "Just the carrier",
-          v: "$m$ controls how much the envelope varies. Past $m=1$ → over-modulation (distortion)."
+          a: "Just the carrier — no information.",
+          v: "This is literally what you hear between words on an AM station: full carrier, silent program ✓ — and it is AM's power-efficiency indictment: the transmitter burns full carrier power even when saying nothing (motivating DSB-SC/SSB)."
+
         }),
         ref: "Handbook p.371" },
       { q: "Nyquist signaling theorem (for ISI-free): max symbol rate over BW $B$ is:",
         choices: ["$2B$ symbols/sec", "$B$", "$B/2$", "$4B$"],
         correct: 0,
         solution: S({
-          c: "Nyquist's noiseless channel capacity: $C = 2B$ symbols/sec for an ideal channel of bandwidth $B$.",
+          c: "Two different 'capacity' theorems share Nyquist's name-space — keep them straight: NYQUIST (noiseless) limits SYMBOL rate to $2B$ symbols/s through bandwidth $B$ without inter-symbol interference; SHANNON (noisy) limits BIT rate via SNR.",
           s: [
-            "This is different from Shannon (which includes noise).",
-            "For $M$-level signaling with no noise: $C = 2B \\log_2(M)$ bps."
+            "<b>Step 1 — State it.</b> Max ISI-free signaling rate $= 2B$ symbols/sec for an ideal brick-wall channel of bandwidth $B$.",
+            "<b>Step 2 — Extend to bits.</b> With $M$ levels: $C = 2B\\log_2M$ bps — multilevel signaling beats $2B$ bits, but never $2B$ SYMBOLS.",
+            "<b>Step 3 — Distractor audit.</b> $B$ and $B/2$ undersell by 2× and 4×; $4B$ violates the theorem."
           ],
-          a: "$2B$ symbols/sec",
-          v: "Real systems use raised-cosine pulse shaping; bandwidth must include rolloff factor."
+          a: "$2B$ symbols per second.",
+          v: "Concrete: a 4-kHz telephone channel supports up to 8 kbaud ideally — real modems ran ~3.4 kbaud with raised-cosine shaping (the rolloff eats margin) and stacked bits per symbol instead ✓. Noise then caps the LEVELS via Shannon — the two theorems work in series."
+
         }),
         ref: "Handbook p.371" },
     ],
@@ -1595,70 +1609,74 @@
         choices: ["$80$", "$8080$", "$443$", "$25$"],
         correct: 0,
         solution: S({
-          c: "Well-known ports (0-1023) are reserved for standard services.",
+          c: "Well-known ports (0-1023) give standard services fixed addresses so clients know where to connect. The short list the FE expects: HTTP 80, HTTPS 443, SSH 22, SMTP 25, FTP 21, DNS 53.",
           s: [
-            "HTTP: 80",
-            "HTTPS: 443",
-            "SSH: 22",
-            "SMTP: 25",
-            "FTP: 21",
-            "DNS: 53"
+            "<b>Step 1 — Recall.</b> HTTP = port 80.",
+            "<b>Step 2 — Distractor audit.</b> 8080 is the common UNPRIVILEGED dev/proxy alternative; 443 is HTTPS (encrypted sibling); 25 is SMTP mail."
           ],
-          a: "Port 80",
-          v: "Port 8080 is commonly used for unprivileged dev/test web servers."
+          a: "Port 80.",
+          v: "Browser behavior confirms: http://site.com silently means :80, https:// means :443 — explicit ports appear only when deviating ✓. Why 1024 matters: binding below it traditionally requires root privileges, which is why dev servers squat on 8080."
+
         }),
         ref: "Handbook p.394" },
       { q: "IPv4 address space size:",
         choices: ["$2^{32}$ (≈4.3 billion)", "$2^{64}$", "$2^{16}$", "$2^{128}$"],
         correct: 0,
         solution: S({
-          c: "IPv4: 32-bit address. IPv6: 128-bit.",
+          c: "An IPv4 address is a 32-bit number, so the space holds $2^{32} \\approx 4.29$ billion addresses — large in 1981, exhausted by ~2011-2019 (registry by registry).",
           s: [
-            "$2^{32} = 4,294,967,296$ addresses.",
-            "Many reserved (private, multicast, loopback), so usable on public internet is less.",
-            "IPv6: $2^{128} \\approx 3.4 \\times 10^{38}$ — practically unlimited."
+            "<b>Step 1 — Recall.</b> 32 bits → $2^{32} = 4{,}294{,}967{,}296$.",
+            "<b>Step 2 — Why usable is less.</b> Private blocks, multicast (224/4), loopback (127/8), and other reservations carve out big chunks.",
+            "<b>Step 3 — Distractor audit.</b> $2^{128}$ is IPv6; $2^{64}$ is neither; $2^{16}$ is a port-number space."
           ],
-          a: "$2^{32}$",
-          v: "Internet's IPv4 address pool exhaustion led to IPv6 adoption."
+          a: "$2^{32}$ — about 4.3 billion.",
+          v: "Scale contrast that explains the migration: IPv6's $2^{128} \\approx 3.4\\times10^{38}$ — about $5\\times10^{28}$ addresses per human ✓. IPv4 survives today largely thanks to NAT rationing."
+
         }),
         ref: "Handbook p.393" },
       { q: "Private (RFC1918) IP block in 10.x.x.x. Total addresses:",
         choices: ["$2^{24}$ (~16.7M)", "$2^{16}$", "$2^{8}$", "$2^{32}$"],
         correct: 0,
         solution: S({
-          c: "10.0.0.0/8 is the largest private block: 8 network bits, 24 host bits.",
+          c: "RFC 1918 reserves three blocks for PRIVATE use (never routed on the public internet): 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16. Address count = $2^{\\text{host bits}}$, and a /8 leaves $32-8 = 24$ host bits.",
           s: [
-            "$2^{24} = 16{,}777{,}216$ addresses.",
-            "Other private: 172.16.0.0/12, 192.168.0.0/16."
+            "<b>Step 1 — Host bits.</b> /8 → 24 bits free.",
+            "<b>Step 2 — Count.</b> $2^{24} = 16{,}777{,}216$ — about 16.7 million.",
+            "<b>Step 3 — Distractor audit.</b> $2^{16}$ is the 192.168/16 block; $2^{8}$ is one /24; $2^{32}$ is all of IPv4."
           ],
-          a: "$2^{24} \\approx 16.7$ million",
-          v: "Most home routers use 192.168.x.x because /24 fits ~250 hosts (plenty for home)."
+          a: "$2^{24} \\approx 16.7$ million addresses.",
+          v: "Usage pattern check: enterprises with thousands of subnets pick 10/8 for room; home routers default to 192.168.x.x because ~250 hosts is plenty ✓. These addresses reach the internet only through NAT — the pairing that keeps IPv4 alive."
+
         }),
         ref: "Handbook p.394" },
       { q: "Difference between L2 broadcast domain and L3 broadcast domain:",
         choices: ["L2 contained by router; L3 = local subnet", "Same thing", "L3 contained by switch", "Both span the whole internet"],
         correct: 0,
         solution: S({
-          c: "Broadcast domain at L2: limited by routers (they don't forward L2 broadcasts). At L3: a subnet — IP broadcast goes to all hosts in same subnet.",
+          c: "A BROADCAST DOMAIN is 'everyone who hears a broadcast'. At Layer 2, switches FORWARD broadcasts (MAC FF:FF:FF:FF:FF:FF) but routers DO NOT — so routers are the walls of an L2 broadcast domain. At Layer 3, the analogous scope is the local SUBNET (its directed broadcast, e.g. 192.168.1.255).",
           s: [
-            "L2: broadcasts to MAC FF:FF:FF:FF:FF:FF stay in VLAN/switch network.",
-            "L3: IP broadcast (e.g., 192.168.1.255 for /24) reaches all hosts in subnet."
+            "<b>Step 1 — L2 boundary.</b> Switches flood broadcasts to every port (within a VLAN); the propagation stops at a router.",
+            "<b>Step 2 — L3 scope.</b> An IP broadcast targets all hosts of ONE subnet — by design coterminous with the L2 domain in typical networks.",
+            "<b>Step 3 — Distractor audit.</b> 'Same thing' blurs the layers; 'L3 contained by switch' inverts the devices; nothing broadcasts across the whole internet (by deliberate design)."
           ],
-          a: "L2 contained by router; L3 = local subnet",
-          v: "Routers segment broadcast domains — limits broadcast storms."
+          a: "L2 broadcast domain is bounded by routers; L3 broadcast scope is the local subnet.",
+          v: "Why the boundary matters operationally: one chattering NIC can flood an entire L2 domain (broadcast storm) — segmenting with routers/VLANs contains the blast radius ✓. VLANs are exactly 'multiple L2 broadcast domains on one physical switch'."
+
         }),
         ref: "Handbook p.399" },
       { q: "VLAN tag adds ___ bytes to Ethernet frame:",
         choices: ["$4$", "$2$", "$8$", "$1$"],
         correct: 0,
         solution: S({
-          c: "IEEE 802.1Q VLAN tagging inserts 4 bytes (32 bits): 16-bit TPID (0x8100) + 16-bit TCI (priority + VLAN ID).",
+          c: "IEEE 802.1Q tags a frame by INSERTING a 4-byte field after the source MAC: 2 bytes TPID (0x8100, 'this is tagged') + 2 bytes TCI (3-bit priority + 12-bit VLAN ID).",
           s: [
-            "Total Ethernet frame: 14 byte header + payload + 4 byte FCS. With VLAN: +4 bytes.",
-            "Original frame minus tag still passes checksum recomputation."
+            "<b>Step 1 — Recall.</b> 4 bytes (32 bits) added.",
+            "<b>Step 2 — What's inside.</b> The 12-bit VLAN ID gives 4096 VLANs (0 and 4095 reserved → 4094 usable); the 3 priority bits carry QoS (802.1p).",
+            "<b>Step 3 — Distractor audit.</b> 2 bytes is just the TPID half; 8 would be QinQ DOUBLE tagging; 1 byte can't hold the fields."
           ],
-          a: "4 bytes",
-          v: "VLAN ID is 12 bits → 4096 possible VLANs (with 0 and 4095 reserved)."
+          a: "4 bytes.",
+          v: "Frame-size consequence: max tagged frame grows 1518 → 1522 bytes, and switches must expect it ✓. The 4094-VLAN ceiling is also why data centers outgrew 802.1Q into VXLAN (24-bit IDs ≈ 16 million segments)."
+
         }),
         ref: "Handbook p.399" },
     ],
