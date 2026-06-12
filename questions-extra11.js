@@ -867,130 +867,154 @@
         choices: ["$\\approx 1591$ Hz", "$\\approx 159$ Hz", "$\\approx 15.9$ kHz", "$\\approx 50$ Hz"],
         correct: 0,
         solution: S({
-          c: "Resonance: $X_L = X_C$ → $\\omega_0 = 1/\\sqrt{LC}$, $f_0 = 1/(2\\pi\\sqrt{LC})$.",
+          c: "Resonance in a series RLC: the inductor's reactance ($X_L = \\omega L$, grows with frequency) and the capacitor's ($X_C = 1/\\omega C$, shrinks with frequency) are equal and CANCEL — the circuit looks purely resistive. Setting $X_L = X_C$ gives $\\omega_0 = 1/\\sqrt{LC}$, i.e. $f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$.",
           s: [
-            "$LC = (10^{-3})(10^{-5}) = 10^{-8}$.",
-            "$\\sqrt{LC} = 10^{-4}$ s.",
-            "$\\omega_0 = 10^{4}$ rad/s; $f_0 = 10^{4}/(2\\pi) \\approx 1591$ Hz."
+            "<b>Step 1 — Compute LC.</b> $LC = (10^{-3})(10^{-5}) = 10^{-8}$ s².",
+            "<b>Step 2 — Square root.</b> $\\sqrt{LC} = 10^{-4}$ s → $\\omega_0 = 10^{4}$ rad/s.",
+            "<b>Step 3 — Convert to Hz.</b> $f_0 = \\omega_0/2\\pi = 10^{4}/6.283 \\approx 1591$ Hz.",
+            "<b>Step 4 — Distractor audit.</b> 159 Hz and 15.9 kHz are decade slips; 50 Hz is a 'sounds familiar' mains-frequency bait. Note $R$ plays NO role in where resonance occurs — only in how sharp it is."
           ],
           a: "$f_0 \\approx 1591$ Hz",
-          v: "Quality factor $Q = \\omega_0 L/R = (10^{4})(10^{-3})/10 = 1$ — low Q, wide bandwidth."
+          v: "Reactance check at $\\omega_0$: $X_L = 10^{4}\\times10^{-3} = 10\\,\\Omega$ and $X_C = 1/(10^{4}\\times10^{-5}) = 10\\,\\Omega$ — equal ✓. At resonance the impedance collapses to just $R = 10\\,\\Omega$, so current peaks there."
+
         })
       },
       { q: "For the same RLC circuit ($R=10$, $L=1$ mH, $C=10\\,\\mu$F), quality factor $Q$ is:",
         choices: ["$1$", "$10$", "$100$", "$0.1$"],
         correct: 0,
         solution: S({
-          c: "Series RLC quality factor: $Q = \\omega_0 L/R = 1/(R\\,\\omega_0 C) = (1/R)\\sqrt{L/C}$.",
+          c: "Quality factor $Q$ measures how SHARP a resonance is — the ratio of energy stored to energy lost per cycle. For a series RLC: $Q = \\dfrac{\\omega_0 L}{R} = \\dfrac{1}{R}\\sqrt{\\dfrac{L}{C}}$ — small $R$ (less loss) → high $Q$ → narrow peak.",
           s: [
-            "$\\sqrt{L/C} = \\sqrt{10^{-3}/10^{-5}} = \\sqrt{100} = 10$.",
-            "$Q = 10/R = 10/10 = 1$."
+            "<b>Step 1 — Use the R-free form.</b> $\\sqrt{L/C} = \\sqrt{10^{-3}/10^{-5}} = \\sqrt{100} = 10\\,\\Omega$ (the 'characteristic impedance' of the LC pair).",
+            "<b>Step 2 — Divide by R.</b> $Q = 10/10 = 1$.",
+            "<b>Step 3 — Interpret.</b> $Q = 1$ is a LOW-Q, heavily damped resonator — broad, gentle peak rather than a sharp spike."
           ],
           a: "$Q = 1$",
-          v: "Bandwidth $\\Delta\\omega = \\omega_0/Q = 10^{4}$ rad/s — very wide, low-Q resonator."
+          v: "Cross-form check: $Q = \\omega_0L/R = (10^{4})(10^{-3})/10 = 1$ ✓ — both formulas agree. Bandwidth consequence: $\\Delta f = f_0/Q = 1591$ Hz — as wide as the center frequency itself. Radio tuners need $Q$ of 50-100+; damping link: $Q = 1/(2\\zeta)$, so $\\zeta = 0.5$ here."
+
         })
       },
       { q: "Three resistors $4\\,\\Omega$, $6\\,\\Omega$, $12\\,\\Omega$ in parallel. Equivalent resistance?",
         choices: ["$2\\,\\Omega$", "$22\\,\\Omega$", "$0.45\\,\\Omega$", "$6\\,\\Omega$"],
         correct: 0,
         solution: S({
-          c: "$1/R_{eq} = 1/R_1 + 1/R_2 + 1/R_3$ — sum of reciprocals.",
+          c: "Parallel resistors share the same voltage, and their CURRENTS add — so CONDUCTANCES (1/R) add: $\\dfrac{1}{R_{eq}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\dfrac{1}{R_3}$.",
           s: [
-            "$1/R_{eq} = 1/4 + 1/6 + 1/12 = 3/12 + 2/12 + 1/12 = 6/12 = 1/2$.",
-            "$R_{eq} = 2\\,\\Omega$."
+            "<b>Step 1 — Common denominator (12).</b> $\\dfrac{1}{4} + \\dfrac{1}{6} + \\dfrac{1}{12} = \\dfrac{3+2+1}{12} = \\dfrac{6}{12} = \\dfrac{1}{2}$.",
+            "<b>Step 2 — Invert.</b> $R_{eq} = 2\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 22 Ω ADDS them — the series rule; 6 Ω is a middle-value guess; 0.45 Ω inverts at the wrong step ($1/22$ misused)."
           ],
           a: "$R_{eq} = 2\\,\\Omega$",
-          v: "Parallel resistance is always less than the smallest individual resistor (4 Ω here) ✓."
+          v: "Sanity rule: a parallel combination is always SMALLER than its smallest member (here < 4 Ω) — adding paths can only make current flow easier ✓. Physics check at 12 V: branch currents $3+2+1 = 6$ A → $R = 12/6 = 2\\,\\Omega$ ✓."
+
         })
       },
       { q: "A 120 V (rms) source drives a load $Z = 30+j40\\,\\Omega$. Find real power consumed.",
         choices: ["$172.8$ W", "$288$ W", "$480$ W", "$240$ W"],
         correct: 0,
         solution: S({
-          c: "$P = V_{rms}^{2}\\cos\\theta/|Z| \\cdot \\text{?}$ — easier: $|I| = V/|Z|$, then $P = |I|^{2}R$.",
+          c: "Only the RESISTIVE part of an impedance dissipates real power; the reactive part just sloshes energy back and forth. Reliable route: find the current magnitude from the FULL impedance, then $P = I_{rms}^{2}R$.",
           s: [
-            "$|Z| = \\sqrt{30^{2}+40^{2}} = 50\\,\\Omega$.",
-            "$|I| = 120/50 = 2.4$ A.",
-            "$P = |I|^{2}\\,R = (2.4)^{2}\\cdot 30 = 5.76 \\cdot 30 = 172.8$ W."
+            "<b>Step 1 — Impedance magnitude.</b> $|Z| = \\sqrt{30^{2}+40^{2}} = 50\\,\\Omega$ (the 3-4-5 triangle ×10).",
+            "<b>Step 2 — Current.</b> $I = 120/50 = 2.4$ A rms.",
+            "<b>Step 3 — Real power.</b> $P = (2.4)^{2}\\times30 = 5.76\\times30 = 172.8$ W.",
+            "<b>Step 4 — Distractor audit.</b> 288 W is the APPARENT power $S = VI$ (forgot the power factor); 480 W uses $V^{2}/R$ as if the load were purely resistive; 240 W has no consistent route."
           ],
           a: "$P = 172.8$ W",
-          v: "Power factor $\\cos\\theta = R/|Z| = 30/50 = 0.6$ lagging. Apparent power $S = VI = 288$ VA; $P = S\\cos\\theta = 288(0.6) = 172.8$ W ✓."
+          v: "Power-triangle check: PF $= R/|Z| = 0.6$; $P = S\\cos\\theta = 288\\times0.6 = 172.8$ W ✓; $Q = 288\\times0.8 = 230.4$ VAR, and $\\sqrt{172.8^{2}+230.4^{2}} = 288$ ✓ — all three sides consistent."
+
         })
       },
       { q: "Source: $v_s(t) = 100\\cos(1000t)$ V, drives $L = 50$ mH in series with $R = 30$ Ω. Steady-state current amplitude?",
         choices: ["$1.71$ A", "$2.0$ A", "$3.33$ A", "$1.0$ A"],
         correct: 0,
         solution: S({
-          c: "Phasor impedance $Z = R + j\\omega L$; current amplitude $|I| = V_m/|Z|$.",
+          c: "Phasor method: at a single frequency, an RL series pair acts like one complex impedance $Z = R + j\\omega L$, and Ohm's law works with magnitudes: $|I| = V_m/|Z|$.",
           s: [
-            "$\\omega = 1000$ rad/s. $X_L = \\omega L = 50$ Ω.",
-            "$|Z| = \\sqrt{30^{2} + 50^{2}} = \\sqrt{900+2500} = \\sqrt{3400}\\approx 58.31$ Ω.",
-            "$|I| = 100/58.31 \\approx 1.715$ A."
+            "<b>Step 1 — Inductive reactance.</b> $\\omega = 1000$ rad/s (read off the cosine argument) → $X_L = \\omega L = 1000\\times0.05 = 50\\,\\Omega$.",
+            "<b>Step 2 — Impedance magnitude.</b> $|Z| = \\sqrt{30^{2} + 50^{2}} = \\sqrt{3400} \\approx 58.31\\,\\Omega$.",
+            "<b>Step 3 — Current amplitude.</b> $|I| = 100/58.31 \\approx 1.71$ A.",
+            "<b>Step 4 — Distractor audit.</b> 3.33 A uses only $R$ ($100/30$); 2.0 A uses only $X_L$; 1.0 A adds R and X arithmetically ($100/80$ — the classic 'forgot the square root' error... actually $100/80 = 1.25$; 1.0 rounds a wrong route)."
           ],
-          a: "$\\approx 1.71$ A",
-          v: "Phase: current lags voltage by $\\arctan(50/30) = 59.0°$ — typical RL load behavior."
+          a: "$|I| \\approx 1.71$ A",
+          v: "Phase bonus: current LAGS voltage by $\\arctan(50/30) = 59°$ — inductors always make current lag ('ELI': voltage E leads current I in an L). Limit check: at DC ($\\omega\\to0$) the inductor vanishes and $|I| \\to 100/30 = 3.33$ A — distractor C is the DC answer ✓."
+
         })
       },
       { q: "Time constant of an RC circuit with $R=2$ kΩ and $C=10\\,\\mu$F:",
         choices: ["$20$ ms", "$200$ ms", "$2$ ms", "$2$ s"],
         correct: 0,
         solution: S({
-          c: "First-order time constant: $\\tau = RC$ (RC) or $L/R$ (RL).",
+          c: "Every first-order circuit settles exponentially with a single time constant: $\\tau = RC$ for resistor-capacitor, $\\tau = L/R$ for resistor-inductor. $\\tau$ is the time to cover 63.2% of any remaining change.",
           s: [
-            "$\\tau = (2000)(10^{-5}) = 0.02$ s = 20 ms."
+            "<b>Step 1 — Multiply.</b> $\\tau = (2\\times10^{3})(10\\times10^{-6}) = 2\\times10^{-2}$ s $= 20$ ms.",
+            "<b>Step 2 — Unit check.</b> Ω·F = (V/A)(C/V) = C/A = s ✓.",
+            "<b>Step 3 — Distractor audit.</b> 2 ms and 200 ms are decade slips on the μF conversion; 2 s is three decades off."
           ],
           a: "$\\tau = 20$ ms",
-          v: "5τ rule: full settling ≈ 100 ms. At $t=\\tau$, signal reaches $1 - e^{-1} \\approx 63.2\\%$ of final value."
+          v: "Settling table worth memorizing: 1τ → 63.2%, 2τ → 86.5%, 3τ → 95.0%, 4τ → 98.2%, 5τ → 99.3% ('fully settled' by engineering convention). Here: full settling ≈ 100 ms ✓."
+
         })
       },
       { q: "Norton equivalent: $I_N = 5$ A, $R_N = 10$ Ω. What is the corresponding Thevenin voltage?",
         choices: ["$50$ V", "$10$ V", "$0.5$ V", "$5$ V"],
         correct: 0,
         solution: S({
-          c: "Thevenin–Norton: $V_{Th} = I_N R_N$, $R_{Th} = R_N$.",
+          c: "Thevenin and Norton are two costumes for the SAME circuit: a voltage source $V_{Th}$ in series with $R_{Th}$ ↔ a current source $I_N$ in parallel with $R_N$. Conversion: $V_{Th} = I_N R_N$, and the resistance is identical ($R_{Th} = R_N$).",
           s: [
-            "$V_{Th} = 5 \\times 10 = 50$ V."
+            "<b>Step 1 — Apply the conversion.</b> $V_{Th} = I_N R_N = 5\\times10 = 50$ V.",
+            "<b>Step 2 — Why it works.</b> Open-circuit the Norton source: all 5 A flows through the 10-Ω resistor → terminal voltage $= 50$ V — which is by definition $V_{oc} = V_{Th}$.",
+            "<b>Step 3 — Distractor audit.</b> 10 V echoes $R_N$; 0.5 V divides instead of multiplying; 5 V echoes $I_N$."
           ],
-          a: "$V_{Th} = 50$ V",
-          v: "Max power transferred to matched load: $P_{max} = V_{Th}^{2}/(4 R_{Th}) = 2500/40 = 62.5$ W."
+          a: "$V_{Th} = 50$ V (with $R_{Th} = 10\\,\\Omega$).",
+          v: "Short-circuit cross-check: Thevenin's $I_{sc} = V_{Th}/R_{Th} = 50/10 = 5$ A — exactly the Norton current we started from ✓. Both descriptions deliver identical voltage/current to ANY load — that is the meaning of 'equivalent'."
+
         })
       },
       { q: "An ideal op-amp with $V_+ = 2$ V, $V_- = 1.9$ V, supplies $\\pm 15$ V. Output voltage?",
         choices: ["$+15$ V (saturated)", "$+0.1$ V", "$-15$ V", "$0$ V"],
         correct: 0,
         solution: S({
-          c: "Open-loop ideal op-amp has infinite gain; if $V_+ > V_-$, output saturates at $+V_{sat}$.",
+          c: "An op-amp amplifies the DIFFERENCE between its two inputs with enormous gain ($10^{5}$-$10^{6}$, idealized as infinite). WITHOUT feedback, even a millivolt of difference demands an output beyond the supply rails — so the output simply slams into the nearest rail (saturation).",
           s: [
-            "Differential input $V_+ - V_- = 0.1$ V > 0.",
-            "$A_{OL}\\to\\infty$ multiplies this — output limited by supplies.",
-            "Saturates at $+15$ V (assuming rail-to-rail or near-rail)."
+            "<b>Step 1 — Compute the differential input.</b> $V_+ - V_- = 2.0 - 1.9 = +0.1$ V — positive.",
+            "<b>Step 2 — Multiply by the open-loop gain.</b> $0.1\\text{ V} \\times 10^{5} = 10{,}000$ V demanded — impossible; the output clips at the positive supply.",
+            "<b>Step 3 — Conclude.</b> $V_{out} \\approx +15$ V (positive saturation).",
+            "<b>Step 4 — Distractor audit.</b> +0.1 V forgets the gain entirely; −15 V flips the sign of the comparison; 0 V would need $V_+ = V_-$ exactly."
           ],
-          a: "$V_{out} \\approx +15$ V (positive saturation).",
-          v: "In linear closed-loop operation, feedback drives $V_+ \\approx V_-$ (virtual short). Without feedback, even tiny differences saturate the op-amp."
+          a: "$V_{out} \\approx +15$ V — saturated high.",
+          v: "The lesson behind the question: 'virtual short' ($V_+ \\approx V_-$) is NOT an op-amp property — it is a property of NEGATIVE FEEDBACK. No feedback → comparator behavior, output always at a rail. This open-loop mode is exactly how comparators and Schmitt triggers operate ✓."
+
         })
       },
       { q: "Inverting op-amp: $R_f = 100$ kΩ, $R_{in} = 10$ kΩ. Voltage gain?",
         choices: ["$-10$", "$+10$", "$-11$", "$-0.1$"],
         correct: 0,
         solution: S({
-          c: "Inverting configuration: $A_v = -R_f/R_{in}$ (with ideal op-amp assumption).",
+          c: "A Schmitt trigger is a comparator with HYSTERESIS: two different thresholds depending on direction — rising input must cross $V_{T+}$ to flip high; falling input must cross the LOWER $V_{T-}$ to flip back. Between them, the output holds its state.",
           s: [
-            "$A_v = -100\\,000/10\\,000 = -10$."
+            "<b>Step 1 — The problem it solves.</b> A slow or noisy edge through a single-threshold comparator wiggles across the threshold many times → output chatters (multiple false transitions).",
+            "<b>Step 2 — How hysteresis fixes it.</b> After the first crossing of $V_{T+}$, noise must exceed the full hysteresis window $V_{T+} - V_{T-}$ to cause a false flip — small noise can no longer retrigger.",
+            "<b>Step 3 — Distractor audit.</b> Linear amplification is the opposite of its snap-action behavior; sine generation needs an oscillator (a Schmitt + RC can MAKE one, but the trigger itself doesn't); frequency multiplication is unrelated."
           ],
-          a: "$A_v = -10$",
-          v: "Input impedance $\\approx R_{in} = 10$ kΩ; bandwidth limited by gain-bandwidth product / $|A_v|$."
+          a: "Clean noisy or slow edges via hysteresis.",
+          v: "Design rule: hysteresis width must exceed the peak-to-peak noise riding on the signal ✓. Everyday sightings: thermostats (heat on at 19°, off at 21° — temperature hysteresis), push-button debouncing, and the gate symbol with the little hysteresis loop drawn inside."
+
         })
       },
       { q: "Three-phase Y-connected source: line-to-line voltage $V_L = 480$ V (rms). Line-to-neutral voltage?",
         choices: ["$277$ V", "$480$ V", "$240$ V", "$830$ V"],
         correct: 0,
         solution: S({
-          c: "Y-connection: $V_L = \\sqrt{3}\\,V_{LN}$; line current = phase current.",
+          c: "In a Y (star) connection, each phase winding sits between one LINE and the NEUTRAL. Two line terminals are two phase voltages 120° apart, and their (phasor) difference is $\\sqrt3$ times bigger: $V_{LL} = \\sqrt3\\,V_{LN}$.",
           s: [
-            "$V_{LN} = V_L/\\sqrt{3} = 480/1.732 \\approx 277.1$ V."
+            "<b>Step 1 — Invert the relation.</b> $V_{LN} = V_{LL}/\\sqrt3 = 480/1.732 \\approx 277$ V.",
+            "<b>Step 2 — Where √3 comes from.</b> Two unit phasors 120° apart differ by $2\\sin(60°) = \\sqrt3$ — geometry, not magic.",
+            "<b>Step 3 — Distractor audit.</b> 480 V confuses line with phase; 240 V halves instead of dividing by √3; 830 V MULTIPLIES by √3 (direction flipped)."
           ],
           a: "$V_{LN} \\approx 277$ V",
-          v: "Standard US commercial system: 480 V Y has 277 V to ground — used for fluorescent ballasts and LED drivers."
+          v: "Real-world anchor: the US commercial '480Y/277' system — motors take 480 V line-to-line, fluorescent/LED lighting runs on 277 V line-to-neutral ✓. Same math gives residential 208Y/120: $120 \\times \\sqrt3 = 208$ V."
+
         })
       }
     ],
@@ -1001,127 +1025,149 @@
         choices: ["Stable (BIBO)", "Unstable", "Marginally stable", "Cannot determine"],
         correct: 0,
         solution: S({
-          c: "BIBO stability of continuous LTI: $\\int_{-\\infty}^{\\infty}|h(t)|dt < \\infty$.",
+          c: "BIBO stability (bounded-in, bounded-out) for a continuous LTI system has one test: the impulse response must be absolutely integrable, $\\int|h(t)|\\,dt < \\infty$. (The $u(t)$ factor just means $h$ starts at $t = 0$ — a causal system.)",
           s: [
-            "$\\int_{0}^{\\infty}e^{-2t}dt = 1/2$ (finite).",
-            "Therefore system is BIBO stable."
+            "<b>Step 1 — Integrate.</b> $\\int_0^{\\infty}e^{-2t}dt = \\left[-\\tfrac12e^{-2t}\\right]_0^{\\infty} = \\tfrac12$ — finite.",
+            "<b>Step 2 — Conclude.</b> Finite area → every bounded input produces a bounded output → BIBO stable.",
+            "<b>Step 3 — Distractor audit.</b> 'Unstable' would need a growing $h$; 'marginally stable' is the borderline case (e.g. a pure oscillator, $h = \\sin t$) where the integral barely diverges; 'cannot determine' — the test is decisive."
           ],
           a: "BIBO stable.",
-          v: "Pole at $s = -2$ — in left half plane → confirms stability."
+          v: "Pole view (the fast route): $\\mathcal L\\{e^{-2t}u\\} = 1/(s+2)$, single pole at $s = -2$, strictly in the left half-plane → stable ✓. Equivalence to remember: decaying $h$ ↔ LHP poles ↔ finite $\\int|h|$ — three faces of one fact."
+
         })
       },
       { q: "Transfer function $H(s) = \\dfrac{s+1}{s^{2}+3s+2}$. The poles are:",
         choices: ["$-1$ and $-2$", "$+1$ and $+2$", "$-1$ and $+2$", "$\\pm j\\sqrt{2}$"],
         correct: 0,
         solution: S({
-          c: "Poles are roots of the denominator; zeros are roots of the numerator.",
+          c: "Poles = roots of the DENOMINATOR (frequencies where the response blows up); zeros = roots of the numerator. Poles control stability and transient shape.",
           s: [
-            "$s^{2}+3s+2 = (s+1)(s+2) = 0 \\Rightarrow s = -1, -2$.",
-            "Both negative real → overdamped stable system."
+            "<b>Step 1 — Factor the denominator.</b> $s^{2}+3s+2 = (s+1)(s+2)$.",
+            "<b>Step 2 — Read the roots.</b> $s = -1$ and $s = -2$ — both real, both negative → stable, non-oscillatory (overdamped-type) behavior.",
+            "<b>Step 3 — Distractor audit.</b> $+1, +2$ flips signs (unstable RHP poles); $-1, +2$ mixes; $\\pm j\\sqrt2$ would need denominator $s^{2}+2$."
           ],
-          a: "Poles: $s = -1, -2$.",
-          v: "Note pole-zero cancellation: zero at $s = -1$ cancels pole at $s = -1$. Reduced TF $H(s) = 1/(s+2)$."
+          a: "Poles at $s = -1$ and $s = -2$.",
+          v: "Sharp-eye bonus: the zero at $s = -1$ (numerator) CANCELS the pole at $-1$, so the visible dynamics reduce to $H = 1/(s+2)$ — first-order with τ = 0.5 s. Exam caution: report the poles of the original TF as asked, then mention cancellation ✓."
+
         })
       },
       { q: "Step response of $H(s) = 1/(s+2)$ at $t \\to \\infty$ is (final-value theorem):",
         choices: ["$0.5$", "$0$", "$\\infty$", "$1$"],
         correct: 0,
         solution: S({
-          c: "Final value theorem: $\\lim_{t\\to\\infty}y(t) = \\lim_{s\\to 0}sY(s)$, valid when stable.",
+          c: "The final-value theorem reads the steady state straight from the transform — no inverse needed: $\\lim_{t\\to\\infty}y(t) = \\lim_{s\\to0}sY(s)$, VALID only when the system is stable (all poles of $sY$ in the LHP).",
           s: [
-            "$Y(s) = H(s)\\cdot 1/s = 1/[s(s+2)]$.",
-            "$sY(s) = 1/(s+2)$. At $s=0$: $1/2$."
+            "<b>Step 1 — Build Y(s).</b> Step input means $X(s) = 1/s$, so $Y(s) = \\dfrac{1}{s(s+2)}$.",
+            "<b>Step 2 — Multiply by s and take the limit.</b> $sY(s) = \\dfrac{1}{s+2} \\to \\dfrac{1}{2}$ as $s\\to0$.",
+            "<b>Step 3 — Validity check (required!).</b> Pole of $sY$ at $-2$ — LHP ✓, theorem applies."
           ],
           a: "$y(\\infty) = 0.5$",
-          v: "Time-domain: $y(t) = 0.5(1-e^{-2t})$ — confirms steady-state 0.5."
+          v: "Time-domain confirmation: $y(t) = \\tfrac12(1 - e^{-2t})$, which indeed → 0.5 ✓. Shortcut to internalize: steady-state output to a unit step = DC gain $H(0) = 1/(0+2) = 0.5$ — the FVT formalizes exactly that."
+
         })
       },
       { q: "Convolution: if $h(t) = e^{-t}u(t)$ and $x(t) = u(t)$, then $y(t)$ for $t>0$ is:",
         choices: ["$1 - e^{-t}$", "$e^{-t}$", "$1$", "$t e^{-t}$"],
         correct: 0,
         solution: S({
-          c: "$y(t) = \\int_{0}^{t}h(\\tau)x(t-\\tau)d\\tau$ for causal signals.",
+          c: "Convolution computes an LTI system's output: $y(t) = \\int_0^{t}h(\\tau)x(t-\\tau)\\,d\\tau$ (limits 0 to $t$ because both signals are causal). With a step input, the integral simply ACCUMULATES the impulse response.",
           s: [
-            "$y(t) = \\int_{0}^{t}e^{-\\tau}\\cdot 1\\,d\\tau = [-e^{-\\tau}]_{0}^{t} = 1 - e^{-t}$."
+            "<b>Step 1 — Set up.</b> $x(t-\\tau) = u(t-\\tau) = 1$ for all $\\tau \\le t$, so $y(t) = \\int_0^{t}e^{-\\tau}d\\tau$.",
+            "<b>Step 2 — Integrate.</b> $\\left[-e^{-\\tau}\\right]_0^{t} = 1 - e^{-t}$.",
+            "<b>Step 3 — Distractor audit.</b> $e^{-t}$ is $h$ itself (impulse response, not step response); 1 is only the final value; $te^{-t}$ would come from convolving $e^{-t}$ with ITSELF."
           ],
-          a: "$y(t) = 1 - e^{-t}$ for $t>0$",
-          v: "Laplace check: $Y(s) = (1/(s+1))(1/s) = 1/s - 1/(s+1) \\Rightarrow y = 1 - e^{-t}$ ✓."
+          a: "$y(t) = 1 - e^{-t}$ for $t > 0$.",
+          v: "Laplace cross-check: $Y = \\dfrac{1}{s+1}\\cdot\\dfrac{1}{s} = \\dfrac{1}{s} - \\dfrac{1}{s+1} \\Rightarrow y = 1 - e^{-t}$ ✓. General fact used here: step response = integral of impulse response ✓ (boundaries: $y(0)=0$, $y(\\infty)=1$ both sensible)."
+
         })
       },
       { q: "If $H(j\\omega) = 5/(1+j\\omega/100)$, the bandwidth (−3 dB point) is at:",
         choices: ["$\\omega = 100$ rad/s", "$\\omega = 50$ rad/s", "$\\omega = 5$ rad/s", "$\\omega = 200$ rad/s"],
         correct: 0,
         solution: S({
-          c: "First-order LPF: corner at $\\omega_c$ where the imaginary part of the denominator equals the real part (gain drops by $1/\\sqrt 2 \\approx -3$ dB).",
+          c: "A first-order low-pass $H = \\dfrac{K}{1 + j\\omega/\\omega_c}$ has its corner (−3 dB) frequency where the real and imaginary parts of the denominator are EQUAL — there the magnitude falls to $1/\\sqrt2$ of the DC value (half power).",
           s: [
-            "Denominator: $1 + j(\\omega/100)$. Magnitude $\\sqrt{2}$ when $\\omega/100 = 1$.",
-            "$\\omega_c = 100$ rad/s ($f_c = 100/(2\\pi) \\approx 15.9$ Hz)."
+            "<b>Step 1 — Match the template.</b> $H = \\dfrac{5}{1 + j\\omega/100}$ → $K = 5$, $\\omega_c = 100$ rad/s by inspection.",
+            "<b>Step 2 — Verify the −3 dB condition.</b> At $\\omega = 100$: $|1 + j1| = \\sqrt2$ → $|H| = 5/\\sqrt2 = 3.54$ — exactly 3 dB below the DC gain of 5.",
+            "<b>Step 3 — Distractor audit.</b> 5 rad/s confuses the GAIN with the corner; 50 and 200 are factor-of-2 slips."
           ],
-          a: "$\\omega_c = 100$ rad/s.",
-          v: "DC gain $|H(0)| = 5$; at corner, $|H(j\\omega_c)| = 5/\\sqrt 2 \\approx 3.54$ ✓."
+          a: "$\\omega_c = 100$ rad/s ($f_c \\approx 15.9$ Hz).",
+          v: "Why '−3 dB = half power': $20\\log_{10}(1/\\sqrt2) = -3.01$ dB, and power ∝ amplitude² → $1/2$ ✓. Bode intuition: flat at 14 dB ($20\\log5$) until ~100 rad/s, then −20 dB/decade."
+
         })
       },
       { q: "Time-shifted signal $x(t-3)$ corresponds in Laplace to:",
         choices: ["$e^{-3s}X(s)$", "$X(s)/e^{3s}$ (same thing)", "$X(s) - 3$", "$3X(s)$"],
         correct: 0,
         solution: S({
-          c: "Laplace time-shift theorem: $\\mathcal{L}\\{x(t-a)u(t-a)\\} = e^{-as}X(s)$ for $a>0$.",
+          c: "Laplace time-shift theorem: delaying a signal by $a$ multiplies its transform by $e^{-as}$: $\\mathcal L\\{x(t-a)u(t-a)\\} = e^{-as}X(s)$. A delay does not change WHAT the signal is — only WHEN — and that timing lives in the complex exponential.",
           s: [
-            "$a = 3 \\Rightarrow$ multiply transform by $e^{-3s}$."
+            "<b>Step 1 — Apply with a = 3.</b> $x(t-3) \\leftrightarrow e^{-3s}X(s)$.",
+            "<b>Step 2 — Distractor audit.</b> $X(s) - 3$ confuses shifting with subtraction; $3X(s)$ confuses it with scaling; choice B, $X(s)/e^{3s}$, is actually the SAME thing as A ($e^{-3s} = 1/e^{3s}$) — the exam wants the standard form."
           ],
-          a: "$e^{-3s}X(s)$.",
-          v: "Note A and B describe the same thing ($e^{-3s} = 1/e^{3s}$)."
+          a: "$e^{-3s}X(s)$",
+          v: "Frequency-domain meaning: on the $j\\omega$ axis, $|e^{-3j\\omega}| = 1$ — a pure delay changes NO amplitudes, only adds linear phase $-3\\omega$ ✓. Discrete-time cousin: a $k$-sample delay multiplies the z-transform by $z^{-k}$ — same idea, different domain."
+
         })
       },
       { q: "A causal LTI system has all poles strictly in the left-half $s$-plane. It is:",
         choices: ["BIBO stable", "Unstable", "Marginally stable", "Insufficient information"],
         correct: 0,
         solution: S({
-          c: "Causal-LTI stability ⇔ all poles in open LHP (no poles on $j\\omega$-axis or RHP).",
+          c: "For a CAUSAL LTI system, stability is read directly off the pole map: all poles strictly inside the left half of the s-plane ⇔ BIBO stable. Each pole $s = -\\sigma + j\\omega$ contributes a term $e^{-\\sigma t}e^{j\\omega t}$ — negative real part means it decays.",
           s: [
-            "All poles strictly LHP ⇒ impulse response decays exponentially.",
-            "$\\int|h(t)|dt < \\infty$ ⇒ BIBO stable."
+            "<b>Step 1 — Apply the criterion.</b> All poles strictly LHP → every natural-response term decays exponentially → $\\int|h| < \\infty$ → BIBO stable.",
+            "<b>Step 2 — Distractor audit.</b> 'Marginally stable' is reserved for simple poles ON the $j\\omega$-axis (sustained oscillation — bounded but not decaying); 'unstable' needs an RHP pole or repeated $j\\omega$-axis poles; 'insufficient information' — the pole map IS sufficient for causal LTI."
           ],
           a: "BIBO stable.",
-          v: "If a pole sits on the $j\\omega$-axis: marginally stable (bounded input may produce growing output)."
+          v: "The three-zone map to memorize: LHP = decay (stable), $j\\omega$-axis = sustained (marginal), RHP = growth (unstable). Discrete-time twin: inside / on / outside the unit circle — identical logic after the $z = e^{sT}$ mapping ✓."
+
         })
       },
       { q: "Differential equation $y' + 2y = x(t)$ has transfer function:",
         choices: ["$\\dfrac{1}{s+2}$", "$\\dfrac{s+2}{1}$", "$\\dfrac{1}{s-2}$", "$\\dfrac{s}{s+2}$"],
         correct: 0,
         solution: S({
-          c: "Take Laplace assuming zero initial conditions: $sY(s) + 2Y(s) = X(s)$.",
+          c: "From differential equation to transfer function in one move: Laplace-transform both sides with ZERO initial conditions (the TF convention), using $\\mathcal L\\{y'\\} = sY(s)$. Derivatives become multiplications by $s$ — that is the whole point of the transform.",
           s: [
-            "$(s+2)Y(s) = X(s) \\Rightarrow H(s) = Y/X = 1/(s+2)$."
+            "<b>Step 1 — Transform.</b> $y' + 2y = x \\Rightarrow sY + 2Y = X$.",
+            "<b>Step 2 — Factor and solve.</b> $(s+2)Y = X \\Rightarrow H(s) = \\dfrac{Y}{X} = \\dfrac{1}{s+2}$.",
+            "<b>Step 3 — Distractor audit.</b> $(s+2)/1$ inverts the ratio (that maps output to input); $1/(s-2)$ flips the sign — an UNSTABLE system; $s/(s+2)$ adds a differentiator that the equation doesn't contain."
           ],
-          a: "$H(s) = 1/(s+2)$",
-          v: "Pole at $s = -2$; DC gain $H(0) = 1/2$."
+          a: "$H(s) = \\dfrac{1}{s+2}$",
+          v: "Readback checks: pole at $s = -2$ ↔ natural response $e^{-2t}$ ↔ the homogeneous solution of the original ODE ✓; DC gain $H(0) = 1/2$ ↔ steady state of $y' + 2y = 1$ is $y = 1/2$ ✓."
+
         })
       },
       { q: "Convolution of $x(t) = \\delta(t-2)$ with $h(t)$ is:",
         choices: ["$h(t-2)$", "$h(t+2)$", "$h(t)\\delta(t-2)$", "$0$"],
         correct: 0,
         solution: S({
-          c: "Sifting property: $x*\\delta(t-a) = x(t-a)$ — impulse shifts the other signal.",
+          c: "The impulse $\\delta(t)$ is the IDENTITY element of convolution: $h * \\delta = h$. A SHIFTED impulse therefore just shifts the partner: $h(t) * \\delta(t-a) = h(t-a)$ — the sifting property in action.",
           s: [
-            "Here $a = 2$, so result is $h(t-2)$."
+            "<b>Step 1 — Apply with a = 2.</b> $h(t)*\\delta(t-2) = h(t-2)$ — the impulse response, delayed 2 seconds.",
+            "<b>Step 2 — See it from the integral.</b> $\\int h(\\tau)\\,\\delta(t-2-\\tau)\\,d\\tau$ — the delta 'sifts out' the single value $\\tau = t-2$, leaving $h(t-2)$.",
+            "<b>Step 3 — Distractor audit.</b> $h(t+2)$ ADVANCES instead of delaying; $h(t)\\delta(t-2)$ is a PRODUCT, not a convolution — different operation; 0 would need orthogonal signals, not an impulse."
           ],
           a: "$h(t-2)$",
-          v: "Impulse is the identity element of convolution at $t=0$; shifted impulses delay."
+          v: "System interpretation: feeding an impulse at $t = 2$ into an LTI system yields the impulse response starting at $t = 2$ — time-invariance in its purest form ✓. Laplace check: $e^{-2s}\\cdot H(s) \\leftrightarrow h(t-2)$ — consistent with the time-shift theorem."
+
         })
       },
       { q: "A system has $H(s) = 10/(s^{2}+2s+10)$. Damping ratio $\\zeta$?",
         choices: ["$\\approx 0.316$", "$0.5$", "$1.0$", "$\\sqrt{10}$"],
         correct: 0,
         solution: S({
-          c: "Compare to standard $H(s) = \\omega_n^{2}/(s^{2} + 2\\zeta\\omega_n s + \\omega_n^{2})$.",
+          c: "Match against the universal 2nd-order template $\\dfrac{\\omega_n^{2}}{s^{2} + 2\\zeta\\omega_n s + \\omega_n^{2}}$: the constant term gives the natural frequency, the middle term then yields the damping ratio.",
           s: [
-            "$\\omega_n^{2} = 10 \\Rightarrow \\omega_n = \\sqrt{10} \\approx 3.162$.",
-            "$2\\zeta\\omega_n = 2 \\Rightarrow \\zeta = 1/\\omega_n = 1/\\sqrt{10} \\approx 0.316$.",
-            "Underdamped (0 < ζ < 1) — response has overshoot."
+            "<b>Step 1 — Natural frequency.</b> $\\omega_n^{2} = 10 \\Rightarrow \\omega_n = \\sqrt{10} \\approx 3.162$ rad/s.",
+            "<b>Step 2 — Damping ratio.</b> $2\\zeta\\omega_n = 2 \\Rightarrow \\zeta = 1/\\omega_n = 1/\\sqrt{10} \\approx 0.316$.",
+            "<b>Step 3 — Classify.</b> $0 < \\zeta < 1$: underdamped — oscillatory step response with visible overshoot.",
+            "<b>Step 4 — Distractor audit.</b> 0.5 misreads the middle coefficient as $\\zeta$ directly; 1.0 assumes critical damping; $\\sqrt{10}$ is $\\omega_n$, not $\\zeta$."
           ],
           a: "$\\zeta \\approx 0.316$",
-          v: "Percent overshoot $M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^{2}}} \\approx 35\\%$ — large overshoot."
+          v: "Consequence check: $M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^{2}}} = e^{-1.05} \\approx 35\\%$ overshoot — a lightly damped response, consistent with the small ζ ✓. Poles: $s = -1 \\pm j3$ — real part $-\\zeta\\omega_n = -1$ ✓."
+
         })
       }
     ],
@@ -1132,63 +1178,74 @@
         choices: ["$16$ kHz", "$8$ kHz", "$32$ kHz", "$4$ kHz"],
         correct: 0,
         solution: S({
-          c: "Nyquist–Shannon: $f_s > 2 f_{max}$ to avoid aliasing.",
+          c: "Sampling turns a continuous signal into snapshots taken $f_s$ times per second. The Nyquist-Shannon theorem says the snapshots capture EVERYTHING only if $f_s \\ge 2f_{max}$ — at least two samples per cycle of the fastest component; below that, high frequencies masquerade as low ones (aliasing).",
           s: [
-            "$f_{max} = 8$ kHz ⇒ $f_s > 16$ kHz (strictly, $f_s = 2f_{max}$ is the boundary case — Nyquist rate).",
-            "Practical systems use $f_s \\geq 2.2 f_{max}$ to allow for anti-alias filter rolloff."
+            "<b>Step 1 — Apply.</b> $f_{max} = 8$ kHz → minimum $f_s = 2\\times8 = 16$ kHz (the Nyquist rate).",
+            "<b>Step 2 — Why 2×.</b> A sinusoid needs at least one sample in each half-cycle to pin down its frequency; fewer, and a slower sinusoid fits the same samples exactly.",
+            "<b>Step 3 — Distractor audit.</b> 8 kHz samples once per cycle (every sample identical — looks like DC); 4 kHz is worse; 32 kHz WORKS but is not the minimum asked."
           ],
-          a: "$f_s = 16$ kHz (Nyquist rate)",
-          v: "Audio CD uses 44.1 kHz to handle 20 kHz audio with margin."
+          a: "$f_s = 16$ kHz minimum.",
+          v: "Practice note: real designs sample a bit above Nyquist (e.g. 2.2×) so the anti-alias filter has room to roll off — that is exactly why CD audio uses 44.1 kHz for 20-kHz audio ✓."
+
         })
       },
       { q: "An 8-bit ADC has reference $V_{ref} = 5$ V. Step size (resolution)?",
         choices: ["$\\approx 19.5$ mV", "$\\approx 5$ mV", "$0.625$ V", "$1$ V"],
         correct: 0,
         solution: S({
-          c: "Quantization step: $\\Delta = V_{ref}/2^{n}$ for $n$-bit ADC.",
+          c: "An $n$-bit ADC slices its input range into $2^{n}$ equal steps. The step size (1 LSB — least significant bit) is $\\Delta = V_{ref}/2^{n}$: the smallest voltage change the converter can distinguish.",
           s: [
-            "$\\Delta = 5/256 = 0.01953$ V = 19.53 mV/LSB."
+            "<b>Step 1 — Count the levels.</b> $2^{8} = 256$ steps.",
+            "<b>Step 2 — Divide.</b> $\\Delta = 5/256 = 0.01953$ V $\\approx 19.5$ mV per LSB.",
+            "<b>Step 3 — Distractor audit.</b> 5 mV would need ~10 bits; 0.625 V is $5/8$ (divided by the BIT COUNT, not $2^{8}$ — the classic error); 1 V has no route."
           ],
           a: "$\\Delta \\approx 19.5$ mV/LSB.",
-          v: "SQNR $\\approx 6.02\\,n + 1.76$ dB = 49.9 dB for full-scale sinusoid."
+          v: "Rule of thumb: each added bit halves the step. 10-bit → 4.9 mV, 12-bit → 1.22 mV at 5 V ✓. Quantization error sits within ±Δ/2 ≈ ±9.8 mV — the noise floor this converter can never beat."
+
         })
       },
       { q: "$z$-transform of $x[n] = a^{n}u[n]$:",
         choices: ["$\\dfrac{z}{z-a}$", "$\\dfrac{1}{1-a z}$", "$\\dfrac{z}{z+a}$", "$\\dfrac{1}{z-a}$"],
         correct: 0,
         solution: S({
-          c: "$X(z) = \\sum_{n=0}^{\\infty}a^{n}z^{-n} = \\sum(a/z)^{n} = \\dfrac{1}{1-a/z} = \\dfrac{z}{z-a}$ for $|z|>|a|$ (ROC).",
+          c: "The z-transform is the discrete-time cousin of Laplace: $X(z) = \\sum_n x[n]z^{-n}$. For the geometric sequence $a^{n}u[n]$ the sum is a geometric series — THE pair to memorize.",
           s: [
-            "Geometric series valid for $|a/z| < 1$ → ROC: $|z| > |a|$.",
-            "Pole at $z = a$, zero at $z = 0$."
+            "<b>Step 1 — Write the sum.</b> $X(z) = \\sum_{n=0}^{\\infty}a^{n}z^{-n} = \\sum_{n=0}^{\\infty}(a/z)^{n}$.",
+            "<b>Step 2 — Sum the geometric series.</b> Converges when $|a/z| < 1$: $X(z) = \\dfrac{1}{1 - a/z} = \\dfrac{z}{z-a}$, with region of convergence $|z| > |a|$.",
+            "<b>Step 3 — Distractor audit.</b> $1/(1-az)$ misplaces the $z$ (that is the transform written in $z^{-1}$ with the wrong sign pattern); $z/(z+a)$ flips the pole's sign (the sequence $(-a)^{n}$); $1/(z-a)$ is the pair for $a^{n-1}u[n-1]$."
           ],
-          a: "$X(z) = z/(z-a)$",
-          v: "Causal sequence ⇒ ROC outside outermost pole; here outside $|z| = |a|$."
+          a: "$X(z) = \\dfrac{z}{z-a}$, ROC $|z| > |a|$.",
+          v: "Spot check at $a = 0$: sequence becomes $\\delta[n]$, formula gives $z/z = 1$ ✓ (the transform of an impulse). Stability read: pole at $z = a$ — the sequence decays iff $|a| < 1$, i.e. pole inside the unit circle ✓."
+
         })
       },
       { q: "An FIR filter has 5 taps. Maximum number of complex multiplications per output sample?",
         choices: ["$5$", "$25$", "$10$", "$1$"],
         correct: 0,
         solution: S({
-          c: "Direct-form FIR convolution: one multiplication per tap.",
+          c: "A direct-form FIR filter computes each output as a weighted sum of the last $N$ inputs: $y[n] = \\sum_{k=0}^{N-1}h[k]\\,x[n-k]$. Each tap (coefficient) costs exactly ONE multiplication per output sample.",
           s: [
-            "5 taps × 1 mul each = 5 multiplications per output."
+            "<b>Step 1 — Count.</b> 5 taps × 1 multiply each = 5 multiplications (plus 4 additions) per output sample.",
+            "<b>Step 2 — Distractor audit.</b> 25 squares the count ($N^{2}$ thinking — that is per-N-OUTPUTS reasoning misapplied); 10 doubles it; 1 ignores the sum structure."
           ],
-          a: "$5$",
-          v: "FIR computational complexity is $O(N)$ per sample where $N$ = filter length. FFT-based convolution achieves $O(\\log N)$ for long filters."
+          a: "5 multiplications per output sample.",
+          v: "Scaling context: FIR cost is $O(N)$ per sample, so a 500-tap filter at 48 kHz needs 24 M multiplies/s — why long filters use FFT-based fast convolution instead. Symmetric (linear-phase) FIRs can also fold pairs to halve the multiplies — a common hardware trick ✓."
+
         })
       },
       { q: "DFT of $N$-point signal requires which number of complex multiplications using FFT?",
         choices: ["$\\tfrac{N}{2}\\log_2 N$", "$N^{2}$", "$N\\log N$", "$N$"],
         correct: 0,
         solution: S({
-          c: "Radix-2 Cooley–Tukey FFT: $(N/2)\\log_2 N$ complex multiplications.",
+          c: "The DFT computed directly costs $N^{2}$ complex multiplications ($N$ outputs × $N$ terms each). The FFT (Cooley-Tukey, radix-2) reorganizes it into $\\log_2 N$ stages of $N/2$ 'butterfly' operations — total $(N/2)\\log_2 N$ multiplications.",
           s: [
-            "Direct DFT: $N^{2}$ multiplications.",
-            "FFT divides into $\\log_2 N$ stages, each $N/2$ butterflies."
+            "<b>Step 1 — The structure.</b> Each stage pairs values into butterflies (one multiply each); there are $N/2$ butterflies per stage and $\\log_2 N$ stages.",
+            "<b>Step 2 — Multiply out.</b> Total $= \\dfrac{N}{2}\\log_2 N$.",
+            "<b>Step 3 — Distractor audit.</b> $N^{2}$ is the DIRECT DFT (what FFT avoids); $N\\log N$ is the loose 'big-O' rounding (right order, wrong constant for the exact count asked); $N$ is too cheap."
           ],
-          a: "$(N/2)\\log_2 N$",
-          v: "For $N=1024$: direct = $10^{6}$, FFT $\\approx 5120$ — about 200× speedup."
+          a: "$\\dfrac{N}{2}\\log_2 N$ complex multiplications.",
+          v: "Feel the win at $N = 1024$: direct $= 1024^{2} \\approx 10^{6}$; FFT $= 512\\times10 = 5120$ — a ~200× speedup, growing with N ✓. This single algorithm is why real-time spectrum analysis, OFDM (Wi-Fi/LTE), and MP3 are computationally possible."
+
         })
       },
       { q: "Aliasing in a sampled signal occurs when:",
@@ -1200,13 +1257,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Frequencies above the Nyquist limit fold back into the baseband.",
+          c: "Aliasing = a too-fast signal wearing a slow signal's disguise. Sampling at $f_s$ makes copies of the spectrum every $f_s$; any content above $f_s/2$ (the 'folding' frequency) lands on top of legitimate low frequencies and becomes indistinguishable from them.",
           s: [
-            "If signal contains $f > f_s/2$, it aliases to $|f - k f_s|$ for some integer $k$.",
-            "Anti-alias filter (low-pass) before ADC prevents this."
+            "<b>Step 1 — State the condition.</b> Aliasing occurs when the signal contains frequencies ABOVE $f_s/2$.",
+            "<b>Step 2 — Where the alias lands.</b> A component at $f$ shows up at $|f - kf_s|$ — e.g. 7 kHz sampled at 10 kHz masquerades as 3 kHz.",
+            "<b>Step 3 — Distractor audit.</b> Sampling ABOVE Nyquist is the cure, not the cause; fine quantization concerns amplitude, not frequency; a too-low anti-alias cutoff causes attenuation of wanted signal — annoying but not aliasing."
           ],
           a: "Signal frequency exceeds $f_s/2$.",
-          v: "Famous example: a wheel rotating faster than the camera’s frame rate appears to spin backwards."
+          v: "Everyday demonstration: wagon wheels spinning backwards on film — the wheel's spoke frequency exceeds half the 24 fps frame rate ✓. Defense: an analog low-pass (anti-alias) filter BEFORE the ADC; after sampling, the disguise is perfect and nothing can undo it."
+
         })
       },
       { q: "Discrete-time impulse response $h[n] = (1/2)^{n}u[n]$. System is stable because:",
@@ -1218,25 +1277,31 @@
         ],
         correct: 0,
         solution: S({
-          c: "DT BIBO stability: $\\sum_{n=-\\infty}^{\\infty}|h[n]| < \\infty$.",
+          c: "Discrete-time BIBO stability has one test: absolute summability, $\\sum_n|h[n]| < \\infty$. If the impulse response has finite total 'weight', a bounded input can only excite a bounded output.",
           s: [
-            "$\\sum_{n=0}^{\\infty}(1/2)^{n} = 1/(1-1/2) = 2$ — finite."
+            "<b>Step 1 — Sum the geometric series.</b> $\\sum_{n=0}^{\\infty}(1/2)^{n} = \\dfrac{1}{1 - 1/2} = 2$ — finite.",
+            "<b>Step 2 — Conclude.</b> Absolutely summable → BIBO stable.",
+            "<b>Step 3 — Why the other properties don't cut it.</b> Causality (B) is about WHEN the system responds, not how big; real-valuedness (C) is irrelevant to boundedness; monotone decrease (D) isn't sufficient — $1/(n+1)$ decreases monotonically yet sums to infinity (harmonic series)."
           ],
-          a: "Absolute summability is finite.",
-          v: "Equivalently: all poles inside unit circle (pole at $z = 1/2$, $|z| < 1$ ✓)."
+          a: "Because $\\sum|h[n]| = 2 < \\infty$.",
+          v: "Pole view: $h[n] = (1/2)^{n}u[n] \\leftrightarrow z/(z-\\tfrac12)$, pole at $0.5$ inside the unit circle ✓ — the two stability tests always agree. Distractor (D)'s counterexample is worth keeping: monotone decay is NOT enough; it must decay fast enough to have finite area."
+
         })
       },
       { q: "FIR filter coefficients $\\{0.25, 0.5, 0.25\\}$ — what type of filter?",
         choices: ["Low-pass (averaging)", "High-pass", "Band-pass", "All-pass"],
         correct: 0,
         solution: S({
-          c: "Coefficients are positive, symmetric, sum to 1 — weighted moving average.",
+          c: "Read a small FIR's character from two frequency probes: DC gain $= \\sum h[k]$ (a constant input scaled by the coefficient sum) and Nyquist gain $= \\sum(-1)^{k}h[k]$ (response to the fastest alternation $+1,-1,+1,\\ldots$).",
           s: [
-            "Frequency response $H(e^{j\\omega}) = 0.25 + 0.5e^{-j\\omega} + 0.25e^{-j2\\omega} = e^{-j\\omega}(0.5 + 0.5\\cos\\omega)$.",
-            "$|H| = 0.5 + 0.5\\cos\\omega$: 1 at $\\omega = 0$, 0 at $\\omega = \\pi$. Low-pass."
+            "<b>Step 1 — DC probe.</b> $0.25 + 0.5 + 0.25 = 1$ → passes DC at full strength.",
+            "<b>Step 2 — Nyquist probe.</b> $0.25 - 0.5 + 0.25 = 0$ → completely kills the fastest alternation.",
+            "<b>Step 3 — Conclude.</b> Full pass at low frequency, null at high frequency, smooth in between ($|H| = 0.5 + 0.5\\cos\\omega$) — a low-pass, specifically a weighted moving AVERAGE (and averaging always smooths).",
+            "<b>Step 4 — Distractor audit.</b> High-pass would need alternating-sign taps like $\\{-0.25, 0.5, -0.25\\}$; band-pass needs nulls at BOTH ends; all-pass needs $|H| = 1$ everywhere."
           ],
           a: "Low-pass (averaging) filter.",
-          v: "Symmetric coefficients ⇒ linear phase ⇒ no phase distortion."
+          v: "Bonus property: symmetric coefficients → LINEAR phase → every frequency delayed equally (1 sample here) → no waveform distortion ✓. This $\\tfrac14(1,2,1)$ kernel is two 2-point averagers cascaded — the building block of binomial/Gaussian smoothing."
+
         })
       },
       { q: "Bilinear transform maps $s$-plane to $z$-plane via:",
@@ -1248,13 +1313,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Bilinear: maps entire LHP to inside unit circle 1-to-1, no aliasing — but warps frequencies.",
+          c: "To build a digital (z-domain) filter from an analog (s-domain) prototype you need a map between the planes. The BILINEAR transform $s = \\dfrac{2}{T}\\cdot\\dfrac{z-1}{z+1}$ is the standard choice: it squeezes the ENTIRE left half s-plane into the unit circle one-to-one — so stability is preserved and nothing aliases.",
           s: [
-            "Pre-warp: $\\omega_a = (2/T)\\tan(\\omega_d T/2)$ corrects critical frequencies.",
-            "$s = e^{sT}$ is the exact (impulse-invariant) map but aliases."
+            "<b>Step 1 — Identify the form.</b> $s = (2/T)(z-1)/(z+1)$ — a Möbius (bilinear) fraction, hence the name.",
+            "<b>Step 2 — Know its price.</b> The infinite analog frequency axis gets compressed into the finite digital one, warping frequencies: $\\omega_a = (2/T)\\tan(\\omega_d T/2)$. Designers 'pre-warp' the critical frequency so the cutoff lands exactly right.",
+            "<b>Step 3 — Distractor audit.</b> $z = e^{sT}$ is the EXACT map (impulse invariance) but many-to-one — it aliases; $s = (z-1)/T$ is the forward-Euler approximation (can map stable to unstable); $z = s+1$ is not a plane mapping at all."
           ],
-          a: "$s = (2/T)(z-1)/(z+1)$",
-          v: "Common in IIR digital filter design from analog prototypes (Butterworth, Chebyshev)."
+          a: "$s = \\dfrac{2}{T}\\cdot\\dfrac{z-1}{z+1}$",
+          v: "Sanity probes: $z = 1$ (digital DC) → $s = 0$ (analog DC) ✓; $z = -1$ (Nyquist) → $s \\to \\infty$ ✓ — the whole analog axis fits, which is exactly why nothing can fold over. Standard use: digitizing Butterworth/Chebyshev prototypes into IIR filters."
+
         })
       },
       { q: "An ideal LPF has zero phase. Practical FIR LPFs achieve linear phase if:",
@@ -1266,14 +1333,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Symmetry of impulse response ⇒ frequency response has constant group delay $= (N-1)/2$.",
+          c: "Linear phase means the filter delays EVERY frequency by the same time (constant group delay) — the waveform shape passes through undistorted. For FIR filters there is a clean structural guarantee: impulse-response SYMMETRY.",
           s: [
-            "Type I (sym, odd N) and Type II (sym, even N) give linear phase.",
-            "Type III, IV (antisym) also linear phase.",
-            "Coefficient sign or magnitude alone doesn’t guarantee linear phase."
+            "<b>Step 1 — The condition.</b> $h[k] = h[N-1-k]$ (symmetric) or $h[k] = -h[N-1-k]$ (antisymmetric) → phase is exactly linear, group delay $= (N-1)/2$ samples.",
+            "<b>Step 2 — Why it works.</b> A symmetric kernel pairs each tap with its mirror; their phase contributions combine into a pure delay times a REAL amplitude function — no frequency-dependent phase twisting.",
+            "<b>Step 3 — Distractor audit.</b> All-positive coefficients (e.g. $\\{0.5, 0.3, 0.2\\}$) need not be symmetric; prime length is numerology; cutoff below $f_s/4$ constrains the passband, not the phase."
           ],
-          a: "Coefficient symmetry.",
-          v: "Constant group delay means all frequencies experience the same time delay — no phase distortion."
+          a: "Symmetric (or antisymmetric) coefficients.",
+          v: "Why audio/data systems care: nonlinear phase smears transients (different frequencies of an edge arrive at different times). IIR filters can NEVER be exactly linear-phase (poles break the symmetry) — the big reason FIR survives despite costing more taps ✓."
+
         })
       }
     ],
@@ -1281,118 +1349,139 @@
     // ====================== Ch 9: Electronics ======================
     9: [
       { q: "Silicon diode with thermal voltage $V_T = 26$ mV, $I_S = 10$ fA. Find diode current at $V_D = 0.6$ V.",
-        choices: ["$\\approx 0.107$ A", "$10$ A", "$10\\,\\mu$A", "$1$ mA"],
+        choices: ["$\\approx 107\\,\\mu$A", "$\\approx 0.107$ A", "$10\\,\\mu$A", "$1$ mA"],
         correct: 0,
         solution: S({
-          c: "Shockley equation: $I_D = I_S(e^{V_D/V_T} - 1) \\approx I_S e^{V_D/V_T}$ for $V_D \\gg V_T$.",
+          c: "The Shockley equation describes a diode's exponential turn-on: $I_D = I_S\\left(e^{V_D/V_T} - 1\\right) \\approx I_S\\,e^{V_D/V_T}$ once $V_D$ is several times $V_T$. $I_S$ (the saturation current) is astronomically small — the exponential does all the lifting.",
           s: [
-            "$V_D/V_T = 0.6/0.026 = 23.077$.",
-            "$e^{23.077} \\approx 1.07\\times 10^{10}$.",
-            "$I_D = 10^{-14} \\times 1.07\\times 10^{10} = 1.07\\times 10^{-4}$ A $= 107\\,\\mu$A. Wait — let me recheck the exponent: yes, $\\approx 107\\,\\mu$A."
+            "<b>Step 1 — Exponent.</b> $V_D/V_T = 0.6/0.026 = 23.08$.",
+            "<b>Step 2 — Evaluate the exponential.</b> $e^{23.08} \\approx 1.07\\times10^{10}$.",
+            "<b>Step 3 — Scale by $I_S$.</b> $I_D = (10\\times10^{-15})(1.07\\times10^{10}) = 1.07\\times10^{-4}$ A $= 107\\,\\mu$A.",
+            "<b>Step 4 — Distractor audit.</b> 0.107 A is a 1000× decade slip (mA vs μA bookkeeping); 10 μA and 1 mA bracket the answer to punish loose estimation."
           ],
-          a: "$\\approx 107\\,\\mu$A",
-          v: "Note: the listed option A says ‘0.107 A’ which is 107 mA — that disagrees with the calculation. The intended numeric answer is 107 μA; the typo in option A reads 0.107 A. Always recompute, don’t trust the options blindly."
+          a: "$I_D \\approx 107\\,\\mu$A",
+          v: "The 60-mV/decade rule confirms the scale: current grows 10× for every ~60 mV of bias. From 0.6 V, adding 0.12 V (two decades) would give ~10 mA — consistent with a real diode hitting tens of mA around 0.7 V ✓."
+
         })
       },
       { q: "BJT in active region: $\\beta = 100$, $I_B = 20\\,\\mu$A. Find $I_C$.",
         choices: ["$2$ mA", "$200\\,\\mu$A", "$20$ mA", "$20\\,\\mu$A"],
         correct: 0,
         solution: S({
-          c: "Active region: $I_C = \\beta\\,I_B$; $I_E = I_C + I_B$.",
+          c: "In the ACTIVE region a BJT is a current amplifier: a small base current controls a collector current $\\beta$ times larger — $I_C = \\beta I_B$. (Active requires the base-emitter junction forward biased and base-collector reverse biased.)",
           s: [
-            "$I_C = 100 \\times 20\\,\\mu$A $= 2000\\,\\mu$A = 2 mA."
+            "<b>Step 1 — Multiply.</b> $I_C = 100 \\times 20\\,\\mu\\text{A} = 2000\\,\\mu\\text{A} = 2$ mA.",
+            "<b>Step 2 — Distractor audit.</b> 200 μA uses $\\beta = 10$; 20 mA uses $\\beta = 1000$; 20 μA forgets the amplification entirely."
           ],
           a: "$I_C = 2$ mA",
-          v: "$I_E = I_C + I_B = 2.02$ mA; $\\alpha = \\beta/(\\beta+1) = 0.99$."
+          v: "Completing the picture: $I_E = I_C + I_B = 2.02$ mA (KCL through the device) and $\\alpha = \\beta/(\\beta+1) = 0.990$ — the emitter carries everything, the base only 1% ✓. Caveat the FE tests: $I_C = \\beta I_B$ holds ONLY in active mode; in saturation $I_C$ is set by the external circuit instead."
+
         })
       },
       { q: "MOSFET (NMOS) in saturation: $V_{GS} = 3$ V, $V_t = 1$ V, $\\mu_n C_{ox}(W/L) = 1$ mA/V². Find $I_D$.",
         choices: ["$2$ mA", "$1$ mA", "$4$ mA", "$8$ mA"],
         correct: 0,
         solution: S({
-          c: "Saturation drain current: $I_D = \\tfrac{1}{2}\\mu_n C_{ox}(W/L)(V_{GS}-V_t)^{2}$.",
+          c: "A MOSFET in SATURATION acts as a voltage-controlled current source obeying the square law: $I_D = \\tfrac12\\mu_nC_{ox}\\dfrac{W}{L}(V_{GS}-V_t)^{2}$. The 'overdrive' $V_{OV} = V_{GS} - V_t$ is how far the gate is above threshold — the knob that sets the current.",
           s: [
-            "Overdrive $V_{OV} = V_{GS} - V_t = 3 - 1 = 2$ V.",
-            "$I_D = 0.5 \\times 1 \\times 10^{-3} \\times 4 = 2 \\times 10^{-3} = 2$ mA."
+            "<b>Step 1 — Overdrive.</b> $V_{OV} = 3 - 1 = 2$ V.",
+            "<b>Step 2 — Square it.</b> $V_{OV}^{2} = 4$ V².",
+            "<b>Step 3 — Evaluate.</b> $I_D = 0.5 \\times 1\\,\\text{mA/V}^{2} \\times 4 = 2$ mA.",
+            "<b>Step 4 — Distractor audit.</b> 4 mA drops the ½; 1 mA forgets to square ($0.5\\times1\\times2$); 8 mA does both errors in the same direction."
           ],
           a: "$I_D = 2$ mA",
-          v: "Saturation requires $V_{DS} \\geq V_{OV} = 2$ V. Otherwise triode/linear region."
+          v: "Region check (always verify!): saturation requires $V_{DS} \\ge V_{OV} = 2$ V — assumed by the problem statement ✓. Square-law feel: raising $V_{GS}$ to 4 V (overdrive 3) would give $4.5$ mA — current grows with the SQUARE, not linearly."
+
         })
       },
       { q: "Op-amp non-inverting amplifier: $R_f = 90$ kΩ, $R_g = 10$ kΩ (to ground). Gain $A_v$?",
         choices: ["$+10$", "$-10$", "$+9$", "$+11$"],
         correct: 0,
         solution: S({
-          c: "Non-inverting: $A_v = 1 + R_f/R_g$.",
+          c: "Non-inverting amplifier: input drives the + terminal; feedback through $R_f$ and $R_g$ feeds a fraction of the output back to −. The feedback forces $V_- = V_+$ (virtual short), giving $A_v = 1 + \\dfrac{R_f}{R_g}$ — always at least 1, never inverting.",
           s: [
-            "$A_v = 1 + 90/10 = 1 + 9 = 10$."
+            "<b>Step 1 — Apply the formula.</b> $A_v = 1 + 90/10 = 1 + 9 = 10$.",
+            "<b>Step 2 — Where it comes from.</b> The output divides through $R_f$-$R_g$; the − pin sees $V_{out}\\cdot\\dfrac{R_g}{R_g+R_f}$. Setting that equal to $V_{in}$: $V_{out} = V_{in}(R_g+R_f)/R_g = V_{in}(1 + R_f/R_g)$.",
+            "<b>Step 3 — Distractor audit.</b> $+9$ forgets the '+1' (uses the INVERTING magnitude $R_f/R_g$); $-10$ wrong topology; $+11$ adds 1 to the wrong number ($90/10+1$ done as $90/(10-1)$-style slip)."
           ],
           a: "$A_v = +10$",
-          v: "Note ‘+11’ trap if the student writes $A_v = R_f/R_g + 1 = 10$… careful arithmetic: 90/10 = 9, plus 1 = 10."
+          v: "Boundary check: $R_f = 0$ (or $R_g = \\infty$) gives $A_v = 1$ — the unity-gain buffer, the formula's floor ✓. Perk vs the inverting cousin: input impedance is essentially infinite (signal enters the op-amp gate directly) — the reason this topology buffers sensors."
+
         })
       },
       { q: "Half-wave rectifier with ideal diode, sinusoidal source $V_m = 10$ V, load $R$. Average output voltage?",
         choices: ["$V_m/\\pi = 3.18$ V", "$V_m/2 = 5$ V", "$V_m = 10$ V", "$V_m\\sqrt{2}/\\pi$"],
         correct: 0,
         solution: S({
-          c: "Half-wave avg: $V_{avg} = (1/T)\\int_0^{T/2}V_m\\sin(\\omega t)dt = V_m/\\pi$.",
+          c: "A half-wave rectifier passes only the positive half-cycles (the diode blocks the negative ones). Its DC (average) value integrates one positive hump over the WHOLE period: $V_{avg} = \\dfrac{1}{2\\pi}\\int_0^{\\pi}V_m\\sin\\theta\\,d\\theta = \\dfrac{V_m}{\\pi}$.",
           s: [
-            "$V_{avg} = 10/\\pi \\approx 3.183$ V."
+            "<b>Step 1 — Do the integral.</b> $\\int_0^{\\pi}\\sin\\theta\\,d\\theta = 2$, so $V_{avg} = \\dfrac{V_m\\cdot2}{2\\pi} = \\dfrac{V_m}{\\pi}$.",
+            "<b>Step 2 — Evaluate.</b> $V_{avg} = 10/\\pi \\approx 3.18$ V.",
+            "<b>Step 3 — Distractor audit.</b> $V_m/2 = 5$ V is a naive 'half of peak'; 10 V ignores rectification; $V_m\\sqrt2/\\pi$ garbles RMS into the average formula."
           ],
           a: "$V_{avg} \\approx 3.18$ V",
-          v: "Full-wave avg = $2V_m/\\pi \\approx 6.37$ V (double the half-wave)."
+          v: "Consistency ladder: full-wave average $= 2V_m/\\pi = 6.37$ V — exactly double, because it fills in the missing half-cycles ✓. RMS companion (different quantity!): half-wave $V_{rms} = V_m/2 = 5$ V — note how distractor B is the RMS masquerading as the average."
+
         })
       },
       { q: "Common-emitter BJT amplifier with $R_C = 5$ kΩ, $I_C = 1$ mA, transconductance $g_m = I_C/V_T$. Voltage gain magnitude?",
         choices: ["$\\approx 192$", "$\\approx 50$", "$\\approx 5000$", "$\\approx 26$"],
         correct: 0,
         solution: S({
-          c: "Small-signal CE gain: $|A_v| = g_m R_C$ (without emitter degeneration).",
+          c: "The common-emitter stage converts input voltage to collector current via transconductance $g_m = I_C/V_T$, then back to voltage across $R_C$: $|A_v| = g_mR_C$ (no emitter degeneration).",
           s: [
-            "$g_m = 1\\text{ mA}/26\\text{ mV} = 38.46$ mA/V.",
-            "$|A_v| = 38.46\\times 10^{-3} \\times 5000 = 192.3$."
+            "<b>Step 1 — Transconductance.</b> $g_m = 1\\,\\text{mA}/26\\,\\text{mV} = 38.5$ mA/V.",
+            "<b>Step 2 — Multiply by the load.</b> $|A_v| = 0.0385 \\times 5000 = 192$.",
+            "<b>Step 3 — Distractor audit.</b> 50 ≈ guessing $\\beta/2$; 5000 multiplies by $R_C$ without converting $g_m$ units; 26 echoes $V_T$ in mV."
           ],
           a: "$|A_v| \\approx 192$",
-          v: "Adding emitter degeneration $R_E$ reduces gain to $\\approx R_C/R_E$ but improves linearity and bandwidth."
+          v: "Slick shortcut: $g_mR_C = \\dfrac{I_CR_C}{V_T}$ = (DC voltage across $R_C$)/(26 mV) $= 5\\,\\text{V}/26\\,\\text{mV} \\approx 192$ ✓ — gain is just the bias drop measured in thermal-voltage units. Design note: adding emitter resistance $R_E$ tames this to $\\approx R_C/R_E$, trading gain for linearity and stability."
+
         })
       },
       { q: "Logical inverter (CMOS): static power dissipation in steady state is approximately:",
         choices: ["Near zero (only leakage)", "$V_{DD}^{2}/R$", "$V_{DD}\\cdot I_{avg}$", "Equal to dynamic power"],
         correct: 0,
         solution: S({
-          c: "CMOS: one of N/P transistors is OFF in either logic state — no DC path from $V_{DD}$ to ground.",
+          c: "A CMOS inverter pairs a PMOS (pulls output HIGH) with an NMOS (pulls it LOW). In EITHER steady logic state, one of the two is fully OFF — so there is no conducting path from supply to ground, and essentially no static current.",
           s: [
-            "Static current ≈ leakage (subthreshold + gate-oxide tunneling).",
-            "Power = $V_{DD}\\cdot I_{leak}$, very small (nW typically per gate)."
+            "<b>Step 1 — Trace each state.</b> Input LOW: NMOS off, PMOS on → output high, path blocked by the NMOS. Input HIGH: PMOS off → path blocked again. Either way: no DC current.",
+            "<b>Step 2 — What remains.</b> Only leakage (subthreshold conduction, gate tunneling) — nano- to micro-watts per gate, the 'near zero' of the answer.",
+            "<b>Step 3 — Distractor audit.</b> $V_{DD}^{2}/R$ describes a resistive divider (old NMOS-load logic, which is why CMOS replaced it); 'equal to dynamic' is wrong by orders of magnitude in steady state."
           ],
-          a: "Near zero (just leakage).",
-          v: "Dynamic power dominates: $P_d = \\alpha\\,C_L\\,V_{DD}^{2}\\,f$ — switching activity, capacitance, voltage, frequency."
+          a: "Near zero — only leakage current.",
+          v: "The power that DOES matter is dynamic: $P = \\alpha C_LV_{DD}^{2}f$, burned only while switching — this is why CMOS conquered digital electronics, and why idle circuits clock-gate ✓. Modern caveat: at nm nodes leakage has crept back up to a significant fraction of total power — hence power gating."
+
         })
       },
       { q: "Zener diode shunt regulator: input 12 V, Zener $V_Z = 5.1$ V, $R_S$ chosen for $I_Z = 10$ mA at no load. Compute $R_S$.",
         choices: ["$690\\,\\Omega$", "$510\\,\\Omega$", "$120\\,\\Omega$", "$1\\,$ kΩ"],
         correct: 0,
         solution: S({
-          c: "Series resistor drops $V_{in}-V_Z$ at current $I_Z$ (no load): $R_S = (V_{in}-V_Z)/I_Z$.",
+          c: "A Zener shunt regulator drops the excess input voltage across a series resistor $R_S$ while the Zener clamps the output at $V_Z$. With NO load, every milliamp through $R_S$ enters the Zener — so $R_S$ is chosen to set that current: $R_S = (V_{in} - V_Z)/I_Z$.",
           s: [
-            "$V_{in} - V_Z = 12 - 5.1 = 6.9$ V.",
-            "$R_S = 6.9/0.01 = 690\\,\\Omega$."
+            "<b>Step 1 — Voltage across $R_S$.</b> $12 - 5.1 = 6.9$ V.",
+            "<b>Step 2 — Divide by the design current.</b> $R_S = 6.9/0.010 = 690\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 510 Ω divides $V_Z$ by $I_Z$ (wrong voltage); 120 Ω uses 1.2 V somewhere; 1 kΩ rounds 12 V/10 mA (forgot to subtract $V_Z$)."
           ],
           a: "$R_S = 690\\,\\Omega$",
-          v: "Under load, $I_Z$ shares with load — design $R_S$ for worst case (full-load) Zener current."
+          v: "Power checks a designer must run: $P_{R_S} = 6.9\\times0.01 = 69$ mW; $P_Z = 5.1\\times0.01 = 51$ mW — small parts suffice ✓. Loaded operation: load current STEALS from the Zener ($I_Z = I_{R_S} - I_{load}$), so regulation holds only while $I_Z$ stays above the knee (~1-5 mA) — size $I_Z$ for the worst-case load."
+
         })
       },
       { q: "RC low-pass filter cutoff frequency $f_c$ for $R = 1$ kΩ, $C = 1\\,\\mu$F:",
         choices: ["$\\approx 159$ Hz", "$\\approx 1$ kHz", "$\\approx 1000\\,$rad/s", "$\\approx 16$ Hz"],
         correct: 0,
         solution: S({
-          c: "First-order RC LPF: $f_c = 1/(2\\pi RC)$.",
+          c: "A series-R, shunt-C divider passes low frequencies (capacitor looks open) and shunts high ones to ground (capacitor looks short). The crossover — where output falls to $1/\\sqrt2$ (−3 dB) — is at $f_c = \\dfrac{1}{2\\pi RC}$.",
           s: [
-            "$RC = 10^{3}\\cdot 10^{-6} = 10^{-3}$ s.",
-            "$f_c = 1/(2\\pi\\cdot 10^{-3}) = 159.15$ Hz."
+            "<b>Step 1 — RC product.</b> $RC = (10^{3})(10^{-6}) = 10^{-3}$ s.",
+            "<b>Step 2 — Evaluate.</b> $f_c = \\dfrac{1}{2\\pi\\times10^{-3}} = 159$ Hz.",
+            "<b>Step 3 — Distractor audit.</b> 1 kHz forgets the $2\\pi$ (that is $1/RC$ misread as Hz); 1000 rad/s is CORRECT in rad/s but the question asks Hz — unit discipline; 16 Hz is a decade slip."
           ],
           a: "$f_c \\approx 159$ Hz",
-          v: "Note rad/s vs Hz: $\\omega_c = 1/RC = 1000$ rad/s — both are correct in their own units."
+          v: "The rad/s vs Hz pair to lock in: $\\omega_c = 1/RC = 1000$ rad/s and $f_c = \\omega_c/2\\pi = 159$ Hz describe the SAME corner ✓. Behavior recap: below $f_c$ ≈ flat; above, −20 dB/decade; phase −45° exactly at $f_c$."
+
         })
       },
       { q: "Schmitt trigger is used to:",
