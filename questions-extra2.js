@@ -323,41 +323,45 @@
         choices: ["Refuse — accepting bonus violates faithful agent duty", "Accept but disclose to client", "Accept if product is good", "Negotiate higher bonus"],
         correct: 0,
         solution: S({
-          c: "Rule 4: engineers are faithful agents of clients. Gifts/bonuses from vendors create conflicts of interest.",
+          c: "Engineers act as FAITHFUL AGENTS of their clients: recommendations must serve the client's interest only. A vendor's bonus-for-specification ties the engineer's personal gain to the choice — a conflict of interest that corrupts (or appears to corrupt) the judgment the client is paying for.",
           s: [
-            "Refusal is the cleanest action — no perceived bias.",
-            "Even with disclosure, accepting compromises objectivity.",
-            "Most state boards: gift acceptance from vendors = ethics violation."
+            "<b>Step 1 — Name the transaction.</b> Money in exchange for specifying a product = a kickback, whatever it is labeled.",
+            "<b>Step 2 — Apply the rule.</b> Refuse outright — the only action leaving zero bias and zero appearance of bias.",
+            "<b>Step 3 — Distractor audit.</b> 'Accept but disclose' still leaves the engineer paid by two masters; 'if the product is good' — the bonus makes that very judgment untrustworthy; negotiating a bigger kickback compounds the violation."
           ],
           a: "Refuse the bonus.",
-          v: "Some firms allow small gifts (≤$25/year) but tighten policies are common."
+          v: "Litmus test that resolves every gift question: would the client, knowing everything, still trust the recommendation? Practical norms agree — most firms cap vendor courtesies at trivial value (a coffee, a pen) and many at zero ✓."
+
         }),
         ref: "Handbook p.4" },
       { q: "An engineer's signature/seal on a document indicates:",
         choices: ["Personal responsibility for the work", "Approval by employer", "Just authentication of identity", "Optional courtesy"],
         correct: 0,
         solution: S({
-          c: "Sealing/stamping = professional assertion that the work meets standards and the engineer accepts personal liability.",
+          c: "The seal is the licensure system's accountability anchor: it asserts that the named, licensed individual prepared the work or supervised it in RESPONSIBLE CHARGE — and personally answers for its technical adequacy.",
           s: [
-            "Not employer's responsibility; the engineer is personally liable.",
-            "Liability persists even after employment changes.",
-            "Use only when work is fully prepared or thoroughly reviewed."
+            "<b>Step 1 — What it claims.</b> 'I am professionally responsible for this document' — to the client, the public, and the licensing board.",
+            "<b>Step 2 — What it is NOT.</b> Not an employer's corporate sign-off (liability is personal and follows the engineer between jobs); not mere identity authentication (that's what a notary does); never optional on public-safety documents — permits require it by law.",
+            "<b>Step 3 — Practical consequence.</b> Boards discipline the SEALING engineer for deficient work regardless of who actually drafted it."
           ],
-          a: "Personal responsibility",
-          v: "This is why states require licensure for stamping public-safety-affecting work."
+          a: "Personal responsibility for the work.",
+          v: "This is the entire logic of licensure: the public cannot evaluate engineering quality, so the state pins accountability to one identifiable, licensed person — which is also why sealing unreviewed work ('plan stamping') is treated as fraud ✓."
+
         }),
         ref: "Handbook p.5" },
       { q: "Public welfare obligation vs. employer confidentiality — which prevails?",
         choices: ["Public welfare", "Confidentiality", "Whichever has stronger contract clause", "Always negotiate"],
         correct: 0,
         solution: S({
-          c: "NCEES Rule 1 explicitly: public safety is paramount. No employment contract can override this.",
+          c: "The first canon — hold paramount the safety, health, and welfare of the public — outranks every other duty, including confidentiality owed to an employer. No contract clause can buy exemption from it.",
           s: [
-            "Confidentiality is routine, except when public is at risk.",
-            "Reporting actual safety threats is protected by law in most jurisdictions."
+            "<b>Step 1 — Apply the hierarchy.</b> PUBLIC > client/employer > self. When secrecy would conceal a public hazard, secrecy loses.",
+            "<b>Step 2 — How to act on it.</b> Raise internally first; escalate to the responsible authority if unaddressed — ordered escalation, documented in writing.",
+            "<b>Step 3 — Distractor audit.</b> 'Stronger contract clause' — private contracts cannot override professional law; 'always negotiate' treats a safety duty as a bargaining chip."
           ],
           a: "Public welfare prevails.",
-          v: "Famous case: Roger Boisjoly warned about O-ring failures before Challenger but was overridden — leading to subsequent ethics-reform discussions."
+          v: "The Challenger case anchors this canon: engineer Roger Boisjoly documented the O-ring danger and escalated; management overrode him — the disaster that followed reshaped engineering-ethics teaching and whistleblower protections ✓."
+
         }),
         ref: "Handbook p.4-5" },
     ],
@@ -368,64 +372,78 @@
         choices: ["$\\approx \\$57{,}435$", "$\\$28{,}000$", "$\\$100{,}000$", "$\\$60{,}000$"],
         correct: 0,
         solution: S({
-          c: "$F = P(1+i)^n$.",
+          c: "Compound interest grows a lump sum geometrically: $F = P(1+i)^{n}$ — each year multiplies by $(1+i)$, and over decades the multiplication dominates.",
           s: [
-            "$(1.06)^{30} = 5.7435$.",
-            "$F = 10000 \\cdot 5.7435 = 57{,}435$."
+            "<b>Step 1 — Growth factor.</b> $(1.06)^{30} = 5.7435$.",
+            "<b>Step 2 — Scale.</b> $F = 10{,}000 \\times 5.7435 = \\$57{,}435$.",
+            "<b>Step 3 — Distractor audit.</b> \\$28,000 is SIMPLE interest ($10{,}000(1 + 0.06\\times30)$) — the planted contrast; \\$60,000 and \\$100,000 are round-number guesses."
           ],
-          a: "$\\approx \\$57{,}435$",
-          v: "Rule of 72: doubles every ~12 yrs at 6%, so in 30 yrs about $2.5\\times$ doublings = ~5.6$\\times$ original ✓"
+          a: "$F \\approx \\$57{,}435$",
+          v: "Rule-of-72 check: at 6%, money doubles every ~12 years → 30 years = 2.5 doublings → $2^{2.5} \\approx 5.7\\times$ ✓ — exactly the factor computed. The \\$29k gap between simple and compound IS the 'interest on interest'."
+
         }),
         ref: "Handbook p.230" },
       { q: "Present worth of $\\$5000$ received 8 years from now at 5%:",
         choices: ["$\\approx \\$3{,}385$", "$\\$3{,}000$", "$\\$4{,}500$", "$\\$5{,}500$"],
         correct: 0,
         solution: S({
-          c: "$P = F/(1+i)^n$.",
+          c: "Discounting runs compound growth backwards: a future amount is worth less today because today's money could grow at $i$: $P = F/(1+i)^{n}$.",
           s: [
-            "$(1.05)^8 = 1.4775$.",
-            "$P = 5000 / 1.4775 \\approx 3385$."
+            "<b>Step 1 — Growth factor.</b> $(1.05)^{8} = 1.4775$.",
+            "<b>Step 2 — Divide.</b> $P = 5000/1.4775 = \\$3{,}385$.",
+            "<b>Step 3 — Distractor audit.</b> \\$4,500 under-discounts (≈2 years' worth); \\$3,000 over-rounds; \\$5,500 goes the WRONG DIRECTION (that's a future value)."
           ],
-          a: "$\\approx \\$3{,}385$",
-          v: "Future $5000 today only worth $3385 because of opportunity cost."
+          a: "$P \\approx \\$3{,}385$",
+          v: "Round trip: $3385\\times(1.05)^{8} = 3385\\times1.4775 = \\$5{,}001$ ✓. Sense check: ~5% for 8 years should shave roughly a third off — and $3385/5000 = 68\\%$ ✓."
+
         }),
         ref: "Handbook p.230" },
       { q: "Annual maintenance $\\$500$/yr forever (perpetuity) at $i=8\\%$. Present worth:",
         choices: ["$\\$6{,}250$", "$\\$500$", "$\\$8{,}000$", "$\\$10{,}000$"],
         correct: 0,
         solution: S({
-          c: "Perpetuity (infinite annuity): $P = A/i$.",
-          s: ["$P = 500/0.08 = 6{,}250$."],
+          c: "A perpetuity — equal payments FOREVER — has a finite present worth because distant payments discount toward zero. The formula collapses beautifully: $P = A/i$ (the fund whose interest alone pays $A$ each year).",
+          s: [
+            "<b>Step 1 — Divide.</b> $P = 500/0.08 = \\$6{,}250$.",
+            "<b>Step 2 — Why it works.</b> \\$6,250 at 8% earns exactly \\$500/yr — pay it out and the principal survives untouched, forever.",
+            "<b>Step 3 — Distractor audit.</b> \\$500 confuses one payment with the fund; \\$8,000 and \\$10,000 misuse the 8%."
+          ],
           a: "$P = \\$6{,}250$",
-          v: "An infinite stream is worth a finite amount because distant payments are heavily discounted."
+          v: "Convergence intuition: the payments sum to infinity NOMINALLY, but $\\sum 500/(1.08)^{n}$ is a geometric series with ratio < 1 — finite ✓. This $A/i$ building block is the engine of capitalized-cost problems for long-lived public works."
+
         }),
         ref: "Handbook p.231" },
       { q: "Loan $\\$50k$ at $i=4\\%$ monthly compounded over 5 years. Monthly payment:",
         choices: ["$\\approx \\$921$", "$\\$833$", "$\\$1041$", "$\\$700$"],
         correct: 0,
         solution: S({
-          c: "Capital recovery: $A = P \\cdot \\dfrac{i(1+i)^n}{(1+i)^n - 1}$. Monthly: $i = 4\\%/12 = 0.003333$, $n = 60$.",
+          c: "A loan payment is the capital-recovery factor in action: $A = P\\cdot\\dfrac{i(1+i)^{n}}{(1+i)^{n}-1}$ — and for monthly payments BOTH the rate and the period count must be monthly: $i = 0.04/12$, $n = 60$.",
           s: [
-            "$(1.003333)^{60} = 1.2210$.",
-            "$A/P = 0.003333 \\cdot 1.2210 / 0.2210 = 0.004069/0.2210 = 0.01842$.",
-            "$A = 50000 \\cdot 0.01842 = 921$."
+            "<b>Step 1 — Monthly parameters.</b> $i = 0.003333$/mo; $n = 60$ payments.",
+            "<b>Step 2 — Growth factor.</b> $(1.003333)^{60} = 1.2210$.",
+            "<b>Step 3 — Capital-recovery factor.</b> $\\dfrac{0.003333\\times1.2210}{0.2210} = 0.01842$.",
+            "<b>Step 4 — Payment.</b> $A = 50{,}000\\times0.01842 = \\$921$/month.",
+            "<b>Step 5 — Distractor audit.</b> \\$833 is $50{,}000/60$ — zero-interest amortization; \\$1041 ≈ uses 4% PER MONTH territory errors; \\$700 has no route."
           ],
-          a: "$\\approx \\$921$/month",
-          v: "Total paid: $60 \\cdot 921 = \\$55{,}260$. Interest ≈ $\\$5{,}260$ on $\\$50k$ over 5 yrs."
+          a: "$\\approx \\$921$ per month.",
+          v: "Total-cost read: $60\\times921 = \\$55{,}260$ → \\$5,260 of interest on \\$50k over 5 years at 4% — plausible (roughly 'average balance \\$26k × 4% × 5yr ≈ \\$5.2k') ✓. The annual↔monthly rate conversion is where most loan-problem points are lost."
+
         }),
         ref: "Handbook p.232" },
       { q: "ROR for $\\$1000$ now to $\\$2000$ in 6 years:",
         choices: ["$\\approx 12.2\\%$", "$10\\%$", "$\\approx 16.7\\%$", "$33.3\\%$"],
         correct: 0,
         solution: S({
-          c: "$F = P(1+i)^n \\Rightarrow i = (F/P)^{1/n} - 1$.",
+          c: "Rate of return for a single doubling: solve $F = P(1+i)^{n}$ for the rate — $i = (F/P)^{1/n} - 1$, the geometric average growth per year.",
           s: [
-            "$F/P = 2$.",
-            "$2^{1/6} = 1.1225$.",
-            "$i = 0.1225 = 12.25\\%$."
+            "<b>Step 1 — Ratio.</b> $F/P = 2$.",
+            "<b>Step 2 — Sixth root.</b> $2^{1/6} = 1.1225$.",
+            "<b>Step 3 — Rate.</b> $i = 12.25\\%$.",
+            "<b>Step 4 — Distractor audit.</b> $16.7\\% = 100\\%/6$ is the SIMPLE-interest answer (linear thinking); $33.3\\%$ has no route; 10% under-shoots (would take 7.3 years to double)."
           ],
           a: "$i \\approx 12.25\\%$",
-          v: "Rule of 72: at 12.25%, doubles in 72/12.25 = 5.88 yrs ≈ 6 ✓"
+          v: "Rule-of-72 confirmation: $72/12.25 = 5.9$ years to double ≈ the stated 6 ✓. The compound-vs-simple gap (12.25% vs 16.7%) is exactly what the distractors test."
+
         }),
         ref: "Handbook p.230" },
     ],
