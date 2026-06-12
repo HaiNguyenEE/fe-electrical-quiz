@@ -20,14 +20,16 @@
         correct: 0,
         ref: "Handbook §1.5 (Vector calculus, optimization)",
         solution: S({
-          c: "Stationary point of $\\mathcal L = f - \\lambda g$ where $g(x,y) = x + 2y - 5$.",
+          c: "Constrained optimization: at the optimum, the gradient of the objective is parallel to the gradient of the constraint — $\\nabla f = \\lambda\\nabla g$ with $g(x,y) = x + 2y - 5 = 0$.",
           s: [
-            "Set $\\nabla f = \\lambda\\nabla g$: $\\ 2x = \\lambda$ and $2y = 2\\lambda$.",
-            "Therefore $y = 2x$. Substitute into the constraint: $x + 2(2x) = 5x = 5 \\Rightarrow x = 1$.",
-            "Then $y = 2$ and $f(1,2) = 1 + 4 = 5$."
+            "<b>Step 1 — Write the multiplier equations.</b> $\\nabla f = (2x, 2y)$, $\\nabla g = (1, 2)$. Setting $\\nabla f = \\lambda\\nabla g$: $2x = \\lambda$ and $2y = 2\\lambda$.",
+            "<b>Step 2 — Eliminate $\\lambda$.</b> From the pair: $2y = 2(2x) \\Rightarrow y = 2x$. The optimum lies along this ray.",
+            "<b>Step 3 — Enforce the constraint.</b> $x + 2(2x) = 5x = 5 \\Rightarrow x = 1$, $y = 2$.",
+            "<b>Step 4 — Evaluate.</b> $f(1,2) = 1 + 4 = 5$. It is a minimum because $f$ grows without bound along the constraint line in both directions."
           ],
-          a: "$(x,y) = (1,2)$, minimum value $f = 5$",
-          v: "Geometrically the answer is the foot of perpendicular from origin to the line $x + 2y = 5$ — distance $5/\\sqrt 5 = \\sqrt 5$, squared = 5 ✓."
+          a: "$(x,y) = (1,2)$ with $f_{min} = 5$.",
+          v: "Geometric check: minimizing $x^{2}+y^{2}$ on a line finds the closest point to the origin. Distance from origin to $x+2y=5$ is $|{-5}|/\\sqrt{1^{2}+2^{2}} = 5/\\sqrt 5 = \\sqrt 5$, and $(\\sqrt 5)^{2} = 5$ ✓. Distractor $(2,1)$ also gives $f = 5$ but is NOT on the gradient-parallel condition ($2+2 = 4 \\ne 5$ constraint ✓ wait: $2+2(1)=4\\ne5$ — it violates the constraint entirely)."
+
         })
       },
       { q: "Evaluate the line integral $\\oint_C (x\\,dy - y\\,dx)$ where $C$ is the unit circle traversed counter-clockwise.",
@@ -35,13 +37,15 @@
         correct: 0,
         ref: "Handbook §1.5.4 (Green's theorem)",
         solution: S({
-          c: "By Green's theorem $\\oint_C(P\\,dx + Q\\,dy) = \\iint_D\\!(\\partial_x Q - \\partial_y P)\\,dA$. Here $P = -y$, $Q = x$.",
+          c: "Green's theorem converts a closed line integral to a double integral: $\\oint_C(P\\,dx + Q\\,dy) = \\iint_D(\\partial_x Q - \\partial_y P)\\,dA$. Here $P = -y$, $Q = x$.",
           s: [
-            "$\\partial_x Q - \\partial_y P = 1 - (-1) = 2$.",
-            "Integral $= 2 \\cdot \\text{Area}(D) = 2\\pi r^{2} = 2\\pi$."
+            "<b>Step 1 — Compute the integrand.</b> $\\partial_x Q - \\partial_y P = 1 - (-1) = 2$ — a constant.",
+            "<b>Step 2 — Integrate over the disc.</b> $\\iint_D 2\\,dA = 2\\,\\text{Area} = 2\\pi(1)^{2} = 2\\pi$.",
+            "<b>Step 3 — Note the orientation.</b> Counter-clockwise traversal is the positive orientation Green's theorem assumes; clockwise would flip the sign to $-2\\pi$ (distractor D)."
           ],
           a: "$2\\pi$",
-          v: "Alternative parametrization $x = \\cos\\theta,\\ y = \\sin\\theta$: integrand becomes $\\cos^{2}\\theta + \\sin^{2}\\theta = 1$, integrated over $[0, 2\\pi]$ gives $2\\pi$ ✓."
+          v: "Direct parametrization check: $x = \\cos\\theta$, $y = \\sin\\theta$ gives $x\\,dy - y\\,dx = (\\cos^{2}\\theta + \\sin^{2}\\theta)\\,d\\theta = d\\theta$, and $\\int_0^{2\\pi}d\\theta = 2\\pi$ ✓. Memorable identity: $\\tfrac12\\oint(x\\,dy - y\\,dx)$ = enclosed area — the planimeter formula."
+
         })
       },
       { q: "The Laplace transform $\\mathcal L\\{t^{2}e^{-2t}\\}$ equals:",
@@ -49,13 +53,15 @@
         correct: 0,
         ref: "Handbook §1.7 (Laplace transform pair table)",
         solution: S({
-          c: "Frequency-shift property: $\\mathcal L\\{e^{-at}f(t)\\} = F(s+a)$. Pair: $\\mathcal L\\{t^{n}\\} = n!/s^{n+1}$.",
+          c: "Two table entries compose the answer: the power pair $\\mathcal L\\{t^{n}\\} = n!/s^{n+1}$ and the frequency-shift (damping) property $\\mathcal L\\{e^{-at}f(t)\\} = F(s+a)$.",
           s: [
-            "Start with $\\mathcal L\\{t^{2}\\} = 2/s^{3}$.",
-            "Apply $a = 2$ shift: replace $s$ by $s+2$ to get $2/(s+2)^{3}$."
+            "<b>Step 1 — Transform the power factor.</b> $\\mathcal L\\{t^{2}\\} = 2!/s^{3} = 2/s^{3}$.",
+            "<b>Step 2 — Apply the shift for $e^{-2t}$.</b> Multiplying by $e^{-2t}$ in time shifts every $s$ to $s + 2$: $F(s+2) = 2/(s+2)^{3}$.",
+            "<b>Step 3 — Distractor audit.</b> $1/(s+2)^{3}$ drops the $2! = 2$; $2/(s-2)^{3}$ shifts the wrong way (that is $e^{+2t}$, a GROWING signal); $1/(s^{3}+2)$ is not a valid transform shape at all."
           ],
-          a: "$2/(s+2)^{3}$",
-          v: "Pole at $s = -2$ with order 3 — matches a damped quadratic ramp ($t^{2}e^{-2t}$) in time domain."
+          a: "$\\dfrac{2}{(s+2)^{3}}$",
+          v: "Pole check: a triple pole at $s = -2$ matches a $t^{2}$-weighted decaying exponential ✓. Initial-value theorem: $\\lim_{s\\to\\infty} sF(s) = 0 = f(0^{+})$ ✓ ($t^{2}e^{-2t}$ starts at zero)."
+
         })
       },
       { q: "Find the radius of convergence of the power series $\\displaystyle\\sum_{n=1}^{\\infty}\\dfrac{(x-3)^{n}}{n\\,2^{n}}$.",
@@ -63,14 +69,15 @@
         correct: 0,
         ref: "Handbook §1.3 (Series and convergence)",
         solution: S({
-          c: "Ratio test: $R = \\lim_{n\\to\\infty}|a_n/a_{n+1}|$ where $a_n$ is the coefficient.",
+          c: "For a power series $\\sum a_n(x - x_0)^{n}$, the ratio test gives $R = \\lim|a_n/a_{n+1}|$. The center here is $x_0 = 3$.",
           s: [
-            "$a_n = 1/(n\\,2^{n})$. $a_{n+1} = 1/((n+1)2^{n+1})$.",
-            "$|a_n/a_{n+1}| = \\dfrac{(n+1)2^{n+1}}{n\\,2^{n}} = 2\\cdot\\dfrac{n+1}{n} \\to 2$.",
-            "Therefore $R = 2$; series converges for $|x-3| < 2$, i.e. $1 < x < 5$."
+            "<b>Step 1 — Identify coefficients.</b> $a_n = \\dfrac{1}{n\\,2^{n}}$.",
+            "<b>Step 2 — Form the ratio.</b> $\\left|\\dfrac{a_n}{a_{n+1}}\\right| = \\dfrac{(n+1)\\,2^{n+1}}{n\\,2^{n}} = 2\\cdot\\dfrac{n+1}{n} \\xrightarrow{n\\to\\infty} 2$.",
+            "<b>Step 3 — State the interval.</b> $R = 2$: converges for $|x - 3| < 2$, i.e. $1 < x < 5$, with endpoints needing separate tests."
           ],
           a: "$R = 2$",
-          v: "At $x = 5$: $\\sum 1/n$ diverges (harmonic). At $x = 1$: alternating harmonic, converges. So radius is correct, endpoints differ."
+          v: "Endpoint check (confirms $R$ is exactly 2): at $x = 5$ the series is $\\sum 1/n$ — divergent harmonic; at $x = 1$ it is $\\sum(-1)^{n}/n$ — convergent alternating harmonic. One endpoint in, one out — classic ✓. The $1/n$ factor affects endpoints only, never the radius (set by the geometric $2^{n}$)."
+
         })
       },
       { q: "Solve $\\dfrac{dy}{dx} = \\dfrac{y}{x+1}$ with $y(0) = 2$ by separation of variables.",
@@ -78,14 +85,16 @@
         correct: 0,
         ref: "Handbook §1.6 (First-order ODE)",
         solution: S({
-          c: "Separable form: $\\dfrac{dy}{y} = \\dfrac{dx}{x+1}$.",
+          c: "The equation is separable: move all $y$ dependence left, all $x$ dependence right — $\\dfrac{dy}{y} = \\dfrac{dx}{x+1}$ — then integrate both sides.",
           s: [
-            "Integrate: $\\ln|y| = \\ln|x+1| + C_1$.",
-            "Exponentiate: $y = C(x+1)$.",
-            "Apply $y(0) = 2 \\Rightarrow C = 2$, so $y = 2(x+1)$."
+            "<b>Step 1 — Integrate.</b> $\\ln|y| = \\ln|x+1| + C_1$.",
+            "<b>Step 2 — Exponentiate.</b> $y = C(x+1)$ where $C = \\pm e^{C_1}$ absorbs the sign.",
+            "<b>Step 3 — Apply the initial condition.</b> $y(0) = C(1) = 2 \\Rightarrow C = 2$, so $y = 2(x+1)$.",
+            "<b>Step 4 — Distractor audit.</b> $2e^{x}$ solves $y' = y$ (wrong denominator); $2\\ln(x+1)$ comes from integrating the wrong side; $(x+1)^{2}$ solves $y' = 2y/(x+1)$."
           ],
           a: "$y = 2(x+1)$",
-          v: "Check: $dy/dx = 2 = 2(x+1)/(x+1) = y/(x+1)$ ✓."
+          v: "Substitute back: $y' = 2$ and $\\dfrac{y}{x+1} = \\dfrac{2(x+1)}{x+1} = 2$ — identical ✓. The solution is a straight line through $(0,2)$ with slope 2; the ODE's slope field is indeed constant along it."
+
         })
       },
       { q: "For matrix $A = \\begin{bmatrix} 3 & 1\\\\ 0 & 2\\end{bmatrix}$, what is $A^{10}$ (top-left entry only)?",
@@ -93,12 +102,15 @@
         correct: 0,
         ref: "Handbook §1.4 (Linear algebra — powers of triangular matrices)",
         solution: S({
-          c: "For an upper triangular matrix, the eigenvalues are the diagonal entries, and the $(1,1)$ entry of $A^{n}$ is $a_{11}^{n}$ (top diagonal element raised to $n$).",
+          c: "Powers of a triangular matrix stay triangular, and each diagonal entry simply gets raised to the power: $(A^{n})_{ii} = a_{ii}^{n}$.",
           s: [
-            "$a_{11} = 3$, so $(A^{10})_{11} = 3^{10} = 59{,}049$."
+            "<b>Step 1 — Recognize the structure.</b> $A$ is upper triangular with diagonal $\\{3, 2\\}$ — its eigenvalues.",
+            "<b>Step 2 — Multiply once to see the pattern.</b> $A^{2} = \\begin{bmatrix}9 & 5\\\\0 & 4\\end{bmatrix}$: diagonal is $\\{3^{2}, 2^{2}\\}$; only the off-diagonal mixes.",
+            "<b>Step 3 — Apply at $n = 10$.</b> $(A^{10})_{11} = 3^{10} = 59{,}049$."
           ],
           a: "$3^{10} = 59{,}049$",
-          v: "By induction the diagonal of $A^{k}$ is $\\{a_{11}^{k}, a_{22}^{k}, \\ldots\\}$ for triangular $A$."
+          v: "Induction: if $(A^{k})_{11} = 3^{k}$, then $(A^{k+1})_{11} = 3\\cdot 3^{k}$ because row 1 of $A$ hits column 1 of $A^{k}$, whose below-diagonal entry is 0 ✓. Distractor $5^{10}$ baits with $3 + 2$; $10\\cdot 3^{9}$ resembles a derivative rule, not matrix power."
+
         })
       },
       { q: "$\\displaystyle\\int_{0}^{\\infty} x e^{-2x}\\,dx$ equals:",
@@ -106,12 +118,15 @@
         correct: 0,
         ref: "Handbook §1.5 (Improper integrals / Gamma function)",
         solution: S({
-          c: "Gamma-function identity: $\\int_{0}^{\\infty} x^{n}e^{-ax}dx = n!/a^{n+1}$.",
+          c: "Gamma-function template: $\\displaystyle\\int_0^{\\infty}x^{n}e^{-ax}dx = \\dfrac{n!}{a^{n+1}}$ — worth memorizing for the FE.",
           s: [
-            "Here $n = 1,\\ a = 2$, so integral $= 1!/2^{2} = 1/4$."
+            "<b>Step 1 — Match parameters.</b> $n = 1$, $a = 2$.",
+            "<b>Step 2 — Evaluate.</b> $\\dfrac{1!}{2^{2}} = \\dfrac{1}{4}$.",
+            "<b>Step 3 — Convergence sanity.</b> The exponential decay dominates the linear growth, so the improper integral converges — 'diverges' is bait for sign confusion."
           ],
           a: "$1/4$",
-          v: "Alternative: integration by parts with $u = x,\\ dv = e^{-2x}dx$ gives $-\\tfrac{x}{2}e^{-2x}\\big|_0^{\\infty} + \\tfrac12\\int e^{-2x}dx = 0 + \\tfrac14 = \\tfrac14$ ✓."
+          v: "Integration-by-parts check: $u = x$, $dv = e^{-2x}dx$ → $\\left[-\\tfrac{x}{2}e^{-2x}\\right]_0^{\\infty} + \\tfrac12\\int_0^{\\infty}e^{-2x}dx = 0 + \\tfrac12\\cdot\\tfrac12 = \\tfrac14$ ✓. Probability view: this is $E[X]/2$... more directly, it equals $E[X]\\cdot\\tfrac12$ where $X\\sim$Exp(2) has mean $\\tfrac12$ — i.e. $\\tfrac12\\times\\tfrac12 = \\tfrac14$ ✓."
+
         })
       },
       { q: "Fourier-series coefficient $b_n$ for $f(t) = \\text{sgn}(\\sin t)$ (square wave, period $2\\pi$) is:",
@@ -119,13 +134,15 @@
         correct: 0,
         ref: "Handbook §1.7 (Fourier series of standard waveforms)",
         solution: S({
-          c: "Square wave has odd symmetry — only sine terms — and the standard amplitude $4/(n\\pi)$ for odd harmonics.",
+          c: "A ±1 square wave is odd and half-wave symmetric: only SINE terms survive, only ODD harmonics appear, and the classic amplitude is $b_n = 4/(n\\pi)$.",
           s: [
-            "Half-wave (anti-)symmetry makes even harmonics vanish.",
-            "Compute $b_n = \\frac{2}{T}\\int_0^T f(t)\\sin(n\\omega_0 t)dt$; for square wave this yields $b_n = 4/(n\\pi)$ for $n$ odd."
+            "<b>Step 1 — Use symmetry to kill terms.</b> Odd function ⇒ all $a_n = 0$ (no cosines, no DC). Half-wave symmetry $f(t + T/2) = -f(t)$ ⇒ even harmonics vanish.",
+            "<b>Step 2 — Compute a surviving coefficient.</b> $b_n = \\dfrac{2}{\\pi}\\displaystyle\\int_0^{\\pi}\\sin(nt)\\,dt = \\dfrac{2}{n\\pi}[1 - \\cos n\\pi]$ — equals $\\dfrac{4}{n\\pi}$ for odd $n$, 0 for even.",
+            "<b>Step 3 — Distractor audit.</b> $4/(n^{2}\\pi)$ is the TRIANGLE wave's decay (smoother signal → faster rolloff); $2/(n\\pi)$ for all $n$ describes a sawtooth's magnitude pattern."
           ],
-          a: "$b_n = 4/(n\\pi)$ for odd $n$; 0 for even $n$",
-          v: "Series $\\sum_{n=1,3,5,\\ldots}(4/n\\pi)\\sin(n\\omega_0 t)$ is the classic square-wave expansion."
+          a: "$b_n = 4/(n\\pi)$ for odd $n$; zero for even $n$.",
+          v: "Amplitude check: fundamental $4/\\pi \\approx 1.273 > 1$ — the first harmonic overshoots the square wave's level, which is why partial sums show Gibbs ears ✓. Decay rate $1/n$ matches the rule: discontinuous signal → coefficients fall as $1/n$."
+
         })
       },
       { q: "Find the gradient of $\\phi(x,y,z) = x^{2}y + yz^{3}$ at $(1, 2, -1)$.",
@@ -133,14 +150,15 @@
         correct: 0,
         ref: "Handbook §1.5 (Gradient operator)",
         solution: S({
-          c: "$\\nabla\\phi = \\langle \\partial\\phi/\\partial x,\\ \\partial\\phi/\\partial y,\\ \\partial\\phi/\\partial z\\rangle$.",
+          c: "The gradient collects the three partial derivatives: $\\nabla\\phi = \\langle\\phi_x, \\phi_y, \\phi_z\\rangle$, then evaluate at the point.",
           s: [
-            "$\\phi_x = 2xy = 2(1)(2) = 4$.",
-            "$\\phi_y = x^{2} + z^{3} = 1 + (-1)^{3} = 1 - 1 = 0$.",
-            "$\\phi_z = 3yz^{2} = 3(2)(1) = 6$."
+            "<b>Step 1 — $x$-partial.</b> $\\phi_x = 2xy \\Rightarrow 2(1)(2) = 4$.",
+            "<b>Step 2 — $y$-partial.</b> $\\phi_y = x^{2} + z^{3} \\Rightarrow 1 + (-1) = 0$ (note $(-1)^{3} = -1$ — sign trap).",
+            "<b>Step 3 — $z$-partial.</b> $\\phi_z = 3yz^{2} \\Rightarrow 3(2)(1) = 6$ (here $z^{2} = +1$ — the square kills the sign)."
           ],
-          a: "$\\nabla\\phi = \\langle 4, 0, 6\\rangle$",
-          v: "Direction of steepest increase at the point; magnitude $\\sqrt{16+0+36} = \\sqrt{52}$."
+          a: "$\\nabla\\phi(1,2,-1) = \\langle 4,\\ 0,\\ 6\\rangle$",
+          v: "The two sign traps are the whole question: $z^{3}$ keeps the minus, $z^{2}$ discards it — mixing them up produces the distractors. Magnitude if needed: $|\\nabla\\phi| = \\sqrt{16 + 36} = \\sqrt{52} \\approx 7.2$, the steepest-ascent rate at that point ✓."
+
         })
       },
       { q: "Numerical method: bisection on $f(x) = x^{3} - x - 2$ over $[1, 2]$. After 3 iterations the bracket is:",
@@ -148,15 +166,16 @@
         correct: 0,
         ref: "Handbook §1.8 (Root finding — bisection)",
         solution: S({
-          c: "Each iteration evaluates $f$ at midpoint and keeps the half-interval whose endpoints bracket the root.",
+          c: "Bisection keeps whichever half-interval still brackets the root (endpoints with opposite signs of $f$), halving the bracket each iteration.",
           s: [
-            "$f(1) = -2,\\ f(2) = 4$ → root in $[1,2]$.",
-            "Iter 1: midpoint 1.5, $f(1.5) = 3.375 - 1.5 - 2 = -0.125 < 0$ → keep $[1.5, 2]$.",
-            "Iter 2: midpoint 1.75, $f(1.75) = 5.359 - 1.75 - 2 = 1.609 > 0$ → keep $[1.5, 1.75]$.",
-            "Iter 3: midpoint 1.625, $f(1.625) = 4.291 - 1.625 - 2 = 0.666 > 0$ → keep $[1.5, 1.625]$."
+            "<b>Step 1 — Confirm the starting bracket.</b> $f(1) = 1 - 1 - 2 = -2 < 0$; $f(2) = 8 - 2 - 2 = 4 > 0$ → root in $[1, 2]$.",
+            "<b>Step 2 — Iteration 1.</b> Midpoint 1.5: $f(1.5) = 3.375 - 3.5 = -0.125 < 0$. Sign change is now between 1.5 and 2 → keep $[1.5,\\ 2]$.",
+            "<b>Step 3 — Iteration 2.</b> Midpoint 1.75: $f(1.75) = 5.359 - 3.75 = +1.609 > 0$ → keep $[1.5,\\ 1.75]$.",
+            "<b>Step 4 — Iteration 3.</b> Midpoint 1.625: $f(1.625) = 4.291 - 3.625 = +0.666 > 0$ → keep $[1.5,\\ 1.625]$."
           ],
-          a: "$[1.5, 1.625]$",
-          v: "Bracket width halves each iteration: $1 \\to 0.5 \\to 0.25 \\to 0.125$. After $n$ iterations error $\\le (b-a)/2^{n+1}$."
+          a: "$[1.5,\\ 1.625]$ after three iterations.",
+          v: "Width check: $1 \\to 0.5 \\to 0.25 \\to 0.125$ — exactly $(b-a)/2^{3}$ ✓. The true root is $\\approx 1.5214$, which indeed lies inside $[1.5, 1.625]$ ✓. Error bound after $n$ iterations: $(b-a)/2^{n+1}$ — guaranteed, if slow (1 bit per iteration)."
+
         })
       },
       { q: "Complex Taylor series of $\\dfrac{1}{1-z}$ about $z = 0$ converges in:",
@@ -164,13 +183,15 @@
         correct: 0,
         ref: "Handbook §1.3 (Geometric series / radius of convergence)",
         solution: S({
-          c: "Geometric series $\\sum z^{n}$ converges for $|z| < 1$. The pole of $1/(1-z)$ at $z = 1$ sets the radius.",
+          c: "A complex Taylor series converges inside the largest disc (centered at the expansion point) that avoids every singularity. $1/(1-z)$ has one pole, at $z = 1$.",
           s: [
-            "$\\dfrac{1}{1-z} = 1 + z + z^{2} + z^{3} + \\cdots$ for $|z| < 1$.",
-            "Distance from expansion point ($z = 0$) to nearest singularity ($z = 1$) is 1, giving $R = 1$."
+            "<b>Step 1 — Write the series.</b> $\\dfrac{1}{1-z} = 1 + z + z^{2} + \\cdots$ — the geometric series, convergent when the ratio satisfies $|z| < 1$.",
+            "<b>Step 2 — Confirm with the singularity rule.</b> Distance from center $z=0$ to the nearest (only) pole $z = 1$ is 1 → $R = 1$. The two arguments agree, as they must.",
+            "<b>Step 3 — Distractor audit.</b> 'All of $\\mathbb C$' would require an entire function (no poles); $|z| > 1$ describes a LAURENT series about infinity — different expansion; $|z| < 2$ has no singularity at distance 2 to justify it."
           ],
-          a: "Open disc $|z| < 1$",
-          v: "Series diverges at $z = 1$ (sum diverges to $\\infty$) — confirms boundary."
+          a: "Open disc $|z| < 1$.",
+          v: "Boundary behavior: at $z = 1$ the terms are all 1 — series diverges; at $z = -1$ the partial sums oscillate 1, 0, 1, 0 — also no convergence. So nothing on $|z| = 1$ converges here, consistent with $R = 1$ ✓."
+
         })
       },
       { q: "Convert $z = 1 + j\\sqrt 3$ to exponential form $re^{j\\theta}$.",
@@ -178,13 +199,15 @@
         correct: 0,
         ref: "Handbook §1.2 (Complex numbers in polar form)",
         solution: S({
-          c: "$r = |z| = \\sqrt{a^{2}+b^{2}}$, $\\theta = \\arctan(b/a)$ (adjusted for quadrant).",
+          c: "Polar conversion: $r = \\sqrt{a^{2} + b^{2}}$ and $\\theta = \\arctan(b/a)$, with the quadrant checked from the signs of $(a, b)$.",
           s: [
-            "$r = \\sqrt{1 + 3} = 2$.",
-            "$\\theta = \\arctan(\\sqrt 3 / 1) = 60° = \\pi/3$ (first quadrant)."
+            "<b>Step 1 — Magnitude.</b> $r = \\sqrt{1^{2} + (\\sqrt 3)^{2}} = \\sqrt 4 = 2$.",
+            "<b>Step 2 — Angle.</b> $\\theta = \\arctan(\\sqrt 3/1) = 60° = \\pi/3$; both parts positive → first quadrant, no correction needed.",
+            "<b>Step 3 — Assemble.</b> $z = 2e^{j\\pi/3}$. Distractors: $\\pi/6$ swaps the roles of the parts ($\\arctan(1/\\sqrt3)$); $-\\pi/3$ is the conjugate $1 - j\\sqrt3$; $\\sqrt2 e^{j\\pi/4}$ belongs to $1+j$."
           ],
-          a: "$z = 2 e^{j\\pi/3}$",
-          v: "Euler: $2(\\cos 60° + j\\sin 60°) = 2(\\tfrac12 + j\\tfrac{\\sqrt 3}{2}) = 1 + j\\sqrt 3$ ✓."
+          a: "$z = 2e^{j\\pi/3}$",
+          v: "Euler check: $2(\\cos 60° + j\\sin 60°) = 2(\\tfrac12 + j\\tfrac{\\sqrt3}{2}) = 1 + j\\sqrt3$ ✓. This form makes powers trivial: e.g. $z^{3} = 8e^{j\\pi} = -8$ by De Moivre."
+
         })
       },
       { q: "If $A$ is $n\\times n$ and $\\det A = 0$, then $A$:",
@@ -192,14 +215,15 @@
         correct: 0,
         ref: "Handbook §1.4 (Determinants, singular matrices)",
         solution: S({
-          c: "$\\det A = \\lambda_1\\lambda_2\\cdots\\lambda_n$ (product of eigenvalues, counted with multiplicity).",
+          c: "The determinant equals the product of the eigenvalues: $\\det A = \\lambda_1\\lambda_2\\cdots\\lambda_n$. A zero product forces at least one zero factor.",
           s: [
-            "If $\\det A = 0$, at least one eigenvalue equals zero.",
-            "Equivalently, $A$ has a non-trivial null space, so it is not invertible (singular).",
-            "Rank is $< n$."
+            "<b>Step 1 — Zero eigenvalue.</b> $\\det A = 0 \\Rightarrow$ some $\\lambda_i = 0$, i.e. $A\\vec v = 0$ has a non-trivial solution $\\vec v$.",
+            "<b>Step 2 — Singularity.</b> A non-trivial null space means $A$ cannot be inverted (two different inputs map to the same output) — $A$ is singular, rank $< n$.",
+            "<b>Step 3 — Eliminate distractors.</b> Invertible requires $\\det \\ne 0$ — direct contradiction. Symmetry is unrelated to the determinant's value. Rank $n$ (full rank) is equivalent to invertibility — also contradicted."
           ],
-          a: "Singular with at least one zero eigenvalue.",
-          v: "Consider $A = \\begin{bmatrix}1&1\\\\1&1\\end{bmatrix}$: $\\det = 0$, eigenvalues $\\{0, 2\\}$, rank 1."
+          a: "Singular, with at least one zero eigenvalue (rank $< n$).",
+          v: "Concrete check: $A = \\begin{bmatrix}1&1\\\\1&1\\end{bmatrix}$ has $\\det = 0$, eigenvalues $\\{0, 2\\}$ (product 0 ✓), rank 1, null vector $(1,-1)^{T}$ ✓. Equivalence chain worth memorizing: $\\det A = 0 \\Leftrightarrow$ singular $\\Leftrightarrow$ rank $< n \\Leftrightarrow$ $0 \\in$ spectrum $\\Leftrightarrow$ columns linearly dependent."
+
         })
       },
       { q: "Mean-value theorem: if $f$ continuous on $[0, 4]$, differentiable on $(0, 4)$, $f(0) = 1$, $f(4) = 9$, then there exists $c\\in (0,4)$ with $f'(c) =$:",
@@ -207,12 +231,15 @@
         correct: 0,
         ref: "Handbook §1.5 (MVT, derivative properties)",
         solution: S({
-          c: "MVT: $f'(c) = \\dfrac{f(b)-f(a)}{b-a}$ for some $c\\in (a,b)$.",
+          c: "MVT: under continuity on $[a,b]$ and differentiability on $(a,b)$, some interior point $c$ has $f'(c)$ equal to the SECANT slope $\\dfrac{f(b)-f(a)}{b-a}$.",
           s: [
-            "$f'(c) = (9-1)/(4-0) = 8/4 = 2$."
+            "<b>Step 1 — Compute the secant slope.</b> $\\dfrac{f(4) - f(0)}{4 - 0} = \\dfrac{9 - 1}{4} = 2$.",
+            "<b>Step 2 — Apply the theorem.</b> Hypotheses hold, so $\\exists\\,c \\in (0,4)$ with $f'(c) = 2$. The theorem guarantees existence — it does not locate $c$.",
+            "<b>Step 3 — Distractor audit.</b> 8 is the rise alone (forgot to divide); $\\tfrac12$ inverts the ratio; 4 is the run."
           ],
           a: "$f'(c) = 2$",
-          v: "Geometrically, the secant slope from $(0,1)$ to $(4,9)$ equals the tangent slope somewhere in between."
+          v: "Concrete instance: if $f(x) = \\tfrac12 x^{2} + 1$ (which satisfies the endpoint data: $f(0)=1$, $f(4)=9$), then $f'(x) = x = 2$ at $c = 2 \\in (0,4)$ ✓. MVT is the engine behind error bounds in numerical methods — it converts function differences into derivative values."
+
         })
       },
       { q: "Find $\\displaystyle\\frac{d^{2}}{dx^{2}}\\!\\left[x\\sin x\\right]$.",
@@ -220,13 +247,15 @@
         correct: 0,
         ref: "Handbook §1.5 (Higher derivatives, product rule)",
         solution: S({
-          c: "First derivative by product rule, then differentiate again.",
+          c: "Differentiate twice with the product rule: $(uv)' = u'v + uv'$, applied carefully at each stage.",
           s: [
-            "$\\dfrac{d}{dx}[x\\sin x] = \\sin x + x\\cos x$.",
-            "$\\dfrac{d}{dx}[\\sin x + x\\cos x] = \\cos x + (\\cos x - x\\sin x) = 2\\cos x - x\\sin x$."
+            "<b>Step 1 — First derivative.</b> $\\dfrac{d}{dx}[x\\sin x] = (1)\\sin x + x\\cos x = \\sin x + x\\cos x$.",
+            "<b>Step 2 — Second derivative.</b> Differentiate each piece: $\\dfrac{d}{dx}\\sin x = \\cos x$; $\\dfrac{d}{dx}[x\\cos x] = \\cos x - x\\sin x$. Sum: $2\\cos x - x\\sin x$.",
+            "<b>Step 3 — Distractor audit.</b> $-x\\sin x$ drops the $2\\cos x$ cross terms (the most common slip); $x\\cos x$ stops after a partial first derivative."
           ],
           a: "$2\\cos x - x\\sin x$",
-          v: "Check at $x = 0$: $2\\cos 0 - 0 = 2$. Original: $f(0)=0$; $f'(0) = 0 + 0 = 0$; $f''(0) = 2$ ✓."
+          v: "Spot check at $x = 0$: formula gives $2\\cos 0 - 0 = 2$. Independent check via Taylor: $x\\sin x = x^{2} - x^{4}/6 + \\cdots$, so $f''(x) = 2 - 2x^{2} + \\cdots \\to 2$ at $x=0$ ✓. Structure check: even function (product of two odds), and $2\\cos x - x\\sin x$ is indeed even ✓."
+
         })
       }
     ],
@@ -238,13 +267,15 @@
         correct: 0,
         ref: "Handbook §2.2 (Poisson distribution)",
         solution: S({
-          c: "Poisson PMF for interval of length $t$: $P(X = k) = (\\lambda t)^{k} e^{-\\lambda t}/k!$.",
+          c: "For a Poisson process, the count in an interval of length $t$ is Poisson with mean $\\lambda t$: $P(X = k) = (\\lambda t)^{k}e^{-\\lambda t}/k!$.",
           s: [
-            "$\\lambda = 5$/hr, $t = 0.5$ hr ⇒ expected count $\\lambda t = 2.5$.",
-            "$P(X = 0) = e^{-2.5} \\approx 0.0821$."
+            "<b>Step 1 — Scale the rate to the interval.</b> $\\lambda = 5$/hr over $t = 0.5$ hr gives expected count $\\lambda t = 2.5$ — the single most common slip is using 5 instead of 2.5 (distractor B).",
+            "<b>Step 2 — Evaluate at $k = 0$.</b> $P(X = 0) = \\dfrac{(2.5)^{0}e^{-2.5}}{0!} = e^{-2.5}$.",
+            "<b>Step 3 — Numerics.</b> $e^{-2.5} \\approx 0.0821$ — about an 8% chance of a fully quiet half hour."
           ],
-          a: "$\\approx 0.0821$ (≈ 8.21%)",
-          v: "Cross-check: $P(X = 0) = $ probability no event in $t$ for a Poisson process equals the survival function of exponential inter-arrival, $e^{-\\lambda t}$ ✓."
+          a: "$e^{-2.5} \\approx 0.0821$",
+          v: "Cross-check via inter-arrival times: 'zero events in $[0, t]$' is the same event as 'first arrival later than $t$', and exponential inter-arrivals give $P(T_1 > t) = e^{-\\lambda t} = e^{-2.5}$ ✓. Distractor $2.5e^{-2.5}$ is $P(X = 1)$, not $P(X=0)$."
+
         })
       },
       { q: "Maximum-likelihood estimate of $\\lambda$ for exponential distribution given i.i.d. data $\\{x_1, \\ldots, x_n\\}$:",
@@ -252,13 +283,15 @@
         correct: 0,
         ref: "Handbook §2.3 (MLE)",
         solution: S({
-          c: "Likelihood $L(\\lambda) = \\prod \\lambda e^{-\\lambda x_i} = \\lambda^{n}e^{-\\lambda\\sum x_i}$. Maximize log-likelihood.",
+          c: "MLE maximizes the joint likelihood. For exponential data, $L(\\lambda) = \\prod_i\\lambda e^{-\\lambda x_i} = \\lambda^{n}e^{-\\lambda\\sum x_i}$ — work with its logarithm.",
           s: [
-            "$\\ell(\\lambda) = n\\ln\\lambda - \\lambda\\sum x_i$.",
-            "$d\\ell/d\\lambda = n/\\lambda - \\sum x_i = 0 \\Rightarrow \\hat\\lambda = n/\\sum x_i = 1/\\bar x$."
+            "<b>Step 1 — Log-likelihood.</b> $\\ell(\\lambda) = n\\ln\\lambda - \\lambda\\sum x_i$.",
+            "<b>Step 2 — Stationary point.</b> $\\dfrac{d\\ell}{d\\lambda} = \\dfrac{n}{\\lambda} - \\sum x_i = 0 \\Rightarrow \\hat\\lambda = \\dfrac{n}{\\sum x_i} = \\dfrac{1}{\\bar x}$.",
+            "<b>Step 3 — Confirm a maximum.</b> $\\ell''(\\lambda) = -n/\\lambda^{2} < 0$ everywhere — concave, so the stationary point is the global max."
           ],
           a: "$\\hat\\lambda_{MLE} = 1/\\bar x$",
-          v: "For exponential, $E[X] = 1/\\lambda$, so $\\hat\\lambda = 1/\\bar x$ is the method-of-moments estimator as well — they coincide here."
+          v: "Consistency check: exponential mean is $1/\\lambda$, so estimating $\\lambda$ by the reciprocal of the sample mean is exactly method-of-moments too — the two estimators coincide here ✓. Units check: $\\lambda$ is a rate (1/time) and $1/\\bar x$ has units 1/time ✓; distractor $\\bar x$ has the wrong units entirely."
+
         })
       },
       { q: "A binomial test: $n = 100$ trials, observed 35 successes. Test $H_0: p = 0.30$ against $H_1: p \\ne 0.30$ using normal approximation. The $z$-statistic is:",
@@ -266,14 +299,16 @@
         correct: 0,
         ref: "Handbook §2.3 (Large-sample normal approximation to binomial)",
         solution: S({
-          c: "$z = (\\hat p - p_0)/\\sqrt{p_0(1-p_0)/n}$ where $\\hat p = X/n$.",
+          c: "Large-sample test of a proportion: $z = \\dfrac{\\hat p - p_0}{\\sqrt{p_0(1-p_0)/n}}$ — the standard error uses the NULL value $p_0$, not $\\hat p$.",
           s: [
-            "$\\hat p = 35/100 = 0.35$.",
-            "Standard error under $H_0$: $\\sqrt{0.30\\cdot 0.70/100} = \\sqrt{0.0021} = 0.0458$.",
-            "$z = (0.35 - 0.30)/0.0458 \\approx 1.09$."
+            "<b>Step 1 — Sample proportion.</b> $\\hat p = 35/100 = 0.35$.",
+            "<b>Step 2 — Null standard error.</b> $SE_0 = \\sqrt{0.30 \\times 0.70/100} = \\sqrt{0.0021} \\approx 0.0458$.",
+            "<b>Step 3 — Standardize.</b> $z = (0.35 - 0.30)/0.0458 \\approx 1.09$.",
+            "<b>Step 4 — Decision context.</b> $|z| = 1.09 < 1.96$: two-sided $p \\approx 0.275$ — the data are compatible with $p = 0.30$."
           ],
-          a: "$z \\approx 1.09$",
-          v: "Two-sided $p$-value $\\approx 0.275$ — fail to reject $H_0$ at $\\alpha = 0.05$. The 35/100 is within sampling variability."
+          a: "$z \\approx 1.09$ — fail to reject $H_0$ at $\\alpha = 0.05$.",
+          v: "Normal-approximation validity: $np_0 = 30$ and $n(1-p_0) = 70$, both $\\ge 10$ ✓. Distractor 5.0 comes from forgetting the square root in the SE; 0.10 from using $SE = p_0(1-p_0)$ unsquare-rooted differently. A 5-point excess on $n = 100$ is just over one SD of sampling noise — intuition matches the math ✓."
+
         })
       },
       { q: "Bayes: $P(\\text{disease}) = 0.01$, test sensitivity $P(+\\,|\\,D) = 0.95$, specificity $P(-\\,|\\,\\neg D) = 0.95$. Posterior $P(D\\,|\\,+)$:",
@@ -281,14 +316,15 @@
         correct: 0,
         ref: "Handbook §2.2 (Bayes theorem)",
         solution: S({
-          c: "$P(D|+) = \\dfrac{P(+|D)\\,P(D)}{P(+)}$ with $P(+) = P(+|D)P(D) + P(+|\\neg D)P(\\neg D)$.",
+          c: "Bayes' theorem with the law of total probability: $P(D\\,|\\,+) = \\dfrac{P(+|D)P(D)}{P(+|D)P(D) + P(+|\\neg D)P(\\neg D)}$. The base rate $P(D) = 0.01$ dominates the result.",
           s: [
-            "$P(+|\\neg D) = 1 - 0.95 = 0.05$ (false-positive rate).",
-            "$P(+) = 0.95(0.01) + 0.05(0.99) = 0.0095 + 0.0495 = 0.059$.",
-            "$P(D|+) = 0.0095 / 0.059 \\approx 0.161$ (~16.1%)."
+            "<b>Step 1 — False-positive rate.</b> Specificity 0.95 ⇒ $P(+|\\neg D) = 1 - 0.95 = 0.05$.",
+            "<b>Step 2 — Total probability of testing positive.</b> $P(+) = 0.95(0.01) + 0.05(0.99) = 0.0095 + 0.0495 = 0.059$ — note the false positives (0.0495) outnumber the true positives (0.0095) five to one.",
+            "<b>Step 3 — Posterior.</b> $P(D|+) = 0.0095/0.059 \\approx 0.161$."
           ],
-          a: "$\\approx 16.1\\%$",
-          v: "Classic counter-intuitive result: even a 95%-accurate test on a rare disease gives mostly false positives. Base rate matters."
+          a: "$\\approx 16.1\\%$ — most positives are false positives.",
+          v: "Frequency check (often clearer): per 10,000 people — 100 diseased → 95 true positives; 9,900 healthy → 495 false positives; $95/(95+495) = 95/590 = 16.1\\%$ ✓. Distractor 0.95 confuses $P(+|D)$ with $P(D|+)$ — the classic 'prosecutor's fallacy' this question is built to test."
+
         })
       },
       { q: "Sample mean $\\bar X$ from $n = 25$, sample SD $s = 4$, population mean $\\mu$ unknown. 95% CI half-width uses:",
@@ -296,14 +332,15 @@
         correct: 0,
         ref: "Handbook §2.4 (t-distribution CI)",
         solution: S({
-          c: "Small-sample (unknown $\\sigma$) CI uses $t_{\\alpha/2, n-1}$ not $z$. Half-width $= t_{\\alpha/2}\\cdot s/\\sqrt n$.",
+          c: "Unknown population $\\sigma$ with small $n$ → Student's $t$: half-width $= t_{\\alpha/2,\\,n-1}\\cdot s/\\sqrt n$. Using $z = 1.96$ is the trap.",
           s: [
-            "df $= 24$. $t_{0.025, 24} \\approx 2.064$.",
-            "$s/\\sqrt n = 4/5 = 0.8$.",
-            "Half-width $\\approx 2.064 \\cdot 0.8 \\approx 1.65$."
+            "<b>Step 1 — Degrees of freedom and critical value.</b> df $= n - 1 = 24$; $t_{0.025,24} \\approx 2.064$ (wider than $z = 1.96$ to pay for estimating $\\sigma$).",
+            "<b>Step 2 — Standard error.</b> $s/\\sqrt n = 4/\\sqrt{25} = 4/5 = 0.8$.",
+            "<b>Step 3 — Half-width.</b> $2.064 \\times 0.8 \\approx 1.65$."
           ],
-          a: "$\\approx 1.65$ (using $t$ critical value)",
-          v: "If $\\sigma$ were known (rare in practice), would use $z = 1.96$ instead, giving 1.568."
+          a: "$\\approx 1.65$ (via $t_{0.025,24}$).",
+          v: "Distractor audit: $1.96\\times 0.8 = 1.57$ uses $z$ — only correct if $\\sigma$ were KNOWN; the two choices dividing by 25 instead of $\\sqrt{25}$ misuse the SE formula. Behavior check: as $n$ grows, $t_{0.025,n-1} \\to 1.96$ — at $n = 25$ the difference is already only ~5% ✓."
+
         })
       },
       { q: "Linear regression $Y = \\beta_0 + \\beta_1 X + \\epsilon$. Slope estimator $\\hat\\beta_1$ in terms of sample data:",
@@ -311,13 +348,15 @@
         correct: 0,
         ref: "Handbook §2.5 (Linear regression — least squares)",
         solution: S({
-          c: "Ordinary least squares minimizes $\\sum(y_i - \\beta_0 - \\beta_1 x_i)^{2}$. Closed form: $\\hat\\beta_1 = S_{xy}/S_{xx}$ where $S_{xy} = \\sum(x_i-\\bar x)(y_i-\\bar y)$, $S_{xx} = \\sum(x_i-\\bar x)^{2}$.",
+          c: "Ordinary least squares minimizes $\\sum(y_i - \\beta_0 - \\beta_1x_i)^{2}$; setting both partial derivatives to zero (the normal equations) yields the closed form $\\hat\\beta_1 = S_{xy}/S_{xx}$.",
           s: [
-            "Normal equation: $\\sum(y_i - \\beta_0 - \\beta_1 x_i)(-x_i) = 0$ and similar for $\\beta_0$.",
-            "Solving simultaneously: $\\hat\\beta_1 = S_{xy}/S_{xx}$, $\\hat\\beta_0 = \\bar y - \\hat\\beta_1\\bar x$."
+            "<b>Step 1 — Normal equations.</b> $\\partial/\\partial\\beta_1 = 0$ gives $\\sum x_i(y_i - \\beta_0 - \\beta_1 x_i) = 0$; $\\partial/\\partial\\beta_0 = 0$ gives $\\sum(y_i - \\beta_0 - \\beta_1 x_i) = 0$.",
+            "<b>Step 2 — Solve.</b> Eliminating $\\beta_0$ leaves $\\hat\\beta_1 = \\dfrac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^{2}} = \\dfrac{S_{xy}}{S_{xx}}$, then $\\hat\\beta_0 = \\bar y - \\hat\\beta_1\\bar x$.",
+            "<b>Step 3 — Distractor audit.</b> $\\bar y/\\bar x$ forces the line through the origin (no intercept); $r\\,s_x/s_y$ INVERTS the correct correlation form ($\\hat\\beta_1 = r\\,s_y/s_x$); $S_{xx}/S_{xy}$ is the reciprocal."
           ],
           a: "$\\hat\\beta_1 = S_{xy}/S_{xx}$",
-          v: "Equivalent: $\\hat\\beta_1 = r\\cdot s_y/s_x$ (note the order — multiplies $s_y$, divides $s_x$), so the third option has the ratio inverted."
+          v: "Units check: $S_{xy}$ carries units of $x\\cdot y$, $S_{xx}$ of $x^{2}$ — ratio has units $y/x$, correct for a slope ✓. Equivalent form check: $r\\,s_y/s_x = \\dfrac{S_{xy}}{\\sqrt{S_{xx}S_{yy}}}\\cdot\\dfrac{\\sqrt{S_{yy}}}{\\sqrt{S_{xx}}} = S_{xy}/S_{xx}$ ✓."
+
         })
       },
       { q: "Joint density $f(x,y) = 2$ on the triangle $0\\le y\\le x\\le 1$, 0 elsewhere. Marginal $f_X(x)$ equals:",
@@ -325,13 +364,15 @@
         correct: 0,
         ref: "Handbook §2.2 (Joint and marginal densities)",
         solution: S({
-          c: "$f_X(x) = \\int f(x,y)\\,dy$ over the support of $y$ given $x$.",
+          c: "Marginalize by integrating the joint density over the other variable — but the integration LIMITS come from the support shape (the triangle), not from $[0,1]$ blindly.",
           s: [
-            "For fixed $x \\in [0,1]$, $y$ ranges over $[0, x]$.",
-            "$f_X(x) = \\int_0^x 2\\,dy = 2x$."
+            "<b>Step 1 — Read the support.</b> On the triangle $0 \\le y \\le x \\le 1$: for a fixed $x$, $y$ runs only from 0 to $x$.",
+            "<b>Step 2 — Integrate.</b> $f_X(x) = \\displaystyle\\int_0^{x}2\\,dy = 2x$ for $0 \\le x \\le 1$.",
+            "<b>Step 3 — Interpret.</b> The marginal grows linearly: larger $x$ values sit above a longer slice of the triangle, so they carry more probability."
           ],
-          a: "$f_X(x) = 2x,\\ 0\\le x\\le 1$",
-          v: "Check: $\\int_0^1 2x\\,dx = 1$ ✓ (proper marginal density)."
+          a: "$f_X(x) = 2x$ on $[0, 1]$.",
+          v: "Normalization check: $\\int_0^{1}2x\\,dx = 1$ ✓. Distractor '2' integrates $y$ over $[0,1]$ regardless of $x$ — ignoring the triangular support is THE classic error this problem tests. Companion result: $f_Y(y) = 2(1-y)$, also integrating to 1 ✓."
+
         })
       },
       { q: "Two-sample $t$-test (equal variances): $n_1 = n_2 = 15$, $\\bar x_1 = 10.2$, $\\bar x_2 = 9.5$, $s_p = 1.4$. Test statistic:",
@@ -339,14 +380,15 @@
         correct: 0,
         ref: "Handbook §2.4 (Two-sample t-test)",
         solution: S({
-          c: "$t = (\\bar x_1 - \\bar x_2)/[s_p\\sqrt{1/n_1 + 1/n_2}]$.",
+          c: "Pooled two-sample $t$: $t = \\dfrac{\\bar x_1 - \\bar x_2}{s_p\\sqrt{1/n_1 + 1/n_2}}$, df $= n_1 + n_2 - 2$.",
           s: [
-            "$\\sqrt{1/15 + 1/15} = \\sqrt{2/15} = 0.3651$.",
-            "Denominator: $1.4 \\times 0.3651 = 0.5112$.",
-            "$t = (10.2 - 9.5)/0.5112 = 0.7/0.5112 \\approx 1.37$."
+            "<b>Step 1 — Standard error.</b> $\\sqrt{1/15 + 1/15} = \\sqrt{0.1333} = 0.3651$; $SE = s_p \\times 0.3651 = 1.4 \\times 0.3651 = 0.5112$.",
+            "<b>Step 2 — Test statistic.</b> $t = \\dfrac{10.2 - 9.5}{0.5112} = \\dfrac{0.7}{0.5112} \\approx 1.37$ with df $= 28$.",
+            "<b>Step 3 — Decision.</b> $t_{0.025,28} \\approx 2.048 > 1.37$ → fail to reject; two-sided $p \\approx 0.18$."
           ],
-          a: "$t \\approx 1.37$ (df = 28)",
-          v: "Two-sided $p$-value $\\approx 0.18$ — not significant at $\\alpha = 0.05$."
+          a: "$t \\approx 1.37$ (df = 28) — not significant at the 5% level.",
+          v: "Distractor audit: 0.7 is the raw mean difference (forgot to divide by SE); 5.0 ≈ dividing by $s_p\\sqrt{2}/15$-type unit slip; 2.5 has no consistent origin. Magnitude sense: the difference (0.7) is exactly half a pooled SD (1.4) — with only 15 per group, that is well inside noise ✓."
+
         })
       },
       { q: "Variance of a sum of independent random variables $X + Y$:",
@@ -354,13 +396,15 @@
         correct: 0,
         ref: "Handbook §2.1 (Variance of sums)",
         solution: S({
-          c: "If independent: $\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y)$ because $\\text{Cov}(X,Y) = 0$.",
+          c: "General rule: $\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y) + 2\\,\\text{Cov}(X,Y)$. Independence zeroes the covariance term.",
           s: [
-            "General: $\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y) + 2\\,\\text{Cov}(X,Y)$.",
-            "Independence ⇒ $\\text{Cov}(X,Y) = 0$ ⇒ variances simply add."
+            "<b>Step 1 — Drop the covariance.</b> $X \\perp Y \\Rightarrow \\text{Cov}(X,Y) = 0$, leaving $\\text{Var}(X) + \\text{Var}(Y)$.",
+            "<b>Step 2 — Distractor audit.</b> Product of variances has wrong units (units$^4$); $|\\text{Var}X - \\text{Var}Y|$ would allow zero variance from two noisy sources — absurd; the square-root form confuses variances with standard deviations.",
+            "<b>Step 3 — The SD corollary.</b> Standard deviations combine in quadrature: $\\sigma_{X+Y} = \\sqrt{\\sigma_X^{2} + \\sigma_Y^{2}}$ — they never simply add (unless perfectly correlated)."
           ],
           a: "$\\text{Var}(X) + \\text{Var}(Y)$",
-          v: "Note: standard deviations do NOT add — they combine in quadrature."
+          v: "Quick numeric check: two fair dice, each Var $= 35/12$; sum of two dice has Var $= 35/6$ — exactly double ✓. Engineering use: independent noise sources add in POWER (variance), which is why uncorrelated noise contributions are root-sum-squared in error budgets."
+
         })
       },
       { q: "Process capability index $C_{pk}$ for $\\bar x = 5.0,\\ \\sigma = 0.1$, specifications $4.7 \\le x \\le 5.5$:",
@@ -368,14 +412,15 @@
         correct: 0,
         ref: "Handbook §2.6 (Process capability indices)",
         solution: S({
-          c: "$C_{pk} = \\min\\!\\left(\\dfrac{\\text{USL}-\\bar x}{3\\sigma},\\ \\dfrac{\\bar x - \\text{LSL}}{3\\sigma}\\right)$.",
+          c: "$C_{pk}$ measures how many 3σ half-widths fit between the process mean and the NEAREST spec limit: $C_{pk} = \\min\\!\\left(\\dfrac{USL - \\bar x}{3\\sigma},\\ \\dfrac{\\bar x - LSL}{3\\sigma}\\right)$.",
           s: [
-            "USL distance: $(5.5 - 5.0)/(3\\cdot 0.1) = 0.5/0.3 = 1.67$.",
-            "LSL distance: $(5.0 - 4.7)/0.3 = 0.3/0.3 = 1.00$.",
-            "$C_{pk} = \\min(1.67, 1.00) = 1.00$ — process limited by lower spec."
+            "<b>Step 1 — Upper side.</b> $(5.5 - 5.0)/(3 \\times 0.1) = 0.5/0.3 \\approx 1.67$.",
+            "<b>Step 2 — Lower side.</b> $(5.0 - 4.7)/0.3 = 0.3/0.3 = 1.00$.",
+            "<b>Step 3 — Take the minimum.</b> $C_{pk} = \\min(1.67, 1.00) = 1.00$ — capability is throttled by the lower spec because the mean sits off-center (closer to LSL)."
           ],
           a: "$C_{pk} = 1.00$",
-          v: "$C_{pk} = 1.0$ means process barely meets 3σ spec on the tight side. Industry target is typically ≥1.33."
+          v: "Interpretation check: $C_{pk} = 1.0$ means the nearest limit is exactly 3σ away → ~1,350 ppm defective on that side (one-tailed). Industry minimum is typically 1.33 (4σ). Distractor 1.67 reports the GOOD side only — ignoring the min() is the standard mistake; centering the mean at 5.1 would balance both sides at 1.33 ✓."
+
         })
       }
     ],
@@ -392,14 +437,15 @@
         correct: 0,
         ref: "NSPE Code §III.4 (Confidential information)",
         solution: S({
-          c: "Trade secrets and confidential information remain protected after employment ends; new employer cannot benefit from misappropriated IP.",
+          c: "NSPE Code §III.4: engineers shall not disclose or use confidential information from a present or former employer or client without consent — the duty SURVIVES the end of employment.",
           s: [
-            "§III.4: engineers shall not disclose or use confidential information of past employers/clients for personal advantage.",
-            "Even unintentional use is a breach.",
-            "Many companies require non-compete or non-disclosure clauses; legal action is possible."
+            "<b>Step 1 — Identify the protected interest.</b> The design information belongs to the current employer as a trade secret; changing jobs does not transfer or extinguish that ownership.",
+            "<b>Step 2 — Apply the rule.</b> Accepting a role premised on using that information makes the breach a condition of employment — the only compliant options are to decline, or to wait until the information becomes public through legitimate disclosure.",
+            "<b>Step 3 — Audit the distractors.</b> 'Normal practice' does not exist as an ethics defense; using 'selected portions' is still misappropriation; selling the information adds a second, graver violation."
           ],
-          a: "Decline or wait until publicly disclosed.",
-          v: "Some firms use 'ethical walls' or quarantine periods to manage transitioning engineers."
+          a: "Decline the role, or wait until the information is publicly disclosed.",
+          v: "Practical corollary: beyond the ethics code, trade-secret law (e.g. DTSA/UTSA) exposes both engineer and new employer to litigation — which is why firms use clean-room teams and quarantine periods when hiring from competitors."
+
         })
       },
       { q: "A registered PE notices the contractor is substituting materials that don't meet specification. The PE was not asked to inspect. Ethically the PE should:",
@@ -412,14 +458,15 @@
         correct: 0,
         ref: "NSPE Code §I.1 (Public safety paramount)",
         solution: S({
-          c: "Engineers must hold paramount the safety, health, and welfare of the public — even outside their assigned scope.",
+          c: "NSPE Code §I.1: hold paramount the safety, health, and welfare of the public. This duty attaches to what the engineer KNOWS, not to what they were hired to inspect.",
           s: [
-            "Material substitution may compromise structural integrity.",
-            "PE has obligation to notify client/owner in writing.",
-            "If client doesn't act, authorities (building dept) must be notified."
+            "<b>Step 1 — Recognize the duty trigger.</b> Off-spec material substitution can compromise structural capacity — public-safety duty activates regardless of assigned scope.",
+            "<b>Step 2 — Take the proportionate first action.</b> Notify the client/owner in writing and document the observed deviation (what, where, when) — written notice creates accountability and a record.",
+            "<b>Step 3 — Know the escalation path.</b> If the client fails to act on a genuine safety issue, the obligation escalates to the building official / authority having jurisdiction. Ignoring it, a site confrontation with no record, or silent resignation all fail the duty."
           ],
-          a: "Notify client and document.",
-          v: "Hierarchy: public > client > employer > self."
+          a: "Notify the client and document the deviation.",
+          v: "Hierarchy worth memorizing for the FE: public > client/employer > profession > self. A quiet resignation (distractor D) is specifically called out in ethics case law (NSPE BER) as inadequate — leaving does not discharge knowledge of a hazard."
+
         })
       },
       { q: "Engineer designs a product and patents it personally without disclosing to employer. Patent uses skills/equipment from the job. Ethically:",
@@ -432,14 +479,15 @@
         correct: 0,
         ref: "NSPE Code §II.4 (Conflicts of interest)",
         solution: S({
-          c: "Employment IP-assignment clauses typically cover any invention made using employer's resources or related to employer's business.",
+          c: "NSPE Code §II.4 (conflicts of interest) plus standard employment IP-assignment law: inventions made with employer resources or within the employer's business scope presumptively belong to the employer.",
           s: [
-            "Engineer should disclose and review the contract.",
-            "Conflict exists if invention is in employer's field or used employer's equipment.",
-            "Many companies have an IP-disclosure process."
+            "<b>Step 1 — Spot the two taints.</b> The invention (a) used employer skills/equipment and (b) was filed WITHOUT disclosure — each independently creates the conflict.",
+            "<b>Step 2 — The compliant path.</b> Disclose the invention to the employer, review the employment agreement's IP-assignment clause, and resolve ownership before filing.",
+            "<b>Step 3 — Audit the distractors.</b> 'Patents are personal' ignores assignment clauses; 'outside business hours' does not cure use of employer equipment or field overlap; paying a 'small fee' is not how IP ownership is settled."
           ],
-          a: "Conflict — disclose to employer first.",
-          v: "Some inventions clearly outside employer's scope and made on personal time can be carved out, but only via formal disclosure and agreement."
+          a: "Likely a conflict — disclose to the employer first.",
+          v: "Nuance that keeps the rule honest: a truly unrelated invention, made on personal time with personal resources, can legitimately remain the engineer's (some states, e.g. CA Labor Code §2870, protect this) — but that determination is reached THROUGH formal disclosure, never by skipping it."
+
         })
       },
       { q: "An engineer is asked to certify a project complete based only on a brief walk-through. The engineer has not seen the test data. Ethically:",
@@ -452,14 +500,15 @@
         correct: 0,
         ref: "NSPE Code §II.3 (Statements only when truthful)",
         solution: S({
-          c: "Engineers can only certify what they have verified or reasonably supervised.",
+          c: "NSPE Code §II.3: issue statements only in an objective and truthful manner; a PE may certify only work they have personally reviewed or that was performed under their responsible charge.",
           s: [
-            "A walk-through is not sufficient documentation for most engineering certifications.",
-            "Test data, calculations, and inspection records must be reviewed personally.",
-            "Liability waivers do not absolve engineer of professional duty."
+            "<b>Step 1 — Measure the evidence against the act.</b> A certification asserts verified completion. A walk-through with no test data provides no verification — the assertion would be untruthful regardless of intent.",
+            "<b>Step 2 — The compliant action.</b> Refuse until test data, calculations, and inspection records are personally reviewed (or until tests are re-witnessed).",
+            "<b>Step 3 — Audit the distractors.</b> The contractor's word is hearsay, not verification; a liability waiver shifts money, not professional duty — the engineer's seal still vouches to the public; a 'footnote' contradicting the certification makes the document self-impeaching."
           ],
-          a: "Refuse until adequate evidence reviewed.",
-          v: "Sealing/signing implies responsible charge — direct knowledge and control."
+          a: "Refuse to certify until adequate evidence is personally reviewed.",
+          v: "The seal/signature legally implies 'responsible charge' — direct supervision and control. Boards discipline engineers for 'plan stamping' (sealing unreviewed work) more than almost any other violation; the same logic applies to completion certificates."
+
         })
       },
       { q: "An engineer working on a public project becomes aware that their spouse owns stock in a major supplier bidding on the work. They should:",
@@ -472,14 +521,15 @@
         correct: 0,
         ref: "NSPE Code §II.4 (Disclose all conflicts)",
         solution: S({
-          c: "Family financial interest in a bidder is a clear conflict of interest requiring written disclosure.",
+          c: "NSPE Code §II.4: disclose all known or potential conflicts of interest that could influence — or merely APPEAR to influence — judgment. Family financial interest in a bidder is a textbook case.",
           s: [
-            "Disclosure must be to client/employer in writing.",
-            "Engineer may continue if both parties accept disclosure and recusal from bid evaluation is established.",
-            "Some firms require divestiture; rules vary by jurisdiction."
+            "<b>Step 1 — Recognize the conflict.</b> A spouse's stock in a bidding supplier ties household finances to the bid outcome — an interest the engineer cannot un-know.",
+            "<b>Step 2 — The required act is disclosure.</b> Promptly, in writing, to employer/client and relevant parties. Disclosure converts a hidden bias into a managed one; the parties can then recuse the engineer from bid evaluation or accept the conflict knowingly.",
+            "<b>Step 3 — Audit the distractors.</b> Quietly selling the stock destroys the record and looks like concealment (possibly insider-timing too); 'small value' is not an exemption — materiality is for the PARTIES to judge after disclosure; resignation is disproportionate when recusal handles it."
           ],
-          a: "Disclose in writing.",
-          v: "Even appearance of conflict damages public trust — disclosure protects engineer and project."
+          a: "Disclose in writing to all parties immediately.",
+          v: "The appearance standard does the heavy lifting on public projects: even a conflict that never changes a decision erodes public trust if discovered undisclosed. Written disclosure protects the engineer as much as the project."
+
         })
       },
       { q: "An engineer disagrees with their supervisor's design decision that they believe is unsafe. Per NSPE the engineer should:",
@@ -492,14 +542,15 @@
         correct: 0,
         ref: "NSPE Code §II.1 (Engineers shall act as faithful agents but with primary obligation to public safety)",
         solution: S({
-          c: "Disagreement must go through proper channels — supervisor, manager, ethics officer, licensing board, regulator, in that escalation order.",
+          c: "Two NSPE duties intersect: faithful agency to the employer (§II.1 family) and the paramount duty to public safety (§I.1). Safety concerns are raised through proper channels, in writing, with escalation as needed.",
           s: [
-            "Document concerns in writing.",
-            "If safety concern is serious and not addressed, escalate to higher management.",
-            "If still not resolved, engineer may not sign or seal the work; may need to report to authorities."
+            "<b>Step 1 — Document first.</b> Put the technical disagreement and its safety basis in writing to the supervisor — a paper trail is both ethically required and self-protective.",
+            "<b>Step 2 — Escalate in order.</b> Supervisor → higher management/ethics officer → client/owner where appropriate → licensing board or regulator if the hazard persists. Each step is taken only if the previous one fails.",
+            "<b>Step 3 — Hold the personal line.</b> The engineer must not seal or sign work they believe unsafe — the seal is personal, not corporate. Distractors fail: silent private objections protect no one; peer-only griping changes nothing; going straight to the press skips every channel that could actually fix the design."
           ],
-          a: "Document in writing; escalate properly.",
-          v: "Whistleblower protections vary by jurisdiction. Many state engineering boards have a duty-to-report rule."
+          a: "Express disagreement in writing through proper channels; refuse to seal if necessary.",
+          v: "Whistleblower statutes (and some state boards' duty-to-report rules) protect engineers who escalate properly — protection is strongest precisely when the written-channel record exists. The FE answer pattern: document + escalate + never certify what you believe unsafe."
+
         })
       },
       { q: "An engineer uses an old design from a previous employer that they did not author. They modify some parameters and submit it as new work. This is:",
@@ -512,14 +563,15 @@
         correct: 0,
         ref: "NSPE Code §III.9 (Credit for engineering work)",
         solution: S({
-          c: "Reusing work without authorization violates both copyright/ownership and the duty to credit original authors.",
+          c: "Two simultaneous violations: §III.9 (take credit only for your own work; credit others) and §III.4 (confidential information of a former employer). Parameter tweaks do not launder either one.",
           s: [
-            "Even with modifications, derivative work requires permission.",
-            "Confidentiality violation (§III.4) if from previous employer.",
-            "Plagiarism violation (§III.9) — fail to credit original engineer."
+            "<b>Step 1 — The plagiarism prong.</b> The engineer did not author the design; presenting it as new work claims another engineer's intellectual effort — §III.9 violation regardless of modification.",
+            "<b>Step 2 — The confidentiality prong.</b> The design belongs to the former employer; taking and reusing it is misappropriation under §III.4 (and likely trade-secret law).",
+            "<b>Step 3 — Audit the distractors.</b> 'Modification makes it new' fails — a derivative work still requires rights to the original; 'if no one notices' is concealment, not ethics; a footnote attribution cures neither ownership nor confidentiality."
           ],
-          a: "Plagiarism + confidentiality violation.",
-          v: "Some firms maintain template libraries with explicit licensing for internal reuse — different situation entirely."
+          a: "Plagiarism AND a confidentiality violation.",
+          v: "Contrast case that sharpens the rule: firms legitimately reuse their OWN template libraries because the firm owns them and authorship is internal — ownership plus authorization is exactly what is missing here."
+
         })
       },
       { q: "A self-employed engineer offers free consulting to a city council to influence them to award a contract to the engineer's firm. This is:",
@@ -532,14 +584,15 @@
         correct: 0,
         ref: "NSPE Code §III.6 (Improper solicitation)",
         solution: S({
-          c: "Offering free services in exchange for business is an improper inducement and undermines fair procurement.",
+          c: "NSPE Code §III.6: do not give (or promise) anything of value to secure work. 'Free' services rendered to a decision-maker during procurement ARE a thing of value — an inducement.",
           s: [
-            "§III.6: engineers shall not offer or accept commissions or payments to procure professional engagements.",
-            "Even non-monetary 'free service' counts — it has value.",
-            "Public procurement processes are designed to prevent this exact behavior."
+            "<b>Step 1 — Name the transaction.</b> Free consulting → council goodwill → contract award: value exchanged for influence over procurement. That is the structure of an improper inducement, whatever it is called.",
+            "<b>Step 2 — Why the no-cash framing fails.</b> The code tests VALUE, not currency — professional services have a clear market price; waiving it for the buyer's decision-makers is the gift.",
+            "<b>Step 3 — Audit the remaining distractors.</b> 'Technical advice' describes the content, not the impropriety of its targeting and timing; offering the same freebie to competitors just multiplies the violation — fair procurement requires no vendor gifts to deciders at all."
           ],
-          a: "Improper inducement.",
-          v: "Many city councils explicitly forbid accepting any value from vendors during procurement decisions."
+          a: "Improper inducement — prohibited.",
+          v: "Mirror-image rule: public officials are typically barred from ACCEPTING such services during procurement, so the offer endangers the councilors too. Legitimate channel that does exist: responding to a published RFP/RFQ with qualifications — competing on merit, not on gifts."
+
         })
       }
     ],
@@ -551,14 +604,15 @@
         correct: 0,
         ref: "Handbook §3 (Depreciation methods)",
         solution: S({
-          c: "MACRS 7-year class with half-year convention: year-1 rate is 14.29% (not full 200%-declining-balance rate).",
+          c: "MACRS prescribes fixed percentage tables by property class. Two rules dominate: salvage value is IGNORED (full basis depreciates), and the half-year convention sets the year-1 rate of the 7-year class at 14.29%.",
           s: [
-            "Year 1 = $14.29\\% \\times 80{,}000 = \\$11{,}432$.",
-            "Salvage is ignored under MACRS — full basis is depreciated.",
-            "Year-2 rate is 24.49%, year-3 is 17.49%, etc., per the MACRS table."
+            "<b>Step 1 — Apply the table rate.</b> Year-1 depreciation $= 14.29\\% \\times \\$80{,}000 = \\$11{,}432$.",
+            "<b>Step 2 — See where 14.29% comes from.</b> 200% declining balance on 7 years is $2/7 = 28.57\\%$/yr; the half-year convention grants only half a year in year 1: $28.57/2 = 14.29\\%$.",
+            "<b>Step 3 — Audit the distractors.</b> \\$22,449 jumps to the year-2 rate (24.49%); \\$7,500 is straight-line on $(80{,}000-5{,}000)/10$ — wrong method AND wrongly uses salvage; \\$8,000 is $80{,}000/10$ straight-line."
           ],
-          a: "\\$11,432 (year 1)",
-          v: "MACRS sum over 8 years = 100% of basis. Half-year convention means year 1 gets only half-year deprecation, hence the smaller rate vs. full 200%/7 = 28.57%."
+          a: "\\$11,432 in year 1.",
+          v: "Consistency check: the 7-year MACRS schedule (14.29, 24.49, 17.49, 12.49, 8.93, 8.92, 8.93, 4.46) sums to 100.00% of basis over 8 calendar years — the trailing half year is the year-1 half deferred ✓."
+
         })
       },
       { q: "Two alternatives: A costs \\$10{,}000 now, saves \\$2{,}000/yr for 8 years. B costs \\$15{,}000 now, saves \\$3{,}000/yr for 8 years. MARR = 10%. Pick using incremental IRR.",
@@ -571,14 +625,16 @@
         correct: 0,
         ref: "Handbook §3.5 (Incremental analysis)",
         solution: S({
-          c: "When comparing mutually exclusive alternatives of unequal size, incremental IRR is the correct decision rule.",
+          c: "For mutually exclusive alternatives of different size, rank by the return on the INCREMENTAL investment: compute IRR of (B − A) cash flows and accept the larger project if that incremental IRR ≥ MARR.",
           s: [
-            "Incremental cash flow: $-5{,}000$ now, $+1{,}000$/yr for 8 yr.",
-            "Solve $-5{,}000 + 1{,}000(P/A, i, 8) = 0 \\Rightarrow (P/A) = 5 \\Rightarrow i \\approx 11.8\\%$ from tables.",
-            "$11.8\\% > $ MARR (10%) → accept the bigger investment (B)."
+            "<b>Step 1 — Form the increment.</b> B − A: extra cost \\$5,000 now; extra savings \\$1,000/yr for 8 years.",
+            "<b>Step 2 — Solve for the incremental IRR.</b> $-5000 + 1000(P/A, i, 8) = 0 \\Rightarrow (P/A, i, 8) = 5.0$; interest tables give $i \\approx 11.8\\%$.",
+            "<b>Step 3 — Decide.</b> $11.8\\% > $ MARR $= 10\\%$ → the extra \\$5,000 earns more than the hurdle → choose B.",
+            "<b>Step 4 — Why not individual IRRs?</b> A's own IRR (≈13.7%) beats B's (≈12.4%), yet B is correct — picking by individual IRR leaves \\$5,000 earning 11.8% on the table, above MARR. Size matters; increments decide."
           ],
-          a: "Use incremental IRR; accept B since 11.8% > MARR.",
-          v: "Highest individual IRR can mislead — A's IRR is 13.7%, B's is 12.4%, but the incremental return on going from A to B is what matters."
+          a: "Compute IRR of (B−A); since ≈11.8% ≥ MARR, choose B.",
+          v: "NPV cross-check (the gold standard): at 10%, $(P/A, 10\\%, 8) = 5.335$; NPV(A) $= -10{,}000 + 2000(5.335) = +\\$670$; NPV(B) $= -15{,}000 + 3000(5.335) = +\\$1{,}005$. B has the higher NPV ✓ — incremental IRR and NPV agree, as they always do when applied correctly."
+
         })
       },
       { q: "Equivalent annual cost (EAC) of an asset: P = \\$50{,}000, useful life 10 years, salvage \\$5{,}000, i = 8%, annual O&M = \\$2{,}000.",
@@ -586,15 +642,15 @@
         correct: 0,
         ref: "Handbook §3 (EAC capital recovery formula)",
         solution: S({
-          c: "EAC = $P(A/P, i, n) - S(A/F, i, n) + \\text{annual O&M}$.",
+          c: "EAC spreads ownership cost into a level annual amount: $\\text{EAC} = P(A/P, i, n) - S(A/F, i, n) + \\text{O\\&M}$.",
           s: [
-            "$(A/P, 8\\%, 10) = 0.14903$. Capital recovery on \\$50,000: \\$7,452.",
-            "$(A/F, 8\\%, 10) = 0.06903$. Salvage credit on \\$5,000: \\$345.",
-            "Annual O&M: \\$2,000.",
-            "EAC = $7{,}452 - 345 + 2{,}000 = \\$9{,}107 \\approx 9{,}116$ (rounding of factor tables)."
+            "<b>Step 1 — Capital recovery on first cost.</b> $(A/P, 8\\%, 10) = 0.14903$: $50{,}000 \\times 0.14903 = \\$7{,}452$/yr.",
+            "<b>Step 2 — Salvage credit.</b> $(A/F, 8\\%, 10) = 0.06903$: $5{,}000 \\times 0.06903 = \\$345$/yr recovered.",
+            "<b>Step 3 — Add O&M and total.</b> $7{,}452 - 345 + 2{,}000 = \\$9{,}107 \\approx \\$9{,}116$ (small spread is factor-table rounding)."
           ],
-          a: "≈ \\$9,116/yr",
-          v: "Equivalent forms: EAC = (P - S)(A/P) + Si + O&M = 45,000(0.14903) + 5,000(0.08) + 2,000 = 6,706 + 400 + 2,000 = 9,106 ✓ (matches within rounding)."
+          a: "≈ \\$9,116 per year.",
+          v: "Independent identity check: EAC $= (P-S)(A/P) + S\\,i + \\text{O\\&M} = 45{,}000(0.14903) + 5{,}000(0.08) + 2{,}000 = 6{,}706 + 400 + 2{,}000 = \\$9{,}106$ ✓ — the two standard formulas agree. Relationship check: $(A/P) - (A/F) = i$, i.e. $0.14903 - 0.06903 = 0.08$ ✓."
+
         })
       },
       { q: "Working capital of \\$50{,}000 invested at year 0 and recovered at year 5. Discount rate 10%. Present worth?",
@@ -602,14 +658,15 @@
         correct: 0,
         ref: "Handbook §3 (Time value, working capital)",
         solution: S({
-          c: "Working capital is invested initially and recovered at project end — earns no interest internally.",
+          c: "Working capital ties up cash at $t = 0$ and returns the SAME nominal amount at project end — it earns nothing in between, so its present worth is negative by exactly the time-value drag.",
           s: [
-            "PW = $-50{,}000 + 50{,}000(P/F, 10\\%, 5)$.",
-            "$(P/F, 10\\%, 5) = 1.1^{-5} = 0.6209$.",
-            "PW = $-50{,}000 + 31{,}046 = -\\$18{,}954$."
+            "<b>Step 1 — Set up the two cash flows.</b> $-\\$50{,}000$ at $t=0$; $+\\$50{,}000$ at $t=5$.",
+            "<b>Step 2 — Discount the recovery.</b> $(P/F, 10\\%, 5) = 1.1^{-5} = 0.6209$: PW of recovery $= \\$31{,}046$.",
+            "<b>Step 3 — Net.</b> PW $= -50{,}000 + 31{,}046 = -\\$18{,}954$."
           ],
-          a: "PW = $-\\$18{,}954$",
-          v: "Working capital is 'costless' on the books but has time-value opportunity cost. The negative PW captures that drag."
+          a: "PW $= -\\$18{,}954$",
+          v: "Distractor audit: '0, always recovered' ignores time value — the central lesson of the problem; $-50{,}000$ ignores the recovery entirely; $-25{,}000$ is an unsupported halving. Interpretation: the \\$18,954 is the opportunity cost of capital parked in inventory/receivables for 5 years at 10% — real money in project evaluation ✓."
+
         })
       },
       { q: "Real rate of return when nominal $i = 12\\%$ and inflation $f = 3\\%$:",
@@ -617,12 +674,15 @@
         correct: 0,
         ref: "Handbook §3 (Inflation — Fisher equation)",
         solution: S({
-          c: "Fisher: $(1+i) = (1+r)(1+f)$ ⇒ $r = (1+i)/(1+f) - 1$.",
+          c: "Fisher equation: $(1 + i) = (1 + r)(1 + f)$ — nominal return compounds the real return WITH inflation, so the real rate is $r = \\dfrac{1+i}{1+f} - 1$.",
           s: [
-            "$r = 1.12/1.03 - 1 = 1.08738 - 1 = 0.08738 \\approx 8.74\\%$."
+            "<b>Step 1 — Apply the exact formula.</b> $r = \\dfrac{1.12}{1.03} - 1 = 1.08738 - 1 = 8.74\\%$.",
+            "<b>Step 2 — See why subtraction is only approximate.</b> $i \\approx r + f + rf$; the cross-term $rf \\approx 0.26\\%$ is exactly the gap between 9% (naive $12-3$) and the true 8.74%.",
+            "<b>Step 3 — Audit the remaining distractors.</b> 15% ADDS inflation (backwards); 4% has no consistent derivation."
           ],
           a: "$r \\approx 8.74\\%$",
-          v: "Approximation $r \\approx i - f = 9\\%$ is close but underestimates the actual real return slightly. Use exact Fisher for FE."
+          v: "Round-trip check: $(1.0874)(1.03) = 1.1200$ ✓. Buying-power interpretation: \\$1 grows to \\$1.12, but the basket costing \\$1 now costs \\$1.03 — purchasing power grew by $1.12/1.03 = 1.0874$ ✓. The FE expects the exact Fisher form when choices are this close."
+
         })
       },
       { q: "Capitalized cost of an asset: \\$200{,}000 first cost, \\$10{,}000/yr perpetual O&M, $i = 8\\%$.",
@@ -630,13 +690,15 @@
         correct: 0,
         ref: "Handbook §3 (Capitalized cost — perpetuity)",
         solution: S({
-          c: "Capitalized cost = first cost + PW of perpetual annual cost. PW of perpetuity $A/i$.",
+          c: "Capitalized cost = present worth of owning something FOREVER: first cost plus the perpetuity value of recurring costs, $P + A/i$.",
           s: [
-            "Perpetual O&M present worth: $10{,}000/0.08 = \\$125{,}000$.",
-            "Capitalized cost = $200{,}000 + 125{,}000 = \\$325{,}000$."
+            "<b>Step 1 — Perpetuity of O&M.</b> $A/i = 10{,}000/0.08 = \\$125{,}000$ — the fund that yields \\$10,000/yr at 8% indefinitely.",
+            "<b>Step 2 — Add first cost.</b> $200{,}000 + 125{,}000 = \\$325{,}000$.",
+            "<b>Step 3 — Audit the distractors.</b> \\$210,000 adds just one year of O&M; \\$200,000 ignores O&M; \\$1,250,000 is $100{,}000/0.08$ — a misplaced decimal on the annual cost."
           ],
           a: "\\$325,000",
-          v: "This is the amount you'd need today, invested at 8%, to fund the project and its O&M forever."
+          v: "Endowment check: \\$125,000 invested at 8% throws off exactly $0.08 \\times 125{,}000 = \\$10{,}000$ every year without touching principal ✓. Public-works context: capitalized cost is the standard comparison metric for very-long-life assets (dams, rights-of-way) where $n \\to \\infty$ makes ordinary PW awkward."
+
         })
       },
       { q: "Effective annual rate when nominal is 18% compounded continuously:",
@@ -644,13 +706,14 @@
         correct: 0,
         ref: "Handbook §3 (Compounding — continuous limit)",
         solution: S({
-          c: "Continuous compounding: $i_{eff} = e^{r} - 1$.",
+          c: "Continuous compounding is the limit of $m$ periods per year as $m \\to \\infty$: $\\left(1 + \\frac{r}{m}\\right)^{m} \\to e^{r}$, so $i_{eff} = e^{r} - 1$.",
           s: [
-            "$e^{0.18} = 1.19722$.",
-            "$i_{eff} \\approx 19.72\\%$."
+            "<b>Step 1 — Evaluate.</b> $i_{eff} = e^{0.18} - 1 = 1.19722 - 1 = 19.72\\%$.",
+            "<b>Step 2 — Sanity-bound it.</b> Effective rate must EXCEED the nominal 18% (compounding helps) but by a finite margin — 18% and 20% bracket it; 1.5% is the monthly rate $18/12$, a units trap."
           ],
-          a: "$\\approx 19.72\\%$",
-          v: "Compare: monthly compounding gives $(1.015)^{12}-1 = 19.56\\%$ — continuous is slightly higher (limit case)."
+          a: "$i_{eff} = e^{0.18} - 1 \\approx 19.72\\%$",
+          v: "Ladder check (effective rate rises with compounding frequency): annual 18.00% → monthly $(1.015)^{12}-1 = 19.56\\%$ → daily 19.71% → continuous 19.72% — a tight ceiling just above the daily figure ✓."
+
         })
       },
       { q: "Bond: \\$1{,}000 face, 6% annual coupon, 5 years to maturity, yield 8%. Price?",
@@ -658,14 +721,15 @@
         correct: 0,
         ref: "Handbook §3 (Bond valuation)",
         solution: S({
-          c: "Bond price = PW of coupons + PW of face. Coupon = $60$/yr; face = \\$1,000; yield $i = 8\\%$.",
+          c: "A bond's price is the present worth of its promised cash flows at the market yield: annuity of coupons plus the discounted face value.",
           s: [
-            "PW coupons: $60(P/A, 8\\%, 5) = 60 \\times 3.9927 = 239.56$.",
-            "PW face: $1000(P/F, 8\\%, 5) = 1000 \\times 0.6806 = 680.58$.",
-            "Price = $239.56 + 680.58 = \\$920.15$."
+            "<b>Step 1 — Coupon stream.</b> Coupon $= 6\\% \\times 1000 = \\$60$/yr. PW $= 60(P/A, 8\\%, 5) = 60 \\times 3.9927 = \\$239.56$.",
+            "<b>Step 2 — Face value.</b> PW $= 1000(P/F, 8\\%, 5) = 1000 \\times 0.6806 = \\$680.58$.",
+            "<b>Step 3 — Price.</b> $239.56 + 680.58 = \\$920.15$."
           ],
           a: "\\$920.15",
-          v: "Yield (8%) > coupon (6%) ⇒ bond sells at discount (below par). Makes sense ✓."
+          v: "Direction check: yield (8%) > coupon (6%) → price BELOW par ✓ (a buyer demands a discount to lift the 6% coupon up to an 8% total return); distractor \\$1,080 has it backwards (premium), \\$1,000 would mean yield = coupon. Magnitude check: the ~\\$80 discount amortized over 5 years ≈ \\$16/yr extra return on ~\\$920 ≈ 1.7%, closing most of the 2-point coupon-yield gap ✓."
+
         })
       }
     ],
