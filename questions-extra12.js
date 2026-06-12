@@ -314,19 +314,21 @@
 
         })
       },
-      { q: "Bayes: $P(\\text{disease}) = 0.01$, test sensitivity $P(+\\,|\\,D) = 0.95$, specificity $P(-\\,|\\,\\neg D) = 0.95$. Posterior $P(D\\,|\\,+)$:",
+      { q: "Bayes: $P(\\text{disease}) = 0.01$, test sensitivity $P(+\\,|\\,D) = 0.95$, specificity $P(-\\,|\\,\\bar D) = 0.95$. Find $P(D\\,|\\,+)$ — the probability the patient actually has the disease given a positive test:",
         choices: ["$\\approx 0.161$", "$\\approx 0.95$", "$\\approx 0.01$", "$\\approx 0.5$"],
         correct: 0,
         ref: "Handbook §2.2 (Bayes theorem)",
         solution: S({
-          c: "Bayes' theorem with the law of total probability: $P(D\\,|\\,+) = \\dfrac{P(+|D)P(D)}{P(+|D)P(D) + P(+|\\neg D)P(\\neg D)}$. The base rate $P(D) = 0.01$ dominates the result.",
+          c: "Decode the notation before anything else: $D$ = has the disease, $\\bar D$ = does NOT have it (the complement of $D$ — also written $D'$), $+$ = tests positive. 'Sensitivity' $P(+|D)$ = how often a SICK person tests positive; 'specificity' $P(-|\\bar D)$ = how often a HEALTHY person tests negative. The question asks for the REVERSED direction, $P(D|+)$: of the people who test positive, what fraction is actually sick? That reversal is what Bayes' theorem computes.",
           s: [
-            "<b>Step 1 — False-positive rate.</b> Specificity 0.95 ⇒ $P(+|\\neg D) = 1 - 0.95 = 0.05$.",
-            "<b>Step 2 — Total probability of testing positive.</b> $P(+) = 0.95(0.01) + 0.05(0.99) = 0.0095 + 0.0495 = 0.059$ — note the false positives (0.0495) outnumber the true positives (0.0095) five to one.",
-            "<b>Step 3 — Posterior.</b> $P(D|+) = 0.0095/0.059 \\approx 0.161$."
+            "<b>Step 1 — Easiest route: count an imaginary 10,000 people.</b> Disease rate 1% → 100 sick, 9,900 healthy.",
+            "<b>Step 2 — Run them all through the test.</b> Sick: $95\\%$ of 100 test positive → 95 TRUE positives. Healthy: specificity 0.95 means $5\\%$ wrongly test positive → $0.05 \\times 9{,}900 = 495$ FALSE positives.",
+            "<b>Step 3 — Answer the actual question.</b> Everyone with a positive test: $95 + 495 = 590$ people. Actually sick among them: 95. So $P(D|+) = 95/590 \\approx 0.161 = 16.1\\%$.",
+            "<b>Step 4 — Same thing by the Bayes formula (for the exam).</b> $P(D|+) = \\dfrac{P(+|D)P(D)}{P(+|D)P(D) + P(+|\\bar D)P(\\bar D)} = \\dfrac{0.95(0.01)}{0.95(0.01) + 0.05(0.99)} = \\dfrac{0.0095}{0.059} \\approx 0.161$ — identical, because the formula IS the counting argument written compactly.",
+            "<b>Step 5 — Distractor audit.</b> 0.95 confuses $P(+|D)$ with $P(D|+)$ — the two DIRECTIONS of conditioning are not the same thing (the classic error this question exists to test); 0.01 ignores the test entirely; 0.5 is a coin-flip guess."
           ],
-          a: "$\\approx 16.1\\%$ — most positives are false positives.",
-          v: "Frequency check (often clearer): per 10,000 people — 100 diseased → 95 true positives; 9,900 healthy → 495 false positives; $95/(95+495) = 95/590 = 16.1\\%$ ✓. Distractor 0.95 confuses $P(+|D)$ with $P(D|+)$ — the classic 'prosecutor's fallacy' this question is built to test."
+          a: "$P(D|+) \\approx 16.1\\%$ — most positive tests are false alarms.",
+          v: "Why so LOW despite a '95% accurate' test: the disease is rare, so the small 5% error rate applied to the HUGE healthy group (495 people) swamps the true positives (95). Rule of thumb: for rare conditions, screening positives need a confirmatory second test ✓. Vocabulary note for further reading: $P(D)$ is sometimes called the 'prior' and $P(D|+)$ the 'posterior' in Bayesian texts — fancy names for 'before the test' and 'after the test'."
 
         })
       },
