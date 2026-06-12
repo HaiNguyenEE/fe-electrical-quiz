@@ -991,14 +991,13 @@
         choices: ["$-10$", "$+10$", "$-11$", "$-0.1$"],
         correct: 0,
         solution: S({
-          c: "A Schmitt trigger is a comparator with HYSTERESIS: two different thresholds depending on direction — rising input must cross $V_{T+}$ to flip high; falling input must cross the LOWER $V_{T-}$ to flip back. Between them, the output holds its state.",
+          c: "Inverting amplifier with negative feedback: the feedback holds the inverting node at 0 V (a 'virtual ground'), so the input current is $V_{in}/R_{in}$, all of it flows through $R_f$, and the gain is a pure resistor ratio: $A_v = -R_f/R_{in}$.",
           s: [
-            "<b>Step 1 — The problem it solves.</b> A slow or noisy edge through a single-threshold comparator wiggles across the threshold many times → output chatters (multiple false transitions).",
-            "<b>Step 2 — How hysteresis fixes it.</b> After the first crossing of $V_{T+}$, noise must exceed the full hysteresis window $V_{T+} - V_{T-}$ to cause a false flip — small noise can no longer retrigger.",
-            "<b>Step 3 — Distractor audit.</b> Linear amplification is the opposite of its snap-action behavior; sine generation needs an oscillator (a Schmitt + RC can MAKE one, but the trigger itself doesn't); frequency multiplication is unrelated."
+            "<b>Step 1 — Apply the ratio.</b> $A_v = -100\\text{k}/10\\text{k} = -10$.",
+            "<b>Step 2 — Distractor audit.</b> $+10$ drops the inversion; $-11$ borrows the NON-inverting '+1' (that belongs to $1 + R_f/R_g$, a different topology); $-0.1$ inverts the ratio."
           ],
-          a: "Clean noisy or slow edges via hysteresis.",
-          v: "Design rule: hysteresis width must exceed the peak-to-peak noise riding on the signal ✓. Everyday sightings: thermostats (heat on at 19°, off at 21° — temperature hysteresis), push-button debouncing, and the gate symbol with the little hysteresis loop drawn inside."
+          a: "$A_v = -10$",
+          v: "Current walk: $V_{in} = 1$ V pushes 0.1 mA into the virtual ground; through 100 kΩ that drops 10 V, pulling the output to −10 V ✓. Trade-off: input impedance is only $R_{in} = 10$ kΩ — the non-inverting topology's near-infinite input impedance is its advantage."
 
         })
       },
@@ -1493,13 +1492,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Schmitt trigger has two thresholds (V_T+ and V_T−) — output stays in one state until input crosses the other threshold.",
+          c: "A Schmitt trigger is a comparator with HYSTERESIS: two different thresholds depending on direction — a rising input must cross $V_{T+}$ to flip the output high; a falling input must cross the LOWER threshold $V_{T-}$ to flip it back. Between the two, the output holds its state.",
           s: [
-            "Hysteresis prevents multiple transitions on a slow or noisy edge.",
-            "Common application: square up sensor outputs before logic gates."
+            "<b>Step 1 — The problem it solves.</b> A slow or noisy edge through a single-threshold comparator wiggles across that one threshold repeatedly → the output chatters with false transitions.",
+            "<b>Step 2 — How hysteresis fixes it.</b> After the first crossing of $V_{T+}$, noise must exceed the FULL window $V_{T+} - V_{T-}$ to cause a false flip — small noise can no longer retrigger the output.",
+            "<b>Step 3 — Distractor audit.</b> Linear amplification is the opposite of its snap-action; generating sinusoids needs an oscillator (a Schmitt + RC can build one, but the trigger itself doesn't); frequency multiplication is unrelated."
           ],
-          a: "Clean noisy edges via hysteresis.",
-          v: "Hysteresis width = $V_{T+} - V_{T-}$ — must exceed peak-to-peak noise."
+          a: "Clean noisy or slow edges via hysteresis.",
+          v: "Design rule: the hysteresis window must exceed the peak-to-peak noise on the signal ✓. Everyday sightings: thermostats (on at 19°, off at 21°), push-button debouncing, and the logic-gate symbol with the little hysteresis loop drawn inside."
+
         })
       }
     ],
@@ -2147,130 +2148,150 @@
         choices: ["Network (Layer 3)", "Data Link (Layer 2)", "Transport (Layer 4)", "Physical (Layer 1)"],
         correct: 0,
         solution: S({
-          c: "OSI 7-layer model — Network layer handles logical addressing and routing.",
+          c: "The OSI model splits networking into 7 layers, each with one job. The mnemonic ladder (bottom-up): Physical (bits on wire) → Data Link (frames within ONE network) → Network (packets BETWEEN networks) → Transport (end-to-end) → Session → Presentation → Application.",
           s: [
-            "Network (L3): IP, ICMP — routing.",
-            "Data Link (L2): MAC addresses, switching within a LAN.",
-            "Transport (L4): TCP/UDP — end-to-end communication."
+            "<b>Step 1 — Match the job to the layer.</b> 'Routing between networks' requires logical addresses that span networks — that is the NETWORK layer (L3), home of IP and routers.",
+            "<b>Step 2 — Eliminate by job description.</b> L2 (Data Link) switches frames by MAC address WITHIN one LAN — it cannot cross networks; L4 (Transport, TCP/UDP) connects programs end-to-end and assumes delivery is someone else's problem; L1 is voltages and connectors.",
+            "<b>Step 3 — Device mapping.</b> Router = L3, switch = L2, hub/repeater = L1 — the device hierarchy mirrors the layers."
           ],
-          a: "Network (Layer 3).",
-          v: "Routers operate at L3; switches at L2."
+          a: "Network layer (Layer 3).",
+          v: "Self-test that locks it in: an IP address (L3) is routable across the world; a MAC address (L2) never leaves its local segment — each router hop REWRITES the MACs but preserves the IPs ✓."
+
         })
       },
       { q: "Subnet mask /24 in CIDR notation corresponds to:",
         choices: ["$255.255.255.0$", "$255.0.0.0$", "$255.255.0.0$", "$0.0.0.255$"],
         correct: 0,
         solution: S({
-          c: "CIDR /n means n bits of network prefix.",
+          c: "CIDR notation /n says: the first $n$ bits of the 32-bit IPv4 address are the NETWORK part. The subnet mask writes those $n$ ones (then zeros) in dotted decimal.",
           s: [
-            "/24 = 24 ones = 11111111.11111111.11111111.00000000 = 255.255.255.0.",
-            "Hosts available: $2^{8} - 2 = 254$ (subtract network and broadcast addresses)."
+            "<b>Step 1 — Expand /24.</b> 24 ones = three full bytes of ones: 11111111.11111111.11111111.00000000.",
+            "<b>Step 2 — Convert.</b> 255.255.255.0 — each all-ones byte reads 255.",
+            "<b>Step 3 — Host capacity.</b> 8 host bits → $2^{8} - 2 = 254$ usable hosts (subtracting the all-zeros network address and all-ones broadcast).",
+            "<b>Step 4 — Distractor audit.</b> 255.0.0.0 is /8; 255.255.0.0 is /16; 0.0.0.255 inverts the mask (that pattern is a WILDCARD mask in ACLs)."
           ],
-          a: "$255.255.255.0$",
-          v: "/16 = 255.255.0.0 (65,534 hosts), /8 = 255.0.0.0 (16M hosts)."
+          a: "255.255.255.0",
+          v: "The byte-boundary anchors: /8 → 255.0.0.0 (~16M hosts), /16 → 65,534 hosts, /24 → 254 hosts ✓. Off-boundary practice: /26 = 255.255.255.192, 62 hosts — same logic, partial byte."
+
         })
       },
       { q: "TCP vs UDP: which provides reliable, ordered delivery?",
         choices: ["TCP", "UDP", "Both", "Neither"],
         correct: 0,
         solution: S({
-          c: "TCP is connection-oriented with acknowledgments, sequence numbers, retransmission.",
+          c: "Both are transport (L4) protocols, but with opposite philosophies: TCP promises RELIABLE, ORDERED delivery (and pays for it in overhead); UDP just flings datagrams — fast, light, no guarantees.",
           s: [
-            "TCP: handshake (SYN-SYN/ACK-ACK), reliable, ordered, flow control.",
-            "UDP: connectionless, best-effort, low overhead — good for streaming, DNS."
+            "<b>Step 1 — TCP's machinery.</b> Connection setup (three-way handshake), sequence numbers (ordering), acknowledgments + retransmission (reliability), flow and congestion control — every byte accounted for.",
+            "<b>Step 2 — UDP's bargain.</b> No connection, no ACKs, no ordering — an 8-byte header and hope. Perfect when speed beats completeness: live video, gaming, DNS lookups.",
+            "<b>Step 3 — Answer.</b> 'Reliable, ordered' is TCP by definition."
           ],
           a: "TCP.",
-          v: "QUIC (HTTP/3 transport) is built on UDP but adds TCP-like reliability in userspace."
+          v: "Use-case check: file transfer/web/email ride TCP (a missing byte corrupts everything); a lost video frame is better skipped than re-sent → UDP ✓. Modern twist: QUIC (HTTP/3) rebuilds TCP-like reliability ON TOP of UDP to escape TCP's head-of-line blocking."
+
         })
       },
       { q: "Default port for HTTPS:",
         choices: ["443", "80", "22", "8080"],
         correct: 0,
         solution: S({
-          c: "Well-known ports under 1024 are reserved for standard services.",
+          c: "Port numbers let one IP host many services; the 'well-known' ports (0-1023) are standardized so clients know where to knock. The handful the FE expects: HTTP 80, HTTPS 443, SSH 22, FTP 21, DNS 53, SMTP 25.",
           s: [
-            "HTTP = 80, HTTPS = 443, SSH = 22, FTP = 21, DNS = 53."
+            "<b>Step 1 — Recall.</b> HTTPS (HTTP over TLS) = port 443.",
+            "<b>Step 2 — Distractor audit.</b> 80 is plain HTTP (unencrypted); 22 is SSH; 8080 is a common ALTERNATE/proxy HTTP port, not a standard default."
           ],
           a: "443.",
-          v: "Browsers default to 443 for HTTPS; 8080 is a common alternative HTTP port."
+          v: "Browser behavior confirms it: https://example.com silently means https://example.com:443, just as http:// implies :80 — you only type a port when deviating from these defaults ✓."
+
         })
       },
       { q: "Bandwidth-delay product for 1 Gbps link with 50 ms RTT:",
         choices: ["$50$ Mbit (≈6.25 MB)", "$1$ Mbit", "$1$ kbit", "$50$ Gbit"],
         correct: 0,
         solution: S({
-          c: "BDP = bandwidth × RTT — amount of data ‘in flight’ in a fully utilized pipe.",
+          c: "Think of a network path as a pipe: bandwidth is its width, round-trip time its length. The bandwidth-delay product BDP $= R \\times RTT$ is the pipe's VOLUME — how many bits are 'in flight' when the link is kept full.",
           s: [
-            "$BDP = 10^{9} \\times 0.05 = 5\\times 10^{7}$ bits = 50 Mbit = 6.25 MB."
+            "<b>Step 1 — Multiply.</b> $BDP = 10^{9}\\,\\text{bit/s} \\times 0.05\\,\\text{s} = 5\\times10^{7}$ bits.",
+            "<b>Step 2 — Convert.</b> 50 Mbit ÷ 8 = 6.25 MB.",
+            "<b>Step 3 — Distractor audit.</b> 1 Mbit and 1 kbit are decade slips; 50 Gbit multiplies by 50 s instead of 50 ms."
           ],
-          a: "50 Mbit (~6.25 MB).",
-          v: "TCP window must be ≥ BDP to fully utilize the link; default 64 KB window is too small for long-fat-network links."
+          a: "50 Mbit ≈ 6.25 MB.",
+          v: "Why it matters: a TCP sender may only have a WINDOW's worth of unacknowledged data in flight — if the window < BDP, the pipe runs partly empty. The classic 64-KB window fills only 1% of this link → ~10 Mbps effective on a 1-Gbps path; window scaling (RFC 1323) exists precisely for these 'long fat networks' ✓."
+
         })
       },
       { q: "CSMA/CD is used by:",
         choices: ["Legacy half-duplex Ethernet", "Wi-Fi", "Token Ring", "ATM"],
         correct: 0,
         solution: S({
-          c: "Carrier Sense Multiple Access with Collision Detection — listen before transmit, abort on collision.",
+          c: "CSMA/CD = Carrier Sense Multiple Access with Collision Detection: listen before transmitting; if two stations collide anyway, detect it, abort, and retry after a random backoff. It manages a SHARED medium where everyone hears everyone.",
           s: [
-            "Used by 10/100 Mbps Ethernet on shared coax/hub.",
-            "Modern switched full-duplex Ethernet doesn’t need CSMA/CD (no collisions).",
-            "Wi-Fi uses CSMA/CA (collision avoidance) since detection isn’t feasible wirelessly."
+            "<b>Step 1 — Match to the medium.</b> Shared-medium Ethernet — coax buses and hub-based 10/100 Mbps LANs (half-duplex) — is exactly that environment: CSMA/CD's home.",
+            "<b>Step 2 — Why the others fail.</b> Wi-Fi can't reliably DETECT collisions while transmitting (your own signal deafens you) → it uses CSMA/CA (avoidance); Token Ring passes a token (no contention at all); ATM is connection-switched cells.",
+            "<b>Step 3 — Why 'legacy'.</b> Modern switched Ethernet gives every port its own full-duplex link — no shared medium, no collisions, CSMA/CD disabled."
           ],
-          a: "Legacy half-duplex Ethernet.",
-          v: "Switches with full-duplex links eliminate collision domains entirely."
+          a: "Legacy half-duplex (shared/hub) Ethernet.",
+          v: "Mechanism fossil that proves the history: Ethernet's 64-byte minimum frame exists so a transmitter is STILL transmitting when a collision at the far end propagates back — a constraint sized to CSMA/CD's detection window, still in the standard today ✓."
+
         })
       },
       { q: "Hamming distance between codewords 10110 and 11011:",
         choices: ["$3$", "$2$", "$5$", "$1$"],
         correct: 0,
         solution: S({
-          c: "Hamming distance = number of differing bit positions.",
+          c: "Hamming distance between two equal-length codewords = the number of bit positions where they DIFFER. It is coding theory's basic ruler: codes that keep all words far apart can detect and correct errors.",
           s: [
-            "Position 1: 1=1 ✓; pos 2: 0≠1 ✗; pos 3: 1=0 ✗; pos 4: 1=1 ✓; pos 5: 0≠1 ✗.",
-            "3 differences."
+            "<b>Step 1 — Compare position by position.</b> 1·0·1·1·0 vs 1·1·0·1·1 → match, differ, differ, match, differ.",
+            "<b>Step 2 — Count.</b> 3 differing positions → distance 3.",
+            "<b>Step 3 — Shortcut.</b> XOR the words: $10110 \\oplus 11011 = 01101$ — count the ones: 3 ✓ (Hamming distance = weight of the XOR)."
           ],
           a: "3.",
-          v: "Minimum Hamming distance $d_{min}$ determines error-correcting capability: $\\lfloor(d_{min}-1)/2\\rfloor$ errors correctable."
+          v: "Why distance matters: a code whose MINIMUM pairwise distance is $d$ can detect $d-1$ bit errors and correct $\\lfloor(d-1)/2\\rfloor$ — distance 3 → correct 1 error, the design point of classic Hamming codes ✓."
+
         })
       },
       { q: "DNS query goes from client to:",
         choices: ["Recursive resolver, then root/TLD/auth servers", "Web server directly", "Default gateway", "ISP modem"],
         correct: 0,
         solution: S({
-          c: "DNS uses a hierarchical resolution: client → recursive resolver → root → TLD → authoritative.",
+          c: "DNS translates names to addresses through a HIERARCHY. Your machine asks one helper — a RECURSIVE RESOLVER — which then walks the tree on your behalf: root servers → top-level-domain (.com) servers → the domain's authoritative server.",
           s: [
-            "Resolver caches answers to reduce upstream queries (TTL-based).",
-            "Common resolvers: 8.8.8.8 (Google), 1.1.1.1 (Cloudflare)."
+            "<b>Step 1 — The client's single hop.</b> The stub resolver in your OS sends the whole question to a recursive resolver (your ISP's, or 8.8.8.8 / 1.1.1.1).",
+            "<b>Step 2 — The resolver's walk.</b> Root ('ask .com servers') → TLD ('ask example.com's server') → authoritative (the actual A/AAAA record). Answers are CACHED per TTL, so most queries never reach the root.",
+            "<b>Step 3 — Distractor audit.</b> The web server doesn't do name lookups for you; the default gateway just forwards packets; the modem is L1/L2 hardware."
           ],
-          a: "Recursive resolver, then hierarchy.",
-          v: "DNSSEC adds cryptographic authentication to prevent spoofing."
+          a: "To a recursive resolver, which then queries root → TLD → authoritative servers.",
+          v: "Scale check: root servers survive only because caching absorbs ~everything — a busy resolver answers most queries from cache in microseconds ✓. Security note: DNSSEC signs the records so a resolver can verify nobody forged the answer."
+
         })
       },
       { q: "MAC address is how many bits?",
         choices: ["$48$", "$32$", "$64$", "$128$"],
         correct: 0,
         solution: S({
-          c: "Ethernet MAC address: 48 bits (6 bytes), often written as hex e.g. 00:1A:2B:3C:4D:5E.",
+          c: "A MAC address is the LINK-layer (L2) hardware identifier burned into a network interface: 48 bits = 6 bytes, written as six hex pairs like 00:1A:2B:3C:4D:5E.",
           s: [
-            "First 3 bytes: OUI (manufacturer).",
-            "Last 3 bytes: device-specific."
+            "<b>Step 1 — Recall the size.</b> 48 bits.",
+            "<b>Step 2 — Structure.</b> First 3 bytes = OUI (manufacturer prefix assigned by IEEE); last 3 bytes = device serial — globally unique by construction.",
+            "<b>Step 3 — Distractor audit.</b> 32 bits is IPv4; 128 bits is IPv6; 64 bits is the EUI-64 format (used inside IPv6 link-local addresses — a stretched MAC, not a MAC)."
           ],
-          a: "48 bits.",
-          v: "IPv4: 32 bits. IPv6: 128 bits. Don’t confuse MAC with IP addressing."
+          a: "48 bits (6 bytes).",
+          v: "Address-space check: $2^{48} \\approx 2.8\\times10^{14}$ — hundreds of thousands of addresses for every person on Earth ✓. Keep the pair straight: MAC = local delivery on one network segment; IP = global routing — both are needed, doing different jobs."
+
         })
       },
       { q: "An IPv4 packet header is at minimum how many bytes?",
         choices: ["20", "60", "8", "40"],
         correct: 0,
         solution: S({
-          c: "IPv4 header: 20–60 bytes (5–15 words of 32 bits).",
+          c: "The IPv4 header is built from 32-bit words: the IHL (header length) field counts them, minimum 5, maximum 15 — so the header spans 20 to 60 bytes.",
           s: [
-            "Minimum: 5 words × 4 bytes = 20 bytes (no options).",
-            "Maximum with options: 60 bytes."
+            "<b>Step 1 — Minimum.</b> 5 words × 4 bytes = 20 bytes — the no-options header that virtually all real traffic uses (version, IHL, total length, TTL, protocol, checksum, source IP, destination IP, etc.).",
+            "<b>Step 2 — Maximum for contrast.</b> 15 words = 60 bytes when options are present (rare).",
+            "<b>Step 3 — Distractor audit.</b> 60 is the MAX, not min; 8 bytes is the UDP header; 40 bytes is the IPv6 fixed header."
           ],
-          a: "20 bytes.",
-          v: "IPv6 fixed header is 40 bytes (no options field, extension headers instead)."
+          a: "20 bytes minimum.",
+          v: "Cross-protocol anchor set: IPv4 ≥ 20 B, TCP ≥ 20 B, UDP = 8 B, IPv6 = 40 B fixed — a minimal TCP/IPv4 packet carries 40 bytes of headers before any data, which is why tiny-packet workloads (VoIP) measure efficiency carefully ✓."
+
         })
       }
     ],
@@ -2281,64 +2302,75 @@
         choices: ["$13.375$", "$13.75$", "$11.375$", "$13.3$"],
         correct: 0,
         solution: S({
-          c: "Binary positional value: $\\sum b_i\\cdot 2^{i}$, with negative powers for fractional bits.",
+          c: "Binary is positional just like decimal, but with powers of 2: digits left of the point weigh $8, 4, 2, 1$; digits right of it weigh $\\tfrac12, \\tfrac14, \\tfrac18, \\ldots$",
           s: [
-            "Integer 1101 = 8+4+0+1 = 13.",
-            "Fraction .011 = 0/2 + 1/4 + 1/8 = 0.25 + 0.125 = 0.375.",
-            "Total: 13.375."
+            "<b>Step 1 — Integer part.</b> $1101_2 = 8 + 4 + 0 + 1 = 13$.",
+            "<b>Step 2 — Fraction part.</b> $.011_2 = 0\\cdot\\tfrac12 + 1\\cdot\\tfrac14 + 1\\cdot\\tfrac18 = 0.25 + 0.125 = 0.375$.",
+            "<b>Step 3 — Combine.</b> $13.375$.",
+            "<b>Step 4 — Distractor audit.</b> 13.75 misweights the fraction bits ($\\tfrac12+\\tfrac14$); 11.375 drops a bit in the integer; 13.3 truncates."
           ],
-          a: "13.375.",
-          v: "Quick check: 1101 binary obviously bigger than 1100 (12), so 13 is in the right ballpark."
+          a: "$1101.011_2 = 13.375_{10}$",
+          v: "Reverse check: $0.375 \\times 2 = 0.75$ (0), $0.75\\times2 = 1.5$ (1), $0.5\\times2 = 1.0$ (1) → .011 ✓ — the multiply-by-2 algorithm regenerates the fraction bits exactly."
+
         })
       },
       { q: "Two’s complement of 8-bit binary 00010110:",
         choices: ["11101010", "11101001", "10010110", "00010111"],
         correct: 0,
         solution: S({
-          c: "Two’s complement = bitwise NOT then add 1 — represents the negative.",
+          c: "Two's complement is how computers store negatives so that ordinary addition hardware works for both signs. To negate: invert every bit, then add 1.",
           s: [
-            "00010110 → invert → 11101001 → +1 → 11101010.",
-            "Verify: 00010110 = +22 decimal; -22 in 8-bit two’s complement is 234 in unsigned = 11101010 ✓."
+            "<b>Step 1 — Invert.</b> $00010110 \\to 11101001$.",
+            "<b>Step 2 — Add one.</b> $11101001 + 1 = 11101010$.",
+            "<b>Step 3 — Distractor audit.</b> 11101001 stops after inverting (one's complement); 10010110 just flips the sign bit (sign-magnitude thinking); 00010111 adds 1 without inverting."
           ],
-          a: "11101010.",
-          v: "Sum check: 00010110 + 11101010 = 100000000 (carry-out, lower 8 bits zero) — confirms it’s the negative."
+          a: "11101010 (= −22).",
+          v: "Two confirmations: weighted read with MSB = −128: $-128+64+32+8+2 = -22$ ✓, matching $00010110 = +22$; additive identity: $00010110 + 11101010 = 1\\,00000000$ → low 8 bits all zero ✓ — a number plus its negation is 0, the property the encoding is built for."
+
         })
       },
       { q: "Simplify Boolean expression: $\\overline{AB} + AB$",
         choices: ["$1$", "$A + B$", "$\\overline{A} + B$", "$0$"],
         correct: 0,
         solution: S({
-          c: "Tautology: $X + \\overline X = 1$ for any logical expression $X$.",
+          c: "Treat a whole sub-expression as a single variable when it appears with its own complement: the complement law $X + \\overline X = 1$ holds for ANY expression $X$, not just single letters.",
           s: [
-            "Let $X = AB$. Then $\\overline{AB} + AB = \\overline X + X = 1$."
+            "<b>Step 1 — Substitute.</b> Let $X = AB$. The expression is $\\overline X + X$.",
+            "<b>Step 2 — Apply the law.</b> $\\overline X + X = 1$ — always true, regardless of A and B.",
+            "<b>Step 3 — Distractor audit.</b> $A + B$ would come from misreading $\\overline{AB}$ as $\\bar A\\bar B$... (note: $\\overline{AB} = \\bar A + \\bar B$ by De Morgan, and $\\bar A + \\bar B + AB$ still $= 1$); the others ignore the complement pairing."
           ],
-          a: "$1$.",
-          v: "Truth table: any combination of A,B gives 1 ✓."
+          a: "$F = 1$ (a tautology).",
+          v: "Brute-force truth table: (0,0)→$\\overline{0}+0 = 1$; (0,1)→1; (1,0)→1; (1,1)→$\\overline{1}+1 = 0+1 = 1$ — all rows 1 ✓. Circuit meaning: this network can be replaced by a wire to logic HIGH — simplification finds free hardware."
+
         })
       },
       { q: "Truth table for XOR (A⊕B): output is 1 when:",
         choices: ["A ≠ B (exactly one is 1)", "Both A and B are 1", "Both A and B are 0", "A = B"],
         correct: 0,
         solution: S({
-          c: "XOR (exclusive OR) outputs 1 when inputs differ.",
+          c: "XOR (exclusive OR, ⊕) is the DIFFERENCE detector: output 1 exactly when the two inputs DISAGREE. Contrast with plain OR, which is also 1 when both are 1.",
           s: [
-            "A=0,B=0: 0; A=0,B=1: 1; A=1,B=0: 1; A=1,B=1: 0.",
-            "$A\\oplus B = A\\overline B + \\overline A B$."
+            "<b>Step 1 — The table.</b> 0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0 — ones exactly where A ≠ B.",
+            "<b>Step 2 — Boolean form.</b> $A\\oplus B = A\\bar B + \\bar AB$ — 'A without B, or B without A'.",
+            "<b>Step 3 — Distractor audit.</b> 'Both 1' is AND; 'both 0' is NOR; 'A = B' is XNOR — the complement of XOR."
           ],
-          a: "A ≠ B.",
-          v: "Used in parity generators, comparators, and CRC computations."
+          a: "Output is 1 when A ≠ B (exactly one input is 1).",
+          v: "Why XOR is everywhere: it computes parity (odd number of 1s), builds adders (sum bit = A⊕B⊕carry), compares bits, and toggles state ($X\\oplus1 = \\bar X$, $X\\oplus0 = X$) ✓. Self-inverse gem: $X \\oplus Y \\oplus Y = X$ — the basis of simple encryption and RAID parity."
+
         })
       },
       { q: "Number of distinct inputs to a function of 4 Boolean variables:",
         choices: ["$16$", "$8$", "$4$", "$32$"],
         correct: 0,
         solution: S({
-          c: "$2^{n}$ rows in truth table for $n$ binary variables.",
+          c: "Each Boolean variable independently takes 2 values, so $n$ variables produce $2^{n}$ distinct input combinations — the number of rows in the truth table.",
           s: [
-            "$2^{4} = 16$."
+            "<b>Step 1 — Apply.</b> $2^{4} = 16$ input combinations (0000 through 1111).",
+            "<b>Step 2 — Distractor audit.</b> 8 is $2^{3}$; 4 counts the variables themselves; 32 is $2^{5}$."
           ],
-          a: "16.",
-          v: "Number of distinct $n$-variable Boolean functions: $2^{2^{n}} = 2^{16} = 65536$ for $n=4$."
+          a: "16 distinct inputs.",
+          v: "The follow-up the FE likes: how many distinct FUNCTIONS of 4 variables exist? Each of the 16 rows can output 0 or 1 independently → $2^{16} = 65{,}536$ functions ✓ — exponentials stacked on exponentials, which is why logic synthesis is hard."
+
         })
       },
       { q: "Setup time violation in a flip-flop occurs when:",
@@ -2350,52 +2382,60 @@
         ],
         correct: 0,
         solution: S({
-          c: "Setup time $t_{su}$ is the minimum time data must be stable BEFORE the clock edge.",
+          c: "An edge-triggered flip-flop samples its D input at the clock edge — but the sampling circuit needs the data stable for a window $t_{su}$ (setup time) BEFORE the edge. Data changing inside that window risks capturing garbage or metastability (output hovering between 0 and 1).",
           s: [
-            "If data arrives later than $t_{clk} - t_{su}$, flip-flop may enter metastable state.",
-            "Fix: reduce combinational delay, increase clock period, or pipeline."
+            "<b>Step 1 — Define the violation.</b> Data transitions within $t_{su}$ before the active edge → violation.",
+            "<b>Step 2 — Root cause in a real design.</b> The combinational path feeding D is too slow for the clock: $t_{cq} + t_{logic} + t_{su} > T_{clk}$. Fixes: faster logic, slower clock, or pipeline the path.",
+            "<b>Step 3 — Distractor audit.</b> Changing LONG before the edge is ideal; zero clock skew is good news; 'hold exceeds setup' compares two unrelated datasheet numbers."
           ],
-          a: "Data changes too close to clock edge (within $t_{su}$ window).",
-          v: "Hold time $t_h$ is the minimum time data must remain stable AFTER the clock edge."
+          a: "Data changes within the setup window before the clock edge.",
+          v: "The dual to keep straight: HOLD time is stability required AFTER the edge — violated by paths that are too FAST, and fixed by adding delay (never by slowing the clock) ✓. Design equation worth memorizing: $f_{max} = 1/(t_{cq} + t_{logic} + t_{su})$."
+
         })
       },
       { q: "Number of bits needed to address $4$ K words of memory:",
         choices: ["$12$", "$4$", "$10$", "$1024$"],
         correct: 0,
         solution: S({
-          c: "Address bits $n$ satisfies $2^{n} \\geq$ number of locations.",
+          c: "An address is just a binary number naming one location: $n$ address bits can name $2^{n}$ locations. To address $M$ locations you need $n = \\log_2 M$ bits (rounded up).",
           s: [
-            "$4\\text{K} = 4096 = 2^{12}$.",
-            "Need $n = 12$ bits."
+            "<b>Step 1 — Convert 4K.</b> In memory sizing, K $= 1024 = 2^{10}$, so 4K $= 4\\times1024 = 4096 = 2^{12}$.",
+            "<b>Step 2 — Take the log.</b> $n = \\log_2 4096 = 12$ bits.",
+            "<b>Step 3 — Distractor audit.</b> 10 bits only reaches 1K; 4 confuses '4K' with 4 bits; 1024 is a SIZE, not a bit count."
           ],
-          a: "12 bits.",
-          v: "Each additional bit doubles addressable memory: $2^{20}$ = 1 M, $2^{30}$ = 1 G, $2^{32}$ = 4 G."
+          a: "12 address bits.",
+          v: "The powers-of-two ladder every digital designer carries: $2^{10}$ = 1K, $2^{16}$ = 64K, $2^{20}$ = 1M, $2^{30}$ = 1G, $2^{32}$ = 4G ✓ — and each extra address PIN doubles the memory you can attach."
+
         })
       },
       { q: "K-map simplification of $F(A,B,C) = \\sum m(0,2,4,6)$:",
         choices: ["$\\overline C$", "$\\overline A\\overline C$", "$\\overline B\\overline C$", "$ABC$"],
         correct: 0,
         solution: S({
-          c: "All minterms have C=0 (even-indexed in standard ordering ABC: 000, 010, 100, 110).",
+          c: "Minterm shorthand: $\\sum m(0,2,4,6)$ lists the input combinations (as decimal numbers) where $F = 1$. Decode each number into bits (A = MSB, C = LSB) and look for the variable that never changes.",
           s: [
-            "Each minterm has bit 0 (C) = 0.",
-            "Other variables (A, B) take all combinations → don’t cares.",
-            "Simplifies to $\\overline C$."
+            "<b>Step 1 — Decode to binary ABC.</b> $0 = 000$, $2 = 010$, $4 = 100$, $6 = 110$.",
+            "<b>Step 2 — Scan each variable.</b> A: takes 0 and 1 (changes); B: 0 and 1 (changes); C: ALWAYS 0 — the even numbers, since C is the 1s place.",
+            "<b>Step 3 — Read the result.</b> Four minterms $= 2^{2}$ → eliminate 2 variables, keep the constant one as $\\bar C$. $F = \\bar C$.",
+            "<b>Step 4 — Distractor audit.</b> $\\bar A\\bar C$ and $\\bar B\\bar C$ keep a variable that actually changes; $ABC$ is a single minterm (7), not even in the list."
           ],
-          a: "$F = \\overline C$.",
-          v: "Truth table: $F$ is 1 whenever C=0, regardless of A,B — exactly $\\overline C$."
+          a: "$F = \\bar C$",
+          v: "Spot-checks: $m_3 = 011$ has $C = 1$ → $F$ should be 0, and 3 is absent from the list ✓; $m_4 = 100$, $C = 0$ → 1 ✓. Same group-size rule as the 4-variable version: $2^{k}$ minterms → drop $k$ variables."
+
         })
       },
       { q: "A 3-bit synchronous counter has how many states?",
         choices: ["$8$", "$3$", "$6$", "$16$"],
         correct: 0,
         solution: S({
-          c: "$2^{n}$ states with $n$ flip-flops.",
+          c: "A counter built from $n$ flip-flops stores an $n$-bit number, so it can step through at most $2^{n}$ distinct states before repeating.",
           s: [
-            "$2^{3} = 8$ states (000 to 111)."
+            "<b>Step 1 — Apply.</b> $2^{3} = 8$ states: 000, 001, … 111, then wrap to 000.",
+            "<b>Step 2 — Distractor audit.</b> 3 counts flip-flops, not states; 6 would be a mod-6 counter (deliberately reset early); 16 needs 4 FFs."
           ],
           a: "8 states.",
-          v: "Modulo-N counter resets early (e.g., mod-6 uses 3 FFs but cycles through 6 states)."
+          v: "Vocabulary check: this is a MOD-8 counter; a mod-N counter with $N < 2^{n}$ uses decode-and-reset to cut the cycle short (mod-6 still needs 3 FFs because $2^{2} = 4 < 6$) ✓. 'Synchronous' means all FFs share one clock — outputs change together, no ripple delays."
+
         })
       },
       { q: "Difference between latch and flip-flop:",
@@ -2407,13 +2447,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Latch transparently passes data when enable is asserted (level). Flip-flop changes only on clock edge.",
+          c: "Both store one bit; the difference is WHEN they listen. A LATCH is level-sensitive: while its enable is high, the output transparently follows the input. A FLIP-FLOP is edge-triggered: it samples the input only at the clock's rising (or falling) instant.",
           s: [
-            "D-latch: $Q$ follows $D$ while CLK = 1, holds when CLK = 0.",
-            "D flip-flop: $Q$ captures $D$ only on rising (or falling) edge."
+            "<b>Step 1 — Behavior contrast.</b> D-latch with EN = 1: $Q$ tracks $D$ continuously (changes leak through). D flip-flop: $Q$ updates once per clock edge, then holds regardless of $D$.",
+            "<b>Step 2 — Why designers care.</b> Edge-triggering gives each clock cycle exactly one well-defined update moment — timing analysis becomes tractable; transparent latches allow races through multiple stages within one phase.",
+            "<b>Step 3 — Distractor audit.</b> 'Faster' and 'more outputs' are not the distinction; 'identical' ignores the level-vs-edge core difference."
           ],
-          a: "Latch level-sensitive; flip-flop edge-triggered.",
-          v: "Sequential ASIC design prefers edge-triggered flip-flops for simpler timing analysis."
+          a: "Latch = level-sensitive (transparent); flip-flop = edge-triggered.",
+          v: "Construction insight that ties them together: a master-slave pair of latches on opposite clock phases IS an edge-triggered flip-flop ✓. Where latches still win: low-power/time-borrowing designs and bus-holding — but synchronous design flows default to flip-flops."
+
         })
       }
     ],
@@ -2424,76 +2466,91 @@
         choices: ["$\\approx 6$ ns", "$1$ ns", "$100$ ns", "$\\approx 50$ ns"],
         correct: 0,
         solution: S({
-          c: "Effective access time $= \\text{hit time} + \\text{miss rate}\\times\\text{miss penalty}$.",
+          c: "A cache is a small fast memory in front of a big slow one. Average (effective) access time weighs the two outcomes: EAT $= t_{hit} + (\\text{miss rate})\\times(\\text{miss penalty})$ — you always pay the hit time, and occasionally the penalty on top.",
           s: [
-            "Miss rate = 1 - 0.95 = 0.05.",
-            "EAT = 1 + 0.05×100 = 1 + 5 = 6 ns."
+            "<b>Step 1 — Miss rate.</b> $1 - 0.95 = 0.05$.",
+            "<b>Step 2 — Weighted penalty.</b> $0.05 \\times 100 = 5$ ns of average penalty.",
+            "<b>Step 3 — Total.</b> EAT $= 1 + 5 = 6$ ns.",
+            "<b>Step 4 — Distractor audit.</b> 1 ns pretends every access hits; 100 ns pretends none do; 50 ns averages the two latencies without using the hit ratio."
           ],
-          a: "$\\approx 6$ ns.",
-          v: "Without cache: 100 ns per access. Cache improvement factor $\\approx 16\\times$."
+          a: "EAT $\\approx 6$ ns.",
+          v: "Leverage check: the cache turns 100-ns memory into an effective 6 ns — a 16× speedup from a 95% hit rate ✓. Sensitivity worth noticing: improving hits from 95% → 99% drops EAT to 2 ns — the last few percent of hit rate matter enormously."
+
         })
       },
       { q: "Pipelining: a 5-stage pipeline with stage time 2 ns processes 1000 instructions in approximately:",
         choices: ["$\\approx 2008$ ns", "$10{,}000$ ns", "$5000$ ns", "$2$ ms"],
         correct: 0,
         solution: S({
-          c: "Pipeline time $= (N + k - 1)\\cdot t_{stage}$, where $N$ = instructions, $k$ = stages.",
+          c: "A pipeline is an assembly line for instructions: $k$ stages work on $k$ different instructions at once. Total time for $N$ instructions $= (N + k - 1)\\times t_{stage}$ — the first instruction takes all $k$ stages, then one finishes every stage time.",
           s: [
-            "$T = (1000 + 5 - 1) \\times 2 = 1004 \\times 2 = 2008$ ns."
+            "<b>Step 1 — Plug in.</b> $(1000 + 5 - 1)\\times2 = 1004\\times2 = 2008$ ns.",
+            "<b>Step 2 — Read the structure.</b> 10 ns to fill the pipe (latency of the first instruction), then 999 more × 2 ns each (throughput of one per stage time).",
+            "<b>Step 3 — Distractor audit.</b> 10,000 ns is the UNpipelined time ($1000\\times5\\times2$); 5000 ns halves it arbitrarily; 2 ms is a unit slip."
           ],
-          a: "2008 ns.",
-          v: "Ideal pipeline speedup approaches $k=5$ for large $N$; here 5000/2008 ≈ 2.49× speedup over non-pipelined."
+          a: "$\\approx 2008$ ns.",
+          v: "Speedup check: $10{,}000/2008 \\approx 4.98$ — approaching the ideal $k = 5$ as $N$ grows (the fill cost amortizes away) ✓. Real pipelines fall short of ideal due to hazards (data, control, structural) — stalls insert bubbles into exactly this formula."
+
         })
       },
       { q: "Number of registers an 8-bit ISA can directly reference with a 3-bit register field:",
         choices: ["$8$", "$3$", "$256$", "$16$"],
         correct: 0,
         solution: S({
-          c: "$2^{n}$ items addressable with $n$ bits.",
+          c: "An instruction encodes which register it uses in a fixed bit field; $n$ bits of field can name $2^{n}$ registers — same counting rule as memory addressing.",
           s: [
-            "$2^{3} = 8$ registers (R0–R7)."
+            "<b>Step 1 — Apply.</b> $2^{3} = 8$ registers, conventionally R0-R7.",
+            "<b>Step 2 — Distractor audit.</b> 3 counts the bits themselves; 256 is $2^{8}$ (confusing the 8-bit ISA word with the register field); 16 would need a 4-bit field."
           ],
           a: "8 registers.",
-          v: "RISC ISAs commonly use 5-bit register fields (32 registers) — better compiler register allocation."
+          v: "Design trade-off this number embodies: more registers (wider field) → fewer memory accesses and happier compilers, but fewer bits left in the instruction for opcode/immediates. RISC ISAs settled on 5-bit fields = 32 registers (MIPS, ARM64, RISC-V) ✓."
+
         })
       },
       { q: "Virtual memory page size 4 KB. Address split for 32-bit address:",
         choices: ["20-bit VPN + 12-bit offset", "16-bit VPN + 16-bit offset", "12-bit VPN + 20-bit offset", "4-bit VPN + 28-bit offset"],
         correct: 0,
         solution: S({
-          c: "Page size $2^{p}$ bytes → offset is $p$ bits; remaining bits select page.",
+          c: "Virtual memory chops addresses into PAGE NUMBER (which page) + OFFSET (where within the page). The page size fixes the split: a $2^{p}$-byte page needs exactly $p$ offset bits; the rest of the address is the virtual page number (VPN).",
           s: [
-            "4 KB = $2^{12}$ → 12 offset bits.",
-            "32 - 12 = 20 VPN bits."
+            "<b>Step 1 — Offset bits.</b> 4 KB $= 2^{12}$ → 12 offset bits.",
+            "<b>Step 2 — VPN bits.</b> $32 - 12 = 20$ bits → $2^{20} \\approx 1$M pages per address space.",
+            "<b>Step 3 — Distractor audit.</b> 16+16 would mean 64-KB pages; 12+20 swaps the roles; 4+28 would mean 256-MB pages."
           ],
           a: "20-bit VPN + 12-bit offset.",
-          v: "Page table size: $2^{20}$ entries × 4 bytes/entry = 4 MB per process — why multi-level page tables are used."
+          v: "Mechanism check: translation changes ONLY the VPN (→ physical frame number); the 12 offset bits pass through untouched — that is why page size must be a power of two ✓. Downstream consequence: $2^{20}$ entries × 4 B = 4 MB flat page table per process — the motivation for multi-level tables."
+
         })
       },
       { q: "Direct-mapped cache with 16 lines and 64-byte lines. For 32-bit address, tag bits:",
         choices: ["$22$", "$26$", "$10$", "$4$"],
         correct: 0,
         solution: S({
-          c: "Address split: tag | index | block offset.",
+          c: "A cache splits each address into three fields, right to left: block OFFSET (byte within a line), INDEX (which cache line), and TAG (everything left over, stored to verify the line really holds that address).",
           s: [
-            "Block offset: $\\log_2 64 = 6$ bits.",
-            "Index: $\\log_2 16 = 4$ bits.",
-            "Tag: $32 - 6 - 4 = 22$ bits."
+            "<b>Step 1 — Offset bits.</b> 64-byte lines → $\\log_2 64 = 6$ bits.",
+            "<b>Step 2 — Index bits.</b> 16 lines → $\\log_2 16 = 4$ bits.",
+            "<b>Step 3 — Tag = remainder.</b> $32 - 6 - 4 = 22$ bits.",
+            "<b>Step 4 — Distractor audit.</b> 26 forgets the index; 10 reports offset+index instead of the tag; 4 echoes the index."
           ],
           a: "22 tag bits.",
-          v: "Set-associative cache reuses the same address split with index choosing the set."
+          v: "Consistency check: fields must sum to the full address: $22 + 4 + 6 = 32$ ✓. Associativity twist for the exam: making it 2-way set-associative halves the SETS (3 index bits) and grows the tag to 23 — tag always absorbs what index releases."
+
         })
       },
       { q: "Amdahl’s law: if 80% of code is parallelizable, maximum speedup with ∞ processors?",
         choices: ["$5\\times$", "$10\\times$", "$80\\times$", "$1.25\\times$"],
         correct: 0,
         solution: S({
-          c: "Speedup $= 1/[(1-f) + f/P]$ where $f$ is parallel fraction, $P$ is processor count.",
+          c: "Amdahl's law caps parallel speedup by the part you CANNOT parallelize: speedup $= \\dfrac{1}{(1-f) + f/P}$. With infinite processors the parallel term vanishes, leaving $1/(1-f)$ — the serial fraction is the ceiling.",
           s: [
-            "As $P\\to\\infty$: speedup $\\to 1/(1-f) = 1/0.2 = 5$."
+            "<b>Step 1 — Serial fraction.</b> $1 - f = 0.20$.",
+            "<b>Step 2 — Limit.</b> Speedup $\\to 1/0.2 = 5\\times$, no matter how many processors.",
+            "<b>Step 3 — Distractor audit.</b> 10× would need 90% parallel; 80× confuses the percentage with the speedup; 1.25× is $1/f$ inverted thinking."
           ],
-          a: "$5\\times$.",
-          v: "Bottleneck is the 20% serial portion; need to reduce that fraction to scale further."
+          a: "Maximum speedup $= 5\\times$.",
+          v: "Diminishing-returns check: at $P = 16$, speedup $= 1/(0.2 + 0.05) = 4$ — already 80% of the infinite-processor ceiling ✓. The engineering moral: shrink the SERIAL part (better algorithms, less synchronization) before buying more cores."
+
         })
       },
       { q: "RISC vs CISC: RISC instructions typically:",
@@ -2505,13 +2562,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "RISC philosophy: simple instructions executed at high frequency, easier to pipeline.",
+          c: "Two instruction-set philosophies: RISC (Reduced) keeps instructions simple, uniform, and fast — fixed length, register-to-register, ideally one per cycle — so the hardware pipeline stays simple. CISC (Complex) packs more work per instruction — variable length, memory operands, microcode.",
           s: [
-            "Examples: MIPS, ARM, RISC-V.",
-            "CISC: x86 — variable length, microcoded, but heavily pipelined internally."
+            "<b>Step 1 — Match the description.</b> 'Fixed-length, simple, single-cycle, register-to-register' is the RISC textbook definition (MIPS, ARM, RISC-V).",
+            "<b>Step 2 — Why those choices.</b> Fixed length → trivial fetch/decode; register-register with explicit load/store → predictable timing → deep, fast pipelines.",
+            "<b>Step 3 — Distractor audit.</b> 'Variable-length, complex, multi-cycle' is CISC (x86); 'only memory operands' is neither (RISC is load/store!); 'slower than CISC' — per-instruction RISC does less, but per-PROGRAM it competes by clocking and pipelining better."
           ],
-          a: "Fixed-length, simple, single-cycle.",
-          v: "Modern x86 cores decode CISC into RISC-like micro-ops internally."
+          a: "Fixed-length, simple, single-cycle, register-to-register instructions.",
+          v: "The modern punchline that reconciles the war: x86 chips DECODE their CISC instructions into RISC-like micro-ops internally — CISC outside (compatibility), RISC inside (speed) ✓. Meanwhile ARM/RISC-V won mobile and embedded outright."
+
         })
       },
       { q: "Big-endian byte order stores most significant byte at:",
@@ -2523,13 +2582,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Endianness affects multi-byte representation.",
+          c: "Endianness = the byte ORDER of multi-byte values in memory. BIG-endian stores the most significant byte FIRST (at the lowest address) — like writing numbers left to right; LITTLE-endian stores the least significant byte first.",
           s: [
-            "Big-endian: MSB at low address (network byte order, IBM, SPARC).",
-            "Little-endian: LSB at low address (x86, ARM by default)."
+            "<b>Step 1 — Apply the definition.</b> Big-endian: MSB at the LOWEST address.",
+            "<b>Step 2 — Concrete example.</b> 0x12345678 at address 0: big-endian lays down 12 34 56 78; little-endian lays down 78 56 34 12.",
+            "<b>Step 3 — Who uses what.</b> Network byte order is big-endian (hence htonl/ntohs conversion functions); x86 and most ARM run little-endian."
           ],
-          a: "Lowest address.",
-          v: "Network protocols use big-endian — htonl/ntohl functions convert."
+          a: "At the lowest memory address.",
+          v: "Where it bites: reading a binary file or network packet on the 'wrong' machine scrambles every multi-byte field — protocol code must convert explicitly ✓. Memory-hook: 'BIG end first' = the BIG (most significant) byte leads."
+
         })
       },
       { q: "DMA controller’s primary advantage:",
@@ -2541,25 +2602,30 @@
         ],
         correct: 0,
         solution: S({
-          c: "Direct Memory Access offloads block I/O transfers from CPU.",
+          c: "Without DMA, the CPU must personally copy every byte between a device and memory (programmed I/O) — thousands of interrupts and loads per block. A DMA controller is a dedicated copy engine: the CPU describes the transfer once, the controller moves the whole block, then raises ONE interrupt.",
           s: [
-            "CPU initiates DMA, then continues other work.",
-            "DMA controller arbitrates bus and signals interrupt on completion."
+            "<b>Step 1 — The win.</b> The CPU is freed during bulk transfers to run other work — data moves WITHOUT per-byte CPU intervention.",
+            "<b>Step 2 — How it runs.</b> CPU programs source, destination, length → DMA controller arbitrates the bus, streams the data → completion interrupt.",
+            "<b>Step 3 — Distractor audit.</b> DMA doesn't change clock speed or memory size, and it USES the bus rather than eliminating it (it competes with the CPU for bus cycles — 'cycle stealing')."
           ],
-          a: "Free CPU during bulk transfer.",
-          v: "Modern PCIe uses bus-mastering DMA for high-throughput peripherals (NVMe SSDs, GPUs)."
+          a: "Transfers data without per-byte CPU intervention, freeing the CPU.",
+          v: "Scale check that makes it obvious: an NVMe SSD at 3 GB/s would consume the entire CPU with programmed I/O; with bus-mastering DMA the CPU spends microseconds setting up descriptors per megabyte moved ✓ — every modern disk, NIC, and GPU transfer is DMA."
+
         })
       },
       { q: "MIPS performance metric for a 2 GHz CPU executing 1.5 IPC (instructions per cycle):",
         choices: ["$3000$ MIPS", "$1500$ MIPS", "$2000$ MIPS", "$750$ MIPS"],
         correct: 0,
         solution: S({
-          c: "MIPS = $f_{clk}\\text{ (MHz)} \\times IPC$.",
+          c: "MIPS (millions of instructions per second) multiplies how fast the clock ticks by how many instructions complete per tick: MIPS $= f_{clk}(\\text{MHz}) \\times \\text{IPC}$.",
           s: [
-            "$f_{clk} = 2000$ MHz, $IPC = 1.5$ ⇒ MIPS = 3000."
+            "<b>Step 1 — Convert the clock.</b> 2 GHz = 2000 MHz.",
+            "<b>Step 2 — Multiply by IPC.</b> $2000 \\times 1.5 = 3000$ MIPS.",
+            "<b>Step 3 — Distractor audit.</b> 1500 uses 1 GHz; 2000 ignores IPC; 750 divides by IPC instead."
           ],
           a: "3000 MIPS.",
-          v: "Modern CPUs achieve higher IPC via superscalar/out-of-order execution; SPECint is more meaningful than raw MIPS."
+          v: "IPC > 1 sanity: superscalar cores issue multiple instructions per cycle, so 1.5 IPC is ordinary ✓. Why architects mock the metric ('Meaningless Indicator of Processor Speed'): a weak ISA needing 2× the instructions can post higher MIPS for the same real work — benchmark suites (SPEC) measure time on real programs instead."
+
         })
       }
     ],
@@ -2570,63 +2636,76 @@
         choices: ["$O(\\log n)$", "$O(n)$", "$O(n^{2})$", "$O(1)$"],
         correct: 0,
         solution: S({
-          c: "Each comparison halves the search range.",
+          c: "Binary search exploits SORTED order: compare the target to the middle element, and half the array is instantly eliminated. Repeating halves the candidates each step — logarithmic work.",
           s: [
-            "Maximum comparisons $= \\lceil\\log_2 n\\rceil$.",
-            "For $n = 10^{6}$: only ~20 comparisons!"
+            "<b>Step 1 — Count the halvings.</b> From $n$ candidates to 1 takes $\\log_2 n$ halvings → $O(\\log n)$ comparisons.",
+            "<b>Step 2 — Feel the scale.</b> $n = 10^{6}$ → ~20 comparisons; $n = 10^{9}$ → ~30. Doubling the data adds ONE comparison.",
+            "<b>Step 3 — Distractor audit.</b> $O(n)$ is LINEAR search (unsorted data's only option); $O(1)$ would mean position known in advance (hashing's promise, not search-by-comparison); $O(n^{2})$ is nested-loop territory."
           ],
           a: "$O(\\log n)$.",
-          v: "Requires sorted input; building/maintaining sort is $O(n\\log n)$ — amortize over many queries."
+          v: "The hidden precondition the FE tests: the array must be SORTED — and sorting costs $O(n\\log n)$, so binary search pays off when you search the same data repeatedly ✓. Off-by-one note: the classic implementation bug is the mid/boundary update — 'mid = (lo+hi)/2' overflow was a famous real-world defect."
+
         })
       },
       { q: "Hash-table operations average-case complexity:",
         choices: ["$O(1)$ amortized", "$O(\\log n)$", "$O(n)$", "$O(n^{2})$"],
         correct: 0,
         solution: S({
-          c: "Hashing provides constant-time average lookup, given good hash function and adequate table size.",
+          c: "A hash table computes WHERE an item belongs (hash function → bucket index) instead of searching for it — so insert/lookup/delete cost $O(1)$ on AVERAGE, independent of how many items are stored.",
           s: [
-            "Worst case (all collisions): $O(n)$ for a chained table.",
-            "Modern implementations resize dynamically and use cryptographic-quality hashes."
+            "<b>Step 1 — Why constant.</b> hash(key) → index is one computation; a good hash spreads keys so each bucket holds O(1) items.",
+            "<b>Step 2 — The fine print.</b> Worst case degenerates to $O(n)$ if everything collides into one bucket (bad hash or adversarial keys); 'amortized' also covers occasional table-resizing costs spread over many operations.",
+            "<b>Step 3 — Distractor audit.</b> $O(\\log n)$ belongs to balanced TREES (sorted structures); $O(n)$ is the worst case mislabeled as average; $O(n^{2})$ fits nothing here."
           ],
-          a: "$O(1)$ amortized.",
-          v: "Java HashMap, Python dict, C++ unordered_map all rely on this property."
+          a: "$O(1)$ amortized average case.",
+          v: "Ubiquity check: Python dict, Java HashMap, C++ unordered_map — the default associative container everywhere is a hash table for exactly this reason ✓. Trade-off vs trees: hashes lose ORDER — range queries and sorted iteration need a tree ($O(\\log n)$) instead."
+
         })
       },
       { q: "Stack data structure follows:",
         choices: ["LIFO (last in, first out)", "FIFO (first in, first out)", "Random access", "Priority order"],
         correct: 0,
         solution: S({
-          c: "Stack: push to top, pop from top — last item pushed is first popped.",
+          c: "A stack allows access at ONE end only: PUSH puts an item on top, POP removes the most recent — Last In, First Out (LIFO). Think of a stack of plates.",
           s: [
-            "Used for function call frames, undo histories, expression evaluation."
+            "<b>Step 1 — Match the definition.</b> LIFO is the stack's defining discipline.",
+            "<b>Step 2 — Where you've already met it.</b> Function calls (the call STACK — most recent call returns first), undo history, matching parentheses, depth-first search.",
+            "<b>Step 3 — Distractor audit.</b> FIFO is a QUEUE (line at a store); random access is an ARRAY; priority order is a HEAP/priority queue."
           ],
-          a: "LIFO.",
-          v: "FIFO describes a queue. Both have $O(1)$ push/pop with proper implementation."
+          a: "LIFO — last in, first out.",
+          v: "Implementation check: an array with a top pointer gives $O(1)$ push/pop ✓. The pairing to memorize: stack↔LIFO↔DFS↔recursion; queue↔FIFO↔BFS — data structure choices ARE algorithm choices."
+
         })
       },
       { q: "Merge sort time complexity:",
         choices: ["$O(n\\log n)$", "$O(n)$", "$O(n^{2})$", "$O(\\log n)$"],
         correct: 0,
         solution: S({
-          c: "Divide-and-conquer: $\\log n$ levels, $O(n)$ merge per level.",
+          c: "Merge sort is divide-and-conquer: split the array in half, sort each half recursively, then MERGE the two sorted halves in linear time. The recurrence $T(n) = 2T(n/2) + O(n)$ solves to $O(n\\log n)$.",
           s: [
-            "Recurrence: $T(n) = 2T(n/2) + O(n) = O(n\\log n)$ by Master Theorem."
+            "<b>Step 1 — Count the levels.</b> Halving until size 1 → $\\log_2 n$ levels of recursion.",
+            "<b>Step 2 — Work per level.</b> Every level merges a total of $n$ elements → $O(n)$ per level.",
+            "<b>Step 3 — Multiply.</b> $O(n)\\times\\log_2 n = O(n\\log n)$ — and unusually, this holds for WORST case too (the splits are always perfectly even).",
+            "<b>Step 4 — Distractor audit.</b> $O(n)$ beats the comparison-sorting lower bound — impossible; $O(n^{2})$ is bubble/insertion territory; $O(\\log n)$ couldn't even read the input."
           ],
-          a: "$O(n\\log n)$.",
-          v: "Stable sort with $O(n)$ extra space. Quicksort same average, $O(n^{2})$ worst."
+          a: "$O(n\\log n)$ — best, average, AND worst case.",
+          v: "Trade-off table vs quicksort: merge sort guarantees $O(n\\log n)$ and is STABLE (equal keys keep order), but needs $O(n)$ extra space; quicksort is in-place and cache-friendly but risks $O(n^{2})$ ✓. Real libraries hedge: Python's Timsort is a merge-sort hybrid."
+
         })
       },
       { q: "OOP principle: hiding internal data from outside access:",
         choices: ["Encapsulation", "Inheritance", "Polymorphism", "Abstraction"],
         correct: 0,
         solution: S({
-          c: "Encapsulation bundles data with methods and restricts direct access using access modifiers (private, protected).",
+          c: "The four pillars of OOP each answer a different question. ENCAPSULATION answers 'who may touch this data?' — bundle data with its methods and mark internals private, exposing only a controlled public interface.",
           s: [
-            "Inheritance: reusing one class to derive another.",
-            "Polymorphism: same interface, different implementation."
+            "<b>Step 1 — Match the description.</b> 'Hiding internal data from outside access' = encapsulation, enforced by access modifiers (private/protected) and getter/setter gateways.",
+            "<b>Step 2 — Separate the siblings.</b> Inheritance: reuse/extend a class ('is-a'); Polymorphism: one interface, many behaviors (a draw() that works on any Shape); Abstraction: model only the essential features — related to but broader than hiding fields.",
+            "<b>Step 3 — Why it matters.</b> With internals hidden, the class can change its implementation freely — nothing outside depended on the private parts."
           ],
           a: "Encapsulation.",
-          v: "Encapsulation enables refactoring of internals without breaking external API."
+          v: "Litmus test: if renaming a private field breaks code in OTHER files, encapsulation was violated ✓. This is also the unit-testing payoff — test the public contract, refactor the inside fearlessly."
+
         })
       },
       { q: "Agile vs Waterfall: Agile emphasizes:",
@@ -2638,27 +2717,30 @@
         ],
         correct: 0,
         solution: S({
-          c: "Agile values working software, individuals/interactions, customer collaboration, responding to change.",
+          c: "Two project-delivery philosophies: WATERFALL runs one long sequence (requirements → design → build → test → deliver) betting everything on upfront planning; AGILE delivers in short ITERATIONS with stakeholder feedback after each, betting on course-correction.",
           s: [
-            "Sprints typically 1–4 weeks; demo to stakeholders at end of each sprint.",
-            "Waterfall is linear, prefers upfront planning, late-stage testing."
+            "<b>Step 1 — Match the values.</b> The Agile Manifesto: working software over documentation, customer collaboration over contract negotiation, responding to change over following a plan → 'iterative development with frequent stakeholder feedback'.",
+            "<b>Step 2 — The cadence.</b> Sprints of 1-4 weeks, each ending in a demo of working software — feedback arrives months earlier than waterfall's end-stage reveal.",
+            "<b>Step 3 — Distractor audit.</b> 'Fixed scope upfront, sequential phases' IS waterfall; 'long upfront design, infrequent releases' likewise; 'single-person teams' is nobody's methodology."
           ],
-          a: "Iterative + frequent feedback.",
-          v: "Most modern teams use Scrum/Kanban variants; hybrid models exist for regulated industries."
+          a: "Iterative development with frequent stakeholder feedback.",
+          v: "When each wins (the honest version): Agile shines when requirements are uncertain or evolving; plan-driven approaches retain value where change is genuinely expensive — avionics, construction, regulated medical software — and hybrids are common ✓."
+
         })
       },
       { q: "Linked list: which operation is $O(1)$ (singly-linked)?",
         choices: ["Insert at head", "Random access by index", "Search for value", "Sort"],
         correct: 0,
         solution: S({
-          c: "Linked list: insertion/deletion at known position is constant; traversal is linear.",
+          c: "A singly-linked list is a chain of nodes, each pointing to the next, with only a HEAD pointer held. Cost follows reachability: anything at the head is instant; anything else requires walking the chain.",
           s: [
-            "Insert at head: update new node’s next, update head pointer — $O(1)$.",
-            "Random access: must traverse from head — $O(n)$.",
-            "Search: linear scan — $O(n)$."
+            "<b>Step 1 — Insert at head.</b> newNode.next = head; head = newNode — two pointer writes, no traversal: $O(1)$ regardless of list length.",
+            "<b>Step 2 — Why the others are linear or worse.</b> Random access by index: must hop node-by-node → $O(n)$ (no arithmetic indexing like arrays); search by value: scan → $O(n)$; sort: $O(n\\log n)$ at best.",
+            "<b>Step 3 — The structural lesson.</b> Linked lists trade away random access to gain cheap insertion/deletion at known positions — the mirror image of arrays."
           ],
-          a: "Insert at head.",
-          v: "Doubly-linked lists also support O(1) deletion of a known node."
+          a: "Insert at head — $O(1)$.",
+          v: "Extension check: a TAIL pointer also makes append $O(1)$; a DOUBLY-linked list makes deleting a known node $O(1)$ (you can reach its predecessor) ✓. Cache reality: even at equal big-O, arrays often win in practice — contiguous memory prefetches; chains don't."
+
         })
       },
       { q: "Cyclomatic complexity counts:",
@@ -2670,28 +2752,30 @@
         ],
         correct: 0,
         solution: S({
-          c: "McCabe’s metric: a measure of testing complexity.",
+          c: "McCabe's cyclomatic complexity measures how tangled a function's control flow is: the number of INDEPENDENT PATHS through the code — equivalently, the number of decision points (if, while, for, case, &&, ||) plus one.",
           s: [
-            "CC = E - N + 2P for control flow graph (edges, nodes, components).",
-            "Equivalently: count of decision points + 1.",
-            "Rule of thumb: CC ≤ 10 per function for maintainability."
+            "<b>Step 1 — The two equivalent formulas.</b> Graph form: $CC = E - N + 2P$ (edges, nodes, connected components of the control-flow graph); shortcut: decisions + 1.",
+            "<b>Step 2 — Worked micro-example.</b> A function with one if and one while = 2 decisions → CC = 3 → at least 3 test cases for full branch-path coverage.",
+            "<b>Step 3 — Distractor audit.</b> Lines of code measure SIZE, not structure; function count is architecture; comment lines are documentation."
           ],
-          a: "Independent paths (decision points + 1).",
-          v: "Higher CC indicates more test cases needed for full path coverage."
+          a: "Independent paths through the code (decision points + 1).",
+          v: "Why testers care: CC is a floor on the number of test cases needed to exercise every path ✓. Maintainability rule of thumb: keep CC ≤ 10 per function; beyond that, refactor — deeply nested conditionals are where bugs breed."
+
         })
       },
       { q: "SQL JOIN that returns only matching rows from both tables:",
         choices: ["INNER JOIN", "LEFT JOIN", "FULL OUTER JOIN", "CROSS JOIN"],
         correct: 0,
         solution: S({
-          c: "INNER JOIN keeps only rows where the join condition holds in both tables.",
+          c: "JOINs combine rows from two tables by a condition; the JOIN TYPE decides what happens to rows that DON'T match. INNER keeps only matches; the OUTER variants keep unmatched rows from one or both sides, padding with NULLs.",
           s: [
-            "LEFT JOIN: all left rows, matched right (or NULLs).",
-            "FULL OUTER: all rows, NULLs for unmatched on either side.",
-            "CROSS JOIN: Cartesian product."
+            "<b>Step 1 — Match the requirement.</b> 'Only matching rows from both tables' = INNER JOIN by definition.",
+            "<b>Step 2 — Map the alternatives.</b> LEFT JOIN: ALL left rows, NULLs where the right side has no match; FULL OUTER: all rows from both sides; CROSS JOIN: every left row paired with every right row (Cartesian product — no condition at all).",
+            "<b>Step 3 — Mnemonic.</b> Picture the Venn diagram: INNER = the intersection only; LEFT = left circle; FULL = both circles."
           ],
           a: "INNER JOIN.",
-          v: "Implicit JOIN syntax: SELECT … FROM A, B WHERE A.id = B.aid is the same as INNER JOIN."
+          v: "Row-count sanity: |INNER| ≤ |LEFT| ≤ |FULL|, and |CROSS| = $n\\times m$ ✓. Practical bug this prevents: using INNER when LEFT was needed silently DROPS entities with no match (customers with zero orders vanish from a 'customer report') — the most common real-world JOIN mistake."
+
         })
       },
       { q: "Race condition occurs in concurrent code when:",
@@ -2703,13 +2787,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Race condition: non-deterministic behavior caused by unsynchronized concurrent access.",
+          c: "A race condition: two or more threads touch the same shared data without coordination, and the final result depends on the accidental ORDER in which their operations interleave — same code, different outcomes run to run.",
           s: [
-            "Example: two threads incrementing a counter without locking can lose updates.",
-            "Fix: mutex, atomic operations, or message passing."
+            "<b>Step 1 — The canonical example.</b> Two threads run counter++ (read, add, write). Interleaving: both read 5, both write 6 — one increment LOST. Expected 7, got 6, sometimes.",
+            "<b>Step 2 — The fix family.</b> Mutual exclusion (mutex/lock around the critical section), atomic operations (hardware-indivisible read-modify-write), or removing sharing entirely (message passing, immutability).",
+            "<b>Step 3 — Distractor audit.</b> A long-running thread is performance, not a race; clock stability is hardware; variable size is unrelated."
           ],
-          a: "Unsynchronized shared-state access with timing-dependent outcome.",
-          v: "Subtle bugs: may pass tests on one machine and fail on another with different scheduling."
+          a: "Unsynchronized concurrent access to shared state, with a timing-dependent result.",
+          v: "Why these bugs are feared: they are non-deterministic — code can pass a thousand test runs and fail in production under different scheduling ('Heisenbugs') ✓. Detection exists (thread sanitizers, lock-discipline analysis) but prevention by design — minimize shared mutable state — is the real cure."
+
         })
       }
     ]

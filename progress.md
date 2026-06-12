@@ -90,4 +90,12 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   (Ch 1-4 → Ch 6/8/9/10 → Ch 12/13/15/16/17). 7 new SVGs (op-amp summing junction, Delta-load line
   diagram, single-mesh KVL loop, Zener regulator, power triangle, unity-feedback block diagram,
   4-variable K-map). File 80 KB → 143 KB. Rounds 12+13 now fully on the detailed standard.
-- **Next upgrade targets:** extra11 (170 solutions), then extra10 and earlier rounds.
+- **2026-06-11 — extra11 complete (170/170):** all solutions upgraded to the TEACH-FROM-ZERO
+  English-primary standard (per user request: assume the reader knows nothing — define every
+  concept before use, explicit recipes, distractor audits, multi-point verification). Two broken
+  questions repaired: Ch 1 line integral (correct:1 + missing 35/2 choice) and Ch 9 Shockley diode
+  (0.107 A vs computed 107 uA). File 118 KB -> ~229 KB, committed in 4 checkpoints.
+  Lesson captured: when batch-replacing solutions keyed by substring, key on the q:-line — a key
+  matching text inside an earlier-written solution corrupted one neighbor (caught by the
+  per-question Step-format integrity scan, now standard practice).
+- **Next upgrade targets:** extra10 and earlier rounds (questions.js + extra1-10, ~1,400 solutions).
