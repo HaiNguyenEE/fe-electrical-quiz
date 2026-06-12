@@ -748,75 +748,90 @@
         choices: ["$1/(s+2)^2$", "$1/(s-2)^2$", "$2/(s^2+4)$", "$1/(s+2)$"],
         correct: 0,
         solution: S({
-          c: "Standard pair (frequency shift): $\\mathcal{L}\\{t^n e^{at}\\} = \\dfrac{n!}{(s-a)^{n+1}}$. Here $n=1$, $a=-2$.",
-          s: ["$\\mathcal{L}\\{te^{-2t}\\} = \\dfrac{1!}{(s-(-2))^{1+1}} = \\dfrac{1}{(s+2)^2}$."],
-          a: "$\\dfrac{1}{(s+2)^2}$",
-          v: "Pole at $s=-2$ with multiplicity 2 → solution has form $te^{-2t}$ in time."
+          c: "Two table facts combine: the power pair $\\mathcal L\\{t\\} = 1/s^{2}$, and the frequency-shift rule — multiplying by $e^{-at}$ in time replaces every $s$ with $s+a$: $\\mathcal L\\{t^{n}e^{-at}\\} = \\dfrac{n!}{(s+a)^{n+1}}$.",
+          s: [
+            "<b>Step 1 — Transform $t$ alone.</b> $\\mathcal L\\{t\\} = 1/s^{2}$.",
+            "<b>Step 2 — Apply the shift for $e^{-2t}$.</b> $s \\to s+2$: result $\\dfrac{1}{(s+2)^{2}}$.",
+            "<b>Step 3 — Distractor audit.</b> $1/(s-2)^{2}$ shifts the wrong way (that is the GROWING $te^{+2t}$); $1/(s+2)$ is plain $e^{-2t}$ without the $t$; $2/(s^{2}+4)$ is $\\sin 2t$'s pair."
+          ],
+          a: "$\\dfrac{1}{(s+2)^{2}}$",
+          v: "Pole reading: a DOUBLE pole at $s = -2$ always signals a $te^{-2t}$-type term — repeated poles add the polynomial factor ✓. Initial-value check: $\\lim_{s\\to\\infty}sF(s) = 0 = f(0)$ ✓."
+
         }),
         ref: "Handbook p.56" },
       { q: "Inverse Laplace of $F(s) = \\dfrac{2s+1}{s^2+s}$:",
         choices: ["$1 + e^{-t}$", "$2 + e^{-t}$", "$1 - e^{-t}$", "$e^{-t}$"],
         correct: 0,
         solution: S({
-          c: "Partial fractions: $\\dfrac{2s+1}{s(s+1)} = \\dfrac{A}{s} + \\dfrac{B}{s+1}$.",
+          c: "Partial fractions turn a complicated transform into a sum of table entries: factor the denominator, split, then invert each piece ($1/s \\to 1$, $1/(s+1) \\to e^{-t}$).",
           s: [
-            "Multiply out: $2s+1 = A(s+1) + Bs$.",
-            "Set $s=0$: $1 = A$. Set $s=-1$: $-1 = -B \\Rightarrow B = 1$.",
-            "$F(s) = 1/s + 1/(s+1)$. Inverse: $1 + e^{-t}$."
+            "<b>Step 1 — Factor and set up.</b> $\\dfrac{2s+1}{s(s+1)} = \\dfrac{A}{s} + \\dfrac{B}{s+1}$.",
+            "<b>Step 2 — Cover-up method.</b> At $s = 0$: $A = \\dfrac{2(0)+1}{0+1} = 1$. At $s = -1$: $B = \\dfrac{2(-1)+1}{-1} = 1$.",
+            "<b>Step 3 — Invert term by term.</b> $f(t) = 1 + e^{-t}$.",
+            "<b>Step 4 — Distractor audit.</b> $1 - e^{-t}$ flips B's sign; $2 + e^{-t}$ misreads the numerator's 2; bare $e^{-t}$ loses the DC term."
           ],
           a: "$f(t) = 1 + e^{-t}$",
-          v: "DC term (1) + decay $(e^{-t})$. At $t\\to\\infty$: $f \\to 1$."
+          v: "Endpoint checks (always available): initial value $\\lim_{s\\to\\infty}sF = 2 = f(0) = 1 + 1$ ✓; final value $\\lim_{s\\to0}sF = 1 = f(\\infty)$ ✓ — both theorems confirm the inversion."
+
         }),
         ref: "Handbook p.56" },
       { q: "A bandpass filter centered at 100 Hz with Q=10. Bandwidth?",
         choices: ["$10$ Hz", "$1000$ Hz", "$100$ Hz", "$1$ Hz"],
         correct: 0,
         solution: S({
-          c: "$BW = f_0/Q$.",
-          s: ["$BW = 100/10 = 10$ Hz."],
+          c: "Q (quality factor) measures a bandpass filter's selectivity: $Q = f_0/BW$, so the −3 dB bandwidth is $BW = f_0/Q$ — the higher the Q, the skinnier the passband.",
+          s: [
+            "<b>Step 1 — Apply.</b> $BW = 100/10 = 10$ Hz — passband roughly 95-105 Hz.",
+            "<b>Step 2 — Distractor audit.</b> 1000 Hz multiplies instead of divides; 100 Hz echoes $f_0$; 1 Hz divides twice."
+          ],
           a: "$BW = 10$ Hz",
-          v: "High Q → narrow BW → more selective."
+          v: "Anchor application: a radio IF stage at 455 kHz needing a 10-kHz channel needs $Q \\approx 45$ — same relation, real numbers ✓. The trade: high Q rings longer in time (narrow in frequency ↔ slow in time, the uncertainty principle in circuit form)."
+
         }),
         ref: "Handbook p.361" },
       { q: "Time constant of $H(s) = 5/(2s+10)$:",
         choices: ["$0.2$ s", "$2$ s", "$10$ s", "$5$ s"],
         correct: 0,
         solution: S({
-          c: "Standard form: rewrite as $H(s) = K/(\\tau s + 1)$. Compare.",
+          c: "Time constant lives in the STANDARD form $\\dfrac{K}{\\tau s + 1}$ — so the denominator's constant term must be normalized to 1 before reading τ. Don't read coefficients off an unnormalized transfer function.",
           s: [
-            "Factor: $H(s) = 5/[10(0.2s+1)] = 0.5/(0.2s+1)$.",
-            "Time constant $\\tau = 0.2$ s."
+            "<b>Step 1 — Normalize.</b> $\\dfrac{5}{2s+10} = \\dfrac{5}{10(0.2s+1)} = \\dfrac{0.5}{0.2s+1}$.",
+            "<b>Step 2 — Read off.</b> $\\tau = 0.2$ s (and DC gain $K = 0.5$).",
+            "<b>Step 3 — Distractor audit.</b> 2 s reads the raw $s$-coefficient; 10 and 5 s read other raw coefficients — all symptoms of skipping normalization."
           ],
           a: "$\\tau = 0.2$ s",
-          v: "Pole at $s = -1/0.2 = -5$, so $\\tau = 1/5 = 0.2$ s ✓"
+          v: "Pole cross-check (normalization-proof route): $2s + 10 = 0 \\Rightarrow s = -5$, and $\\tau = 1/|pole| = 0.2$ s ✓ — if the two methods disagree, the normalization slipped."
+
         }),
         ref: "Handbook p.365" },
       { q: "A 2nd-order system has poles at $-1 \\pm j2$. Damping ratio $\\zeta$:",
         choices: ["$\\approx 0.447$", "$0.5$", "$0.707$", "$1.0$"],
         correct: 0,
         solution: S({
-          c: "Standard form poles at $s = -\\zeta\\omega_n \\pm j\\omega_n\\sqrt{1-\\zeta^2}$. Read off $\\omega_n$ and $\\zeta$.",
+          c: "Complex poles $s = -\\sigma \\pm j\\omega_d$ encode the 2nd-order parameters geometrically: $\\omega_n$ is the DISTANCE from the origin, and $\\zeta = \\sigma/\\omega_n$ — the cosine of the pole's angle from the negative real axis.",
           s: [
-            "Real part: $-\\zeta\\omega_n = -1$.",
-            "Imag part: $\\omega_n\\sqrt{1-\\zeta^2} = 2$.",
-            "$\\omega_n = \\sqrt{1 + 4} = \\sqrt{5} \\approx 2.236$ (since $\\omega_n^2 = (\\zeta\\omega_n)^2 + (\\omega_n\\sqrt{1-\\zeta^2})^2$).",
-            "$\\zeta = 1/\\omega_n = 1/\\sqrt{5} \\approx 0.447$."
+            "<b>Step 1 — Distance to origin.</b> $\\omega_n = \\sqrt{1^{2} + 2^{2}} = \\sqrt5 \\approx 2.236$ rad/s.",
+            "<b>Step 2 — Damping ratio.</b> $\\zeta = \\dfrac{\\sigma}{\\omega_n} = \\dfrac{1}{\\sqrt5} \\approx 0.447$.",
+            "<b>Step 3 — Distractor audit.</b> 0.5 guesses from the real part alone; 0.707 is the famous 45°-pole value (poles at $-1\\pm j1$); 1.0 would mean repeated REAL poles."
           ],
           a: "$\\zeta \\approx 0.447$",
-          v: "Under-damped (between 0 and 1) → step response oscillates."
+          v: "Reassembly check: $-\\zeta\\omega_n = -1$ ✓ and $\\omega_d = \\omega_n\\sqrt{1-\\zeta^{2}} = \\sqrt5\\cdot\\sqrt{0.8} = 2$ ✓ — the given poles regenerate exactly. Geometric rule worth keeping: poles closer to the imaginary axis (smaller angle-cosine) ring more."
+
         }),
         ref: "Handbook p.366" },
       { q: "Settling time (2%) of a system with $\\zeta=0.5$, $\\omega_n = 10$ rad/s:",
         choices: ["$\\approx 0.8$ s", "$\\approx 2$ s", "$\\approx 0.1$ s", "$\\approx 4$ s"],
         correct: 0,
         solution: S({
-          c: "$t_s \\approx 4/(\\zeta\\omega_n)$ for 2% settling.",
+          c: "Settling time is governed by the ENVELOPE $e^{-\\zeta\\omega_nt}$ that bounds the ringing. The 2% criterion needs the envelope down to 0.02: $e^{-\\zeta\\omega_nt_s} = 0.02 \\Rightarrow t_s \\approx \\dfrac{4}{\\zeta\\omega_n}$ (since $\\ln 50 \\approx 3.9 \\approx 4$).",
           s: [
-            "$\\zeta\\omega_n = 0.5 \\cdot 10 = 5$.",
-            "$t_s = 4/5 = 0.8$ s."
+            "<b>Step 1 — Decay rate.</b> $\\zeta\\omega_n = 0.5\\times10 = 5$ s⁻¹.",
+            "<b>Step 2 — Apply.</b> $t_s = 4/5 = 0.8$ s.",
+            "<b>Step 3 — Distractor audit.</b> 2 s ≈ uses $\\omega_n$'s reciprocal scaled wrong; 0.1 s is $1/\\omega_n$; 4 s forgets the rate is 5, not 1."
           ],
           a: "$t_s \\approx 0.8$ s",
-          v: "$\\zeta\\omega_n$ controls envelope decay rate; not affected by $\\omega_d$."
+          v: "Insight the formula encodes: settling depends ONLY on the poles' REAL part ($\\zeta\\omega_n = 5$, poles at $-5 \\pm j8.66$) — the imaginary part sets ring FREQUENCY, not decay ✓. Cousin criterion: 5% settling uses $3/(\\zeta\\omega_n) = 0.6$ s."
+
         }),
         ref: "Handbook p.366" },
     ],
@@ -827,88 +842,102 @@
         choices: ["$40$ dB", "$20$ dB", "$100$ dB", "$2$ dB"],
         correct: 0,
         solution: S({
-          c: "Voltage dB: $20\\log_{10}(\\text{ratio})$.",
-          s: ["$20\\log 100 = 20 \\cdot 2 = 40$ dB."],
-          a: "$40$ dB",
-          v: "Voltage ×100 = +40 dB. Power ×100 = +20 dB. Always note voltage vs power!"
+          c: "Decibels for VOLTAGE (or current) ratios use $20\\log_{10}$ — because power goes as voltage SQUARED, and $10\\log(V^{2}) = 20\\log V$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $20\\log_{10}100 = 20\\times2 = 40$ dB.",
+            "<b>Step 2 — Distractor audit.</b> 20 dB applies the POWER formula ($10\\log$) to a voltage ratio — the classic mix-up; 100 dB confuses ratio with dB; 2 dB is just the log."
+          ],
+          a: "40 dB",
+          v: "Consistency proof of the 10-vs-20 rule: voltage ×100 into a fixed resistor → power ×10,000 → $10\\log10^{4} = 40$ dB — SAME number either way, as it must be ✓. Pocket pairs: ×10 V = +20 dB; ×2 V = +6 dB."
+
         }),
         ref: "Handbook p.375" },
       { q: "Decibel gain of -6 dB corresponds to voltage ratio:",
         choices: ["$\\approx 0.5$", "$0.1$", "$0.3$", "$0.01$"],
         correct: 0,
         solution: S({
-          c: "$\\text{dB} = 20\\log_{10}(V_2/V_1) \\Rightarrow V_2/V_1 = 10^{(\\text{dB}/20)}$.",
+          c: "Unwrapping voltage dB: $V_2/V_1 = 10^{\\text{dB}/20}$. Negative dB = attenuation (ratio below 1).",
           s: [
-            "$10^{(-6/20)} = 10^{-0.3} = 0.501$."
+            "<b>Step 1 — Apply.</b> $10^{-6/20} = 10^{-0.3} = 0.501 \\approx 0.5$.",
+            "<b>Step 2 — Distractor audit.</b> 0.1 is −20 dB; 0.3 misreads the exponent as the answer; 0.01 is −40 dB."
           ],
-          a: "ratio ≈ 0.5",
-          v: "Memorize: -6 dB = ×0.5; -20 dB = ×0.1; +3 dB power = ×2."
+          a: "$\\approx 0.5$",
+          v: "The memorized lattice (voltage): ±6 dB = ×2 or ×½, ±20 dB = ×10 or ×0.1 — and they compose: −26 dB = 0.5×0.1 = 0.05 ✓. '−6 dB per octave' rolloff language in filters comes straight from this halving."
+
         }),
         ref: "Handbook p.375" },
       { q: "An 8 kHz audio sampled at 16 kHz. After sampling, can the signal be perfectly reconstructed?",
         choices: ["Only if anti-alias filter rolls off well below 8 kHz", "Yes always", "No, sampling rate too low", "No, need 32 kHz"],
         correct: 0,
         solution: S({
-          c: "Nyquist: $f_s > 2 f_{max}$ <i>strictly</i>. $f_s = 16$ kHz means signals up to exactly 8 kHz alias to themselves. In practice, real anti-aliasing filter has finite roll-off, so $f_{max}$ must be set below 8 kHz.",
+          c: "Nyquist's fine print: $f_s > 2f_{max}$ is a STRICT inequality, and real anti-alias filters aren't brick walls. Sampling at exactly twice the band edge leaves zero guard band for the filter's rolloff.",
           s: [
-            "Strict Nyquist allows up to $f_s/2 = 8$ kHz (boundary).",
-            "Real filters can't be perfectly sharp, so leave guard band.",
-            "If anti-alias filter cuts off at 7.5 kHz, sampling at 16 kHz is safe."
+            "<b>Step 1 — The boundary problem.</b> $f_s = 16$ kHz puts the folding frequency at exactly 8 kHz — content AT 8 kHz is marginal, and anything the filter lets through ABOVE 8 kHz folds back into the audio.",
+            "<b>Step 2 — The practical condition.</b> Reconstruction works iff the anti-alias filter attenuates everything approaching 8 kHz — i.e., its cutoff sits comfortably BELOW 8 kHz (e.g. 7.5 kHz), sacrificing a sliver of bandwidth for clean sampling.",
+            "<b>Step 3 — Distractor audit.</b> 'Yes always' ignores filter reality; 'rate too low' is false in principle (16 = 2×8 satisfies the theorem's boundary); 'need 32 kHz' over-corrects by a full octave."
           ],
-          a: "Only with proper anti-alias filter (cutting below 8 kHz).",
-          v: "CD audio uses 44.1 kHz for 20 kHz max signal — 10% guard band."
+          a: "Only if the anti-alias filter rolls off below 8 kHz.",
+          v: "Industry mirror: CD audio samples 20-kHz content at 44.1 kHz — a ~10% guard band (20 → 22.05) provided precisely so an implementable filter can do its job ✓."
+
         }),
         ref: "Handbook p.375" },
       { q: "Inverse Z-transform of $X(z) = z/(z - 0.5)$:",
         choices: ["$0.5^n$ (for $n \\ge 0$)", "$0.5^n u[n-1]$", "$\\delta[n]$", "$2^n$"],
         correct: 0,
         solution: S({
-          c: "Standard pair: $\\mathcal{Z}\\{a^n u[n]\\} = z/(z-a) = 1/(1-az^{-1})$.",
+          c: "THE z-transform pair to know cold: $a^{n}u[n] \\leftrightarrow \\dfrac{z}{z-a}$ (equivalently $\\dfrac{1}{1-az^{-1}}$), valid for $|z| > |a|$.",
           s: [
-            "Match with $a = 0.5$.",
-            "Inverse: $x[n] = (0.5)^n u[n]$."
+            "<b>Step 1 — Pattern match.</b> $X(z) = \\dfrac{z}{z-0.5}$ → $a = 0.5$.",
+            "<b>Step 2 — Invert.</b> $x[n] = (0.5)^{n}u[n]$: the sequence 1, 0.5, 0.25, 0.125, …",
+            "<b>Step 3 — Distractor audit.</b> $0.5^{n}u[n-1]$ delays one sample (drops the leading 1 — that pair is $\\frac{1}{z-a}$ territory); $\\delta[n]$ would need $X = 1$; $2^{n}$ flips the pole to 2."
           ],
-          a: "$x[n] = 0.5^n$ for $n \\ge 0$",
-          v: "Pole at $z = 0.5$ inside unit circle → stable signal (decays)."
+          a: "$x[n] = 0.5^{n}$ for $n \\ge 0$.",
+          v: "Long-division check of the first terms: $\\dfrac{z}{z-0.5} = 1 + 0.5z^{-1} + 0.25z^{-2} + \\cdots$ — coefficients 1, 0.5, 0.25 = the claimed sequence ✓. Pole at 0.5, inside the unit circle → decaying (stable) ✓."
+
         }),
         ref: "Handbook p.376" },
       { q: "An IIR filter with transfer function $H(z) = 1/(1 - 0.9 z^{-1})$ is:",
         choices: ["Stable (pole inside unit circle)", "Unstable", "Marginally stable", "Causes oscillation"],
         correct: 0,
         solution: S({
-          c: "Digital system stable iff all poles inside unit circle $|z| < 1$.",
+          c: "Digital (discrete-time) stability lives on the unit circle: a causal IIR filter is stable iff every pole satisfies $|z| < 1$. Find the poles, measure their distance from the origin.",
           s: [
-            "Pole: $1 - 0.9 z^{-1} = 0 \\Rightarrow z = 0.9$.",
-            "$|0.9| < 1$ → stable."
+            "<b>Step 1 — Locate the pole.</b> $1 - 0.9z^{-1} = 0 \\Rightarrow z = 0.9$.",
+            "<b>Step 2 — Test.</b> $|0.9| < 1$ — inside the circle → stable; impulse response $0.9^{n}$ decays.",
+            "<b>Step 3 — Distractor audit.</b> 'Unstable' would need $|z| > 1$; 'marginally stable' needs $|z| = 1$ exactly; 'oscillation' needs complex poles ON the circle."
           ],
-          a: "Stable",
-          v: "If coefficient were $\\ge 1$: $H(z) = 1/(1-1.1 z^{-1})$ would have pole at $z=1.1$ outside circle → unstable."
+          a: "Stable — pole at $z = 0.9$, inside the unit circle.",
+          v: "Sensitivity note that makes IIR design careful: nudging the coefficient from 0.9 to 1.1 (pole outside) turns the filter into an exponential amplifier — quantized coefficients in fixed-point hardware must respect this margin ✓. (The 0.9-pole filter is the classic 'leaky integrator' / smoothing filter.)"
+
         }),
         ref: "Handbook p.376" },
       { q: "Convolution of $\\{1, 2\\}$ and $\\{1, 1\\}$ yields:",
         choices: ["$\\{1, 3, 2\\}$", "$\\{2, 3\\}$", "$\\{1, 2, 1\\}$", "$\\{3, 3\\}$"],
         correct: 0,
         solution: S({
-          c: "Convolution: $y[n] = \\sum_k x[k] h[n-k]$. Like polynomial multiplication.",
+          c: "Discrete convolution IS polynomial multiplication: treat each sequence's samples as coefficients, multiply the polynomials, read the result's coefficients.",
           s: [
-            "Treat sequences as polynomials: $(1 + 2x)(1 + x) = 1 + x + 2x + 2x^2 = 1 + 3x + 2x^2$.",
-            "Result: $\\{1, 3, 2\\}$."
+            "<b>Step 1 — Multiply.</b> $(1 + 2x)(1 + x) = 1 + x + 2x + 2x^{2} = 1 + 3x + 2x^{2}$.",
+            "<b>Step 2 — Read coefficients.</b> $y = \\{1, 3, 2\\}$.",
+            "<b>Step 3 — Distractor audit.</b> $\\{2,3\\}$ and $\\{3,3\\}$ have the wrong LENGTH (must be $2+2-1 = 3$); $\\{1,2,1\\}$ is $\\{1,1\\}*\\{1,1\\}$."
           ],
           a: "$\\{1, 3, 2\\}$",
-          v: "Output length: $L_x + L_h - 1 = 2+2-1 = 3$ ✓"
+          v: "Sum rule: $\\sum y = 6 = (\\sum x)(\\sum h) = 3\\times2$ ✓ — a one-second check that catches most convolution arithmetic errors. The middle term ($1\\cdot1 + 2\\cdot1 = 3$) is where the overlap happens."
+
         }),
         ref: "Handbook p.376" },
       { q: "A Butterworth filter is characterized by:",
         choices: ["Maximally flat passband", "Ripple in passband", "Ripple in stopband", "Linear phase"],
         correct: 0,
         solution: S({
-          c: "Filter families: <b>Butterworth</b> — flat passband, monotonic rolloff. <b>Chebyshev</b> — ripple in either pass or stop band, steeper rolloff. <b>Bessel</b> — linear phase but slower rolloff.",
+          c: "The classic filter families trade three goods — passband flatness, rolloff steepness, phase linearity — and each family maximizes one: BUTTERWORTH = maximally flat passband; CHEBYSHEV = steepest rolloff (paid for with ripple); BESSEL = most linear phase (paid for with lazy rolloff).",
           s: [
-            "Butterworth is most common where flatness matters more than sharp cutoff.",
-            "Tradeoff: butterworth slower rolloff than equiripple."
+            "<b>Step 1 — Match.</b> Butterworth's defining property is the maximally flat magnitude response: $|H| = \\dfrac{1}{\\sqrt{1 + (\\omega/\\omega_c)^{2n}}}$ — all derivatives zero at DC, no ripple anywhere.",
+            "<b>Step 2 — Distractor audit.</b> Passband ripple = Chebyshev type I; stopband ripple = Chebyshev type II / elliptic; linear phase = Bessel (analog) or symmetric FIR (digital)."
           ],
-          a: "Maximally flat passband",
-          v: "Higher-order Butterworth → sharper rolloff but more components."
+          a: "Maximally flat passband.",
+          v: "Selection logic to carry into practice: measurement/audio chains (flatness matters) → Butterworth; tight channel selection (steepness matters) → Chebyshev/elliptic; pulse/waveform fidelity (phase matters) → Bessel ✓. All trade-offs ease with higher order $n$ — at higher component cost."
+
         }),
         ref: "Handbook p.375" },
     ],
