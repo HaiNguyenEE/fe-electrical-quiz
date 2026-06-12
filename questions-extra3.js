@@ -13,120 +13,149 @@
         choices: ["$1, 2, 3$", "$1, 3, 6$", "$-1, -2, -3$", "$2, 3, 5$"],
         correct: 0,
         solution: S({
-          c: "Rational root theorem: rational roots are factors of constant term ÷ leading coefficient. Try ±1, ±2, ±3, ±6.",
+          c: "Cubics on the FE crack open with the RATIONAL ROOT THEOREM: any rational root must divide the constant term (here ±1, ±2, ±3, ±6). Find one root by trial, then divide down to a quadratic.",
           s: [
-            "Try $x=1$: $1 - 6 + 11 - 6 = 0$ ✓.",
-            "Divide by $(x-1)$: $x^2 - 5x + 6 = (x-2)(x-3)$.",
-            "Roots: 1, 2, 3."
+            "<b>Step 1 — Trial the easy candidates.</b> $x = 1$: $1 - 6 + 11 - 6 = 0$ ✓ — a root.",
+            "<b>Step 2 — Factor it out.</b> Dividing by $(x-1)$: $x^{2} - 5x + 6$.",
+            "<b>Step 3 — Factor the quadratic.</b> $(x-2)(x-3)$ → roots 1, 2, 3.",
+            "<b>Step 4 — Distractor audit.</b> $-1,-2,-3$ flips all signs (those solve $x^3+6x^2+11x+6$); the others fail the trial test instantly."
           ],
-          a: "$1, 2, 3$",
-          v: "Vieta's: sum = 6 ✓ (matches $-(-6)/1$); product = 6 ✓ (matches $-(-6)/1$)."
+          a: "$x = 1, 2, 3$",
+          v: "Vieta's checks in seconds: sum of roots $= 6 = -(-6)/1$ ✓; product $= 6 = -(-6)/1$ ✓; pairwise sum $= 11$ ✓ — all three coefficients confirmed."
+
         }),
         ref: "Handbook p.35" },
       { q: "$\\sum_{k=1}^{100} k$ = ",
         choices: ["$5050$", "$5000$", "$10000$", "$100$"],
         correct: 0,
         solution: S({
-          c: "Sum formula: $\\sum_{k=1}^n k = n(n+1)/2$.",
-          s: ["$100 \\cdot 101 / 2 = 5050$."],
+          c: "Sum of the first $n$ integers — the most-used closed form in counting: $\\sum_{k=1}^{n}k = \\dfrac{n(n+1)}{2}$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\dfrac{100\\times101}{2} = 5050$.",
+            "<b>Step 2 — Distractor audit.</b> 5000 is $100^{2}/2$ (forgot the +1); 10000 is $100^{2}$; 100 is just $n$."
+          ],
           a: "$5050$",
-          v: "Legend: Gauss computed this as a child by pairing 1+100, 2+99, ... = 50 pairs of 101 = 5050."
+          v: "Gauss's pairing proves the formula on sight: $1+100, 2+99, \\ldots$ — 50 pairs of 101 = 5050 ✓. The same trick derives the formula: pair the sum with its reverse, get $n$ copies of $(n+1)$, halve."
+
         }),
         ref: "Handbook p.36" },
       { q: "$\\sum_{k=1}^{\\infty} (1/2)^k$ = ",
         choices: ["$1$", "$2$", "$1/2$", "Diverges"],
         correct: 0,
         solution: S({
-          c: "Geometric series: $\\sum_{k=1}^\\infty r^k = r/(1-r)$ if $|r|<1$.",
-          s: ["$= (1/2)/(1 - 1/2) = (1/2)/(1/2) = 1$."],
+          c: "An infinite geometric series converges when $|r| < 1$. STARTING INDEX matters: from $k=1$ (no '1' term), $\\sum_{k=1}^{\\infty}r^{k} = \\dfrac{r}{1-r}$.",
+          s: [
+            "<b>Step 1 — Apply with r = 1/2.</b> $\\dfrac{1/2}{1 - 1/2} = \\dfrac{1/2}{1/2} = 1$.",
+            "<b>Step 2 — Distractor audit.</b> 2 is the $k=0$ version ($\\frac{1}{1-r}$, which includes the leading 1); 1/2 is just the first term; 'diverges' needs $|r| \\ge 1$."
+          ],
           a: "$1$",
-          v: "Includes 1/2 + 1/4 + 1/8 + ... = 1. Zeno's paradox resolved."
+          v: "Picture proof: $\\tfrac12 + \\tfrac14 + \\tfrac18 + \\cdots$ keeps filling half the REMAINING gap to 1 — never beyond ✓ (Zeno's paradox, resolved). Partial-sum check: after 4 terms, $0.9375$ — closing on 1."
+
         }),
         ref: "Handbook p.50" },
       { q: "Polar coordinates of point $(x,y) = (3, 4)$:",
         choices: ["$r=5$, $\\theta\\approx 53.13°$", "$r=7$, $\\theta=45°$", "$r=5$, $\\theta=36.87°$", "$r=25$"],
         correct: 0,
         solution: S({
-          c: "$r = \\sqrt{x^2+y^2}$; $\\theta = \\arctan(y/x)$.",
+          c: "Rectangular → polar: $r = \\sqrt{x^{2}+y^{2}}$ (distance), $\\theta = \\arctan(y/x)$ (angle from +x axis), quadrant-checked.",
           s: [
-            "$r = \\sqrt{9+16} = 5$.",
-            "$\\theta = \\arctan(4/3) = 53.13°$."
+            "<b>Step 1 — Distance.</b> $r = \\sqrt{9+16} = 5$.",
+            "<b>Step 2 — Angle.</b> $\\arctan(4/3) = 53.13°$ — first quadrant, no correction needed.",
+            "<b>Step 3 — Distractor audit.</b> 36.87° is $\\arctan(3/4)$ — the y/x ratio INVERTED (the planted trap); $r = 7$ adds instead of Pythagorizing; $r = 25$ forgot the square root."
           ],
-          a: "$r=5$, $\\theta\\approx 53.13°$",
-          v: "Choice C swaps the angles — 36.87° is $\\arctan(3/4)$, not $\\arctan(4/3)$."
+          a: "$r = 5$, $\\theta \\approx 53.13°$",
+          v: "Rebuild the point: $5\\cos53.13° = 5(0.6) = 3$ ✓, $5\\sin53.13° = 5(0.8) = 4$ ✓. The 3-4-5 triangle's two angles (36.87°, 53.13°) appear constantly — memorize which leg each belongs to: angle is measured FROM the x-axis, so opposite side is y."
+
         }),
         ref: "Handbook p.36" },
       { q: "Partial fraction decomposition of $\\dfrac{2}{(s+1)(s+3)}$:",
         choices: ["$\\frac{1}{s+1} - \\frac{1}{s+3}$", "$\\frac{1}{s+1} + \\frac{1}{s+3}$", "$\\frac{2}{s+1}$", "$\\frac{2}{s+2}$"],
         correct: 0,
         solution: S({
-          c: "$\\dfrac{2}{(s+1)(s+3)} = \\dfrac{A}{s+1} + \\dfrac{B}{s+3}$. Cover-up: $A = 2/(-1+3) = 1$; $B = 2/(-3+1) = -1$.",
+          c: "Distinct linear factors split as $\\dfrac{A}{s+1} + \\dfrac{B}{s+3}$. The COVER-UP method finds each constant instantly: cover one factor, evaluate the rest at its root.",
           s: [
-            "$A$ at $s = -1$: $2/(-1+3) = 2/2 = 1$.",
-            "$B$ at $s = -3$: $2/(-3+1) = 2/(-2) = -1$.",
-            "Result: $\\dfrac{1}{s+1} - \\dfrac{1}{s+3}$."
+            "<b>Step 1 — A (cover $s+1$, set $s = -1$).</b> $A = \\dfrac{2}{-1+3} = 1$.",
+            "<b>Step 2 — B (cover $s+3$, set $s = -3$).</b> $B = \\dfrac{2}{-3+1} = -1$.",
+            "<b>Step 3 — Assemble.</b> $\\dfrac{1}{s+1} - \\dfrac{1}{s+3}$.",
+            "<b>Step 4 — Distractor audit.</b> The '+' version (choice B) fails recombination (gives $\\frac{2s+4}{(s+1)(s+3)}$); the others aren't decompositions at all."
           ],
           a: "$\\dfrac{1}{s+1} - \\dfrac{1}{s+3}$",
-          v: "Verify: $\\dfrac{1}{s+1} - \\dfrac{1}{s+3} = \\dfrac{(s+3)-(s+1)}{(s+1)(s+3)} = \\dfrac{2}{(s+1)(s+3)}$ ✓"
+          v: "Recombine to confirm: $\\dfrac{(s+3)-(s+1)}{(s+1)(s+3)} = \\dfrac{2}{(s+1)(s+3)}$ ✓. Payoff: the inverse Laplace drops out instantly — $e^{-t} - e^{-3t}$ — which is WHY partial fractions exist on this exam."
+
         }),
         ref: "Handbook p.36" },
       { q: "Cross product: $(2\\hat{i}+3\\hat{j}) \\times (\\hat{i}-\\hat{j})$ = ",
         choices: ["$-5\\hat{k}$", "$5\\hat{k}$", "$0$", "$\\hat{i}-\\hat{j}$"],
         correct: 0,
         solution: S({
-          c: "$\\vec{A}\\times\\vec{B}$ for 2D (z components = 0): only $\\hat{k}$ component nonzero, equal to $A_x B_y - A_y B_x$.",
-          s: ["$\\hat{k}$ comp: $(2)(-1) - (3)(1) = -2 - 3 = -5$. Result: $-5\\hat{k}$."],
-          a: "$-5\\hat{k}$",
-          v: "Magnitude = 5 = area of parallelogram formed; direction $-\\hat{k}$ (into page by right-hand rule)."
+          c: "For 2-D vectors (z = 0), the cross product has only a $\\hat k$ component: $A_xB_y - A_yB_x$ — positive out of the page, negative into it.",
+          s: [
+            "<b>Step 1 — Apply.</b> $(2)(-1) - (3)(1) = -2 - 3 = -5$ → $-5\\hat k$.",
+            "<b>Step 2 — Distractor audit.</b> $+5\\hat k$ subtracts in the wrong order ($A_yB_x - A_xB_y$); 0 would need parallel vectors; $\\hat i - \\hat j$ confuses cross with subtraction."
+          ],
+          a: "$-5\\hat k$",
+          v: "Two readings of the same number: magnitude 5 = the AREA of the parallelogram the vectors span; sign − = clockwise turn from $\\vec A$ to $\\vec B$ (right-hand rule, into the page) ✓. Anticommutativity check: $\\vec B\\times\\vec A = +5\\hat k$ — order matters."
+
         }),
         ref: "Handbook p.38" },
       { q: "$\\int_0^1 (3x^2 + 1)\\,dx$:",
         choices: ["$2$", "$1$", "$4$", "$3$"],
         correct: 0,
         solution: S({
-          c: "Power rule on each term.",
-          s: ["Antideriv: $x^3 + x$. At $x=1$: $1+1=2$. At $x=0$: $0$. Difference: $2$."],
+          c: "Integrate term by term with the power rule $\\int x^{n}dx = \\dfrac{x^{n+1}}{n+1}$, then evaluate at the limits.",
+          s: [
+            "<b>Step 1 — Antiderivative.</b> $\\int(3x^{2} + 1)dx = x^{3} + x$.",
+            "<b>Step 2 — Evaluate.</b> $(1 + 1) - (0 + 0) = 2$.",
+            "<b>Step 3 — Distractor audit.</b> 1 keeps only one of the two terms; 4 misintegrates $3x^{2}$ as $3x^{3}$; 3 sums the coefficients."
+          ],
           a: "$2$",
-          v: "$\\int_0^1 3x^2 dx = 1$ and $\\int_0^1 dx = 1$ ✓"
+          v: "Termwise check: $\\int_0^{1}3x^{2}dx = 1$ and $\\int_0^{1}1\\,dx = 1$ → $1 + 1 = 2$ ✓. Sense check: the integrand runs from 1 (at 0) to 4 (at 1) over width 1 — an area of 2 sits plausibly in that range ✓."
+
         }),
         ref: "Handbook p.49" },
       { q: "Rank of $A = \\begin{pmatrix}1&2\\\\2&4\\end{pmatrix}$:",
         choices: ["$1$", "$2$", "$0$", "$4$"],
         correct: 0,
         solution: S({
-          c: "Rank = number of linearly independent rows/columns. Row 2 = 2 × Row 1 → dependent.",
+          c: "Rank = the number of linearly INDEPENDENT rows (equivalently columns) — the true dimensionality of what the matrix does. Spotting a row that is a multiple of another collapses the rank immediately.",
           s: [
-            "Determinant: $1\\cdot 4 - 2\\cdot 2 = 0$ → not full rank.",
-            "Only 1 independent row → rank 1."
+            "<b>Step 1 — Compare the rows.</b> Row 2 $= (2, 4) = 2\\times$ Row 1 $= 2(1,2)$ — dependent.",
+            "<b>Step 2 — Confirm via determinant.</b> $\\det = 1(4) - 2(2) = 0$ → not full rank.",
+            "<b>Step 3 — Count what's left.</b> One independent row → rank 1.",
+            "<b>Step 4 — Distractor audit.</b> 2 would need $\\det \\ne 0$; 0 only for the zero matrix; 4 confuses rank with an entry."
           ],
-          a: "Rank = 1",
-          v: "Singular matrix (det=0) always has rank < n."
+          a: "Rank $= 1$",
+          v: "Geometric meaning: this matrix squashes the whole plane onto the LINE through $(1,2)$ — a 1-dimensional image, rank 1 ✓. The chain to remember: $\\det = 0 \\Leftrightarrow$ rank $< n \\Leftrightarrow$ singular $\\Leftrightarrow$ a zero eigenvalue."
+
         }),
         ref: "Handbook p.57" },
       { q: "If $\\sin\\theta = 0.6$ and $\\theta$ in Q1, then $\\cos\\theta$:",
         choices: ["$0.8$", "$-0.8$", "$0.4$", "$\\pm 0.8$"],
         correct: 0,
         solution: S({
-          c: "Pythagorean: $\\cos\\theta = \\pm\\sqrt{1-\\sin^2\\theta}$. Sign from quadrant.",
+          c: "The Pythagorean identity $\\sin^{2}\\theta + \\cos^{2}\\theta = 1$ recovers one ratio from the other — up to a SIGN, which the quadrant decides.",
           s: [
-            "$\\cos^2\\theta = 1 - 0.36 = 0.64 \\Rightarrow \\cos\\theta = \\pm 0.8$.",
-            "Q1: cos positive → $+0.8$."
+            "<b>Step 1 — Solve the identity.</b> $\\cos^{2}\\theta = 1 - 0.36 = 0.64 \\Rightarrow \\cos\\theta = \\pm0.8$.",
+            "<b>Step 2 — Apply the quadrant.</b> Q1: both sine and cosine positive → $+0.8$.",
+            "<b>Step 3 — Distractor audit.</b> $-0.8$ belongs to Q2; $\\pm0.8$ ignores the given quadrant; 0.4 subtracts without squaring."
           ],
-          a: "$0.8$",
-          v: "3-4-5 right triangle with $\\sin = 3/5, \\cos = 4/5$ ✓"
+          a: "$\\cos\\theta = 0.8$",
+          v: "It's the 3-4-5 triangle again: $\\sin = 3/5$, $\\cos = 4/5$ ✓. Quadrant sign map worth a glance: 'All Students Take Calculus' — All(+,+), Sin only, Tan only, Cos only — settles every such sign question."
+
         }),
         ref: "Handbook p.37" },
       { q: "$\\sinh(x)$ expressed in exponentials:",
         choices: ["$\\dfrac{e^x - e^{-x}}{2}$", "$\\dfrac{e^x + e^{-x}}{2}$", "$\\dfrac{1 - e^x}{2}$", "$e^x \\cdot e^{-x}$"],
         correct: 0,
         solution: S({
-          c: "Hyperbolic functions definitions: $\\sinh x = (e^x - e^{-x})/2$, $\\cosh x = (e^x + e^{-x})/2$.",
+          c: "Hyperbolic functions are exponential combinations: $\\sinh x = \\dfrac{e^{x} - e^{-x}}{2}$ (odd, like sine) and $\\cosh x = \\dfrac{e^{x} + e^{-x}}{2}$ (even, like cosine).",
           s: [
-            "Choice B is $\\cosh x$.",
-            "Identity: $\\cosh^2 - \\sinh^2 = 1$ (different sign from $\\sin^2 + \\cos^2$)."
+            "<b>Step 1 — Match.</b> $\\sinh$ takes the MINUS combination.",
+            "<b>Step 2 — Distractor audit.</b> The '+' version is $\\cosh$ (choice B); $(1-e^{x})/2$ is malformed; $e^{x}e^{-x} = 1$ — a constant."
           ],
-          a: "$\\sinh x = (e^x - e^{-x})/2$",
-          v: "$\\sinh$ is odd: $\\sinh(-x) = -\\sinh(x)$ ✓"
+          a: "$\\sinh x = \\dfrac{e^{x} - e^{-x}}{2}$",
+          v: "Parity check: swap $x \\to -x$ — the minus combination flips sign (odd ✓); evaluate at 0: $\\sinh0 = 0$, $\\cosh0 = 1$ ✓. The sign-flipped identity $\\cosh^{2} - \\sinh^{2} = 1$ is why catenary cables and transmission-line equations speak hyperbolic."
+
         }),
         ref: "Handbook p.37" },
     ],
@@ -137,61 +166,76 @@
         choices: ["$8$", "$5$", "$10$", "$2.83$"],
         correct: 0,
         solution: S({
-          c: "Population variance: divide by $n$ (not $n-1$).",
+          c: "Variance = average squared distance from the mean. POPULATION variance divides by $n$; SAMPLE variance by $n-1$ — the question says population, so divide by 5.",
           s: [
-            "Mean: $(1+3+5+7+9)/5 = 5$.",
-            "Squared deviations: 16, 4, 0, 4, 16 → sum = 40.",
-            "$\\sigma^2 = 40/5 = 8$."
+            "<b>Step 1 — Mean.</b> $25/5 = 5$.",
+            "<b>Step 2 — Squared deviations.</b> $(-4)^{2}, (-2)^{2}, 0, 2^{2}, 4^{2} = 16, 4, 0, 4, 16$ → sum 40.",
+            "<b>Step 3 — Divide by n.</b> $\\sigma^{2} = 40/5 = 8$.",
+            "<b>Step 4 — Distractor audit.</b> 10 is the SAMPLE variance ($40/4$) — the planted twin; 2.83 is $\\sqrt8$ (the standard deviation); 5 is the mean."
           ],
-          a: "$\\sigma^2 = 8$ (population)",
-          v: "Sample variance would divide by 4: $40/4 = 10$ (choice C)."
+          a: "$\\sigma^{2} = 8$ (population).",
+          v: "Unit check: variance carries SQUARED units; its root $\\sigma = 2.83$ is what shares units with the data ✓. The n vs n−1 reading habit — 'population/process' vs 'sample' — settles this entire question family."
+
         }),
         ref: "Handbook p.63" },
       { q: "Probability of rolling 7 with two dice:",
         choices: ["$1/6$", "$1/36$", "$1/12$", "$2/7$"],
         correct: 0,
         solution: S({
-          c: "Count combinations summing to 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways. Total outcomes 36.",
-          s: ["$P(7) = 6/36 = 1/6$."],
-          a: "$1/6$",
-          v: "7 is the most likely sum with 2 dice. Probabilities: 2&12 (1/36 each), 7 (6/36)."
+          c: "Two dice make $6\\times6 = 36$ equally likely ORDERED outcomes. Count the pairs hitting the target sum, divide by 36.",
+          s: [
+            "<b>Step 1 — List the pairs for 7.</b> (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) — six ordered ways, the most of any sum.",
+            "<b>Step 2 — Divide.</b> $6/36 = 1/6$.",
+            "<b>Step 3 — Distractor audit.</b> $1/36$ is a SINGLE pair (like snake-eyes); $1/12$ is sums 4 or 10 (3 ways); $2/7$ confuses outcomes with sums."
+          ],
+          a: "$P(7) = 1/6$",
+          v: "Shape check: ways per sum rise 1,2,3,4,5,6 (sums 2-7) then fall symmetrically — 7 is the peak, hence dice games pivot on it (craps' 'seven out') ✓. All 36 ways sum to 1 ✓."
+
         }),
         ref: "Handbook p.64" },
       { q: "Bayes: P(A)=0.3, P(B|A)=0.8, P(B|A')=0.2. P(A|B):",
         choices: ["$0.632$", "$0.3$", "$0.8$", "$0.5$"],
         correct: 0,
         solution: S({
-          c: "Bayes theorem: $P(A|B) = \\dfrac{P(B|A)P(A)}{P(B)}$ where $P(B) = P(B|A)P(A) + P(B|A')P(A')$.",
+          c: "Bayes' theorem reverses a conditional: $P(A|B) = \\dfrac{P(B|A)P(A)}{P(B)}$, where the denominator totals BOTH routes to B: $P(B) = P(B|A)P(A) + P(B|A')P(A')$.",
           s: [
-            "$P(A') = 0.7$.",
-            "$P(B) = (0.8)(0.3) + (0.2)(0.7) = 0.24 + 0.14 = 0.38$.",
-            "$P(A|B) = (0.8)(0.3)/0.38 = 0.24/0.38 \\approx 0.632$."
+            "<b>Step 1 — Complement.</b> $P(A') = 1 - 0.3 = 0.7$.",
+            "<b>Step 2 — Total probability of B.</b> $P(B) = 0.8(0.3) + 0.2(0.7) = 0.24 + 0.14 = 0.38$.",
+            "<b>Step 3 — Reverse.</b> $P(A|B) = 0.24/0.38 \\approx 0.632$.",
+            "<b>Step 4 — Distractor audit.</b> 0.3 echoes the prior (ignores the evidence); 0.8 echoes $P(B|A)$ — direction confusion again; 0.5 is a shrug."
           ],
-          a: "$\\approx 0.632$",
-          v: "Common in medical testing: P(disease|+test) depends on disease prevalence not just test accuracy."
+          a: "$P(A|B) \\approx 0.632$",
+          v: "Counting check with 100 trials: 30 A-cases → 24 give B; 70 non-A → 14 give B; of the 38 B's, 24 are A's → $24/38 = 0.632$ ✓. Direction sense: B is 4× likelier under A, so observing B lifts A's probability from 0.30 to 0.63 — evidence moved it the right way ✓."
+
         }),
         ref: "Handbook p.65" },
       { q: "Standard deviation of $X = 2Y + 3$ given $\\sigma_Y = 4$:",
         choices: ["$8$", "$11$", "$4$", "$16$"],
         correct: 0,
         solution: S({
-          c: "Standard deviation: $\\sigma_{aY+b} = |a|\\sigma_Y$. Adding constants doesn't change spread.",
-          s: ["$\\sigma_X = |2|\\cdot 4 = 8$."],
+          c: "Linear transformations move spread predictably: multiplying by $a$ scales the standard deviation by $|a|$; ADDING a constant shifts everything equally and changes spread NOT AT ALL: $\\sigma_{aY+b} = |a|\\sigma_Y$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\sigma_X = |2|\\times4 = 8$ — the +3 is irrelevant.",
+            "<b>Step 2 — Distractor audit.</b> 11 wrongly adds the 3; 4 ignores the scaling; 16 squares (that's what happens to VARIANCE: $\\sigma^{2}: 16 \\to 64$, i.e. $\\times a^{2}$)."
+          ],
           a: "$\\sigma_X = 8$",
-          v: "Variance scales by $a^2$, std by $|a|$."
+          v: "Unit conversion is the everyday face of this rule: °C → °F is $1.8Y + 32$, so temperature SDs multiply by 1.8 while the +32 does nothing ✓. Pair to keep straight: SD scales by $|a|$, variance by $a^{2}$, mean by the full $a\\mu + b$."
+
         }),
         ref: "Handbook p.66" },
       { q: "Confidence interval for mean (large sample, known $\\sigma$): margin of error =",
         choices: ["$z \\cdot \\sigma/\\sqrt{n}$", "$z \\cdot \\sigma$", "$\\sigma/\\sqrt{n}$", "$\\sigma \\cdot n$"],
         correct: 0,
         solution: S({
-          c: "Standard error: $\\sigma/\\sqrt{n}$. Margin of error: multiply by critical z (e.g., 1.96 for 95%).",
+          c: "A CI for the mean is built as estimate ± margin, where margin = (critical value) × (standard error). With KNOWN σ and large n: margin $= z\\cdot\\sigma/\\sqrt n$.",
           s: [
-            "95% CI: $\\bar{x} \\pm 1.96 \\sigma/\\sqrt{n}$.",
-            "Larger $n$ → smaller margin (precision improves with sample size)."
+            "<b>Step 1 — Standard error.</b> The sample mean wobbles with SD $\\sigma/\\sqrt n$ — that's what's being bracketed.",
+            "<b>Step 2 — Scale by confidence.</b> Multiply by $z$ (1.96 for 95%, 1.645 for 90%, 2.576 for 99%).",
+            "<b>Step 3 — Distractor audit.</b> $z\\sigma$ forgets that MEANS are steadier than individuals (no $\\sqrt n$); $\\sigma/\\sqrt n$ alone is the SE without the confidence multiplier; $\\sigma n$ is dimensional nonsense."
           ],
-          a: "$z \\sigma/\\sqrt{n}$",
-          v: "If $\\sigma$ unknown: use $t$ distribution with $s$ instead."
+          a: "Margin of error $= z\\,\\sigma/\\sqrt n$.",
+          v: "Behavior checks: quadruple $n$ → margin halves ($\\sqrt{}$ law) ✓; demand more confidence → larger $z$ → wider interval ✓ — both knobs move the right way. Unknown σ swaps in $t_{n-1}$ and $s$ — the small-sample sibling."
+
         }),
         ref: "Handbook p.69" },
     ],
@@ -202,28 +246,30 @@
         choices: ["Document with proper credit and report violation", "Confront and demand payment", "Ignore", "Plagiarize their work in return"],
         correct: 0,
         solution: S({
-          c: "Engineers should be credited for their work; reporting through professional channels is the constructive path.",
+          c: "Professional credit is protected by ethics codes (credit others' work; don't claim others') — and the REMEDY runs through documentation and proper channels, not retaliation.",
           s: [
-            "Document evidence first.",
-            "Report to employer, state board, or relevant authority.",
-            "Avoid public confrontation initially — escalate appropriately."
+            "<b>Step 1 — Secure the evidence.</b> Date-stamped originals, drafts, correspondence — the record that establishes authorship.",
+            "<b>Step 2 — Report through channels.</b> Employer, the professional society's ethics committee (IEEE/NSPE), or the state board — escalating in that order as needed.",
+            "<b>Step 3 — Distractor audit.</b> Demanding payment converts a violation into a shakedown; ignoring it lets the violation stand; retaliatory plagiarism makes you the second offender."
           ],
-          a: "Document and report through proper channels.",
-          v: "IEEE and most professional societies have ethics committees that handle these cases."
+          a: "Document with proper credit and report the violation.",
+          v: "The pattern that answers most ethics questions: EVIDENCE first, CHANNELS second, never self-help retaliation ✓. Professional societies maintain ethics committees precisely so individuals don't have to act alone."
+
         }),
         ref: "Handbook p.5" },
       { q: "An engineer reviews a design and notices a calculation error that could fail under load. The original designer disagrees. Engineer should:",
         choices: ["Escalate to authorities if safety risk persists", "Drop the matter — not their project", "Sign off anyway", "Wait for failure"],
         correct: 0,
         solution: S({
-          c: "Public safety (Rule 1) requires action when an error could harm public — even if it means escalating beyond the original designer.",
+          c: "When a calculation error threatens safety and the original designer disagrees, the public-safety canon doesn't let the matter drop — disagreement between engineers is resolved by escalation, not silence.",
           s: [
-            "Try to resolve with designer first.",
-            "If unresolved and safety risk real: report to engineering board, owner, or regulatory body.",
-            "Document everything."
+            "<b>Step 1 — Resolve peer-to-peer first.</b> Present the calculation to the designer; honest technical disagreement is often fixed at this stage.",
+            "<b>Step 2 — Escalate while the risk persists.</b> If unresolved: supervisor → owner → building authority/licensing board, in order, documenting every step.",
+            "<b>Step 3 — Distractor audit.</b> 'Not my project' — the duty follows KNOWLEDGE, not assignment; signing off endorses the error; waiting for failure is the textbook definition of negligence."
           ],
-          a: "Escalate if safety risk remains.",
-          v: "Some classic engineering ethics case studies (Hyatt Regency walkway, Challenger) center on this exact dilemma."
+          a: "Escalate to appropriate authorities if the safety risk persists.",
+          v: "History grades this question: the Hyatt Regency walkway collapse (1981, 114 deaths) traced to a connection change inadequately checked — the case every ethics course cites for 'review disputes must be escalated, not waved through' ✓."
+
         }),
         ref: "Handbook p.5" },
     ],
@@ -234,51 +280,60 @@
         choices: ["$1\\%$/month", "$12\\%$/month", "$1.2\\%$/month", "$10\\%$/month"],
         correct: 0,
         solution: S({
-          c: "Periodic rate: nominal annual rate / periods per year.",
-          s: ["$12\\%/12 = 1\\%$/month."],
-          a: "1%/month",
-          v: "Effective annual rate (EAR): $(1.01)^{12} - 1 \\approx 12.68\\%$ (slightly higher than nominal 12%)."
+          c: "'12% APR compounded monthly' defines a PERIODIC rate by simple division: nominal annual ÷ periods per year. The compounding subtlety shows up later (in the EFFECTIVE rate), not here.",
+          s: [
+            "<b>Step 1 — Divide.</b> $12\\%/12 = 1\\%$ per month.",
+            "<b>Step 2 — Distractor audit.</b> 12%/month would be 12× the stated nominal; 1.2% mis-divides; 10% is noise."
+          ],
+          a: "1% per month.",
+          v: "The follow-up the FE loves: the EFFECTIVE annual rate is $(1.01)^{12} - 1 = 12.68\\%$ — more than the nominal 12% because each month's interest compounds ✓. APR÷12 is also exactly how credit-card monthly interest is computed."
+
         }),
         ref: "Handbook p.230" },
       { q: "EAR for nominal 10% APR compounded continuously:",
         choices: ["$10.52\\%$", "$10\\%$", "$11\\%$", "$\\approx 21\\%$"],
         correct: 0,
         solution: S({
-          c: "Continuous: $EAR = e^r - 1$ where $r$ = nominal rate.",
+          c: "Continuous compounding is the $n\\to\\infty$ limit of $(1 + r/n)^{n}$, which converges to $e^{r}$ — so the effective annual rate is $EAR = e^{r} - 1$.",
           s: [
-            "$e^{0.10} = 1.1052$.",
-            "$EAR = 0.1052 = 10.52\\%$."
+            "<b>Step 1 — Evaluate.</b> $e^{0.10} = 1.10517$.",
+            "<b>Step 2 — Subtract 1.</b> $EAR = 10.52\\%$.",
+            "<b>Step 3 — Distractor audit.</b> 10% ignores compounding entirely; 11% over-rounds; 21% doubles for no reason."
           ],
-          a: "$10.52\\%$",
-          v: "Limit of $(1 + r/n)^n$ as $n\\to\\infty$."
+          a: "$EAR = 10.52\\%$",
+          v: "Ladder check: annual 10.00% < monthly 10.47% < daily 10.516% < continuous 10.517% — continuous is the supremum, barely above daily ✓. Rule of thumb: continuous adds roughly $r^{2}/2$ to the nominal rate ($0.5\\%$ here)."
+
         }),
         ref: "Handbook p.230" },
       { q: "Two mutually exclusive projects: A (cost 5k, life 4 yr, return 1800/yr), B (cost 8k, life 6 yr, return 2200/yr). Without computing IRRs, the right method is:",
         choices: ["Equivalent uniform annual worth (or LCM lives)", "Just compare costs", "Just compare returns", "Pick lowest"],
         correct: 0,
         solution: S({
-          c: "Different lives → cannot compare NPV directly. Use EUAW or LCM of lives (12 yrs here: A repeated 3×, B repeated 2×).",
+          c: "Projects with DIFFERENT LIVES can't be compared by raw NPV — the longer project simply has more years of cash flow. The fair comparisons: EUAW (equivalent uniform annual worth — dollars per year) or repeating each project to the LCM of lives.",
           s: [
-            "EUAW factors each project's NPV by $(A/P, i, n_{project})$.",
-            "Then compare EUAW values."
+            "<b>Step 1 — Spot the mismatch.</b> 4-year vs 6-year lives — NPVs cover different service periods.",
+            "<b>Step 2 — The two fixes.</b> EUAW: convert each NPV to an annual equivalent via $(A/P, i, n)$ and compare per-year values; or LCM: repeat A three times and B twice over 12 years, then compare NPVs of equal spans.",
+            "<b>Step 3 — Distractor audit.</b> Comparing only costs ignores returns; only returns ignores costs and timing; 'pick lowest' isn't analysis."
           ],
-          a: "EUAW or LCM analysis",
-          v: "Standard FE-style problem. The detailed answer depends on $i$."
+          a: "EUAW (or LCM-of-lives) comparison.",
+          v: "Why EUAW wins in practice: one $(A/P)$ factor per project versus building a 12-year cash-flow table — same ranking, fifth the work ✓. Hidden assumption worth stating: the project can be repeated at like-for-like terms."
+
         }),
         ref: "Handbook p.232" },
       { q: "Replacement analysis: existing asset still useful 4 more years saves $\\$2000$/yr; new costs $\\$10000$ now and saves $\\$3500$/yr for 8 years (no salvage). Which to choose at $i=10\\%$?",
         choices: ["Need EUAW comparison", "Always old", "Always new", "Both equally good"],
         correct: 0,
         solution: S({
-          c: "Compute EUAW of both options at $i=10\\%$.",
+          c: "Keep-vs-replace with unequal remaining lives is the classic EUAW application: convert both options to dollars-per-year at the MARR and compare.",
           s: [
-            "Old: EUAW = $\\$2000$/yr (cash flow already annual).",
-            "New: PW = $-10000 + 3500 \\cdot (P/A, 10\\%, 8) = -10000 + 3500 \\cdot 5.335 = 8672.5$.",
-            "EUAW(new) = $8672.5 \\cdot (A/P, 10\\%, 8) = 8672.5 \\cdot 0.1875 = 1626$.",
-            "Old: $2000$/yr > New: $1626$/yr → keep old asset!"
+            "<b>Step 1 — Old asset.</b> Already an annual figure: EUAW = \\$2,000/yr (no further investment).",
+            "<b>Step 2 — New asset to PW.</b> $PW = -10{,}000 + 3500(P/A, 10\\%, 8) = -10{,}000 + 3500(5.335) = \\$8{,}672$.",
+            "<b>Step 3 — New asset to EUAW.</b> $8672\\times(A/P, 10\\%, 8) = 8672\\times0.1874 = \\$1{,}626$/yr.",
+            "<b>Step 4 — Compare.</b> Old \\$2,000 > New \\$1,626 → KEEP the old asset."
           ],
-          a: "EUAW analysis → Keep old (1626 < 2000).",
-          v: "Counterintuitive! The 'new and shiny' isn't always better — economics matters."
+          a: "EUAW comparison → keep the old asset (2,000 > 1,626).",
+          v: "The counter-intuition is the lesson: the new machine saves 75% more per year yet LOSES, because its \\$10k price tag amortizes to ~\\$1,874/yr at 10% — eating the entire savings advantage ✓. Replacement decisions ignore sunk costs and compare FORWARD-looking annual worths only."
+
         }),
         ref: "Handbook p.232" },
     ],
@@ -289,37 +344,44 @@
         choices: ["$\\Omega\\cdot$m", "$\\Omega$", "$\\Omega/$m", "S/m"],
         correct: 0,
         solution: S({
-          c: "$R = \\rho L/A \\Rightarrow \\rho = RA/L$. Units: $\\Omega \\cdot \\text{m}^2 / \\text{m} = \\Omega\\cdot$m.",
-          s: ["$\\rho$ in Ω·m. Conductivity $\\sigma = 1/\\rho$ in S/m."],
+          c: "Solve the defining equation for ρ and read the units: $R = \\rho L/A \\Rightarrow \\rho = RA/L$ → $\\Omega\\cdot\\text{m}^{2}/\\text{m} = \\Omega\\cdot\\text{m}$.",
+          s: [
+            "<b>Step 1 — Unit algebra.</b> $\\Omega\\times\\text{m}^{2}\\div\\text{m} = \\Omega\\cdot\\text{m}$.",
+            "<b>Step 2 — Distractor audit.</b> Ω is resistance (geometry already baked in); Ω/m describes resistance PER LENGTH of a specific wire; S/m is CONDUCTIVITY $\\sigma = 1/\\rho$ — the reciprocal."
+          ],
           a: "$\\Omega\\cdot$m",
-          v: "Confusing because in CGS sometimes seen as Ω·cm — always check units!"
+          v: "Spot check with copper: $\\rho = 1.72\\times10^{-8}\\,\\Omega$·m gives a 1-m, 1-mm² wire $R = 17.2$ mΩ — the numbers only work with Ω·m ✓. Datasheet caution: Ω·cm is common in semiconductor specs (×100 conversion)."
+
         }),
         ref: "Handbook p.354" },
       { q: "Forward bias of pn junction: depletion region:",
         choices: ["Narrows", "Widens", "Unchanged", "Disappears"],
         correct: 0,
         solution: S({
-          c: "Forward bias: applied V reduces built-in potential → narrower depletion region → easier carrier flow.",
+          c: "The depletion region is the carrier-free zone at a pn junction, held open by the built-in potential. FORWARD bias pushes against that potential → the region NARROWS → carriers cross easily (current flows). Reverse bias does the opposite.",
           s: [
-            "Reverse bias: widens depletion region → blocks current.",
-            "Junction capacitance varies with bias — wider = smaller $C$."
+            "<b>Step 1 — Apply.</b> Forward bias → barrier lowered → depletion region narrows.",
+            "<b>Step 2 — The mirror case.</b> Reverse bias widens it — blocking current and increasing the junction's standoff.",
+            "<b>Step 3 — Distractor audit.</b> 'Unchanged' ignores the bias entirely; 'disappears' overstates — a sliver remains even in strong forward bias."
           ],
-          a: "Narrows",
-          v: "Used in varactor diodes — capacitance tuned by reverse voltage."
+          a: "Narrows.",
+          v: "The width-capacitance link makes this practical: depletion width sets junction capacitance ($C \\propto 1/\\sqrt{V_R}$ roughly), and VARACTOR diodes tune radios by adjusting reverse bias — voltage-controlled capacitors built from exactly this effect ✓."
+
         }),
         ref: "Handbook p.354" },
       { q: "Wire ampacity is limited by:",
         choices: ["Heat dissipation (insulation rating)", "Wire length", "Skin depth", "Voltage rating"],
         correct: 0,
         solution: S({
-          c: "Ampacity = max current without overheating insulation. Determined by $I^2R$ heating, insulation temperature rating, and cooling conditions.",
+          c: "Ampacity = the maximum continuous current a conductor can carry WITHOUT overheating its insulation. The physics is thermal: $I^{2}R$ heat generated vs heat the installation can shed; the limit is the insulation's temperature rating.",
           s: [
-            "AWG 14 Cu in conduit: ~15 A.",
-            "Higher ambient or bundled → derate.",
-            "NEC has tables for ampacity by gauge, insulation, environment."
+            "<b>Step 1 — Match the limiter.</b> Heat dissipation against the insulation rating — that IS the definition.",
+            "<b>Step 2 — Why the others fail.</b> LENGTH affects voltage drop, not the per-meter heat balance; skin depth matters at RF, not 60 Hz building wiring; voltage rating limits INSULATION BREAKDOWN, a separate failure mode.",
+            "<b>Step 3 — The code reality.</b> NEC ampacity tables index by gauge, insulation class, ambient, and bundling — all thermal variables."
           ],
-          a: "Heat dissipation",
-          v: "Why thicker insulation often allows higher current ratings (e.g., 90°C THWN vs 60°C TW)."
+          a: "Heat dissipation (insulation temperature rating).",
+          v: "Sanity anchor: 14 AWG copper ≈ 15 A in conduit; bundled or in hot attics it DERATES — same copper, worse cooling ✓. And 90°C-rated THHN carries more than 60°C TW on identical copper: the insulation, not the metal, sets the ceiling."
+
         }),
         ref: "Handbook p.354" },
     ],
@@ -330,150 +392,181 @@
         choices: ["$\\approx 14.7\\angle 39.9°$", "$\\approx 15\\angle 45°$", "$\\approx 14.5\\angle 60°$", "$\\approx 5\\angle 30°$"],
         correct: 0,
         solution: S({
-          c: "Add phasors by converting to rectangular, summing, then back to polar.",
+          c: "Phasors add as VECTORS, not as magnitudes: convert each to rectangular (real + imaginary), sum the parts, convert back to polar.",
           s: [
-            "$V_1 = 10(\\cos 30° + j\\sin 30°) = 8.66 + j5$.",
-            "$V_2 = 5(\\cos 60° + j\\sin 60°) = 2.5 + j4.33$.",
-            "Sum: $11.16 + j9.33$.",
-            "$|V| = \\sqrt{124.5 + 87.0} = \\sqrt{211.5} \\approx 14.54$.",
-            "$\\angle = \\arctan(9.33/11.16) \\approx 39.9°$."
+            "<b>Step 1 — To rectangular.</b> $V_1 = 10\\angle30° = 8.66 + j5$; $V_2 = 5\\angle60° = 2.5 + j4.33$.",
+            "<b>Step 2 — Add parts.</b> $(8.66+2.5) + j(5+4.33) = 11.16 + j9.33$.",
+            "<b>Step 3 — Back to polar.</b> $|V| = \\sqrt{11.16^{2} + 9.33^{2}} = 14.54$; $\\angle = \\arctan(9.33/11.16) = 39.9°$.",
+            "<b>Step 4 — Distractor audit.</b> $15\\angle45°$ adds magnitudes and averages angles — the exact shortcut this question punishes; the others mangle one component."
           ],
-          a: "$\\approx 14.54\\angle 39.9°$",
-          v: "Phasor magnitudes don't simply add ($10+5=15$). Direction matters."
+          a: "$\\approx 14.5\\angle39.9°$ V",
+          v: "Bound check: the vector sum (14.54) must be ≤ the scalar sum (15), equality only for aligned phasors — 30° apart gives slightly less ✓. The resultant angle (39.9°) lands between 30° and 60°, weighted toward the bigger phasor ✓."
+
         }),
         ref: "Handbook p.360" },
       { q: "Two voltage sources: $V_1 = 20$ V and $V_2 = 12$ V in series-opposing, feeding 5Ω. Current:",
         choices: ["$1.6$ A", "$6.4$ A", "$2.4$ A", "$8$ A"],
         correct: 0,
         solution: S({
-          c: "Series-opposing: net EMF = difference. Current direction matches larger source.",
+          c: "SERIES-OPPOSING sources fight each other: net EMF = the DIFFERENCE, current flows the way the larger source pushes.",
           s: [
-            "Net EMF: $20 - 12 = 8$ V.",
-            "$I = 8/5 = 1.6$ A (in direction of $V_1$)."
+            "<b>Step 1 — Net EMF.</b> $20 - 12 = 8$ V.",
+            "<b>Step 2 — Ohm's law.</b> $I = 8/5 = 1.6$ A, in $V_1$'s direction.",
+            "<b>Step 3 — Distractor audit.</b> 6.4 A uses the SUM (series-aiding misread, $32/5$); 2.4 A divides only $V_2$ by 5; 8 A confuses net EMF with current."
           ],
           a: "$I = 1.6$ A",
-          v: "Power delivered by $V_1$: $20 \\cdot 1.6 = 32$ W; absorbed by $V_2$: $12 \\cdot 1.6 = 19.2$ W; dissipated: $1.6^2 \\cdot 5 = 12.8$ W. Sum: 32 = 19.2 + 12.8 ✓"
+          v: "Energy audit that proves it: $V_1$ delivers $20\\times1.6 = 32$ W; $V_2$ ABSORBS $12\\times1.6 = 19.2$ W (being charged!); resistor burns $1.6^{2}\\times5 = 12.8$ W; $19.2 + 12.8 = 32$ ✓ — this is literally how battery charging works."
+
         }),
         ref: "Handbook p.356" },
       { q: "Equivalent capacitance: $C_1 = 4$ µF in parallel with $C_2 = 6$ µF:",
         choices: ["$10$ µF", "$2.4$ µF", "$1.5$ µF", "$24$ µF"],
         correct: 0,
         solution: S({
-          c: "Capacitors in parallel <b>add</b> (opposite of resistors). Series: $1/C_{eq} = \\sum 1/C_i$.",
-          s: ["Parallel: $4 + 6 = 10$ µF."],
-          a: "$10$ µF",
-          v: "Mnemonic: caps in parallel behave like one big plate — areas add."
+          c: "Capacitor combination rules are the MIRROR of resistors: PARALLEL capacitors ADD ($C_{eq} = C_1 + C_2$) — parallel plates effectively merge into one bigger plate area.",
+          s: [
+            "<b>Step 1 — Add.</b> $4 + 6 = 10$ µF.",
+            "<b>Step 2 — Distractor audit.</b> 2.4 µF is the SERIES result (the mirror error); 24 multiplies; 1.5 is the resistor-parallel formula misapplied."
+          ],
+          a: "$C_{eq} = 10$ µF",
+          v: "Why parallel adds: both caps see the SAME voltage and their stored charges add — $Q = (C_1+C_2)V$ ✓. The complete mirror table: caps parallel = add, series = product/sum; resistors/inductors the opposite — one table, memorized once."
+
         }),
         ref: "Handbook p.358" },
       { q: "Capacitors in series: $C_1 = 4$ µF and $C_2 = 6$ µF:",
         choices: ["$2.4$ µF", "$10$ µF", "$5$ µF", "$24$ µF"],
         correct: 0,
         solution: S({
-          c: "$1/C_{eq} = 1/C_1 + 1/C_2$. For two caps: $C_{eq} = C_1 C_2/(C_1 + C_2)$.",
-          s: ["$C_{eq} = (4 \\cdot 6)/(4 + 6) = 24/10 = 2.4$ µF."],
-          a: "$2.4$ µF",
-          v: "Always less than smallest. Same formula form as parallel resistors!"
+          c: "SERIES capacitors combine like parallel resistors: $\\dfrac{1}{C_{eq}} = \\dfrac{1}{C_1} + \\dfrac{1}{C_2}$, or for two: $C_{eq} = \\dfrac{C_1C_2}{C_1+C_2}$ — always SMALLER than the smallest.",
+          s: [
+            "<b>Step 1 — Product over sum.</b> $\\dfrac{4\\times6}{4+6} = \\dfrac{24}{10} = 2.4$ µF.",
+            "<b>Step 2 — Distractor audit.</b> 10 µF is the PARALLEL result; 24 stops at the product; 5 averages."
+          ],
+          a: "$C_{eq} = 2.4$ µF",
+          v: "Why series shrinks: the same charge $Q$ sits on every series cap while voltages ADD — more volts per coulomb = less capacitance ✓. Bound check: 2.4 < 4 (smallest) ✓. Practical face: two series caps also split the voltage — how capacitor strings survive high voltage."
+
         }),
         ref: "Handbook p.358" },
       { q: "Inductors in series: $L_1 = 5$ mH, $L_2 = 15$ mH:",
         choices: ["$20$ mH", "$3.75$ mH", "$10$ mH", "$75$ mH"],
         correct: 0,
         solution: S({
-          c: "Inductors in series add (like resistors); in parallel use $1/L_{eq} = \\sum 1/L_i$.",
-          s: ["Series: $5 + 15 = 20$ mH."],
-          a: "$20$ mH",
-          v: "Caps & inductors have opposite combining rules — easy to mix up. Memorize!"
+          c: "Inductors follow the RESISTOR pattern: series ADDS ($L_{eq} = L_1 + L_2$, assuming no mutual coupling), parallel uses reciprocals.",
+          s: [
+            "<b>Step 1 — Add.</b> $5 + 15 = 20$ mH.",
+            "<b>Step 2 — Distractor audit.</b> 3.75 mH is the PARALLEL result ($75/20$); 75 multiplies; 10 averages."
+          ],
+          a: "$L_{eq} = 20$ mH",
+          v: "Physical sense: series inductors share one current, and their back-EMFs $L\\,di/dt$ stack — total opposition adds ✓. The one-table summary: R and L combine alike; C is their mirror. Caveat for later courses: mutually COUPLED series inductors add $\\pm2M$."
+
         }),
         ref: "Handbook p.358" },
       { q: "An RC circuit has $R=2$ k$\\Omega$ and $\\tau=20$ ms. C =?",
         choices: ["$10$ µF", "$40$ µF", "$1$ µF", "$0.1$ µF"],
         correct: 0,
         solution: S({
-          c: "$\\tau = RC \\Rightarrow C = \\tau/R$.",
-          s: ["$C = 20 \\times 10^{-3} / 2000 = 10^{-5}$ F $= 10$ µF."],
-          a: "$10$ µF",
-          v: "$\\tau$ in s = (Ω)(F); microF × kΩ = ms ✓"
+          c: "The time constant definition rearranges directly: $\\tau = RC \\Rightarrow C = \\tau/R$ — watch the unit prefixes.",
+          s: [
+            "<b>Step 1 — Plug in SI.</b> $C = \\dfrac{20\\times10^{-3}}{2000} = 10^{-5}$ F.",
+            "<b>Step 2 — Prefix.</b> $10^{-5}$ F = 10 µF.",
+            "<b>Step 3 — Distractor audit.</b> 40 µF multiplies instead of divides; 1 µF and 0.1 µF are decade slips."
+          ],
+          a: "$C = 10$ µF",
+          v: "Prefix shortcut worth owning: kΩ × µF = ms, so 2 kΩ × 10 µF = 20 ms ✓ on sight — this pairing kills the decade errors that produce all three distractors."
+
         }),
         ref: "Handbook p.358" },
       { q: "120 V RMS source feeds parallel branches: branch 1 is R=10Ω, branch 2 is $X_L=20$Ω. Total complex impedance:",
         choices: ["$|Z| \\approx 8.94\\ \\Omega$, $\\angle \\approx 26.6°$", "$10 + j20\\ \\Omega$", "$30\\ \\Omega$", "$j10$"],
         correct: 0,
         solution: S({
-          c: "Parallel: $Z_{eq} = Z_1 Z_2 / (Z_1 + Z_2)$.",
+          c: "Parallel impedances combine by product-over-sum — done cleanest in POLAR for the multiply/divide steps: $Z_{eq} = \\dfrac{Z_1Z_2}{Z_1+Z_2}$.",
           s: [
-            "$Z_1 = 10$, $Z_2 = j20$.",
-            "Numerator: $(10)(j20) = j200$.",
-            "Denominator: $10 + j20$ = $\\sqrt{500}\\angle 63.43° \\approx 22.36\\angle 63.43°$.",
-            "Quotient: $200\\angle 90° / 22.36\\angle 63.43° = 8.944\\angle 26.57°$."
+            "<b>Step 1 — Numerator (polar).</b> $(10)(j20) = 200\\angle90°$.",
+            "<b>Step 2 — Denominator (rectangular→polar).</b> $10 + j20 = 22.36\\angle63.43°$.",
+            "<b>Step 3 — Divide.</b> $\\dfrac{200\\angle90°}{22.36\\angle63.43°} = 8.94\\angle26.57°\\ \\Omega$ — magnitudes divide, angles subtract.",
+            "<b>Step 4 — Distractor audit.</b> $10 + j20$ is the SERIES combination; 30 adds magnitudes; $j10$ is noise."
           ],
-          a: "$Z \\approx 8.94\\angle 26.57°\\ \\Omega$",
-          v: "Net inductive (positive angle) but smaller than either branch alone — typical parallel."
+          a: "$Z_{eq} \\approx 8.94\\angle26.6°\\ \\Omega$",
+          v: "Two sanity locks: parallel result is smaller than EITHER branch (8.94 < 10, < 20) ✓; the angle (26.6°) sits between the branches' 0° and 90°, pulled toward the lower-impedance (resistive) branch that carries more current ✓."
+
         }),
         ref: "Handbook p.360" },
       { q: "Bridge rectifier with $V_{in,peak} = 12$ V (incl. 2 diode drops 0.7V each): DC output:",
         choices: ["$\\approx 6.62$ V", "$\\approx 7.64$ V", "$12$ V", "$\\approx 3.18$ V"],
         correct: 0,
         solution: S({
-          c: "Bridge has 2 diodes conducting each half-cycle → 2×0.7 = 1.4 V drop. Effective peak: $V_{peak} - 1.4$. Then full-wave DC: $2 V_{peak}'/\\pi$.",
+          c: "A real bridge conducts through TWO diodes each half-cycle, so subtract $2\\times0.7 = 1.4$ V from the peak BEFORE applying the full-wave average $V_{DC} = 2V_{peak}'/\\pi$.",
           s: [
-            "Effective peak: $12 - 1.4 = 10.6$ V.",
-            "$V_{DC} = 2 \\cdot 10.6 / \\pi \\approx 6.75$ V (close to 6.62 with rounding).",
-            "(Exact: depends on whether we use $V_{in,peak}$ as before-rectifier or after.)"
+            "<b>Step 1 — Effective peak.</b> $12 - 1.4 = 10.6$ V.",
+            "<b>Step 2 — Full-wave average.</b> $V_{DC} = \\dfrac{2\\times10.6}{\\pi} \\approx 6.7$ V — matching choice A's ≈6.6-6.7 within rounding of the diode model.",
+            "<b>Step 3 — Distractor audit.</b> 7.64 V skips the diode drops ($2\\times12/\\pi$); 12 V ignores rectification averaging; 3.18 V is the HALF-wave value ($V_m/\\pi$ on 10 V)."
           ],
-          a: "$\\approx 6.6-6.8$ V",
-          v: "Add a smoothing cap to reduce ripple and get closer to $V_{peak,effective}$ = 10.6 V."
+          a: "$\\approx 6.6$-$6.7$ V DC.",
+          v: "Design follow-up: adding a smoothing capacitor lifts the output toward the effective PEAK (10.6 V) with ripple riding on it — the average-vs-peak distinction is exactly what the filter cap buys ✓. At low voltages those 1.4 V cost ~12% — why 5-V supplies use Schottky (0.3 V) or synchronous rectifiers."
+
         }),
         ref: "Handbook p.383" },
       { q: "Y-load draws 10 A line current at $V_{LL}=480$ V at $pf=1$. Real power per phase:",
         choices: ["$\\approx 2{,}771$ W", "$\\approx 8{,}314$ W", "$\\approx 4{,}800$ W", "$\\approx 1{,}600$ W"],
         correct: 0,
         solution: S({
-          c: "Per-phase power: $V_\\phi \\cdot I_\\phi \\cos\\theta$. For Y: $V_\\phi = V_{LL}/\\sqrt{3}$, $I_\\phi = I_L$.",
+          c: "PER-PHASE power in a wye: $P_\\phi = V_\\phi I_\\phi\\cos\\theta$, with the wye mappings $V_\\phi = V_{LL}/\\sqrt3$ and $I_\\phi = I_L$.",
           s: [
-            "$V_\\phi = 480/\\sqrt{3} \\approx 277.1$ V.",
-            "$P_\\phi = 277.1 \\cdot 10 \\cdot 1 = 2{,}771$ W."
+            "<b>Step 1 — Phase voltage.</b> $480/\\sqrt3 = 277$ V.",
+            "<b>Step 2 — Per-phase power.</b> $277\\times10\\times1 = 2{,}771$ W.",
+            "<b>Step 3 — Distractor audit.</b> 8,314 W is the TOTAL (×3 — read 'per phase' carefully); 4,800 uses $V_{LL}$ on a wye phase; 1,600 is noise."
           ],
-          a: "$P_\\phi \\approx 2771$ W",
-          v: "Total: $3 \\cdot 2771 = 8314$ W = $\\sqrt{3} \\cdot 480 \\cdot 10 \\cdot 1$ ✓"
+          a: "$P_\\phi \\approx 2{,}771$ W",
+          v: "Total cross-check: $3\\times2771 = 8314$ W $= \\sqrt3\\times480\\times10$ ✓ — the per-phase and line-quantity formulas must agree, and do. 'Per phase' vs 'total' is the cheapest 3× error on the exam."
+
         }),
         ref: "Handbook p.363" },
       { q: "Energy dissipated in 100Ω resistor with $I_{rms} = 2$ A over 30 minutes:",
         choices: ["$\\approx 720$ kJ", "$\\approx 720$ J", "$\\approx 12$ MJ", "$\\approx 24$ kJ"],
         correct: 0,
         solution: S({
-          c: "Energy = Power × time. $P = I^2 R = 4 \\cdot 100 = 400$ W.",
+          c: "Energy = power × time, and RMS current exists precisely so AC power uses the DC formula: $P = I_{rms}^{2}R$.",
           s: [
-            "Time: 30 min = 1800 s.",
-            "$W = 400 \\cdot 1800 = 720{,}000$ J = 720 kJ."
+            "<b>Step 1 — Power.</b> $P = 2^{2}\\times100 = 400$ W.",
+            "<b>Step 2 — Time in seconds.</b> 30 min = 1800 s.",
+            "<b>Step 3 — Multiply.</b> $W = 400\\times1800 = 720{,}000$ J = 720 kJ.",
+            "<b>Step 4 — Distractor audit.</b> 720 J forgets the time conversion (used 1.8 s?); 24 kJ uses minutes as seconds ($400\\times60$); 12 MJ overshoots a decade."
           ],
-          a: "≈ 720 kJ",
-          v: "Equivalent to 0.2 kWh on your electricity bill."
+          a: "$W = 720$ kJ",
+          v: "Billing units check: $400\\,\\text{W}\\times0.5\\,\\text{h} = 0.2$ kWh, and $0.2\\times3.6\\,\\text{MJ/kWh} = 720$ kJ ✓ — the joule and the kilowatt-hour agree, as they must (1 kWh = 3.6 MJ is a conversion worth caching)."
+
         }),
         ref: "Handbook p.356" },
       { q: "A series circuit: $V_s = 100$ V (DC), $R=20\\ \\Omega$, $L=200$ mH. Current at $t=10$ ms (closed at $t=0$):",
-        choices: ["$\\approx 1.97$ A", "$5$ A", "$3.16$ A", "$0$"],
+        choices: ["$\\approx 3.16$ A", "$\\approx 1.97$ A", "$5$ A", "$0$"],
         correct: 0,
         solution: S({
-          c: "RL transient: $i(t) = (V/R)(1 - e^{-t/\\tau})$ where $\\tau = L/R$.",
+          c: "RL energization follows $i(t) = \\dfrac{V}{R}\\left(1 - e^{-t/\\tau}\\right)$ with $\\tau = L/R$: the inductor blocks sudden change, so current climbs exponentially toward $V/R$.",
           s: [
-            "$\\tau = 0.2/20 = 0.01$ s = 10 ms.",
-            "$I_\\infty = V/R = 100/20 = 5$ A.",
-            "$t/\\tau = 1$ → $1 - e^{-1} = 0.632$.",
-            "$i(10$ ms$) = 5 \\cdot 0.632 = 3.16$ A. Hmm, that's choice C. Let me re-read.",
-            "Actually choice C is 3.16 which matches. Choice A (1.97) doesn't. The correct answer should be C."
+            "<b>Step 1 — Time constant.</b> $\\tau = 0.2/20 = 0.01$ s = 10 ms.",
+            "<b>Step 2 — Final current.</b> $I_\\infty = 100/20 = 5$ A.",
+            "<b>Step 3 — Evaluate at one τ.</b> $t = 10$ ms $= 1\\tau$: $i = 5(1 - e^{-1}) = 5\\times0.632 = 3.16$ A.",
+            "<b>Step 4 — Distractor audit.</b> 5 A is the FINAL value (needs ~5τ); 1.97 A would be $5(1-e^{-0.5})$ — a τ miscalculation; 0 is the starting value."
           ],
-          a: "≈ 3.16 A (choice C — my initial answer placement was wrong; correct answer is the math)",
-          v: "After 5τ = 50 ms, current essentially at 5 A steady state."
+          a: "$i(10\\,\\text{ms}) \\approx 3.16$ A — 63.2% of final, the one-time-constant signature.",
+          v: "Slope check: initial rise rate $V/L = 500$ A/s would reach 5 A in exactly 10 ms if it never bent — the tangent-line definition of τ ✓. The 63.2%-at-1τ landmark instantly identifies this whole question family."
+
         }),
         ref: "Handbook p.358" },
       { q: "Phase angle of $Z = 5 - j5$ in degrees:",
         choices: ["$-45°$", "$+45°$", "$+135°$", "$-135°$"],
         correct: 0,
         solution: S({
-          c: "Z in 4th quadrant (Re>0, Im<0): $\\theta = \\arctan(\\text{Im}/\\text{Re}) = \\arctan(-5/5) = -45°$.",
-          s: ["$\\theta = -45°$ → capacitive (current leads voltage)."],
-          a: "$-45°$",
-          v: "Magnitude $|Z| = \\sqrt{50} = 7.07$, so $Z = 7.07\\angle -45°$."
+          c: "Impedance angle: $\\theta = \\arctan(\\text{Im}/\\text{Re})$, quadrant-checked. NEGATIVE imaginary part = capacitive = negative angle (current LEADS).",
+          s: [
+            "<b>Step 1 — Locate the quadrant.</b> Re $= +5$, Im $= -5$ → fourth quadrant.",
+            "<b>Step 2 — Angle.</b> $\\arctan(-5/5) = -45°$ — no correction needed in Q4.",
+            "<b>Step 3 — Distractor audit.</b> $+45°$ would be $5 + j5$ (inductive); ±135° belong to negative-real-part impedances, which passive RLC networks never produce."
+          ],
+          a: "$\\theta = -45°$ (capacitive).",
+          v: "Polar completion: $|Z| = \\sqrt{25+25} = 7.07$, so $Z = 7.07\\angle{-45°}$ — equal R and $X_C$ is exactly the corner condition of an RC filter ✓. Sign mnemonic: ICE — current (I) leads voltage in a Capacitive circuit; ELI for inductors."
+
         }),
         ref: "Handbook p.36" },
     ],
