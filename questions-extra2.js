@@ -1132,152 +1132,180 @@
         choices: ["$\\approx 23.8$ A", "$\\approx 27.7$ A", "$\\approx 41.3$ A", "$\\approx 100$ A"],
         correct: 0,
         solution: S({
-          c: "Wye: $I_L = I_\\phi = V_{LN}/|Z_\\phi|$.",
+          c: "In a WYE (star) connection, each phase impedance sits between one line and the neutral — so the phase sees $V_{LN}$, and line current EQUALS phase current: $I_L = I_\\phi = V_{LN}/|Z_\\phi|$.",
           s: [
-            "$|Z| = \\sqrt{100 + 36} = \\sqrt{136} \\approx 11.66\\ \\Omega$.",
-            "$I_L = 277/11.66 \\approx 23.76$ A."
+            "<b>Step 1 — Impedance magnitude.</b> $|Z| = \\sqrt{10^{2} + 6^{2}} = \\sqrt{136} = 11.66\\,\\Omega$.",
+            "<b>Step 2 — Current.</b> $I_L = 277/11.66 \\approx 23.8$ A.",
+            "<b>Step 3 — Distractor audit.</b> 27.7 A divides by 10 (uses R, not |Z|); 41.3 A uses $480/11.66$ (line-to-LINE voltage on a wye phase — the classic mistake); 100 A is noise."
           ],
           a: "$I_L \\approx 23.8$ A",
-          v: "Line current equals phase current for Y configuration."
+          v: "Configuration discipline: wye phases get $V_{LN}$ (277 V on a 480-V system); DELTA phases get the full $V_{LL}$ (480 V) — choosing the wrong voltage is the #1 three-phase error ✓."
+
         }),
         ref: "Handbook p.363" },
       { q: "Per-phase power for the load above ($V_{LN}=277$, $Z=10+j6$):",
         choices: ["$\\approx 5.65$ kW", "$\\approx 8.0$ kW", "$\\approx 3.4$ kW", "$11.5$ kW"],
         correct: 0,
         solution: S({
-          c: "$P_\\phi = I_\\phi^2 \\cdot R$ (real power in phase impedance).",
+          c: "Real power dissipates only in the RESISTIVE part of the impedance: $P_\\phi = I_\\phi^{2}R$ — the reactance ($j6$) stores and returns energy but burns none.",
           s: [
-            "$I_\\phi = 23.76$ A.",
-            "$P_\\phi = 23.76^2 \\cdot 10 = 5644$ W $\\approx 5.64$ kW."
+            "<b>Step 1 — Take the current from before.</b> $I_\\phi = 23.76$ A.",
+            "<b>Step 2 — Apply.</b> $P_\\phi = (23.76)^{2}\\times10 = 5644$ W $\\approx 5.65$ kW.",
+            "<b>Step 3 — Distractor audit.</b> 8.0 kW ≈ uses $|Z|$ wrongly... actually $I^2|Z| = 6.58$ kVA is the apparent power per phase; 3.4 kW uses $X$ (that is $Q_\\phi$); 11.5 kW doubles."
           ],
-          a: "$P_\\phi \\approx 5.65$ kW",
-          v: "Total 3-φ power: $3 \\cdot 5.64 = 16.93$ kW."
+          a: "$P_\\phi \\approx 5.65$ kW (total 3-phase: $\\times3 = 16.9$ kW).",
+          v: "Cross-route check: PF $= R/|Z| = 10/11.66 = 0.857$; $P_\\phi = V_{LN}I\\cos\\theta = 277\\times23.76\\times0.857 = 5.64$ kW ✓ — two formulas, one answer."
+
         }),
         ref: "Handbook p.363" },
       { q: "Step-up transformer 11 kV / 132 kV. Turns ratio:",
         choices: ["$1:12$", "$12:1$", "$121:1$", "$1:11$"],
         correct: 0,
         solution: S({
-          c: "Turns ratio = $V_1:V_2$.",
+          c: "Turns ratio mirrors voltage ratio: $N_1/N_2 = V_1/V_2$. A step-UP transformer has MORE secondary turns — ratio written primary:secondary comes out less than 1.",
           s: [
-            "$N_1/N_2 = V_1/V_2 = 11/132 = 1/12$, so ratio is $1:12$ (primary:secondary)."
+            "<b>Step 1 — Compute.</b> $V_1/V_2 = 11/132 = 1/12$ → ratio 1:12.",
+            "<b>Step 2 — Distractor audit.</b> 12:1 reads the ratio backwards (that's a step-DOWN); 121:1 squares; 1:11 misdivides."
           ],
-          a: "$1:12$ (step-up)",
-          v: "Step-up: more secondary turns, higher V, lower I. Used at generator → transmission."
+          a: "1:12 (primary:secondary) — step-up.",
+          v: "Current consequence: secondary current is 1/12 of primary, so $I^{2}R$ line losses drop by ~144× — the entire reason generation (11-25 kV) is stepped up to transmission voltages (132-765 kV) before traveling ✓."
+
         }),
         ref: "Handbook p.364" },
       { q: "Transformer efficiency at full load: copper losses = 200 W; iron losses = 100 W; output = 9700 W. Efficiency:",
         choices: ["$\\approx 97\\%$", "$\\approx 99\\%$", "$\\approx 90\\%$", "$\\approx 98\\%$"],
         correct: 0,
         solution: S({
-          c: "$\\eta = P_{out}/(P_{out} + losses)$.",
+          c: "Efficiency = useful out over total in, and the input is output PLUS losses: $\\eta = \\dfrac{P_{out}}{P_{out} + P_{Cu} + P_{Fe}}$. Copper losses ($I^{2}R$, load-dependent) and iron losses (core hysteresis/eddy, constant) are the two buckets.",
           s: [
-            "Total losses: $200+100=300$ W.",
-            "$P_{in} = 9700 + 300 = 10000$ W.",
-            "$\\eta = 9700/10000 = 0.97 = 97\\%$."
+            "<b>Step 1 — Total losses.</b> $200 + 100 = 300$ W.",
+            "<b>Step 2 — Input.</b> $9700 + 300 = 10{,}000$ W.",
+            "<b>Step 3 — Divide.</b> $\\eta = 9700/10{,}000 = 97\\%$.",
+            "<b>Step 4 — Distractor audit.</b> 99% and 98% undercount losses; 90% over-penalizes."
           ],
-          a: "$\\eta \\approx 97\\%$",
-          v: "Maximum efficiency occurs when copper = iron loss; here they're not equal, so we're not at peak."
+          a: "$\\eta = 97\\%$",
+          v: "The classic follow-up fact: efficiency PEAKS at the load where copper loss equals iron loss — here Cu (200) > Fe (100), so this transformer would be MOST efficient somewhat below full load (at $\\sqrt{100/200} = 71\\%$ load) ✓."
+
         }),
         ref: "Handbook p.364" },
       { q: "Synchronous generator: 6-pole machine at 60 Hz. RPM:",
         choices: ["$1200$", "$3600$", "$900$", "$1800$"],
         correct: 0,
         solution: S({
-          c: "$n_s = 120f/p$.",
-          s: ["$n_s = 120(60)/6 = 1200$ rpm."],
-          a: "$n_s = 1200$ rpm",
-          v: "Wind turbines often have many poles (e.g., 96 pole at 6 rpm = same 1200 rpm equivalent)."
+          c: "Synchronous speed locks to the grid: $n_s = \\dfrac{120f}{p}$ rpm — frequency and pole count are the only inputs.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $n_s = \\dfrac{120\\times60}{6} = 1200$ rpm.",
+            "<b>Step 2 — Distractor audit.</b> 3600 is 2-pole; 1800 is 4-pole; 900 is 8-pole — the standard 60-Hz ladder."
+          ],
+          a: "$1200$ rpm",
+          v: "The ladder to memorize (60 Hz): 2P-3600, 4P-1800, 6P-1200, 8P-900 ✓. Design logic: slow prime movers (hydro turbines) get MANY poles so the shaft can creep while the electricity stays at 60 Hz — some hydro units run 72+ poles at 100 rpm."
+
         }),
         ref: "Handbook p.365" },
       { q: "Power factor of pure resistor in AC circuit:",
         choices: ["$1.0$ (unity)", "$0$", "$0.707$", "Negative"],
         correct: 0,
         solution: S({
-          c: "Resistor: V and I in phase, $\\theta = 0$, $pf = \\cos 0 = 1$.",
-          s: ["Pure R: no reactive component, all power is real."],
-          a: "$pf = 1$",
-          v: "Pure L or C alone: $pf = 0$ (90° phase shift), no real power."
+          c: "Power factor $= \\cos\\theta$, where θ is the phase angle between voltage and current. In a pure resistor they rise and fall TOGETHER — θ = 0 — so pf = 1: every volt-ampere does real work.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\theta = 0 \\Rightarrow pf = \\cos0 = 1.0$.",
+            "<b>Step 2 — The contrast cases.</b> Pure L or pure C: current shifted ±90° → pf = 0 — current flows, energy sloshes, NOTHING is consumed.",
+            "<b>Step 3 — Distractor audit.</b> 0.707 is the 45° case (R = X mix); 'negative' pf describes power FLOWING BACKWARD (generation), not a resistor."
+          ],
+          a: "$pf = 1.0$ (unity).",
+          v: "Anchor the two extremes and every load fits between: heaters/incandescents ≈ 1.0; motors 0.8-0.9 lagging; idle magnetics worse ✓. Utilities charge penalties as pf drops because the wires carry amperes that do no billable work."
+
         }),
         ref: "Handbook p.362" },
       { q: "An induction motor's <b>starting</b> current is typically:",
         choices: ["5-7× rated full-load current", "Same as FL", "1.2× FL", "Less than FL"],
         correct: 0,
         solution: S({
-          c: "At start, slip $s=1$, rotor impedance is mostly resistive and low. Locked-rotor current is much larger than FL.",
+          c: "At the instant of starting, slip $s = 1$: the rotor is stationary while the field spins at full synchronous speed, transformer-coupling maximum current into a low-impedance rotor. The result — LOCKED-ROTOR (inrush) current of typically 5-7× the full-load rating.",
           s: [
-            "Typical: 5-7× rated at start.",
-            "Mitigation: soft starters, VFDs, autotransformer starters reduce inrush.",
-            "Voltage sag on lights when fridges/AC start is from this."
+            "<b>Step 1 — Recall the multiple.</b> 5-7× FLA is the standard locked-rotor range (NEMA code letters on the nameplate encode the exact value).",
+            "<b>Step 2 — Why it decays.</b> As the rotor accelerates, slip falls, rotor-induced EMF and current fall with it — current drops toward FLA as speed approaches rated.",
+            "<b>Step 3 — Distractor audit.</b> 'Same as FL' and '1.2×' describe a motor already running; 'less than FL' inverts the physics."
           ],
-          a: "5-7× rated FL current",
-          v: "Why circuit breakers must withstand momentary inrush without nuisance tripping."
+          a: "5-7× rated full-load current.",
+          v: "You have SEEN this fact: house lights dim for a half-second when the AC compressor kicks on — that is 6× inrush dragging the line voltage down ✓. Mitigation toolbox: soft starters, autotransformer starts, or VFDs (which also fix the torque profile)."
+
         }),
         ref: "Handbook p.365" },
       { q: "Wye to Delta voltage relation, line voltage:",
         choices: ["$V_{LL,\\Delta} = V_{LL,Y}$ if same line", "$V_{LL,\\Delta} = \\sqrt{3}\\,V_{LL,Y}$", "$V_{LL,\\Delta} = V_{LL,Y}/\\sqrt{3}$", "Always equal"],
         correct: 0,
         solution: S({
-          c: "Both Y and $\\Delta$ on the same 3-wire system see the <b>same line-to-line voltage</b>. What differs is the phase voltage (= $V_{LL}/\\sqrt{3}$ in Y, = $V_{LL}$ in $\\Delta$).",
+          c: "Line-to-line voltage is a property of the THREE WIRES, not of any load hung on them. A wye load and a delta load on the same lines see the SAME $V_{LL}$ — what differs is each topology's PHASE voltage: $V_{LL}/\\sqrt3$ inside a wye, $V_{LL}$ itself inside a delta.",
           s: [
-            "Line voltage is fixed by the source.",
-            "Y phase voltage: $V_{LN} = V_{LL}/\\sqrt{3}$.",
-            "$\\Delta$ phase voltage: $V_\\phi = V_{LL}$."
+            "<b>Step 1 — Fix what the source fixes.</b> The lines carry one $V_{LL}$ — identical for any load connected to them.",
+            "<b>Step 2 — Where √3 actually lives.</b> Inside the WYE: each winding spans line-to-NEUTRAL → $V_\\phi = V_{LL}/\\sqrt3$. Inside the DELTA: each winding spans line-to-line → $V_\\phi = V_{LL}$.",
+            "<b>Step 3 — Distractor audit.</b> Options B and C bolt the √3 onto the line voltage itself — the factor never belongs there."
           ],
-          a: "$V_{LL}$ same — both connect to same lines.",
-          v: "Source vs load configurations independent. Δ-Y transformer is common."
+          a: "Same line-to-line voltage — both connect to the same three lines.",
+          v: "Practical consequence: the SAME motor can be wired delta on a 230-V system or wye on a 400-V system and its windings see identical voltage — exactly how dual-voltage motor nameplates (230Δ/400Y) work ✓."
+
         }),
         ref: "Handbook p.363" },
       { q: "A 3-φ load draws $P = 15$ kW at $pf = 0.8$ lagging. Reactive power $Q$:",
         choices: ["$\\approx 11.25$ kVAR", "$\\approx 18.75$ kVAR", "$\\approx 15$ kVAR", "$\\approx 9$ kVAR"],
         correct: 0,
         solution: S({
-          c: "$Q = P \\cdot \\tan\\theta$ where $\\theta = \\arccos(pf)$.",
+          c: "From real power and power factor to reactive power: $Q = P\\tan\\theta$ with $\\theta = \\arccos(pf)$. The 0.8-0.6 right triangle makes this one mental math: $pf = 0.8 \\Rightarrow \\tan\\theta = 0.6/0.8 = 0.75$.",
           s: [
-            "$\\theta = \\arccos 0.8 = 36.87°$.",
-            "$\\tan 36.87° = 0.75$.",
-            "$Q = 15 \\cdot 0.75 = 11.25$ kVAR."
+            "<b>Step 1 — Angle.</b> $\\arccos0.8 = 36.87°$ (the 3-4-5 angle).",
+            "<b>Step 2 — Tangent shortcut.</b> $\\sin\\theta = 0.6$, so $\\tan\\theta = 0.75$.",
+            "<b>Step 3 — Reactive power.</b> $Q = 15\\times0.75 = 11.25$ kVAR.",
+            "<b>Step 4 — Distractor audit.</b> 18.75 is the APPARENT power $S = P/pf$; 15 echoes P; 9 multiplies by 0.6 (that gives $Q$ only via $S$, i.e. $18.75\\times0.6 = 11.25$ — done wrong it lands at 9)."
           ],
-          a: "$Q \\approx 11.25$ kVAR",
-          v: "Check: $|S| = P/pf = 15/0.8 = 18.75$ kVA. $|S|^2 = P^2 + Q^2$ → $351.6 = 225 + 126.6$ ✓"
+          a: "$Q = 11.25$ kVAR",
+          v: "Triangle closure: $\\sqrt{15^{2} + 11.25^{2}} = 18.75 = S$ ✓ — P, Q, S in the exact 4-3-5 proportion the 0.8 power factor promises. To correct to unity pf, capacitors would supply exactly these 11.25 kVAR."
+
         }),
         ref: "Handbook p.362" },
       { q: "A primary side has 100 A AC and secondary has 5 A. Step-up or step-down?",
         choices: ["Step-up (V increases, I decreases)", "Step-down", "Cannot tell", "1:1 isolation"],
         correct: 0,
         solution: S({
-          c: "Step-up: secondary V > primary, so secondary I < primary (power conserved).",
+          c: "An ideal transformer conserves power, so voltage and current trade places: where current goes DOWN, voltage went UP. Comparing currents alone reveals the direction.",
           s: [
-            "Primary 100 A; Secondary 5 A (less).",
-            "Lower I on secondary → higher V on secondary → step-UP."
+            "<b>Step 1 — Compare.</b> Primary 100 A → secondary 5 A: current fell by 20×.",
+            "<b>Step 2 — Conclude.</b> Secondary voltage must be 20× HIGHER → step-UP (1:20).",
+            "<b>Step 3 — Distractor audit.</b> 'Step-down' reads the current ratio backwards; 'cannot tell' — current ratio alone IS sufficient for an ideal transformer; '1:1' would keep currents equal."
           ],
-          a: "Step-up",
-          v: "Turn ratio: $a = I_2/I_1 = 5/100 = 1/20$ (this is the ratio defined as $V_1/V_2$, equivalent to $1:20$ step-up)."
+          a: "Step-up, 1:20.",
+          v: "Power check: pick any primary voltage, say 240 V: in = 24 kW; secondary then sits at 4800 V × 5 A = 24 kW ✓ — equal, as conservation demands. Memory hook: transformers are see-saws — V up, I down, P level."
+
         }),
         ref: "Handbook p.364" },
       { q: "A DC motor with $V_a = 240$ V, $R_a = 0.5\\ \\Omega$, drawing $I_a = 30$ A. Back EMF:",
         choices: ["$225$ V", "$240$ V", "$15$ V", "$255$ V"],
         correct: 0,
         solution: S({
-          c: "DC motor: $V_a = E_b + I_a R_a$ (terminal voltage = back EMF + armature drop).",
+          c: "A spinning DC motor GENERATES a voltage opposing its supply — the back EMF $E_b$ (proportional to speed). The armature circuit obeys $V_a = E_b + I_aR_a$: supply = back EMF + resistive drop.",
           s: [
-            "$E_b = V_a - I_a R_a = 240 - 30(0.5) = 240 - 15 = 225$ V."
+            "<b>Step 1 — Rearrange.</b> $E_b = V_a - I_aR_a$.",
+            "<b>Step 2 — Plug in.</b> $E_b = 240 - 30\\times0.5 = 240 - 15 = 225$ V.",
+            "<b>Step 3 — Distractor audit.</b> 240 V ignores the armature drop; 15 V IS the drop, mislabeled; 255 V adds instead of subtracting."
           ],
           a: "$E_b = 225$ V",
-          v: "Speed: $E_b \\propto \\omega$. As load increases, $I_a$ rises, $E_b$ drops, motor slows."
+          v: "The feedback loop this equation encodes: load up the shaft → speed dips → $E_b$ falls → $I_a = (V_a - E_b)/R_a$ rises → more torque — the motor self-regulates ✓. Startup corollary: at standstill $E_b = 0$, so inrush $= 240/0.5 = 480$ A — why big DC motors start through resistors."
+
         }),
         ref: "Handbook p.365" },
       { q: "An induction motor at full load: efficiency 90%, $pf = 0.85$. Input power for 10 hp output:",
         choices: ["$\\approx 8.29$ kW", "$7.46$ kW", "$\\approx 8.78$ kW", "$\\approx 12$ kW"],
         correct: 0,
         solution: S({
-          c: "$P_{in} = P_{out}/\\eta$. ($pf$ not needed for $P_{in}$ — it relates real vs apparent.)",
+          c: "Two different ratios, two different jobs: EFFICIENCY (η) links real power out to real power in ($P_{in} = P_{out}/\\eta$); POWER FACTOR links real to APPARENT power ($S = P/pf$). For input real power, only η matters — the pf in the problem is a decoy for this part.",
           s: [
-            "1 hp = 746 W → 10 hp = 7460 W output.",
-            "$P_{in} = 7460/0.9 = 8289$ W $\\approx 8.29$ kW."
+            "<b>Step 1 — Convert the output.</b> $10\\,\\text{hp} = 10\\times746 = 7460$ W.",
+            "<b>Step 2 — Apply efficiency.</b> $P_{in} = 7460/0.9 = 8289$ W $\\approx 8.29$ kW.",
+            "<b>Step 3 — Distractor audit.</b> 7.46 kW is the OUTPUT (skipped η); 8.78 kW ≈ divides by pf instead of η; 12 kW divides by both."
           ],
           a: "$P_{in} \\approx 8.29$ kW",
-          v: "Apparent input: $|S| = P_{in}/pf = 8289/0.85 = 9752$ VA. Utility bills you for kVA, not kW!"
+          v: "Where the pf DOES matter: apparent power drawn $S = 8289/0.85 = 9.75$ kVA — that's the number that sizes the wiring, breaker, and transformer ✓. Loss check: $8.29 - 7.46 = 0.83$ kW of heat — a motor frame's worth of fins."
+
         }),
         ref: "Handbook p.365" },
     ],
