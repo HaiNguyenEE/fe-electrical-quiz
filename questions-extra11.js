@@ -15,143 +15,157 @@
         choices: ["$\\tfrac{1}{2}$", "$0$", "$1$", "Does not exist"],
         correct: 0,
         solution: S({
-          c: "Standard $0/0$ indeterminate form — use Taylor expansion of $\\cos x$ near zero or L’Hospital twice.",
+          c: "This is a $0/0$ indeterminate form: plugging $x = 0$ gives $\\frac{1-1}{0} = \\frac{0}{0}$, which is meaningless — so we need a tool: Taylor series (expand the function near 0) or L'Hospital's rule (differentiate top and bottom).",
           s: [
-            "Taylor series: $\\cos x = 1 - \\tfrac{x^{2}}{2} + \\tfrac{x^{4}}{24} - \\cdots$",
-            "So $1 - \\cos x = \\tfrac{x^{2}}{2} - \\tfrac{x^{4}}{24} + \\cdots$",
-            "Divide by $x^{2}$: $\\dfrac{1-\\cos x}{x^{2}} = \\dfrac{1}{2} - \\dfrac{x^{2}}{24} + \\cdots$",
-            "As $x \\to 0$ all higher-order terms vanish, so the limit is $\\boxed{1/2}$."
+            "<b>Step 1 — Why direct substitution fails.</b> $\\cos 0 = 1$, so numerator $\\to 0$ and denominator $\\to 0$. The limit may still exist — it measures HOW FAST each side approaches zero.",
+            "<b>Step 2 — Expand $\\cos x$ near 0 (Taylor).</b> $\\cos x = 1 - \\dfrac{x^{2}}{2} + \\dfrac{x^{4}}{24} - \\cdots$ — for tiny $x$, cosine dips below 1 like a parabola. So $1 - \\cos x = \\dfrac{x^{2}}{2} - \\dfrac{x^{4}}{24} + \\cdots$",
+            "<b>Step 3 — Divide by $x^{2}$.</b> $\\dfrac{1-\\cos x}{x^{2}} = \\dfrac{1}{2} - \\dfrac{x^{2}}{24} + \\cdots$ As $x \\to 0$, every term with $x$ in it dies, leaving $\\dfrac12$.",
+            "<b>Step 4 — Distractor audit.</b> 0 assumes the top vanishes 'faster' (it doesn't — same $x^{2}$ order); 1 misremembers the limit $\\frac{\\sin x}{x} \\to 1$; 'does not exist' confuses indeterminate (needs work) with undefined (no answer)."
           ],
-          a: "$\\tfrac{1}{2}$",
-          v: "L’Hospital check: $\\frac{\\sin x}{2x} \\to \\frac{\\cos x}{2} \\to \\tfrac{1}{2}$ ✓."
+          a: "$\\dfrac{1}{2}$",
+          v: "L'Hospital cross-check (differentiate top & bottom): $\\dfrac{\\sin x}{2x}$ — still $0/0$, apply again → $\\dfrac{\\cos x}{2} \\to \\dfrac12$ ✓. Numeric check: $x = 0.1$: $(1-\\cos 0.1)/0.01 = 0.49958$ — already hugging 0.5 ✓."
+
         })
       },
       { q: "If $f(x,y) = x^{2}y + 3xy^{2}$, find $f_{xy}$ (mixed partial).",
         choices: ["$2x+6y$", "$2x+3y^{2}$", "$x^{2}+6xy$", "$6y+x^{2}$"],
         correct: 0,
         solution: S({
-          c: "Mixed partial $f_{xy}$ means differentiate first w.r.t. $x$, then w.r.t. $y$ (Clairaut’s theorem says order doesn’t matter for smooth $f$).",
+          c: "A partial derivative treats every OTHER variable as a frozen constant. $f_{xy}$ means: differentiate by $x$ first, then differentiate the result by $y$. (Clairaut's theorem: for smooth functions the order doesn't matter — $f_{xy} = f_{yx}$.)",
           s: [
-            "$f_x = \\tfrac{\\partial}{\\partial x}(x^{2}y + 3xy^{2}) = 2xy + 3y^{2}$ (treat $y$ as constant).",
-            "$f_{xy} = \\tfrac{\\partial}{\\partial y}(2xy + 3y^{2}) = 2x + 6y$."
+            "<b>Step 1 — Differentiate by $x$ (treat $y$ as a number).</b> $\\dfrac{\\partial}{\\partial x}(x^{2}y) = 2xy$ (the $y$ rides along like a coefficient); $\\dfrac{\\partial}{\\partial x}(3xy^{2}) = 3y^{2}$. So $f_x = 2xy + 3y^{2}$.",
+            "<b>Step 2 — Now differentiate $f_x$ by $y$ (treat $x$ as a number).</b> $\\dfrac{\\partial}{\\partial y}(2xy) = 2x$; $\\dfrac{\\partial}{\\partial y}(3y^{2}) = 6y$. So $f_{xy} = 2x + 6y$.",
+            "<b>Step 3 — Distractor audit.</b> $2x + 3y^{2}$ stops halfway (differentiates the first term twice, the second not at all); $x^{2} + 6xy$ is $f_y$ — only ONE derivative taken; $6y + x^{2}$ mixes pieces of both."
           ],
-          a: "$2x + 6y$",
-          v: "Reversed order: $f_y = x^{2} + 6xy$, then $\\partial/\\partial x \\Rightarrow 2x + 6y$ ✓ matches."
+          a: "$f_{xy} = 2x + 6y$",
+          v: "Clairaut check — do it in the OTHER order: $f_y = x^{2} + 6xy$, then $\\partial/\\partial x$ gives $2x + 6y$ — identical ✓. This symmetry is also a great self-check on any exam: if the two orders disagree, you made an arithmetic slip."
+
         })
       },
       { q: "Solve $\\dfrac{dy}{dx} + 2y = 6e^{x}$ with $y(0)=0$ using an integrating factor.",
         choices: ["$y = 2(e^{x} - e^{-2x})$", "$y = 2e^{x} - 2$", "$y = 3e^{x}$", "$y = 6(1-e^{-2x})$"],
         correct: 0,
         solution: S({
-          c: "First-order linear ODE $y' + P(x)y = Q(x)$ — multiply both sides by integrating factor $\\mu = e^{\\int P\\,dx}$ to make the LHS an exact derivative.",
+          c: "Integrating-factor method: any first-order linear ODE $y' + P(x)y = Q(x)$ can be solved by multiplying through by $\\mu = e^{\\int P\\,dx}$ — chosen precisely so the left side collapses into the derivative of ONE product, $(\\mu y)'$.",
           s: [
-            "Identify $P(x) = 2$, $Q(x) = 6e^{x}$.",
-            "Integrating factor: $\\mu = e^{\\int 2\\,dx} = e^{2x}$.",
-            "Multiply: $e^{2x}y' + 2e^{2x}y = 6e^{x}\\cdot e^{2x} = 6e^{3x}$, i.e. $(e^{2x}y)' = 6e^{3x}$.",
-            "Integrate: $e^{2x}y = 2e^{3x} + C$, so $y = 2e^{x} + Ce^{-2x}$.",
-            "Apply $y(0)=0$: $0 = 2 + C \\Rightarrow C = -2$.",
-            "Solution: $y = 2e^{x} - 2e^{-2x} = 2(e^{x} - e^{-2x})$."
+            "<b>Step 1 — Match the standard form.</b> $y' + 2y = 6e^{x}$ → $P = 2$, $Q = 6e^{x}$.",
+            "<b>Step 2 — Build the integrating factor.</b> $\\mu = e^{\\int 2\\,dx} = e^{2x}$.",
+            "<b>Step 3 — Multiply and collapse.</b> $e^{2x}y' + 2e^{2x}y = 6e^{3x}$. The left side is EXACTLY $(e^{2x}y)'$ by the product rule — that was the whole point of choosing $\\mu$.",
+            "<b>Step 4 — Integrate both sides.</b> $e^{2x}y = \\int 6e^{3x}dx = 2e^{3x} + C$, so $y = 2e^{x} + Ce^{-2x}$.",
+            "<b>Step 5 — Apply the initial condition.</b> $y(0) = 2 + C = 0 \\Rightarrow C = -2$. Final: $y = 2(e^{x} - e^{-2x})$."
           ],
           a: "$y = 2(e^{x} - e^{-2x})$",
-          v: "At $x=0$: $2(1-1) = 0$ ✓. As $x\\to\\infty$: $y \\sim 2e^{x}$, dominated by forcing term ✓."
+          v: "Substitute back: $y' = 2e^{x} + 4e^{-2x}$; then $y' + 2y = 2e^{x} + 4e^{-2x} + 4e^{x} - 4e^{-2x} = 6e^{x}$ ✓ and $y(0) = 0$ ✓. Structure check: $2e^{x}$ is the forced (particular) response, $-2e^{-2x}$ is the natural response that enforces the initial condition — every linear ODE answer splits this way."
+
         })
       },
       { q: "Find the Fourier-series fundamental angular frequency of $f(t) = 3\\cos(50\\pi t) + 5\\sin(100\\pi t)$.",
         choices: ["$50\\pi$ rad/s", "$100\\pi$ rad/s", "$25\\pi$ rad/s", "$\\pi$ rad/s"],
         correct: 0,
         solution: S({
-          c: "Fundamental frequency $\\omega_0$ is the GCD of the angular frequencies of all harmonics present.",
+          c: "The fundamental $\\omega_0$ is the largest angular frequency such that EVERY component in the signal is an integer multiple (harmonic) of it — mathematically, the GCD of the component frequencies. The signal then repeats with period $T_0 = 2\\pi/\\omega_0$.",
           s: [
-            "Component 1: $\\omega_1 = 50\\pi$ rad/s.",
-            "Component 2: $\\omega_2 = 100\\pi$ rad/s.",
-            "$\\gcd(50\\pi, 100\\pi) = 50\\pi$ — both are integer multiples of $50\\pi$ (n=1, n=2).",
-            "Therefore $\\omega_0 = 50\\pi$ rad/s, i.e. $f_0 = 25$ Hz, period $T_0 = 40$ ms."
+            "<b>Step 1 — List the component frequencies.</b> $3\\cos(50\\pi t)$ → $\\omega_1 = 50\\pi$; $5\\sin(100\\pi t)$ → $\\omega_2 = 100\\pi$ rad/s.",
+            "<b>Step 2 — Take the greatest common divisor.</b> $\\gcd(50\\pi, 100\\pi) = 50\\pi$: the first term is harmonic $n=1$, the second is $n=2$. Both fit.",
+            "<b>Step 3 — Distractor audit.</b> $100\\pi$ fails — $50\\pi$ is NOT an integer multiple of $100\\pi$ (it would be harmonic ½); $25\\pi$ works mathematically but is not the LARGEST such frequency (it would make the components harmonics 2 and 4, wastefully); $\\pi$ same problem, worse."
           ],
-          a: "$\\omega_0 = 50\\pi$ rad/s",
-          v: "$f(t+T_0) = 3\\cos(50\\pi t + 2\\pi) + 5\\sin(100\\pi t + 4\\pi) = f(t)$ ✓."
+          a: "$\\omega_0 = 50\\pi$ rad/s ($f_0 = 25$ Hz, $T_0 = 40$ ms).",
+          v: "Periodicity check: shift $t$ by $T_0 = 2\\pi/50\\pi = 0.04$ s — first term advances by exactly $2\\pi$ (one full cycle), second by $4\\pi$ (two cycles) → signal unchanged ✓. Rule to keep: fundamental = GCD of frequencies; period = LCM of periods — the two statements are equivalent."
+
         })
       },
       { q: "Matrix $A$ has $\\det A = 6$. What is $\\det(2A)$ if $A$ is $3\\times 3$?",
         choices: ["48", "12", "24", "6"],
         correct: 0,
         solution: S({
-          c: "Scaling a matrix by scalar $k$ scales the determinant by $k^{n}$ for $n\\times n$ matrices, because every row is scaled.",
+          c: "Rule: $\\det(kA) = k^{n}\\det A$ for an $n\\times n$ matrix. Why $k^{n}$ and not $k$? Multiplying $A$ by $k$ scales EVERY one of the $n$ rows, and the determinant is linear in each row separately — so the factor $k$ comes out once per row.",
           s: [
-            "Formula: $\\det(kA) = k^{n}\\det(A)$.",
-            "Here $k=2$, $n=3$, so $\\det(2A) = 2^{3} \\cdot 6 = 8 \\cdot 6 = 48$."
+            "<b>Step 1 — Identify $k$ and $n$.</b> $k = 2$; $A$ is $3\\times3$ so $n = 3$.",
+            "<b>Step 2 — Apply.</b> $\\det(2A) = 2^{3}\\det A = 8 \\times 6 = 48$.",
+            "<b>Step 3 — Distractor audit.</b> 12 uses $k^{1}$ (forgets it scales every row); 24 uses $k^{2}$ (off by one row); 6 forgets the scaling entirely."
           ],
-          a: "$48$",
-          v: "Compare with transpose: $\\det(A^{T}) = \\det(A)$ — does not pull constants out the same way."
+          a: "$\\det(2A) = 48$",
+          v: "Concrete mini-check with $2\\times2$: $\\det\\begin{bmatrix}2&0\\\\0&2\\end{bmatrix} = 4 = 2^{2}$ times $\\det I = 1$ ✓ — the identity matrix doubled has determinant $2^{n}$, not 2. Geometric meaning: determinant = volume scale factor, and doubling every edge of a 3-D box multiplies volume by 8 ✓."
+
         })
       },
       { q: "Find all $x$ in $[0, 2\\pi)$ satisfying $\\sin x = \\cos x$.",
         choices: ["$\\pi/4$ and $5\\pi/4$", "$\\pi/4$ only", "$\\pi/2$ and $3\\pi/2$", "$0$ and $\\pi$"],
         correct: 0,
         solution: S({
-          c: "Divide both sides by $\\cos x$ (valid where $\\cos x \\neq 0$) → $\\tan x = 1$.",
+          c: "Divide both sides by $\\cos x$ (legal wherever $\\cos x \\neq 0$) to get a single-function equation: $\\tan x = 1$. Then use the periodicity of tangent (period $\\pi$, NOT $2\\pi$) to collect all solutions.",
           s: [
-            "$\\tan x = 1$ has principal solution $x = \\pi/4$.",
-            "$\\tan$ has period $\\pi$, so add $\\pi$: $x = \\pi/4 + \\pi = 5\\pi/4$.",
-            "Both lie inside $[0, 2\\pi)$, and the points where $\\cos x = 0$ ($x = \\pi/2, 3\\pi/2$) don’t satisfy the original equation."
+            "<b>Step 1 — Reduce to tangent.</b> $\\sin x = \\cos x \\Rightarrow \\tan x = 1$.",
+            "<b>Step 2 — Principal solution.</b> $\\tan x = 1$ at $x = \\pi/4$ (45°, where sine and cosine are both $\\sqrt2/2$).",
+            "<b>Step 3 — Add the period.</b> Tangent repeats every $\\pi$: next solution $= \\pi/4 + \\pi = 5\\pi/4$. Adding $\\pi$ again leaves $[0,2\\pi)$ → exactly two solutions.",
+            "<b>Step 4 — Check the division was safe.</b> Points where $\\cos x = 0$ ($\\pi/2, 3\\pi/2$): there $\\sin x = \\pm1 \\ne 0$, so the original equation fails anyway — no solutions lost."
           ],
-          a: "$x = \\pi/4,\\ 5\\pi/4$",
-          v: "Check: $\\sin(\\pi/4) = \\cos(\\pi/4) = \\sqrt{2}/2$ ✓; $\\sin(5\\pi/4) = \\cos(5\\pi/4) = -\\sqrt{2}/2$ ✓."
+          a: "$x = \\pi/4$ and $5\\pi/4$.",
+          v: "Plug in: $\\sin(5\\pi/4) = \\cos(5\\pi/4) = -\\sqrt2/2$ — equal (both negative) ✓. Geometric view: $\\sin = \\cos$ on the unit circle exactly where the point lies on the line $y = x$ — which crosses the circle twice ✓. Distractor $\\pi/4$ only forgets tangent's $\\pi$-period."
+
         })
       },
       { q: "Find the projection of $\\vec u = \\langle 3, 4 \\rangle$ onto $\\vec v = \\langle 1, 0 \\rangle$.",
         choices: ["$\\langle 3, 0 \\rangle$", "$\\langle 0, 4 \\rangle$", "$\\langle 3, 4 \\rangle$", "$\\langle 1, 0 \\rangle$"],
         correct: 0,
         solution: S({
-          c: "Projection of $\\vec u$ onto $\\vec v$: $\\text{proj}_{\\vec v}\\vec u = \\dfrac{\\vec u\\cdot\\vec v}{|\\vec v|^{2}}\\vec v$.",
+          c: "The projection of $\\vec u$ onto $\\vec v$ is the 'shadow' of $\\vec u$ along $\\vec v$'s direction: $\\text{proj}_{\\vec v}\\vec u = \\dfrac{\\vec u\\cdot\\vec v}{|\\vec v|^{2}}\\,\\vec v$ — a SCALAR times $\\vec v$, so the result always points along $\\vec v$.",
           s: [
-            "$\\vec u\\cdot\\vec v = 3(1) + 4(0) = 3$.",
-            "$|\\vec v|^{2} = 1^{2} + 0^{2} = 1$.",
-            "Projection: $\\dfrac{3}{1}\\langle 1, 0\\rangle = \\langle 3, 0\\rangle$."
+            "<b>Step 1 — Dot product (how aligned are they?).</b> $\\vec u\\cdot\\vec v = 3(1) + 4(0) = 3$.",
+            "<b>Step 2 — Squared length of the target.</b> $|\\vec v|^{2} = 1^{2} + 0^{2} = 1$.",
+            "<b>Step 3 — Assemble.</b> $\\text{proj} = \\dfrac{3}{1}\\langle1,0\\rangle = \\langle3,0\\rangle$.",
+            "<b>Step 4 — Distractor audit.</b> $\\langle0,4\\rangle$ is the part of $\\vec u$ PERPENDICULAR to $\\vec v$ (the rejection); $\\langle3,4\\rangle$ is $\\vec u$ itself; $\\langle1,0\\rangle$ forgets to scale."
           ],
           a: "$\\langle 3, 0\\rangle$",
-          v: "Visually, $\\vec v$ points along the $+x$ axis, so the projection is just the $x$-component of $\\vec u$ ✓."
+          v: "Geometric sanity: $\\vec v$ points along the x-axis, so the shadow of $(3,4)$ on the x-axis is just its x-part, $(3,0)$ ✓. Decomposition check: $\\vec u = \\underbrace{(3,0)}_{\\parallel \\vec v} + \\underbrace{(0,4)}_{\\perp \\vec v}$, and $(3,0)\\cdot(0,4) = 0$ ✓."
+
         })
       },
       { q: "If $z = 2(\\cos 30° + j\\sin 30°)$, find $z^{3}$.",
         choices: ["$8j$", "$8$", "$-8j$", "$8\\angle 90°$ both correct ($8j = 8\\angle 90°$)"],
         correct: 0,
         solution: S({
-          c: "De Moivre’s theorem: $(r\\angle\\theta)^{n} = r^{n}\\angle(n\\theta)$.",
+          c: "De Moivre's theorem: in polar form, powering a complex number is easy — $(r\\angle\\theta)^{n} = r^{n}\\angle(n\\theta)$. Raise the LENGTH to the power, MULTIPLY the angle.",
           s: [
-            "$r = 2$, $\\theta = 30°$, $n = 3$.",
-            "$r^{n} = 2^{3} = 8$; $n\\theta = 90°$.",
-            "$z^{3} = 8\\angle 90° = 8(\\cos 90° + j\\sin 90°) = 8j$."
+            "<b>Step 1 — Read off polar form.</b> $z = 2(\\cos30° + j\\sin30°) = 2\\angle30°$: length 2, angle 30°.",
+            "<b>Step 2 — Apply De Moivre with $n = 3$.</b> Length: $2^{3} = 8$. Angle: $3 \\times 30° = 90°$.",
+            "<b>Step 3 — Convert back to rectangular.</b> $8\\angle90° = 8(\\cos90° + j\\sin90°) = 8(0 + j) = 8j$ — a vector of length 8 pointing straight up the imaginary axis."
           ],
           a: "$z^{3} = 8j$",
-          v: "Alternative: $z^{3} = z \\cdot z^{2}$ — note answer A and D describe the same complex number."
+          v: "Brute-force check: $z = \\sqrt3 + j$; $z^{2} = 3 + 2\\sqrt3 j - 1 = 2 + 2\\sqrt3 j$; $z^{3} = (\\sqrt3+j)(2+2\\sqrt3 j) = 2\\sqrt3 + 6j + 2j - 2\\sqrt3 = 8j$ ✓ — De Moivre saves all that algebra. Note choice D ($8\\angle90°$) is the SAME number in polar dress; the exam wants the simplest listed form, A."
+
         })
       },
       { q: "Evaluate the line integral $\\int_C 2x\\,dx + 3y\\,dy$ along the straight line from $(0,0)$ to $(2,3)$.",
-        choices: ["$\\tfrac{27}{2} + 2$", "$13/2$", "$6$", "$5$"],
-        correct: 1,
+        choices: ["$35/2$", "$27/2$", "$13/2$", "$6$"],
+        correct: 0,
         solution: S({
-          c: "Both terms are exact differentials: $2x\\,dx = d(x^{2})$ and $3y\\,dy = d(\\tfrac{3}{2}y^{2})$. So the integral is path-independent — only endpoints matter.",
+          c: "A line integral $\\int_C P\\,dx + Q\\,dy$ adds up little contributions along a path. Special case: if the integrand is an EXACT differential (it is the derivative of some potential function $F$), the answer depends only on the ENDPOINTS — the path itself is irrelevant.",
           s: [
-            "Antiderivative form: $F(x,y) = x^{2} + \\tfrac{3}{2}y^{2}$.",
-            "Integral = $F(2,3) - F(0,0) = [4 + \\tfrac{27}{2}] - 0 = \\dfrac{8 + 27}{2} = \\dfrac{35}{2}$.",
-            "Wait — let me recompute the second term: $\\tfrac{3}{2}(3)^{2} = \\tfrac{27}{2}$; $\\tfrac{3}{2}(0)^{2}=0$. So integral $= 4 + 27/2 = 35/2 \\neq 13/2$."
+            "<b>Step 1 — Test for exactness.</b> $2x\\,dx = d(x^{2})$ and $3y\\,dy = d\\!\\left(\\tfrac{3}{2}y^{2}\\right)$ — each term is already a perfect derivative, so $F(x,y) = x^{2} + \\tfrac{3}{2}y^{2}$ is a potential for the whole integrand.",
+            "<b>Step 2 — Evaluate potential at the endpoints.</b> $F(2,3) = 2^{2} + \\tfrac{3}{2}(3)^{2} = 4 + \\tfrac{27}{2}$; $F(0,0) = 0$.",
+            "<b>Step 3 — Subtract.</b> $\\int_C = F(2,3) - F(0,0) = 4 + \\dfrac{27}{2} = \\dfrac{8 + 27}{2} = \\dfrac{35}{2}$.",
+            "<b>Step 4 — Distractor audit.</b> $27/2$ drops the $x^{2}$ term; $13/2$ comes from wrongly using $\\tfrac12 y^{2}$ (forgot the 3); 6 multiplies the endpoint coordinates."
           ],
-          a: "$\\dfrac{35}{2}$ — none of the listed options matches exactly. Closest interpretation: choice (A) $\\tfrac{27}{2}+2$ if the $x$-term was integrated incorrectly.",
-          v: "Use parametrization $x=2t, y=3t$ for $t\\in[0,1]$: $\\int_{0}^{1}[2(2t)(2) + 3(3t)(3)]dt = \\int_{0}^{1}(8t+27t)dt = 35/2$. The intended answer key likely had a typo; answer the question by recomputing carefully."
+          a: "$\\dfrac{35}{2} = 17.5$",
+          v: "Path check (must agree since exact): parametrize $x = 2t, y = 3t$, $t \\in [0,1]$: $\\int_0^1[2(2t)(2) + 3(3t)(3)]dt = \\int_0^1(8t + 27t)\\,dt = \\dfrac{35}{2}$ ✓ — same answer through the explicit route, confirming path-independence."
+
         })
       },
       { q: "Solve $y'' + 2y' + 5y = 0$, where $\\omega_n$ and $\\zeta$ characterize an underdamped system.",
         choices: ["$\\omega_n = \\sqrt{5},\\ \\zeta = 1/\\sqrt{5}$", "$\\omega_n = 2,\\ \\zeta = 0.5$", "$\\omega_n = 5,\\ \\zeta = 0.2$", "Critically damped"],
         correct: 0,
         solution: S({
-          c: "Compare $y'' + 2\\zeta\\omega_n y' + \\omega_n^{2}y = 0$ to identify $\\omega_n$ and $\\zeta$.",
+          c: "Match the ODE against the standard 2nd-order template $y'' + 2\\zeta\\omega_n y' + \\omega_n^{2}y = 0$: the LAST coefficient gives $\\omega_n^{2}$ (natural frequency squared), the MIDDLE one gives $2\\zeta\\omega_n$ (damping).",
           s: [
-            "Matching coefficients: $\\omega_n^{2} = 5 \\Rightarrow \\omega_n = \\sqrt{5}\\approx 2.236$ rad/s.",
-            "$2\\zeta\\omega_n = 2 \\Rightarrow \\zeta = 1/\\omega_n = 1/\\sqrt{5} \\approx 0.447$.",
-            "Since $0 < \\zeta < 1$, system is underdamped — response is decaying sinusoid."
+            "<b>Step 1 — Match the constant term.</b> $\\omega_n^{2} = 5 \\Rightarrow \\omega_n = \\sqrt5 \\approx 2.236$ rad/s.",
+            "<b>Step 2 — Match the middle term.</b> $2\\zeta\\omega_n = 2 \\Rightarrow \\zeta = \\dfrac{1}{\\omega_n} = \\dfrac{1}{\\sqrt5} \\approx 0.447$.",
+            "<b>Step 3 — Classify.</b> $0 < \\zeta < 1$ → underdamped: the response is a sinusoid inside a decaying envelope. ($\\zeta = 1$ would be critical, $\\zeta > 1$ overdamped — no oscillation in either.)",
+            "<b>Step 4 — Distractor audit.</b> $(\\omega_n, \\zeta) = (2, 0.5)$ reads the middle coefficient as $\\omega_n$; $(5, 0.2)$ forgets the square root; 'critically damped' would need $\\zeta = 1$ exactly."
           ],
-          a: "$\\omega_n = \\sqrt{5}\\text{ rad/s},\\ \\zeta = 1/\\sqrt{5}$",
-          v: "Char. roots: $-1 \\pm j2$, real part $-\\zeta\\omega_n = -1$ ✓, imag part $\\omega_d = \\omega_n\\sqrt{1-\\zeta^{2}} = \\sqrt{5}\\cdot\\sqrt{4/5} = 2$ ✓."
+          a: "$\\omega_n = \\sqrt5$ rad/s, $\\zeta = 1/\\sqrt5 \\approx 0.447$ — underdamped.",
+          v: "Root check: characteristic equation $s^{2} + 2s + 5 = 0$ → $s = -1 \\pm j2$. Real part $-\\zeta\\omega_n = -1$ ✓; imaginary part $\\omega_d = \\omega_n\\sqrt{1-\\zeta^{2}} = \\sqrt5\\sqrt{4/5} = 2$ ✓ — both pieces of the root match the extracted parameters."
+
         })
       }
     ],
@@ -162,120 +176,139 @@
         choices: ["$5/36$", "$1/6$", "$1/9$", "$8/36$"],
         correct: 0,
         solution: S({
-          c: "Each outcome of two dice has probability $1/36$. Count the ordered pairs that sum to 8.",
+          c: "Sample space: two distinguishable dice give $6 \\times 6 = 36$ equally likely ORDERED outcomes, each with probability $1/36$. Probability = (favorable count)/36.",
           s: [
-            "Pairs summing to 8: (2,6),(3,5),(4,4),(5,3),(6,2) — that’s 5 pairs.",
-            "Probability $= 5/36 \\approx 0.139$."
+            "<b>Step 1 — List the ordered pairs summing to 8.</b> (2,6), (3,5), (4,4), (5,3), (6,2) — note (3,5) and (5,3) count separately because die #1 and die #2 are distinct, but (4,4) appears once.",
+            "<b>Step 2 — Count and divide.</b> 5 favorable / 36 total $= 5/36 \\approx 0.139$.",
+            "<b>Step 3 — Distractor audit.</b> $1/6 = 6/36$ is the count for sum = 7 (the most likely sum); $8/36$ misreads 'sum 8' as '8 ways'; $1/9 = 4/36$ undercounts by missing (4,4)... actually by missing one ordered pair."
           ],
           a: "$5/36$",
-          v: "Total of all sum probabilities $\\sum P = 36/36 = 1$ ✓."
+          v: "Pattern check: the number of ways to roll sum $s$ rises 1,2,3,4,5,6 for $s = 2..7$ then falls 5,4,3,2,1 for $s = 8..12$ — sum 8 sits one step past the peak with 5 ways ✓; total $36/36 = 1$ ✓."
+
         })
       },
       { q: "Continuous random variable $X \\sim \\mathcal{N}(\\mu = 50, \\sigma = 5)$. Find $P(X > 60)$.",
         choices: ["$\\approx 2.28\\%$", "$\\approx 5\\%$", "$\\approx 16\\%$", "$\\approx 0.13\\%$"],
         correct: 0,
         solution: S({
-          c: "Standardize using $Z = (X - \\mu)/\\sigma$, then look up tail probability.",
+          c: "Standardize: any normal variable converts to the STANDARD normal $Z$ (mean 0, SD 1) via $Z = (X-\\mu)/\\sigma$ — 'how many standard deviations above the mean?'. Then read the tail from the Z-table.",
           s: [
-            "$Z = (60 - 50)/5 = 2$.",
-            "From standard normal table: $\\Phi(2) = 0.9772$.",
-            "Tail: $P(Z > 2) = 1 - 0.9772 = 0.0228 = 2.28\\%$."
+            "<b>Step 1 — Compute the z-score.</b> $Z = \\dfrac{60 - 50}{5} = 2$ — the value 60 sits exactly 2 SDs above the mean.",
+            "<b>Step 2 — Look up the cumulative value.</b> $\\Phi(2) = 0.9772$ means 97.72% of outcomes fall BELOW 60.",
+            "<b>Step 3 — Take the upper tail.</b> $P(X > 60) = 1 - 0.9772 = 0.0228 = 2.28\\%$.",
+            "<b>Step 4 — Distractor audit.</b> 16% is the tail at 1 SD; 0.13% is the tail at 3 SD; 5% loosely quotes the TWO-sided 2σ rule — the choices are the classic z-values shuffled."
           ],
-          a: "$\\approx 2.28\\%$",
-          v: "Two-standard-deviation rule: $\\approx 95\\%$ within $\\pm 2\\sigma$, so each tail $\\approx 2.5\\%$ ✓."
+          a: "$P(X>60) \\approx 2.28\\%$",
+          v: "Empirical-rule check (68-95-99.7): ±2σ holds ~95%, leaving ~5% split between two tails → ~2.5% each — our exact 2.28% sits right there ✓."
+
         })
       },
       { q: "Sample $\\{4, 6, 8, 10, 12\\}$. Sample standard deviation $s$ equals:",
         choices: ["$\\sqrt{10} \\approx 3.16$", "$\\sqrt{8} \\approx 2.83$", "$2$", "$\\sqrt{40}$"],
         correct: 0,
         solution: S({
-          c: "Sample SD: $s = \\sqrt{\\dfrac{1}{n-1}\\sum(x_i - \\bar x)^{2}}$ (uses $n-1$, not $n$, for unbiased estimate).",
+          c: "SAMPLE standard deviation divides by $n-1$ (not $n$): $s = \\sqrt{\\frac{1}{n-1}\\sum(x_i - \\bar x)^{2}}$. Why $n-1$? Using the SAMPLE mean $\\bar x$ (instead of the unknown true mean) makes deviations artificially small; dividing by $n-1$ corrects the bias.",
           s: [
-            "Mean: $\\bar x = (4+6+8+10+12)/5 = 8$.",
-            "Deviations: $-4,-2,0,2,4$. Squared: $16,4,0,4,16$. Sum $= 40$.",
-            "Divide by $n-1 = 4$: variance $s^{2} = 40/4 = 10$.",
-            "$s = \\sqrt{10} \\approx 3.162$."
+            "<b>Step 1 — Mean.</b> $\\bar x = (4+6+8+10+12)/5 = 40/5 = 8$.",
+            "<b>Step 2 — Deviations and squares.</b> $-4, -2, 0, 2, 4$ → squared: $16, 4, 0, 4, 16$ → sum $= 40$.",
+            "<b>Step 3 — Divide by $n-1 = 4$.</b> $s^{2} = 40/4 = 10$.",
+            "<b>Step 4 — Square root.</b> $s = \\sqrt{10} \\approx 3.16$."
           ],
           a: "$s = \\sqrt{10} \\approx 3.16$",
-          v: "Population SD would use $n=5$: $\\sigma = \\sqrt{8}\\approx 2.83$. Notice the difference between $s$ and $\\sigma$."
+          v: "The planted twin: dividing by $n = 5$ gives the POPULATION formula $\\sigma = \\sqrt 8 \\approx 2.83$ — distractor B exactly. The FE will tell you 'sample' or 'population'; the word 'sample' here forces $n-1$ ✓. Scale check: data span ±4 around the mean; an SD of ~3 is plausible ✓."
+
         })
       },
       { q: "Box contains 4 red and 6 blue balls. Draw 2 without replacement. Probability both red?",
         choices: ["$2/15$", "$4/25$", "$1/5$", "$3/10$"],
         correct: 0,
         solution: S({
-          c: "Without replacement: probabilities depend on previous draws — use multiplication rule for dependent events.",
+          c: "WITHOUT replacement means the second draw's probabilities change after the first: use the chain rule $P(A \\text{ then } B) = P(A)\\cdot P(B\\,|\\,A)$.",
           s: [
-            "$P(\\text{1st red}) = 4/10 = 2/5$.",
-            "$P(\\text{2nd red}\\,|\\,\\text{1st red}) = 3/9 = 1/3$ (one red removed).",
-            "$P(\\text{both red}) = (2/5)(1/3) = 2/15$."
+            "<b>Step 1 — First draw.</b> $P(\\text{red}_1) = 4/10 = 2/5$ (4 reds among 10 balls).",
+            "<b>Step 2 — Second draw, GIVEN the first was red.</b> Now 3 reds remain among 9 balls: $P(\\text{red}_2|\\text{red}_1) = 3/9 = 1/3$.",
+            "<b>Step 3 — Multiply.</b> $P(\\text{both red}) = \\dfrac{2}{5}\\times\\dfrac{1}{3} = \\dfrac{2}{15} \\approx 0.133$.",
+            "<b>Step 4 — Distractor audit.</b> $4/25 = (2/5)^{2}$ is the WITH-replacement answer (forgetting the ball stays out); $3/10$ and $1/5$ are partial fractions from the setup."
           ],
           a: "$2/15$",
-          v: "Combinatorial: $\\binom{4}{2}/\\binom{10}{2} = 6/45 = 2/15$ ✓."
+          v: "Combinatorial cross-check (order-free): $\\dbinom{4}{2}\\Big/\\dbinom{10}{2} = \\dfrac{6}{45} = \\dfrac{2}{15}$ ✓ — choosing 2 of 4 reds out of all ways to choose 2 of 10. Two different mental models, one answer — the best kind of verification."
+
         })
       },
       { q: "Manufacturing defect rate is 2%. In a batch of 50 units, expected number of defects?",
         choices: ["$1$", "$2$", "$5$", "$0.1$"],
         correct: 0,
         solution: S({
-          c: "For Bernoulli trials, $E[X] = np$ where $n$ = trials, $p$ = success prob (defect prob here).",
+          c: "Each unit is an independent yes/no trial (defective or not) — a binomial setting. Its expected count has the simplest formula in probability: $E[X] = np$.",
           s: [
-            "$n = 50,\\ p = 0.02$.",
-            "$E[X] = 50 \\times 0.02 = 1$."
+            "<b>Step 1 — Identify parameters.</b> $n = 50$ units, $p = 0.02$ defect probability each.",
+            "<b>Step 2 — Multiply.</b> $E[X] = 50 \\times 0.02 = 1$ defect expected per batch.",
+            "<b>Step 3 — Distractor audit.</b> 2 confuses the 2% with a count; 5 misplaces the decimal ($50\\times0.1$); 0.1 misplaces it the other way."
           ],
-          a: "$E[X] = 1$ defect on average",
-          v: "Variance $= np(1-p) = 50(0.02)(0.98) = 0.98$, $\\sigma\\approx 0.99$ — note mean and variance are very close, characteristic of low-$p$ binomial."
+          a: "$E[X] = 1$",
+          v: "Interpretation guard: 'expected 1' does NOT mean every batch has exactly 1 — $P(X=0) = 0.98^{50} \\approx 36\\%$ of batches are defect-free. Variance bonus: $np(1-p) = 0.98$, so SD ≈ 0.99 — mean ≈ variance, the signature of a low-$p$ binomial (it is nearly Poisson with $\\lambda = 1$) ✓."
+
         })
       },
       { q: "Poisson process averages 3 calls/minute. Probability of exactly 5 calls in one minute?",
         choices: ["$\\dfrac{3^{5}e^{-3}}{5!} \\approx 0.1008$", "$0.05$", "$0.20$", "$0.84$"],
         correct: 0,
         solution: S({
-          c: "Poisson PMF: $P(X = k) = \\dfrac{\\lambda^{k}e^{-\\lambda}}{k!}$.",
+          c: "The Poisson distribution gives probabilities for the COUNT of random arrivals in a window when arrivals are independent and average $\\lambda$ per window: $P(X=k) = \\dfrac{\\lambda^{k}e^{-\\lambda}}{k!}$.",
           s: [
-            "$\\lambda = 3$ (mean calls/min), $k = 5$.",
-            "$P(X=5) = \\dfrac{3^{5}e^{-3}}{5!} = \\dfrac{243 \\cdot 0.0498}{120} \\approx \\dfrac{12.10}{120} \\approx 0.1008$."
+            "<b>Step 1 — Identify $\\lambda$ and $k$.</b> Average rate $\\lambda = 3$ calls/min; we want exactly $k = 5$ in one minute.",
+            "<b>Step 2 — Plug into the PMF.</b> $P(X=5) = \\dfrac{3^{5}e^{-3}}{5!} = \\dfrac{243 \\times 0.0498}{120}$.",
+            "<b>Step 3 — Evaluate.</b> $= \\dfrac{12.10}{120} \\approx 0.1008$ — about a 10% chance.",
+            "<b>Step 4 — Why each ingredient is there.</b> $\\lambda^{k}$ favors counts near the average, $k!$ punishes large counts, $e^{-\\lambda}$ normalizes the whole distribution to sum to 1."
           ],
-          a: "$\\approx 0.1008$ (10.08%)",
-          v: "Mode of Poisson is $\\lfloor\\lambda\\rfloor = 3$, so $P(X=5)$ is smaller than $P(X=3) \\approx 0.224$ — sanity check ✓."
+          a: "$P(X=5) \\approx 0.1008$",
+          v: "Shape check: the most likely count is $k = 3$ (= $\\lambda$), with $P(X=3) \\approx 0.224$; asking for 5 — two above the peak — should be noticeably less likely, and 0.10 < 0.22 ✓. Neighbor check: $P(X=4) \\approx 0.168$ sits between them ✓."
+
         })
       },
       { q: "Linear regression yields $r = 0.85$. What fraction of variance in $y$ is explained by $x$?",
         choices: ["$72.25\\%$", "$85\\%$", "$50\\%$", "$15\\%$"],
         correct: 0,
         solution: S({
-          c: "Coefficient of determination $r^{2}$ gives the fraction of $y$-variance explained by the regression.",
+          c: "The correlation $r$ measures how tightly points hug a line; its SQUARE $r^{2}$ (coefficient of determination) is the fraction of the variance in $y$ that the regression on $x$ explains.",
           s: [
-            "$r = 0.85 \\Rightarrow r^{2} = 0.7225$.",
-            "Therefore $72.25\\%$ of variation is explained."
+            "<b>Step 1 — Square the correlation.</b> $r^{2} = (0.85)^{2} = 0.7225$.",
+            "<b>Step 2 — State as percentage.</b> 72.25% of the variability in $y$ is accounted for by $x$; the remaining 27.75% is residual scatter (noise, other factors).",
+            "<b>Step 3 — Distractor audit.</b> 85% reports $r$ itself — the single most common confusion; 15% is $1-r$ (meaningless); 50% is a guess."
           ],
-          a: "$72.25\\%$",
-          v: "Remaining $27.75\\%$ is residual variance — unexplained scatter around the regression line."
+          a: "$r^{2} = 72.25\\%$",
+          v: "Boundary anchors: $r = \\pm1$ → $r^{2} = 100\\%$ (perfect line, zero residual); $r = 0$ → 0% explained ✓. Caution worth remembering: high $r^{2}$ shows association, not causation, and says nothing about whether the LINEAR form is right — always plot residuals."
+
         })
       },
       { q: "Conditional probability: $P(A) = 0.4$, $P(B) = 0.5$, $P(A \\cap B) = 0.3$. Find $P(A\\,|\\,B)$.",
         choices: ["$0.6$", "$0.3$", "$0.75$", "$0.12$"],
         correct: 0,
         solution: S({
-          c: "Definition: $P(A|B) = \\dfrac{P(A \\cap B)}{P(B)}$ — ratio of joint to conditioning event.",
+          c: "Conditional probability re-scales the world to cases where $B$ happened: $P(A|B) = \\dfrac{P(A\\cap B)}{P(B)}$ — 'of the times $B$ occurs, what fraction also has $A$?'.",
           s: [
-            "Plug in: $P(A|B) = 0.3 / 0.5 = 0.6$."
+            "<b>Step 1 — Plug in.</b> $P(A|B) = \\dfrac{0.3}{0.5} = 0.6$.",
+            "<b>Step 2 — Read it.</b> $B$ happens 50% of the time; in 30% (of all trials) BOTH happen — so within $B$'s world, $A$ shows up $0.3/0.5 = 60\\%$ of the time.",
+            "<b>Step 3 — Distractor audit.</b> 0.3 reports the joint, unscaled; 0.75 is $P(B|A) = 0.3/0.4$ — conditioning in the WRONG direction; 0.12 is $P(A)P(B)$, which would only equal the joint if the events were independent (they're not: $0.12 \\ne 0.3$)."
           ],
           a: "$P(A|B) = 0.6$",
-          v: "Bayes check: $P(B|A) = 0.3/0.4 = 0.75$. Note $P(A|B) \\neq P(B|A)$ unless $P(A)=P(B)$."
+          v: "Direction matters: $P(A|B) = 0.6$ but $P(B|A) = 0.75$ — not equal, and they never have to be (that asymmetry IS Bayes' theorem). Dependence check: $P(A|B) = 0.6 > P(A) = 0.4$ — knowing $B$ happened makes $A$ MORE likely; the events are positively dependent ✓."
+
         })
       },
       { q: "If two events are independent and $P(A) = 0.3,\\ P(B) = 0.4$, find $P(A \\cup B)$.",
         choices: ["$0.58$", "$0.70$", "$0.12$", "$0.42$"],
         correct: 0,
         solution: S({
-          c: "Independence: $P(A\\cap B) = P(A)P(B)$. Inclusion–exclusion: $P(A\\cup B) = P(A) + P(B) - P(A\\cap B)$.",
+          c: "Two tools combine: independence gives the overlap ($P(A\\cap B) = P(A)P(B)$), and inclusion-exclusion assembles the union: $P(A\\cup B) = P(A) + P(B) - P(A\\cap B)$ — subtract the overlap so it isn't counted twice.",
           s: [
-            "$P(A\\cap B) = 0.3 \\times 0.4 = 0.12$.",
-            "$P(A\\cup B) = 0.3 + 0.4 - 0.12 = 0.58$."
+            "<b>Step 1 — Overlap from independence.</b> $P(A\\cap B) = 0.3 \\times 0.4 = 0.12$.",
+            "<b>Step 2 — Inclusion-exclusion.</b> $P(A\\cup B) = 0.3 + 0.4 - 0.12 = 0.58$.",
+            "<b>Step 3 — Distractor audit.</b> 0.70 just adds (double-counts the overlap — only valid for MUTUALLY EXCLUSIVE events, the opposite of independent ones); 0.12 reports the intersection; 0.42 is $0.7\\times0.6$ numerology."
           ],
           a: "$P(A\\cup B) = 0.58$",
-          v: "Bounded by $\\max(P(A),P(B)) = 0.4$ below and $P(A)+P(B) = 0.7$ above ✓."
+          v: "Complement route (often faster): $P(\\text{neither}) = P(\\bar A)P(\\bar B) = 0.7\\times0.6 = 0.42$, so $P(A\\cup B) = 1 - 0.42 = 0.58$ ✓ — same answer by a totally different path. Bounds: must lie between $\\max(0.3,0.4) = 0.4$ and $0.3+0.4 = 0.7$ ✓."
+
         })
       },
       { q: "A 95% confidence interval is reported as $(48, 52)$ for a mean. What does this mean?",
@@ -287,15 +320,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Frequentist confidence intervals are about the long-run capture rate of the procedure, not a probability statement about a fixed parameter.",
+          c: "What a confidence interval really claims: the PROCEDURE, repeated over many samples, produces intervals that capture the true mean 95% of the time. The true mean $\\mu$ is a fixed (unknown) number — it does not 'have a probability' of being anywhere.",
           s: [
-            "The true mean $\\mu$ is fixed; the interval is random.",
-            "‘95% confidence’ means 95% of intervals generated by this method would contain $\\mu$.",
-            "Choice B is a common (but incorrect) Bayesian misinterpretation.",
-            "Choice C confuses CI with prediction interval; choice D mixes point and interval estimates."
+            "<b>Step 1 — Identify what is random.</b> $\\mu$ is fixed; the DATA (and therefore the interval endpoints 48 and 52) are random. A new sample gives a different interval.",
+            "<b>Step 2 — State the guarantee correctly.</b> 95% of intervals built this way (across hypothetical repeated samples) contain $\\mu$. THIS particular interval either contains it or not — we just don't know which.",
+            "<b>Step 3 — Demolish the distractors.</b> (B) '95% probability $\\mu$ is in (48,52)' treats $\\mu$ as random — that is a Bayesian CREDIBLE interval, a different framework; (C) confuses a CI for the MEAN with a range containing 95% of individual DATA points (a prediction/tolerance interval, typically much wider); (D) invents certainty about the point estimate."
           ],
-          a: "Long-run frequency interpretation (choice A)",
-          v: "Bayesian credible intervals do allow direct probability statements, but FE follows frequentist semantics."
+          a: "Choice A — the long-run capture-rate (frequentist) interpretation.",
+          v: "Width intuition that exposes (C): a CI for the mean shrinks like $s/\\sqrt n$ — with $n$ large enough it can be far narrower than the data spread, so it cannot possibly contain 95% of the data ✓. The FE exam tests exactly this A-vs-B distinction; when in doubt, pick the sentence about REPEATED procedures."
+
         })
       }
     ],
@@ -311,14 +344,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "NSPE Code §III.5: engineers shall not accept gifts of substantial value from suppliers in exchange for specifying their products. The integrity of the engineer’s recommendation must be unbiased.",
+          c: "Background for every NSPE question: the Code of Ethics is organized as Fundamental Canons (I), Rules of Practice (II), and Professional Obligations (III). Here §III.5 applies: engineers shall not accept gifts of more than nominal value from parties who benefit from their professional decisions — because a paid-for recommendation is no longer an engineering judgment.",
           s: [
-            "A vacation has substantial value — clearly creates an apparent conflict of interest.",
-            "Even with disclosure, the perception of compromised judgment harms the profession.",
-            "Decline outright is the safest, cleanest option per §II.4 (avoid conflicts of interest)."
+            "<b>Step 1 — Name the relationship.</b> The engineer RECOMMENDS this vendor's products to clients. Any gift from that vendor ties the engineer's personal benefit to the recommendation — a conflict of interest by definition (a personal interest that could bias professional judgment).",
+            "<b>Step 2 — Test the gift's size.</b> A coffee mug is nominal; a vacation is substantial value. Substantial gifts from interested parties are prohibited outright — not merely 'disclose and continue'.",
+            "<b>Step 3 — Eliminate the distractors.</b> 'Not cash' changes nothing — value is value; disclosing only to the VENDOR tells the one party who already knows (the client is the deceived party); 'accept if the client doesn't ask' is concealment, which compounds the violation."
           ],
           a: "Decline the gift.",
-          v: "Test: would a reasonable client trust your unbiased advice knowing about the gift? If no — decline."
+          v: "Practical litmus test (works on every gift question): would your client still trust your recommendation if they knew about the gift? If the answer is no — or even 'maybe not' — decline. The Code protects the APPEARANCE of integrity as much as the fact of it, because public trust is the profession's asset."
+
         })
       },
       { q: "An engineer-of-record discovers a design flaw after construction has started. The flaw could be a safety hazard. The engineer should:",
@@ -330,14 +364,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Engineers hold paramount the safety, health, and welfare of the public (NSPE §I.1).",
+          c: "Canon I.1 — the FIRST and highest rule of the entire code: engineers shall hold paramount the safety, health, and welfare of the public. 'Paramount' means it outranks every other duty: to client, to employer, to self, to schedule, to budget.",
           s: [
-            "Public safety overrides client confidentiality and personal liability concerns.",
-            "Authorities must be notified if the situation is not corrected promptly.",
-            "Concealment violates §III.3 (avoid deceptive acts) and is illegal in most jurisdictions."
+            "<b>Step 1 — Classify the situation.</b> A known design flaw + active construction + potential safety hazard = the exact scenario Canon I.1 exists for. Time matters: every day of construction builds more of the flawed design.",
+            "<b>Step 2 — Apply the required actions in order.</b> (1) Notify the client/owner immediately, in writing; (2) stop work on the affected (unsafe) portions; (3) if the client will not act, notify the building authority — the engineer's duty does not end with telling the client.",
+            "<b>Step 3 — Eliminate the distractors.</b> 'Wait until complete' lets the hazard get built; 'notify only if asked' inverts the duty (the engineer must come forward); 'quietly redesign without disclosure' hides a safety event from the people legally entitled to know — it violates §III.3 (deception) on top of I.1."
           ],
-          a: "Notify and halt unsafe work immediately.",
-          v: "Hierarchy of obligations: Public > Client > Employer > Self."
+          a: "Notify the client and authorities; halt unsafe work immediately.",
+          v: "Memorize the obligation hierarchy — it answers half of all FE ethics questions: PUBLIC > client > employer > self. Real-world anchor: the Citicorp Center engineer (1978) who discovered his own building's wind-bracing flaw, disclosed it, and ran emergency retrofits is the profession's model of this duty done right."
+
         })
       },
       { q: "May an EE who is licensed PE sign and seal mechanical drawings for an HVAC system?",
@@ -349,14 +384,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "NSPE Code §II.2.a: engineers shall undertake assignments only when qualified by education or experience in the specific technical fields.",
+          c: "A PE license is NOT a license to practice all engineering. §II.2.a: perform services only in areas of your competence — your education and experience in that SPECIFIC field. The seal tells the public 'a qualified expert verified this'; sealing outside your field makes that statement false.",
           s: [
-            "An EE generally lacks formal training in HVAC thermodynamics, refrigeration cycles, and ductwork.",
-            "Sealing work outside competence misleads the public and violates licensure laws in every state.",
-            "A separate mechanical PE must seal the HVAC drawings."
+            "<b>Step 1 — Compare the field to the qualification.</b> HVAC design lives on thermodynamics, refrigeration cycles, psychrometrics, duct/fluid design — a mechanical engineering body of knowledge an EE typically has never studied or practiced.",
+            "<b>Step 2 — Apply the competence rule.</b> No demonstrated competence → may not seal, period. The legal mechanism agrees: state boards discipline 'practice outside area of competence' even when the license itself is valid.",
+            "<b>Step 3 — Eliminate the distractors.</b> 'A PE may sign anything' confuses license SCOPE with license EXISTENCE; 'small project' — size does not create expertise; 'informal review' — responsibility cannot be borrowed; the mechanical PE who actually reviewed it must be the one to seal it."
           ],
-          a: "No — practice only within competence.",
-          v: "Even within EE, a power-systems specialist would similarly not seal a complex RF design without expertise."
+          a: "No — a PE may only practice (and seal) within demonstrated competence.",
+          v: "The rule cuts within disciplines too: a power-systems PE should not seal a complex RF/microwave design either. Correct staffing: each discipline's drawings sealed by that discipline's PE — multi-discipline projects routinely carry several seals ✓."
+
         })
       },
       { q: "An engineer’s employer asks them to certify compliance with a code, but the engineer believes the design does not comply. The engineer should:",
@@ -368,14 +404,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Engineers must be truthful (NSPE §II.3) and shall not falsify or permit misrepresentation of work (§III.3.b).",
+          c: "Two rules converge: §II.3 — issue public statements only in an objective and truthful manner; §III.3.b — do not falsify or misrepresent. A certification IS a formal factual statement: signing it while believing it false is professional fraud, regardless of who asked.",
           s: [
-            "Certifying false compliance is unlawful and unethical.",
-            "Engineer must refuse and document the disagreement in writing for the record.",
-            "If employer continues, engineer may need to escalate to licensing board."
+            "<b>Step 1 — See what a certification is.</b> 'I certify compliance' = a professional's sworn factual claim that the design meets the code. Believing it does NOT comply while signing makes the statement knowingly false.",
+            "<b>Step 2 — Take the required actions.</b> Refuse to certify; put the technical concerns in writing to the employer (creates the record, forces a real engineering resolution); escalate if pressured — ultimately to the licensing board if the employer insists on a false certification.",
+            "<b>Step 3 — Eliminate the distractors.</b> 'Private mental reservation' — the signature is what the public sees; reservations don't transmit; 'employer takes responsibility' — they legally CANNOT take over your professional truthfulness (the license and the lie are both personally yours); 'resign and tell no one' abandons the public-safety dimension and the documentation duty."
           ],
-          a: "Refuse to certify and document.",
-          v: "Documentation protects engineer legally and meets the duty-to-report standard."
+          a: "Refuse to certify; document the concerns in writing.",
+          v: "Self-protection bonus: the written record is also the engineer's legal shield if the dispute surfaces later — ethics and self-interest point the same way here. Pattern to remember: an engineer's signature/seal/certification can never be delegated, purchased, or excused by orders from above."
+
         })
       },
       { q: "Two competing firms are bidding on a project. Engineer A learns confidential bid details from a former employer who is one of the bidders. What is the ethical action?",
@@ -387,14 +424,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "§III.4: engineers shall not disclose or use confidential information of past clients/employers for personal advantage.",
+          c: "§III.4: engineers shall not use confidential information from a former employer or client for anyone's advantage. Bid amounts during active procurement are among the most sensitive secrets a firm has — knowing a rival's number lets you under-bid by a dollar.",
           s: [
-            "Even unintentional knowledge creates a conflict.",
-            "Recusal preserves fair competition and protects former employer’s trade secrets.",
-            "Using or sharing the info is a clear breach."
+            "<b>Step 1 — Recognize the taint.</b> The engineer KNOWS the former employer's confidential bid. That knowledge cannot be un-known, and any participation in the competing bid is now contaminated — even unconscious use is use.",
+            "<b>Step 2 — Apply the only clean remedy.</b> Recuse: step out of the project/bid entirely, and tell the current employer WHY only in terms that don't leak the secret ('I have a confidentiality conflict from prior employment').",
+            "<b>Step 3 — Eliminate the distractors.</b> Using the info to win = straightforward misappropriation (and likely illegal bid-rigging); sharing with the current employer just spreads the breach to more people; 'pretend not to know' fails because bias operates anyway — recusal exists precisely because pretending doesn't work."
           ],
-          a: "Recuse from the project.",
-          v: "Many firms maintain ethical walls or screen new hires from related projects to prevent this scenario."
+          a: "Recuse from the project entirely.",
+          v: "Industry practice mirrors the rule: firms build 'ethical walls' and screen new hires off matters involving their former employers — institutionalized recusal. Time note: the duty survives indefinitely; it does not expire when the engineer changes jobs ✓."
+
         })
       },
       { q: "Per most state laws and the NSPE Code, who is ultimately responsible for the technical accuracy of sealed engineering documents?",
@@ -406,14 +444,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Professional licensure makes the sealing engineer personally accountable for the work, regardless of who employed them or paid for the project.",
+          c: "The seal is a personal professional act, not a corporate one. Licensure law in every state ties responsibility for sealed work to the individual licensee who sealed it — the concept is called 'responsible charge': direct control and personal supervision of the work.",
           s: [
-            "A seal certifies that the engineer prepared the work or supervised its preparation.",
-            "Disciplinary action by the state board applies to the sealing engineer.",
-            "Even if a junior engineer drafted, the sealing PE is responsible."
+            "<b>Step 1 — What sealing asserts.</b> 'I prepared this work, or it was prepared under my responsible charge, and I take professional responsibility for its technical content.'",
+            "<b>Step 2 — Trace the accountability.</b> If the design fails: the state board disciplines the SEALING engineer (license suspension/revocation); civil liability also lands on the engineer/firm — but the professional accountability never transfers to contractor, owner, or lawyers.",
+            "<b>Step 3 — Eliminate the distractors.</b> The contractor is responsible for BUILDING per the documents (means and methods), not for their engineering content; the owner commissions and pays but exercises no engineering judgment; legal counsel advises on law, not on load paths."
           ],
-          a: "The sealing engineer.",
-          v: "This is why responsible charge requires direct knowledge and control of the work."
+          a: "The engineer who seals the documents.",
+          v: "Corollary the FE loves: a junior engineer may draft every sheet, but the sealing PE answers for all of it — which is why 'plan stamping' (sealing work you never supervised) is among the most-disciplined violations in every state. Responsible charge requires the ABILITY to answer for the work, not just the willingness ✓."
+
         })
       },
       { q: "Engineer A is paid by both the client and a contractor on the same project, without disclosing to either party. This is:",
@@ -425,14 +464,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "§II.4.a: engineers shall disclose all known or potential conflicts of interest to their employers/clients in writing.",
+          c: "§II.4.a-b: disclose all known or potential conflicts of interest in writing, and do not accept compensation from more than one party for services on the same project — unless the circumstances are fully disclosed and agreed to by ALL interested parties.",
           s: [
-            "Receiving compensation from multiple parties on the same project is a textbook conflict.",
-            "Even with full disclosure, the engineer needs informed written consent from both.",
-            "Hidden dual-compensation is forbidden."
+            "<b>Step 1 — See why dual pay is a conflict.</b> Client and contractor have structurally opposed interests on the same project (cost, schedule, change orders, quality acceptance). An engineer paid by both serves two masters whose interests collide — judgment for one is bias against the other.",
+            "<b>Step 2 — Note the aggravator: secrecy.</b> The payments are undisclosed. Even the narrow exception (dual compensation WITH informed written consent of everyone) is unavailable — concealment converts a manageable conflict into a violation.",
+            "<b>Step 3 — Eliminate the distractors.</b> 'Reasonable amounts' — size doesn't cure divided loyalty; 'work quality is high' — the harm is to trust and fair dealing, not necessarily to the calculations; 'builds relationships' mistakes the corruption mechanism for a feature."
           ],
-          a: "Conflict of interest — must disclose in writing.",
-          v: "Even academic peer review requires conflict-of-interest disclosure for the same reason."
+          a: "Conflict of interest — written disclosure to all parties (and consent) is mandatory; hidden dual pay is prohibited.",
+          v: "Generalization worth keeping: COMPENSATION follows DISCLOSURE in the code — every fee, commission, or benefit connected to your professional role must be visible to the parties it could influence. The same logic governs academic peer review and government procurement ✓."
+
         })
       },
       { q: "An engineer is asked to advertise their services. Which is ethical per NSPE §III.3?",
@@ -444,14 +484,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Advertising must be truthful and dignified; avoid misleading or self-laudatory statements.",
+          c: "§III.3: avoid all conduct or practice that deceives the public — advertising included. The test for engineering ads is simple: factual, verifiable, dignified. Engineers may inform; they may not puff, guarantee, or disparage.",
           s: [
-            "Factual qualifications are encouraged — clients need to evaluate competence.",
-            "Guarantees of outcome misrepresent the nature of engineering work.",
-            "Disparaging competitors violates §III.7."
+            "<b>Step 1 — Apply the test to each choice.</b> Factual statements of services, qualifications, and experience: verifiable facts → permitted (clients NEED this to select competent help).",
+            "<b>Step 2 — Why the others fail.</b> 'Guaranteed best results' promises an OUTCOME — engineering work manages uncertainty and cannot honestly guarantee results (deceptive); personal disparagement of other engineers violates §III.7 (do not injure others' professional reputation maliciously); anonymous unverifiable testimonials fail the truthfulness test by construction.",
+            "<b>Step 3 — The principle behind the rule.</b> Engineering services are 'credence goods' — clients cannot easily judge quality before (or even after) buying. Truthful advertising is the only kind that doesn't exploit that asymmetry."
           ],
-          a: "Factual statements only.",
-          v: "Engineers may say what they have done, but not promise specific future results."
+          a: "Factual statements about services, qualifications, and experience.",
+          v: "Quick screen for any ad-ethics question: could every sentence be proven true from records? 'We designed 40 MW of solar interconnections' — provable ✓. 'We are the best in the state' — not provable ✗. Provable wins."
+
         })
       },
       { q: "An engineer signs a contract for personal services and then realizes they will be too busy to perform. Ethically, they should:",
@@ -463,14 +504,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "§II.4 honesty and §III.6 fair dealing require transparency in contractual matters.",
+          c: "Honesty and fair dealing (§II.4 family, §III.6... the fair-dealing obligations) extend to BUSINESS conduct, not just calculations: an engineer who cannot deliver what they promised must say so — promptly, to the person owed the promise.",
           s: [
-            "Notify the client immediately upon recognition of inability.",
-            "Offer to recommend qualified colleagues or formally renegotiate.",
-            "Subcontracting without consent is a breach of trust."
+            "<b>Step 1 — Identify the duty the moment capacity changes.</b> The client contracted for THIS engineer's personal services. Discovering you cannot perform creates an immediate duty to inform — silence converts a scheduling problem into a deception.",
+            "<b>Step 2 — Offer remedies in good faith.</b> Recommend qualified colleagues, renegotiate scope/schedule, or release the client from the contract. The client — the injured party — chooses among them.",
+            "<b>Step 3 — Eliminate the distractors.</b> Subcontracting WITHOUT consent substitutes a different (unvetted) engineer for the one the client chose — most service contracts expressly forbid it; performing poorly harms the client and the profession; ignoring the contract is breach plus concealment."
           ],
-          a: "Notify the client promptly.",
-          v: "Most professional services contracts explicitly require consent before subcontracting."
+          a: "Notify the client promptly and arrange alternate help or release.",
+          v: "Pattern across the whole ethics chapter: when circumstances change against you, the ethical move is always PROMPT + WRITTEN + TO THE AFFECTED PARTY. Late disclosure is the second-most-common aggravator in board discipline cases, right after no disclosure ✓."
+
         })
       },
       { q: "Public safety vs. client confidentiality: which generally wins under NSPE Code?",
@@ -482,14 +524,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "NSPE §I.1: hold paramount the safety, health, and welfare of the public — this is the FIRST canon.",
+          c: "The canons are ORDERED on purpose. Canon I.1 (public safety, health, welfare — 'paramount') sits above the duties of faithful agency and confidentiality owed to clients (II.1.c, III.4). When they collide head-on, safety wins — every time.",
           s: [
-            "When confidentiality conflicts with public safety, the engineer must disclose to appropriate authorities.",
-            "This may require prior written notice to the client.",
-            "The engineer’s license can be revoked for failing to act on a known public hazard."
+            "<b>Step 1 — Understand 'paramount'.</b> The word means 'above all others' — the code's authors chose it to settle exactly this conflict in advance. Confidentiality is a REAL duty, but it is subordinate.",
+            "<b>Step 2 — Apply the escalation discipline.</b> Winning doesn't mean leaking first: notify the client of the hazard and the intent to disclose; give them the chance to fix or report it themselves; THEN go to the authorities if they refuse. Ordered escalation honors both duties as far as possible.",
+            "<b>Step 3 — Eliminate the distractors.</b> 'Clients pay' — payment buys services, not silence about hazards; 'dollar value' — the code has no monetary threshold on human safety; 'manager's preference' — ethical duties are personal to the licensee and cannot be reassigned by org chart."
           ],
-          a: "Public safety is paramount.",
-          v: "Example: a chemical engineer aware of an unreported toxic leak must notify regulators even if the employer disagrees."
+          a: "Public safety always takes precedence.",
+          v: "License-level check: state boards can revoke a PE license for FAILING to report a known public hazard — the law enforces the same priority the code declares. The hierarchy to memorize: PUBLIC > client > employer > self; expect 2-3 FE questions to reduce to exactly this line ✓."
+
         })
       }
     ],
@@ -500,120 +543,138 @@
         choices: ["\\$680.58", "\\$1,469.33", "\\$925.93", "\\$1,000"],
         correct: 0,
         solution: S({
-          c: "Single-payment present worth: $P = F(1+i)^{-n}$ where $F$ = future, $i$ = period rate, $n$ = periods.",
+          c: "Time value of money — the foundation of this chapter: a dollar later is worth less than a dollar now, because money in hand can earn interest. 'Present worth' asks: how much must I invest TODAY at rate $i$ to grow into $F$ after $n$ years? $P = F(1+i)^{-n}$.",
           s: [
-            "$P = 1000 \\times (1.08)^{-5}$.",
-            "$(1.08)^{5} = 1.46933$.",
-            "$P = 1000 / 1.46933 = \\$680.58$."
+            "<b>Step 1 — Identify the pieces.</b> $F = \\$1{,}000$; $i = 8\\% = 0.08$/yr; $n = 5$ years.",
+            "<b>Step 2 — Growth factor.</b> $(1.08)^{5} = 1.4693$ — a dollar grows ~47% in 5 years at 8%.",
+            "<b>Step 3 — Discount (divide).</b> $P = 1000/1.4693 = \\$680.58$.",
+            "<b>Step 4 — Distractor audit.</b> \\$1,469.33 goes the WRONG direction (that is the future value of \\$1,000); \\$925.93 discounts only one year; \\$1,000 ignores time value."
           ],
-          a: "\\$680.58",
-          v: "Forward check: \\$680.58 × $(1.08)^{5}$ = \\$1,000 ✓."
+          a: "$P = \\$680.58$",
+          v: "Round trip: $680.58 \\times 1.4693 = \\$1{,}000$ ✓. Rule-of-72 anchor: at 8% money doubles in ~9 yr, so 5 years is most of a half-doubling — \\$680 → \\$1,000 fits ✓."
+
         })
       },
       { q: "Equal annual deposits of \\$200 are made into an account earning 6%/yr for 10 years. Future worth?",
         choices: ["\\$2,636.16", "\\$2,000", "\\$3,200", "\\$1,800"],
         correct: 0,
         solution: S({
-          c: "Future worth of an annuity (uniform series compound amount factor F/A,i,n): $F = A\\,\\dfrac{(1+i)^{n}-1}{i}$.",
+          c: "A uniform series (annuity) = equal payments $A$ at the END of each period. Future worth adds every deposit PLUS the interest each one earns: $F = A\\cdot\\dfrac{(1+i)^{n}-1}{i}$ — the (F/A, i, n) factor.",
           s: [
-            "$A = 200,\\ i = 0.06,\\ n = 10$.",
-            "$(1.06)^{10} = 1.7908$.",
-            "$F/A = (1.7908 - 1)/0.06 = 13.181$.",
-            "$F = 200 \\times 13.181 = \\$2,636.16$."
+            "<b>Step 1 — Pieces.</b> $A = \\$200$, $i = 6\\%$, $n = 10$.",
+            "<b>Step 2 — Factor.</b> $(1.06)^{10} = 1.7908 \\Rightarrow (F/A) = (1.7908-1)/0.06 = 13.181$.",
+            "<b>Step 3 — Scale.</b> $F = 200 \\times 13.181 = \\$2{,}636.16$.",
+            "<b>Step 4 — Where the formula comes from.</b> First deposit compounds 9 years, second 8, … last 0 — the factor is that geometric series in closed form."
           ],
-          a: "\\$2,636.16",
-          v: "Total deposited $200 \\times 10 = \\$2,000$. Interest earned $\\approx \\$636$ — reasonable for 6% / 10 years."
+          a: "$F = \\$2{,}636.16$",
+          v: "Bounds: with zero interest $F$ = \\$2,000 (total deposits); a \\$2,000 lump sum for 10 yr at 6% would beat \\$3,500. An annuity must land between — \\$2,636 does ✓; the \\$636 is accumulated interest."
+
         })
       },
       { q: "A machine costs \\$50,000, has 5-year life, \\$5,000 salvage. Straight-line annual depreciation?",
         choices: ["\\$9,000", "\\$10,000", "\\$45,000", "\\$8,000"],
         correct: 0,
         solution: S({
-          c: "Straight-line depreciation: $D = (P - S)/n$ where $P$ = initial cost, $S$ = salvage, $n$ = life in years.",
+          c: "Depreciation spreads an asset's cost over its life for accounting/taxes. STRAIGHT-LINE: equal amount every year, and you depreciate only what is truly lost — cost minus salvage: $D = (P - S)/n$.",
           s: [
-            "$D = (50{,}000 - 5{,}000)/5 = 45{,}000/5 = \\$9{,}000$/yr."
+            "<b>Step 1 — Depreciable amount.</b> $P - S = 50{,}000 - 5{,}000 = \\$45{,}000$ (the \\$5,000 salvage comes back at the end — never 'lost').",
+            "<b>Step 2 — Divide by life.</b> $D = 45{,}000/5 = \\$9{,}000$/yr.",
+            "<b>Step 3 — Distractor audit.</b> \\$10,000 forgets salvage; \\$45,000 is the TOTAL, not annual; \\$8,000 has no derivation."
           ],
-          a: "\\$9,000 per year",
-          v: "Total depreciation over 5 years = \\$45,000 = $P - S$ ✓."
+          a: "$D = \\$9{,}000$ per year.",
+          v: "Book-value walk: 50k → 41 → 32 → 23 → 14 → 5k — lands exactly on salvage after 5 years ✓. Exam contrast: MACRS ignores salvage and front-loads via table percentages; straight-line is the only equal-every-year method."
+
         })
       },
       { q: "Nominal annual rate is 12% compounded monthly. Effective annual rate?",
         choices: ["12.68%", "12%", "13%", "1%"],
         correct: 0,
         solution: S({
-          c: "Effective annual rate: $i_{\\text{eff}} = (1 + r/m)^{m} - 1$, $r$ = nominal annual, $m$ = compounding periods/yr.",
+          c: "'12% compounded monthly' does NOT mean 12% per year actually earned. It means 1% per month — and because each month's interest itself earns interest, the true (EFFECTIVE) annual rate is higher: $i_{eff} = (1 + r/m)^{m} - 1$.",
           s: [
-            "$r = 0.12,\\ m = 12$.",
-            "$i_{\\text{eff}} = (1.01)^{12} - 1 = 1.12683 - 1 = 0.12683 = 12.68\\%$."
+            "<b>Step 1 — Per-period rate.</b> $r/m = 0.12/12 = 0.01$ (1%/month).",
+            "<b>Step 2 — Compound 12 times.</b> $(1.01)^{12} = 1.12683$.",
+            "<b>Step 3 — Subtract 1.</b> $i_{eff} = 12.68\\%$.",
+            "<b>Step 4 — Distractor audit.</b> 12% is the NOMINAL rate (the planted trap); 1% is the monthly rate; 13% over-rounds."
           ],
-          a: "$i_{\\text{eff}} = 12.68\\%$",
-          v: "More frequent compounding → higher effective rate. Continuous compounding limit: $e^{0.12}-1 = 12.75\\%$."
+          a: "$i_{eff} = 12.68\\%$",
+          v: "Ordering check: annual 12.00% < monthly 12.68% < continuous $e^{0.12}-1 = 12.75\\%$ — more frequent compounding always raises the effective rate, with continuous as the ceiling ✓."
+
         })
       },
       { q: "Project A: NPV = +\\$10,000. Project B: NPV = +\\$8,000. Mutually exclusive. Which to choose (ignoring scale)?",
         choices: ["Project A", "Project B", "Both", "Neither"],
         correct: 0,
         solution: S({
-          c: "When projects are mutually exclusive and have similar scale, pick the one with higher NPV — it maximizes wealth.",
+          c: "NPV (net present value) = the wealth a project adds, measured in today's dollars. Decision rules: INDEPENDENT projects — accept all with NPV > 0; MUTUALLY EXCLUSIVE (only one can be chosen) — pick the LARGEST NPV.",
           s: [
-            "NPV(A) = +\\$10,000 > NPV(B) = +\\$8,000.",
-            "Both are profitable (positive NPV), but you can only pick one.",
-            "Choose A."
+            "<b>Step 1 — Apply the rule.</b> NPV(A) = +\\$10,000 > NPV(B) = +\\$8,000 → choose A; choosing B forfeits \\$2,000 of value.",
+            "<b>Step 2 — Why not 'both'.</b> Mutually exclusive means selecting one forecloses the other (same site/budget/function) — 'both' contradicts the premise.",
+            "<b>Step 3 — The waved-off caveat.</b> 'Ignoring scale' matters: with very different investment sizes you would also check incremental return. Similar scale → NPV decides directly."
           ],
           a: "Project A — higher NPV.",
-          v: "If scale differs greatly, also check incremental IRR or profitability index. For FE problems, NPV rule applies directly."
+          v: "Why NPV outranks IRR for ranking: NPV measures DOLLARS added at your real cost of capital; IRR is a percentage that can rank a tiny project above a wealth-maximizing big one. When they conflict, follow NPV ✓."
+
         })
       },
       { q: "An investment doubles in 9 years. Approximate annual interest rate (rule of 72)?",
         choices: ["~8%", "~5%", "~12%", "~15%"],
         correct: 0,
         solution: S({
-          c: "Rule of 72: doubling time $T_2 \\approx 72/i$ where $i$ is rate in percent.",
+          c: "Rule of 72 — the standard mental shortcut for compound growth: doubling time $\\approx 72/i$ (i in percent). It works because $\\ln 2 = 0.693$, and the small-rate correction pushes 69.3 to ~72 in the 5-12% range.",
           s: [
-            "$T_2 = 9$ years.",
-            "$i \\approx 72/9 = 8\\%$ per year."
+            "<b>Step 1 — Invert.</b> $T_2 = 9$ yr → $i \\approx 72/9 = 8\\%$.",
+            "<b>Step 2 — Distractor audit.</b> 5% doubles in ~14 yr, 12% in ~6 yr, 15% in ~5 yr — only 8% gives 9 years."
           ],
           a: "$i \\approx 8\\%$",
-          v: "Exact: $(1+i)^{9} = 2 \\Rightarrow i = 2^{1/9}-1 = 0.0801 = 8.01\\%$ — rule of 72 is excellent for rates 5–12%."
+          v: "Exact check: $2^{1/9} - 1 = 8.01\\%$ — the rule is good to a hundredth of a point here ✓. Handy pairs to remember: 72/6 = 12 yr, 72/8 = 9 yr, 72/9 = 8 yr."
+
         })
       },
       { q: "Capitalized cost of an asset costing \\$100,000 with \\$20,000 perpetual annual maintenance at $i = 10\\%$ is:",
         choices: ["\\$300,000", "\\$120,000", "\\$200,000", "\\$1,200,000"],
         correct: 0,
         solution: S({
-          c: "Capitalized cost = initial cost + present worth of perpetual annual cost. PW of perpetual annuity: $A/i$.",
+          c: "Capitalized cost = the single sum needed TODAY to buy an asset and fund its upkeep FOREVER. The 'forever' part is a perpetuity: a fund of $A/i$ pays out exactly $A$ every year at rate $i$ without ever shrinking.",
           s: [
-            "PW of perpetual maintenance = $20{,}000/0.10 = 200{,}000$.",
-            "Capitalized cost = $100{,}000 + 200{,}000 = \\$300{,}000$."
+            "<b>Step 1 — Price the perpetual maintenance.</b> $A/i = 20{,}000/0.10 = \\$200{,}000$.",
+            "<b>Step 2 — Add first cost.</b> $CC = 100{,}000 + 200{,}000 = \\$300{,}000$.",
+            "<b>Step 3 — Distractor audit.</b> \\$120,000 adds only ONE year of maintenance; \\$200,000 forgets the asset itself; \\$1.2M misplaces a decimal."
           ],
-          a: "\\$300,000",
-          v: "Capitalized cost is the amount you’d need today, invested at 10%, to fund the asset + maintenance forever."
+          a: "$CC = \\$300{,}000$",
+          v: "Endowment check: \\$200,000 at 10% yields \\$20,000/yr with principal intact — the definition of perpetual funding ✓. Use case: agencies evaluate dams/bridges/rights-of-way this way because their lives are effectively infinite."
+
         })
       },
       { q: "Cash flow: $-\\$1{,}000$ at year 0, then $+\\$300$/yr for 5 years. At $i = 10\\%$, NPV is:",
         choices: ["+\\$137.24", "+\\$500", "+\\$1,500", "$-\\$200$"],
         correct: 0,
         solution: S({
-          c: "NPV = $-P + A\\,(P/A, i, n)$ where $(P/A) = [1 - (1+i)^{-n}]/i$.",
+          c: "NPV of invest-then-collect: subtract the initial cost from the present worth of the equal annual inflows, priced with the (P/A) factor: $(P/A, i, n) = \\dfrac{1-(1+i)^{-n}}{i}$.",
           s: [
-            "$(P/A, 10\\%, 5) = [1 - 1.1^{-5}]/0.1 = [1 - 0.6209]/0.1 = 3.7908$.",
-            "PW of inflows = $300 \\times 3.7908 = \\$1{,}137.24$.",
-            "NPV = $-1{,}000 + 1{,}137.24 = +\\$137.24$."
+            "<b>Step 1 — Factor.</b> $(P/A, 10\\%, 5) = (1 - 1.1^{-5})/0.1 = (1 - 0.6209)/0.1 = 3.7908$ — five future \\$1 payments are worth \\$3.79 today.",
+            "<b>Step 2 — Price the inflows.</b> $300 \\times 3.7908 = \\$1{,}137.24$.",
+            "<b>Step 3 — Net.</b> NPV $= -1{,}000 + 1{,}137.24 = +\\$137.24$ → accept.",
+            "<b>Step 4 — Distractor audit.</b> +\\$500 is undiscounted ($5\\times300-1000$); +\\$1,500 forgets the cost; $-\\$200$ over-discounts."
           ],
-          a: "NPV = +\\$137.24 — accept the project.",
-          v: "Positive NPV at MARR = 10% ⇒ IRR > 10%. Quick estimate: ROI ~15%."
+          a: "NPV $= +\\$137.24$ — accept.",
+          v: "Bracket: at $i = 0$ NPV would be +\\$500 (ceiling); at high $i$ it goes negative — +\\$137 in between is consistent ✓. Read-through: NPV > 0 at 10% ⇒ IRR > 10% (actual ≈ 15.2%)."
+
         })
       },
       { q: "Benefit/Cost ratio of a project with PW(benefits) = \\$50,000 and PW(costs) = \\$40,000:",
         choices: ["1.25", "0.8", "1.0", "10,000"],
         correct: 0,
         solution: S({
-          c: "B/C = PW(benefits) / PW(costs). Accept if B/C ≥ 1.",
+          c: "The benefit-cost ratio — standard for PUBLIC-sector projects — compares what society receives to what it pays, both in present worth: $B/C = PW(\\text{benefits})/PW(\\text{costs})$; accept when $B/C \\ge 1$.",
           s: [
-            "B/C = 50,000 / 40,000 = 1.25 > 1 → project is economically justified."
+            "<b>Step 1 — Divide.</b> $B/C = 50{,}000/40{,}000 = 1.25$.",
+            "<b>Step 2 — Interpret.</b> Each \\$1 of cost returns \\$1.25 of benefit → justified.",
+            "<b>Step 3 — Distractor audit.</b> 0.8 inverts the ratio; 1.0 is the break-even THRESHOLD, not this project's value; 10,000 is the difference $B-C$ mislabeled as a ratio."
           ],
-          a: "B/C = 1.25",
-          v: "Equivalent to NPV = \\$10,000 > 0."
+          a: "$B/C = 1.25$ — economically justified.",
+          v: "Consistency: $B/C > 1 \\Leftrightarrow B-C > 0 \\Leftrightarrow$ NPV $= +\\$10{,}000 > 0$ — the criteria always agree on accept/reject ✓. Exam caution: COMPARING alternatives requires INCREMENTAL B/C (like IRR), never 'pick the biggest ratio'."
+
         })
       },
       { q: "Two alternatives have IRRs of 14% and 18%. MARR is 12%. Which is selected?",
@@ -625,14 +686,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Highest individual IRR may not be best when alternatives differ in scale — use incremental IRR analysis.",
+          c: "IRR = the discount rate making NPV zero — a PERCENTAGE measure. The trap: a small project can have a high percentage but add less total wealth than a big project with a lower one. Percentages alone cannot rank mutually exclusive choices.",
           s: [
-            "Both pass MARR (12%).",
-            "Compute incremental cash flow (larger initial − smaller initial) and find IRR.",
-            "Accept the larger investment if incremental IRR ≥ MARR."
+            "<b>Step 1 — Screen against MARR.</b> 14% and 18% both clear MARR = 12% — both acceptable alone; the question is which is BETTER.",
+            "<b>Step 2 — Why 'highest IRR' fails.</b> If the 18% project is small and the 14% one is large, the extra dollars in the large project may still earn above 12% — wealth forfeited by chasing the higher percentage.",
+            "<b>Step 3 — Correct procedure.</b> Form the incremental cash flow (larger minus smaller investment), compute the IRR of THAT, accept the larger iff incremental IRR ≥ MARR. (Equivalently: compare NPVs at 12%.)"
           ],
-          a: "Need incremental analysis.",
-          v: "Common FE trap: ‘always pick highest IRR’ fails when investment sizes differ."
+          a: "Cannot decide from individual IRRs — incremental analysis is required.",
+          v: "One-line numeric proof: A = \\$1k at 18% adds ~\\$60 of NPV; B = \\$100k at 14% adds ~\\$2,000 at MARR 12%. Highest-IRR picks A; wealth picks B ✓. FE answer pattern: any 'always pick highest IRR' option is bait."
+
         })
       }
     ],
@@ -643,118 +705,139 @@
         choices: ["$1.72\\,\\Omega$", "$0.172\\,\\Omega$", "$17.2\\,\\Omega$", "$172\\,\\Omega$"],
         correct: 0,
         solution: S({
-          c: "Resistance of uniform conductor: $R = \\rho L/A$. Convert area to SI units (m²).",
+          c: "Resistance of a uniform conductor: $R = \\rho L/A$. Intuition: resistivity $\\rho$ is the material's intrinsic opposition; doubling LENGTH doubles $R$ (longer obstacle course), doubling AREA halves it (more parallel lanes for electrons).",
           s: [
-            "$A = 1\\text{ mm}^{2} = 1\\times 10^{-6}\\text{ m}^{2}$.",
-            "$R = (1.72\\times 10^{-8})(100)/(1\\times 10^{-6})$.",
-            "$R = 1.72\\times 10^{-6}/10^{-6} = 1.72\\,\\Omega$."
+            "<b>Step 1 — Convert the area to SI.</b> $1\\,\\text{mm}^{2} = (10^{-3}\\,\\text{m})^{2} = 10^{-6}\\,\\text{m}^{2}$ — the classic trap is writing $10^{-3}$.",
+            "<b>Step 2 — Plug in.</b> $R = \\dfrac{(1.72\\times10^{-8})(100)}{10^{-6}}$.",
+            "<b>Step 3 — Evaluate.</b> $= \\dfrac{1.72\\times10^{-6}}{10^{-6}} = 1.72\\,\\Omega$.",
+            "<b>Step 4 — Distractor audit.</b> 0.172 / 17.2 / 172 are all decade slips from that single unit conversion."
           ],
           a: "$R = 1.72\\,\\Omega$",
-          v: "Rule of thumb: 1 mm²·m of copper ≈ 17.2 mΩ; multiplied by 100 m = 1.72 Ω ✓."
+          v: "Anchor worth memorizing: copper ≈ 17.2 mΩ per meter per mm² → 100 m of 1 mm² wire = 1.72 Ω ✓. Practical feel: at 10 A this wire would drop 17 V and burn 172 W — why long runs use fatter conductors."
+
         })
       },
       { q: "Capacitance of a parallel-plate capacitor: plate area $A=10\\,\\text{cm}^{2}$, gap $d=1\\,\\text{mm}$, vacuum. ($\\varepsilon_0=8.854\\times 10^{-12}$ F/m)",
         choices: ["$8.85\\,\\text{pF}$", "$88.5\\,\\text{pF}$", "$0.885\\,\\text{pF}$", "$8.85\\,\\text{nF}$"],
         correct: 0,
         solution: S({
-          c: "$C = \\varepsilon_0\\varepsilon_r A/d$ — capacitance of parallel plates.",
+          c: "Parallel-plate capacitance: $C = \\varepsilon_0\\varepsilon_r A/d$. Bigger plates (A↑) store more charge at the same voltage; a smaller gap (d↓) increases the field's grip. Vacuum → $\\varepsilon_r = 1$.",
           s: [
-            "$A = 10\\text{ cm}^{2} = 10\\times 10^{-4}\\text{ m}^{2} = 10^{-3}\\text{ m}^{2}$.",
-            "$d = 10^{-3}\\text{ m}$.",
-            "$C = 8.854\\times 10^{-12} \\times 10^{-3}/10^{-3} = 8.854\\times 10^{-12}\\text{ F} = 8.85\\text{ pF}$."
+            "<b>Step 1 — Convert units.</b> $A = 10\\,\\text{cm}^{2} = 10\\times10^{-4} = 10^{-3}\\,\\text{m}^{2}$; $d = 1\\,\\text{mm} = 10^{-3}$ m.",
+            "<b>Step 2 — Plug in.</b> $C = \\dfrac{(8.854\\times10^{-12})(10^{-3})}{10^{-3}} = 8.854\\times10^{-12}$ F — here $A/d$ happens to equal 1, so the answer is $\\varepsilon_0$ itself.",
+            "<b>Step 3 — Name the prefix.</b> $10^{-12}$ F = picofarad → 8.85 pF.",
+            "<b>Step 4 — Distractor audit.</b> 88.5 pF and 0.885 pF are one-decade slips in the cm² conversion; 8.85 nF is three decades off."
           ],
           a: "$C \\approx 8.85$ pF",
-          v: "Adding a dielectric (e.g. mylar with $\\varepsilon_r = 3.2$) would scale $C$ proportionally to 28.3 pF."
+          v: "Scale feel: air-gap plate capacitors are always pF-class — to reach μF, real parts use thin dielectrics, huge rolled areas, or electrolytes. Dielectric check: mylar ($\\varepsilon_r = 3.2$) in the gap scales C to ~28 pF ✓."
+
         })
       },
       { q: "Temperature coefficient of copper $\\alpha_{20} = 0.00393\\,/°C$. A 10-Ω wire at 20°C heats to 80°C. New resistance?",
         choices: ["$12.36\\,\\Omega$", "$10\\,\\Omega$", "$14.7\\,\\Omega$", "$8.0\\,\\Omega$"],
         correct: 0,
         solution: S({
-          c: "Linear model: $R_T = R_{20}[1 + \\alpha(T - 20)]$.",
+          c: "Metal resistance RISES with temperature: a hotter lattice vibrates more and scatters electrons more often. Linear model: $R_T = R_{ref}[1 + \\alpha(T - T_{ref})]$, with $\\alpha$ the fractional change per °C from the reference (20°C here).",
           s: [
-            "$\\Delta T = 80 - 20 = 60\\,°C$.",
-            "$R_T = 10[1 + 0.00393 \\times 60] = 10[1 + 0.2358] = 10 \\times 1.2358 = 12.36\\,\\Omega$."
+            "<b>Step 1 — Temperature rise.</b> $\\Delta T = 80 - 20 = 60$°C.",
+            "<b>Step 2 — Fractional increase.</b> $\\alpha\\Delta T = 0.00393\\times60 = 0.2358$ → +23.6%.",
+            "<b>Step 3 — Scale.</b> $R = 10(1.2358) = 12.36\\,\\Omega$.",
+            "<b>Step 4 — Distractor audit.</b> 10 Ω ignores heating; 8 Ω goes the WRONG direction (semiconductors drop with heat, metals rise); 14.7 over-multiplies."
           ],
           a: "$R \\approx 12.36\\,\\Omega$",
-          v: "Copper resistance increases ~0.39% per °C — significant in transformer/motor windings."
+          v: "Rate anchor: copper ≈ +0.39%/°C ✓. Engineering relevance: windings run 60-100°C hot, so loss calculations must use HOT resistance — a >20% correction; the same physics is how RTD thermometers measure temperature."
+
         })
       },
       { q: "Energy stored in a 100-μF capacitor charged to 50 V:",
         choices: ["$125\\,\\text{mJ}$", "$5\\,\\text{mJ}$", "$2.5\\,\\text{J}$", "$0.5\\,\\text{J}$"],
         correct: 0,
         solution: S({
-          c: "$W_C = \\tfrac{1}{2}CV^{2}$ — energy stored in the electric field of a capacitor.",
+          c: "A charged capacitor stores energy in its electric field: $W = \\tfrac12CV^{2}$. The square matters — doubling voltage QUADRUPLES the energy.",
           s: [
-            "$C = 100\\,\\mu\\text{F} = 10^{-4}\\text{ F},\\ V = 50\\text{ V}$.",
-            "$W = 0.5 \\times 10^{-4} \\times 2500 = 0.125\\text{ J} = 125\\text{ mJ}$."
+            "<b>Step 1 — Convert.</b> $C = 100\\,\\mu\\text{F} = 10^{-4}$ F.",
+            "<b>Step 2 — Square the voltage.</b> $V^{2} = 2500$.",
+            "<b>Step 3 — Evaluate.</b> $W = 0.5\\times10^{-4}\\times2500 = 0.125$ J $= 125$ mJ.",
+            "<b>Step 4 — Distractor audit.</b> 5 mJ ≈ forgetting to square; 0.5 J and 2.5 J are decade/half slips."
           ],
           a: "$W = 125$ mJ",
-          v: "Equivalent: $W = \\tfrac12 QV$ where $Q = CV = 5$ mC."
+          v: "Cross-check via charge: $Q = CV = 5$ mC, $W = \\tfrac12QV = \\tfrac12(0.005)(50) = 0.125$ J ✓ — two formulas, one answer. The dual pair to memorize: capacitor $\\tfrac12CV^{2}$ ↔ inductor $\\tfrac12LI^{2}$."
+
         })
       },
       { q: "An inductor stores 0.5 J with $I = 2$ A flowing. Find $L$.",
         choices: ["$0.25\\,\\text{H}$", "$0.5\\,\\text{H}$", "$1\\,\\text{H}$", "$2\\,\\text{H}$"],
         correct: 0,
         solution: S({
-          c: "Inductor energy: $W_L = \\tfrac{1}{2}LI^{2}$.",
+          c: "An inductor stores energy in its MAGNETIC field — the exact dual of the capacitor: $W = \\tfrac12LI^{2}$, with current in the role of voltage.",
           s: [
-            "Rearrange: $L = 2W/I^{2} = 2(0.5)/2^{2} = 1/4 = 0.25$ H."
+            "<b>Step 1 — Rearrange.</b> $L = 2W/I^{2}$.",
+            "<b>Step 2 — Plug in.</b> $L = \\dfrac{2(0.5)}{4} = 0.25$ H.",
+            "<b>Step 3 — Distractor audit.</b> 0.5 H drops the factor 2; 1 H forgets to square the current; 2 H does both."
           ],
           a: "$L = 0.25$ H",
-          v: "Field energy density: $w = B^{2}/(2\\mu)$ — relates to flux density."
+          v: "Forward check: $\\tfrac12(0.25)(2^{2}) = 0.5$ J ✓. Duality table (half of transient intuition): capacitor — resists VOLTAGE change, DC steady state = open; inductor — resists CURRENT change, DC steady state = short."
+
         })
       },
       { q: "A semiconductor’s intrinsic carrier concentration $n_i$ at room temperature in silicon is approximately:",
         choices: ["$1.5\\times 10^{10}\\,\\text{cm}^{-3}$", "$1.5\\times 10^{15}\\,\\text{cm}^{-3}$", "$2.5\\times 10^{19}\\,\\text{cm}^{-3}$", "$1\\times 10^{6}\\,\\text{cm}^{-3}$"],
         correct: 0,
         solution: S({
-          c: "Intrinsic concentration in undoped Si at 300 K is a key constant; for Ge it’s $\\sim 2.4\\times 10^{13}$ and GaAs $\\sim 2\\times 10^{6}$.",
+          c: "An INTRINSIC (undoped) semiconductor has only thermally generated carriers: heat occasionally kicks an electron across the band gap, leaving a hole behind. The room-temperature count is a benchmark constant: for silicon $n_i \\approx 1.5\\times10^{10}\\,\\text{cm}^{-3}$.",
           s: [
-            "Silicon $n_i(300\\text{ K}) \\approx 1.5\\times 10^{10}\\text{ cm}^{-3}$.",
-            "Doping above this dominates electron/hole concentrations in extrinsic semiconductors."
+            "<b>Step 1 — Recall the benchmark.</b> Si at 300 K: $n_i \\approx 1.5\\times10^{10}$/cm³ — tiny, because the 1.12-eV gap is ~45× the thermal energy $kT \\approx 26$ meV.",
+            "<b>Step 2 — Place the distractors.</b> $1.5\\times10^{15}$ is a typical light DOPING level; $2.5\\times10^{19}$ is effective-density-of-states territory; $10^{6}$ is GaAs's much-smaller $n_i$ (wider gap).",
+            "<b>Step 3 — Why it matters.</b> Any practical doping ($10^{14}$-$10^{18}$) swamps $n_i$ — exactly why doping gives such precise control of silicon devices."
           ],
-          a: "$1.5\\times 10^{10}$/cm³",
-          v: "For doped Si with $N_D = 10^{16}$: minority carriers $p \\approx n_i^{2}/N_D \\approx 2.25\\times 10^{4}$/cm³."
+          a: "$n_i \\approx 1.5\\times10^{10}\\ \\text{cm}^{-3}$",
+          v: "Perspective: silicon has $5\\times10^{22}$ atoms/cm³ — only ~1 atom in $3\\times10^{12}$ contributes a carrier; intrinsic Si is nearly an insulator ✓. Companion law (mass action): $np = n_i^{2}$ — dope to $N_D = 10^{16}$ and minority holes fall to ~$2\\times10^{4}$/cm³."
+
         })
       },
       { q: "Hall effect coefficient $R_H = -V_H t / (I B)$. For n-type material, $R_H$ is:",
         choices: ["Negative", "Positive", "Zero", "Imaginary"],
         correct: 0,
         solution: S({
-          c: "Hall coefficient sign depends on majority-carrier charge: negative for electrons, positive for holes.",
+          c: "Hall effect: drive current through a slab in a magnetic field, and the Lorentz force $q\\vec v\\times\\vec B$ pushes the moving carriers toward one edge. The SIGN of the resulting transverse (Hall) voltage exposes the sign of the carriers: $R_H = 1/(nq)$.",
           s: [
-            "n-type: majority carriers are electrons (charge $-e$).",
-            "$R_H = 1/(nq)$ with $q = -e \\Rightarrow R_H < 0$.",
-            "Sign-reversal in Hall voltage is the classic way to distinguish n-type from p-type."
+            "<b>Step 1 — Identify the carriers.</b> n-type: majority carriers are electrons, $q = -e$.",
+            "<b>Step 2 — Apply the sign.</b> $R_H = 1/(n(-e)) < 0$.",
+            "<b>Step 3 — Picture.</b> Electrons drift opposite conventional current, but the magnetic push still piles them on one specific edge — that edge goes negative, opposite to a p-type sample's polarity."
           ],
-          a: "Negative.",
-          v: "Magnitude: $|R_H| = 1/(n e)$ — used to extract carrier density experimentally."
+          a: "Negative for n-type material.",
+          v: "Why famous: conductivity alone cannot distinguish electrons from holes — the Hall SIGN can; it is the standard wafer-typing measurement ✓. Bonus: $|R_H| = 1/(ne)$ also yields the carrier density; phone compasses and motor sensors are Hall devices."
+
         })
       },
       { q: "Resistance of a 1 km transmission cable with ACSR conductor of $\\rho = 2.83\\times 10^{-8}\\,\\Omega\\cdot$m and $A = 100\\,\\text{mm}^{2}$.",
         choices: ["$0.283\\,\\Omega/\\text{km}$", "$2.83\\,\\Omega/\\text{km}$", "$28.3\\,\\Omega/\\text{km}$", "$0.0283\\,\\Omega/\\text{km}$"],
         correct: 0,
         solution: S({
-          c: "$R = \\rho L/A$. Watch units: $A$ in m².",
+          c: "Same law as any wire: $R = \\rho L/A$. ACSR = Aluminum Conductor, Steel Reinforced — the standard overhead transmission line: aluminum strands carry current, the steel core carries mechanical tension.",
           s: [
-            "$A = 100\\text{ mm}^{2} = 10^{-4}\\text{ m}^{2}$.",
-            "$R = (2.83\\times 10^{-8})(1000)/(10^{-4}) = 2.83\\times 10^{-1}$ Ω = 0.283 Ω."
+            "<b>Step 1 — Convert the area.</b> $100\\,\\text{mm}^{2} = 10^{-4}\\,\\text{m}^{2}$.",
+            "<b>Step 2 — Plug in for 1 km.</b> $R = \\dfrac{(2.83\\times10^{-8})(1000)}{10^{-4}} = 0.283\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 2.83, 0.0283, 28.3 — all decade slips from the mm²→m² conversion."
           ],
           a: "$R \\approx 0.283\\,\\Omega$/km",
-          v: "Aluminum has higher $\\rho$ than copper but lower cost/density — common in transmission lines."
+          v: "Material logic: aluminum's ρ is ~1.6× copper's, but per unit of conductance it is far lighter and cheaper — every overhead line is aluminum ✓. Loss feel: 300 A over 100 km dissipates $I^{2}R = 300^{2}\\times28.3 \\approx 2.5$ MW — the reason transmission uses high voltage to keep current low."
+
         })
       },
       { q: "Magnetic flux density $B = 1.2$ T inside a core. Cross-section $A = 0.01$ m². Magnetic flux?",
         choices: ["$0.012$ Wb", "$120$ Wb", "$1.2$ Wb", "$0.12$ Wb"],
         correct: 0,
         solution: S({
-          c: "Flux: $\\Phi = BA$ (when $B$ perpendicular to $A$).",
+          c: "Flux vs flux density — the most-confused pair in magnetics: $B$ (tesla) is how DENSE the field lines are; $\\Phi$ (weber) is how MANY lines cross a given area: $\\Phi = BA$ for a uniform perpendicular field.",
           s: [
-            "$\\Phi = 1.2\\text{ T} \\times 0.01\\text{ m}^{2} = 0.012\\text{ Wb} = 12\\text{ mWb}$."
+            "<b>Step 1 — Multiply.</b> $\\Phi = 1.2\\times0.01 = 0.012$ Wb = 12 mWb.",
+            "<b>Step 2 — Unit check.</b> T·m² = Wb by definition ✓.",
+            "<b>Step 3 — Distractor audit.</b> 1.2 Wb echoes $B$; 0.12 and 120 are decade slips on the area."
           ],
           a: "$\\Phi = 0.012$ Wb (12 mWb)",
-          v: "Faraday: induced voltage $|v| = N\\,d\\Phi/dt$ — 1 Wb/s through 1 turn produces 1 V."
+          v: "Realism anchor: 1.2 T is typical working flux density for transformer steel (saturates ~1.7 T) ✓. Why flux matters: Faraday's law $v = N\\,d\\Phi/dt$ runs on Φ — collapse this flux through 100 turns in 10 ms and you generate 120 V."
+
         })
       },
       { q: "Curie temperature of a ferromagnetic material is the temperature at which:",
@@ -766,13 +849,14 @@
         ],
         correct: 0,
         solution: S({
-          c: "Curie point — thermal energy overcomes exchange coupling between aligned spins.",
+          c: "Ferromagnetism exists because neighboring atomic spins lock parallel (quantum exchange coupling). Heat fights the alignment; the CURIE TEMPERATURE $T_C$ is where thermal agitation wins and spontaneous magnetization collapses.",
           s: [
-            "Below $T_C$: spins align spontaneously → ferromagnetism.",
-            "Above $T_C$: thermal randomization → paramagnetic behavior with susceptibility $\\chi \\propto 1/(T-T_C)$ (Curie–Weiss law)."
+            "<b>Step 1 — Below vs above.</b> Below $T_C$: spins align in domains → ferromagnetic. Above $T_C$: orientations randomize → merely PARAMAGNETIC (weak attraction, no permanent magnetism), with $\\chi \\propto 1/(T-T_C)$ (Curie-Weiss).",
+            "<b>Step 2 — Eliminate the distractors.</b> Zero resistance = SUPERCONDUCTING transition (different physics, usually cryogenic); melting is structural and far hotter (Fe: $T_C$ = 770°C, melts 1538°C); dielectric breakdown belongs to insulators under field."
           ],
-          a: "Loss of spontaneous magnetization (transition to paramagnet).",
-          v: "Examples: $T_C(\\text{Fe}) = 1043$ K, $T_C(\\text{Ni}) = 627$ K. Used in temperature sensors."
+          a: "The temperature where spontaneous magnetization disappears — ferromagnet → paramagnet.",
+          v: "Recognizable values: Fe 1043 K, Ni 627 K, Co 1394 K. Applications: rice cookers shut off via a magnet releasing at its Curie point; magnetic storage must stay well below $T_C$ ✓. Reversible: cool down and ferromagnetism returns — a phase transition, not damage."
+
         })
       }
     ],
