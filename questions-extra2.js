@@ -948,162 +948,180 @@
         choices: ["Infinite", "$1$ V/µs", "$10$ V/µs", "$0$"],
         correct: 0,
         solution: S({
-          c: "Ideal op-amp assumptions: infinite gain, infinite input impedance, zero output impedance, infinite bandwidth, infinite slew rate.",
+          c: "The IDEAL op-amp is a list of infinities/zeros that make circuit analysis trivial: infinite gain, infinite input impedance, zero output impedance, infinite bandwidth — and infinite SLEW RATE (the maximum speed, in V/µs, the output can change).",
           s: [
-            "Real op-amps have finite slew rate (e.g., 0.5-50 V/µs typical).",
-            "Slew rate limits how fast the output can change."
+            "<b>Step 1 — Apply the idealization.</b> Ideal → output can jump instantaneously → slew rate infinite.",
+            "<b>Step 2 — Why the parameter exists.</b> REAL op-amps charge internal compensation capacitors with limited current, capping $dv/dt$ at typically 0.5-50 V/µs.",
+            "<b>Step 3 — Distractor audit.</b> 1 and 10 V/µs are REAL device specs (LM741 ≈ 0.5, TL081 ≈ 13); zero would mean a frozen output."
           ],
-          a: "Infinite (ideal)",
-          v: "Slow op-amp + fast signal → triangular distortion of square wave."
+          a: "Infinite (for the ideal model).",
+          v: "Why it matters practically: a 10-V peak sine at frequency $f$ needs slew $\\ge 2\\pi f V_p$ — at 100 kHz that is 6.3 V/µs, beyond a 741 ✓. The symptom of slew limiting: sine waves leave as triangles."
+
         }),
         ref: "Handbook p.380" },
       { q: "Op-amp follower (voltage buffer): $v_{out}/v_{in}$ =",
         choices: ["$1$", "$\\infty$", "$-1$", "$0$"],
         correct: 0,
         solution: S({
-          c: "Voltage follower = non-inverting amp with feedback = direct connection (no $R_f$, $R_{in}$ infinite or absent). Gain $= 1$.",
+          c: "The voltage follower (buffer) feeds the output straight back to the inverting input — 100% feedback. The virtual-short rule ($V_- = V_+$) then forces $v_{out} = v_{in}$ exactly: gain 1.",
           s: [
-            "Special case of non-inverting: $1 + R_f/R_{in}$ with $R_f = 0$, $R_{in} = \\infty$ → gain = 1."
+            "<b>Step 1 — See it as the non-inverting limit.</b> $A_v = 1 + R_f/R_g$ with $R_f = 0$ (wire) → $A_v = 1$.",
+            "<b>Step 2 — Then why use it?</b> It transforms IMPEDANCE, not voltage: near-infinite input impedance (doesn't load the source), near-zero output impedance (drives any load).",
+            "<b>Step 3 — Distractor audit.</b> ∞ is the OPEN-loop gain (no feedback); −1 is an inverting unity stage (different circuit); 0 is no circuit at all."
           ],
-          a: "Gain = 1 (unity)",
-          v: "Use: impedance matching/isolation. Very high input Z, very low output Z."
+          a: "Gain $= 1$ (unity).",
+          v: "Canonical use case: a high-impedance sensor (pH probe, ~GΩ) cannot drive a 10-kΩ ADC input directly — inserting a follower preserves the voltage while supplying the current ✓. Voltage unchanged; CAPABILITY transformed."
+
         }),
         ref: "Handbook p.380" },
       { q: "An op-amp differentiator: input $v_{in}(t) = 3t$ V (ramp), $R = 1$ k$\\Omega$, $C = 1$ µF. Output:",
         choices: ["$-3$ mV (constant)", "$+3$ V", "$0$", "Ramp output"],
         correct: 0,
         solution: S({
-          c: "Op-amp differentiator: $v_{out} = -RC \\cdot (dv_{in}/dt)$.",
+          c: "An op-amp differentiator (input C, feedback R, inverting) outputs the input's rate of change, scaled and inverted: $v_{out} = -RC\\,\\dfrac{dv_{in}}{dt}$. A RAMP input has a CONSTANT slope, so the output is a constant level.",
           s: [
-            "$dv_{in}/dt = 3$ V/s.",
-            "$RC = 10^3 \\cdot 10^{-6} = 10^{-3}$.",
-            "$v_{out} = -10^{-3} \\cdot 3 = -3 \\times 10^{-3}$ V = $-3$ mV."
+            "<b>Step 1 — Slope of the input.</b> $v_{in} = 3t \\Rightarrow dv/dt = 3$ V/s.",
+            "<b>Step 2 — Scale factor.</b> $RC = (10^{3})(10^{-6}) = 10^{-3}$ s.",
+            "<b>Step 3 — Output.</b> $v_{out} = -10^{-3}\\times3 = -3$ mV, constant.",
+            "<b>Step 4 — Distractor audit.</b> +3 V drops both the RC scale and the inversion; 'ramp output' belongs to the INTEGRATOR (the inverse block); 0 would require a constant input."
           ],
-          a: "$v_{out} = -3$ mV",
-          v: "Differentiator has issues with high-frequency noise — usually avoided in favor of integrator + math."
+          a: "$v_{out} = -3$ mV (constant).",
+          v: "Dimension check: (s)·(V/s) = V ✓. Design reality: differentiators amplify high-frequency noise (gain rises with f), so practice prefers integrators plus algebra — worth one sentence of any FE answer ✓."
+
         }),
         ref: "Handbook p.380" },
       { q: "BJT in saturation: $V_{CE}$ is approximately:",
         choices: ["$0.2$ V", "$0.7$ V", "$5$ V", "Equal to $V_{CC}$"],
         correct: 0,
         solution: S({
-          c: "Three BJT regions: <b>Cut-off</b> ($V_{BE}<0.6$, no $I_C$); <b>Active</b> ($V_{BE}\\approx 0.7$, $V_{CE}>V_{CE,sat}$, $I_C = \\beta I_B$); <b>Saturation</b> ($V_{CE}\\approx 0.2$ V, $I_C < \\beta I_B$).",
+          c: "A BJT lives in one of three regions — cutoff (off), active (amplifier, $I_C = \\beta I_B$), saturation (switch fully ON). In SATURATION both junctions are forward-biased and the collector-emitter voltage collapses to a small residual: $V_{CE,sat} \\approx 0.2$ V.",
           s: [
-            "Saturation: both junctions forward biased; $V_{CE,sat} \\approx 0.2$ V."
+            "<b>Step 1 — Recall the benchmark.</b> $V_{CE,sat} \\approx 0.2$ V (0.1-0.3 V depending on current).",
+            "<b>Step 2 — Distractor audit.</b> 0.7 V is the BASE-emitter forward drop $V_{BE}$ — the most-confused pair in transistor land; 5 V / '$= V_{CC}$' describe CUTOFF, the opposite corner.",
+            "<b>Step 3 — How you know you're in saturation.</b> The circuit demands more collector current than $\\beta I_B$ can supply — $I_C < \\beta I_B$ becomes the region's signature."
           ],
           a: "$V_{CE,sat} \\approx 0.2$ V",
-          v: "Switch use: cut-off = OFF, saturation = ON (low drop)."
+          v: "Switching payoff: ON-state power $= I_C\\times0.2$ V is small — a 100-mA load costs only 20 mW in the transistor ✓. The 0.2 vs 0.7 distinction also explains why saturated BJT logic (old TTL) had ~0.2-V lows."
+
         }),
         ref: "Handbook p.384" },
       { q: "Emitter-follower (common-collector) voltage gain:",
         choices: ["≈1 (slightly less)", "≈$\\beta$", "$\\beta+1$", "$\\beta R_E/r_e$"],
         correct: 0,
         solution: S({
-          c: "CC config: output across $R_E$ tracks input minus $V_{BE}$. Voltage gain $\\approx R_E/(R_E + r_e) \\approx 1$ for large $R_E$.",
+          c: "The emitter follower (common-collector) takes input at the base, output at the emitter. The emitter 'follows' the base one diode-drop below, so the VOLTAGE gain is just under 1 — its value lies elsewhere: current gain and impedance transformation.",
           s: [
-            "Useful for current gain ($\\beta$) and low output impedance (~$r_e$).",
-            "Often used as buffer between high-Z source and low-Z load."
+            "<b>Step 1 — The exact gain.</b> $A_v = \\dfrac{R_E}{R_E + r_e} \\approx 1$ when $R_E \\gg r_e$ (e.g. $1000/(1000+25) = 0.976$).",
+            "<b>Step 2 — What it DOES amplify.</b> Current, by $\\beta + 1$; equivalently it shows the source a high impedance ($\\approx\\beta R_E$) and the load a low one ($\\approx r_e$).",
+            "<b>Step 3 — Distractor audit.</b> $\\beta$ and $\\beta+1$ are its CURRENT gain; $\\beta R_E/r_e$ mixes formulas."
           ],
-          a: "Voltage gain ≈ 1",
-          v: "Current gain still large ($\\beta+1$) — that's the value."
+          a: "Voltage gain ≈ 1 (slightly less).",
+          v: "Role check: it is the BJT's answer to the op-amp follower — same buffering job, one transistor ✓. Typical placement: between a voltage-divider bias network and a heavy load, or as the output stage of audio amplifiers (current muscle, no voltage change)."
+
         }),
         ref: "Handbook p.384" },
       { q: "A 5V Zener regulator with 220Ω resistor from 12V source feeding a 1k load. Current through Zener (assume ideal):",
         choices: ["$\\approx 26.8$ mA", "$31.8$ mA", "$\\approx 5$ mA", "$\\approx 12$ mA"],
         correct: 0,
         solution: S({
-          c: "$I_{Zener} = I_{series} - I_{load}$. Zener absorbs the difference.",
+          c: "A loaded Zener regulator splits the series-resistor current two ways: $I_R = I_Z + I_{load}$. The Zener absorbs whatever the load doesn't take — that absorption IS the regulation.",
           s: [
-            "$V_R = 12 - 5 = 7$ V; $I_R = 7/220 = 31.8$ mA.",
-            "$I_{load} = 5/1000 = 5$ mA.",
-            "$I_Z = 31.8 - 5 = 26.8$ mA."
+            "<b>Step 1 — Series-resistor current.</b> $V_R = 12 - 5 = 7$ V → $I_R = 7/220 = 31.8$ mA (fixed, since both ends are pinned).",
+            "<b>Step 2 — Load current.</b> $I_L = 5/1000 = 5$ mA.",
+            "<b>Step 3 — Zener gets the rest.</b> $I_Z = 31.8 - 5 = 26.8$ mA.",
+            "<b>Step 4 — Distractor audit.</b> 31.8 mA is the NO-LOAD Zener current (forgot the load steals some); 5 mA is the load's share; 12 mA is numerology."
           ],
           a: "$I_Z \\approx 26.8$ mA",
-          v: "Designer must ensure $I_Z$ stays in valid Zener range under input + load variation."
+          v: "Regulation-limit check (the design question hiding here): the load can grow until it wants all 31.8 mA — beyond that ($R_L < 157\\,\\Omega$), the Zener starves ($I_Z \\to 0$) and regulation collapses ✓. Power: $P_Z = 5\\times0.0268 = 134$ mW — quarter-watt part territory."
+
         }),
         ref: "Handbook p.383" },
       { q: "Standard 7805 voltage regulator IC has output of:",
         choices: ["$5$ V (positive)", "$-5$ V", "$7$ V", "Variable"],
         correct: 0,
         solution: S({
-          c: "78xx series = positive linear regulators where xx is output voltage. 79xx = negative.",
+          c: "The 78xx/79xx family encodes its function in the part number: 78 = POSITIVE linear regulator, 79 = negative; the last two digits = the output voltage. 7805 → +5 V.",
           s: [
-            "7805: +5V at up to 1.5A typical.",
-            "7812: +12V; 7905: -5V; 7912: -12V.",
-            "Dropout voltage: ~2V — input must be ≥7V for stable 5V output."
+            "<b>Step 1 — Decode.</b> 78|05 = positive, 5 V (up to ~1-1.5 A with heatsinking).",
+            "<b>Step 2 — The operating condition.</b> Dropout ≈ 2 V: input must stay ≥ ~7 V for a stable 5-V output.",
+            "<b>Step 3 — Distractor audit.</b> −5 V is the 7905; 7 V misreads the prefix as the output; 'variable' describes the LM317 family."
           ],
-          a: "+5V",
-          v: "LDO (low-dropout) variants need only ~0.5V dropout."
+          a: "+5 V.",
+          v: "Family check: 7812 → +12 V, 7912 → −12 V — the naming holds across the line ✓. Efficiency caveat worth one line: a linear regulator burns $(V_{in}-V_{out})\\times I$ as heat (12→5 V at 1 A = 7 W!), which is why bucks replaced 78xx in efficiency-critical designs; LDOs cut the 2-V dropout to ~0.3 V."
+
         }),
         ref: "Handbook p.383" },
       { q: "A common-source MOSFET amp: small-signal gain $A_v$ ≈ ",
         choices: ["$-g_m R_D$", "$+R_D/r_o$", "$+1$", "$-\\beta R_D$"],
         correct: 0,
         solution: S({
-          c: "CS MOSFET amp (ignoring $r_o$, source bypassed): $A_v = -g_m R_D$.",
+          c: "The common-source stage is the MOSFET's standard voltage amplifier (input at gate, output at drain): the gate voltage modulates drain current via transconductance $g_m$, and that current develops the output across $R_D$ — giving $A_v = -g_mR_D$, inverting.",
           s: [
-            "$g_m$ = transconductance (A/V), increases with bias current.",
-            "Negative → inverting.",
-            "$\\beta$ is a BJT parameter, doesn't apply."
+            "<b>Step 1 — The chain.</b> $v_{gs} \\to i_d = g_mv_{gs} \\to v_{out} = -i_dR_D$ (drain rises when current falls — hence the minus).",
+            "<b>Step 2 — Distractor audit.</b> $+R_D/r_o$ garbles the output-resistance term; +1 is the source-FOLLOWER's gain; $-\\beta R_D$ borrows a BJT parameter MOSFETs don't have."
           ],
-          a: "$A_v = -g_m R_D$",
-          v: "$g_m$ for MOSFET: $g_m = 2I_D/(V_{GS}-V_{th}) = \\sqrt{2 k I_D}$."
+          a: "$A_v = -g_mR_D$",
+          v: "Useful $g_m$ forms for follow-up questions: $g_m = \\dfrac{2I_D}{V_{OV}} = \\sqrt{2kI_D}$ — bias current is the gain knob ✓. Topology map worth memorizing: CS ↔ CE (voltage gain, inverting), CD/source-follower ↔ CC (buffer), CG ↔ CB (current buffer/high-frequency)."
+
         }),
         ref: "Handbook p.386" },
       { q: "Full-wave bridge rectifier: number of diodes needed:",
         choices: ["$4$", "$2$", "$1$", "$8$"],
         correct: 0,
         solution: S({
-          c: "Bridge rectifier uses 4 diodes in a diamond configuration. Two conduct each half-cycle.",
+          c: "The diode-count taxonomy of rectifiers: half-wave = 1 diode (wastes half the cycle); center-tapped full-wave = 2 diodes + a special transformer; BRIDGE full-wave = 4 diodes in a diamond, no center tap.",
           s: [
-            "Half-wave: 1 diode.",
-            "Center-tapped full-wave: 2 diodes + center-tapped transformer.",
-            "Bridge full-wave: 4 diodes, no center tap needed."
+            "<b>Step 1 — Recall the bridge.</b> 4 diodes; on each half-cycle a diagonal PAIR conducts, steering current through the load in the same direction.",
+            "<b>Step 2 — Distractor audit.</b> 2 belongs to the center-tap design; 1 to half-wave; 8 to nothing standard (a 3-phase bridge uses 6)."
           ],
-          a: "4 diodes",
-          v: "Bridge has lower transformer cost but two diode drops per half-cycle (~1.4V loss)."
+          a: "4 diodes.",
+          v: "The engineering trade hidden in the count: bridge saves the costly center-tapped transformer but pays TWO diode drops (~1.4 V) per half-cycle vs one — negligible at 120 V, painful at 5 V (where synchronous MOSFET rectifiers take over) ✓."
+
         }),
         ref: "Handbook p.383" },
       { q: "Buck converter: $V_{out}/V_{in}$ = ",
         choices: ["Duty cycle $D$", "$1/D$", "$D/(1-D)$", "$1-D$"],
         correct: 0,
         solution: S({
-          c: "Buck (step-down) converter: continuous-conduction output is $V_{out} = D \\cdot V_{in}$ where $D$ = duty cycle (0 to 1).",
+          c: "Switching-converter conversion ratios all come from inductor volt-second balance; the results to memorize: BUCK (step-down) $V_{out} = DV_{in}$; BOOST (step-up) $V_{out} = V_{in}/(1-D)$; BUCK-BOOST (inverting) $V_{out} = -V_{in}D/(1-D)$.",
           s: [
-            "Higher duty → higher output.",
-            "Boost: $V_{out} = V_{in}/(1-D)$ — choice B.",
-            "Buck-boost: $V_{out} = -V_{in} \\cdot D/(1-D)$ — choice C."
+            "<b>Step 1 — Match.</b> Buck → ratio = $D$, the fraction of each cycle the switch connects input to inductor.",
+            "<b>Step 2 — Sense check.</b> $D$ runs 0→1, so $V_{out}$ runs 0→$V_{in}$ — strictly step-DOWN, as 'buck' promises.",
+            "<b>Step 3 — Distractor audit.</b> $1/D$ is nothing standard; $D/(1-D)$ is buck-boost's magnitude; $1-D$ would mean output FALLS as duty rises — backwards."
           ],
-          a: "$V_{out} = D \\cdot V_{in}$",
-          v: "Battery charger: PWM gates the buck, duty controlled to regulate output."
+          a: "$V_{out}/V_{in} = D$.",
+          v: "Endpoint checks: $D = 1$ (switch always on) → output = input ✓; $D = 0$ → zero ✓ — the formula respects both limits. Application anchor: every USB charger and CPU VRM is a buck running exactly this control law, with feedback adjusting $D$."
+
         }),
         ref: "Handbook p.383" },
       { q: "Common-emitter amp with bypass capacitor on emitter resistor: at low frequencies, gain:",
         choices: ["Decreases (high-pass behavior)", "Increases", "Stays constant", "Goes to zero exactly"],
         correct: 0,
         solution: S({
-          c: "Bypass cap shorts emitter resistor at high freq → full gain. At low freq, cap reactance is high → emitter degeneration reduces gain.",
+          c: "The emitter BYPASS capacitor is a frequency-dependent short: at high frequencies its reactance is tiny, shorting out $R_E$ → full gain $R_C/r_e$; at low frequencies it looks open, leaving $R_E$ in the emitter → reduced gain $\\approx R_C/(r_e + R_E)$.",
           s: [
-            "$X_C = 1/(\\omega C)$ — large at low freq.",
-            "At very low freq: gain limited by $R_C / (r_e + R_E)$.",
-            "At high freq: gain rises to $R_C/r_e$ (much larger)."
+            "<b>Step 1 — Trace the mechanism.</b> $X_C = 1/(2\\pi fC)$ grows as $f$ falls → emitter degeneration returns → gain drops.",
+            "<b>Step 2 — Name the shape.</b> Gain low at low frequency, high above a corner — HIGH-PASS behavior for the gain (one of the amplifier's low-frequency cutoffs).",
+            "<b>Step 3 — Distractor audit.</b> 'Increases' inverts the reactance trend; 'constant' ignores the capacitor; 'exactly zero' is too strong — gain falls to the degenerated value, not zero."
           ],
-          a: "Decreases at low freq (high-pass shape)",
-          v: "Coupling caps also create low-freq cutoff — typical audio amps have BW from ~20 Hz to ~20 kHz."
+          a: "Decreases at low frequencies (high-pass shape).",
+          v: "Full-amp picture: bypass cap + input/output COUPLING caps each contribute a low-frequency corner; the highest of them sets the amp's bass limit — the reason audio amps spec '20 Hz' ✓. Design lever: want flat gain to 20 Hz? Size $C$ so $X_C \\ll r_e$ at 20 Hz — that's a BIG capacitor."
+
         }),
         ref: "Handbook p.384" },
       { q: "JFET in pinch-off (saturation) operates with:",
         choices: ["$V_{DS} \\ge V_{GS} - V_p$", "Any $V_{DS}$", "$V_{DS} = 0$", "$V_{GS} > 0$ (n-ch)"],
         correct: 0,
         solution: S({
-          c: "JFET saturation (pinch-off): $V_{DS} \\ge V_{GS} - V_p$ where $V_p$ is the pinch-off voltage. Channel pinched at drain end; current ~constant.",
+          c: "A JFET is a DEPLETION-mode device: fully conducting at $V_{GS} = 0$, progressively choked as the gate reverse-biases toward the pinch-off voltage $V_p$ (negative for n-channel). Its 'saturation' (constant-current) region requires the drain end of the channel pinched: $V_{DS} \\ge V_{GS} - V_p$.",
           s: [
-            "n-channel JFET: $V_{GS}$ is negative or zero ($V_p < 0$).",
-            "In ohmic region: $V_{DS}$ small, $I_D$ varies linearly.",
-            "$I_D = I_{DSS}(1 - V_{GS}/V_p)^2$ in saturation."
+            "<b>Step 1 — Match the condition.</b> Pinch-off operation ⇔ $V_{DS} \\ge V_{GS} - V_p$ (with $V_p < 0$, this is a positive threshold).",
+            "<b>Step 2 — Below it.</b> Smaller $V_{DS}$ → ohmic/triode region, where the JFET acts as a voltage-controlled resistor.",
+            "<b>Step 3 — Distractor audit.</b> 'Any $V_{DS}$' ignores the regions; $V_{DS} = 0$ is the resistor regime's origin; '$V_{GS} > 0$' would forward-bias the gate junction — forbidden for JFETs."
           ],
           a: "$V_{DS} \\ge V_{GS} - V_p$",
-          v: "JFETs are depletion-mode devices — conduct at $V_{GS} = 0$, off when $V_{GS} = V_p$."
+          v: "Current law in pinch-off: $I_D = I_{DSS}(1 - V_{GS}/V_p)^{2}$ — check the endpoints: $V_{GS} = 0 \\to I_{DSS}$ (max) ✓, $V_{GS} = V_p \\to 0$ (off) ✓. Niche where JFETs still shine: ultra-low-noise, high-impedance front ends (instrumentation, audio preamps)."
+
         }),
         ref: "Handbook p.386" },
     ],
