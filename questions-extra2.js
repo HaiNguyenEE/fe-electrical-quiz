@@ -13,154 +13,180 @@
         choices: ["$x = 5$", "$x = 3$", "$x = 10$", "$x = 13$"],
         correct: 0,
         solution: S({
-          c: "Log addition rule: $\\log_b A + \\log_b B = \\log_b(AB)$. Then convert to exponential form.",
+          c: "Two log tools: the product rule $\\log A + \\log B = \\log(AB)$ merges the terms, and the definition of a log unwraps it: $\\log_{10}(Y) = 1$ means $Y = 10^{1}$. One hidden duty: solutions must keep every log's argument POSITIVE.",
           s: [
-            "$\\log_{10}[x(x-3)] = 1 \\Rightarrow x(x-3) = 10^1 = 10$.",
-            "$x^2 - 3x - 10 = 0 \\Rightarrow (x-5)(x+2) = 0$.",
-            "$x = 5$ or $x = -2$. Reject $x = -2$ (log of negative undefined). So $x = 5$."
+            "<b>Step 1 — Merge.</b> $\\log_{10}[x(x-3)] = 1$.",
+            "<b>Step 2 — Unwrap.</b> $x(x-3) = 10 \\Rightarrow x^{2} - 3x - 10 = 0$.",
+            "<b>Step 3 — Factor.</b> $(x-5)(x+2) = 0 \\Rightarrow x = 5$ or $x = -2$.",
+            "<b>Step 4 — Domain check (the trap).</b> $x = -2$ makes $\\log(x)$ undefined — reject. Only $x = 5$ survives."
           ],
           a: "$x = 5$",
-          v: "Check: $\\log 5 + \\log 2 = \\log 10 = 1$ ✓"
+          v: "Substitute: $\\log 5 + \\log 2 = \\log 10 = 1$ ✓. The rejected root is why distractors exist: solving the quadratic is half the problem; the domain check is the other half."
+
         }),
         ref: "Handbook p.36" },
       { q: "Magnitude of complex number $z = 3 - j4$:",
         choices: ["$5$", "$\\sqrt{7}$", "$1$", "$25$"],
         correct: 0,
         solution: S({
-          c: "$|a + jb| = \\sqrt{a^2 + b^2}$ (Pythagorean).",
-          s: ["$|z| = \\sqrt{3^2 + (-4)^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$."],
+          c: "A complex number $a + jb$ is a point in the plane; its magnitude is the straight-line distance from the origin — Pythagoras: $|z| = \\sqrt{a^{2} + b^{2}}$. The SIGN of $b$ never matters (it gets squared).",
+          s: [
+            "<b>Step 1 — Square and add.</b> $3^{2} + (-4)^{2} = 9 + 16 = 25$.",
+            "<b>Step 2 — Root.</b> $|z| = 5$ — the classic 3-4-5 triangle.",
+            "<b>Step 3 — Distractor audit.</b> $\\sqrt7$ subtracts inside the root; 25 forgets the square root; 1 subtracts magnitudes."
+          ],
           a: "$|z| = 5$",
-          v: "Familiar 3-4-5 right triangle."
+          v: "Polar pairing: $z = 5\\angle(-53.13°)$ — the magnitude feeds straight into every phasor calculation, e.g. $|V|/|Z|$ in AC circuits ✓."
+
         }),
         ref: "Handbook p.36" },
       { q: "$\\sin(75°) \\cos(15°) - \\cos(75°)\\sin(15°)$ equals:",
         choices: ["$\\sin 60°$", "$\\cos 60°$", "$1$", "$\\sin 90°$"],
         correct: 0,
         solution: S({
-          c: "Sine of difference: $\\sin(A-B) = \\sin A\\cos B - \\cos A\\sin B$.",
+          c: "Recognize the FINGERPRINT of a trig identity: the pattern $\\sin A\\cos B - \\cos A\\sin B$ is exactly the right side of $\\sin(A - B)$ — the problem is testing identity recognition, not calculator work.",
           s: [
-            "Pattern matches $\\sin(75° - 15°) = \\sin 60° = \\sqrt{3}/2 \\approx 0.866$."
+            "<b>Step 1 — Match the pattern.</b> $A = 75°$, $B = 15°$: the expression IS $\\sin(75° - 15°)$.",
+            "<b>Step 2 — Evaluate.</b> $\\sin 60° = \\sqrt3/2 \\approx 0.866$.",
+            "<b>Step 3 — Distractor audit.</b> $\\cos 60° = 0.5$ comes from misremembering which identity has the minus sign (cosine-difference uses $+$: $\\cos A\\cos B + \\sin A\\sin B$); $\\sin 90° = 1$ adds the angles instead."
           ],
-          a: "$\\sin 60°$",
-          v: "Numerically: $\\sin75°\\cos15° - \\cos75°\\sin15° = 0.966\\cdot 0.966 - 0.259\\cdot 0.259 = 0.933 - 0.067 = 0.866$ ✓"
+          a: "$\\sin 60° = \\sqrt3/2$",
+          v: "Numeric confirmation: $0.966\\times0.966 - 0.259\\times0.259 = 0.933 - 0.067 = 0.866$ ✓. Sign memory hook: SINE difference keeps the minus visible; COSINE difference flips it."
+
         }),
         ref: "Handbook p.37" },
       { q: "Determinant of $A = \\begin{pmatrix}a&b\\\\0&d\\end{pmatrix}$ (upper triangular):",
         choices: ["$ad$", "$abd$", "$a+d$", "$0$"],
         correct: 0,
         solution: S({
-          c: "Triangular matrix determinant = product of diagonal entries.",
-          s: ["$|A| = a \\cdot d - b \\cdot 0 = ad$."],
+          c: "For any TRIANGULAR matrix (all zeros below — or above — the diagonal), the determinant is just the PRODUCT of the diagonal entries. No cofactor grinding needed.",
+          s: [
+            "<b>Step 1 — Apply the 2×2 formula to see it.</b> $|A| = ad - b\\cdot0 = ad$ — the off-diagonal $b$ is multiplied by the 0 and vanishes.",
+            "<b>Step 2 — Distractor audit.</b> $abd$ drags in the irrelevant $b$; $a + d$ is the TRACE (a different invariant); 0 would need a zero ON the diagonal."
+          ],
           a: "$|A| = ad$",
-          v: "Generalizes: for any $n\\times n$ triangular matrix, $|A| = \\prod a_{ii}$."
+          v: "Generalization worth banking: $n\\times n$ triangular → $|A| = \\prod a_{ii}$, and the eigenvalues ARE the diagonal entries — two facts that turn many FE matrix questions into read-offs ✓."
+
         }),
         ref: "Handbook p.57" },
       { q: "Find $\\frac{d}{dx}[e^{2x}\\cos(3x)]$:",
         choices: ["$e^{2x}[2\\cos 3x - 3\\sin 3x]$", "$2e^{2x}\\cos 3x$", "$-3e^{2x}\\sin 3x$", "$e^{2x}\\sin 3x$"],
         correct: 0,
         solution: S({
-          c: "Product rule: $(uv)' = u'v + uv'$. Chain rule for inside derivatives.",
+          c: "A PRODUCT of two functions needs the product rule $(uv)' = u'v + uv'$, and each factor here also hides a chain rule (the $2x$ and $3x$ insides).",
           s: [
-            "$u = e^{2x}$, $u' = 2e^{2x}$.",
-            "$v = \\cos 3x$, $v' = -3\\sin 3x$.",
-            "Combine: $u'v + uv' = 2e^{2x}\\cos 3x + e^{2x}(-3\\sin 3x) = e^{2x}(2\\cos 3x - 3\\sin 3x)$."
+            "<b>Step 1 — Differentiate each factor.</b> $u = e^{2x} \\to u' = 2e^{2x}$ (chain: ×2); $v = \\cos3x \\to v' = -3\\sin3x$ (chain: ×3, and cosine → negative sine).",
+            "<b>Step 2 — Assemble.</b> $u'v + uv' = 2e^{2x}\\cos3x - 3e^{2x}\\sin3x = e^{2x}(2\\cos3x - 3\\sin3x)$.",
+            "<b>Step 3 — Distractor audit.</b> The other choices each keep only ONE of the two product-rule terms — the most common slip."
           ],
-          a: "$e^{2x}[2\\cos 3x - 3\\sin 3x]$",
-          v: "At $x=0$: derivative $= 1 \\cdot 2 = 2$. Quick check from definition would confirm."
+          a: "$e^{2x}(2\\cos3x - 3\\sin3x)$",
+          v: "Spot check at $x = 0$: formula gives $1\\cdot(2 - 0) = 2$; numerically, $[e^{0.02}\\cos0.03 - 1]/0.01 \\approx 2.0$ ✓."
+
         }),
         ref: "Handbook p.47" },
       { q: "$\\int x e^x \\, dx$ equals:",
         choices: ["$(x-1)e^x + C$", "$xe^x + C$", "$x^2 e^x/2 + C$", "$e^x + C$"],
         correct: 0,
         solution: S({
-          c: "Integration by parts: $\\int u\\,dv = uv - \\int v\\,du$. Choose $u = x$ (simplifies after differentiation), $dv = e^x dx$.",
+          c: "Integration by parts — the product rule run backwards: $\\int u\\,dv = uv - \\int v\\,du$. Choose $u$ as the factor that gets SIMPLER when differentiated (here $x$), and $dv$ as what integrates easily ($e^{x}dx$).",
           s: [
-            "$u = x \\Rightarrow du = dx$.",
-            "$dv = e^x dx \\Rightarrow v = e^x$.",
-            "$\\int x e^x dx = x e^x - \\int e^x dx = x e^x - e^x + C = (x-1)e^x + C$."
+            "<b>Step 1 — Assign parts.</b> $u = x \\Rightarrow du = dx$; $dv = e^{x}dx \\Rightarrow v = e^{x}$.",
+            "<b>Step 2 — Apply.</b> $\\int xe^{x}dx = xe^{x} - \\int e^{x}dx = xe^{x} - e^{x} + C$.",
+            "<b>Step 3 — Factor.</b> $(x - 1)e^{x} + C$.",
+            "<b>Step 4 — Distractor audit.</b> $xe^{x}$ stops after the first term; $x^{2}e^{x}/2$ wrongly treats $e^{x}$ as a constant; $e^{x}$ drops the $x$ entirely."
           ],
-          a: "$(x-1)e^x + C$",
-          v: "Differentiate back: $e^x + (x-1)e^x = (1 + x - 1)e^x = xe^x$ ✓"
+          a: "$(x-1)e^{x} + C$",
+          v: "Differentiate back (the universal antiderivative check): $\\dfrac{d}{dx}[(x-1)e^{x}] = e^{x} + (x-1)e^{x} = xe^{x}$ ✓."
+
         }),
         ref: "Handbook p.49" },
       { q: "Solve $y' = 2xy$ with $y(0) = 3$.",
         choices: ["$y = 3e^{x^2}$", "$y = 3e^{2x}$", "$y = 3x^2$", "$y = 3+x^2$"],
         correct: 0,
         solution: S({
-          c: "Separable ODE: write as $dy/y = 2x\\,dx$ and integrate.",
+          c: "Separable ODE: all $y$'s to the left, all $x$'s to the right — $\\dfrac{dy}{y} = 2x\\,dx$ — then integrate each side independently.",
           s: [
-            "$dy/y = 2x\\,dx$.",
-            "Integrate both sides: $\\ln|y| = x^2 + C$.",
-            "Exponentiate: $y = Ae^{x^2}$.",
-            "Apply IC $y(0) = 3$: $3 = A \\cdot e^0 \\Rightarrow A = 3$.",
-            "Solution: $y = 3e^{x^2}$."
+            "<b>Step 1 — Integrate.</b> $\\ln|y| = x^{2} + C$.",
+            "<b>Step 2 — Exponentiate.</b> $y = Ae^{x^{2}}$ (where $A = e^{C}$ absorbs the constant).",
+            "<b>Step 3 — Initial condition.</b> $y(0) = A = 3$ → $y = 3e^{x^{2}}$.",
+            "<b>Step 4 — Distractor audit.</b> $3e^{2x}$ integrates $2x\\,dx$ as if it were a constant 2 — the exponent must be $x^{2}$; $3x^{2}$ and $3 + x^{2}$ forget the exponential structure entirely."
           ],
-          a: "$y(x) = 3e^{x^2}$",
-          v: "Plug back: $y' = 3 e^{x^2} \\cdot 2x = 6xe^{x^2}$; and $2xy = 2x \\cdot 3e^{x^2} = 6xe^{x^2}$ ✓"
+          a: "$y = 3e^{x^{2}}$",
+          v: "Substitute back: $y' = 3e^{x^{2}}\\cdot2x$ and $2xy = 2x\\cdot3e^{x^{2}}$ — identical ✓; and $y(0) = 3$ ✓."
+
         }),
         ref: "Handbook p.55" },
       { q: "$\\nabla \\cdot \\vec{F}$ for $\\vec{F} = x^2\\hat{i} + xy\\hat{j} + z\\hat{k}$:",
         choices: ["$2x + x + 1$", "$x^2 + xy + z$", "$3x$", "$2$"],
         correct: 0,
         solution: S({
-          c: "Divergence: $\\nabla\\cdot\\vec{F} = \\partial F_x/\\partial x + \\partial F_y/\\partial y + \\partial F_z/\\partial z$. Yields scalar.",
+          c: "Divergence measures net OUTFLOW per unit volume — a SCALAR built by differentiating each component with respect to ITS OWN variable: $\\nabla\\cdot\\vec F = \\partial_xF_x + \\partial_yF_y + \\partial_zF_z$.",
           s: [
-            "$\\partial(x^2)/\\partial x = 2x$.",
-            "$\\partial(xy)/\\partial y = x$.",
-            "$\\partial(z)/\\partial z = 1$.",
-            "Sum: $2x + x + 1 = 3x + 1$. Choice A is the unsummed form."
+            "<b>Step 1 — Component derivatives.</b> $\\partial_x(x^{2}) = 2x$; $\\partial_y(xy) = x$; $\\partial_z(z) = 1$.",
+            "<b>Step 2 — Sum.</b> $2x + x + 1 = 3x + 1$ — choice A lists the unsummed form of exactly this.",
+            "<b>Step 3 — Distractor audit.</b> '$x^{2}+xy+z$' just re-adds the components (no derivatives); $3x$ drops the constant; 2 keeps only one term."
           ],
-          a: "$\\nabla\\cdot\\vec{F} = 2x + x + 1 = 3x + 1$",
-          v: "Physical interpretation: net outflow per unit volume of vector field."
+          a: "$\\nabla\\cdot\\vec F = 2x + x + 1 = 3x + 1$",
+          v: "Type check (catches half of all vector-calc errors): divergence of a VECTOR field is a SCALAR; curl is a VECTOR ✓. Physical read: at points where $3x+1 > 0$ the field acts as a net source."
+
         }),
         ref: "Handbook p.38" },
       { q: "$\\nabla \\times \\vec{F}$ at origin for $\\vec{F} = y\\hat{i} - x\\hat{j}$:",
         choices: ["$-2\\hat{k}$", "$2\\hat{k}$", "$0$", "$\\hat{i}+\\hat{j}$"],
         correct: 0,
         solution: S({
-          c: "Curl: $\\nabla\\times\\vec{F} = \\det\\begin{pmatrix}\\hat{i}&\\hat{j}&\\hat{k}\\\\\\partial_x&\\partial_y&\\partial_z\\\\F_x&F_y&F_z\\end{pmatrix}$. Yields vector.",
+          c: "Curl measures local ROTATION — a vector computed from the determinant pattern. For a 2-D field ($F_z = 0$, no $z$-dependence), only the $\\hat k$ component survives: $(\\nabla\\times\\vec F)_z = \\partial_xF_y - \\partial_yF_x$.",
           s: [
-            "$F_x = y$, $F_y = -x$, $F_z = 0$.",
-            "$\\hat{k}$ component: $\\partial F_y/\\partial x - \\partial F_x/\\partial y = -1 - 1 = -2$.",
-            "Other components vanish.",
-            "Curl $= -2\\hat{k}$."
+            "<b>Step 1 — The two partials.</b> $\\partial_x(-x) = -1$; $\\partial_y(y) = 1$.",
+            "<b>Step 2 — Subtract.</b> $-1 - 1 = -2$ → curl $= -2\\hat k$ (everywhere, including the origin).",
+            "<b>Step 3 — Distractor audit.</b> $+2\\hat k$ subtracts in the wrong order; 0 would mean an irrotational field — but this one visibly swirls."
           ],
-          a: "$-2\\hat{k}$",
-          v: "This is a clockwise rotational field in xy-plane → curl points into the page ($-\\hat{k}$)."
+          a: "$-2\\hat k$",
+          v: "Picture check: $\\vec F = y\\hat i - x\\hat j$ at point (1,0) points in $-\\hat j$… tracing a few arrows shows CLOCKWISE rotation, and by the right-hand rule clockwise = curl INTO the page = $-\\hat k$ ✓."
+
         }),
         ref: "Handbook p.38" },
       { q: "$\\binom{8}{3}$ = ",
         choices: ["$56$", "$28$", "$112$", "$336$"],
         correct: 0,
         solution: S({
-          c: "Binomial coefficient: $\\binom{n}{k} = \\dfrac{n!}{k!(n-k)!}$.",
-          s: ["$\\dfrac{8!}{3!\\cdot 5!} = \\dfrac{8 \\cdot 7 \\cdot 6}{3 \\cdot 2 \\cdot 1} = \\dfrac{336}{6} = 56$."],
-          a: "$56$",
-          v: "Pascal's triangle row 8: 1, 8, 28, 56, 70, 56, 28, 8, 1. The 4th entry (index 3) is 56."
+          c: "The binomial coefficient $\\binom{n}{k}$ counts ways to CHOOSE $k$ items from $n$ (order irrelevant): $\\binom{n}{k} = \\dfrac{n!}{k!(n-k)!}$ — in practice, $k$ descending factors over $k!$.",
+          s: [
+            "<b>Step 1 — Shortcut form.</b> $\\binom{8}{3} = \\dfrac{8\\times7\\times6}{3\\times2\\times1} = \\dfrac{336}{6} = 56$.",
+            "<b>Step 2 — Distractor audit.</b> 336 is the PERMUTATION count $P(8,3)$ (forgot to divide by $3!$); 28 is $\\binom{8}{2}$; 112 doubles."
+          ],
+          a: "$\\binom{8}{3} = 56$",
+          v: "Two cross-checks: symmetry $\\binom{8}{3} = \\binom{8}{5} = 56$ ✓, and Pascal's row 8 reads 1, 8, 28, 56, 70, … ✓."
+
         }),
         ref: "Handbook p.64" },
       { q: "$\\lim_{x\\to\\infty} \\dfrac{3x^2 + 5x}{x^2 - 1}$:",
         choices: ["$3$", "$0$", "$\\infty$", "$-5$"],
         correct: 0,
         solution: S({
-          c: "Rational limits at infinity: ratio of leading coefficients (when degrees match).",
+          c: "Limits of rational functions at infinity are decided by the HIGHEST powers — everything else fades. Equal degrees top and bottom → the limit is the ratio of leading coefficients.",
           s: [
-            "Both numerator and denominator degree 2.",
-            "Leading coefficients: 3 (top) and 1 (bottom).",
-            "Limit $= 3/1 = 3$."
+            "<b>Step 1 — Compare degrees.</b> Numerator degree 2, denominator degree 2 — equal.",
+            "<b>Step 2 — Ratio of leaders.</b> $3/1 = 3$.",
+            "<b>Step 3 — Distractor audit.</b> 0 would need a BIGGER denominator degree; $\\infty$ a bigger numerator; −5 plucks a lower-order coefficient."
           ],
-          a: "Limit = 3",
-          v: "Divide num/den by $x^2$: $\\dfrac{3 + 5/x}{1 - 1/x^2} \\to 3/1 = 3$."
+          a: "$3$",
+          v: "Rigorous route (same answer): divide everything by $x^{2}$ → $\\dfrac{3 + 5/x}{1 - 1/x^{2}} \\to \\dfrac{3+0}{1-0} = 3$ ✓. The three-case rule: deg top < bottom → 0; equal → coefficient ratio; greater → ±∞."
+
         }),
         ref: "Handbook p.47" },
       { q: "Convert $250°$ to radians.",
         choices: ["$\\approx 4.36$ rad", "$\\approx 2.18$ rad", "$\\approx 8.72$ rad", "$\\approx 1.39$ rad"],
         correct: 0,
         solution: S({
-          c: "Conversion: rad = degrees × $\\pi/180$.",
-          s: ["$250 \\cdot \\pi/180 = 250 \\cdot 0.01745 \\approx 4.363$ rad."],
+          c: "Degrees and radians measure the same angle in different units: a full circle is $360° = 2\\pi$ rad, so the conversion factor is $\\pi/180$ per degree.",
+          s: [
+            "<b>Step 1 — Multiply.</b> $250 \\times \\pi/180 = 250 \\times 0.017453 = 4.363$ rad.",
+            "<b>Step 2 — Distractor audit.</b> 2.18 halves (factor $\\pi/360$); 8.72 doubles; 1.39 divides by 180 without the $\\pi$."
+          ],
           a: "$\\approx 4.36$ rad",
-          v: "Full circle: $2\\pi \\approx 6.283$ rad; 250° is 25/36 of full = 4.36 rad ✓"
+          v: "Proportion check: $250°$ is $250/360 = 69.4\\%$ of a circle, and $4.36/6.283 = 69.4\\%$ of $2\\pi$ ✓. Anchors to carry: $90° = \\pi/2 \\approx 1.571$, $180° = \\pi$, $360° = 2\\pi \\approx 6.283$."
+
         }),
         ref: "Handbook p.37" },
     ],
@@ -171,102 +197,122 @@
         choices: ["$5.67$", "$6.0$", "$4.5$", "$5.0$"],
         correct: 0,
         solution: S({
-          c: "$\\bar{x} = \\sum x_i / n$.",
-          s: ["Sum = $2+4+4+6+8+10 = 34$. $n = 6$. $\\bar{x} = 34/6 = 5.667$."],
-          a: "$\\bar{x} \\approx 5.67$",
-          v: "Median = $(4+6)/2 = 5$; mode = 4. Mean is slightly higher because of the 10."
+          c: "The mean (average) is total ÷ count: $\\bar x = \\sum x_i/n$ — the balance point of the data.",
+          s: [
+            "<b>Step 1 — Sum.</b> $2+4+4+6+8+10 = 34$.",
+            "<b>Step 2 — Divide by n = 6.</b> $\\bar x = 34/6 = 5.667$.",
+            "<b>Step 3 — Distractor audit.</b> 6.0 miscounts the sum; 5.0 is the MEDIAN ($(4+6)/2$); 4.5 is a partial average."
+          ],
+          a: "$\\bar x \\approx 5.67$",
+          v: "Family portrait of this dataset: mean 5.67, median 5, mode 4 — mean sits highest because the 10 drags it up; skewed data pulls the mean toward the tail, a favorite FE concept ✓."
+
         }),
         ref: "Handbook p.63" },
       { q: "If $P(A) = 0.4$, $P(B) = 0.5$, $P(A \\cap B) = 0.2$. Are A, B independent?",
         choices: ["Yes — $P(A)P(B) = P(A \\cap B)$", "No", "Cannot tell", "Yes — $P(A)+P(B)=1$"],
         correct: 0,
         solution: S({
-          c: "Definition: A, B independent iff $P(A \\cap B) = P(A)\\cdot P(B)$.",
+          c: "Independence has a precise TEST, not a vibe: events A and B are independent if and only if $P(A\\cap B) = P(A)\\,P(B)$ — knowing one happened changes nothing about the other.",
           s: [
-            "$P(A)\\cdot P(B) = 0.4 \\cdot 0.5 = 0.2$.",
-            "$P(A \\cap B) = 0.2$.",
-            "Equal → independent."
+            "<b>Step 1 — Compute the product.</b> $P(A)P(B) = 0.4\\times0.5 = 0.20$.",
+            "<b>Step 2 — Compare with the joint.</b> $P(A\\cap B) = 0.20$ — equal → independent.",
+            "<b>Step 3 — Distractor audit.</b> '$P(A)+P(B) = 1$' is not any independence criterion (sums relate to unions, and only with more work); 'cannot tell' ignores that we have all three numbers."
           ],
-          a: "Yes (independent)",
-          v: "Conditional: $P(A|B) = 0.2/0.5 = 0.4 = P(A)$ ✓ (B doesn't affect A's probability)."
+          a: "Yes — independent, because $P(A\\cap B) = P(A)P(B)$.",
+          v: "Equivalent check through conditioning: $P(A|B) = 0.2/0.5 = 0.4 = P(A)$ — learning B occurred leaves A's probability untouched ✓. Don't confuse independent with mutually exclusive: EXCLUSIVE events ($P(A\\cap B) = 0$) are maximally DEpendent."
+
         }),
         ref: "Handbook p.64" },
       { q: "5 cards drawn from a deck. P(all hearts)?",
         choices: ["$\\binom{13}{5}/\\binom{52}{5} \\approx 0.0005$", "$13/52$", "$(1/4)^5$", "$5/52$"],
         correct: 0,
         solution: S({
-          c: "Hypergeometric (without replacement): $P = \\dfrac{\\binom{13}{5}}{\\binom{52}{5}}$.",
+          c: "Drawing WITHOUT replacement from a finite deck is hypergeometric counting: $P = \\dfrac{\\text{favorable selections}}{\\text{total selections}} = \\dfrac{\\binom{13}{5}}{\\binom{52}{5}}$.",
           s: [
-            "Favorable: choose 5 from 13 hearts → $\\binom{13}{5} = 1287$.",
-            "Total: $\\binom{52}{5} = 2{,}598{,}960$.",
-            "$P = 1287/2598960 \\approx 0.000495 = 0.05\\%$."
+            "<b>Step 1 — Favorable.</b> Choose 5 of the 13 hearts: $\\binom{13}{5} = 1287$.",
+            "<b>Step 2 — Total.</b> $\\binom{52}{5} = 2{,}598{,}960$.",
+            "<b>Step 3 — Divide.</b> $1287/2{,}598{,}960 \\approx 0.000495 \\approx 0.05\\%$.",
+            "<b>Step 4 — Distractor audit.</b> $(1/4)^{5} \\approx 0.098\\%$ is the WITH-replacement approximation (close but wrong model); $13/52$ is one card's probability; $5/52$ is numerology."
           ],
-          a: "≈ 0.05%",
-          v: "Equivalent to royal flush rarity — quite rare!"
+          a: "$\\approx 0.05\\%$ — about 1 in 2,000.",
+          v: "Sequential cross-check: $\\dfrac{13}{52}\\cdot\\dfrac{12}{51}\\cdot\\dfrac{11}{50}\\cdot\\dfrac{10}{49}\\cdot\\dfrac{9}{48} = 0.000495$ ✓ — the multiplication chain and the combination ratio are the same computation in two costumes."
+
         }),
         ref: "Handbook p.64-65" },
       { q: "A normal distribution with $\\mu = 100$, $\\sigma = 15$. P(X between 85 and 115)?",
         choices: ["$\\approx 68\\%$", "$\\approx 95\\%$", "$\\approx 99\\%$", "$50\\%$"],
         correct: 0,
         solution: S({
-          c: "Empirical rule (68-95-99.7): within 1σ ≈ 68%, 2σ ≈ 95%, 3σ ≈ 99.7%.",
+          c: "The empirical (68-95-99.7) rule for normal distributions: about 68% of outcomes fall within ±1σ of the mean, 95% within ±2σ, 99.7% within ±3σ — worth instant recall on the FE.",
           s: [
-            "Range $[\\mu-\\sigma, \\mu+\\sigma] = [85, 115]$.",
-            "By empirical rule: $P \\approx 68.27\\%$."
+            "<b>Step 1 — Express the range in σ units.</b> $85 = 100 - 15 = \\mu - \\sigma$; $115 = \\mu + \\sigma$ — exactly ±1σ.",
+            "<b>Step 2 — Apply the rule.</b> $P \\approx 68\\%$.",
+            "<b>Step 3 — Distractor audit.</b> 95% belongs to ±2σ (70-130 here); 99% ≈ ±2.6σ; 50% is just 'above/below the mean'."
           ],
           a: "$\\approx 68\\%$",
-          v: "More precisely: $P(|Z|<1) = 0.6827$."
+          v: "Exact value: $P(|Z| < 1) = 0.6827$ ✓. These are IQ-test numbers ($\\mu = 100$, $\\sigma = 15$) — so roughly two-thirds of people score 85-115, a handy reality anchor for the rule."
+
         }),
         ref: "Handbook p.67" },
       { q: "10 coins flipped. Probability of exactly 5 heads?",
         choices: ["$\\binom{10}{5}/2^{10} \\approx 24.6\\%$", "$50\\%$", "$5\\%$", "$1/2^{10}$"],
         correct: 0,
         solution: S({
-          c: "Binomial: $P(k) = \\binom{n}{k}p^k(1-p)^{n-k}$. For fair coin, $p=0.5$.",
+          c: "Counting heads in fair coin flips is binomial: $P(k) = \\binom{n}{k}p^{k}(1-p)^{n-k}$. For $p = \\tfrac12$ this simplifies beautifully: every specific sequence has probability $1/2^{n}$, so $P(k) = \\binom{n}{k}/2^{n}$.",
           s: [
-            "$\\binom{10}{5} = 252$.",
-            "$(0.5)^{10} = 1/1024 \\approx 0.000977$.",
-            "$P = 252/1024 \\approx 0.246 = 24.6\\%$."
+            "<b>Step 1 — Count the favorable sequences.</b> $\\binom{10}{5} = 252$ ways to place 5 heads among 10 flips.",
+            "<b>Step 2 — Divide by all sequences.</b> $2^{10} = 1024$ → $P = 252/1024 \\approx 24.6\\%$.",
+            "<b>Step 3 — The intuition correction.</b> 'Exactly half heads' feels like it should be 50% — but 50% is the EXPECTED FRACTION, not the probability of hitting it exactly; outcomes spread over 4, 5, 6… heads."
           ],
           a: "$\\approx 24.6\\%$",
-          v: "Note it's NOT 50% — coin flipping has variance!"
+          v: "Neighbor check: $P(4) = P(6) = 210/1024 \\approx 20.5\\%$ each — the distribution peaks at 5 but only gently ✓. Scaling insight: for $2n$ flips, $P(\\text{exactly }n) \\approx 1/\\sqrt{\\pi n}$ — it SHRINKS as the experiment grows."
+
         }),
         ref: "Handbook p.66" },
       { q: "Median of {12, 7, 9, 15, 10, 8, 11}:",
         choices: ["$10$", "$9$", "$11$", "$10.29$"],
         correct: 0,
         solution: S({
-          c: "Median = middle value when sorted. If $n$ even, average of two middle.",
-          s: ["Sort: 7, 8, 9, <b>10</b>, 11, 12, 15. Middle (4th of 7) is 10."],
-          a: "Median = 10",
-          v: "Mean = $(7+8+9+10+11+12+15)/7 = 72/7 ≈ 10.29$. Median ≠ mean unless symmetric distribution."
+          c: "The median is the middle value of the SORTED data — half the observations below, half above. With an odd count, it's the single center value; with an even count, average the two middles.",
+          s: [
+            "<b>Step 1 — Sort.</b> 7, 8, 9, 10, 11, 12, 15.",
+            "<b>Step 2 — Locate the middle.</b> $n = 7$ → the 4th value → 10.",
+            "<b>Step 3 — Distractor audit.</b> 10.29 is the MEAN ($72/7$); 9 and 11 are the neighbors of the true middle."
+          ],
+          a: "Median $= 10$",
+          v: "Why both statistics exist: the 15 pulls the mean up to 10.29 but cannot budge the median — the median resists outliers (why income statistics quote medians) ✓."
+
         }),
         ref: "Handbook p.63" },
       { q: "If sample size doubles from 100 to 400, the standard error of the sample mean:",
         choices: ["Halves", "Doubles", "Stays same", "Quadruples"],
         correct: 0,
         solution: S({
-          c: "Standard error: $SE = \\sigma/\\sqrt{n}$. Quadrupling $n$ → halving SE.",
+          c: "The standard error of a sample mean — how much $\\bar x$ wobbles between samples — shrinks with the SQUARE ROOT of sample size: $SE = \\sigma/\\sqrt n$. (Careful reading: the question quadruples $n$ from 100 to 400.)",
           s: [
-            "$SE_{100} = \\sigma/\\sqrt{100} = \\sigma/10$.",
-            "$SE_{400} = \\sigma/\\sqrt{400} = \\sigma/20$.",
-            "Ratio: $20/10 = 2$ → SE halved."
+            "<b>Step 1 — Before.</b> $SE_{100} = \\sigma/\\sqrt{100} = \\sigma/10$.",
+            "<b>Step 2 — After.</b> $SE_{400} = \\sigma/\\sqrt{400} = \\sigma/20$.",
+            "<b>Step 3 — Compare.</b> $\\sigma/20$ is HALF of $\\sigma/10$ → SE halves.",
+            "<b>Step 4 — Distractor audit.</b> 'Doubles' inverts; 'stays same' ignores $n$; 'quadruples' applies the change to the wrong side."
           ],
-          a: "Halves",
-          v: "To halve SE, you must quadruple the sample size. Why surveys aim for ~1000 — beyond that, gains are slow."
+          a: "Halves.",
+          v: "The diminishing-returns law of statistics: halving uncertainty costs 4× the data; cutting it to a tenth costs 100× ✓ — exactly why polls stop near $n \\approx 1000$ (±3%) instead of paying for millions."
+
         }),
         ref: "Handbook p.69" },
       { q: "A drug claims 80% effectiveness. In 200 patients, expected number cured + std deviation:",
         choices: ["$\\mu=160$, $\\sigma\\approx 5.66$", "$\\mu=80$, $\\sigma=20$", "$\\mu=160$, $\\sigma=40$", "$\\mu=200$, $\\sigma=8$"],
         correct: 0,
         solution: S({
-          c: "Binomial: $\\mu = np$, $\\sigma = \\sqrt{np(1-p)}$.",
+          c: "A yes/no outcome repeated $n$ times is binomial, with two formulas to recall together: mean $\\mu = np$, standard deviation $\\sigma = \\sqrt{np(1-p)}$ — note the $(1-p)$ inside the root.",
           s: [
-            "$\\mu = 200 \\cdot 0.8 = 160$.",
-            "$\\sigma = \\sqrt{200 \\cdot 0.8 \\cdot 0.2} = \\sqrt{32} \\approx 5.66$."
+            "<b>Step 1 — Mean.</b> $\\mu = 200\\times0.8 = 160$ cured.",
+            "<b>Step 2 — Standard deviation.</b> $\\sigma = \\sqrt{200\\times0.8\\times0.2} = \\sqrt{32} \\approx 5.66$.",
+            "<b>Step 3 — Distractor audit.</b> $\\sigma = 40$ uses $np(1-p)$ WITHOUT the square root... ($32$, not $40$ — it garbles further); $\\mu = 80$ halves; $\\mu = 200$ forgets $p$."
           ],
           a: "$\\mu = 160$, $\\sigma \\approx 5.66$",
-          v: "95% CI roughly $\\mu \\pm 2\\sigma$: 148.7 to 171.3. So between 149 and 171 cures expected."
+          v: "Useful read-out: ~95% of trials should cure $160 \\pm 2(5.66) \\approx 149$-171 patients — observing, say, 130 cures would be strong evidence AGAINST the 80% claim ✓ (this mean±2σ reasoning is the backbone of hypothesis testing)."
+
         }),
         ref: "Handbook p.66" },
     ],
