@@ -1510,126 +1510,148 @@
         choices: ["$\\approx 70.7$ kW", "$\\approx 40.8$ kW", "$\\approx 48$ kW", "$\\approx 83.1$ kW"],
         correct: 0,
         solution: S({
-          c: "Three-phase real power: $P = \\sqrt{3}\\,V_L I_L\\cos\\theta$.",
+          c: "The one three-phase power formula that handles BOTH Y and Δ, using line quantities: $P = \\sqrt3\\,V_LI_L\\cos\\theta$. The $\\sqrt3$ comes from combining three phases' worth of power into line-level measurements; $\\cos\\theta$ (power factor) keeps only the REAL power.",
           s: [
-            "$\\sqrt{3} \\approx 1.732$.",
-            "$P = 1.732 \\times 480 \\times 100 \\times 0.85 = 70{,}658$ W ≈ 70.7 kW."
+            "<b>Step 1 — Plug in.</b> $P = 1.732 \\times 480 \\times 100 \\times 0.85$.",
+            "<b>Step 2 — Evaluate in stages.</b> $1.732 \\times 480 = 831.4$; $\\times 100 = 83{,}140$ (this is $S$ in VA); $\\times 0.85 = 70{,}658$ W.",
+            "<b>Step 3 — Distractor audit.</b> 40.8 kW drops $\\sqrt3$; 48 kW is $V\\times I\\times PF$ single-phase style; 83.1 kW is the APPARENT power $S$ (forgot the power factor)."
           ],
           a: "$P \\approx 70.7$ kW",
-          v: "Apparent $S = \\sqrt 3 V_L I_L = 83.1$ kVA; reactive $Q = S\\sin\\theta = 43.8$ kVAR ✓ ($P^{2}+Q^{2}=S^{2}$)."
+          v: "Triangle closure: $S = 83.1$ kVA, $Q = S\\sin\\theta = 83.1\\times0.527 = 43.8$ kVAR, and $\\sqrt{70.7^{2} + 43.8^{2}} = 83.1$ ✓ — P, Q, S form a right triangle, always."
+
         })
       },
       { q: "Power factor correction: load takes 100 kW at PF = 0.7 lagging. Capacitor kVAR to correct to PF = 0.95?",
         choices: ["$\\approx 69$ kVAR", "$\\approx 30$ kVAR", "$\\approx 100$ kVAR", "$\\approx 50$ kVAR"],
         correct: 0,
         solution: S({
-          c: "Capacitor kVAR = $P[\\tan\\theta_1 - \\tan\\theta_2]$ where $\\theta = \\cos^{-1}(PF)$.",
+          c: "Power-factor correction sizing: real power $P$ stays fixed; capacitors only remove reactive power $Q$. Since $Q = P\\tan\\theta$, the capacitor bank must supply the DIFFERENCE: $Q_C = P(\\tan\\theta_1 - \\tan\\theta_2)$.",
           s: [
-            "$\\theta_1 = \\cos^{-1}(0.7) = 45.57°$; $\\tan\\theta_1 = 1.0202$.",
-            "$\\theta_2 = \\cos^{-1}(0.95) = 18.19°$; $\\tan\\theta_2 = 0.3287$.",
-            "$Q_C = 100(1.0202 - 0.3287) = 69.15$ kVAR."
+            "<b>Step 1 — Initial reactive power.</b> $\\theta_1 = \\cos^{-1}0.7 = 45.6°$, $\\tan\\theta_1 = 1.020$ → $Q_1 = 100\\times1.020 = 102$ kVAR.",
+            "<b>Step 2 — Target reactive power.</b> $\\theta_2 = \\cos^{-1}0.95 = 18.2°$, $\\tan\\theta_2 = 0.329$ → $Q_2 = 32.9$ kVAR.",
+            "<b>Step 3 — Capacitor bank.</b> $Q_C = 102 - 32.9 \\approx 69$ kVAR.",
+            "<b>Step 4 — Distractor audit.</b> 100 kVAR ≈ full correction to unity; 30 kVAR ≈ the residual $Q_2$ mistaken for the bank; 50 is a midpoint guess."
           ],
           a: "$Q_C \\approx 69$ kVAR",
-          v: "New apparent $S_2 = P/PF_2 = 100/0.95 = 105.3$ kVA, down from 142.9 kVA before correction."
+          v: "Payoff check: apparent power falls from $100/0.7 = 142.9$ kVA to $100/0.95 = 105.3$ kVA — 26% less current through every transformer and feeder upstream ✓. Why stop at 0.95: utilities bill penalties below ~0.9-0.95, and over-correcting risks LEADING PF at light load."
+
         })
       },
       { q: "Ideal transformer: $N_1/N_2 = 10$. Primary voltage 2000 V (rms). Secondary voltage?",
         choices: ["$200$ V", "$20{,}000$ V", "$100$ V", "$2000$ V"],
         correct: 0,
         solution: S({
-          c: "$V_1/V_2 = N_1/N_2$ for ideal transformer.",
+          c: "An ideal transformer is a voltage lever: voltage scales WITH the turns ratio ($V_1/V_2 = N_1/N_2$), current scales AGAINST it, and power passes through unchanged.",
           s: [
-            "$V_2 = V_1 \\cdot N_2/N_1 = 2000/10 = 200$ V."
+            "<b>Step 1 — Apply.</b> $V_2 = V_1\\cdot\\dfrac{N_2}{N_1} = \\dfrac{2000}{10} = 200$ V.",
+            "<b>Step 2 — Distractor audit.</b> 20,000 V multiplies instead of divides (a step-UP misread); 100 V over-divides (ratio 20); 2000 V pretends 1:1."
           ],
           a: "$V_2 = 200$ V",
-          v: "Current is inverse: $I_2/I_1 = N_1/N_2 = 10$, so secondary current is 10× primary current."
+          v: "Power-balance check: with a load drawing $I_2 = 10$ A, $P_2 = 2$ kW; the primary draws $I_1 = 1$ A at 2000 V → $P_1 = 2$ kW ✓ — same power, traded between voltage and current. That trade IS the entire grid: step up to transmit (low current, low $I^{2}R$ loss), step down to use."
+
         })
       },
       { q: "Synchronous speed of a 4-pole machine at 60 Hz:",
         choices: ["$1800$ rpm", "$3600$ rpm", "$900$ rpm", "$1500$ rpm"],
         correct: 0,
         solution: S({
-          c: "$n_s = 120f/P$ where $P$ is number of poles.",
+          c: "A 3-phase stator creates a rotating magnetic field. Its speed — the SYNCHRONOUS speed — depends only on supply frequency and pole count: $n_s = \\dfrac{120f}{P}$ rpm (the 120 = 60 s/min × 2, since each pole PAIR spans one electrical cycle).",
           s: [
-            "$n_s = 120 \\times 60 / 4 = 1800$ rpm."
+            "<b>Step 1 — Plug in.</b> $n_s = \\dfrac{120\\times60}{4} = 1800$ rpm.",
+            "<b>Step 2 — Distractor audit.</b> 3600 rpm is the 2-pole value; 900 rpm the 8-pole; 1500 rpm is the 4-pole answer at 50 Hz (Europe) — a units-of-frequency trap."
           ],
-          a: "$1800$ rpm",
-          v: "2-pole: 3600 rpm; 6-pole: 1200 rpm; 8-pole: 900 rpm — at 60 Hz."
+          a: "$n_s = 1800$ rpm",
+          v: "The 60-Hz ladder worth memorizing: 2P→3600, 4P→1800, 6P→1200, 8P→900 rpm — halve and step. Synchronous machines turn at exactly $n_s$; induction motors run slightly BELOW it (slip) ✓."
+
         })
       },
       { q: "Induction motor slip $s = (n_s - n)/n_s$. If $n_s = 1800$ rpm and $n = 1764$ rpm, slip is:",
         choices: ["$2\\%$", "$10\\%$", "$0.02\\%$", "$5\\%$"],
         correct: 0,
         solution: S({
-          c: "Slip definition.",
+          c: "Slip measures how far an induction motor's rotor lags the rotating field, as a fraction: $s = \\dfrac{n_s - n}{n_s}$. Slip is WHY torque exists — rotor conductors must cut field lines to carry induced current.",
           s: [
-            "$s = (1800 - 1764)/1800 = 36/1800 = 0.02 = 2\\%$."
+            "<b>Step 1 — Slip speed.</b> $n_s - n = 1800 - 1764 = 36$ rpm.",
+            "<b>Step 2 — Normalize.</b> $s = 36/1800 = 0.02 = 2\\%$.",
+            "<b>Step 3 — Distractor audit.</b> 10% misreads 36/360; 0.02% forgets the percent conversion is already done; 5% is a plausibility decoy."
           ],
           a: "$s = 2\\%$",
-          v: "Full-load slip typically 2-5%; at no-load slip $\\sim$ 0.1-1%."
+          v: "Range check: full-load slip for standard induction motors runs 2-5%, no-load near 0.1-1% — 2% sits exactly in the full-load band ✓. Rotor frequency bonus: $f_r = sf = 0.02\\times60 = 1.2$ Hz — rotor currents are nearly DC at running speed."
+
         })
       },
       { q: "Per-unit system: a 100 MVA transformer with $X = 0.1$ pu has actual reactance on a 100 kV base of:",
         choices: ["$10\\,\\Omega$", "$1\\,\\Omega$", "$100\\,\\Omega$", "$1000\\,\\Omega$"],
         correct: 0,
         solution: S({
-          c: "$Z_{actual} = Z_{pu}\\cdot Z_{base}$, where $Z_{base} = V_{base}^{2}/S_{base}$.",
+          c: "Per-unit values are fractions of a chosen base. To get back to real ohms: $Z_{actual} = Z_{pu}\\times Z_{base}$, where the impedance base is built from the voltage and power bases: $Z_{base} = V_{base}^{2}/S_{base}$.",
           s: [
-            "$Z_{base} = (100\\text{ kV})^{2}/100\\text{ MVA} = 10^{10}/10^{8} = 100\\,\\Omega$.",
-            "$Z = 0.1 \\times 100 = 10\\,\\Omega$."
+            "<b>Step 1 — Impedance base.</b> $Z_{base} = \\dfrac{(100\\times10^{3})^{2}}{100\\times10^{6}} = \\dfrac{10^{10}}{10^{8}} = 100\\,\\Omega$.",
+            "<b>Step 2 — Scale.</b> $Z = 0.1 \\times 100 = 10\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 100 Ω forgets to apply the pu value; 1 Ω and 1000 Ω are decade slips in $V^{2}/S$."
           ],
-          a: "$Z = 10\\,\\Omega$",
-          v: "Per-unit simplifies multi-voltage analysis: pu impedances are the same on either side of a transformer."
+          a: "$X = 10\\,\\Omega$",
+          v: "Reverse check: $10\\,\\Omega/100\\,\\Omega = 0.1$ pu ✓. Why engineers bother with pu: a transformer's pu impedance is the SAME from either side (the $V^{2}$ in $Z_{base}$ exactly cancels the turns-ratio-squared transformation) — multi-voltage networks collapse into one clean diagram."
+
         })
       },
       { q: "Transmission line short-circuit current at fault: source EMF 1.0 pu, source X = 0.1 pu, line X = 0.05 pu. Fault current?",
         choices: ["$\\approx 6.67$ pu", "$\\approx 10$ pu", "$\\approx 20$ pu", "$\\approx 1$ pu"],
         correct: 0,
         solution: S({
-          c: "Three-phase fault at line end: $I = V/(X_{src}+X_{line})$ in pu.",
+          c: "For a bolted three-phase fault, all the limiting happens in series reactances between the source and the fault: $I_f = \\dfrac{V_{pre}}{X_{total}}$ in per-unit.",
           s: [
-            "Total X = 0.1 + 0.05 = 0.15 pu.",
-            "$I = 1/0.15 = 6.667$ pu."
+            "<b>Step 1 — Total the series reactance.</b> $X = X_{src} + X_{line} = 0.1 + 0.05 = 0.15$ pu.",
+            "<b>Step 2 — Divide.</b> $I_f = 1.0/0.15 = 6.67$ pu.",
+            "<b>Step 3 — Distractor audit.</b> 10 pu uses the source X only; 20 pu uses the line X only; 1 pu forgets to divide."
           ],
-          a: "$\\approx 6.67$ pu",
-          v: "Convert to amps using $I_{base} = S_{base}/(\\sqrt 3 V_{base})$."
+          a: "$I_f \\approx 6.67$ pu",
+          v: "Reading: fault current is 6.67× rated — breakers must interrupt it, conductors must survive it thermally until they do ✓. Location insight: a fault FARTHER down the line (more X in the path) draws LESS current — distance protection relays exploit exactly that."
+
         })
       },
       { q: "A single-phase transformer is rated 10 kVA, 240/120 V. Full-load primary current?",
         choices: ["$\\approx 41.7$ A", "$\\approx 83.3$ A", "$\\approx 100$ A", "$\\approx 10$ A"],
         correct: 0,
         solution: S({
-          c: "$I = S/V$ for single-phase rating.",
+          c: "A transformer's kVA rating is the apparent power it can carry continuously. Full-load current on each side is simply $I = S/V$ for single-phase — same $S$, different $V$, hence different currents.",
           s: [
-            "Primary side (240 V): $I_1 = 10{,}000/240 = 41.67$ A.",
-            "Secondary side (120 V): $I_2 = 10{,}000/120 = 83.33$ A."
+            "<b>Step 1 — Primary current.</b> $I_1 = \\dfrac{10{,}000}{240} = 41.7$ A.",
+            "<b>Step 2 — Secondary for context.</b> $I_2 = \\dfrac{10{,}000}{120} = 83.3$ A — distractor B is the SECONDARY current; read which side the question asks.",
+            "<b>Step 3 — Distractor audit.</b> 100 A and 10 A are decade-ish slips with no consistent route."
           ],
           a: "$I_1 \\approx 41.7$ A",
-          v: "Ratio $I_2/I_1 = V_1/V_2 = 2$ ✓ (turns ratio)."
+          v: "Turns-ratio check: $I_2/I_1 = 83.3/41.7 = 2 = V_1/V_2$ ✓ — current ratio inverts the voltage ratio. Practical note: ratings use kVA (not kW) because the transformer's heating depends on CURRENT regardless of the load's power factor."
+
         })
       },
       { q: "Three-phase $\\Delta$-connected source: phase voltage 240 V. Line voltage?",
         choices: ["$240$ V", "$416$ V", "$139$ V", "$480$ V"],
         correct: 0,
         solution: S({
-          c: "$\\Delta$: $V_L = V_\\phi$ (line and phase voltages equal); $I_L = \\sqrt 3 I_\\phi$.",
+          c: "Connection geometry decides which quantities match: in a DELTA, each winding bridges two lines directly, so LINE voltage EQUALS phase voltage ($V_L = V_\\phi$); the $\\sqrt3$ shows up in the CURRENTS instead ($I_L = \\sqrt3 I_\\phi$).",
           s: [
-            "Line voltage = phase voltage = 240 V."
+            "<b>Step 1 — Apply the Δ rule.</b> $V_L = V_\\phi = 240$ V — no conversion needed.",
+            "<b>Step 2 — Distractor audit.</b> 416 V applies the Y-rule ($\\sqrt3\\times240$) to a Δ; 139 V divides by $\\sqrt3$ (also Y-thinking, wrong direction); 480 V doubles for no reason."
           ],
           a: "$V_L = 240$ V",
-          v: "Y-connection is opposite: $V_L = \\sqrt 3 V_\\phi,\\ I_L = I_\\phi$."
+          v: "The complete pairing to memorize: Y → $V_L = \\sqrt3V_\\phi$, $I_L = I_\\phi$; Δ → $V_L = V_\\phi$, $I_L = \\sqrt3I_\\phi$ — the $\\sqrt3$ always lands on exactly one of the two, never both ✓. Power comes out identical either way: $\\sqrt3V_LI_L\\cos\\theta$."
+
         })
       },
       { q: "A motor draws 50 A at 480 V (3φ) with 0.8 PF lagging. Real power?",
         choices: ["$\\approx 33.3$ kW", "$\\approx 24$ kW", "$\\approx 41.6$ kW", "$\\approx 60$ kW"],
         correct: 0,
         solution: S({
-          c: "$P = \\sqrt 3 V_L I_L \\cos\\theta$ for balanced 3φ.",
+          c: "Same workhorse formula: $P = \\sqrt3\\,V_LI_L\\cos\\theta$ — line voltage, line current, power factor; works for any balanced three-phase load including motors.",
           s: [
-            "$P = 1.732 \\times 480 \\times 50 \\times 0.8 = 33{,}255$ W $\\approx 33.3$ kW."
+            "<b>Step 1 — Plug in.</b> $P = 1.732\\times480\\times50\\times0.8$.",
+            "<b>Step 2 — Evaluate.</b> $1.732\\times480 = 831.4$; $\\times50 = 41{,}570$ ($S$ in VA); $\\times0.8 = 33{,}255$ W.",
+            "<b>Step 3 — Distractor audit.</b> 41.6 kW is the apparent power $S$ (skipped PF); 24 kW drops $\\sqrt3$ ($480\\times50\\times0.8\\div1000 = 19.2$... close-ish decoy family); 60 kW has no route."
           ],
-          a: "$\\approx 33.3$ kW",
-          v: "$S = \\sqrt 3 V_L I_L = 41.57$ kVA; $Q = 24.94$ kVAR; PF = $P/S = 0.8$ ✓."
+          a: "$P \\approx 33.3$ kW",
+          v: "Triangle: $S = 41.6$ kVA, $Q = S\\times0.6 = 24.9$ kVAR; $33.3^{2} + 24.9^{2} = 41.6^{2}$ ✓. Mechanical context: 33 kW ≈ 45 hp delivered (minus motor losses) — a mid-size industrial motor, sensible at 480 V/50 A."
+
         })
       }
     ],
@@ -1640,127 +1662,151 @@
         choices: ["$1.8$ N", "$0.18$ N", "$18$ N", "$0.018$ N"],
         correct: 0,
         solution: S({
-          c: "Coulomb’s law: $F = \\dfrac{1}{4\\pi\\varepsilon_0}\\cdot\\dfrac{|Q_1 Q_2|}{r^{2}}$, with $k = 1/(4\\pi\\varepsilon_0) = 8.99\\times 10^{9}$ N·m²/C².",
+          c: "Coulomb's law — the gravitational law of charges: $F = k\\dfrac{|Q_1Q_2|}{r^{2}}$ with $k = \\dfrac{1}{4\\pi\\varepsilon_0} = 8.99\\times10^{9}$ N·m²/C². Double the distance → quarter the force.",
           s: [
-            "$Q_1 Q_2 = (10^{-6})(2\\times 10^{-6}) = 2\\times 10^{-12}$ C².",
-            "$r^{2} = (0.1)^{2} = 0.01$ m².",
-            "$F = 8.99\\times 10^{9} \\times 2\\times 10^{-12}/0.01 = 1.798$ N."
+            "<b>Step 1 — Charge product.</b> $Q_1Q_2 = (1\\times10^{-6})(2\\times10^{-6}) = 2\\times10^{-12}$ C².",
+            "<b>Step 2 — Distance squared (in meters!).</b> $r = 10$ cm $= 0.1$ m → $r^{2} = 0.01$ m².",
+            "<b>Step 3 — Assemble.</b> $F = \\dfrac{(8.99\\times10^{9})(2\\times10^{-12})}{0.01} = \\dfrac{1.8\\times10^{-2}}{10^{-2}} = 1.8$ N.",
+            "<b>Step 4 — Distractor audit.</b> 0.18, 18, 0.018 N are all decade slips — usually from leaving $r$ in cm or mishandling the μC exponents."
           ],
           a: "$F \\approx 1.8$ N",
-          v: "Like charges repel, unlike attract — magnitude is the same."
+          v: "Scale feel: 1.8 N (~180 grams-force) from microcoulombs at hand distance — electrostatics is VIOLENTLY strong; we rarely notice only because matter stays neutral. Sign note: magnitude is the same whether the charges attract (opposite signs) or repel (same) ✓."
+
         })
       },
       { q: "Electric field due to a point charge $Q$ at distance $r$:",
         choices: ["$E = kQ/r^{2}$", "$E = kQ/r$", "$E = Q/r^{2}$", "$E = kQr$"],
         correct: 0,
         solution: S({
-          c: "$\\vec E = \\dfrac{1}{4\\pi\\varepsilon_0}\\dfrac{Q}{r^{2}}\\hat r$ — inverse-square law.",
+          c: "The electric field is force per unit test charge: $\\vec E = \\vec F/q_{test}$. Dividing Coulomb's law by $q_{test}$ leaves $E = \\dfrac{kQ}{r^{2}}$, pointing radially (outward for positive $Q$).",
           s: [
-            "$k = 1/(4\\pi\\varepsilon_0)$, points radially outward for $Q>0$."
+            "<b>Step 1 — Derive from Coulomb.</b> $F = kQq/r^{2}$ on a test charge $q$ → $E = F/q = kQ/r^{2}$.",
+            "<b>Step 2 — Distractor audit.</b> $kQ/r$ is the POTENTIAL $V$ (one power of $r$ less — the classic mix-up); $Q/r^{2}$ drops the constant $k$; $kQr$ grows with distance — unphysical for a point source."
           ],
           a: "$E = kQ/r^{2}$",
-          v: "Voltage: $V = kQ/r$ — falls off as $1/r$ (one power less than field)."
+          v: "Unit check: N/C = V/m ✓ (two names for the same field unit). The $1/r^{2}$ vs $1/r$ pairing to lock in: FIELD falls as $1/r^{2}$, POTENTIAL as $1/r$, and $E = -dV/dr$ connects them — differentiate $kQ/r$ and you get exactly $kQ/r^{2}$ ✓."
+
         })
       },
       { q: "Magnetic force on a conductor: $F = BIL\\sin\\theta$. For $B = 0.5$ T, $I = 10$ A, $L = 1$ m, $\\theta = 90°$:",
         choices: ["$5$ N", "$0.5$ N", "$10$ N", "$50$ N"],
         correct: 0,
         solution: S({
-          c: "Lorentz force on current-carrying wire: $\\vec F = I\\vec L \\times \\vec B$.",
+          c: "A current-carrying wire in a magnetic field feels the collective Lorentz force of its moving charges: $\\vec F = I\\vec L\\times\\vec B$, magnitude $F = BIL\\sin\\theta$ — maximal when wire ⊥ field, zero when parallel.",
           s: [
-            "$F = BIL\\sin 90° = 0.5 \\times 10 \\times 1 \\times 1 = 5$ N."
+            "<b>Step 1 — Evaluate at θ = 90°.</b> $\\sin90° = 1$: $F = 0.5\\times10\\times1 = 5$ N.",
+            "<b>Step 2 — Direction.</b> Right-hand rule: fingers along current, curl toward $\\vec B$, thumb gives $\\vec F$ — perpendicular to both.",
+            "<b>Step 3 — Distractor audit.</b> 0.5 N drops the current decade; 10 N drops $B$; 50 N multiplies all three carelessly ($0.5\\times10\\times1 = 5$, not 50)."
           ],
           a: "$F = 5$ N",
-          v: "Direction: right-hand rule. Force is zero when current and field are parallel ($\\theta = 0$)."
+          v: "Unit check: T·A·m = (V·s/m²)(A)(m) = W·s/m... cleanly, 1 T = 1 N/(A·m), so T·A·m = N ✓. This force is the operating principle of every motor and loudspeaker; its reciprocal twin (move the wire, get EMF) is every generator."
+
         })
       },
       { q: "Faraday’s law: induced EMF in a coil of 100 turns when flux changes from 0.01 to 0.05 Wb in 0.1 s:",
         choices: ["$-40$ V", "$-4$ V", "$-0.04$ V", "$40$ V"],
         correct: 0,
         solution: S({
-          c: "$\\mathcal{E} = -N\\,d\\Phi/dt$. Negative sign per Lenz’s law.",
+          c: "Faraday's law: a CHANGING magnetic flux through a coil induces voltage, one contribution per turn: $\\mathcal E = -N\\dfrac{d\\Phi}{dt}$. The minus sign is Lenz's law — the induced current opposes the change that created it.",
           s: [
-            "$d\\Phi/dt = (0.05-0.01)/0.1 = 0.4$ Wb/s.",
-            "$\\mathcal{E} = -100 \\times 0.4 = -40$ V."
+            "<b>Step 1 — Rate of flux change.</b> $\\dfrac{d\\Phi}{dt} = \\dfrac{0.05 - 0.01}{0.1} = 0.4$ Wb/s.",
+            "<b>Step 2 — Scale by turns.</b> $\\mathcal E = -100\\times0.4 = -40$ V.",
+            "<b>Step 3 — Distractor audit.</b> −4 V forgets the 100 turns; −0.04 V divides by them; +40 V drops Lenz's sign (the listed answer keeps the conventional negative)."
           ],
-          a: "$\\mathcal{E} = -40$ V",
-          v: "The minus sign indicates the induced current opposes the change in flux (Lenz)."
+          a: "$\\mathcal E = -40$ V",
+          v: "Sanity on the sign: flux is INCREASING, so the induced current circulates to push flux back DOWN (opposing) — that opposition is what the minus encodes; it is also why generators resist being turned under load ✓. Unit check: Wb/s = V by definition of the weber."
+
         })
       },
       { q: "Speed of light in vacuum: $c = 1/\\sqrt{\\mu_0\\varepsilon_0}$. Approximate value:",
         choices: ["$3\\times 10^{8}$ m/s", "$3\\times 10^{6}$ m/s", "$3\\times 10^{10}$ m/s", "$3\\times 10^{5}$ m/s"],
         correct: 0,
         solution: S({
-          c: "Maxwell predicted light is an EM wave with speed $1/\\sqrt{\\mu_0\\varepsilon_0}$.",
+          c: "Maxwell's great unification: electromagnetic waves travel at $c = \\dfrac{1}{\\sqrt{\\mu_0\\varepsilon_0}}$ — a speed built entirely from electric and magnetic constants. Computing it gives $3\\times10^{8}$ m/s — the measured speed of light, proving light IS an EM wave.",
           s: [
-            "$\\mu_0 = 4\\pi\\times 10^{-7}$ H/m, $\\varepsilon_0 = 8.854\\times 10^{-12}$ F/m.",
-            "$\\sqrt{\\mu_0\\varepsilon_0} = 3.34\\times 10^{-9}$ s/m ⇒ $c = 1/3.34\\times 10^{-9} = 2.998\\times 10^{8}$ m/s."
+            "<b>Step 1 — Plug in the constants.</b> $\\mu_0 = 4\\pi\\times10^{-7}$ H/m, $\\varepsilon_0 = 8.854\\times10^{-12}$ F/m.",
+            "<b>Step 2 — Multiply and root.</b> $\\mu_0\\varepsilon_0 = 1.113\\times10^{-17}$ → $\\sqrt{\\ } = 3.34\\times10^{-9}$ s/m.",
+            "<b>Step 3 — Invert.</b> $c = 1/(3.34\\times10^{-9}) = 2.998\\times10^{8}$ m/s.",
+            "<b>Step 4 — Distractor audit.</b> The wrong options are decade shifts; $3\\times10^{5}$ is km/s dressed as m/s."
           ],
-          a: "$c \\approx 3\\times 10^{8}$ m/s",
-          v: "In a medium with $\\varepsilon_r,\\mu_r$: $v = c/\\sqrt{\\varepsilon_r\\mu_r}$."
+          a: "$c \\approx 3\\times10^{8}$ m/s",
+          v: "In a material the same formula picks up the relative constants: $v = c/\\sqrt{\\varepsilon_r\\mu_r}$ — e.g. glass ($\\varepsilon_r \\approx 2.25$) slows light to $2\\times10^{8}$ m/s, which IS the refractive index $n = 1.5$ ✓. Engineering feel: 30 cm per nanosecond — the ruler of high-speed PCB design."
+
         })
       },
       { q: "Characteristic impedance of free space:",
         choices: ["$377\\,\\Omega$", "$50\\,\\Omega$", "$75\\,\\Omega$", "$120\\pi\\,\\Omega$ — same as A"],
         correct: 0,
         solution: S({
-          c: "$\\eta_0 = \\sqrt{\\mu_0/\\varepsilon_0} = 120\\pi \\approx 377\\,\\Omega$.",
+          c: "A traveling EM wave carries E and H fields in a fixed ratio set by the medium: $\\eta = \\sqrt{\\mu/\\varepsilon}$. For vacuum: $\\eta_0 = \\sqrt{\\mu_0/\\varepsilon_0} = 120\\pi \\approx 377\\,\\Omega$ — the 'impedance' space presents to a wave.",
           s: [
-            "$120\\pi = 376.99\\,\\Omega$ — choices A and D are identical."
+            "<b>Step 1 — Evaluate.</b> $\\sqrt{(4\\pi\\times10^{-7})/(8.854\\times10^{-12})} = \\sqrt{1.42\\times10^{5}} = 376.7\\,\\Omega$.",
+            "<b>Step 2 — The exact form.</b> $\\eta_0 = \\mu_0c = 120\\pi\\,\\Omega$ — so choices A (377) and D ($120\\pi$) are THE SAME NUMBER; pick the listed standard form A.",
+            "<b>Step 3 — Distractor audit.</b> 50 Ω and 75 Ω are CABLE impedances (coax geometry), not properties of space — a deliberate confusion of transmission-line $Z_0$ with wave impedance of a medium."
           ],
           a: "$\\eta_0 \\approx 377\\,\\Omega$ ($= 120\\pi$)",
-          v: "Free-space wave: $|E|/|H| = \\eta_0$."
+          v: "Meaning check: for a plane wave in air, $|E|/|H| = 377$ — e.g. a 1-V/m field travels with $H = 2.65$ mA/m ✓. Antenna relevance: radiation resistance formulas are full of $120\\pi$ because the antenna must 'match into' this impedance of space."
+
         })
       },
       { q: "Boundary condition: tangential $E$-field at the surface between two perfect dielectrics is:",
         choices: ["Continuous (equal on both sides)", "Discontinuous", "Zero", "Infinite"],
         correct: 0,
         solution: S({
-          c: "Maxwell boundary conditions: $E_t$ continuous; $D_n$ continuous (if no surface charge); $B_n$ continuous; $H_t$ continuous (if no surface current).",
+          c: "Where two materials meet, Maxwell's equations force matching rules on the fields. The four to memorize: tangential E continuous; tangential H continuous (no surface current); normal D continuous (no surface charge); normal B continuous — always.",
           s: [
-            "Tangential electric field always continuous across charge-free dielectric boundary."
+            "<b>Step 1 — Apply to tangential E.</b> Across a charge-free dielectric-dielectric boundary: $E_{1t} = E_{2t}$ — CONTINUOUS, no exceptions for perfect dielectrics.",
+            "<b>Step 2 — Why.</b> Faraday's law around a vanishingly thin loop straddling the surface: the loop encloses no changing flux in the limit, so the tangential components must cancel — i.e. match.",
+            "<b>Step 3 — Distractor audit.</b> 'Discontinuous' describes the NORMAL E component (since $\\varepsilon_1E_{1n} = \\varepsilon_2E_{2n}$, normal E jumps when ε differs); 'zero' applies at a PERFECT CONDUCTOR surface, not a dielectric; 'infinite' is never a boundary value."
           ],
-          a: "Continuous.",
-          v: "Normal $D$ continuous: $\\varepsilon_1 E_{1n} = \\varepsilon_2 E_{2n}$ ⇒ $E$ normal jumps when $\\varepsilon$ differs."
+          a: "Continuous across the boundary.",
+          v: "This pair of rules (tangential E continuous, normal E jumping) is exactly why light BENDS at an interface — Snell's law is the boundary conditions applied to a plane wave ✓. Conductor contrast worth keeping: at a perfect conductor, tangential E = 0, which is why fields meet metal walls at right angles."
+
         })
       },
       { q: "Capacitance of a parallel-plate capacitor doubles if:",
         choices: ["Plate area doubles (gap unchanged)", "Gap doubles", "Dielectric is removed", "Voltage doubles"],
         correct: 0,
         solution: S({
-          c: "$C = \\varepsilon A/d$ — directly proportional to $A$, inversely to $d$.",
+          c: "Parallel-plate capacitance is pure geometry and material: $C = \\dfrac{\\varepsilon A}{d}$ — proportional to plate area, inversely proportional to gap, scaled by the dielectric. Notably ABSENT: voltage.",
           s: [
-            "Doubling $A$ → $C$ doubles.",
-            "Doubling $d$ → $C$ halves. Voltage doesn’t affect $C$."
+            "<b>Step 1 — Test each option against the formula.</b> Double $A$ → $C$ doubles ✓ (twice the charge-storing surface at the same field).",
+            "<b>Step 2 — The others.</b> Double $d$ → $C$ HALVES (weaker grip across a wider gap); removing a dielectric divides by $\\varepsilon_r$ → $C$ DROPS; doubling voltage changes the stored CHARGE ($Q = CV$), but $C$ itself doesn't budge — capacitance is a property of the device, not the operating point."
           ],
-          a: "Plate area doubles.",
-          v: "Stored energy $W = \\tfrac12 CV^{2}$: doubling $C$ at fixed $V$ doubles energy."
+          a: "Plate area doubles (gap unchanged).",
+          v: "Energy consequence: at fixed $V$, doubling $C$ doubles $W = \\tfrac12CV^{2}$ ✓. The voltage-independence is worth internalizing: a 10-μF capacitor is 10 μF at 1 V or 100 V — what changes with voltage is charge and energy, never the capacitance (ideal case)."
+
         })
       },
       { q: "A plane wave in air has wavelength 30 cm. Frequency?",
         choices: ["$1$ GHz", "$100$ MHz", "$10$ MHz", "$3$ GHz"],
         correct: 0,
         solution: S({
-          c: "$f = c/\\lambda$.",
+          c: "For any wave, speed = frequency × wavelength. EM waves in air travel at $c$, so $f = c/\\lambda$.",
           s: [
-            "$f = (3\\times 10^{8})/0.3 = 10^{9}$ Hz $= 1$ GHz."
+            "<b>Step 1 — Convert.</b> $\\lambda = 30$ cm $= 0.3$ m.",
+            "<b>Step 2 — Divide.</b> $f = \\dfrac{3\\times10^{8}}{0.3} = 10^{9}$ Hz $= 1$ GHz.",
+            "<b>Step 3 — Distractor audit.</b> 100 MHz and 10 MHz are decade slips (likely cm→m errors); 3 GHz multiplies by $c$'s mantissa twice."
           ],
           a: "$f = 1$ GHz",
-          v: "Microwave range — used in Wi-Fi (2.4 GHz, 5 GHz) and cell bands."
+          v: "Anchor pairs worth memorizing: 1 GHz ↔ 30 cm, 3 GHz ↔ 10 cm, 300 MHz ↔ 1 m — all from $\\lambda f = 3\\times10^{8}$ ✓. Context: 1 GHz sits among cellular bands; antenna sizing flows from this (λ/4 monopole at 1 GHz ≈ 7.5 cm — phone-sized, not coincidentally)."
+
         })
       },
       { q: "Skin depth $\\delta = \\sqrt{2/(\\omega\\mu\\sigma)}$ in copper at 60 Hz ($\\mu = \\mu_0$, $\\sigma = 5.8\\times 10^{7}$ S/m):",
         choices: ["$\\approx 8.5$ mm", "$\\approx 85$ mm", "$\\approx 0.85$ mm", "$\\approx 1$ cm"],
         correct: 0,
         solution: S({
-          c: "Higher frequency → smaller skin depth → AC current confined to surface.",
+          c: "AC currents do not fill a conductor uniformly — induced eddy fields push current toward the SURFACE. The skin depth $\\delta = \\sqrt{\\dfrac{2}{\\omega\\mu\\sigma}}$ is where current density has fallen to $1/e$ (37%); most current flows within a few δ of the surface.",
           s: [
-            "$\\omega = 2\\pi(60) = 377$ rad/s.",
-            "$\\omega\\mu\\sigma = 377\\cdot 4\\pi\\times 10^{-7}\\cdot 5.8\\times 10^{7} = 2.748\\times 10^{4}$.",
-            "$\\delta = \\sqrt{2/2.748\\times 10^{4}} = \\sqrt{7.28\\times 10^{-5}} = 8.53\\times 10^{-3}$ m $\\approx 8.5$ mm."
+            "<b>Step 1 — Angular frequency.</b> $\\omega = 2\\pi(60) = 377$ rad/s.",
+            "<b>Step 2 — Build the denominator.</b> $\\omega\\mu\\sigma = 377 \\times (4\\pi\\times10^{-7}) \\times (5.8\\times10^{7}) = 2.75\\times10^{4}$.",
+            "<b>Step 3 — Evaluate.</b> $\\delta = \\sqrt{2/2.75\\times10^{4}} = \\sqrt{7.28\\times10^{-5}} = 8.5$ mm.",
+            "<b>Step 4 — Distractor audit.</b> 85 mm and 0.85 mm are square-root decade slips (forgetting that √ halves the exponent); 1 cm is a rounding decoy."
           ],
-          a: "$\\delta \\approx 8.5$ mm",
-          v: "At 1 GHz, $\\delta$ in copper drops to $\\sim 2\\,\\mu$m — why microwave conductors are plated."
+          a: "$\\delta \\approx 8.5$ mm at 60 Hz.",
+          v: "Scaling check ($\\delta \\propto 1/\\sqrt f$): at 6 kHz → 0.85 mm; at 1 GHz → ~2 μm ✓ — why RF conductors are silver-plated (only the skin matters) and why high-current 60-Hz bus bars beyond ~1.5 cm thick waste copper in the middle (hence hollow/laminated designs)."
+
         })
       }
     ],
@@ -1771,54 +1817,61 @@
         choices: ["$\\dfrac{10}{s+11}$", "$\\dfrac{10}{s+1}$", "$\\dfrac{1}{s+11}$", "$\\dfrac{10}{s+10}$"],
         correct: 0,
         solution: S({
-          c: "Unity feedback: $T(s) = G/(1+G)$.",
+          c: "Feedback wraps a loop around the plant: the output is fed back, subtracted from the reference, and the error drives $G$. For unity feedback the closed-loop transfer function is $T(s) = \\dfrac{G}{1+G}$ — the '1' in the denominator is the feedback path.",
           s: [
-            "$1 + G = 1 + 10/(s+1) = (s+11)/(s+1)$.",
-            "$T = [10/(s+1)]\\cdot[(s+1)/(s+11)] = 10/(s+11)$."
+            "<b>Step 1 — Build $1 + G$.</b> $1 + \\dfrac{10}{s+1} = \\dfrac{s + 1 + 10}{s+1} = \\dfrac{s+11}{s+1}$.",
+            "<b>Step 2 — Divide.</b> $T = \\dfrac{10/(s+1)}{(s+11)/(s+1)} = \\dfrac{10}{s+11}$ — the $(s+1)$ factors cancel.",
+            "<b>Step 3 — Distractor audit.</b> $10/(s+1)$ is the OPEN loop unchanged; $1/(s+11)$ loses the gain; $10/(s+10)$ forgets the '+1' from the feedback sum."
           ],
-          a: "$T(s) = 10/(s+11)$",
-          v: "Closed-loop pole at $s = -11$, much faster than open-loop pole at $s = -1$."
+          a: "$T(s) = \\dfrac{10}{s+11}$",
+          v: "What feedback bought: the pole moved from $-1$ to $-11$ — the closed-loop system responds 11× faster (τ from 1 s to 91 ms); DC gain dropped from 10 to $10/11 \\approx 0.91$. Speed for gain — feedback's classic trade ✓."
+
         })
       },
       { q: "Steady-state error for a step input on a Type-0 system with $K_p = 10$:",
         choices: ["$1/11$", "$0$", "$\\infty$", "$1/10$"],
         correct: 0,
         solution: S({
-          c: "Type-0: $e_{ss}(\\text{step}) = 1/(1+K_p)$.",
+          c: "System TYPE = number of pure integrators ($1/s$ factors) in the open loop. Type 0 has none, so a step input leaves a permanent error: $e_{ss} = \\dfrac{1}{1 + K_p}$, where $K_p = \\lim_{s\\to0}G(s)$ is the position constant.",
           s: [
-            "$e_{ss} = 1/(1+10) = 1/11 \\approx 0.091$ (about 9.1%)."
+            "<b>Step 1 — Plug in.</b> $e_{ss} = \\dfrac{1}{1+10} = \\dfrac{1}{11} \\approx 9.1\\%$.",
+            "<b>Step 2 — Why the error persists.</b> With no integrator, holding a nonzero output requires a nonzero error feeding it — the system settles where error × gain = output needed.",
+            "<b>Step 3 — Distractor audit.</b> 0 would need Type 1 (an integrator accumulates until error vanishes); $\\infty$ is Type 0's RAMP error; $1/10$ forgets the '+1'."
           ],
           a: "$e_{ss} = 1/11$",
-          v: "To zero step error, need Type-1 (integrator in loop): $K_p = \\infty$."
+          v: "Knob check: raising $K_p$ shrinks the error ($K_p = 100$ → 1%) but never zeroes it, and high gain erodes stability margins — the structural fix is adding an integrator (PI control), which changes the TYPE ✓."
+
         })
       },
       { q: "Bode plot of $G(s) = 100/(s+10)$ DC gain (dB):",
         choices: ["$20$ dB", "$10$ dB", "$40$ dB", "$0$ dB"],
         correct: 0,
         solution: S({
-          c: "DC gain: $G(0) = 100/10 = 10$ ⇒ $20\\log_{10}(10) = 20$ dB.",
+          c: "Bode plots graph gain in DECIBELS: $\\text{dB} = 20\\log_{10}|G|$. The DC gain is just $|G(0)|$ converted: every factor of 10 in gain = 20 dB.",
           s: [
-            "Low-frequency asymptote at +20 dB.",
-            "Corner at $\\omega = 10$ rad/s; slope rolls off at $-20$ dB/dec above."
+            "<b>Step 1 — Evaluate at DC.</b> $G(0) = 100/10 = 10$.",
+            "<b>Step 2 — Convert.</b> $20\\log_{10}10 = 20$ dB.",
+            "<b>Step 3 — Distractor audit.</b> 40 dB would be gain 100 (forgot the denominator's 10); 10 dB confuses the gain value with its dB; 0 dB is gain 1."
           ],
-          a: "$20$ dB",
-          v: "At $\\omega = 100$ rad/s: magnitude $= 100/\\sqrt{100^{2}+10^{2}} \\approx 1$, or 0 dB — one decade above corner, gain dropped 20 dB ✓."
+          a: "DC gain $= 20$ dB.",
+          v: "Sketch check: flat at +20 dB out to the corner at $\\omega = 10$ rad/s, then −20 dB/decade. One decade later ($\\omega = 100$): $|G| = 100/\\sqrt{10100} \\approx 1 = 0$ dB — fell exactly 20 dB in one decade ✓. dB anchors: ×10 = +20 dB, ×2 ≈ +6 dB, $1/\\sqrt2$ = −3 dB."
+
         })
       },
       { q: "Routh–Hurwitz: characteristic polynomial $s^{3} + 4s^{2} + 5s + 2 = 0$ — system is:",
         choices: ["Stable", "Unstable", "Marginally stable", "Oscillatory"],
         correct: 0,
         solution: S({
-          c: "Routh array — all first-column entries must be positive for stability.",
+          c: "Routh-Hurwitz tests stability WITHOUT solving for roots: build the Routh array from the polynomial's coefficients; the system is stable iff every entry in the FIRST COLUMN is positive (each sign change = one right-half-plane root).",
           s: [
-            "Row $s^{3}$: 1, 5.",
-            "Row $s^{2}$: 4, 2.",
-            "Row $s^{1}$: $(4\\cdot 5 - 1\\cdot 2)/4 = 18/4 = 4.5$.",
-            "Row $s^{0}$: 2.",
-            "Column: 1, 4, 4.5, 2 — all positive ⇒ stable."
+            "<b>Step 1 — Seed rows from coefficients.</b> $s^{3}$ row: 1, 5 (odd-position coefficients); $s^{2}$ row: 4, 2 (even-position).",
+            "<b>Step 2 — Compute the $s^{1}$ entry.</b> Cross-multiply pattern: $\\dfrac{4(5) - 1(2)}{4} = \\dfrac{18}{4} = 4.5$.",
+            "<b>Step 3 — Last row.</b> $s^{0}$: 2 (the constant term carries down).",
+            "<b>Step 4 — Read the column.</b> $1, 4, 4.5, 2$ — all positive, zero sign changes → no RHP roots → STABLE."
           ],
           a: "Stable.",
-          v: "All roots in LHP — verify by computing or noting positive coefficients & positive Routh column."
+          v: "Root check (factorable here): $s^{3}+4s^{2}+5s+2 = (s+1)^{2}(s+2)$ — roots $-1, -1, -2$, all LHP ✓. Reminder of why Routh matters: for higher orders, all-positive coefficients alone do NOT guarantee stability — the array is the real test."
+
         })
       },
       { q: "Phase margin definition:",
@@ -1830,53 +1883,60 @@
         ],
         correct: 0,
         solution: S({
-          c: "Phase margin measures how close the loop is to $-180°$ at unity gain.",
+          c: "A feedback loop turns unstable when the loop gain reaches magnitude 1 at phase $-180°$ (the feedback becomes perfectly self-reinforcing). PHASE MARGIN measures the safety distance in phase at the frequency where the magnitude crosses 1.",
           s: [
-            "Find $\\omega_{gc}$ where $|G(j\\omega)| = 1$.",
-            "PM = $180° + \\angle G(j\\omega_{gc})$. Positive PM → stable.",
-            "Typical design target: 45°–60° for good damping."
+            "<b>Step 1 — Find gain crossover.</b> $\\omega_{gc}$: the frequency where $|G(j\\omega)| = 1$ (0 dB).",
+            "<b>Step 2 — Measure the margin.</b> PM $= 180° + \\angle G(j\\omega_{gc})$ — how many more degrees of lag the loop could absorb before hitting $-180°$. Positive PM → stable.",
+            "<b>Step 3 — Distractor audit.</b> (B) defines the crossover FREQUENCY, not the margin; (C) plugs in the phase-crossover frequency — that belongs to GAIN margin; (D) describes gain margin's ingredient."
           ],
-          a: "$180° + \\angle G$ at gain crossover.",
-          v: "Gain margin: $-20\\log|G(j\\omega_{pc})|$ at phase crossover ($\\angle G = -180°$)."
+          a: "PM $= 180° + \\angle G(j\\omega_{gc})$ at the gain-crossover frequency.",
+          v: "The companion to keep straight: GAIN margin = how much extra gain fits before instability, measured at the PHASE crossover ($\\angle G = -180°$). Design targets: PM 45-60° gives well-damped responses (rough map: $\\zeta \\approx$ PM/100) ✓."
+
         })
       },
       { q: "PID controller transfer function:",
         choices: ["$K_p + K_i/s + K_d s$", "$K_p s + K_i + K_d/s$", "$K_p/s$", "$K_p K_i K_d$"],
         correct: 0,
         solution: S({
-          c: "Standard PID: parallel sum of proportional, integral, derivative terms.",
+          c: "PID = the workhorse controller: three corrective actions in PARALLEL, each fixing a different weakness. Proportional ($K_p$) reacts to the present error; Integral ($K_i/s$) accumulates the past, erasing steady-state error; Derivative ($K_ds$) anticipates the future, damping overshoot.",
           s: [
-            "$U(s) = K_p E(s) + (K_i/s)E(s) + K_d s E(s)$.",
-            "I term: removes steady-state error. D term: improves transient response.",
-            "Practical D includes a low-pass filter to limit noise gain: $K_d s/(\\tau s+1)$."
+            "<b>Step 1 — Sum the three paths.</b> $C(s) = K_p + \\dfrac{K_i}{s} + K_ds$ — parallel branches add.",
+            "<b>Step 2 — Distractor audit.</b> Option B swaps the roles ($K_ps + K_i$...) — integral must be $1/s$ (accumulation), derivative must be $s$ (rate); $K_p/s$ alone is just an integrator; a product $K_pK_iK_d$ is meaningless structurally.",
+            "<b>Step 3 — Practical footnote.</b> Real derivative terms are filtered — $\\dfrac{K_ds}{\\tau s+1}$ — because a pure $s$ amplifies high-frequency noise without bound."
           ],
-          a: "$C(s) = K_p + K_i/s + K_d s$.",
-          v: "Ziegler–Nichols tuning provides starting-point gains based on plant step or oscillation response."
+          a: "$C(s) = K_p + K_i/s + K_ds$",
+          v: "Role-by-role check against time response: P alone leaves offset; adding I removes offset but can slow/overshoot; adding D restores damping — the standard tuning story (and why PI and PID cover most industrial loops) ✓."
+
         })
       },
       { q: "Pole at $s = +2$ in a closed-loop system means:",
         choices: ["Unstable", "Stable", "Marginally stable", "Critically damped"],
         correct: 0,
         solution: S({
-          c: "Any pole in the right half $s$-plane (positive real part) ⇒ unstable response grows.",
+          c: "Each pole $s = p$ contributes a term $e^{pt}$ to the response. A pole with POSITIVE real part means a growing exponential — the definition of instability.",
           s: [
-            "Time response includes $e^{+2t}$ term — diverges."
+            "<b>Step 1 — Translate the pole.</b> $s = +2$ → response contains $e^{2t}$, doubling roughly every 0.35 s — diverges.",
+            "<b>Step 2 — Conclude.</b> One RHP pole is enough: the system is UNSTABLE no matter how well-behaved the other poles are.",
+            "<b>Step 3 — Distractor audit.</b> 'Marginally stable' is poles ON the imaginary axis (sustained oscillation); 'critically damped' describes a REPEATED negative-real pole — opposite half-plane."
           ],
           a: "Unstable.",
-          v: "Even one RHP pole destroys closed-loop stability — common in unstable plants like inverted pendulum (must be stabilized by control)."
+          v: "Context that makes it concrete: an inverted pendulum's linearized model has exactly such a RHP pole — physically, it falls over unless feedback actively catches it. Feedback design's whole job here is dragging that pole into the left half-plane ✓."
+
         })
       },
       { q: "A first-order system $G(s) = K/(\\tau s + 1)$ has time constant determined by:",
         choices: ["$\\tau$ (the denominator coefficient)", "$K$", "$K\\tau$", "$1/K$"],
         correct: 0,
         solution: S({
-          c: "$\\tau$ sets the rise/settling time of the exponential step response.",
+          c: "The standard first-order form $G(s) = \\dfrac{K}{\\tau s+1}$ separates two independent properties: $K$ = how MUCH the output eventually moves (DC gain); $\\tau$ = how FAST it gets there (time constant).",
           s: [
-            "Step response: $y(t) = K(1 - e^{-t/\\tau})$.",
-            "At $t = \\tau$: 63.2% of final value; 5τ → 99% settled."
+            "<b>Step 1 — Read the step response.</b> $y(t) = K(1 - e^{-t/\\tau})$ — the exponential's clock is $\\tau$, nothing else.",
+            "<b>Step 2 — Milestones.</b> $t = \\tau$: 63.2% of the way; $3\\tau$: 95%; $5\\tau$: 99% (settled).",
+            "<b>Step 3 — Distractor audit.</b> $K$ scales the final VALUE, not the speed; $K\\tau$ and $1/K$ mix the two properties."
           ],
-          a: "$\\tau$.",
-          v: "Bandwidth $\\omega_b = 1/\\tau$ — fast systems have small $\\tau$ and high bandwidth."
+          a: "$\\tau$ — the coefficient multiplying $s$ in the denominator.",
+          v: "Frequency-domain twin: bandwidth $\\omega_b = 1/\\tau$ — fast systems (small τ) are wide-band, slow systems narrow-band; the time and frequency views are reciprocals of each other ✓. Pole location: $s = -1/\\tau$."
+
         })
       },
       { q: "State-space form $\\dot x = Ax + Bu$, $y = Cx + Du$. The system is controllable if:",
@@ -1888,26 +1948,30 @@
         ],
         correct: 0,
         solution: S({
-          c: "Kalman’s rank condition for controllability.",
+          c: "Controllability asks: can the input $u(t)$ steer the state $x$ anywhere in state space? Kalman's rank test answers it algebraically: build $\\mathcal C = [B\\ \\ AB\\ \\ A^{2}B\\ \\cdots\\ A^{n-1}B]$ and check whether it has full rank $n$.",
           s: [
-            "Controllability matrix $\\mathcal C = [B\\ AB\\ \\ldots\\ A^{n-1}B]$.",
-            "If rank $\\mathcal C = n$ (full row rank), every state is reachable with appropriate $u(t)$."
+            "<b>Step 1 — What the columns mean.</b> $B$ is where the input pushes directly; $AB$ is where that push propagates after the dynamics act once; higher powers reach deeper. Together they span every direction the input can influence.",
+            "<b>Step 2 — The test.</b> rank $\\mathcal C = n$ (full) → every state direction reachable → controllable. Rank deficit → some mode is beyond the input's reach.",
+            "<b>Step 3 — Distractor audit.</b> Invertible $A$ is about the dynamics, not the input's reach; '$B$ positive' is not a meaningful condition; $D$ is the direct feedthrough — irrelevant to steering states."
           ],
-          a: "Controllability matrix has full rank.",
-          v: "Observability has a dual condition: $[C^{T}\\ (CA)^{T}\\ \\ldots]$ full rank."
+          a: "Controllability matrix $[B\\ AB\\ \\cdots\\ A^{n-1}B]$ has rank $n$.",
+          v: "Why engineers care: pole placement (choosing closed-loop dynamics freely) is possible IF AND ONLY IF the system is controllable. The mirror concept: OBSERVABILITY uses the dual matrix built from $C$ and $A$ — can the sensor SEE every mode ✓."
+
         })
       },
       { q: "Root-locus starts (at $K = 0$) from:",
         choices: ["Open-loop poles", "Open-loop zeros", "Origin", "Infinity"],
         correct: 0,
         solution: S({
-          c: "As $K\\to 0$, closed-loop poles approach open-loop poles; as $K\\to\\infty$, they approach zeros (or infinity if more poles than zeros).",
+          c: "The root locus traces the closed-loop poles as the gain $K$ sweeps from 0 to ∞. The characteristic equation $1 + KG = 0$ explains both ends: at $K = 0$ it reduces to the open-loop POLES; as $K\\to\\infty$ the closed-loop poles migrate to the open-loop ZEROS (or off to infinity).",
           s: [
-            "Number of branches = number of poles (or zeros, whichever larger).",
-            "Branches ending at infinity follow asymptotes at angles $(2k+1)\\pi/(P-Z)$."
+            "<b>Step 1 — Evaluate at K = 0.</b> $1 + KG = 0$ becomes 'denominator of G = 0' — the open-loop poles. Branches START there.",
+            "<b>Step 2 — The journey.</b> Number of branches = number of poles; excess branches (poles minus zeros) head to infinity along asymptotes at angles $(2k+1)180°/(P-Z)$.",
+            "<b>Step 3 — Distractor audit.</b> Zeros are the DESTINATION, not the start; origin and infinity are special locations, not general starting points."
           ],
-          a: "Open-loop poles.",
-          v: "Visualizes how closed-loop pole locations migrate with proportional gain."
+          a: "At the open-loop poles.",
+          v: "Worked micro-example: $G = 1/[s(s+2)]$ — locus starts at $0$ and $-2$, the branches meet at $-1$ and split vertically; at $K = 5$ the poles sit at $-1\\pm j2$ ✓ (matching the earlier closed-loop computation). The plot IS gain-tuning made visible."
+
         })
       }
     ],
@@ -1918,90 +1982,106 @@
         choices: ["$0.5$ (50%)", "$1.0$ (100%)", "$50$", "$0.25$"],
         correct: 0,
         solution: S({
-          c: "Modulation index $m$ = ratio of message amplitude to carrier amplitude.",
+          c: "Amplitude modulation rides the message on the carrier's ENVELOPE: $s(t) = [1 + m\\cos\\omega_mt]\\cos\\omega_ct$. The modulation index $m$ is how deeply the message swings the envelope — from $(1-m)$ to $(1+m)$ times the carrier amplitude.",
           s: [
-            "Here $m = 0.5$ — 50% modulation.",
-            "Over-modulation ($m > 1$) causes envelope distortion and signal recovery problems."
+            "<b>Step 1 — Read it off.</b> The given form is already standard: $m = 0.5$ → 50% modulation; envelope swings between 0.5 and 1.5 of the carrier.",
+            "<b>Step 2 — Why $m \\le 1$ matters.</b> Over-modulation ($m > 1$) pinches the envelope through zero — phase reversals corrupt simple envelope detection.",
+            "<b>Step 3 — Distractor audit.</b> 100% would need $m = 1$; '50' confuses percent with the index value; 0.25 squares it for no reason."
           ],
-          a: "50%",
-          v: "Total power in AM: $P = P_c(1 + m^{2}/2) = P_c(1 + 0.125)$ — sidebands carry only 11% of total power at $m=0.5$."
+          a: "$m = 0.5$ (50% modulation).",
+          v: "Power breakdown at $m = 0.5$: total $= P_c(1 + m^{2}/2) = 1.125P_c$ — sidebands (the only part carrying information) hold just 11% of transmitted power. That inefficiency is AM's price for dirt-cheap envelope-detector receivers ✓."
+
         })
       },
       { q: "FM modulation index $\\beta = \\Delta f/f_m$. With $\\Delta f = 75$ kHz, $f_m = 15$ kHz:",
         choices: ["$5$", "$0.2$", "$1125$", "$15$"],
         correct: 0,
         solution: S({
-          c: "FM modulation index measures frequency deviation per Hz of message.",
+          c: "In FM the message wiggles the carrier's FREQUENCY, not its amplitude. The modulation index compares the peak frequency swing to the message rate: $\\beta = \\Delta f/f_m$.",
           s: [
-            "$\\beta = 75/15 = 5$.",
-            "Carson’s rule bandwidth: $B = 2(\\beta + 1)f_m = 2 \\times 6 \\times 15 = 180$ kHz."
+            "<b>Step 1 — Divide.</b> $\\beta = 75/15 = 5$ — wideband FM (β ≫ 1).",
+            "<b>Step 2 — Bandwidth payoff (Carson).</b> $B = 2(\\beta+1)f_m = 2(6)(15) = 180$ kHz.",
+            "<b>Step 3 — Distractor audit.</b> 0.2 inverts the ratio; 1125 multiplies; 15 echoes $f_m$."
           ],
           a: "$\\beta = 5$",
-          v: "Commercial FM broadcasting uses 200-kHz channel spacing for this kind of modulation index."
+          v: "Recognize the numbers: $\\Delta f = 75$ kHz and $f_m = 15$ kHz are exactly the US broadcast-FM standard, and the 180-kHz Carson bandwidth fits the 200-kHz channel spacing with guard band ✓. Why bother with wideband: FM trades bandwidth for noise immunity — SNR improves ~$\\beta^{2}$ over AM."
+
         })
       },
       { q: "Information capacity (Shannon): bandwidth 4 kHz, SNR = 30 dB. Channel capacity?",
         choices: ["$\\approx 39.9$ kbps", "$\\approx 12$ kbps", "$\\approx 120$ kbps", "$\\approx 4$ kbps"],
         correct: 0,
         solution: S({
-          c: "Shannon: $C = B\\log_2(1 + \\text{SNR})$ — theoretical maximum error-free rate.",
+          c: "Shannon-Hartley sets the speed limit of any channel: $C = B\\log_2(1 + \\text{SNR})$ bits/s — no modulation or coding scheme can beat it. Convert dB to LINEAR before the logarithm.",
           s: [
-            "SNR = 30 dB → linear ratio = $10^{3} = 1000$.",
-            "$C = 4000 \\log_2(1001) \\approx 4000 \\times 9.97 \\approx 39.9$ kbps."
+            "<b>Step 1 — Convert SNR.</b> 30 dB → $10^{30/10} = 1000$.",
+            "<b>Step 2 — Bits per second per Hz.</b> $\\log_2(1001) \\approx 9.97$ bits/s/Hz.",
+            "<b>Step 3 — Scale by bandwidth.</b> $C = 4000 \\times 9.97 \\approx 39.9$ kbps.",
+            "<b>Step 4 — Distractor audit.</b> 12 kbps ≈ uses 30 (dB) as the linear SNR ($\\log_2 31 \\approx 5$); 120 kbps ≈ 30 × B; 4 kbps echoes the bandwidth."
           ],
           a: "$C \\approx 39.9$ kbps",
-          v: "POTS line: 4 kHz BW, 30 dB SNR → ~40 kbps. Real modems (V.92) achieve 56 kbps downstream using digital-side advantage."
+          v: "History check: this IS the telephone line ($B = 4$ kHz, ~30 dB) — and dial-up modems plateaued at 33.6 kbps analog, brushing the Shannon ceiling; '56k' worked only by skipping one analog conversion ✓. Per 10 dB of SNR you gain ~3.3 bits/s/Hz."
+
         })
       },
       { q: "PSK with M = 4 (QPSK). Bits per symbol:",
         choices: ["$2$", "$1$", "$4$", "$\\log_2 16 = 4$"],
         correct: 0,
         solution: S({
-          c: "M-ary modulation: $\\log_2 M$ bits/symbol.",
+          c: "M-ary modulation packs bits into symbols: with $M$ distinct symbols (here 4 phase angles), each symbol selects one of $M$ patterns → $\\log_2M$ bits per symbol.",
           s: [
-            "$\\log_2 4 = 2$ bits/symbol."
+            "<b>Step 1 — Apply.</b> $\\log_2 4 = 2$ bits/symbol (the four phases map to 00, 01, 11, 10).",
+            "<b>Step 2 — Distractor audit.</b> 1 bit is BPSK ($M = 2$); 4 bits would need $M = 16$ (16-PSK/16-QAM) — note distractor D even shows $\\log_216 = 4$, the right formula applied to the wrong M."
           ],
-          a: "2 bits/symbol.",
-          v: "QPSK doubles bandwidth efficiency vs BPSK at same energy per bit."
+          a: "2 bits per symbol.",
+          v: "Throughput consequence: at the same symbol rate, QPSK carries 2× BPSK's bit rate in the SAME bandwidth, at (ideally) the same energy per bit — the rare free lunch, which is why QPSK is everywhere from satellites to LTE ✓. Beyond M=4, the constellation points crowd: more bits/symbol but more SNR needed."
+
         })
       },
       { q: "Noise figure: amplifier $G = 20$ dB, $NF = 3$ dB. Input SNR = 30 dB, output SNR is:",
         choices: ["$27$ dB", "$33$ dB", "$53$ dB", "$30$ dB"],
         correct: 0,
         solution: S({
-          c: "Noise figure: $NF = SNR_{in}/SNR_{out}$ (linear), or in dB: $SNR_{out} = SNR_{in} - NF$.",
+          c: "Every real amplifier adds noise of its own. NOISE FIGURE quantifies the damage: $NF = \\dfrac{SNR_{in}}{SNR_{out}}$ in linear terms — or, beautifully simple in dB: $SNR_{out} = SNR_{in} - NF$.",
           s: [
-            "$SNR_{out} = 30 - 3 = 27$ dB."
+            "<b>Step 1 — Subtract in dB.</b> $SNR_{out} = 30 - 3 = 27$ dB.",
+            "<b>Step 2 — Note what gain does NOT do.</b> The 20-dB gain amplifies signal AND noise together — it cannot restore the SNR already lost; it never enters this calculation.",
+            "<b>Step 3 — Distractor audit.</b> 33 dB adds NF (wrong direction — noise never helps); 53 dB adds the gain; 30 dB pretends the amplifier is noiseless."
           ],
-          a: "27 dB.",
-          v: "NF is independent of gain — high gain doesn’t fix poor noise performance."
+          a: "$SNR_{out} = 27$ dB",
+          v: "Physical meaning of NF = 3 dB: the amplifier adds as much noise as was already there (doubles the noise power). System design consequence (Friis cascade formula): the FIRST stage's NF dominates the whole receiver — why a low-noise amplifier (LNA) sits right at the antenna ✓."
+
         })
       },
       { q: "Bit error rate (BER) for BPSK with $E_b/N_0 = 10$ dB approximately:",
         choices: ["$\\approx 3.9\\times 10^{-6}$", "$10^{-2}$", "$10^{-12}$", "$0.1$"],
         correct: 0,
         solution: S({
-          c: "BPSK BER: $P_b = Q(\\sqrt{2 E_b/N_0})$.",
+          c: "$E_b/N_0$ — energy per bit over noise density — is digital comms' universal quality axis. For BPSK the bit-error rate is $P_b = Q\\!\\left(\\sqrt{2E_b/N_0}\\right)$, where $Q(x)$ is the Gaussian tail probability.",
           s: [
-            "$E_b/N_0 = 10$ dB → linear 10.",
-            "$\\sqrt{2\\times 10} = \\sqrt{20} = 4.47$.",
-            "$Q(4.47) \\approx 3.9\\times 10^{-6}$."
+            "<b>Step 1 — Convert dB to linear.</b> $10$ dB → $10$.",
+            "<b>Step 2 — Argument of Q.</b> $\\sqrt{2\\times10} = \\sqrt{20} = 4.47$.",
+            "<b>Step 3 — Tail value.</b> $Q(4.47) \\approx 3.9\\times10^{-6}$ — about four errors per million bits.",
+            "<b>Step 4 — Distractor audit.</b> $10^{-2}$ belongs near 4 dB; $10^{-12}$ near 14 dB; 0.1 is sub-0-dB territory — the options test whether you can place yourself on the BER waterfall."
           ],
-          a: "$\\approx 3.9\\times 10^{-6}$",
-          v: "Adding 3 dB to $E_b/N_0$ reduces BER by roughly an order of magnitude in this regime."
+          a: "$P_b \\approx 3.9\\times10^{-6}$",
+          v: "Waterfall steepness: in this region every +1 dB cuts BER by ~an order of magnitude (compare $10^{-5}$ at ~9.6 dB) — tiny link improvements buy huge error reductions ✓. BPSK/QPSK share this curve per-bit; coding (LDPC/turbo) shifts it several dB left toward the Shannon limit."
+
         })
       },
       { q: "TDM vs. FDM: which uses time slots to multiplex users?",
         choices: ["TDM", "FDM", "Both", "Neither"],
         correct: 0,
         solution: S({
-          c: "Time-division multiplexing (TDM) allocates time slots; frequency-division (FDM) allocates frequency bands.",
+          c: "Two classic ways to share one channel among many users: slice TIME or slice FREQUENCY. TDM (time-division multiplexing) gives each user the FULL band for a short recurring slot; FDM gives each user a NARROW band all the time.",
           s: [
-            "TDM example: T-1 carrier (24 voice channels at 8 kHz each).",
-            "FDM example: cable TV channels on coax."
+            "<b>Step 1 — Match the question.</b> 'Time slots' is the literal definition of TDM.",
+            "<b>Step 2 — Concrete anchors.</b> TDM: T-1 carrier — 24 voice channels take turns 8000 times/s. FDM: broadcast radio/cable TV — stations parked at different frequencies simultaneously.",
+            "<b>Step 3 — Distractor audit.</b> FDM is the frequency-slicing dual; 'both' and 'neither' dodge the definition."
           ],
           a: "TDM.",
-          v: "OFDM combines both: subcarriers (FDM) and symbol times (TDM)."
+          v: "Modern synthesis worth knowing: OFDM (Wi-Fi, LTE, 5G) slices BOTH ways — many subcarriers (frequency) × symbol intervals (time) — and schedulers assign users tiles in that 2-D grid (OFDMA) ✓. CDMA adds a third axis: codes."
+
         })
       },
       { q: "Frequency reuse factor of 7 in cellular means:",
@@ -2013,13 +2093,15 @@
         ],
         correct: 0,
         solution: S({
-          c: "Cluster size $N$ = number of cells using the entire spectrum before reuse.",
+          c: "Cellular's founding idea: the same frequencies can serve MANY cities' worth of users if reused at a safe distance. The reuse (cluster) factor $N$ = how many adjacent cells share out the full spectrum before the pattern repeats.",
           s: [
-            "$N = 7$ ⇒ each frequency assigned to 1 cell per 7-cell cluster.",
-            "Co-channel reuse distance $D = R\\sqrt{3N}$ where $R$ is cell radius."
+            "<b>Step 1 — Decode N = 7.</b> The spectrum is split among 7 neighboring cells; cell #8 (one cluster away) reuses cell #1's channels.",
+            "<b>Step 2 — The geometry guarantee.</b> Co-channel cells sit $D = R\\sqrt{3N} = 4.58R$ apart — far enough that interference stays tolerable.",
+            "<b>Step 3 — Distractor audit.</b> 'Bandwidth ÷ 7' is the per-cell SHARE, not the meaning of reuse; '7 users/cell' and '7 antennas' are numerology."
           ],
-          a: "Same frequencies repeat every 7 cells.",
-          v: "Smaller $N$ = more capacity but more co-channel interference. Modern systems use $N = 1$ with OFDMA + interference coordination."
+          a: "The same frequencies repeat every 7 cells.",
+          v: "The capacity trade: smaller $N$ → each cell gets more spectrum → more capacity, but co-channel cells move closer → more interference. Evolution check: LTE/5G run $N = 1$ (every cell uses everything) and manage the interference actively — the old trade-off attacked with signal processing ✓."
+
         })
       },
       { q: "DSB-SC AM: $s(t) = m(t)\\cos(\\omega_c t)$. Spectrum compared to standard AM:",
@@ -2031,25 +2113,30 @@
         ],
         correct: 0,
         solution: S({
-          c: "Double-sideband suppressed carrier removes the carrier tone, saving power but requiring coherent detection.",
+          c: "Standard AM transmits a big carrier tone PLUS two sidebands — but the carrier carries NO information. DSB-SC (double-sideband, suppressed carrier) deletes it: $s(t) = m(t)\\cos\\omega_ct$ — same sidebands, no carrier line in the spectrum.",
           s: [
-            "Standard AM wastes ~50% power in the carrier (information-free).",
-            "DSB-SC sends only sidebands but receiver must regenerate the carrier."
+            "<b>Step 1 — Spectrum comparison.</b> Both occupy the same bandwidth ($2f_m$, two sidebands); DSB-SC just lacks the carrier spike — so 'wider/lower bandwidth' are out.",
+            "<b>Step 2 — Power accounting.</b> In standard AM at full modulation, the carrier eats at least 2/3 of the power; suppressing it saves ~50% or more for the same sideband strength.",
+            "<b>Step 3 — The price.</b> Envelope detection no longer works (the envelope is $|m(t)|$, not $m(t)$); the receiver must regenerate the carrier in phase — coherent (synchronous) detection."
           ],
-          a: "No carrier, 50% power saving.",
-          v: "SSB (single sideband) saves both carrier and half the bandwidth, at cost of more complex receiver."
+          a: "No carrier component — ~50% power saving, same bandwidth.",
+          v: "The family tree to keep: AM (carrier + 2 SB, cheapest receiver) → DSB-SC (2 SB, saves power) → SSB (1 SB, saves power AND half the bandwidth, hardest receiver) — each step trades receiver complexity for efficiency ✓."
+
         })
       },
       { q: "PCM bit rate: voice band 0–4 kHz, sampled at 8 kHz, quantized 8 bits/sample. Bit rate:",
         choices: ["$64$ kbps", "$32$ kbps", "$8$ kbps", "$128$ kbps"],
         correct: 0,
         solution: S({
-          c: "Bit rate = $f_s \\times n_{bits}$.",
+          c: "PCM (pulse-code modulation) digitizes voice in two steps — sample, then quantize — and the bit rate is simply their product: $R = f_s \\times n$.",
           s: [
-            "$8000 \\times 8 = 64{,}000$ bps = 64 kbps."
+            "<b>Step 1 — Verify the sampling rate.</b> 4-kHz voice band → Nyquist minimum $2\\times4 = 8$ kHz ✓ (the standard choice).",
+            "<b>Step 2 — Multiply.</b> $R = 8000 \\times 8 = 64$ kbps.",
+            "<b>Step 3 — Distractor audit.</b> 32 kbps halves the sampling rate; 8 kbps is samples/s alone; 128 kbps doubles (stereo thinking)."
           ],
-          a: "64 kbps.",
-          v: "T-1 carrier carries 24 such PCM channels at 1.544 Mbps."
+          a: "$R = 64$ kbps — the classic DS0 channel.",
+          v: "Hierarchy check: T-1 = 24 × 64k + 8k framing = 1.544 Mbps; E-1 = 32 × 64k = 2.048 Mbps — telephone infrastructure is built in multiples of exactly this number ✓. G.711 (μ-law/A-law) still encodes calls this way."
+
         })
       }
     ],
