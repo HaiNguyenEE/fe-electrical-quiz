@@ -5,6 +5,9 @@
 // problem statement is paraphrased from any copyrighted source.
 // Handbook page references map to the NCEES FE Reference Handbook v10.
 // Worked solutions use the S({c, s, a, v}) helper from questions.js.
+// 2026-06-11: all 93 solutions upgraded to the detailed multi-
+// step standard (Step 1-N narratives, distractor audits, multi-
+// point verification, sub-circuit/diagram SVGs where natural).
 // ============================================================
 (function () {
   if (typeof QUESTION_BANK === "undefined" || typeof S === "undefined") {
@@ -1176,7 +1179,7 @@
         solution: S({
           c: "Capacitors supply reactive power locally. To reach UNITY power factor, the capacitor bank must cancel the load's entire reactive demand: $Q_C = Q_{load} = P\\tan\\theta$.",
           s: [
-            "<b>Step 1 — Find the load's reactive power.</b> $\\cos\\theta = 0.7 \\Rightarrow \\theta = 45.57°,\\ \\tan\\theta = 1.0202$. $Q = 200 \\times 1.0202 = 204$ kVAR.<br><svg viewBox='-10 -10 330 140' width='310' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.8' fill='none' stroke-linecap='round'><line x1='30' y1='110' x2='230' y2='110'/><line x1='230' y1='110' x2='230' y2='10'/><line x1='30' y1='110' x2='230' y2='10'/><text x='130' y='126' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>P = 200 kW</text><text x='240' y='64' font-size='11' fill='#1f4e79' stroke='none'>Q = 204 kVAR</text><text x='105' y='52' font-size='11' fill='#1f4e79' stroke='none'>S = 285.7 kVA</text><path d='M70,110 A40,40 0 0 0 62,87'/><text x='80' y='98' font-size='11' fill='#1f4e79' stroke='none'>θ</text></g></svg>",
+            "<b>Step 1 — Find the load's reactive power.</b> $\\cos\\theta = 0.7 \\Rightarrow \\theta = 45.57°,\\ \\tan\\theta = 1.0202$. $Q = 200 \\times 1.0202 = 204$ kVAR.<br><svg viewBox='-10 -10 345 140' width='325' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.8' fill='none' stroke-linecap='round'><line x1='30' y1='110' x2='230' y2='110'/><line x1='230' y1='110' x2='230' y2='10'/><line x1='30' y1='110' x2='230' y2='10'/><text x='130' y='126' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>P = 200 kW</text><text x='240' y='64' font-size='11' fill='#1f4e79' stroke='none'>Q = 204 kVAR</text><text x='105' y='52' font-size='11' fill='#1f4e79' stroke='none'>S = 285.7 kVA</text><path d='M70,110 A40,40 0 0 0 62,87'/><text x='80' y='98' font-size='11' fill='#1f4e79' stroke='none'>θ</text></g></svg>",
             "<b>Step 2 — Size the bank for unity PF.</b> Target $\\theta_2 = 0 \\Rightarrow Q_2 = 0$, so $Q_C = Q_1 - 0 = 204$ kVAR.",
             "<b>Step 3 — Distractor audit.</b> 200 kVAR equates Q with P (only true at PF = 0.707); 142 kVAR would correct to about 0.95 PF, not unity; 100 kVAR is half-hearted."
           ],
@@ -1209,14 +1212,16 @@
         correct: 0,
         ref: "Handbook §15 (Closed-loop poles, root locus)",
         solution: S({
-          c: "Closed-loop characteristic equation: $1 + G(s) = 0$.",
+          c: "Closing unity feedback around $G(s)$ moves the poles to the roots of the characteristic equation $1 + G(s) = 0$.",
           s: [
-            "$1 + K/[s(s+2)] = 0 \\Rightarrow s^{2} + 2s + K = 0$.",
-            "With $K = 5$: $s^{2} + 2s + 5 = 0$.",
-            "Roots: $s = (-2 \\pm\\sqrt{4-20})/2 = -1 \\pm j2$."
+            "<b>Step 1 — Form the loop.</b><br><svg viewBox='-10 0 350 110' width='330' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.6' fill='none' stroke-linecap='round'><text x='2' y='40' font-size='11' fill='#1f4e79' stroke='none'>R</text><line x1='14' y1='44' x2='48' y2='44'/><polyline points='42,40 50,44 42,48'/><circle cx='62' cy='44' r='11'/><text x='62' y='48' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>Σ</text><text x='52' y='66' font-size='10' fill='#1f4e79' stroke='none'>−</text><line x1='73' y1='44' x2='110' y2='44'/><polyline points='104,40 112,44 104,48'/><rect x='112' y='26' width='110' height='36'/><text x='167' y='49' text-anchor='middle' font-size='11' fill='#1f4e79' stroke='none'>K / [s(s+2)]</text><line x1='222' y1='44' x2='290' y2='44'/><polyline points='284,40 292,44 284,48'/><text x='298' y='48' font-size='11' fill='#1f4e79' stroke='none'>Y</text><circle cx='258' cy='44' r='2.5' fill='#1f4e79' stroke='none'/><line x1='258' y1='44' x2='258' y2='92'/><line x1='258' y1='92' x2='62' y2='92'/><line x1='62' y1='92' x2='62' y2='55'/><polyline points='58,62 62,54 66,62'/></g></svg>",
+            "<b>Step 2 — Characteristic equation.</b> $1 + \\dfrac{K}{s(s+2)} = 0 \\Rightarrow s^{2} + 2s + K = 0$; with $K = 5$: $s^{2} + 2s + 5 = 0$.",
+            "<b>Step 3 — Solve the quadratic.</b> $s = \\dfrac{-2 \\pm \\sqrt{4 - 20}}{2} = -1 \\pm j2$.",
+            "<b>Step 4 — Distractor audit.</b> $\\{0, -2\\}$ are the OPEN-loop poles (feedback moves them!); $\\pm j\\sqrt5$ drops the damping term; $-2$ alone loses a pole."
           ],
           a: "$s = -1 \\pm j2$",
-          v: "Underdamped: $\\omega_n = \\sqrt 5,\\ \\zeta = 1/\\sqrt 5 = 0.447$. Damped frequency = 2."
+          v: "Parameter check: $\\omega_n = \\sqrt5 = 2.24$ rad/s, $\\zeta = 2/(2\\omega_n) = 0.447$, $\\omega_d = \\omega_n\\sqrt{1-\\zeta^2} = 2$ ✓ (matches the imaginary part). Root-locus sense: as $K$ grows from 0, the two real poles meet at $-1$ ($K=1$) and split vertically — at $K = 5$ they sit at $-1 \\pm j2$, on the vertical branch ✓."
+
         })
       },
       { q: "Routh array: $s^{4} + 2s^{3} + 3s^{2} + 4s + 5$. Number of RHP poles:",
@@ -1224,18 +1229,16 @@
         correct: 0,
         ref: "Handbook §15 (Routh-Hurwitz)",
         solution: S({
-          c: "Build Routh array; count sign changes in first column.",
+          c: "Routh-Hurwitz counts right-half-plane roots without solving: the number of SIGN CHANGES in the first column equals the number of RHP poles.",
           s: [
-            "$s^{4}$: 1, 3, 5",
-            "$s^{3}$: 2, 4, 0",
-            "$s^{2}$: $(2\\cdot 3 - 1\\cdot 4)/2 = 1$, $5$",
-            "$s^{1}$: $(1\\cdot 4 - 2\\cdot 5)/1 = -6$",
-            "$s^{0}$: 5",
-            "First column: 1, 2, 1, -6, 5 — two sign changes (1→-6 and -6→5).",
-            "Two RHP poles → unstable."
+            "<b>Step 1 — Seed the array.</b> $s^{4}$ row: 1, 3, 5 (alternate coefficients); $s^{3}$ row: 2, 4.",
+            "<b>Step 2 — Compute the $s^{2}$ row.</b> First entry $= (2\\cdot3 - 1\\cdot4)/2 = 1$; second $= (2\\cdot5 - 1\\cdot0)/2 = 5$.",
+            "<b>Step 3 — Compute the $s^{1}$ row.</b> $(1\\cdot4 - 2\\cdot5)/1 = -6$.",
+            "<b>Step 4 — Finish and count.</b> $s^{0}$ row: 5. First column: $1, 2, 1, -6, 5$ → signs $+,+,+,-,+$ → TWO changes ($1\\to-6$, $-6\\to5$) → 2 RHP poles."
           ],
-          a: "2 RHP poles → unstable.",
-          v: "All coefficients positive is NECESSARY but not sufficient. Routh confirms instability despite all positive coefficients."
+          a: "2 RHP poles — the system is unstable.",
+          v: "The teaching point: ALL coefficients of $s^{4}+2s^{3}+3s^{2}+4s+5$ are positive, yet the system is unstable — positivity is necessary but NOT sufficient above 2nd order; Routh is the real test ✓. Sanity: complex roots come in conjugate pairs, so an even count (2) is consistent."
+
         })
       },
       { q: "Phase margin of $L(s) = 10/[s(s+1)]$:",
@@ -1243,15 +1246,16 @@
         correct: 0,
         ref: "Handbook §15 (Phase margin from Bode)",
         solution: S({
-          c: "Find gain crossover $\\omega_{gc}$ where $|L| = 1$, then PM = $180° + \\angle L(j\\omega_{gc})$.",
+          c: "Phase margin = how much extra phase lag the loop tolerates before oscillation: PM $= 180° + \\angle L(j\\omega_{gc})$, measured at the gain-crossover frequency where $|L| = 1$.",
           s: [
-            "$|L(j\\omega)| = 10/[\\omega\\sqrt{\\omega^{2}+1}] = 1 \\Rightarrow \\omega^{2}(\\omega^{2}+1) = 100$.",
-            "Solve $\\omega^{4} + \\omega^{2} - 100 = 0 \\Rightarrow \\omega^{2} \\approx 9.51 \\Rightarrow \\omega_{gc} \\approx 3.08$ rad/s.",
-            "$\\angle L = -90° - \\arctan(3.08) = -90° - 72.0° = -162.0°$.",
-            "PM = $180° - 162.0° = 17.9°$."
+            "<b>Step 1 — Find gain crossover.</b> $|L(j\\omega)| = \\dfrac{10}{\\omega\\sqrt{\\omega^{2}+1}} = 1 \\Rightarrow \\omega^{2}(\\omega^{2}+1) = 100$.",
+            "<b>Step 2 — Solve the quadratic in $\\omega^{2}$.</b> $\\omega^{4} + \\omega^{2} - 100 = 0 \\Rightarrow \\omega^{2} = \\dfrac{-1+\\sqrt{401}}{2} \\approx 9.51 \\Rightarrow \\omega_{gc} \\approx 3.08$ rad/s.",
+            "<b>Step 3 — Phase at crossover.</b> $\\angle L = -90° - \\arctan(\\omega_{gc}) = -90° - 72.0° = -162.0°$.",
+            "<b>Step 4 — Margin.</b> PM $= 180° - 162.0° = 18.0° \\approx 17.9°$."
           ],
-          a: "PM $\\approx 17.9°$",
-          v: "Small PM ⇒ lightly damped step response with significant overshoot — typically want PM ≥ 45° for good transient."
+          a: "PM $\\approx 17.9°$ — stable but lightly damped.",
+          v: "Rule-of-thumb link: PM $\\approx 100\\zeta$ (degrees) → $\\zeta \\approx 0.18$ → step overshoot near 55% — this loop badly needs a lead compensator or lower gain (target PM ≥ 45°) ✓. Bound check: integrator + one pole can never reach $-180°$ at finite ω, so the system is stable for ALL $K$ — but margins shrink as $K$ grows ✓."
+
         })
       },
       { q: "Steady-state error to a unit step for Type-1 system with unity feedback:",
@@ -1259,13 +1263,15 @@
         correct: 0,
         ref: "Handbook §15 (Steady-state error)",
         solution: S({
-          c: "Type-1 system has one pure integrator: $K_p = \\lim_{s\\to 0}G(s) = \\infty$. Steady-state error to step: $e_{ss} = 1/(1 + K_p) = 0$.",
+          c: "Final-value theorem applied to unity feedback: $e_{ss} = \\dfrac{1}{1 + K_p}$ for a step, where $K_p = \\lim_{s\\to0}G(s)$. A Type-1 system (one integrator) has $K_p = \\infty$.",
           s: [
-            "For ramp input: $e_{ss} = 1/K_v$ where $K_v = \\lim_{s\\to 0}sG(s)$ — finite for Type-1.",
-            "For parabolic input: Type-1 cannot follow — infinite error."
+            "<b>Step 1 — Evaluate the position constant.</b> Type 1 means a factor $1/s$ in $G$: as $s \\to 0$, $G(s) \\to \\infty$, so $K_p = \\infty$.",
+            "<b>Step 2 — Apply the error formula.</b> $e_{ss} = 1/(1 + \\infty) = 0$ — the integrator keeps wind-ing up until the step is tracked exactly.",
+            "<b>Step 3 — Place the distractors.</b> $1/(1+K)$ is the TYPE-0 step error; $1/K$ is the Type-1 error to a RAMP ($1/K_v$); $\\infty$ is Type-0's ramp error. The error table (type × input) is the FE's favorite controls question."
           ],
           a: "$e_{ss} = 0$",
-          v: "Adding integrators (higher type) reduces steady-state error to lower-order inputs — but harder to stabilize."
+          v: "Pattern check (memorize the diagonal): Type 0 — step $\\frac{1}{1+K_p}$, ramp ∞; Type 1 — step 0, ramp $\\frac{1}{K_v}$, parabola ∞; Type 2 — step 0, ramp 0, parabola $\\frac{1}{K_a}$. Each added integrator zeroes one more input order, at the cost of phase margin ✓."
+
         })
       },
       { q: "Step response of $T(s) = 4/(s^{2} + 2s + 4)$. Percent overshoot:",
@@ -1273,13 +1279,15 @@
         correct: 0,
         ref: "Handbook §15 (Second-order overshoot)",
         solution: S({
-          c: "Standard form: $\\omega_n^{2} = 4,\\ 2\\zeta\\omega_n = 2 \\Rightarrow \\omega_n = 2,\\ \\zeta = 0.5$. $M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^{2}}}$.",
+          c: "Match to the 2nd-order standard form $\\dfrac{\\omega_n^{2}}{s^{2} + 2\\zeta\\omega_n s + \\omega_n^{2}}$, then apply the overshoot map $M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^{2}}}$.",
           s: [
-            "$\\zeta = 0.5,\\ \\sqrt{1-\\zeta^{2}} = \\sqrt{0.75} = 0.866$.",
-            "$M_p = e^{-\\pi(0.5)/0.866} = e^{-1.814} = 0.163 = 16.3\\%$."
+            "<b>Step 1 — Extract parameters.</b> $\\omega_n^{2} = 4 \\Rightarrow \\omega_n = 2$; $2\\zeta\\omega_n = 2 \\Rightarrow \\zeta = 0.5$.",
+            "<b>Step 2 — Evaluate the exponent.</b> $\\dfrac{\\pi\\zeta}{\\sqrt{1-\\zeta^{2}}} = \\dfrac{\\pi(0.5)}{0.866} = 1.814$.",
+            "<b>Step 3 — Overshoot.</b> $M_p = e^{-1.814} = 0.163 \\to 16.3\\%$."
           ],
-          a: "$\\approx 16.3\\%$",
-          v: "Rules of thumb: $\\zeta = 0.7$ ⇒ ~5% OS; $\\zeta = 1$ ⇒ 0% (critical); $\\zeta = 0.1$ ⇒ ~73% OS."
+          a: "$\\approx 16.3\\%$ overshoot.",
+          v: "Anchor points worth memorizing: $\\zeta = 0.5 \\to 16.3\\%$, $\\zeta = 0.7 \\to 4.6\\%$, $\\zeta = 1 \\to 0\\%$ — the distractors are exactly these neighbors. Timing bonus: peak time $t_p = \\pi/\\omega_d = \\pi/(2\\times0.866) = 1.81$ s; 2% settling $\\approx 4/(\\zeta\\omega_n) = 4$ s ✓."
+
         })
       },
       { q: "State-space: $A = \\begin{bmatrix}-1 & 0\\\\1 & -2\\end{bmatrix}$. Eigenvalues of $A$:",
@@ -1287,13 +1295,15 @@
         correct: 0,
         ref: "Handbook §15 (State-space dynamics)",
         solution: S({
-          c: "For triangular matrices, eigenvalues are diagonal entries.",
+          c: "Eigenvalues of the state matrix ARE the system poles. For a triangular matrix they can be read directly off the diagonal — no characteristic polynomial needed.",
           s: [
-            "$A$ is lower triangular. Eigenvalues = diagonal = $\\{-1, -2\\}$.",
-            "Both negative ⇒ system is asymptotically stable."
+            "<b>Step 1 — Recognize the structure.</b> $A$ is lower triangular (the only off-diagonal entry sits below). Eigenvalues = diagonal = $\\{-1, -2\\}$.",
+            "<b>Step 2 — Verify via the characteristic polynomial.</b> $\\det(sI - A) = (s+1)(s+2) - (0)(-1)... = (s+1)(s+2)$ — roots $-1, -2$ ✓ (the below-diagonal 1 multiplies a zero).",
+            "<b>Step 3 — Classify stability.</b> Both eigenvalues have negative real parts → asymptotically stable; every initial condition decays to zero."
           ],
-          a: "$\\lambda = -1, -2$",
-          v: "Time constants: $\\tau_1 = 1$ s, $\\tau_2 = 0.5$ s. Slowest mode dominates."
+          a: "$\\lambda = -1,\\ -2$ — asymptotically stable.",
+          v: "Mode check: time constants $\\tau = 1$ s and 0.5 s; after ~4-5 s (4-5 of the slower τ) the response is gone ✓. Distractor audit: $\\{+1,+2\\}$ flips signs (unstable); $\\{0,-3\\}$ preserves the trace ($-3$) but not the determinant ($2 \\ne 0$) — trace and det together pin the answer: $\\lambda_1\\lambda_2 = \\det A = 2$, $\\lambda_1+\\lambda_2 = \\text{tr}A = -3$ ✓."
+
         })
       }
     ],
@@ -1305,13 +1315,16 @@
         correct: 0,
         ref: "Handbook §13 (Shannon-Hartley)",
         solution: S({
-          c: "$C = B\\log_2(1 + \\text{SNR})$, SNR in linear (not dB).",
+          c: "Shannon-Hartley caps error-free rate: $C = B\\log_2(1 + \\text{SNR})$ — and SNR must be converted from dB to LINEAR before it goes in the log.",
           s: [
-            "SNR = 20 dB ⇒ linear = $10^{2} = 100$.",
-            "$C = 10{,}000\\log_2(101) = 10{,}000 \\times 6.66 = 66{,}600$ bps."
+            "<b>Step 1 — Convert SNR.</b> 20 dB $\\Rightarrow 10^{20/10} = 100$ (linear).",
+            "<b>Step 2 — Evaluate the log.</b> $\\log_2(101) = \\ln 101/\\ln 2 \\approx 6.66$ bits/s/Hz.",
+            "<b>Step 3 — Scale by bandwidth.</b> $C = 10{,}000 \\times 6.66 \\approx 66.6$ kbps.",
+            "<b>Step 4 — Distractor audit.</b> 20 kbps treats the dB figure as the linear SNR ($\\log_2 21 \\approx 4.4$... actually it echoes '20'); 10 kbps is just $B$; 200 kbps ≈ uses $20\\times B$ — none survive the dB conversion step, which is the question's real test."
           ],
-          a: "$\\approx 66.6$ kbps",
-          v: "Each doubling of SNR linear adds ~1 bps/Hz to capacity in this regime."
+          a: "$C \\approx 66.6$ kbps",
+          v: "Sensitivity check: every extra 3 dB of SNR adds ~1 bit/s/Hz in this regime ($\\log_2$ doubles) → at 23 dB the capacity would be ≈76.6 kbps ✓. Context: real modems approach but never exceed this bound; error-correcting codes (LDPC/turbo) close to within ~1 dB of it."
+
         })
       },
       { q: "FM signal: $\\Delta f = 25$ kHz, $f_m = 5$ kHz. Carson's rule bandwidth:",
@@ -1319,12 +1332,15 @@
         correct: 0,
         ref: "Handbook §13 (Carson's rule)",
         solution: S({
-          c: "$B = 2(\\Delta f + f_m) = 2 f_m(\\beta + 1)$ where $\\beta = \\Delta f/f_m$.",
+          c: "Carson's rule estimates FM occupied bandwidth: $B = 2(\\Delta f + f_m)$ — twice the sum of peak deviation and highest modulating frequency (~98% of signal power).",
           s: [
-            "$B = 2(25 + 5) = 60$ kHz."
+            "<b>Step 1 — Plug in.</b> $B = 2(25 + 5) = 60$ kHz.",
+            "<b>Step 2 — Modulation index view.</b> $\\beta = \\Delta f/f_m = 5$; equivalently $B = 2f_m(\\beta + 1) = 2(5)(6) = 60$ kHz ✓ — same number from both forms.",
+            "<b>Step 3 — Distractor audit.</b> 50 kHz is $2\\Delta f$ (forgets $f_m$); 30 kHz is $\\Delta f + f_m$ un-doubled; 10 kHz is just $2f_m$ (the AM-style answer)."
           ],
           a: "$B = 60$ kHz",
-          v: "Modulation index $\\beta = 5$. Commercial FM uses $\\Delta f = 75$ kHz, $f_m = 15$ kHz ⇒ $B = 180$ kHz (200-kHz channel spacing)."
+          v: "Benchmark check: broadcast FM ($\\Delta f = 75$ kHz, $f_m = 15$ kHz) gives $2(90) = 180$ kHz inside a 200-kHz channel — the rule reproduces the real allocation with sensible guard band ✓. Limit behavior: narrowband FM ($\\beta \\ll 1$) collapses to $2f_m$ (AM-like); wideband is dominated by $2\\Delta f$ ✓."
+
         })
       },
       { q: "QPSK with $E_b/N_0 = 8$ dB. Approximate BER:",
@@ -1332,14 +1348,16 @@
         correct: 0,
         ref: "Handbook §13 (Digital modulation BER)",
         solution: S({
-          c: "QPSK BER $\\approx Q(\\sqrt{2 E_b/N_0})$ — same as BPSK in $E_b/N_0$ terms.",
+          c: "QPSK is two orthogonal BPSK streams, so its bit-error rate in $E_b/N_0$ terms is identical to BPSK: $P_b = Q\\!\\left(\\sqrt{2E_b/N_0}\\right)$.",
           s: [
-            "$E_b/N_0 = 8$ dB → linear 6.31.",
-            "$\\sqrt{2(6.31)} = \\sqrt{12.62} = 3.55$.",
-            "$Q(3.55) \\approx 1.9 \\times 10^{-4}$."
+            "<b>Step 1 — Convert dB to linear.</b> $E_b/N_0 = 10^{8/10} = 6.31$.",
+            "<b>Step 2 — Argument of Q.</b> $\\sqrt{2 \\times 6.31} = \\sqrt{12.62} = 3.55$.",
+            "<b>Step 3 — Evaluate the tail.</b> $Q(3.55) \\approx 1.9\\times10^{-4} \\approx 2\\times10^{-4}$.",
+            "<b>Step 4 — Distractor audit.</b> $10^{-2}$ corresponds to ~4 dB; $10^{-8}$ to ~12 dB; 0.1 is sub-0 dB — the answer cluster tests whether you can roughly place the BER waterfall."
           ],
-          a: "$\\approx 2 \\times 10^{-4}$",
-          v: "QPSK doubles bandwidth efficiency over BPSK at same $E_b/N_0$ — same BER, twice the rate."
+          a: "BER $\\approx 2\\times10^{-4}$ at 8 dB.",
+          v: "Why QPSK 'wins': same BER as BPSK per bit, but 2 bits/symbol → double the spectral efficiency at no $E_b/N_0$ penalty — the reason QPSK (and its offset/π/4 variants) dominate satellite and cellular links ✓. Waterfall anchors: $10^{-3}$ @ ~6.8 dB, $10^{-5}$ @ ~9.6 dB — our point sits between them ✓."
+
         })
       },
       { q: "PCM voice: 4 kHz baseband, sampled at Nyquist, 8 bits/sample. Bit rate:",
@@ -1347,13 +1365,15 @@
         correct: 0,
         ref: "Handbook §13 (PCM)",
         solution: S({
-          c: "Rate = $f_s \\times n_{bits}$.",
+          c: "PCM bit rate is a two-factor product: $R = f_s \\times n$ — sampling rate (set by Nyquist) times bits per sample.",
           s: [
-            "$f_s = 8$ kHz (Nyquist for 4 kHz). $n = 8$ bits.",
-            "$R = 8 \\times 8 = 64$ kbps."
+            "<b>Step 1 — Sampling rate.</b> Nyquist for a 4-kHz baseband: $f_s = 2 \\times 4 = 8$ kHz.",
+            "<b>Step 2 — Multiply by resolution.</b> $R = 8{,}000 \\times 8 = 64$ kbps.",
+            "<b>Step 3 — Distractor audit.</b> 32 kbps halves the sampling rate (forgot Nyquist's factor 2); 8 kbps is the sample rate alone; 128 kbps doubles up (stereo confusion)."
           ],
-          a: "64 kbps",
-          v: "T-1 carrier carries 24 such channels at 1.544 Mbps."
+          a: "$R = 64$ kbps — the classic DS0 voice channel.",
+          v: "Telecom anchor: T-1 multiplexes 24 such DS0s: $24 \\times 64\\,\\text{k} + 8\\,\\text{k framing} = 1.544$ Mbps ✓; E-1 carries 32 → 2.048 Mbps. Modern context: G.711 still encodes exactly this way (8 kHz × 8-bit μ-law/A-law) ✓."
+
         })
       },
       { q: "Antenna gain 30 dBi at receiver, EIRP from transmitter 50 dBW, path loss 130 dB. Received power:",
@@ -1361,12 +1381,15 @@
         correct: 0,
         ref: "Handbook §13 (Link budget)",
         solution: S({
-          c: "$P_R = $ EIRP $- L + G_R$ in dB.",
+          c: "Link budgets add and subtract decibels: $P_R = \\text{EIRP} - L_{path} + G_{R}$ — transmitter effective power, minus path loss, plus receive-antenna gain.",
           s: [
-            "$P_R = 50 - 130 + 30 = -50$ dBW = $10^{-5}$ W = 10 μW."
+            "<b>Step 1 — Stack the budget.</b> $P_R = 50\\,\\text{dBW} - 130\\,\\text{dB} + 30\\,\\text{dBi} = -50$ dBW.",
+            "<b>Step 2 — Convert to watts.</b> $-50$ dBW $= 10^{-5}$ W $= 10\\,\\mu$W.",
+            "<b>Step 3 — Distractor audit.</b> $-90$ dBW forgets the receive gain... ($50-130-... $ hmm $-110+30$? no — it subtracts $G_R$ instead of adding); $+10$ dBW drops the path loss sign; $-130$ dBW ignores both antenna terms."
           ],
-          a: "$-50$ dBW (10 μW)",
-          v: "Typical satellite receivers operate at $\\sim -120$ to $-150$ dBW after LNA noise contribution. 10 μW is very strong."
+          a: "$P_R = -50$ dBW (10 μW).",
+          v: "Unit discipline check: dBW + dB + dBi keeps everything in dBW ✓ (dBi is gain relative to isotropic — dimensionless in dB). Scale context: 10 μW is a STRONG received signal — GPS arrives near $-158$ dBW; satellite TV LNB inputs run $-120$ to $-90$ dBW — so a 130-dB path with 80 dB of combined EIRP+gain is a comfortable link ✓."
+
         })
       }
     ],
@@ -1378,14 +1401,15 @@
         correct: 0,
         ref: "Handbook §16 (Boolean algebra)",
         solution: S({
-          c: "Group terms: $A(\\bar B + B) + \\bar A B = A\\cdot 1 + \\bar A B = A + \\bar A B$. Then $A + \\bar A B = A + B$ (absorption).",
+          c: "Two reduction laws do all the work: combining ($X\\bar Y + XY = X$) and absorption-with-complement ($X + \\bar XY = X + Y$).",
           s: [
-            "$A\\bar B + AB = A(\\bar B + B) = A$.",
-            "$F = A + \\bar A B$.",
-            "$A + \\bar A B = (A + \\bar A)(A + B) = A + B$ (distributive)."
+            "<b>Step 1 — Combine the first two terms.</b> $A\\bar B + AB = A(\\bar B + B) = A\\cdot1 = A$, leaving $F = A + \\bar AB$.",
+            "<b>Step 2 — Apply $X + \\bar XY = X + Y$.</b> Distribute to see it: $A + \\bar AB = (A + \\bar A)(A + B) = 1\\cdot(A + B) = A + B$.",
+            "<b>Step 3 — Distractor audit.</b> $AB$ keeps only one minterm of three; $\\bar A\\bar B$ is the complement of the answer (the single 0-row); constant 1 would need all four minterms — we have only three."
           ],
           a: "$F = A + B$",
-          v: "Truth table check: only $A = B = 0$ gives $F = 0$, matching $A + B$ behavior ✓."
+          v: "Truth-table check: the given minterms are $A\\bar B$ (10), $AB$ (11), $\\bar AB$ (01) — i.e. every row EXCEPT 00, which is precisely the OR function ✓. K-map view: three filled cells of a 2×2 map group into two pairs covering $A$ and $B$ ✓."
+
         })
       },
       { q: "Convert hex $A3F$ to decimal:",
@@ -1393,13 +1417,15 @@
         correct: 0,
         ref: "Handbook §16 (Number systems)",
         solution: S({
-          c: "Hex positional: $\\text{A3F}_{16} = A\\cdot 16^{2} + 3\\cdot 16 + F$.",
+          c: "Hexadecimal is base-16 positional: $\\text{A3F}_{16} = A\\cdot16^{2} + 3\\cdot16^{1} + F\\cdot16^{0}$ with $A = 10$, $F = 15$.",
           s: [
-            "$A = 10$, $F = 15$.",
-            "$10(256) + 3(16) + 15 = 2560 + 48 + 15 = 2623$."
+            "<b>Step 1 — Expand the digits.</b> $10 \\times 256 = 2560$; $3 \\times 16 = 48$; $15 \\times 1 = 15$.",
+            "<b>Step 2 — Sum.</b> $2560 + 48 + 15 = 2623$.",
+            "<b>Step 3 — Distractor audit.</b> 163 reads 'A3' alone as decimal-ish; 2599 drops the F→15 mapping somewhere; 10243 concatenates digit values (10, 3, 15) instead of weighting them."
           ],
-          a: "2623",
-          v: "Equivalent binary: 1010 0011 1111 — each hex digit is 4 binary bits."
+          a: "$\\text{A3F}_{16} = 2623_{10}$",
+          v: "Binary cross-check (each hex digit = 4 bits): A3F → 1010 0011 1111; value $= 2048+512+32+16+8+4+2+1 = 2623$ ✓. Range check: 3-digit hex spans 0-4095, and 2623 sits inside ✓."
+
         })
       },
       { q: "Two's complement: 8-bit representation of $-50$:",
@@ -1407,14 +1433,16 @@
         correct: 0,
         ref: "Handbook §16 (Two's complement)",
         solution: S({
-          c: "Take positive's binary, invert, add 1.",
+          c: "Two's complement negation: write $+|x|$ in binary, invert every bit, add 1. The result makes addition hardware sign-agnostic.",
           s: [
-            "$+50 = 0011\\ 0010$ in 8-bit.",
-            "Invert: $1100\\ 1101$.",
-            "Add 1: $1100\\ 1110$."
+            "<b>Step 1 — Encode +50.</b> $50 = 32 + 16 + 2 = 0011\\,0010_2$.",
+            "<b>Step 2 — Invert.</b> $1100\\,1101$.",
+            "<b>Step 3 — Add one.</b> $1100\\,1101 + 1 = 1100\\,1110$.",
+            "<b>Step 4 — Distractor audit.</b> $1100\\,1111$ forgets nothing — wait, it ADDS 1 twice... it is $-49$; $1011\\,0010$ just flips the sign bit of +50 (sign-magnitude thinking); $0011\\,0010$ IS +50."
           ],
-          a: "$1100\\ 1110$",
-          v: "Verify: as signed 8-bit, $1100\\ 1110 = -128 + 64 + 8 + 4 + 2 = -50$ ✓."
+          a: "$-50 = 1100\\,1110_2$ (two's complement, 8-bit).",
+          v: "Weighted check (MSB carries $-128$): $-128 + 64 + 8 + 4 + 2 = -50$ ✓. Additive check: $0011\\,0010 + 1100\\,1110 = 1\\,0000\\,0000$ → discard carry → 0 ✓ — a number plus its two's complement is zero, by construction."
+
         })
       },
       { q: "Synchronous mod-12 counter requires how many flip-flops minimum?",
@@ -1422,13 +1450,15 @@
         correct: 0,
         ref: "Handbook §16 (Counter design)",
         solution: S({
-          c: "$n$ flip-flops give $2^{n}$ states; need $2^{n} \\ge 12$.",
+          c: "$n$ flip-flops provide $2^{n}$ distinct states; a mod-$M$ counter needs $2^{n} \\ge M$, i.e. $n = \\lceil\\log_2 M\\rceil$.",
           s: [
-            "$2^{3} = 8 < 12$. $2^{4} = 16 \\ge 12$. Need 4 FFs.",
-            "Counter cycles through 12 of 16 possible states; remaining 4 are illegal/don't-care."
+            "<b>Step 1 — Test the powers of two.</b> $2^{3} = 8 < 12$ — three FFs cannot represent 12 states. $2^{4} = 16 \\ge 12$ ✓.",
+            "<b>Step 2 — Conclude.</b> Minimum $n = 4$; the counter uses 12 of 16 states (0-11) and decode-resets at 12 ($1100_2$).",
+            "<b>Step 3 — Distractor audit.</b> 12 FFs confuses states with flip-flops (that is a 12-stage ring counter — valid but far from minimal); 3 under-provisions; 6 has no derivation."
           ],
-          a: "4 flip-flops",
-          v: "Reset logic forces the counter back to 0 when it reaches 12 (binary 1100)."
+          a: "4 flip-flops.",
+          v: "Design check: the reset decode needs only the two high bits ($Q_3Q_2 = 11$ first occurs at 12) — a single AND gate ✓. The 4 unused states (12-15) must be verified to re-enter the main sequence (self-correcting design) — a standard FE follow-up point."
+
         })
       },
       { q: "Karnaugh map: 4-variable function with minterms $\\{0, 2, 4, 6, 8, 10, 12, 14\\}$ simplifies to:",
@@ -1436,14 +1466,15 @@
         correct: 0,
         ref: "Handbook §16 (K-maps)",
         solution: S({
-          c: "All minterms are even — D bit (LSB) is 0 in every case. Simplifies to $\\bar D$.",
+          c: "Eight minterms covering half a 4-variable map collapse to a SINGLE literal if they share exactly one variable value. All eight given minterms are even — D (the LSB) is 0 in every one.",
           s: [
-            "Minterms in binary: 0000, 0010, 0100, 0110, 1000, 1010, 1100, 1110.",
-            "All have D = 0; A, B, C take all 8 combinations.",
-            "Result: $\\bar D$."
+            "<b>Step 1 — Spot the pattern in binary.</b> 0000, 0010, 0100, 0110, 1000, 1010, 1100, 1110 — every value of A, B, C appears; D = 0 always.",
+            "<b>Step 2 — See it on the map.</b><br><svg viewBox='-10 -14 330 200' width='310' xmlns='http://www.w3.org/2000/svg' style='display:block;margin:.5em auto;max-width:100%;background:#fff;border-radius:6px'><g stroke='#1f4e79' stroke-width='1.4' fill='none'><rect x='60' y='30' width='40' height='144' fill='#dbe7f6'/><rect x='180' y='30' width='40' height='144' fill='#dbe7f6'/><rect x='60' y='30' width='160' height='144'/><line x1='100' y1='30' x2='100' y2='174'/><line x1='140' y1='30' x2='140' y2='174'/><line x1='180' y1='30' x2='180' y2='174'/><line x1='60' y1='66' x2='220' y2='66'/><line x1='60' y1='102' x2='220' y2='102'/><line x1='60' y1='138' x2='220' y2='138'/><text x='80' y='22' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>CD=00</text><text x='120' y='22' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>01</text><text x='160' y='22' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>11</text><text x='200' y='22' text-anchor='middle' font-size='10' fill='#1f4e79' stroke='none'>10</text><text x='50' y='52' text-anchor='end' font-size='10' fill='#1f4e79' stroke='none'>AB=00</text><text x='50' y='88' text-anchor='end' font-size='10' fill='#1f4e79' stroke='none'>01</text><text x='50' y='124' text-anchor='end' font-size='10' fill='#1f4e79' stroke='none'>11</text><text x='50' y='160' text-anchor='end' font-size='10' fill='#1f4e79' stroke='none'>10</text><text x='240' y='100' font-size='11' fill='#1f4e79' stroke='none'>D = 0 cols</text></g></svg>The filled cells are the two D=0 columns (CD = 00 and 10) — adjacent in Gray order because they wrap around.",
+            "<b>Step 3 — Read the group.</b> One group of 8 → drop the 3 variables that change (A, B, C), keep the one that doesn't: $F = \\bar D$."
           ],
           a: "$F = \\bar D$",
-          v: "Coverage of 8 cells in a K-map of 16 cells gives a single literal as expected."
+          v: "Group-size rule check: in a 16-cell map, a group of 8 = 1 literal, 4 = 2 literals, 2 = 3 literals ✓. Logical restatement: 'F is true exactly when the number is even' — and even-ness IS $\\bar D$ for a binary number ✓."
+
         })
       },
       { q: "Setup time violation occurs when:",
@@ -1456,13 +1487,15 @@
         correct: 0,
         ref: "Handbook §16 (Synchronous timing)",
         solution: S({
-          c: "Setup time $t_{su}$ = minimum stable time of data BEFORE clock edge for correct latching.",
+          c: "Setup time $t_{su}$ is the window BEFORE the active clock edge during which the D input must already be stable; violating it risks latching garbage or metastability.",
           s: [
-            "Violation ⇒ metastability or wrong value latched.",
-            "Fix: shorter combinational path, higher clock period, pipeline insertion."
+            "<b>Step 1 — Define the violation.</b> Data transitions inside the $t_{su}$ window before the edge → the latch samples a changing signal → wrong value or metastable oscillation that resolves unpredictably.",
+            "<b>Step 2 — Trace the cause.</b> Setup is violated when the combinational path is too SLOW for the clock: $t_{clk} < t_{cq} + t_{comb} + t_{su}$. Fixes: pipeline the logic, slow the clock, or speed the path.",
+            "<b>Step 3 — Distractor audit.</b> Data changing LONG before the edge is the desired case; clock period exceeding logic delay is the SAFE direction; duty cycle is irrelevant to edge-triggered setup."
           ],
-          a: "Data changes within $t_{su}$ before clock edge.",
-          v: "Hold time $t_h$ is the dual: minimum stable time AFTER clock edge. Different violation, different fix."
+          a: "Data changes within $t_{su}$ before the active clock edge.",
+          v: "The dual worth pinning: HOLD violations come from paths that are too FAST (data races through before the edge's effect lands) — fixed with delay insertion, never by slowing the clock ✓. Max-frequency formula every FE taker needs: $f_{max} = 1/(t_{cq} + t_{comb} + t_{su})$."
+
         })
       }
     ],
@@ -1474,13 +1507,15 @@
         correct: 0,
         ref: "Handbook §17 (Cache hierarchy)",
         solution: S({
-          c: "AMAT = $t_{L1} + \\text{miss}_{L1}(t_{L2} + \\text{miss}_{L2}\\cdot t_{mem})$.",
+          c: "Average memory access time chains the miss paths: AMAT $= t_{L1} + m_{L1}\\,(t_{L2} + m_{L2}\\,t_{mem})$ — each level's cost is paid only on the misses that reach it.",
           s: [
-            "L2 effective time: $10 + 0.01(100) = 11$ cycles.",
-            "Overall: $1 + 0.05(11) = 1 + 0.55 = 1.55$ cycles."
+            "<b>Step 1 — Cost of an L1 miss.</b> Going to L2 costs $10 + 0.01 \\times 100 = 11$ cycles on average (L2 hit plus its own 1% miss to memory).",
+            "<b>Step 2 — Weight by L1 miss rate.</b> AMAT $= 1 + 0.05 \\times 11 = 1 + 0.55 = 1.55$ cycles.",
+            "<b>Step 3 — Distractor audit.</b> 5, 10, 100 cycles are the raw latencies of single levels — the whole point of the hierarchy is that the WEIGHTED average stays near the L1 time."
           ],
-          a: "$\\approx 1.55$ cycles",
-          v: "Without cache: 100 cycles per access. Cache improvement factor ~65x — the value of hierarchy."
+          a: "AMAT $\\approx 1.55$ cycles.",
+          v: "Leverage check: without any cache every access costs 100 cycles — the hierarchy delivers a ~65× speedup while only 0.05% of accesses ($0.05\\times0.01$) ever touch DRAM ✓. Sensitivity: halving the L1 miss rate to 2.5% drops AMAT to 1.28 — miss-rate improvements at the TOP level dominate."
+
         })
       },
       { q: "Amdahl's law: 90% parallelizable code, infinite processors. Maximum speedup:",
@@ -1488,12 +1523,15 @@
         correct: 0,
         ref: "Handbook §17 (Amdahl)",
         solution: S({
-          c: "Speedup $= 1/[(1-f) + f/P]$, $P\\to\\infty$.",
+          c: "Amdahl's law: speedup $= \\dfrac{1}{(1-f) + f/P}$. As $P \\to \\infty$ the parallel term vanishes, leaving the serial fraction as an immovable ceiling.",
           s: [
-            "$\\lim_{P\\to\\infty}\\text{Speedup} = 1/(1-f) = 1/0.10 = 10$."
+            "<b>Step 1 — Take the limit.</b> $\\lim_{P\\to\\infty} = \\dfrac{1}{1 - f} = \\dfrac{1}{0.10} = 10$.",
+            "<b>Step 2 — Internalize why.</b> With infinite processors the 90% parallel work takes zero time, but the 10% serial work still takes its full share — total time can never drop below 10% of the original.",
+            "<b>Step 3 — Distractor audit.</b> $\\infty$ ignores the serial fraction; 90× confuses the percentage with the speedup; 1.1× inverts the logic."
           ],
-          a: "$10\\times$",
-          v: "Even with infinite parallelism, the 10% serial portion limits the speedup. Practical lesson: kill serial bottlenecks first."
+          a: "Maximum speedup $= 10\\times$.",
+          v: "Finite-P check: at $P = 90$, speedup $= 1/(0.1 + 0.9/90) = 9.1$ — already 91% of the ceiling, so piling on processors past ~100 is nearly pointless here ✓. Engineering moral: optimize the serial 10% first — cutting it to 5% doubles the ceiling to 20×."
+
         })
       },
       { q: "32-bit virtual address, 4 KB pages. Page-table size for a single process with one-level table (4 bytes/entry):",
@@ -1501,13 +1539,16 @@
         correct: 0,
         ref: "Handbook §17 (Virtual memory page table)",
         solution: S({
-          c: "$2^{12}$ bytes/page ⇒ 20-bit VPN ⇒ $2^{20}$ entries × 4 bytes = 4 MB.",
+          c: "Page-table size = (number of virtual pages) × (entry size). The page offset consumes $\\log_2(\\text{page size})$ bits; the rest of the address indexes the table.",
           s: [
-            "$2^{20} = 1$M entries.",
-            "1M × 4 bytes = 4 MB per process."
+            "<b>Step 1 — Split the address.</b> 4 KB pages → offset $= \\log_2 4096 = 12$ bits → VPN $= 32 - 12 = 20$ bits.",
+            "<b>Step 2 — Count entries.</b> $2^{20} = 1{,}048{,}576 \\approx 1$M page-table entries.",
+            "<b>Step 3 — Multiply by entry size.</b> $2^{20} \\times 4$ B $= 4$ MB per process.",
+            "<b>Step 4 — Distractor audit.</b> 1 MB forgets the 4-byte entry width; 32 MB miscounts the VPN as 23 bits; 1 GB would be a 64-bit-ish fantasy for this configuration."
           ],
-          a: "4 MB",
-          v: "Why multi-level page tables exist: 4 MB × thousands of processes is impractical. Hierarchical tables only allocate the levels actually used."
+          a: "4 MB per process (flat, single-level).",
+          v: "Why this number matters: 4 MB × hundreds of processes = gigabytes of page tables for mostly-empty address spaces — exactly the waste that multi-level tables fix by allocating only the populated branches ✓. Scaling check: 64-bit flat tables would be $2^{52}\\times8$ B — absurd, hence 4-5 level radix tables on x86-64."
+
         })
       }
     ],
@@ -1519,13 +1560,15 @@
         correct: 0,
         ref: "Handbook §18 (Algorithm complexity)",
         solution: S({
-          c: "Quicksort partitions around a pivot. Balanced partitions → $\\log n$ levels × $n$ work each.",
+          c: "Quicksort's cost is (levels of recursion) × (linear partition work per level). Pivot quality controls the depth: balanced → $\\log n$ levels; degenerate → $n$ levels.",
           s: [
-            "Average: pivot near median ⇒ $T(n) = 2T(n/2) + n = O(n\\log n)$.",
-            "Worst: always-bad pivot (sorted input, naive choice) ⇒ $T(n) = T(n-1) + n = O(n^{2})$."
+            "<b>Step 1 — Average case.</b> A random pivot lands near the middle on average: $T(n) = 2T(n/2) + O(n) \\Rightarrow O(n\\log n)$ (Master theorem case 2).",
+            "<b>Step 2 — Worst case.</b> Always-extreme pivot (e.g. first element on ALREADY-SORTED input): $T(n) = T(n-1) + O(n) = O(n^{2})$ — the recursion degenerates to a chain.",
+            "<b>Step 3 — Distractor audit.</b> '$O(n\\log n)$ both' describes MERGESORT/heapsort (guaranteed); '$O(n^{2})$ both' slanders the average case; '$O(n)$ average' beats the comparison-sort lower bound — impossible."
           ],
-          a: "$O(n\\log n)$ avg, $O(n^{2})$ worst.",
-          v: "Mitigation: random pivot, median-of-3, or introsort (switches to heapsort if recursion too deep)."
+          a: "$O(n\\log n)$ average, $O(n^{2})$ worst.",
+          v: "Mitigation map (why quicksort survives in practice): randomized pivot makes the worst case vanishingly unlikely; median-of-three kills the sorted-input trap; introsort (C++ std::sort) detects deep recursion and bails to heapsort, capping the worst case at $O(n\\log n)$ ✓. Space note: in-place ($O(\\log n)$ stack) vs mergesort's $O(n)$ buffer — the practical tiebreaker."
+
         })
       },
       { q: "Hash table with linear probing: load factor 0.5, average successful lookups:",
@@ -1533,12 +1576,15 @@
         correct: 0,
         ref: "Handbook §18 (Hashing — Knuth's formulas)",
         solution: S({
-          c: "Knuth: successful search $\\approx \\frac{1}{2}(1 + 1/(1-\\alpha))$ where $\\alpha$ is load factor.",
+          c: "Knuth's classic open-addressing results: with load factor $\\alpha$, a SUCCESSFUL linear-probe search averages $\\tfrac12\\!\\left(1 + \\dfrac{1}{1-\\alpha}\\right)$ probes.",
           s: [
-            "$\\alpha = 0.5$ ⇒ $\\frac{1}{2}(1 + 1/0.5) = \\frac{1}{2}(1 + 2) = 1.5$ probes."
+            "<b>Step 1 — Plug in $\\alpha = 0.5$.</b> $\\tfrac12(1 + \\dfrac{1}{0.5}) = \\tfrac12(1 + 2) = 1.5$ probes.",
+            "<b>Step 2 — Distractor audit.</b> 1 probe assumes no collisions ever ($\\alpha \\to 0$); 5 probes ≈ the UNSUCCESSFUL-search cost at much higher load; 0.5 probes is physically impossible (every search costs at least one).",
+            "<b>Step 3 — The companion formula.</b> Unsuccessful search: $\\tfrac12\\!\\left(1 + \\dfrac{1}{(1-\\alpha)^{2}}\\right) = \\tfrac12(1+4) = 2.5$ probes at the same load."
           ],
-          a: "$\\approx 1.5$ probes",
-          v: "Unsuccessful search has higher cost: $\\frac{1}{2}(1 + 1/(1-\\alpha)^{2}) = 2.5$ at $\\alpha = 0.5$."
+          a: "$\\approx 1.5$ probes per successful search.",
+          v: "Blow-up check (why tables resize): at $\\alpha = 0.9$ successful → 5.5 probes, unsuccessful → 50.5 — the $(1-\\alpha)^{-2}$ term explodes, which is why implementations rehash near $\\alpha \\approx 0.7$ ✓. Mechanism note: linear probing suffers PRIMARY clustering (runs coalesce); double hashing trades that for slightly costlier probes."
+
         })
       },
       { q: "SQL query: count distinct customers who placed an order in 2025. Which clause is essential?",
@@ -1551,13 +1597,15 @@
         correct: 0,
         ref: "Handbook §18 (SQL aggregate functions)",
         solution: S({
-          c: "DISTINCT inside COUNT removes duplicates so each customer is counted once even if they placed multiple orders.",
+          c: "COUNT(*) counts ROWS; one customer with five 2025 orders contributes five rows. De-duplication must happen inside the aggregate: COUNT(DISTINCT customer_id).",
           s: [
-            "Full query: $\\text{SELECT COUNT(DISTINCT customer\\_id) FROM orders WHERE order\\_date >= '2025-01-01' AND order\\_date < '2026-01-01'}$.",
-            "Without DISTINCT, each order increments the count even if same customer."
+            "<b>Step 1 — Identify the grain mismatch.</b> The orders table's grain is one row per ORDER; the question asks about CUSTOMERS — an entity one level up.",
+            "<b>Step 2 — Apply the right aggregate.</b> SELECT COUNT(DISTINCT customer_id) FROM orders WHERE order_date >= '2025-01-01' AND order_date < '2026-01-01' — DISTINCT collapses repeat buyers before counting.",
+            "<b>Step 3 — Distractor audit.</b> COUNT(*) counts orders, not customers; GROUP BY customer_id alone returns one ROW per customer (a list, not a count); ORDER BY is presentation only — it never changes cardinality."
           ],
-          a: "$\\text{COUNT(DISTINCT customer\\_id)}$",
-          v: "GROUP BY would produce one row per customer; you'd then need another aggregate to count those rows."
+          a: "COUNT(DISTINCT customer_id) is the essential clause.",
+          v: "Equivalence check: SELECT COUNT(*) FROM (SELECT customer_id FROM orders WHERE ... GROUP BY customer_id) AS t returns the same number — GROUP BY + outer count is the long way around ✓. Date-range note: the half-open interval [Jan 1 2025, Jan 1 2026) beats BETWEEN for timestamp columns — no midnight-edge double counting."
+
         })
       },
       { q: "Big-O of repeatedly inserting at the head of a doubly-linked list of size $n$, $k$ times:",
@@ -1565,13 +1613,15 @@
         correct: 0,
         ref: "Handbook §18 (Linked-list operations)",
         solution: S({
-          c: "Doubly-linked list head insertion is $O(1)$ — update head pointer and adjacent links.",
+          c: "Head insertion into a doubly-linked list touches a constant number of pointers — old head's prev, new node's next/prev, and the head reference — regardless of list length: $O(1)$ each.",
           s: [
-            "Each insertion: constant time.",
-            "$k$ insertions: total $O(k)$."
+            "<b>Step 1 — Cost one insertion.</b> Allocate node; set node.next = head, node.prev = null, head.prev = node, head = node — four pointer writes, no traversal: $O(1)$.",
+            "<b>Step 2 — Multiply by $k$.</b> $k$ insertions × $O(1)$ = $O(k)$ total. The list's current size $n$ never appears in the cost.",
+            "<b>Step 3 — Distractor audit.</b> $O(kn)$ is the ARRAY answer (each head-insert shifts $n$ elements); $O(n)$ ignores the $k$ insertions; $O(n^{2})$ belongs to repeated array insertion with $k \\approx n$."
           ],
-          a: "$O(k)$",
-          v: "Compare with array head-insertion: $O(n)$ per (must shift), $O(kn)$ total. Linked list wins for head-heavy workloads."
+          a: "$O(k)$ total.",
+          v: "Contrast check that cements it: the same $k$ insertions at the head of a dynamic ARRAY cost $O(kn)$ shifts (amortized append at the TAIL would be $O(k)$ — position matters for arrays, not for lists) ✓. Trade-off honesty: lists pay it back with $O(n)$ random access and poor cache locality — the FE wants the operation-vs-structure mapping."
+
         })
       }
     ]

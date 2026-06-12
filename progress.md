@@ -86,4 +86,8 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   transmission-line reflection, z-plane unit circle, 4-bit SIPO shift register). File grew
   37 KB → 81 KB. Deployed via `gh api` git-data flow (blobs → tree → commit → ref) — no more
   web-upload drag-drop needed.
-- **Next upgrade targets:** extra12 (91 solutions), then extra11 (170) and earlier rounds.
+- **2026-06-11 — extra12 complete:** all 93 solutions in `questions-extra12.js` upgraded in 3 commits
+  (Ch 1-4 → Ch 6/8/9/10 → Ch 12/13/15/16/17). 7 new SVGs (op-amp summing junction, Delta-load line
+  diagram, single-mesh KVL loop, Zener regulator, power triangle, unity-feedback block diagram,
+  4-variable K-map). File 80 KB → 143 KB. Rounds 12+13 now fully on the detailed standard.
+- **Next upgrade targets:** extra11 (170 solutions), then extra10 and earlier rounds.
