@@ -6,58 +6,224 @@
     // ====================== Ch 1: Math — +18 ======================
     1: [
       { q: "$|3-j4|$ = ", choices: ["$5$", "$1$", "$25$", "$7$"], correct: 0,
-        solution: S({ c: "Magnitude: $|a+jb|=\\sqrt{a^2+b^2}$.", s: ["$\\sqrt{9+16}=\\sqrt{25}=5$."], a: "$5$", v: "3-4-5 right triangle." }), ref: "Handbook p.36" },
+        solution: S({
+          c: "Magnitude of a complex number = its distance from the origin: $|a+jb| = \\sqrt{a^{2}+b^{2}}$ — the sign of $b$ vanishes under the square.",
+          s: [
+            "<b>Step 1 — Square and add.</b> $3^{2} + (-4)^{2} = 25$.",
+            "<b>Step 2 — Root.</b> $|z| = 5$.",
+            "<b>Step 3 — Distractor audit.</b> 1 subtracts inside the root; 25 forgets the root; 7 adds magnitudes."
+          ],
+          a: "$5$",
+          v: "The 3-4-5 triangle yet again ✓ — and the conjugate $3+j4$ has the SAME magnitude, since reflection doesn't change distance."
+        }), ref: "Handbook p.36" },
       { q: "Complex number in exponential form: $z = 5\\angle 60°$ as $re^{j\\theta}$ with $\\theta$ in radians:",
         choices: ["$5 e^{j\\pi/3}$", "$5 e^{j60}$", "$5 e^{j\\pi/6}$", "$60 e^{j5}$"], correct: 0,
-        solution: S({ c: "Convert degrees to radians: $\\theta_{rad}=\\theta_{deg}\\cdot \\pi/180$.", s: ["$60° = \\pi/3$ rad. So $5e^{j\\pi/3}$."], a: "$5 e^{j\\pi/3}$", v: "Euler: $e^{j\\pi/3}=\\cos 60°+j\\sin 60°=0.5+j0.866$." }), ref: "Handbook p.36" },
+        solution: S({
+          c: "Polar and exponential forms are the same data in two costumes: $r\\angle\\theta = re^{j\\theta}$ — BUT the exponent demands RADIANS: multiply degrees by $\\pi/180$.",
+          s: [
+            "<b>Step 1 — Convert the angle.</b> $60° = 60\\times\\pi/180 = \\pi/3$ rad.",
+            "<b>Step 2 — Assemble.</b> $5e^{j\\pi/3}$.",
+            "<b>Step 3 — Distractor audit.</b> $5e^{j60}$ leaves degrees in the exponent — 60 RADIANS is ~9.5 full turns; $\\pi/6$ is 30°; $60e^{j5}$ swaps the roles."
+          ],
+          a: "$5e^{j\\pi/3}$",
+          v: "Euler unpack: $5(\\cos60° + j\\sin60°) = 2.5 + j4.33$ ✓. Radians-in-exponentials is non-negotiable — calculus identities like $\\frac{d}{dt}e^{j\\omega t} = j\\omega e^{j\\omega t}$ only work in radians."
+        }), ref: "Handbook p.36" },
       { q: "Solve $|2x-1| = 5$:",
         choices: ["$x=3$ or $x=-2$", "$x=3$ only", "$x=2$ only", "$x=-3$ or $x=2$"], correct: 0,
-        solution: S({ c: "Absolute value: $|y|=k \\Rightarrow y=\\pm k$.", s: ["$2x-1=5 \\Rightarrow x=3$.", "$2x-1=-5 \\Rightarrow x=-2$."], a: "$x=3, -2$", v: "Check: $|2(3)-1|=5$ ✓; $|2(-2)-1|=5$ ✓" }), ref: "Handbook p.35" },
+        solution: S({
+          c: "An absolute-value equation splits in two: $|y| = k$ means $y = +k$ OR $y = -k$ — solve both branches, keep both answers.",
+          s: [
+            "<b>Step 1 — Positive branch.</b> $2x - 1 = 5 \\Rightarrow x = 3$.",
+            "<b>Step 2 — Negative branch.</b> $2x - 1 = -5 \\Rightarrow x = -2$.",
+            "<b>Step 3 — Distractor audit.</b> Single-answer choices drop a branch; '$-3$ or 2' solves the branches with sign slips."
+          ],
+          a: "$x = 3$ or $x = -2$",
+          v: "Substitute both: $|6-1| = 5$ ✓, $|-4-1| = 5$ ✓. Geometric read: points where $2x-1$ sits 5 units from zero — symmetric about $x = 1/2$, and indeed $3$ and $-2$ straddle it equally ✓."
+        }), ref: "Handbook p.35" },
       { q: "$\\tan^{-1}(1) + \\tan^{-1}(\\sqrt{3})$ = (in degrees)",
         choices: ["$105°$", "$120°$", "$90°$", "$135°$"], correct: 0,
-        solution: S({ c: "$\\tan^{-1}(1)=45°$, $\\tan^{-1}(\\sqrt{3})=60°$. Sum.", s: ["$45+60=105°$."], a: "$105°$", v: "Common reference angles to memorize: $\\tan(30°)=1/\\sqrt{3}$, $\\tan(60°)=\\sqrt{3}$." }), ref: "Handbook p.37" },
+        solution: S({
+          c: "Reference angles to know cold: $\\tan45° = 1$ and $\\tan60° = \\sqrt3$ — so the inverse tangents are 45° and 60°.",
+          s: [
+            "<b>Step 1 — Evaluate each.</b> $\\tan^{-1}(1) = 45°$; $\\tan^{-1}(\\sqrt3) = 60°$.",
+            "<b>Step 2 — Add.</b> $45 + 60 = 105°$.",
+            "<b>Step 3 — Distractor audit.</b> 90° pairs 45+45; 120° pairs 60+60; 135° pairs 45+90."
+          ],
+          a: "$105°$",
+          v: "The full mini-table worth caching: $\\tan30° = 1/\\sqrt3$, $\\tan45° = 1$, $\\tan60° = \\sqrt3$ — with sine/cosine versions, it answers a surprising fraction of trig questions ✓."
+        }), ref: "Handbook p.37" },
       { q: "Find $y$ when $\\ln y = 2.5$:",
         choices: ["$y \\approx 12.18$", "$y=2.5$", "$y \\approx 0.082$", "$y=5$"], correct: 0,
-        solution: S({ c: "Inverse of $\\ln$: $y = e^{2.5}$.", s: ["$e^{2.5} \\approx 12.18$."], a: "$y \\approx 12.18$", v: "$e \\approx 2.718$, so $e^{2.5}$ is between $e^2 \\approx 7.39$ and $e^3 \\approx 20.1$ ✓" }), ref: "Handbook p.36" },
+        solution: S({
+          c: "Natural log and $e^{x}$ undo each other: $\\ln y = 2.5 \\Rightarrow y = e^{2.5}$.",
+          s: [
+            "<b>Step 1 — Exponentiate.</b> $y = e^{2.5} \\approx 12.18$.",
+            "<b>Step 2 — Distractor audit.</b> 2.5 forgets to invert; 0.082 is $e^{-2.5}$ (sign slip); 5 doubles."
+          ],
+          a: "$y \\approx 12.18$",
+          v: "Bracket check: $e^{2} = 7.39 < 12.18 < e^{3} = 20.1$ ✓. Quick mental ladder: $e \\approx 2.72$, $e^{2} \\approx 7.4$, $e^{3} \\approx 20$ — enough to sanity-check any exponential answer."
+        }), ref: "Handbook p.36" },
       { q: "Matrix $A = \\begin{pmatrix}1&2&3\\\\0&4&5\\\\0&0&6\\end{pmatrix}$. Determinant:",
         choices: ["$24$", "$30$", "$0$", "$1$"], correct: 0,
-        solution: S({ c: "Triangular matrix: $|A|$ = product of diagonal.", s: ["$1 \\cdot 4 \\cdot 6 = 24$."], a: "$24$", v: "Upper triangular here. Lower triangular: same rule." }), ref: "Handbook p.57" },
+        solution: S({
+          c: "A TRIANGULAR matrix (zeros below the diagonal here) gives up its determinant for free: the product of the diagonal entries.",
+          s: [
+            "<b>Step 1 — Multiply the diagonal.</b> $1\\times4\\times6 = 24$.",
+            "<b>Step 2 — Distractor audit.</b> 30 adds strays; 0 would need a zero ON the diagonal; 1 takes only the first entry."
+          ],
+          a: "$24$",
+          v: "Why it works: cofactor expansion down the first column hits only the diagonal path — every other product crosses a zero ✓. Bonus: the eigenvalues are 1, 4, 6 — diagonal again."
+        }), ref: "Handbook p.57" },
       { q: "If $A = \\begin{pmatrix}1&0\\\\0&-2\\end{pmatrix}$, $A^3 = $",
         choices: ["$\\begin{pmatrix}1&0\\\\0&-8\\end{pmatrix}$", "$\\begin{pmatrix}3&0\\\\0&-6\\end{pmatrix}$", "$\\begin{pmatrix}1&0\\\\0&8\\end{pmatrix}$", "Cannot compute"], correct: 0,
-        solution: S({ c: "Diagonal matrix raised to power: cube each diagonal entry.", s: ["$1^3 = 1$, $(-2)^3 = -8$."], a: "$\\begin{pmatrix}1&0\\\\0&-8\\end{pmatrix}$", v: "General: $D^n$ for diagonal $D$ = diag of $d_i^n$." }), ref: "Handbook p.57" },
+        solution: S({
+          c: "Powers of a DIAGONAL matrix act entry-by-entry: $D^{n}$ = each diagonal element raised to $n$ — no matrix multiplication needed.",
+          s: [
+            "<b>Step 1 — Cube each entry.</b> $1^{3} = 1$; $(-2)^{3} = -8$.",
+            "<b>Step 2 — Assemble.</b> $\\text{diag}(1, -8)$.",
+            "<b>Step 3 — Distractor audit.</b> 'diag(3,−6)' MULTIPLIES by 3 instead of cubing; '+8' loses the odd-power sign; 'cannot compute' — diagonal powers are the easiest case there is."
+          ],
+          a: "$\\begin{pmatrix}1&0\\\\0&-8\\end{pmatrix}$",
+          v: "Odd power preserves sign: $(-2)^{3} = -8$ ✓ (an even power would give +). This entrywise rule is the payoff of diagonalization — hard matrix powers reduce to scalar powers."
+        }), ref: "Handbook p.57" },
       { q: "Transpose of $A = \\begin{pmatrix}1&2\\\\3&4\\\\5&6\\end{pmatrix}$:",
         choices: ["$\\begin{pmatrix}1&3&5\\\\2&4&6\\end{pmatrix}$", "Same matrix", "$\\begin{pmatrix}1&2&3\\\\4&5&6\\end{pmatrix}$", "Negative"], correct: 0,
-        solution: S({ c: "Transpose: rows ↔ columns. $3\\times 2 \\to 2\\times 3$.", s: ["First row of $A^T$ is first column of $A$: $(1,3,5)$.", "Second row of $A^T$ is second column of $A$: $(2,4,6)$."], a: "$\\begin{pmatrix}1&3&5\\\\2&4&6\\end{pmatrix}$", v: "$(A^T)^T = A$ always." }), ref: "Handbook p.57" },
+        solution: S({
+          c: "Transpose swaps rows and columns: entry $(i,j)$ moves to $(j,i)$, and a $3\\times2$ matrix becomes $2\\times3$.",
+          s: [
+            "<b>Step 1 — Columns become rows.</b> Column 1 of A = (1,3,5) → row 1 of $A^{T}$; column 2 = (2,4,6) → row 2.",
+            "<b>Step 2 — Check the shape.</b> $3\\times2 \\to 2\\times3$ ✓.",
+            "<b>Step 3 — Distractor audit.</b> 'Same matrix' needs symmetry (square + $a_{ij}=a_{ji}$); the row-reshuffle option just reflows numbers; 'negative' confuses transpose with negation."
+          ],
+          a: "$\\begin{pmatrix}1&3&5\\\\2&4&6\\end{pmatrix}$",
+          v: "Self-inverse check: transposing again returns the original, $(A^{T})^{T} = A$ ✓. Companion rules: $(AB)^{T} = B^{T}A^{T}$ (order flips) — the detail product-transpose questions test."
+        }), ref: "Handbook p.57" },
       { q: "$f(x) = x^3 - 3x$. Find local minimum value.",
         choices: ["$-2$ (at $x=1$)", "$0$", "$2$ (at $x=-1$)", "$-1$"], correct: 0,
-        solution: S({ c: "Set $f'=0$, check $f''$.", s: ["$f'(x) = 3x^2 - 3 = 0 \\Rightarrow x = \\pm 1$.", "$f''(x) = 6x$. $f''(1) = 6 > 0$ → min at $x=1$. $f''(-1)=-6<0$ → max at $x=-1$.", "$f(1) = 1 - 3 = -2$."], a: "$-2$", v: "$f(-1) = -1+3 = 2$ is the local max ✓" }), ref: "Handbook p.47-49" },
+        solution: S({
+          c: "Local extrema live where $f' = 0$; the SECOND derivative sorts them: $f'' > 0$ → minimum (curve opens up), $f'' < 0$ → maximum.",
+          s: [
+            "<b>Step 1 — Critical points.</b> $f' = 3x^{2} - 3 = 0 \\Rightarrow x = \\pm1$.",
+            "<b>Step 2 — Classify.</b> $f'' = 6x$: at $x = 1$, $f'' = 6 > 0$ → MIN; at $x = -1$, $f'' = -6 < 0$ → max.",
+            "<b>Step 3 — Evaluate the minimum.</b> $f(1) = 1 - 3 = -2$.",
+            "<b>Step 4 — Distractor audit.</b> '+2 at $x=-1$' is the local MAX; 0 and −1 are neither."
+          ],
+          a: "Local minimum value $= -2$ (at $x = 1$).",
+          v: "Symmetry check: $x^{3}-3x$ is odd, so max and min values mirror: $f(-1) = +2$ ✓. The question asks for the VALUE, not the location — a classic careful-reading point."
+        }), ref: "Handbook p.47-49" },
       { q: "$\\int e^{-2x} dx$:",
         choices: ["$-\\frac{1}{2}e^{-2x} + C$", "$e^{-2x} + C$", "$-2 e^{-2x} + C$", "$\\frac{1}{2}e^{-2x} + C$"], correct: 0,
-        solution: S({ c: "$\\int e^{ax}dx = e^{ax}/a + C$.", s: ["With $a=-2$: $-\\frac{1}{2}e^{-2x} + C$."], a: "$-\\frac{1}{2}e^{-2x} + C$", v: "Derivative back: $-\\frac{1}{2}(-2)e^{-2x} = e^{-2x}$ ✓" }), ref: "Handbook p.49" },
+        solution: S({
+          c: "Exponential integration rule: $\\int e^{ax}dx = \\dfrac{e^{ax}}{a} + C$ — divide by the inner coefficient (the reverse of the chain rule).",
+          s: [
+            "<b>Step 1 — Apply with a = −2.</b> $\\int e^{-2x}dx = \\dfrac{e^{-2x}}{-2} + C = -\\tfrac12e^{-2x} + C$.",
+            "<b>Step 2 — Distractor audit.</b> $e^{-2x}$ forgets the ÷a; $-2e^{-2x}$ MULTIPLIES by a (that's the derivative's factor); $+\\tfrac12$ drops the sign."
+          ],
+          a: "$-\\tfrac12e^{-2x} + C$",
+          v: "Differentiate back — the universal check: $\\dfrac{d}{dx}\\left[-\\tfrac12e^{-2x}\\right] = -\\tfrac12(-2)e^{-2x} = e^{-2x}$ ✓."
+
+        }), ref: "Handbook p.49" },
       { q: "Indefinite integral $\\int 1/(x^2+1) dx$:",
         choices: ["$\\tan^{-1}(x) + C$", "$\\ln(x^2+1) + C$", "$1/(x+1) + C$", "$x/(x+1) + C$"], correct: 0,
-        solution: S({ c: "Standard form: $\\int 1/(x^2+1)dx = \\arctan x + C$.", s: ["Memorize this standard form."], a: "$\\arctan x + C$", v: "More general: $\\int 1/(x^2+a^2)dx = (1/a)\\arctan(x/a) + C$." }), ref: "Handbook p.49" },
+        solution: S({
+          c: "A standard form worth instant recall: $\\int\\dfrac{dx}{x^{2}+1} = \\arctan x + C$ — the inverse-tangent's defining integral.",
+          s: [
+            "<b>Step 1 — Match the form.</b> Denominator $x^{2} + 1$, numerator $dx$ → arctangent.",
+            "<b>Step 2 — Distractor audit.</b> $\\ln(x^{2}+1)$ would need an $x$ in the numerator (u-substitution case, off by the factor 2); $1/(x+1)$ confuses with a linear denominator; the last is noise."
+          ],
+          a: "$\\arctan x + C$",
+          v: "The scaled sibling to carry: $\\int\\dfrac{dx}{x^{2}+a^{2}} = \\dfrac1a\\arctan\\dfrac{x}{a} + C$ ✓ — and definite check: $\\int_0^{1} = \\arctan1 = \\pi/4 \\approx 0.785$, plausible for area under a curve starting at height 1."
+
+        }), ref: "Handbook p.49" },
       { q: "ODE $y'' + 9y = 0$ general solution:",
         choices: ["$C_1\\cos 3x + C_2\\sin 3x$", "$C_1 e^{3x} + C_2 e^{-3x}$", "$C_1 + C_2 x$", "$C e^{-9x}$"], correct: 0,
-        solution: S({ c: "Char eq $r^2+9=0$ → $r = \\pm 3j$ (purely imaginary). Solution: $C_1\\cos\\beta x + C_2\\sin\\beta x$ with $\\beta=3$.", s: ["No damping ($\\alpha=0$) → pure oscillation."], a: "$C_1\\cos 3x + C_2\\sin 3x$", v: "Frequency $\\omega = 3$ rad/x; period $T = 2\\pi/3$." }), ref: "Handbook p.55" },
+        solution: S({
+          c: "Constant-coefficient ODEs crack via the characteristic equation: $y''+9y = 0 \\to r^{2}+9 = 0 \\to r = \\pm j3$. PURELY IMAGINARY roots = pure oscillation: $C_1\\cos3x + C_2\\sin3x$.",
+          s: [
+            "<b>Step 1 — Characteristic roots.</b> $r = \\pm3j$ — zero real part (no damping term $y'$ in the ODE).",
+            "<b>Step 2 — Write the solution family.</b> $y = C_1\\cos3x + C_2\\sin3x$.",
+            "<b>Step 3 — Distractor audit.</b> $C_1e^{3x}+C_2e^{-3x}$ belongs to $y''-9y = 0$ (real roots ±3); $C_1 + C_2x$ to $y''=0$ (double zero root); $Ce^{-9x}$ to first order."
+          ],
+          a: "$y = C_1\\cos3x + C_2\\sin3x$",
+          v: "Physics name-check: this is the undamped oscillator (mass-spring, LC tank) at $\\omega = 3$ ✓. Sign map to memorize: $y''+\\omega^{2}y$ → sines/cosines; $y''-\\omega^{2}y$ → real exponentials/hyperbolics."
+
+        }), ref: "Handbook p.55" },
       { q: "$\\nabla f$ for $f(x,y,z) = x^2 y + z^3$ at $(1,2,1)$:",
         choices: ["$(4, 1, 3)$", "$(2, 1, 3)$", "$(4, 1, 1)$", "$(2, 0, 1)$"], correct: 0,
-        solution: S({ c: "Gradient = $(\\partial f/\\partial x, \\partial f/\\partial y, \\partial f/\\partial z)$.", s: ["$\\partial f/\\partial x = 2xy = 2(1)(2) = 4$.", "$\\partial f/\\partial y = x^2 = 1$.", "$\\partial f/\\partial z = 3z^2 = 3(1) = 3$.", "$\\nabla f = (4, 1, 3)$."], a: "$(4, 1, 3)$", v: "Gradient points in direction of steepest increase." }), ref: "Handbook p.38" },
+        solution: S({
+          c: "The gradient stacks the three partial derivatives — differentiate by each variable while freezing the others — then evaluate at the point.",
+          s: [
+            "<b>Step 1 — Partials.</b> $f_x = 2xy$; $f_y = x^{2}$; $f_z = 3z^{2}$.",
+            "<b>Step 2 — Evaluate at (1,2,1).</b> $f_x = 4$; $f_y = 1$; $f_z = 3$.",
+            "<b>Step 3 — Distractor audit.</b> $(2,1,3)$ forgets the $y$ in $f_x$; $(4,1,1)$ drops the 3 in $f_z$; $(2,0,1)$ garbles several."
+          ],
+          a: "$\\nabla f = (4, 1, 3)$",
+          v: "Meaning check: $(4,1,3)$ points where $f$ climbs fastest from $(1,2,1)$, at rate $|\\nabla f| = \\sqrt{26}$ ✓ — and any directional derivative is just $\\nabla f\\cdot\\hat u$, the follow-up the FE likes."
+
+        }), ref: "Handbook p.38" },
       { q: "$\\sum_{k=0}^{4} 2^k$ = ",
         choices: ["$31$", "$32$", "$15$", "$16$"], correct: 0,
-        solution: S({ c: "Geometric sum: $\\sum_{k=0}^{n} r^k = (r^{n+1}-1)/(r-1)$.", s: ["$1 + 2 + 4 + 8 + 16 = 31$.", "Or: $(2^5-1)/(2-1) = 31$."], a: "$31$", v: "n-bit binary max value: $2^n - 1$. Familiar pattern." }), ref: "Handbook p.50" },
+        solution: S({
+          c: "A finite geometric sum: $\\sum_{k=0}^{n}r^{k} = \\dfrac{r^{n+1}-1}{r-1}$ — or for small cases, just add.",
+          s: [
+            "<b>Step 1 — Direct add.</b> $1+2+4+8+16 = 31$.",
+            "<b>Step 2 — Formula confirms.</b> $(2^{5}-1)/(2-1) = 31$.",
+            "<b>Step 3 — Distractor audit.</b> 32 is $2^{5}$ (the NEXT power, off-by-one); 15 stops at $2^{3}$; 16 is just the last term."
+          ],
+          a: "$31$",
+          v: "Binary reading that locks it in: $11111_2 = 31$ — the sum of the first five powers of 2 IS a 5-bit all-ones value, $2^{5}-1$ ✓ (same identity as 'max unsigned n-bit = $2^n - 1$')."
+
+        }), ref: "Handbook p.50" },
       { q: "Average rate of change of $f(x) = x^2$ on $[1, 4]$:",
         choices: ["$5$", "$15$", "$3$", "$9$"], correct: 0,
-        solution: S({ c: "Avg rate = $(f(b) - f(a))/(b - a)$.", s: ["$(16 - 1)/(4 - 1) = 15/3 = 5$."], a: "$5$", v: "Mean Value Theorem: there exists $c \\in (1,4)$ where $f'(c) = 5$, i.e., $2c = 5 \\Rightarrow c = 2.5$ ✓" }), ref: "Handbook p.47" },
+        solution: S({
+          c: "Average rate of change = the SECANT slope: $\\dfrac{f(b)-f(a)}{b-a}$ — no calculus needed, just two endpoint values.",
+          s: [
+            "<b>Step 1 — Endpoints.</b> $f(4) = 16$, $f(1) = 1$.",
+            "<b>Step 2 — Slope.</b> $(16-1)/(4-1) = 15/3 = 5$.",
+            "<b>Step 3 — Distractor audit.</b> 15 is the rise alone; 3 the run; 9 is $f$ at the midpoint-ish."
+          ],
+          a: "$5$",
+          v: "MVT tie-in: some $c \\in (1,4)$ has the instantaneous rate 5 — here $2c = 5 \\Rightarrow c = 2.5$, comfortably inside ✓ — average and instantaneous rates meeting is exactly the Mean Value Theorem."
+
+        }), ref: "Handbook p.47" },
       { q: "$\\dfrac{d}{dx}[\\arctan(x)]$ = ",
         choices: ["$\\dfrac{1}{1+x^2}$", "$\\dfrac{1}{\\sqrt{1-x^2}}$", "$\\dfrac{-1}{1+x^2}$", "$\\sec^2 x$"], correct: 0,
-        solution: S({ c: "Standard derivative.", s: ["Memorize: $\\dfrac{d}{dx}\\arctan x = \\dfrac{1}{1+x^2}$."], a: "$1/(1+x^2)$", v: "Inverse function rule: if $y = \\arctan x$, $\\tan y = x$, differentiate: $\\sec^2 y\\,dy/dx = 1$, $dy/dx = \\cos^2 y = 1/(1+\\tan^2 y) = 1/(1+x^2)$." }), ref: "Handbook p.47" },
+        solution: S({
+          c: "Inverse-trig derivative to memorize: $\\dfrac{d}{dx}\\arctan x = \\dfrac{1}{1+x^{2}}$.",
+          s: [
+            "<b>Step 1 — Recall (or derive).</b> $y = \\arctan x \\Rightarrow \\tan y = x \\Rightarrow \\sec^{2}y\\,y' = 1 \\Rightarrow y' = \\cos^{2}y = \\dfrac{1}{1+\\tan^{2}y} = \\dfrac{1}{1+x^{2}}$.",
+            "<b>Step 2 — Distractor audit.</b> $1/\\sqrt{1-x^{2}}$ is $\\arcsin$'s derivative (the classic mix-up); the negative version is $\\text{arccot}$; $\\sec^{2}x$ is tan's FORWARD derivative."
+          ],
+          a: "$\\dfrac{1}{1+x^{2}}$",
+          v: "Consistency with the integral two questions ago: $\\int dx/(1+x^{2}) = \\arctan x$ — derivative and antiderivative pair up ✓. Behavior check: slope 1 at $x=0$, →0 at ±∞ (arctan flattens toward ±π/2) ✓."
+
+        }), ref: "Handbook p.47" },
       { q: "Slope of tangent to $y = \\ln x$ at $x = e$:",
         choices: ["$1/e$", "$1$", "$0$", "$e$"], correct: 0,
-        solution: S({ c: "$y' = 1/x$. Evaluate at $x = e$.", s: ["$y'(e) = 1/e \\approx 0.368$."], a: "$1/e$", v: "$\\ln$ has decreasing slope; at $x=1$, slope = 1; at $x=e$, slope = $1/e$." }), ref: "Handbook p.47" },
+        solution: S({
+          c: "Tangent slope = derivative evaluated at the point: $y = \\ln x \\Rightarrow y' = 1/x$.",
+          s: [
+            "<b>Step 1 — Evaluate.</b> $y'(e) = 1/e \\approx 0.368$.",
+            "<b>Step 2 — Distractor audit.</b> 1 is the slope at $x = 1$; 0 is the limit at $\\infty$; $e$ inverts the answer."
+          ],
+          a: "$1/e$",
+          v: "Trend check: $\\ln x$ rises ever more slowly — slope 1 at $x=1$, $1/e$ at $x=e$, $1/10$ at $x=10$ — monotonically flattening, never zero ✓. (Tangent line bonus: at $(e, 1)$ with slope $1/e$, the line passes through the origin.)"
+
+        }), ref: "Handbook p.47" },
       { q: "$\\lim_{x \\to 0} \\dfrac{1-\\cos x}{x^2}$ = ",
         choices: ["$1/2$", "$0$", "$1$", "Does not exist"], correct: 0,
-        solution: S({ c: "L'Hopital twice or use $1 - \\cos x \\approx x^2/2$ for small $x$.", s: ["L'Hopital: $\\lim \\dfrac{\\sin x}{2x}$. Apply again: $\\lim \\dfrac{\\cos x}{2} = 1/2$."], a: "$1/2$", v: "Famous limit. Equivalent to Taylor series: $\\cos x = 1 - x^2/2 + ...$" }), ref: "Handbook p.47" },
+        solution: S({
+          c: "A $0/0$ indeterminate form — resolve by L'Hôpital (differentiate top and bottom) or the small-angle expansion $\\cos x \\approx 1 - x^{2}/2$.",
+          s: [
+            "<b>Step 1 — L'Hôpital once.</b> $\\dfrac{\\sin x}{2x}$ — still $0/0$.",
+            "<b>Step 2 — Again.</b> $\\dfrac{\\cos x}{2} \\to \\dfrac12$.",
+            "<b>Step 3 — Distractor audit.</b> 0 assumes the top dies faster (same $x^{2}$ order — it doesn't); 1 misremembers $\\sin x/x$; 'DNE' confuses indeterminate with undefined."
+          ],
+          a: "$1/2$",
+          v: "Taylor route (one line): $1-\\cos x = x^{2}/2 - x^{4}/24 + \\cdots$ → divide by $x^{2}$ → $1/2$ ✓. Numeric: $x = 0.1$ gives 0.49958 — already at the answer ✓."
+
+        }), ref: "Handbook p.47" },
     ],
 
     // ====================== Ch 2: Probability — +12 ======================
