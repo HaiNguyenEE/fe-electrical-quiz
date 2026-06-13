@@ -1175,51 +1175,234 @@
     // Electronics — +20
     9: [
       { q: "BJT operating region with $V_{BE} = 0.7$V, $V_{CE} = 5$V:", choices: ["Active (linear)", "Saturation", "Cutoff", "Breakdown"], correct: 0,
-        solution: S({ c: "Active: $V_{BE} \\approx 0.7$ V, $V_{CE} > V_{CE,sat} \\approx 0.2$ V.", s: ["For amplification, BJT must be in active region."], a: "Active" }), ref: "p.384" },
+        solution: S({
+          c: "A BJT has three regions: CUTOFF (both junctions off, no current), ACTIVE (base-emitter forward ~0.7 V, collector-base reverse — the amplifying region), and SATURATION (both forward, $V_{CE}$ collapses to ~0.2 V). $V_{BE}=0.7$ V with $V_{CE}=5$ V (well above 0.2) means ACTIVE.",
+          s: [
+            "<b>Step 1 — Check $V_{BE}$.</b> 0.7 V → base-emitter is forward-biased (on).",
+            "<b>Step 2 — Check $V_{CE}$.</b> 5 V $> V_{CE,sat}\\approx0.2$ V → not saturated → active.",
+            "<b>Step 3 — Distractor audit.</b> Saturation needs $V_{CE}\\approx0.2$ V; cutoff needs $V_{BE}<0.6$ V; breakdown needs excessive reverse voltage."
+          ],
+          a: "Active (linear) region.",
+          v: "Active is the ONLY region for linear amplification — the transistor acts as a current-controlled current source ($I_C=\\beta I_B$) ✓. Switching circuits instead toggle between cutoff (off) and saturation (on)."
+
+        }), ref: "p.384" },
       { q: "Effect of negative feedback on input impedance (series-shunt):",
         choices: ["Increases $Z_{in}$", "Decreases", "No effect", "Variable"], correct: 0,
-        solution: S({ c: "Series feedback at input: increases $Z_{in}$ by factor $1+A\\beta$.", s: ["Shunt feedback at input: decreases $Z_{in}$.", "Output: opposite (shunt-shunt feedback decreases $Z_{out}$)."], a: "Increases" }), ref: "p.380" },
+        solution: S({
+          c: "Negative feedback reshapes impedances by the factor $(1+A\\beta)$. SERIES feedback at the input RAISES $Z_{in}$; SHUNT (parallel) feedback LOWERS it. Series-shunt (voltage-series) topology → higher input impedance.",
+          s: [
+            "<b>Step 1 — Match.</b> Increases $Z_{in}$ (by $1+A\\beta$).",
+            "<b>Step 2 — Distractor audit.</b> 'Decreases' is the SHUNT-input case; 'no effect' / 'variable' miss the systematic $1+A\\beta$ scaling."
+          ],
+          a: "Increases $Z_{in}$.",
+          v: "The mnemonic: how feedback SAMPLES and MIXES sets the effect — series mixing at input raises $Z_{in}$; shunt sampling at output lowers $Z_{out}$ ✓. This is why feedback amplifiers approach the ideal (huge $Z_{in}$, tiny $Z_{out}$)."
+
+        }), ref: "p.380" },
       { q: "Op-amp Schmitt trigger output:", choices: ["Hysteretic — two thresholds", "Linear", "Sine wave", "Always positive"], correct: 0,
-        solution: S({ c: "Schmitt: positive feedback creates hysteresis. Trip points differ by hysteresis width.", s: ["Used for noise immunity, conditioning slow inputs."], a: "Hysteretic" }), ref: "p.380" },
+        solution: S({
+          c: "A Schmitt trigger uses POSITIVE feedback to create HYSTERESIS — two different switching thresholds. The output snaps high or low, and the input must cross a different level to switch back.",
+          s: [
+            "<b>Step 1 — Match.</b> Hysteretic — two thresholds.",
+            "<b>Step 2 — Distractor audit.</b> 'Linear' needs NEGATIVE feedback; 'sine wave' and 'always positive' aren't comparator behaviors."
+          ],
+          a: "Hysteretic (two trip points).",
+          v: "The gap between thresholds gives NOISE IMMUNITY — a noisy signal crossing one level won't chatter back and forth ✓. Schmitt triggers clean up slow or noisy edges into crisp digital transitions (e.g., squaring a sine)."
+
+        }), ref: "p.380" },
       { q: "Common-source MOSFET amplifier input impedance:",
         choices: ["Very high (≈ gate is insulated)", "Low", "$1$ Ω", "Resistive"], correct: 0,
-        solution: S({ c: "MOSFET gate is insulated from channel → input current is essentially zero → $Z_{in} \\to \\infty$.", s: ["Real MOSFET: small leakage (pA range)."], a: "Very high (~MΩ-GΩ)" }), ref: "p.386" },
+        solution: S({
+          c: "A MOSFET's gate is separated from the channel by an insulating OXIDE layer, so essentially NO DC current flows into it → the input impedance is extremely high (megohms to gigohms).",
+          s: [
+            "<b>Step 1 — Match.</b> Very high (gate is insulated).",
+            "<b>Step 2 — Distractor audit.</b> 'Low' / '1 Ω' describe bipolar or current-input devices; 'resistive' understates the near-open gate."
+          ],
+          a: "Very high (~MΩ-GΩ).",
+          v: "This is the MOSFET's signature advantage over the BJT (whose base draws real current) ✓ — it barely loads the source. Real gates have tiny pA leakage, and the gate's capacitance becomes the limiting factor at high frequency, not resistance."
+
+        }), ref: "p.386" },
       { q: "Common-drain (source follower) gain:", choices: ["$\\approx 1$, non-inverting", "$-g_m R_D$", "$+\\beta$", "$0$"], correct: 0,
-        solution: S({ c: "Output across $R_S$ at source follows input at gate.", s: ["Equivalent to BJT emitter follower."], a: "$\\approx 1$" }), ref: "p.386" },
+        solution: S({
+          c: "The common-drain (source-follower) configuration: input at gate, output at source. The source FOLLOWS the gate, giving voltage gain just under 1, non-inverting — the MOSFET analog of the BJT emitter follower.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\approx 1$, non-inverting.",
+            "<b>Step 2 — Distractor audit.</b> $-g_mR_D$ is the common-SOURCE (inverting) gain; $+\\beta$ is a BJT current gain; 0 is wrong."
+          ],
+          a: "$A_v \\approx 1$ (non-inverting).",
+          v: "Like all followers, it's a BUFFER: high input impedance, low output impedance, unity gain ✓ — used to drive heavy loads without loading the source. Gain ≈ 1 means it provides current/power gain, not voltage gain."
+
+        }), ref: "p.386" },
       { q: "Buck converter inductor stores energy during:", choices: ["Switch ON, then releases during OFF", "Switch OFF only", "Always", "Never"], correct: 0,
-        solution: S({ c: "Switch ON: V_in - V_out across L, current ramps up (storing).", s: ["Switch OFF: L drives current through diode/load (releasing)."], a: "ON: store; OFF: release" }), ref: "p.383" },
+        solution: S({
+          c: "In a buck (step-down) converter, the inductor cycles energy: during switch-ON it charges (current ramps up as $V_{in}-V_{out}$ is applied), during switch-OFF it discharges through the freewheeling diode into the load.",
+          s: [
+            "<b>Step 1 — Switch ON.</b> $V_{in}-V_{out}$ across L → current ramps up → energy STORED.",
+            "<b>Step 2 — Switch OFF.</b> L maintains current through the diode → energy RELEASED to load.",
+            "<b>Step 3 — Distractor audit.</b> 'OFF only', 'always', 'never' all miss the two-phase store/release cycle."
+          ],
+          a: "Stores during ON, releases during OFF.",
+          v: "This energy shuttling is why switching converters are EFFICIENT (>90%) — the inductor transfers energy rather than dissipating it ✓. Output voltage follows $V_{out}=D\\,V_{in}$, set by the ON-time duty cycle D."
+
+        }), ref: "p.383" },
       { q: "Op-amp differentiator gain at $\\omega$:", choices: ["$|A| = \\omega RC$", "Constant", "$1/(\\omega RC)$", "Zero"], correct: 0,
-        solution: S({ c: "Differentiator: $H(j\\omega) = -j\\omega RC$. Magnitude grows with $\\omega$.", s: ["Issue: amplifies high-freq noise. Usually need filter."], a: "$\\omega RC$" }), ref: "p.380" },
+        solution: S({
+          c: "An op-amp differentiator has transfer function $H(j\\omega) = -j\\omega RC$, so its gain MAGNITUDE rises linearly with frequency: $|A| = \\omega RC$.",
+          s: [
+            "<b>Step 1 — Match.</b> $|A| = \\omega RC$.",
+            "<b>Step 2 — Distractor audit.</b> 'Constant' is an amplifier; $1/(\\omega RC)$ is the INTEGRATOR (gain falls with ω); 'zero' is wrong."
+          ],
+          a: "$|A| = \\omega RC$ (rises with frequency).",
+          v: "The rising gain is a PROBLEM: high-frequency noise gets amplified most ✓ — so practical differentiators add a series resistor or feedback cap to cap the gain. The integrator (gain $\\propto 1/\\omega$) is its well-behaved opposite."
+
+        }), ref: "p.380" },
       { q: "Voltage divider biasing for BJT: purpose:", choices: ["Stable Q-point (less sensitive to $\\beta$)", "Higher gain", "Switch faster", "Linear region"], correct: 0,
-        solution: S({ c: "Voltage divider sets base voltage. Combined with emitter resistor: $V_{BE}$ stable across temperature/$\\beta$ variations.", s: [""], a: "Stable bias" }), ref: "p.384" },
+        solution: S({
+          c: "Voltage-divider bias sets the base voltage with two resistors and adds an emitter resistor. The goal: a STABLE Q-point (operating point) that barely shifts when $\\beta$ or temperature varies between transistors.",
+          s: [
+            "<b>Step 1 — Match.</b> Stable Q-point, insensitive to $\\beta$.",
+            "<b>Step 2 — Distractor audit.</b> It doesn't raise gain, speed up switching, or by itself set the active region — its job is bias STABILITY."
+          ],
+          a: "Stable bias (β-independent Q-point).",
+          v: "Why it works: the emitter resistor provides local negative feedback — if $I_C$ tries to drift up, $V_E$ rises, reducing $V_{BE}$ and pushing $I_C$ back down ✓. This self-correction is what makes the design manufacturable across β spreads of 2:1 or more."
+
+        }), ref: "p.384" },
       { q: "Transformer-coupled Class A amp efficiency limit:",
         choices: ["$50\\%$", "$25\\%$", "$78.5\\%$", "$100\\%$"], correct: 0,
-        solution: S({ c: "Transformer coupling doubles peak voltage swing → doubles efficiency vs direct-coupled (25%).", s: [""], a: "$50\\%$" }), ref: "p.384" },
+        solution: S({
+          c: "A Class A amplifier conducts over the full cycle. Direct-coupled, its max efficiency is just 25%; TRANSFORMER coupling doubles the achievable output swing, lifting the ceiling to 50%.",
+          s: [
+            "<b>Step 1 — Match.</b> 50%.",
+            "<b>Step 2 — Why double.</b> The transformer lets the collector swing above the supply (to ~$2V_{CC}$), doubling deliverable power without more DC draw.",
+            "<b>Step 3 — Distractor audit.</b> 25% is DIRECT-coupled Class A; 78.5% is Class B; 100% is unattainable for linear stages."
+          ],
+          a: "50%.",
+          v: "Even at its best, Class A wastes half the power as heat (it draws full bias current even with no signal) ✓ — which is why efficiency-critical designs use Class B/AB (78.5%) or Class D switching (>90%). Class A survives for its low distortion."
+
+        }), ref: "p.384" },
       { q: "Crystal oscillator vs RC oscillator: crystal has:",
         choices: ["Much better frequency stability/accuracy", "Higher frequency only", "Wider tuning range", "Lower cost"], correct: 0,
-        solution: S({ c: "Crystals: ppm-level accuracy/stability via mechanical resonance.", s: ["RC: ±5-10% typically.", "Used: clocks, RF references."], a: "Better stability" }), ref: "p.380" },
+        solution: S({
+          c: "A quartz crystal resonates mechanically with an extremely sharp, stable frequency. Crystal oscillators achieve ppm-level (parts-per-million) accuracy and stability — vastly better than RC oscillators (±5-10%).",
+          s: [
+            "<b>Step 1 — Match.</b> Much better frequency stability/accuracy.",
+            "<b>Step 2 — Distractor audit.</b> Not 'higher frequency only' (crystals are limited in range), not 'wider tuning' (they're nearly fixed), not 'lower cost' (RC is cheaper)."
+          ],
+          a: "Far better frequency stability and accuracy.",
+          v: "The trade is tunability for precision: a crystal is locked near one frequency but holds it to ppm ✓ — which is why every clock, microcontroller, and RF reference uses one. RC oscillators are cheap and tunable but drift with temperature and component tolerance."
+
+        }), ref: "p.380" },
       { q: "DAC R-2R ladder advantages:", choices: ["Uses only 2 resistor values; scales well", "Highest speed", "Lowest power", "Built into all chips"], correct: 0,
-        solution: S({ c: "R-2R ladder DAC: simple architecture with binary-weighted current sources using just R and 2R.", s: ["Easier to make precise resistors than binary-weighted (R, 2R, 4R, 8R, ...)."], a: "Two-value scaling" }), ref: "p.388" },
+        solution: S({
+          c: "An R-2R ladder DAC builds binary-weighted currents using only TWO resistor values (R and 2R). That's far easier to fabricate precisely than a binary-weighted DAC needing R, 2R, 4R, 8R, … across many decades.",
+          s: [
+            "<b>Step 1 — Match.</b> Uses only 2 resistor values; scales well.",
+            "<b>Step 2 — Distractor audit.</b> It's not the fastest or lowest-power architecture, and isn't 'built into all chips' — its specific virtue is resistor simplicity/matching."
+          ],
+          a: "Only two resistor values, easily scaled.",
+          v: "Matched resistors are the key to DAC accuracy, and matching two identical-ratio values on-chip is far easier than matching values spanning 256:1 ✓ — which is why R-2R dominates precision DACs."
+
+        }), ref: "p.388" },
       { q: "Crowbar circuit protects against:", choices: ["Over-voltage", "Under-voltage", "Over-current only", "EMI"], correct: 0,
-        solution: S({ c: "Crowbar: SCR triggers on over-voltage, shorting supply to blow fuse.", s: [""], a: "Over-voltage" }), ref: "p.383" },
+        solution: S({
+          c: "A crowbar is an over-voltage protection circuit: if the supply voltage exceeds a safe level, an SCR fires and SHORTS the supply, blowing the fuse and protecting downstream electronics.",
+          s: [
+            "<b>Step 1 — Match.</b> Over-voltage.",
+            "<b>Step 2 — Distractor audit.</b> Under-voltage and EMI need different protections; 'over-current only' misses that the trigger is VOLTAGE (though the resulting short does blow a current fuse)."
+          ],
+          a: "Over-voltage.",
+          v: "The name is literal — like dropping a crowbar across the rails to force a hard short ✓. It's a deliberate sacrifice: blow the fuse to save the expensive load from a regulator failure that would otherwise let dangerous voltage through."
+
+        }), ref: "p.383" },
       { q: "Photodiode vs LED:", choices: ["Photodiode detects light → current; LED converts current → light", "Same thing", "Photodiode emits", "LED amplifies"], correct: 0,
-        solution: S({ c: "Reverse roles: photodiode is sensor, LED is source.", s: ["Both based on p-n junctions but optimized differently."], a: "Detector vs emitter" }), ref: "p.383" },
+        solution: S({
+          c: "Photodiode and LED are reverse roles of the same p-n junction physics. A PHOTODIODE converts incoming light into current (a sensor); an LED converts current into emitted light (a source).",
+          s: [
+            "<b>Step 1 — Match.</b> Photodiode detects (light→current); LED emits (current→light).",
+            "<b>Step 2 — Distractor audit.</b> 'Same thing' / 'photodiode emits' / 'LED amplifies' all scramble the roles."
+          ],
+          a: "Photodiode = detector; LED = emitter.",
+          v: "Both are p-n junctions, optimized oppositely — and remarkably, an LED can even work weakly as a photodetector ✓. The pairing (LED emitter + photodiode receiver) is the heart of optocouplers, remote controls, and fiber-optic links."
+
+        }), ref: "p.383" },
       { q: "Hysteresis voltage in Schmitt: difference between trip points:",
         choices: ["$V_{TH+} - V_{TH-}$", "$V_{ref}$", "$V_{out}$", "Variable"], correct: 0,
-        solution: S({ c: "Hysteresis window = upper trip minus lower trip.", s: ["Bigger window = better noise immunity but less precision."], a: "$V_{T+} - V_{T-}$" }), ref: "p.380" },
+        solution: S({
+          c: "The hysteresis voltage of a Schmitt trigger is the WIDTH of its dead band — the difference between the upper trip point and the lower trip point: $V_H = V_{T+} - V_{T-}$.",
+          s: [
+            "<b>Step 1 — Match.</b> $V_{T+} - V_{T-}$.",
+            "<b>Step 2 — Distractor audit.</b> $V_{ref}$, $V_{out}$, 'variable' aren't the threshold gap."
+          ],
+          a: "$V_H = V_{T+} - V_{T-}$",
+          v: "It's a trade-off knob: a WIDER window gives better noise immunity (harder to false-trigger) but coarser threshold precision ✓. Designers size it to exceed the expected noise amplitude on the input signal."
+
+        }), ref: "p.380" },
       { q: "Phase margin tells about closed-loop:", choices: ["Stability robustness", "Bandwidth only", "DC gain", "Slew rate"], correct: 0,
-        solution: S({ c: "PM: how much added phase lag before instability at unity-gain frequency.", s: ["Higher PM → more stable; lower → more oscillatory."], a: "Stability" }), ref: "p.366" },
+        solution: S({
+          c: "Phase margin measures STABILITY ROBUSTNESS: how much additional phase lag the loop can tolerate at the unity-gain (gain-crossover) frequency before it hits the −180° that causes oscillation.",
+          s: [
+            "<b>Step 1 — Match.</b> Stability robustness.",
+            "<b>Step 2 — Distractor audit.</b> Bandwidth, DC gain, and slew rate are separate specs — phase margin specifically quantifies the stability cushion."
+          ],
+          a: "Stability robustness (margin before oscillation).",
+          v: "Rule of thumb: PM > 45° is comfortably stable, ~60° is the sweet spot (fast with little overshoot); low PM means a ringing, near-unstable response ✓. It's the frequency-domain partner of damping ratio."
+
+        }), ref: "p.366" },
       { q: "BJT $h_{FE}$ same as:", choices: ["$\\beta$ (DC current gain)", "$\\alpha$", "$g_m$", "$h_{ie}$"], correct: 0,
-        solution: S({ c: "$h_{FE} = I_C/I_B$ = $\\beta$ in DC.", s: [""], a: "$\\beta$" }), ref: "p.384" },
+        solution: S({
+          c: "In BJT h-parameter notation, $h_{FE}$ IS the DC current gain $\\beta = I_C/I_B$ — the factor by which base current is amplified into collector current.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\beta$ (DC current gain).",
+            "<b>Step 2 — Distractor audit.</b> $\\alpha = I_C/I_E \\approx 1$ (different gain); $g_m$ is transconductance; $h_{ie}$ is input resistance."
+          ],
+          a: "$\\beta$ (DC current gain).",
+          v: "Lowercase $h_{fe}$ is the AC (small-signal) version, usually close to the DC $h_{FE}$ ✓. The related $\\alpha = \\beta/(\\beta+1)$ is the common-base gain, always just under 1."
+
+        }), ref: "p.384" },
       { q: "Power MOSFET vs signal MOSFET:", choices: ["Power version handles much higher current/voltage", "Same", "Signal is bigger", "Power has less gain"], correct: 0,
-        solution: S({ c: "Power MOSFETs: optimized for switching at high current, low $R_{DS,on}$.", s: ["Signal: faster, smaller, low current."], a: "Power: high I/V" }), ref: "p.386" },
+        solution: S({
+          c: "A power MOSFET is built to handle large current and voltage with low on-resistance ($R_{DS,on}$); a signal MOSFET is small and fast for low-current logic/analog use.",
+          s: [
+            "<b>Step 1 — Match.</b> Power version handles much higher current/voltage.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; signal MOSFETs are SMALLER, not bigger; the power device isn't lower-gain in the relevant sense — it's built for current."
+          ],
+          a: "Power MOSFET handles high current/voltage.",
+          v: "The price of power handling is SPEED and gate charge — big power FETs switch slower and need stout gate drivers ✓. Low $R_{DS,on}$ is the headline spec, since conduction loss is $I^2R_{DS,on}$."
+
+        }), ref: "p.386" },
       { q: "JFET vs MOSFET: structural difference:", choices: ["JFET has p-n junction gate; MOSFET has oxide-insulated gate", "Same", "JFET is bigger", "Different materials"], correct: 0,
-        solution: S({ c: "JFET: pn junction; controlled by reverse bias. MOSFET: gate isolated by oxide (insulator).", s: [""], a: "Junction vs oxide gate" }), ref: "p.386" },
+        solution: S({
+          c: "The gate construction differs. A JFET's gate is a reverse-biased p-n JUNCTION; a MOSFET's gate is a metal/poly electrode separated from the channel by an insulating OXIDE.",
+          s: [
+            "<b>Step 1 — Match.</b> JFET = p-n junction gate; MOSFET = oxide-insulated gate.",
+            "<b>Step 2 — Distractor audit.</b> 'Same' is false; size and material aren't the defining structural difference — the gate isolation is."
+          ],
+          a: "Junction gate (JFET) vs oxide-insulated gate (MOSFET).",
+          v: "Consequence: the JFET's junction can conduct gate current if forward-biased (so it stays reverse-biased, depletion-mode only), while the MOSFET's oxide blocks DC gate current entirely → even higher input impedance ✓."
+
+        }), ref: "p.386" },
       { q: "Operational transconductance amplifier (OTA) output is:",
         choices: ["Current proportional to differential input voltage", "Voltage", "Charge", "Power"], correct: 0,
-        solution: S({ c: "OTA: $I_{out} = g_m (V_+ - V_-)$. Acts as voltage-to-current converter.", s: ["Used in: switched-capacitor filters, integrators."], a: "Current" }), ref: "p.380" },
+        solution: S({
+          c: "An OTA is a voltage-to-CURRENT amplifier: its output is a current proportional to the differential input voltage, $I_{out} = g_m(V_+ - V_-)$. (A regular op-amp outputs a voltage.)",
+          s: [
+            "<b>Step 1 — Match.</b> Current proportional to differential input voltage.",
+            "<b>Step 2 — Distractor audit.</b> Voltage is a standard op-amp; charge and power aren't OTA outputs."
+          ],
+          a: "An output current, $I_{out}=g_m(V_+-V_-)$.",
+          v: "The current output and electronically-tunable $g_m$ make OTAs ideal for switched-capacitor filters, variable-gain stages, and integrators ✓ — drive a capacitor with its current output and you get a $g_m/C$ integrator."
+
+        }), ref: "p.380" },
       { q: "An IGBT combines:", choices: ["BJT (high current) + MOSFET (voltage-controlled gate)", "Two BJTs", "Diode + transistor", "JFET + BJT"], correct: 0,
-        solution: S({ c: "IGBT = Insulated Gate Bipolar Transistor. MOS gate controls a BJT. Used in: motor drives, induction heating.", s: ["High voltage (>600V), high current (>100A), moderate frequency."], a: "BJT + MOSFET hybrid" }), ref: "p.386" },
+        solution: S({
+          c: "An IGBT (Insulated-Gate Bipolar Transistor) is a hybrid: a MOSFET-style insulated gate (easy voltage control, no gate current) driving a BJT-style output stage (high current, low conduction drop).",
+          s: [
+            "<b>Step 1 — Match.</b> BJT high-current output + MOSFET voltage-controlled gate.",
+            "<b>Step 2 — Distractor audit.</b> Not two BJTs, not diode+transistor, not JFET+BJT — it's specifically the MOS-gate-drives-BJT combination."
+          ],
+          a: "MOSFET gate + BJT output (best of both).",
+          v: "It gets the easy gate drive of a MOSFET with the low conduction loss of a BJT at high voltage ✓ — which is why IGBTs dominate motor drives, EV inverters, and induction heating (>600 V, >100 A, moderate switching frequency)."
+
+        }), ref: "p.386" },
     ],
 
     // Power — +20
