@@ -35,15 +35,15 @@ const QUESTION_BANK = {
           choices: ["$1 \\pm j\\sqrt{6}/2$", "$2 \\pm j\\sqrt{3}$", "$1 \\pm j2$", "$-1 \\pm j\\sqrt{6}/2$"],
           correct: 0,
           solution: S({
-            c: "Quadratic formula $x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$ works for any $ax^2+bx+c=0$; $\\Delta<0$ gives complex conjugate roots.",
+            c: "The quadratic formula $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$ solves any $ax^2+bx+c=0$; a NEGATIVE discriminant gives complex-conjugate roots.",
             s: [
-              "Identify coefficients: $a=2$, $b=-4$, $c=5$.",
-              "Compute discriminant: $\\Delta = b^2 - 4ac = (-4)^2 - 4(2)(5) = 16 - 40 = -24$.",
-              "Since $\\Delta < 0$, expect complex conjugates. $\\sqrt{-24} = j\\sqrt{24} = 2j\\sqrt{6}$.",
-              "Substitute: $x = \\frac{4 \\pm 2j\\sqrt{6}}{2(2)} = \\frac{4 \\pm 2j\\sqrt{6}}{4} = 1 \\pm \\frac{j\\sqrt{6}}{2}$."
+              "<b>Step 1 — Coefficients.</b> $a=2$, $b=-4$, $c=5$.",
+              "<b>Step 2 — Discriminant.</b> $\\Delta=(-4)^2-4(2)(5)=16-40=-24<0$ -> complex.",
+              "<b>Step 3 — Apply formula.</b> $\\sqrt{-24}=2j\\sqrt6$, so $x=\\dfrac{4\\pm2j\\sqrt6}{4}=1\\pm\\dfrac{j\\sqrt6}{2}$.",
+              "<b>Step 4 — Distractor audit.</b> $2\\pm j\\sqrt3$ and $-1\\pm j\\sqrt6/2$ mis-handle $-b/2a=+1$; $1\\pm j2$ assumes $\\Delta=-16$."
             ],
-            a: "$x = 1 \\pm \\dfrac{j\\sqrt{6}}{2}$",
-            v: "Numerically: $\\sqrt{6}\\approx 2.449$, so $x \\approx 1 \\pm 1.225j$."
+            a: "$x=1\\pm\\dfrac{j\\sqrt6}{2}$",
+            v: "Vieta: sum $=2=-b/a$ and product $=1+1.5=2.5=c/a$ ✓. Numerically $x\\approx1\\pm1.225j$."
           }),
           ref: "Handbook p.35" },
 
@@ -51,14 +51,15 @@ const QUESTION_BANK = {
           choices: ["$5.20 + j3.00$", "$3.00 + j5.20$", "$6\\cos 30° + j6\\sin 30°$ which equals $5.20+j3.00$", "Both A and C"],
           correct: 3,
           solution: S({
-            c: "Polar to rectangular: $z = r\\cos\\theta + jr\\sin\\theta$.",
+            c: "Polar to rectangular: $z=r\\cos\\theta+jr\\sin\\theta$. Here the answer is 'Both A and C' because both express the same value.",
             s: [
-              "Real part: $r\\cos\\theta = 6\\cos 30° = 6(\\sqrt{3}/2) = 6(0.866) = 5.196$.",
-              "Imag part: $r\\sin\\theta = 6\\sin 30° = 6(0.5) = 3.000$.",
-              "So $z = 5.196 + j3.000$. Both choices A (numerical) and C (symbolic) are correct expressions."
+              "<b>Step 1 — Real part.</b> $6\\cos30°=6(0.866)=5.196$.",
+              "<b>Step 2 — Imag part.</b> $6\\sin30°=6(0.5)=3.000$.",
+              "<b>Step 3 — Recognize both forms.</b> Choice A (numeric $5.20+j3.00$) and choice C (symbolic, equal to it) are BOTH correct.",
+              "<b>Step 4 — Distractor audit.</b> $3.00+j5.20$ swaps real/imag (used $\\sin$ for real); picking only A misses that C states the same thing."
             ],
-            a: "$z \\approx 5.20 + j3.00$ — Both A and C state this.",
-            v: "$|z| = \\sqrt{5.196^2 + 3^2} = \\sqrt{27 + 9} = 6$ ✓"
+            a: "Both A and C ($z\\approx5.20+j3.00$).",
+            v: "$|z|=\\sqrt{5.196^2+3^2}=\\sqrt{36}=6$ ✓ recovers the original magnitude."
           }),
           ref: "Handbook p.36" },
 
@@ -66,14 +67,15 @@ const QUESTION_BANK = {
           choices: ["$8\\angle 90°$", "$8\\angle 30°$", "$6\\angle 90°$", "$2\\angle 30°$"],
           correct: 0,
           solution: S({
-            c: "Multiplying complex numbers in polar form: <b>multiply magnitudes, add angles</b>: $(r_1\\angle\\theta_1)(r_2\\angle\\theta_2) = r_1 r_2 \\angle(\\theta_1+\\theta_2)$.",
+            c: "Multiplying complex numbers in POLAR form: multiply magnitudes, ADD angles -> $(r_1\\angle\\theta_1)(r_2\\angle\\theta_2)=r_1r_2\\angle(\\theta_1+\\theta_2)$.",
             s: [
-              "Magnitudes: $r_1 r_2 = (4)(2) = 8$.",
-              "Angles: $\\theta_1 + \\theta_2 = 60° + 30° = 90°$.",
-              "Combine: $z_1 z_2 = 8\\angle 90° = 0 + j8$."
+              "<b>Step 1 — Magnitudes.</b> $4\\times2=8$.",
+              "<b>Step 2 — Angles.</b> $60°+30°=90°$.",
+              "<b>Step 3 — Combine.</b> $8\\angle90°=0+j8$.",
+              "<b>Step 4 — Distractor audit.</b> $8\\angle30°$ subtracts angles; $6\\angle90°$ adds magnitudes ($4+2$); $2\\angle30°$ divides."
             ],
-            a: "$z_1 z_2 = 8\\angle 90°$",
-            v: "Rectangular check: $z_1 = 2+j(2\\sqrt{3})$, $z_2 = \\sqrt{3}+j$. Product = $(2)(\\sqrt{3}) - (2\\sqrt{3})(1) + j[(2)(1)+(2\\sqrt{3})(\\sqrt{3})] = 0 + j8$ ✓"
+            a: "$z_1 z_2=8\\angle90°=j8$",
+            v: "Rectangular cross-check: $(2+j2\\sqrt3)(\\sqrt3+j)=0+j8$ ✓. Polar wins for products; rectangular for sums."
           }),
           ref: "Handbook p.36" },
 
@@ -81,13 +83,14 @@ const QUESTION_BANK = {
           choices: ["$0.48$", "$0.96$", "$0.28$", "$1.4$"],
           correct: 1,
           solution: S({
-            c: "Double-angle identity: $\\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$.",
+            c: "Double-angle identity: $\\sin(2\\theta)=2\\sin\\theta\\cos\\theta$.",
             s: [
-              "Substitute: $\\sin 2\\theta = 2(0.6)(0.8)$.",
-              "Multiply: $= 2 \\cdot 0.48 = 0.96$."
+              "<b>Step 1 — Substitute.</b> $2(0.6)(0.8)$.",
+              "<b>Step 2 — Multiply.</b> $=2(0.48)=0.96$.",
+              "<b>Step 3 — Distractor audit.</b> $0.48$ forgets the factor of 2; $0.28$ is a $\\cos2\\theta$ confusion; $1.4$ adds $\\sin+\\cos$."
             ],
-            a: "$\\sin 2\\theta = 0.96$",
-            v: "Pythagorean check: $\\sin^2\\theta + \\cos^2\\theta = 0.36 + 0.64 = 1$ ✓ (consistent values)."
+            a: "$\\sin2\\theta=0.96$",
+            v: "Consistency: $\\sin^2\\theta+\\cos^2\\theta=0.36+0.64=1$ ✓, so the given values are valid."
           }),
           ref: "Handbook p.37" },
 
@@ -95,15 +98,15 @@ const QUESTION_BANK = {
           choices: ["$9.17$", "$8.66$", "$11.49$", "$6.93$"],
           correct: 0,
           solution: S({
-            c: "Law of cosines: $c^2 = a^2 + b^2 - 2ab\\cos C$. Use when two sides and the included angle are known (SAS).",
+            c: "Law of cosines for SAS (two sides + included angle): $c^2=a^2+b^2-2ab\\cos C$.",
             s: [
-              "Substitute: $c^2 = 8^2 + 10^2 - 2(8)(10)\\cos 60°$.",
-              "Compute squares: $c^2 = 64 + 100 - 160(0.5)$.",
-              "Simplify: $c^2 = 164 - 80 = 84$.",
-              "Square root: $c = \\sqrt{84} \\approx 9.165$."
+              "<b>Step 1 — Substitute.</b> $c^2=8^2+10^2-2(8)(10)\\cos60°$.",
+              "<b>Step 2 — Compute.</b> $=64+100-160(0.5)=164-80=84$.",
+              "<b>Step 3 — Root.</b> $c=\\sqrt{84}\\approx9.17$.",
+              "<b>Step 4 — Distractor audit.</b> $8.66$ used a wrong angle; $11.49$ ADDED the $2ab\\cos C$ term; $6.93$ mis-scales."
             ],
-            a: "$c \\approx 9.17$",
-            v: "Sanity check: $c$ is between $|a-b|=2$ and $a+b=18$ ✓."
+            a: "$c\\approx9.17$",
+            v: "Triangle inequality: $c$ lies between $|a-b|=2$ and $a+b=18$ ✓."
           }),
           ref: "Handbook p.37" },
 
@@ -111,15 +114,15 @@ const QUESTION_BANK = {
           choices: ["$-61$", "$61$", "$-19$", "$23$"],
           correct: 0,
           solution: S({
-            c: "Cofactor expansion along row 1: $|A| = a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}$ where $M_{ij}$ is the $2\\times 2$ minor obtained by deleting row $i$, column $j$.",
+            c: "3x3 determinant by cofactor expansion along row 1: $|A|=a_{11}M_{11}-a_{12}M_{12}+a_{13}M_{13}$ (alternating signs +,-,+).",
             s: [
-              "$M_{11} = \\det\\begin{pmatrix}4&-1\\\\2&0\\end{pmatrix} = 4\\cdot 0 - (-1)(2) = 2$.",
-              "$M_{12} = \\det\\begin{pmatrix}0&-1\\\\5&0\\end{pmatrix} = 0\\cdot 0 - (-1)(5) = 5$.",
-              "$M_{13} = \\det\\begin{pmatrix}0&4\\\\5&2\\end{pmatrix} = 0\\cdot 2 - 4\\cdot 5 = -20$.",
-              "Combine with cofactor signs $(+,-,+)$: $|A| = 2(2) - 1(5) + 3(-20) = 4 - 5 - 60$."
+              "<b>Step 1 — Minors.</b> $M_{11}=(4)(0)-(-1)(2)=2$; $M_{12}=(0)(0)-(-1)(5)=5$; $M_{13}=(0)(2)-(4)(5)=-20$.",
+              "<b>Step 2 — Combine with signs.</b> $|A|=2(2)-1(5)+3(-20)=4-5-60$.",
+              "<b>Step 3 — Total.</b> $=-61$.",
+              "<b>Step 4 — Distractor audit.</b> $+61$ drops a sign; $-19$ and $23$ mishandle a minor or the cofactor signs."
             ],
-            a: "$|A| = -61$",
-            v: "Singular check: $|A|\\ne 0$, so $A$ is invertible."
+            a: "$|A|=-61$",
+            v: "$|A|\\ne0$, so $A$ is invertible. Expanding along any other row gives the same $-61$."
           }),
           ref: "Handbook p.57" },
 
@@ -127,13 +130,14 @@ const QUESTION_BANK = {
           choices: ["$3\\times 2$", "$4\\times 4$", "$2\\times 3$", "Undefined"],
           correct: 0,
           solution: S({
-            c: "Matrix multiplication rule: $(m\\times n)(n\\times p) = (m\\times p)$. <b>Inner dimensions must match.</b>",
+            c: "Matrix multiply rule: $(m\\times n)(n\\times p)=(m\\times p)$ - inner dimensions must MATCH, outer dimensions form the result.",
             s: [
-              "Inner dimensions: $A$ has 4 columns, $B$ has 4 rows → 4 = 4 ✓.",
-              "Outer dimensions form the result: $m \\times p = 3 \\times 2$."
+              "<b>Step 1 — Check inner.</b> $A$ has 4 columns, $B$ has 4 rows: $4=4$ ✓ (defined).",
+              "<b>Step 2 — Outer = result.</b> $m\\times p=3\\times2$.",
+              "<b>Step 3 — Distractor audit.</b> $4\\times4$ and $2\\times3$ scramble the dimensions; 'undefined' would apply to $BA$ (inner 2 vs 3)."
             ],
-            a: "$AB$ is $3 \\times 2$.",
-            v: "Note: $BA$ would be undefined (inner: 2 vs 3)."
+            a: "$AB$ is $3\\times2$.",
+            v: "Order matters: $BA$ here is UNDEFINED - matrix multiplication is not commutative."
           }),
           ref: "Handbook p.57" },
 
@@ -141,15 +145,15 @@ const QUESTION_BANK = {
           choices: ["$\\frac{1}{7}\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$", "$\\frac{1}{23}\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$", "$\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$", "$\\frac{1}{7}\\begin{pmatrix}3&-4\\\\-2&5\\end{pmatrix}$"],
           correct: 0,
           solution: S({
-            c: "$2\\times 2$ inverse: $A^{-1} = \\dfrac{1}{|A|}\\begin{pmatrix}d & -b\\\\-c & a\\end{pmatrix}$ for $A = \\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$. <b>Swap diagonal, negate off-diagonal, divide by determinant.</b>",
+            c: "2x2 inverse: $A^{-1}=\\dfrac{1}{|A|}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$ - swap the diagonal, negate the off-diagonal, divide by det.",
             s: [
-              "Determinant: $|A| = ad - bc = (3)(5) - (4)(2) = 15 - 8 = 7$.",
-              "Swap diagonals: $a\\leftrightarrow d$ gives $\\begin{pmatrix}5 & 4\\\\2 & 3\\end{pmatrix}$.",
-              "Negate off-diagonals: $\\begin{pmatrix}5 & -4\\\\-2 & 3\\end{pmatrix}$.",
-              "Divide by $|A|=7$: $A^{-1} = \\dfrac{1}{7}\\begin{pmatrix}5 & -4\\\\-2 & 3\\end{pmatrix}$."
+              "<b>Step 1 — Determinant.</b> $|A|=(3)(5)-(4)(2)=15-8=7$.",
+              "<b>Step 2 — Swap/negate.</b> $\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$.",
+              "<b>Step 3 — Divide by det.</b> $A^{-1}=\\dfrac17\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$.",
+              "<b>Step 4 — Distractor audit.</b> The $1/23$ version uses a wrong det; the un-divided matrix forgets $/|A|$; the last option swaps the wrong entries."
             ],
-            a: "$A^{-1} = \\dfrac{1}{7}\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$",
-            v: "$A\\cdot A^{-1}$ top-left: $\\frac{1}{7}[(3)(5)+(4)(-2)] = \\frac{15-8}{7} = 1$ ✓"
+            a: "$A^{-1}=\\dfrac17\\begin{pmatrix}5&-4\\\\-2&3\\end{pmatrix}$",
+            v: "Check $AA^{-1}$ top-left: $\\frac17[(3)(5)+(4)(-2)]=\\frac{7}{7}=1$ ✓."
           }),
           ref: "Handbook p.57" },
 
@@ -157,15 +161,15 @@ const QUESTION_BANK = {
           choices: ["$1.8$", "$1.0$", "$0.8$", "$2.5$"],
           correct: 0,
           solution: S({
-            c: "Cramer's rule: for $A\\vec{x}=\\vec{b}$, each unknown $x_i = |A_i|/|A|$, where $A_i$ is $A$ with column $i$ replaced by $\\vec{b}$.",
+            c: "Cramer's rule: $x_i=|A_i|/|A|$, where $A_i$ replaces column $i$ of the coefficient matrix with the right-hand-side vector.",
             s: [
-              "Write coefficient matrix: $A = \\begin{pmatrix}3&2\\\\1&-1\\end{pmatrix}$, $\\vec{b} = \\begin{pmatrix}7\\\\1\\end{pmatrix}$.",
-              "$|A| = (3)(-1) - (2)(1) = -3 - 2 = -5$.",
-              "Replace column 1 with $\\vec{b}$: $A_x = \\begin{pmatrix}7&2\\\\1&-1\\end{pmatrix}$, $|A_x| = (7)(-1) - (2)(1) = -9$.",
-              "Divide: $x = \\dfrac{|A_x|}{|A|} = \\dfrac{-9}{-5} = 1.8$."
+              "<b>Step 1 — Determinant.</b> $A=\\begin{pmatrix}3&2\\\\1&-1\\end{pmatrix}$, $|A|=(3)(-1)-(2)(1)=-5$.",
+              "<b>Step 2 — Replace col 1.</b> $A_x=\\begin{pmatrix}7&2\\\\1&-1\\end{pmatrix}$, $|A_x|=(7)(-1)-(2)(1)=-9$.",
+              "<b>Step 3 — Divide.</b> $x=-9/-5=1.8$.",
+              "<b>Step 4 — Distractor audit.</b> $1.0$ guesses; $0.8$ is actually $y$; $2.5$ is wrong."
             ],
-            a: "$x = 1.8$",
-            v: "By inspection $y = x - 1 = 0.8$. Check eq.1: $3(1.8)+2(0.8) = 5.4+1.6 = 7$ ✓"
+            a: "$x=1.8$",
+            v: "Then $y=x-1=0.8$; check eq.1: $3(1.8)+2(0.8)=5.4+1.6=7$ ✓."
           }),
           ref: "Handbook p.57" },
 
@@ -173,15 +177,15 @@ const QUESTION_BANK = {
           choices: ["$5, 2$", "$4, 3$", "$3, -2$", "$6, 1$"],
           correct: 0,
           solution: S({
-            c: "Eigenvalues satisfy $\\det(A-\\lambda I) = 0$. For $2\\times 2$: $\\lambda^2 - \\text{tr}(A)\\lambda + |A| = 0$.",
+            c: "Eigenvalues solve $\\det(A-\\lambda I)=0$. For 2x2: $\\lambda^2-\\text{tr}(A)\\lambda+|A|=0$.",
             s: [
-              "Trace: $\\text{tr}(A) = 4 + 3 = 7$.",
-              "Determinant: $|A| = (4)(3) - (1)(2) = 10$.",
-              "Characteristic polynomial: $\\lambda^2 - 7\\lambda + 10 = 0$.",
-              "Factor: $(\\lambda - 5)(\\lambda - 2) = 0 \\Rightarrow \\lambda = 5, 2$."
+              "<b>Step 1 — Trace and det.</b> $\\text{tr}=4+3=7$; $|A|=(4)(3)-(1)(2)=10$.",
+              "<b>Step 2 — Characteristic eq.</b> $\\lambda^2-7\\lambda+10=0$.",
+              "<b>Step 3 — Factor.</b> $(\\lambda-5)(\\lambda-2)=0\\Rightarrow\\lambda=5,2$.",
+              "<b>Step 4 — Distractor audit.</b> $4,3$ are diagonal entries (not eigenvalues of a non-diagonal matrix); $3,-2$ and $6,1$ fail the trace/det checks."
             ],
-            a: "$\\lambda_1 = 5$, $\\lambda_2 = 2$",
-            v: "Sum check: $5+2 = 7 = $ trace ✓ ; Product: $5\\cdot 2 = 10 = $ det ✓"
+            a: "$\\lambda=5,\\ 2$",
+            v: "Sum $5+2=7=$ trace ✓; product $5\\times2=10=$ det ✓ - eigenvalues always satisfy both."
           }),
           ref: "Handbook p.58" },
 
@@ -189,15 +193,15 @@ const QUESTION_BANK = {
           choices: ["$3$", "$2$", "$6$", "$-3$"],
           correct: 0,
           solution: S({
-            c: "For optimization: set $f'(x) = 0$ to find critical points, then check $f''$ — if $f''>0$ it's a minimum.",
+            c: "To minimize: set $f'(x)=0$ for critical points, then confirm with $f''>0$ (concave up = minimum).",
             s: [
-              "$f'(x) = 2x - 6$.",
-              "Set to 0: $2x - 6 = 0 \\Rightarrow x = 3$.",
-              "$f''(x) = 2 > 0$ → confirms minimum.",
-              "Minimum value: $f(3) = 9 - 18 + 11 = 2$."
+              "<b>Step 1 — Derivative.</b> $f'(x)=2x-6$.",
+              "<b>Step 2 — Critical point.</b> $2x-6=0\\Rightarrow x=3$.",
+              "<b>Step 3 — Confirm.</b> $f''(x)=2>0$ -> minimum.",
+              "<b>Step 4 — Distractor audit.</b> $6$ is $-b$ (forgot $/2a$); $2$ is the MIN VALUE $f(3)$, not the location; $-3$ has wrong sign."
             ],
-            a: "$x = 3$ (and $f_{\\min} = 2$)",
-            v: "Alternative: parabola vertex at $x = -b/(2a) = 6/2 = 3$ ✓"
+            a: "$x=3$ (with $f_{\\min}=2$)",
+            v: "Vertex shortcut: $x=-b/(2a)=6/2=3$ ✓ - matches the calculus."
           }),
           ref: "Handbook p.47-49" },
 
@@ -205,15 +209,15 @@ const QUESTION_BANK = {
           choices: ["$12$", "$10$", "$14$", "$8$"],
           correct: 0,
           solution: S({
-            c: "Power rule: $\\int x^n dx = \\dfrac{x^{n+1}}{n+1} + C$. Fundamental theorem: $\\int_a^b f\\,dx = F(b) - F(a)$.",
+            c: "Power rule $\\int x^n dx=\\dfrac{x^{n+1}}{n+1}$, then the fundamental theorem: $\\int_a^b f=F(b)-F(a)$.",
             s: [
-              "Antiderivative: $\\int (3x^2 + 2x)\\,dx = x^3 + x^2 + C$.",
-              "Evaluate at $x=2$: $F(2) = 8 + 4 = 12$.",
-              "Evaluate at $x=0$: $F(0) = 0$.",
-              "Subtract: $F(2) - F(0) = 12 - 0 = 12$."
+              "<b>Step 1 — Antiderivative.</b> $\\int(3x^2+2x)dx=x^3+x^2$.",
+              "<b>Step 2 — At bounds.</b> $F(2)=8+4=12$; $F(0)=0$.",
+              "<b>Step 3 — Subtract.</b> $12-0=12$.",
+              "<b>Step 4 — Distractor audit.</b> $10$, $14$, $8$ come from antiderivative or arithmetic slips."
             ],
-            a: "$\\int_0^2 = 12$",
-            v: "Geometric: the curve grows on $[0,2]$ and the area is bounded by $f(2)=16$ times width 2 = 32, so 12 is reasonable."
+            a: "$\\int_0^2=12$",
+            v: "Sanity: the integrand is positive and rising on $[0,2]$, so a value near 12 (well under the $16\\times2$ bounding box) is reasonable."
           }),
           ref: "Handbook p.49" },
 
@@ -221,14 +225,15 @@ const QUESTION_BANK = {
           choices: ["$2x\\ln x + x$", "$2x\\ln x$", "$x + \\ln x$", "$2/x$"],
           correct: 0,
           solution: S({
-            c: "Product rule: $(uv)' = u'v + uv'$. Here $u = x^2$, $v = \\ln x$.",
+            c: "Product rule $(uv)'=u'v+uv'$ with $u=x^2$, $v=\\ln x$.",
             s: [
-              "$u' = 2x$, $v' = 1/x$.",
-              "Apply product rule: $\\frac{d}{dx}[x^2\\ln x] = (2x)(\\ln x) + (x^2)(1/x)$.",
-              "Simplify: $= 2x\\ln x + x$."
+              "<b>Step 1 — Pieces.</b> $u'=2x$, $v'=1/x$.",
+              "<b>Step 2 — Apply.</b> $(2x)(\\ln x)+(x^2)(1/x)$.",
+              "<b>Step 3 — Simplify.</b> $=2x\\ln x+x$.",
+              "<b>Step 4 — Distractor audit.</b> $2x\\ln x$ drops the second term; $x+\\ln x$ and $2/x$ misapply the rule."
             ],
-            a: "$2x\\ln x + x$",
-            v: "At $x=1$: derivative $= 2(1)(0) + 1 = 1$. Numerical check confirms slope ≈ 1 there."
+            a: "$2x\\ln x+x$",
+            v: "At $x=1$: $2(1)(0)+1=1$ ✓ - the slope is 1 there, matching a numerical check."
           }),
           ref: "Handbook p.47" },
 
@@ -236,13 +241,14 @@ const QUESTION_BANK = {
           choices: ["$y = Ce^{-3x}$", "$y = Ce^{3x}$", "$y = C\\cos 3x$", "$y = Cx^{-3}$"],
           correct: 0,
           solution: S({
-            c: "First-order linear homogeneous ODE: $y' + ay = 0$ has solution $y = Ce^{-ax}$. Equivalently, characteristic equation $r + a = 0$ gives $r = -a$.",
+            c: "First-order linear homogeneous ODE $y'+ay=0$ has solution $y=Ce^{-ax}$ (characteristic root $r=-a$).",
             s: [
-              "Characteristic equation: $r + 3 = 0 \\Rightarrow r = -3$.",
-              "General solution: $y = Ce^{rx} = Ce^{-3x}$ ($C$ is integration constant)."
+              "<b>Step 1 — Characteristic eq.</b> $r+3=0\\Rightarrow r=-3$.",
+              "<b>Step 2 — General solution.</b> $y=Ce^{-3x}$.",
+              "<b>Step 3 — Distractor audit.</b> $Ce^{3x}$ has the wrong sign (would GROW); $C\\cos3x$ needs imaginary roots; $Cx^{-3}$ isn't exponential."
             ],
-            a: "$y(x) = Ce^{-3x}$",
-            v: "Plug back: $y' = -3Ce^{-3x}$, so $y'+3y = -3Ce^{-3x}+3Ce^{-3x} = 0$ ✓"
+            a: "$y=Ce^{-3x}$",
+            v: "Plug back: $y'+3y=-3Ce^{-3x}+3Ce^{-3x}=0$ ✓. Negative root -> decaying solution."
           }),
           ref: "Handbook p.54-55" },
 
@@ -250,15 +256,15 @@ const QUESTION_BANK = {
           choices: ["$-2 \\pm 3j$", "$2 \\pm 3j$", "$-4 \\pm \\sqrt{36}$", "$-2, -13$"],
           correct: 0,
           solution: S({
-            c: "Second-order ODE $ay''+by'+cy=0$ → characteristic equation $ar^2+br+c=0$. Solve for $r$.",
+            c: "Second-order ODE $ay''+by'+cy=0$ -> characteristic equation $ar^2+br+c=0$; a negative discriminant gives complex roots (damped oscillation).",
             s: [
-              "Char eq: $r^2 + 4r + 13 = 0$.",
-              "Discriminant: $b^2 - 4ac = 16 - 52 = -36 < 0$ → complex conjugate roots.",
-              "Quadratic formula: $r = \\dfrac{-4 \\pm \\sqrt{-36}}{2} = \\dfrac{-4 \\pm 6j}{2} = -2 \\pm 3j$.",
-              "General solution: $y = e^{-2x}(C_1 \\cos 3x + C_2 \\sin 3x)$ (under-damped oscillation)."
+              "<b>Step 1 — Characteristic eq.</b> $r^2+4r+13=0$.",
+              "<b>Step 2 — Discriminant.</b> $16-52=-36<0$ -> complex.",
+              "<b>Step 3 — Roots.</b> $r=\\dfrac{-4\\pm6j}{2}=-2\\pm3j$.",
+              "<b>Step 4 — Distractor audit.</b> $2\\pm3j$ has wrong real-part sign; $-4\\pm\\sqrt{36}$ misreads the discriminant; $-2,-13$ assumes real roots."
             ],
-            a: "$r = -2 \\pm 3j$",
-            v: "Real part $-2$ → solution decays; imag part $3$ → oscillation freq."
+            a: "$r=-2\\pm3j$",
+            v: "Real part $-2$ -> the solution $e^{-2x}(C_1\\cos3x+C_2\\sin3x)$ decays; imag part 3 -> oscillation frequency."
           }),
           ref: "Handbook p.55" },
 
@@ -266,15 +272,15 @@ const QUESTION_BANK = {
           choices: ["$42.8°$", "$60°$", "$30°$", "$48°$"],
           correct: 0,
           solution: S({
-            c: "Dot product gives angle: $\\cos\\theta = \\dfrac{\\vec{A}\\cdot\\vec{B}}{|\\vec{A}||\\vec{B}|}$.",
+            c: "Angle from the dot product: $\\cos\\theta=\\dfrac{\\vec A\\cdot\\vec B}{|\\vec A||\\vec B|}$.",
             s: [
-              "Dot product: $\\vec{A}\\cdot\\vec{B} = (3)(1)+(4)(2)+(0)(2) = 3+8+0 = 11$.",
-              "Magnitudes: $|\\vec{A}| = \\sqrt{9+16+0} = 5$; $|\\vec{B}| = \\sqrt{1+4+4} = 3$.",
-              "Cosine: $\\cos\\theta = 11/(5\\cdot 3) = 11/15 = 0.7333$.",
-              "Inverse: $\\theta = \\arccos(0.7333) \\approx 42.83°$."
+              "<b>Step 1 — Dot product.</b> $(3)(1)+(4)(2)+(0)(2)=11$.",
+              "<b>Step 2 — Magnitudes.</b> $|\\vec A|=\\sqrt{25}=5$; $|\\vec B|=\\sqrt{1+4+4}=3$.",
+              "<b>Step 3 — Cosine and angle.</b> $\\cos\\theta=11/15=0.733\\Rightarrow\\theta\\approx42.8°$.",
+              "<b>Step 4 — Distractor audit.</b> $60°,30°,48°$ correspond to wrong cosine values."
             ],
-            a: "$\\theta \\approx 42.8°$",
-            v: "If vectors were parallel, $\\theta = 0°$; perpendicular = 90°. Got 42.8° — between, reasonable."
+            a: "$\\theta\\approx42.8°$",
+            v: "Range check: $0°$ would be parallel, $90°$ perpendicular - 42.8° is in between, as the positive dot product implies."
           }),
           ref: "Handbook p.38" },
 
@@ -282,16 +288,15 @@ const QUESTION_BANK = {
           choices: ["$-\\hat{i}+3\\hat{j}+2\\hat{k}$", "$\\hat{i}-3\\hat{j}+2\\hat{k}$", "$3\\hat{i}+\\hat{j}-\\hat{k}$", "$-\\hat{i}-3\\hat{j}-2\\hat{k}$"],
           correct: 0,
           solution: S({
-            c: "Cross product via determinant: $\\vec{A}\\times\\vec{B} = \\det\\begin{pmatrix}\\hat{i}&\\hat{j}&\\hat{k}\\\\A_x&A_y&A_z\\\\B_x&B_y&B_z\\end{pmatrix}$.",
+            c: "Cross product via the determinant of the i-j-k matrix over the two vectors' components.",
             s: [
-              "Set up: $A = (2, 0, 1)$, $B = (1, 1, -1)$.",
-              "$\\hat{i}$ component: $A_y B_z - A_z B_y = (0)(-1) - (1)(1) = -1$.",
-              "$\\hat{j}$ component (with negative sign): $-(A_x B_z - A_z B_x) = -((2)(-1) - (1)(1)) = -(-3) = 3$.",
-              "$\\hat{k}$ component: $A_x B_y - A_y B_x = (2)(1) - (0)(1) = 2$.",
-              "Combine: $\\vec{A}\\times\\vec{B} = -\\hat{i} + 3\\hat{j} + 2\\hat{k}$."
+              "<b>Step 1 — Components.</b> $A=(2,0,1)$, $B=(1,1,-1)$.",
+              "<b>Step 2 — i, j, k.</b> $i:(0)(-1)-(1)(1)=-1$; $j:-[(2)(-1)-(1)(1)]=3$; $k:(2)(1)-(0)(1)=2$.",
+              "<b>Step 3 — Combine.</b> $-\\hat i+3\\hat j+2\\hat k$.",
+              "<b>Step 4 — Distractor audit.</b> The other options flip signs (especially the j-term's required minus) or scramble components."
             ],
-            a: "$-\\hat{i} + 3\\hat{j} + 2\\hat{k}$",
-            v: "Perpendicularity: $(\\vec{A}\\times\\vec{B})\\cdot\\vec{A} = (-1)(2)+(3)(0)+(2)(1) = 0$ ✓ (perp to $\\vec{A}$ as expected)."
+            a: "$-\\hat i+3\\hat j+2\\hat k$",
+            v: "Perpendicularity check: $(\\vec A\\times\\vec B)\\cdot\\vec A=(-1)(2)+(3)(0)+(2)(1)=0$ ✓ - the cross product is normal to both."
           }),
           ref: "Handbook p.38" },
 
@@ -299,14 +304,15 @@ const QUESTION_BANK = {
           choices: ["$10$", "$12$", "$8$", "$14$"],
           correct: 0,
           solution: S({
-            c: "Log identity: $\\log_b(b^n) = n$. Find what power gives the argument.",
+            c: "Use $\\log_b(b^n)=n$ - find the power that produces each argument.",
             s: [
-              "$\\log_2 64 = \\log_2 2^6 = 6$ (since $2^6 = 64$).",
-              "$\\log_3 81 = \\log_3 3^4 = 4$ (since $3^4 = 81$).",
-              "Sum: $6 + 4 = 10$."
+              "<b>Step 1 — First log.</b> $\\log_2 64=\\log_2 2^6=6$.",
+              "<b>Step 2 — Second log.</b> $\\log_3 81=\\log_3 3^4=4$.",
+              "<b>Step 3 — Sum.</b> $6+4=10$.",
+              "<b>Step 4 — Distractor audit.</b> $12$, $8$, $14$ come from mis-powering 64 or 81."
             ],
             a: "$10$",
-            v: "All powers of 2/3 verified by mental math."
+            v: "Verify: $2^6=64$ and $3^4=81$ ✓. A log just asks 'what exponent?'."
           }),
           ref: "Handbook p.36" },
 
@@ -314,14 +320,14 @@ const QUESTION_BANK = {
           choices: ["$3$", "$1$", "$0$", "$\\infty$"],
           correct: 0,
           solution: S({
-            c: "Key limit: $\\lim_{u\\to 0}\\dfrac{\\sin u}{u} = 1$. Manipulate to match.",
+            c: "Key limit $\\lim_{u\\to0}\\dfrac{\\sin u}{u}=1$; rewrite to match the form.",
             s: [
-              "Multiply top and bottom by 3: $\\dfrac{\\sin 3x}{x} = 3\\cdot\\dfrac{\\sin 3x}{3x}$.",
-              "As $x\\to 0$, $3x\\to 0$, so $\\dfrac{\\sin 3x}{3x}\\to 1$.",
-              "Limit = $3 \\cdot 1 = 3$."
+              "<b>Step 1 — Force the form.</b> $\\dfrac{\\sin3x}{x}=3\\cdot\\dfrac{\\sin3x}{3x}$.",
+              "<b>Step 2 — Take limit.</b> As $x\\to0$, $\\dfrac{\\sin3x}{3x}\\to1$, so the limit is $3\\times1=3$.",
+              "<b>Step 3 — Distractor audit.</b> $1$ forgets the factor of 3; $0$ and $\\infty$ misjudge the $0/0$ form."
             ],
-            a: "Limit $= 3$",
-            v: "Alternatively L'Hôpital: $\\lim \\dfrac{3\\cos 3x}{1}\\bigg|_{x=0} = 3$ ✓"
+            a: "Limit $=3$",
+            v: "L'Hopital confirms: $\\lim\\dfrac{3\\cos3x}{1}\\big|_{x=0}=3$ ✓."
           }),
           ref: "Handbook p.47" },
 
@@ -329,15 +335,14 @@ const QUESTION_BANK = {
           choices: ["$1 + x + x^2/2$", "$1 - x + x^2/2$", "$x + x^2/2 + x^3/6$", "$1 + x + x^2$"],
           correct: 0,
           solution: S({
-            c: "Maclaurin series: $f(x) = \\sum_{n=0}^{\\infty}\\dfrac{f^{(n)}(0)}{n!}x^n$. For $e^x$, all derivatives equal $e^x$, so $f^{(n)}(0)=1$.",
+            c: "Maclaurin series $f(x)=\\sum\\dfrac{f^{(n)}(0)}{n!}x^n$. For $e^x$ every derivative is $e^x$, so $f^{(n)}(0)=1$.",
             s: [
-              "Term 0: $\\dfrac{1}{0!}x^0 = 1$.",
-              "Term 1: $\\dfrac{1}{1!}x^1 = x$.",
-              "Term 2: $\\dfrac{1}{2!}x^2 = x^2/2$.",
-              "First 3 terms: $1 + x + \\dfrac{x^2}{2}$."
+              "<b>Step 1 — Terms.</b> $\\dfrac{1}{0!}=1$, $\\dfrac{1}{1!}x=x$, $\\dfrac{1}{2!}x^2=x^2/2$.",
+              "<b>Step 2 — First three.</b> $1+x+\\dfrac{x^2}{2}$.",
+              "<b>Step 3 — Distractor audit.</b> $1-x+x^2/2$ is $e^{-x}$; the others drop the constant or use wrong coefficients."
             ],
-            a: "$1 + x + \\dfrac{x^2}{2}$",
-            v: "At $x=0.1$: series gives $1 + 0.1 + 0.005 = 1.105$; actual $e^{0.1}\\approx 1.105$ ✓"
+            a: "$1+x+\\dfrac{x^2}{2}$",
+            v: "At $x=0.1$: $1+0.1+0.005=1.105$ vs actual $e^{0.1}\\approx1.105$ ✓."
           }),
           ref: "Handbook p.50" },
       ],
