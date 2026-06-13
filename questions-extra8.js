@@ -1177,177 +1177,432 @@
     12: [
       { q: "Nichols chart: shows:",
         choices: ["Open-loop magnitude vs phase", "Time response", "Pole locations", "Stability boundary"], correct: 0,
-        solution: S({ c: "Nichols: log-magnitude vs phase, useful for closed-loop synthesis.", s: ["Alternative to Bode."], a: "$|GH|$ vs $\\angle GH$" }), ref: "p.366" },
+        solution: S({
+          c: "A Nichols chart plots open-loop log-MAGNITUDE versus PHASE on one diagram - useful for reading closed-loop response and stability margins.",
+          s: ["<b>Step 1 — Match.</b> Open-loop magnitude vs phase.","<b>Step 2 — Distractor audit.</b> Not time response, pole locations, or just a boundary line."],
+          a: "$|GH|$ vs $\\angle GH$.",
+          v: "It combines Bode's two plots (magnitude and phase) into one curve, with overlaid closed-loop contours - handy for loop-shaping design. An alternative graphical view to Bode/Nyquist."
+        }), ref: "p.366" },
       { q: "Sensitivity function $S(s) = 1/(1+GH)$. Smaller |S|:",
         choices: ["Better disturbance rejection and reference tracking", "Worse", "More oscillation", "Higher gain"], correct: 0,
-        solution: S({ c: "$S$ measures how output responds to disturbance / reference error.", s: ["Bode's integral: can't make S small over all frequencies."], a: "Better rejection" }), ref: "p.365" },
+        solution: S({
+          c: "The sensitivity function $S=1/(1+GH)$ measures how much disturbances and reference errors reach the output. SMALLER |S| means BETTER disturbance rejection and tracking.",
+          s: ["<b>Step 1 — Match.</b> Better disturbance rejection / tracking.","<b>Step 2 — Distractor audit.</b> Smaller S is better, not worse; it doesn't add oscillation or gain by itself."],
+          a: "Better disturbance rejection.",
+          v: "High loop gain GH makes S small - but Bode's integral theorem says you CAN'T make S small at ALL frequencies (push it down here, it pops up there). Design is about WHERE to make S small."
+        }), ref: "p.365" },
       { q: "Complementary sensitivity $T = 1 - S = GH/(1+GH)$:",
         choices: ["Closed-loop transfer function (also): $T(s) = Y/R$", "Just disturbance", "Time-delay model", "Frequency"], correct: 0,
-        solution: S({ c: "Same $T$ as closed-loop transfer function.", s: [""], a: "CL transfer fn" }), ref: "p.365" },
+        solution: S({
+          c: "The complementary sensitivity $T = GH/(1+GH)$ IS the closed-loop transfer function $Y/R$, and $S + T = 1$ always.",
+          s: ["<b>Step 1 — Match.</b> Closed-loop transfer function $Y/R$.","<b>Step 2 — Distractor audit.</b> Not 'just disturbance', a time-delay model, or frequency."],
+          a: "Closed-loop transfer function.",
+          v: "$S+T=1$ is a fundamental constraint: you want T~1 (good tracking) at low frequencies and S~1 (noise rejection / robustness) at high frequencies - they trade off across the spectrum."
+        }), ref: "p.365" },
       { q: "Pole at origin: integrator type:",
         choices: ["Type 1 system (zero steady-state error to step)", "Type 0", "Type 2", "Type 3"], correct: 0,
-        solution: S({ c: "Number of integrators = type number.", s: [""], a: "Type 1" }), ref: "p.366" },
+        solution: S({
+          c: "A pole at the origin (s=0) is an integrator; the NUMBER of such poles is the system TYPE. One integrator -> Type 1 -> zero steady-state error to a step.",
+          s: ["<b>Step 1 — Match.</b> Type 1.","<b>Step 2 — Distractor audit.</b> Type 0 has no origin pole; Type 2/3 have two/three."],
+          a: "Type 1.",
+          v: "Type sets steady-state accuracy: Type 1 zeroes STEP error, Type 2 zeroes RAMP error, etc. Each integrator absorbs one more degree of input polynomial."
+        }), ref: "p.366" },
       { q: "Bode plot: integrator at $\\omega = 0.1$ (very low freq):",
         choices: ["Large positive dB (1/0.1 → +20 dB)", "Zero", "Negative", "Constant"], correct: 0,
-        solution: S({ c: "$|1/(j\\omega)| = 1/\\omega = 10$ at $\\omega=0.1$. $20\\log 10 = 20$ dB.", s: ["Slope: -20 dB/decade."], a: "$+20$ dB" }), ref: "p.366" },
+        solution: S({
+          c: "An integrator $1/(j\\omega)$ has magnitude $1/\\omega$, which is LARGE at low frequency. At $\\omega=0.1$: $1/0.1=10$, i.e. $20\\log10 = +20$ dB.",
+          s: ["<b>Step 1 — Apply.</b> $|1/j\\omega| = 1/0.1 = 10 = +20$ dB.","<b>Step 2 — Distractor audit.</b> Zero/negative/constant miss the high low-frequency gain."],
+          a: "$+20$ dB.",
+          v: "The integrator's magnitude falls at -20 dB/decade with a -90 deg phase - infinite gain at DC is what lets it drive steady-state error to zero. At high frequency its gain shrinks."
+        }), ref: "p.366" },
       { q: "Closed-loop step response 5% overshoot corresponds to approximately:",
         choices: ["$\\zeta \\approx 0.69$", "$\\zeta = 1$", "$\\zeta = 0.5$", "$\\zeta = 0.1$"], correct: 0,
-        solution: S({ c: "$M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^2}}$. Solve for 5%.", s: ["$\\zeta \\approx 0.69$ gives $M_p \\approx 5.05\\%$."], a: "$\\approx 0.69$" }), ref: "p.366" },
+        solution: S({
+          c: "From $M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^2}}$, a 5% overshoot needs $\\zeta \\approx 0.69$.",
+          s: ["<b>Step 1 — Solve.</b> $M_p=0.05$ gives $\\zeta \\approx 0.69$.","<b>Step 2 — Distractor audit.</b> $\\zeta=1$ is 0% (no overshoot); 0.5 is ~16%; 0.1 is ~73%."],
+          a: "$\\zeta \\approx 0.69$.",
+          v: "The popular design target $\\zeta=0.7$ gives ~4.6% overshoot - a good balance of speed and minimal overshoot. Calibration: 0.5->16%, 0.7->5%, 1.0->0%."
+        }), ref: "p.366" },
       { q: "Robust control: tracks reference well despite:",
         choices: ["Model uncertainty and disturbances", "Only constant", "Only at DC", "Random"], correct: 0,
-        solution: S({ c: "Robust: performance preserved with uncertain plant.", s: ["$H_\\infty$ control formalizes this."], a: "Uncertainty rejection" }), ref: "p.365" },
+        solution: S({
+          c: "Robust control maintains performance despite MODEL UNCERTAINTY and disturbances - the real plant differs from the design model.",
+          s: ["<b>Step 1 — Match.</b> Model uncertainty and disturbances.","<b>Step 2 — Distractor audit.</b> Not limited to constant inputs, DC, or random."],
+          a: "Model uncertainty and disturbances.",
+          v: "H-infinity control formalizes robustness by bounding worst-case sensitivity - crucial because no model is exact, and a controller tuned to a nominal model must tolerate real-world deviation."
+        }), ref: "p.365" },
       { q: "Discrete-time vs continuous-time stability boundary:",
         choices: ["Continuous: $\\text{Re}(s) < 0$; Discrete: $|z| < 1$", "Same", "Reverse", "Random"], correct: 0,
-        solution: S({ c: "Continuous: LHP. Discrete: inside unit circle.", s: ["Bilinear transform maps between them."], a: "LHP vs unit disk" }), ref: "p.376" },
+        solution: S({
+          c: "Continuous-time systems are stable with poles in the left-half plane (Re(s)<0); discrete-time systems require poles INSIDE the unit circle (|z|<1).",
+          s: ["<b>Step 1 — Match.</b> Continuous: Re(s)<0; discrete: |z|<1.","<b>Step 2 — Distractor audit.</b> They're different (not same/reverse)."],
+          a: "LHP (continuous) vs unit disk (discrete).",
+          v: "The bilinear transform maps the LHP onto the inside of the unit circle precisely to preserve stability when converting a continuous design to digital. Same idea, two coordinate systems."
+        }), ref: "p.376" },
       { q: "Bode plot: pole and zero close together create:",
         choices: ["Doublet — small effect, may approximately cancel", "Large peak", "Resonance", "Instability"], correct: 0,
-        solution: S({ c: "Pole-zero doublet (close together): small net contribution.", s: ["Often used intentionally in compensator design."], a: "Doublet (small effect)" }), ref: "p.366" },
+        solution: S({
+          c: "A pole and zero very close together form a DOUBLET - their effects nearly cancel, giving only a small net contribution to the response.",
+          s: ["<b>Step 1 — Match.</b> Doublet - small effect, near cancellation.","<b>Step 2 — Distractor audit.</b> Not a large peak, resonance, or instability."],
+          a: "A doublet (small net effect).",
+          v: "Doublets are sometimes introduced deliberately in compensators for fine local shaping - but a slow doublet can cause a long, slow 'tail' in the transient response (a known pitfall)."
+        }), ref: "p.366" },
       { q: "Damping ratio related to overshoot inversely:",
         choices: ["Higher $\\zeta$ → less overshoot", "Higher $\\zeta$ → more overshoot", "Independent", "Linear"], correct: 0,
-        solution: S({ c: "$\\zeta = 0$: pure oscillation, 100% overshoot. $\\zeta = 1$: 0% overshoot.", s: [""], a: "Inverse" }), ref: "p.366" },
+        solution: S({
+          c: "Higher damping ratio means LESS overshoot. At $\\zeta=0$ there's sustained oscillation (effectively 100%); at $\\zeta\\ge1$ there's no overshoot.",
+          s: ["<b>Step 1 — Match.</b> Higher $\\zeta$ -> less overshoot.","<b>Step 2 — Distractor audit.</b> Not 'more overshoot', independent, or linear (it's exponential)."],
+          a: "Inverse (more damping, less overshoot).",
+          v: "Overshoot $M_p=e^{-\\pi\\zeta/\\sqrt{1-\\zeta^2}}$ falls steeply with $\\zeta$ - which is why adding damping (or derivative control) tames a ringing, oscillatory response."
+        }), ref: "p.366" },
     ],
 
     // Comm — +8
     13: [
       { q: "Bit error probability (BEP) for BPSK in AWGN: ",
         choices: ["$Q(\\sqrt{2E_b/N_0})$", "$E_b/N_0$", "$1/N_0$", "$\\log_2 M$"], correct: 0,
-        solution: S({ c: "Standard BPSK BER formula.", s: ["$Q(x)$ = standard normal upper tail."], a: "$Q(\\sqrt{2E_b/N_0})$" }), ref: "p.371" },
+        solution: S({
+          c: "BPSK bit-error probability in additive white Gaussian noise: $P_b = Q\\left(\\sqrt{2E_b/N_0}\\right)$, where Q is the standard-normal tail.",
+          s: ["<b>Step 1 — Match.</b> $Q(\\sqrt{2E_b/N_0})$.","<b>Step 2 — Distractor audit.</b> $E_b/N_0$ is the SNR-per-bit (input, not the error rate); the others aren't BER formulas."],
+          a: "$P_b = Q(\\sqrt{2E_b/N_0})$.",
+          v: "BER drops sharply (exponentially) as $E_b/N_0$ rises - the Q-function's steep tail. BPSK/QPSK share this optimal curve; higher-order QAM needs more $E_b/N_0$ for the same BER."
+        }), ref: "p.371" },
       { q: "Eye diagram crosshair height represents:",
         choices: ["Noise margin", "Bandwidth", "Frequency", "Phase"], correct: 0,
-        solution: S({ c: "Eye opening height: how much noise tolerable before bit error.", s: ["Width: timing margin."], a: "Noise margin" }), ref: "p.371" },
+        solution: S({
+          c: "The vertical EYE OPENING height represents the NOISE MARGIN - how much noise the signal can tolerate before a bit is misread.",
+          s: ["<b>Step 1 — Match.</b> Noise margin.","<b>Step 2 — Distractor audit.</b> Not bandwidth, frequency, or phase; the WIDTH represents timing margin."],
+          a: "Noise margin.",
+          v: "A wide-open eye = healthy signal (big noise and timing margins); a closing eye warns of ISI, jitter, or noise. Eye height -> noise margin, eye width -> timing margin."
+        }), ref: "p.371" },
       { q: "Forward Error Correction (FEC) trades:",
         choices: ["Bandwidth (redundancy) for lower error rate", "Speed for accuracy", "Both", "Power for noise"], correct: 0,
-        solution: S({ c: "FEC: add redundant bits → receiver can detect/correct errors.", s: ["Cost: less efficient use of bandwidth."], a: "BW for error rate" }), ref: "p.371" },
+        solution: S({
+          c: "FEC adds redundant bits so the receiver can detect AND correct errors WITHOUT retransmission - trading BANDWIDTH (the overhead) for a lower error rate.",
+          s: ["<b>Step 1 — Match.</b> Bandwidth (redundancy) for lower error rate.","<b>Step 2 — Distractor audit.</b> Not strictly speed-for-accuracy or power-for-noise."],
+          a: "Bandwidth for error rate.",
+          v: "FEC enables reliable one-way links (deep space, broadcast) where retransmission is impractical - the cost is sending extra parity bits, lowering the effective data rate (code rate < 1)."
+        }), ref: "p.371" },
       { q: "Reed-Solomon codes are good for:",
         choices: ["Burst errors (used in CDs, QR codes, DSL)", "Random errors only", "Encryption", "Compression"], correct: 0,
-        solution: S({ c: "RS: corrects burst errors well due to symbol-based coding.", s: ["Used: CDs (scratches), DSL, QR codes."], a: "Burst errors" }), ref: "p.371" },
+        solution: S({
+          c: "Reed-Solomon codes correct BURST errors well because they operate on SYMBOLS (groups of bits) rather than individual bits.",
+          s: ["<b>Step 1 — Match.</b> Burst errors (CDs, QR codes, DSL).","<b>Step 2 — Distractor audit.</b> They handle bursts especially (not random-only); not encryption or compression."],
+          a: "Burst errors.",
+          v: "A scratch on a CD or a smudge on a QR code damages CONSECUTIVE symbols - RS corrects those clustered errors, which is why it's everywhere data faces localized damage."
+        }), ref: "p.371" },
       { q: "Eye pattern closure due to:",
         choices: ["ISI (inter-symbol interference) and jitter", "Higher bandwidth", "Better SNR", "Lower freq"], correct: 0,
-        solution: S({ c: "ISI: previous symbol's tail affecting current decision.", s: ["Jitter: timing variation. Both close the eye → more bit errors."], a: "ISI + jitter" }), ref: "p.371" },
+        solution: S({
+          c: "The eye closes due to INTER-SYMBOL INTERFERENCE (a previous symbol's tail bleeding into the current decision) and JITTER (timing variation).",
+          s: ["<b>Step 1 — Match.</b> ISI and jitter.","<b>Step 2 — Distractor audit.</b> Higher bandwidth and better SNR would OPEN the eye; lower frequency isn't the cause."],
+          a: "ISI and jitter.",
+          v: "ISI closes the eye vertically (amplitude), jitter horizontally (timing) - both push the signal toward the decision threshold and raise bit errors. Equalizers fight ISI."
+        }), ref: "p.371" },
       { q: "Bandwidth efficient modulation chooses higher M when:",
         choices: ["SNR is high enough to distinguish more constellation points", "Low SNR", "Low cost", "Always"], correct: 0,
-        solution: S({ c: "More constellation points → tighter spacing → need higher SNR.", s: ["64-QAM (6 bps/Hz) needs ~28 dB; QPSK (2 bps/Hz) needs ~10 dB for similar BER."], a: "High SNR" }), ref: "p.371" },
+        solution: S({
+          c: "Higher-order modulation (larger M) packs more bits per symbol but crowds the constellation - so it's chosen only when SNR is HIGH enough to distinguish the closer points.",
+          s: ["<b>Step 1 — Match.</b> SNR high enough to distinguish more points.","<b>Step 2 — Distractor audit.</b> Low SNR can't support it; not about cost; not 'always'."],
+          a: "When SNR is high.",
+          v: "This is why adaptive modulation (Wi-Fi, LTE) drops to QPSK in poor conditions and ramps to 64/256-QAM when SNR allows - maximizing throughput within the noise budget."
+        }), ref: "p.371" },
       { q: "Coherent demodulation requires:",
         choices: ["Carrier phase and frequency reference at receiver", "Only frequency", "Nothing extra", "Higher power"], correct: 0,
-        solution: S({ c: "Coherent receiver: needs to know carrier phase to demodulate.", s: ["Phase recovery: PLL or pilot-aided."], a: "Carrier reference" }), ref: "p.371" },
+        solution: S({
+          c: "Coherent demodulation requires a carrier PHASE and FREQUENCY reference at the receiver (synchronized to the transmitter).",
+          s: ["<b>Step 1 — Match.</b> Carrier phase and frequency reference.","<b>Step 2 — Distractor audit.</b> Frequency alone isn't enough; it does need extra (phase recovery); not just higher power."],
+          a: "A carrier (phase) reference.",
+          v: "Phase recovery (via a PLL or pilot tone) is the cost of coherent demod - in exchange you get the best BER. Non-coherent schemes (DPSK, envelope detection) skip it at a ~3 dB penalty."
+        }), ref: "p.371" },
       { q: "Signal-to-noise ratio (SNR) units:",
         choices: ["Dimensionless ratio (often in dB)", "Watts", "Hz", "V"], correct: 0,
-        solution: S({ c: "Power ratio, dimensionless. dB = $10\\log_{10}(S/N)$.", s: [""], a: "Ratio (dB common)" }), ref: "p.371" },
+        solution: S({
+          c: "SNR is a dimensionless power RATIO, usually expressed in decibels: $\\text{SNR}_{dB}=10\\log_{10}(S/N)$.",
+          s: ["<b>Step 1 — Match.</b> Dimensionless ratio (often dB).","<b>Step 2 — Distractor audit.</b> Watts, Hz, V are absolute units, not a ratio."],
+          a: "A dimensionless ratio (dB common).",
+          v: "dB compresses the wide range of power ratios - 10 dB = 10x, 20 dB = 100x, 30 dB = 1000x. SNR is the key input to Shannon capacity and BER curves."
+        }), ref: "p.371" },
     ],
 
     // Networks — +5
     14: [
       { q: "DNS query types: A record vs MX:",
         choices: ["A: name to IPv4; MX: mail server", "Same", "A is for email", "MX is for IPv6"], correct: 0,
-        solution: S({ c: "Various DNS record types serve different purposes.", s: ["AAAA: IPv6. CNAME: alias. TXT: arbitrary text."], a: "A: IP; MX: mail" }), ref: "p.400" },
+        solution: S({
+          c: "DNS record types serve different lookups: an A record maps a name to an IPv4 address; an MX record names the mail server for a domain.",
+          s: ["<b>Step 1 — Match.</b> A: name->IPv4; MX: mail server.","<b>Step 2 — Distractor audit.</b> A isn't for email; MX isn't for IPv6 (that's AAAA)."],
+          a: "A: address; MX: mail exchanger.",
+          v: "Other records: AAAA (IPv6), CNAME (alias), TXT (arbitrary text, used for SPF/verification), NS (name servers). Each query type retrieves a different kind of record."
+        }), ref: "p.400" },
       { q: "HTTPS vs HTTP differences:",
         choices: ["HTTPS adds TLS encryption layer (typically port 443)", "Same", "HTTPS is slower always", "Different content"], correct: 0,
-        solution: S({ c: "HTTPS: HTTP-over-TLS.", s: ["Encrypts client-server communication. Modern web standard."], a: "TLS encryption" }), ref: "p.412" },
+        solution: S({
+          c: "HTTPS is HTTP wrapped in a TLS encryption layer (typically on port 443), securing the client-server communication.",
+          s: ["<b>Step 1 — Match.</b> HTTPS adds TLS encryption (port 443).","<b>Step 2 — Distractor audit.</b> Not 'same'; not 'always slower' (overhead is small); same content, just encrypted."],
+          a: "HTTPS = HTTP over TLS.",
+          v: "TLS provides confidentiality, integrity, and server authentication (via certificates) - now the web default. Port 80 is plain HTTP; 443 is HTTPS."
+        }), ref: "p.412" },
       { q: "TCP socket: identified by:",
         choices: ["(local IP, local port, remote IP, remote port) — 4-tuple", "Just IP", "Port only", "MAC"], correct: 0,
-        solution: S({ c: "TCP connection 4-tuple uniquely identifies a connection.", s: ["Allows multiple connections between same two hosts on different port pairs."], a: "4-tuple" }), ref: "p.400" },
+        solution: S({
+          c: "A TCP connection is uniquely identified by a 4-TUPLE: (local IP, local port, remote IP, remote port).",
+          s: ["<b>Step 1 — Match.</b> The 4-tuple.","<b>Step 2 — Distractor audit.</b> IP alone, port alone, or MAC don't uniquely identify a connection."],
+          a: "(local IP, local port, remote IP, remote port).",
+          v: "The 4-tuple lets ONE server port (e.g. 443) handle thousands of simultaneous connections - each distinguished by the client's IP/port. It's how web servers multiplex many users."
+        }), ref: "p.400" },
       { q: "Half-open TCP connection (SYN flood attack):",
         choices: ["Attacker sends SYN but never ACK — exhausts server resources", "Closes properly", "Normal traffic", "Application layer"], correct: 0,
-        solution: S({ c: "DoS technique: many SYNs without follow-up ACK fill server's connection table.", s: ["Mitigation: SYN cookies, rate limiting, firewalls."], a: "DoS attack" }), ref: "p.412" },
+        solution: S({
+          c: "A SYN flood is a denial-of-service attack: the attacker sends many SYN packets but never completes the handshake (no final ACK), exhausting the server's connection table.",
+          s: ["<b>Step 1 — Match.</b> SYN without ACK - exhausts server resources.","<b>Step 2 — Distractor audit.</b> It doesn't close properly, isn't normal traffic, and operates at the transport layer."],
+          a: "A DoS attack (resource exhaustion).",
+          v: "Each half-open connection ties up server memory waiting for the ACK that never comes - filling the backlog. Mitigations: SYN cookies, rate limiting, firewalls."
+        }), ref: "p.412" },
       { q: "Inter-domain routing protocol used between ISPs:",
         choices: ["BGP", "OSPF", "RIP", "ARP"], correct: 0,
-        solution: S({ c: "BGP (Border Gateway Protocol): policy-based path vector between ASes.", s: ["OSPF / RIP: intra-AS (within single network)."], a: "BGP" }), ref: "p.400" },
+        solution: S({
+          c: "BGP (Border Gateway Protocol) is the inter-domain (between autonomous systems / ISPs) routing protocol of the internet.",
+          s: ["<b>Step 1 — Match.</b> BGP.","<b>Step 2 — Distractor audit.</b> OSPF/RIP are INTRA-domain (within one network); ARP is Layer 2 address resolution."],
+          a: "BGP.",
+          v: "BGP is a policy-based path-vector protocol that glues the internet's ~100k autonomous systems together - its trust-based design means a misconfiguration can cause global route leaks/outages."
+        }), ref: "p.400" },
     ],
 
     // Digital — +10
     15: [
       { q: "JK FF excitation table: from $Q=0$ to $Q^+ = 1$:",
         choices: ["$J=1$, $K=$ don't care", "$J=K=0$", "$J=0$, $K=1$", "Both 1"], correct: 0,
-        solution: S({ c: "Transition 0→1: set (J=1) or toggle (J=K=1). K doesn't matter when Q=0.", s: [""], a: "$J=1, K=X$" }), ref: "p.391" },
+        solution: S({
+          c: "To force a JK flip-flop from Q=0 to Q=1, you need J=1 (SET); K is a 'don't care' because at Q=0 it has no effect.",
+          s: ["<b>Step 1 — Match.</b> J=1, K=X (don't care).","<b>Step 2 — Distractor audit.</b> J=K=0 holds (stays 0); J=0,K=1 resets; the question needs a 0->1 transition."],
+          a: "$J=1$, $K=X$.",
+          v: "Excitation tables (what inputs CAUSE a desired transition) are the reverse of truth tables - the don't-cares they expose are what make JK-based counter/FSM design efficient."
+        }), ref: "p.391" },
       { q: "Race condition in async circuits caused by:",
         choices: ["Multiple inputs changing near-simultaneously", "Single input", "Slow clock", "Static signals"], correct: 0,
-        solution: S({ c: "Race: outcome depends on which input change reaches output first.", s: ["Mitigation: synchronous design with clock-driven FFs."], a: "Concurrent changes" }), ref: "p.391" },
+        solution: S({
+          c: "An async race condition arises when MULTIPLE inputs change nearly simultaneously - the outcome depends on which change propagates first.",
+          s: ["<b>Step 1 — Match.</b> Multiple inputs changing near-simultaneously.","<b>Step 2 — Distractor audit.</b> A single input or static signals don't race; slow clock isn't the cause."],
+          a: "Concurrent input changes.",
+          v: "Synchronous design eliminates races by only sampling at clock edges (after signals settle) - which is why nearly all real logic is clock-driven, not asynchronous."
+        }), ref: "p.391" },
       { q: "PLA (Programmable Logic Array): both AND and OR planes programmable. Cost vs PAL:",
         choices: ["More flexible but slower/more area", "Always faster", "Always cheaper", "Identical"], correct: 0,
-        solution: S({ c: "PLA: full flexibility. PAL: fixed OR plane → simpler, faster.", s: [""], a: "Flexible but slower" }), ref: "p.390" },
+        solution: S({
+          c: "A PLA (both AND and OR planes programmable) is MORE flexible than a PAL but slower and larger (more area).",
+          s: ["<b>Step 1 — Match.</b> More flexible but slower/more area.","<b>Step 2 — Distractor audit.</b> Not 'always faster/cheaper'; not identical to PAL."],
+          a: "More flexible, slower/larger.",
+          v: "The PAL's FIXED OR plane is simpler and faster - the classic flexibility-vs-speed trade. Both predate CPLDs/FPGAs, which generalized programmable logic much further."
+        }), ref: "p.390" },
       { q: "FPGA configuration storage:",
         choices: ["SRAM (volatile, reconfigurable)", "ROM", "Hard-coded", "Magnetic"], correct: 0,
-        solution: S({ c: "Most FPGAs: SRAM-based config → erased on power-off, reloaded on power-up.", s: ["Anti-fuse FPGAs: one-time programmable.", "Flash FPGAs: non-volatile."], a: "SRAM" }), ref: "p.391" },
+        solution: S({
+          c: "Most FPGAs store their configuration in SRAM - volatile and reconfigurable, so the bitstream must be reloaded on every power-up.",
+          s: ["<b>Step 1 — Match.</b> SRAM (volatile, reconfigurable).","<b>Step 2 — Distractor audit.</b> Anti-fuse FPGAs are one-time; flash FPGAs are non-volatile; not magnetic."],
+          a: "SRAM (volatile).",
+          v: "SRAM-based FPGAs are infinitely reconfigurable (great for development) but need an external config flash to reload at boot. Anti-fuse and flash variants trade reconfigurability for non-volatility."
+        }), ref: "p.391" },
       { q: "Sequential vs combinational logic:",
         choices: ["Sequential has memory (state); combinational only present inputs", "Same", "Combinational is faster", "Sequential is older"], correct: 0,
-        solution: S({ c: "Combinational: output = $f(\\text{current inputs})$.", s: ["Sequential: output = $f(\\text{inputs, state})$ — includes FFs/latches."], a: "Memory vs not" }), ref: "p.391" },
+        solution: S({
+          c: "SEQUENTIAL logic has MEMORY (state) - output depends on inputs AND past state; COMBINATIONAL logic depends only on present inputs.",
+          s: ["<b>Step 1 — Match.</b> Sequential has memory/state; combinational doesn't.","<b>Step 2 — Distractor audit.</b> Not 'same'; speed/age aren't the distinction."],
+          a: "Memory (state) vs none.",
+          v: "Flip-flops/latches make a circuit sequential (counters, registers, FSMs); pure gate networks (adders, MUXes) are combinational. Sequential logic is what lets digital systems remember."
+        }), ref: "p.391" },
       { q: "Setup-hold violation result:",
         choices: ["Metastability — output may settle to wrong value or oscillate briefly", "Damage", "Reset", "Speed up"], correct: 0,
-        solution: S({ c: "Metastable: not a clean 0 or 1 for some time before resolving.", s: ["Synchronizer chain mitigates between clock domains."], a: "Metastability" }), ref: "p.391" },
+        solution: S({
+          c: "A setup/hold violation can drive a flip-flop into METASTABILITY - the output hovers between 0 and 1 (or oscillates) before settling unpredictably.",
+          s: ["<b>Step 1 — Match.</b> Metastability.","<b>Step 2 — Distractor audit.</b> Not physical damage, a reset, or a speedup."],
+          a: "Metastability.",
+          v: "It's the classic hazard when crossing clock domains (input async to the clock) - a two-flip-flop synchronizer gives the metastable state time to resolve before downstream logic uses it."
+        }), ref: "p.391" },
       { q: "Number of inputs to 16-to-1 MUX (data + select):",
         choices: ["16 data + 4 select = 20", "16", "20", "32"], correct: 0,
-        solution: S({ c: "MUX with $N$ inputs needs $\\log_2 N$ select lines.", s: ["16 data + 4 select."], a: "20 total" }), ref: "p.390" },
+        solution: S({
+          c: "A 16-to-1 MUX needs 16 data inputs plus $\\log_2 16 = 4$ select lines = 20 total inputs.",
+          s: ["<b>Step 1 — Apply.</b> $16 + 4 = 20$.","<b>Step 2 — Distractor audit.</b> 16 forgets the selects; 32 over-counts; '20' alone matches but the answer notes the breakdown."],
+          a: "16 data + 4 select = 20.",
+          v: "The select lines scale logarithmically: $N$ data inputs need $\\log_2 N$ selects (8->3, 16->4, 32->5). The selects form the binary 'address' of which input to route through."
+        }), ref: "p.390" },
       { q: "BCD adder for 9 + 1: result needs correction (add 6) because:",
         choices: ["10 > 9 valid BCD; must produce '10' as two digits", "BCD only goes to 9", "Same as binary", "Random"], correct: 0,
-        solution: S({ c: "BCD invalid: digit > 9. Add 6 (0110) to shift into next BCD digit.", s: [""], a: "Carry to next decade" }), ref: "p.390" },
+        solution: S({
+          c: "$9+1=10$, but binary 1010 isn't a valid BCD digit (BCD only encodes 0-9). Adding 6 (0110) corrects it, producing a carry into the next decade and 0000 in this one.",
+          s: ["<b>Step 1 — Reason.</b> Result >9 is invalid BCD -> add 6 to roll over to '10' as two BCD digits.","<b>Step 2 — Distractor audit.</b> 'BCD only goes to 9' is true but the MECHANISM is the +6 correction/carry; not same as binary."],
+          a: "Carry to the next decade (add 6).",
+          v: "BCD wastes codes 1010-1111, so any sum landing there needs the +6 fix to skip the gap - this is how BCD adders keep each 4-bit group a valid decimal digit, used in displays and finance."
+        }), ref: "p.390" },
       { q: "Gray code adjacent values differ by 1 bit, advantage in:",
         choices: ["Encoders, K-maps, async circuits — avoids transient incorrect codes", "Faster computation", "Encryption", "Compression"], correct: 0,
-        solution: S({ c: "Gray code: only one transition at a time → no glitch on transitions.", s: [""], a: "Glitch avoidance" }), ref: "p.388" },
+        solution: S({
+          c: "Gray code's single-bit-change property prevents transient wrong codes during transitions - valuable in rotary ENCODERS, K-maps, and asynchronous circuits.",
+          s: ["<b>Step 1 — Match.</b> Encoders, K-maps, async circuits (avoids transient codes).","<b>Step 2 — Distractor audit.</b> Not faster computation, encryption, or compression."],
+          a: "Glitch/transient avoidance.",
+          v: "If multiple bits changed at once (like binary 0111->1000), brief intermediate values could be misread - Gray code's one-bit transitions eliminate that ambiguity. K-maps use it so adjacent cells differ by one variable."
+        }), ref: "p.388" },
       { q: "Synchronous FSM design steps:",
         choices: ["State diagram → state table → state encoding → logic equations", "Random", "Just write code", "Start with hardware"], correct: 0,
-        solution: S({ c: "Standard methodology for state machine design.", s: [""], a: "Standard flow" }), ref: "p.391" },
+        solution: S({
+          c: "Standard FSM design flow: state diagram -> state table -> state encoding (assign bit patterns) -> derive logic equations for next-state and outputs.",
+          s: ["<b>Step 1 — Match.</b> Diagram -> table -> encoding -> equations.","<b>Step 2 — Distractor audit.</b> Not random, 'just write code', or 'start with hardware'."],
+          a: "Diagram -> table -> encoding -> equations.",
+          v: "This systematic methodology turns a behavioral spec into gates and flip-flops - the encoding choice (binary, one-hot, Gray) affects the resulting logic complexity and speed."
+        }), ref: "p.391" },
     ],
 
     // CompSys — +10
     16: [
       { q: "Big-endian byte order: 0x12345678 in memory at address 0x100:",
         choices: ["100:12, 101:34, 102:56, 103:78", "100:78, 101:56, 102:34, 103:12", "Random", "All same"], correct: 0,
-        solution: S({ c: "Big-endian: MSB first (at low address).", s: ["Used: network byte order (TCP/IP), SPARC, PowerPC."], a: "MSB at low address" }), ref: "p.408" },
+        solution: S({
+          c: "Big-endian stores the MOST-significant byte at the LOWEST address: 0x12 at 0x100, then 0x34, 0x56, 0x78.",
+          s: ["<b>Step 1 — Match.</b> 100:12, 101:34, 102:56, 103:78.","<b>Step 2 — Distractor audit.</b> The reverse (78 first) is LITTLE-endian; not random or all-same."],
+          a: "MSB at the low address.",
+          v: "Big-endian is 'network byte order' (TCP/IP, also SPARC/PowerPC); x86 is little-endian (LSB first). Mismatches require byte-swapping when exchanging binary data between systems."
+        }), ref: "p.408" },
       { q: "Memory hierarchy access times (typical):",
         choices: ["Register: <1 ns, L1: 1-3 ns, L2: 5-15 ns, RAM: 50-100 ns, SSD: 25 µs, HDD: 5 ms", "All similar", "DRAM fastest", "Tape fast"], correct: 0,
-        solution: S({ c: "Each tier roughly 10× slower as we go down.", s: [""], a: "Wide range" }), ref: "p.407" },
+        solution: S({
+          c: "Access time grows by roughly 10x at each level down: register <1 ns, L1 ~1-3 ns, L2 ~5-15 ns, DRAM ~50-100 ns, SSD ~25 us, HDD ~5 ms.",
+          s: ["<b>Step 1 — Match.</b> The wide-range tiered list.","<b>Step 2 — Distractor audit.</b> Not 'all similar'; DRAM isn't fastest; tape is slowest, not fast."],
+          a: "Tiered, ~10x slower per level.",
+          v: "The enormous span (sub-ns registers to ms disks - a factor of a MILLION+) is exactly why caching and locality matter so much: keeping hot data in fast tiers dominates real performance."
+        }), ref: "p.407" },
       { q: "Spinning waiting (busy-wait) loop:",
         choices: ["Wastes CPU cycles", "Saves power", "Faster", "Used for I/O"], correct: 0,
-        solution: S({ c: "Busy-wait: CPU loops checking condition.", s: ["Alternative: blocking with interrupt/wakeup. Better for low-CPU."], a: "Wastes CPU" }), ref: "p.408" },
+        solution: S({
+          c: "A busy-wait (spin) loop has the CPU repeatedly check a condition, WASTING CPU cycles while it waits.",
+          s: ["<b>Step 1 — Match.</b> Wastes CPU cycles.","<b>Step 2 — Distractor audit.</b> It doesn't save power or run faster; it's a poor fit for slow I/O."],
+          a: "Wastes CPU cycles.",
+          v: "The alternative - blocking and waking on an interrupt - frees the CPU for other work. Spinning is justified ONLY for very short waits where the wake-up overhead would exceed the spin."
+        }), ref: "p.408" },
       { q: "RAID 5: requires minimum disks:",
         choices: ["$3$ (data + distributed parity)", "$2$", "$4$", "$5$"], correct: 0,
-        solution: S({ c: "RAID 5: striping with distributed parity. Min 3 disks.", s: ["Tolerates 1 disk failure.", "Capacity: $(N-1) \\cdot \\text{disk size}$."], a: "$3$" }), ref: "p.407" },
+        solution: S({
+          c: "RAID 5 stripes data with DISTRIBUTED parity, requiring a minimum of 3 disks. It tolerates one disk failure.",
+          s: ["<b>Step 1 — Match.</b> 3 disks.","<b>Step 2 — Distractor audit.</b> 2 is RAID 1 (mirror); 4/5 aren't the minimum for RAID 5."],
+          a: "3 disks.",
+          v: "Usable capacity is $(N-1)$ disks (one disk's worth goes to parity, spread across all). It survives ANY single drive failure by reconstructing from parity - the rebuild is the vulnerable window."
+        }), ref: "p.407" },
       { q: "RAID 10 (1+0): combines:",
         choices: ["Mirroring + striping (typically 4+ disks)", "Just striping", "Just parity", "Three different schemes"], correct: 0,
-        solution: S({ c: "RAID 10: stripe across mirrored pairs.", s: ["Performance of striping + redundancy of mirroring."], a: "Mirror + stripe" }), ref: "p.407" },
+        solution: S({
+          c: "RAID 10 combines MIRRORING and STRIPING - it stripes data across mirrored pairs (needs 4+ disks).",
+          s: ["<b>Step 1 — Match.</b> Mirroring + striping.","<b>Step 2 — Distractor audit.</b> Not just striping (RAID 0) or just parity (RAID 5); only two schemes combined."],
+          a: "Mirror + stripe.",
+          v: "It gets striping's speed AND mirroring's redundancy (tolerates multiple failures if not in the same pair) - at the cost of 50% capacity. Favored for high-performance databases."
+        }), ref: "p.407" },
       { q: "x86 vs ARM instruction set:",
         choices: ["x86: CISC, variable length; ARM: RISC, fixed length", "Same", "x86 is RISC", "ARM is CISC"], correct: 0,
-        solution: S({ c: "x86: complex instructions, variable encoding 1-15 bytes.", s: ["ARM: 32-bit fixed (AArch32) or 16/32-bit mixed (Thumb), simpler decode."], a: "CISC vs RISC" }), ref: "p.408" },
+        solution: S({
+          c: "x86 is CISC (complex, variable-length instructions); ARM is RISC (simpler, fixed-length instructions, easier to decode/pipeline).",
+          s: ["<b>Step 1 — Match.</b> x86 CISC/variable; ARM RISC/fixed.","<b>Step 2 — Distractor audit.</b> Not 'same'; x86 isn't RISC; ARM isn't CISC."],
+          a: "CISC (x86) vs RISC (ARM).",
+          v: "x86 instructions span 1-15 bytes (complex decode); ARM uses fixed 32-bit (or 16/32-bit Thumb). RISC's regularity aids pipelining and power efficiency - why ARM dominates mobile. Modern x86 decodes CISC into RISC-like micro-ops internally."
+        }), ref: "p.408" },
       { q: "Out-of-order (OoO) execution:",
         choices: ["Reorder instructions for parallelism while preserving observable semantics", "Slower", "Skip instructions", "Linear"], correct: 0,
-        solution: S({ c: "OoO: execute when operands ready, in any order, then retire in program order.", s: ["Major performance gain over in-order CPUs."], a: "Reorder for ILP" }), ref: "p.408" },
+        solution: S({
+          c: "Out-of-order execution REORDERS instructions to run them as soon as their operands are ready (exploiting instruction-level parallelism), while preserving the program's observable results (retiring in order).",
+          s: ["<b>Step 1 — Match.</b> Reorder for parallelism, preserve semantics.","<b>Step 2 — Distractor audit.</b> Not slower, not skipping instructions, not linear/in-order."],
+          a: "Reorder for ILP (results preserved).",
+          v: "OoO keeps execution units busy during stalls (e.g. a cache miss) by running independent later instructions first - a major speedup over in-order CPUs. A reorder buffer ensures correct retirement order."
+        }), ref: "p.408" },
       { q: "DMA controller benefits:",
         choices: ["Offloads I/O bulk transfers from CPU", "Faster CPU", "More memory", "Reduces cost"], correct: 0,
-        solution: S({ c: "DMA transfers without CPU intervention.", s: ["CPU can compute while DMA moves data."], a: "Offloads CPU" }), ref: "p.408" },
+        solution: S({
+          c: "A DMA controller OFFLOADS bulk I/O transfers from the CPU - moving data between device and memory without per-byte CPU involvement.",
+          s: ["<b>Step 1 — Match.</b> Offloads I/O bulk transfers from CPU.","<b>Step 2 — Distractor audit.</b> Not a faster CPU, more memory, or cheaper - it frees the CPU."],
+          a: "Offloads the CPU.",
+          v: "While DMA moves a disk block or network packet, the CPU computes in parallel, getting an interrupt only when the whole transfer completes - essential for high-throughput I/O."
+        }), ref: "p.408" },
       { q: "Memory-mapped I/O:",
         choices: ["I/O devices appear as memory addresses", "I/O has own bus", "Special instructions", "Same as paging"], correct: 0,
-        solution: S({ c: "MMIO: device registers in memory address space → load/store access.", s: ["Alternative: port-mapped I/O (x86 IN/OUT)."], a: "Devices in memory space" }), ref: "p.408" },
+        solution: S({
+          c: "Memory-mapped I/O places device registers in the regular MEMORY address space, so ordinary load/store instructions access them.",
+          s: ["<b>Step 1 — Match.</b> I/O devices appear as memory addresses.","<b>Step 2 — Distractor audit.</b> Port-mapped I/O uses SEPARATE address space and special instructions (x86 IN/OUT); not the same as paging."],
+          a: "Devices in the memory address space.",
+          v: "MMIO is clean - no special I/O instructions, full addressing modes work on devices. The alternative, port-mapped I/O (x86's IN/OUT), keeps I/O in its own space. ARM and most RISC use MMIO exclusively."
+        }), ref: "p.408" },
       { q: "Cache thrashing:",
         choices: ["Repeated misses due to working set > cache", "Cache hit", "Fast access", "Coherence"], correct: 0,
-        solution: S({ c: "Working set doesn't fit → cache evicts useful data, then refetches.", s: ["Performance plummets.", "Mitigation: larger cache, better algorithms with locality."], a: "Excessive misses" }), ref: "p.407" },
+        solution: S({
+          c: "Cache thrashing is repeated cache MISSES because the active working set is larger than the cache - useful data is evicted and immediately refetched.",
+          s: ["<b>Step 1 — Match.</b> Repeated misses (working set > cache).","<b>Step 2 — Distractor audit.</b> Not a cache hit, fast access, or coherence."],
+          a: "Excessive misses from a too-large working set.",
+          v: "Performance plummets toward main-memory speeds when thrashing - mitigated by larger caches, better data layout, or restructuring algorithms to improve locality (e.g. cache-blocking matrix code)."
+        }), ref: "p.407" },
     ],
 
     // Software — +8
     17: [
       { q: "Big-O of insertion sort (worst case):",
         choices: ["$O(n^2)$", "$O(n)$", "$O(n\\log n)$", "$O(\\log n)$"], correct: 0,
-        solution: S({ c: "Insertion sort: shift elements in inner loop.", s: ["Best case (sorted input): O(n)."], a: "$O(n^2)$" }), ref: "p.415" },
+        solution: S({
+          c: "Insertion sort's worst case is $O(n^2)$ - each element may shift past all prior ones (reverse-sorted input).",
+          s: ["<b>Step 1 — Match.</b> $O(n^2)$.","<b>Step 2 — Distractor audit.</b> $O(n)$ is its BEST case; $O(n\\log n)$ is mergesort/heapsort; $O(\\log n)$ is too fast."],
+          a: "$O(n^2)$.",
+          v: "Despite the quadratic worst case, insertion sort is fast for SMALL or NEARLY-SORTED data (low constant, adaptive) - which is why hybrid sorts (Timsort) use it on small partitions."
+        }), ref: "p.415" },
       { q: "Insertion sort best case:",
         choices: ["$O(n)$ (already sorted input)", "$O(n^2)$", "$O(\\log n)$", "$O(1)$"], correct: 0,
-        solution: S({ c: "Already sorted: each insertion is O(1) (no shift).", s: ["Useful for nearly-sorted data."], a: "$O(n)$" }), ref: "p.415" },
+        solution: S({
+          c: "On already-sorted input, insertion sort runs in $O(n)$ - each element needs no shifting, just one comparison.",
+          s: ["<b>Step 1 — Match.</b> $O(n)$ (already sorted).","<b>Step 2 — Distractor audit.</b> $O(n^2)$ is the worst case; $O(\\log n)$ and $O(1)$ are too fast."],
+          a: "$O(n)$.",
+          v: "This ADAPTIVE behavior (fast on nearly-sorted data) is insertion sort's selling point - it makes a great finishing pass and is used inside Timsort/introsort for small or partially-ordered runs."
+        }), ref: "p.415" },
       { q: "Linked list vs array memory:",
         choices: ["List: extra pointer per node; Array: contiguous, less overhead per element", "Same", "List always smaller", "Array always larger"], correct: 0,
-        solution: S({ c: "Linked list: O(1) extra per node for pointer(s).", s: ["Array: just data elements + length field."], a: "List has pointer overhead" }), ref: "p.415" },
+        solution: S({
+          c: "A linked list stores an extra POINTER per node (overhead); an array stores elements contiguously with minimal per-element overhead.",
+          s: ["<b>Step 1 — Match.</b> List has pointer overhead; array is contiguous.","<b>Step 2 — Distractor audit.</b> Not 'same'; list isn't always smaller; array isn't always larger."],
+          a: "List: pointer overhead; array: contiguous.",
+          v: "The trade: arrays are memory-compact and cache-friendly (great for iteration) but costly to insert/resize; lists insert cheaply but waste space on pointers and scatter through memory (poor cache locality)."
+        }), ref: "p.415" },
       { q: "Recursion vs iteration: memory:",
         choices: ["Recursion uses stack frames (more memory)", "Iteration more memory", "Same", "Random"], correct: 0,
-        solution: S({ c: "Each recursive call adds stack frame.", s: ["Tail-call optimization (in some languages): equivalent to iteration."], a: "Recursion: more stack" }), ref: "p.415" },
+        solution: S({
+          c: "Recursion consumes STACK frames (one per call), using more memory than iteration, which uses a fixed amount.",
+          s: ["<b>Step 1 — Match.</b> Recursion uses stack frames (more memory).","<b>Step 2 — Distractor audit.</b> Iteration isn't more memory; not 'same' or random."],
+          a: "Recursion uses more (stack).",
+          v: "Deep recursion risks STACK OVERFLOW; iteration avoids it. Tail-call optimization (in some languages) compiles tail recursion to a loop, erasing the memory penalty."
+        }), ref: "p.415" },
       { q: "Hash function for strings: must:",
         choices: ["Be deterministic, distribute uniformly", "Random", "Always 0", "Use only first char"], correct: 0,
-        solution: S({ c: "Good hash: same input → same output, uniform distribution.", s: ["Common: polynomial hash, FNV, MurmurHash, xxHash."], a: "Deterministic + uniform" }), ref: "p.415" },
+        solution: S({
+          c: "A good string hash must be DETERMINISTIC (same string -> same hash) and distribute keys UNIFORMLY (minimize collisions).",
+          s: ["<b>Step 1 — Match.</b> Deterministic, uniform distribution.","<b>Step 2 — Distractor audit.</b> Not random (breaks lookup); not always 0; using only the first char clusters badly."],
+          a: "Deterministic and uniform.",
+          v: "Uniformity keeps hash-table operations near O(1) by spreading keys across buckets - common choices: polynomial hashing, FNV, MurmurHash, xxHash. Cryptographic hashes add irreversibility (different goal)."
+        }), ref: "p.415" },
       { q: "Sorted array search:",
         choices: ["$O(\\log n)$ with binary search", "$O(n)$", "$O(1)$", "$O(n^2)$"], correct: 0,
-        solution: S({ c: "Binary search on sorted array.", s: [""], a: "$O(\\log n)$" }), ref: "p.415" },
+        solution: S({
+          c: "A sorted array supports BINARY SEARCH in $O(\\log n)$ - halving the search range each step.",
+          s: ["<b>Step 1 — Match.</b> $O(\\log n)$ (binary search).","<b>Step 2 — Distractor audit.</b> $O(n)$ is linear search (any array); $O(1)$ needs a hash/index; $O(n^2)$ is wrong."],
+          a: "$O(\\log n)$.",
+          v: "Binary search of a million items takes only ~20 comparisons - but it REQUIRES sorted data. If you search repeatedly, sort once ($O(n\\log n)$) then binary-search many times."
+        }), ref: "p.415" },
       { q: "Stack overflow in recursion:",
         choices: ["Too deep recursion exhausts stack memory", "RAM full", "Heap leak", "GC fail"], correct: 0,
-        solution: S({ c: "Each recursive call uses stack. Deep recursion → stack overflow.", s: ["Iterative version or TCO avoids this."], a: "Stack exhaustion" }), ref: "p.408" },
+        solution: S({
+          c: "Stack overflow happens when recursion goes TOO DEEP and exhausts the limited call-stack memory.",
+          s: ["<b>Step 1 — Match.</b> Too-deep recursion exhausts the stack.","<b>Step 2 — Distractor audit.</b> Not full RAM, a heap leak, or GC failure - it's the bounded stack."],
+          a: "Stack memory exhaustion.",
+          v: "Each call adds a frame to the fixed-size stack (typically 1-8 MB); unbounded recursion overflows it. Convert to iteration, add a base case, or rely on tail-call optimization to avoid it."
+        }), ref: "p.408" },
       { q: "DFS traversal order on binary tree (root, then recursively):",
         choices: ["Preorder, inorder, postorder variants", "BFS only", "Random", "Just one order"], correct: 0,
-        solution: S({ c: "Preorder: root, left, right. Inorder: left, root, right. Postorder: left, right, root.", s: ["Inorder of BST: sorted output."], a: "Three variants" }), ref: "p.415" },
+        solution: S({
+          c: "Depth-first traversal of a binary tree comes in three variants by WHEN the root is visited: PREorder (root, left, right), INorder (left, root, right), POSTorder (left, right, root).",
+          s: ["<b>Step 1 — Match.</b> Preorder, inorder, postorder variants.","<b>Step 2 — Distractor audit.</b> BFS is the breadth-first (level-order) alternative; not random or single-order."],
+          a: "Preorder, inorder, postorder.",
+          v: "INorder traversal of a binary SEARCH tree yields sorted output - a key property. Preorder is used to copy/serialize a tree; postorder to delete it (children before parent)."
+        }), ref: "p.415" },
     ],
   };
 

@@ -139,7 +139,10 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   Python script (_b.py) to the repo folder via Desktop Commander write_file, then running
   `python3 _b.py` (short command). This avoids both the shell-length block AND JSON escaping — the
   reliable method for the remaining large files.
-- **Remaining upgrade targets:** questions.js (164 — already has concept/steps/answer/verify,
-  user requested full Step-format upgrade anyway),
-  extra8 (191) — standard S() format; extra9/extra10
+- **2026-06-12 — extra8 (Round 9) COMPLETE (191/191):** all 17 chapters upgraded to teach-from-zero
+  across 5 checkpoints, using the _b.py file-write method (write self-contained Python to repo, run
+  `python3 _b.py`). Integrity scan 191/191 Step-format.
+- **Remaining upgrade target:** questions.js (164 — already has concept/steps/answer/verify,
+  user requested full Step-format upgrade anyway); extra9/extra10
   (~60 q) use template-literal SVG helpers and need their own careful session.
+- **ALL compact-inline drill files now teach-from-zero:** extra, extra2-extra8, extra11-extra13.
