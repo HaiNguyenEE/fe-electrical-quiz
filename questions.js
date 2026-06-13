@@ -1675,15 +1675,15 @@ const QUESTION_BANK = {
           choices: ["$354$ pF", "$354$ nF", "$0.354$ pF", "$3.54\\ \\mu$F"],
           correct: 0,
           solution: S({
-            c: "Parallel-plate capacitance: $C = \\dfrac{\\varepsilon_0 \\varepsilon_r A}{d}$. $\\varepsilon_0 = 8.854\\times 10^{-12}$ F/m.",
+            c: "Parallel-plate capacitance: $C=\\dfrac{\\varepsilon_0\\varepsilon_r A}{d}$, with $\\varepsilon_0=8.854\\times10^{-12}$ F/m. Watch the unit conversions.",
             s: [
-              "Convert area: $A = 100$ cm² $= 0.01$ m². Distance: $d = 1$ mm $= 0.001$ m.",
-              "Plug in: $C = (8.854\\times 10^{-12})(4)(0.01)/0.001$.",
-              "Numerator: $8.854\\times 10^{-12} \\cdot 0.04 = 3.54\\times 10^{-13}$.",
-              "Divide by $d=10^{-3}$: $C = 3.54\\times 10^{-10}$ F $= 354$ pF."
+              "<b>Step 1 — Convert.</b> $A=100$ cm$^2=0.01$ m$^2$; $d=1$ mm $=0.001$ m.",
+              "<b>Step 2 — Apply.</b> $C=(8.854\\times10^{-12})(4)(0.01)/0.001=3.54\\times10^{-10}$ F.",
+              "<b>Step 3 — Express.</b> $=354$ pF.",
+              "<b>Step 4 — Distractor audit.</b> $354$ nF and $3.54\\ \\mu$F are 1000x/10000x off (unit slips); $0.354$ pF is far too small."
             ],
-            a: "$C \\approx 354$ pF",
-            v: "Higher $\\varepsilon_r$ → more capacitance. Smaller $d$ → more capacitance (but breakdown risk)."
+            a: "$C\\approx354$ pF",
+            v: "Higher $\\varepsilon_r$ or smaller gap $d$ -> more capacitance (but a smaller gap risks dielectric breakdown)."
           }),
           ref: "Handbook p.355" },
 
@@ -1691,14 +1691,15 @@ const QUESTION_BANK = {
           choices: ["$0.277$", "$0.5$", "$0.1$", "$0.707$"],
           correct: 0,
           solution: S({
-            c: "Reflection coefficient: $\\Gamma = \\dfrac{Z_L - Z_0}{Z_L + Z_0}$. Magnitude $|\\Gamma|$ between 0 (matched) and 1 (totally reflected).",
+            c: "Reflection coefficient $\\Gamma=\\dfrac{Z_L-Z_0}{Z_L+Z_0}$; its magnitude runs 0 (matched) to 1 (total reflection).",
             s: [
-              "Numerator: $Z_L - Z_0 = (75+j25) - 50 = 25 + j25$. $|num| = \\sqrt{625+625} = \\sqrt{1250} \\approx 35.36$.",
-              "Denominator: $Z_L + Z_0 = 125 + j25$. $|den| = \\sqrt{15625+625} = \\sqrt{16250} \\approx 127.48$.",
-              "$|\\Gamma| = 35.36/127.48 \\approx 0.277$."
+              "<b>Step 1 — Numerator.</b> $Z_L-Z_0=25+j25$, $|num|=\\sqrt{1250}=35.36$.",
+              "<b>Step 2 — Denominator.</b> $Z_L+Z_0=125+j25$, $|den|=\\sqrt{16250}=127.48$.",
+              "<b>Step 3 — Ratio.</b> $|\\Gamma|=35.36/127.48\\approx0.277$.",
+              "<b>Step 4 — Distractor audit.</b> $0.5$, $0.1$, $0.707$ don't match the computed ratio."
             ],
-            a: "$|\\Gamma| \\approx 0.277$",
-            v: "Power reflected ratio: $|\\Gamma|^2 \\approx 0.077 = 7.7\\%$. Power delivered: 92.3% of incident."
+            a: "$|\\Gamma|\\approx0.277$",
+            v: "Power reflected is $|\\Gamma|^2\\approx7.7\\%$, so 92.3% is delivered to the load ✓ - matching minimizes reflection."
           }),
           ref: "Handbook p.368" },
 
@@ -1706,14 +1707,13 @@ const QUESTION_BANK = {
           choices: ["$1.77$", "$2.0$", "$1.0$", "$5.0$"],
           correct: 0,
           solution: S({
-            c: "Voltage Standing Wave Ratio: $\\text{VSWR} = \\dfrac{1+|\\Gamma|}{1-|\\Gamma|}$. Range: 1 (matched) to ∞ (open/short).",
+            c: "VSWR $=\\dfrac{1+|\\Gamma|}{1-|\\Gamma|}$, ranging 1 (matched) to infinity (open/short).",
             s: [
-              "Numerator: $1 + 0.277 = 1.277$.",
-              "Denominator: $1 - 0.277 = 0.723$.",
-              "VSWR = $1.277/0.723 \\approx 1.766$."
+              "<b>Step 1 — Apply.</b> $(1+0.277)/(1-0.277)=1.277/0.723\\approx1.77$.",
+              "<b>Step 2 — Distractor audit.</b> $2.0$ needs $|\\Gamma|=0.33$; $1.0$ is a perfect match; $5.0$ is far worse."
             ],
-            a: "VSWR ≈ 1.77",
-            v: "Antennas with VSWR < 2 considered well matched. VSWR = 1.5 is ~96% power transfer."
+            a: "VSWR $\\approx1.77$",
+            v: "Antennas with VSWR < 2 are considered well matched ✓; VSWR=1.5 already transfers ~96% of power."
           }),
           ref: "Handbook p.368" },
 
@@ -1721,14 +1721,14 @@ const QUESTION_BANK = {
           choices: ["$2\\ \\mu$T", "$10\\ \\mu$T", "$2$ T", "$0.2$ mT"],
           correct: 0,
           solution: S({
-            c: "Ampère's law for an infinite wire: $B = \\dfrac{\\mu_0 I}{2\\pi r}$.",
+            c: "Ampere's law for an infinite straight wire: $B=\\dfrac{\\mu_0 I}{2\\pi r}$.",
             s: [
-              "$\\mu_0 I = (4\\pi\\times 10^{-7})(10) = 4\\pi \\times 10^{-6}$.",
-              "$2\\pi r = 2\\pi$.",
-              "$B = (4\\pi \\times 10^{-6})/(2\\pi) = 2\\times 10^{-6}$ T = 2 µT."
+              "<b>Step 1 — Numerator.</b> $\\mu_0 I=(4\\pi\\times10^{-7})(10)=4\\pi\\times10^{-6}$.",
+              "<b>Step 2 — Divide.</b> $B=4\\pi\\times10^{-6}/(2\\pi)=2\\times10^{-6}$ T.",
+              "<b>Step 3 — Distractor audit.</b> $10\\ \\mu$T, $2$ T, $0.2$ mT are off by factors."
             ],
-            a: "$B = 2$ µT",
-            v: "Earth's surface B-field is ~50 µT — about 25× stronger than this wire field at 1 m."
+            a: "$B=2\\ \\mu$T",
+            v: "For scale, Earth's surface field is ~50 uT - about 25x this wire's field at 1 m. B falls as $1/r$ from a wire."
           }),
           ref: "Handbook p.355" },
 
@@ -1736,13 +1736,13 @@ const QUESTION_BANK = {
           choices: ["$0.02$ J", "$0.04$ J", "$0.01$ J", "$0.001$ J"],
           correct: 0,
           solution: S({
-            c: "Magnetic energy: $W = \\dfrac{1}{2} L I^2$.",
+            c: "Magnetic energy: $W=\\tfrac12LI^2$.",
             s: [
-              "$L = 0.01$ H, $I^2 = 4$.",
-              "$W = 0.5 \\cdot 0.01 \\cdot 4 = 0.02$ J."
+              "<b>Step 1 — Apply.</b> $W=\\tfrac12(0.01)(4)=0.02$ J.",
+              "<b>Step 2 — Distractor audit.</b> $0.04$ J forgets the $\\tfrac12$; $0.01$/$0.001$ J are off."
             ],
-            a: "$W = 0.02$ J",
-            v: "Energy = 20 mJ. This much energy released as spark when current is interrupted suddenly."
+            a: "$W=0.02$ J",
+            v: "Interrupting the current abruptly releases this 20 mJ as a voltage spike/spark ($v=L\\,di/dt$) - why flyback diodes protect switches."
           }),
           ref: "Handbook p.355" },
 
@@ -1750,15 +1750,13 @@ const QUESTION_BANK = {
           choices: ["$8.99\\times 10^9$ N·m²/C²", "$8.85\\times 10^{-12}$ F/m", "$6.626\\times 10^{-34}$ J·s", "$1.6\\times 10^{-19}$ C"],
           correct: 0,
           solution: S({
-            c: "Coulomb constant: $k_e = \\dfrac{1}{4\\pi\\varepsilon_0} \\approx 8.99\\times 10^9$ N·m²/C². Used in $F = k_e Q_1 Q_2 / r^2$.",
+            c: "Coulomb's constant $k_e=\\dfrac{1}{4\\pi\\varepsilon_0}\\approx8.99\\times10^9$ N$\\cdot$m$^2$/C$^2$, used in $F=k_eQ_1Q_2/r^2$.",
             s: [
-              "Choice A: Coulomb constant ✓.",
-              "Choice B: permittivity of free space $\\varepsilon_0$.",
-              "Choice C: Planck's constant $h$.",
-              "Choice D: elementary charge $e$."
+              "<b>Step 1 — Match.</b> $8.99\\times10^9$ N$\\cdot$m$^2$/C$^2$.",
+              "<b>Step 2 — Distractor audit.</b> $8.85\\times10^{-12}$ is $\\varepsilon_0$; $6.626\\times10^{-34}$ is Planck's $h$; $1.6\\times10^{-19}$ is the electron charge $e$."
             ],
-            a: "$k_e = 8.99\\times 10^9$ N·m²/C²",
-            v: "Connection: $1/(4\\pi \\cdot 8.854\\times 10^{-12}) \\approx 8.99\\times 10^9$ ✓"
+            a: "$k_e=8.99\\times10^9$ N$\\cdot$m$^2$/C$^2$",
+            v: "Consistency: $1/(4\\pi\\times8.854\\times10^{-12})\\approx8.99\\times10^9$ ✓ - $k_e$ and $\\varepsilon_0$ are two faces of the same constant."
           }),
           ref: "Handbook p.355" },
 
@@ -1766,15 +1764,13 @@ const QUESTION_BANK = {
           choices: ["$-\\partial B/\\partial t$", "$\\rho/\\varepsilon_0$", "$J$", "$0$"],
           correct: 0,
           solution: S({
-            c: "Faraday's law (Maxwell #3): $\\nabla\\times \\vec{E} = -\\dfrac{\\partial \\vec{B}}{\\partial t}$. A time-varying magnetic field induces a circulating electric field.",
+            c: "Faraday's law (Maxwell #3): $\\nabla\\times\\vec E=-\\dfrac{\\partial\\vec B}{\\partial t}$ - a changing magnetic field induces a circulating electric field.",
             s: [
-              "Choice A: Faraday's law ✓.",
-              "Choice B: Gauss for E: $\\nabla\\cdot \\vec{E} = \\rho/\\varepsilon_0$.",
-              "Choice C: part of Ampère-Maxwell: $\\nabla\\times \\vec{H} = \\vec{J} + \\partial \\vec{D}/\\partial t$.",
-              "Choice D: Gauss for B: $\\nabla\\cdot \\vec{B} = 0$ (no magnetic monopoles)."
+              "<b>Step 1 — Match.</b> $-\\partial B/\\partial t$.",
+              "<b>Step 2 — Distractor audit.</b> $\\rho/\\varepsilon_0$ is Gauss for E ($\\nabla\\cdot E$); $J$ relates to Ampere ($\\nabla\\times H$); 0 is Gauss for B ($\\nabla\\cdot B$, no monopoles)."
             ],
-            a: "$\\nabla\\times \\vec{E} = -\\partial \\vec{B}/\\partial t$",
-            v: "This law is the basis of electromagnetic induction — transformers, generators, RF antennas."
+            a: "$\\nabla\\times\\vec E=-\\partial\\vec B/\\partial t$",
+            v: "This is the basis of ALL electromagnetic induction - transformers, generators, and antennas all run on Faraday's law."
           }),
           ref: "Handbook p.355" },
       ],
@@ -1787,13 +1783,14 @@ const QUESTION_BANK = {
           choices: ["$10/(s+12)$", "$10/(s+2)$", "$(s+2)/10$", "$10s/(s+12)$"],
           correct: 0,
           solution: S({
-            c: "Closed-loop transfer function for negative unity feedback: $T(s) = \\dfrac{G(s)}{1 + G(s)}$.",
+            c: "Negative unity feedback: $T(s)=\\dfrac{G(s)}{1+G(s)}$.",
             s: [
-              "Form: $T = \\dfrac{10/(s+2)}{1 + 10/(s+2)}$.",
-              "Multiply top and bottom by $(s+2)$: $T = \\dfrac{10}{(s+2) + 10} = \\dfrac{10}{s+12}$."
+              "<b>Step 1 — Form.</b> $T=\\dfrac{10/(s+2)}{1+10/(s+2)}$.",
+              "<b>Step 2 — Clear.</b> Multiply by $(s+2)$: $T=\\dfrac{10}{s+2+10}=\\dfrac{10}{s+12}$.",
+              "<b>Step 3 — Distractor audit.</b> $10/(s+2)$ is the OPEN loop; $(s+2)/10$ inverts; $10s/(s+12)$ adds a spurious zero."
             ],
-            a: "$T(s) = \\dfrac{10}{s+12}$",
-            v: "The pole moved from $-2$ (open loop) to $-12$ (closed loop) — faster response."
+            a: "$T(s)=\\dfrac{10}{s+12}$",
+            v: "Feedback moved the pole from $-2$ to $-12$ - faster response. Pole-shifting is the whole purpose of feedback."
           }),
           ref: "Handbook p.365" },
 
@@ -1801,12 +1798,13 @@ const QUESTION_BANK = {
           choices: ["$0.833$", "$10$", "$12$", "$1$"],
           correct: 0,
           solution: S({
-            c: "DC gain: $T(0)$.",
+            c: "DC gain = $T(0)$ (steady-state response to a constant).",
             s: [
-              "Substitute $s = 0$: $T(0) = 10/12 = 5/6 \\approx 0.833$."
+              "<b>Step 1 — Set s=0.</b> $10/12=0.833$.",
+              "<b>Step 2 — Distractor audit.</b> $10$ is the numerator; $12$ the pole; $1$ is wrong."
             ],
-            a: "DC gain $\\approx 0.833$",
-            v: "Time constant: $\\tau = 1/12$ s; steady-state output of step is $0.833 \\cdot$ input."
+            a: "DC gain $\\approx0.833$",
+            v: "A constant input is scaled by 0.833 at steady state; time constant $\\tau=1/12$ s. (Note feedback reduced both the pole AND the DC gain from the open loop.)"
           }),
           ref: "Handbook p.366" },
 
@@ -1814,14 +1812,14 @@ const QUESTION_BANK = {
           choices: ["Stable (poles at $-1, -2$)", "Unstable", "Marginally stable", "Oscillatory"],
           correct: 0,
           solution: S({
-            c: "Stability: all poles must lie in the open left half-plane (negative real parts).",
+            c: "Stability requires ALL poles in the open left-half plane (negative real parts).",
             s: [
-              "Factor denominator: $s^2+3s+2 = (s+1)(s+2)$.",
-              "Poles: $s = -1, -2$.",
-              "Both have negative real parts → in LHP → <b>stable</b>."
+              "<b>Step 1 — Factor.</b> $s^2+3s+2=(s+1)(s+2)$.",
+              "<b>Step 2 — Poles.</b> $s=-1,-2$ - both LHP.",
+              "<b>Step 3 — Distractor audit.</b> Unstable needs a RHP pole; marginal needs a jw-axis pole; 'oscillatory' needs complex poles (these are real)."
             ],
-            a: "Stable; poles at $-1, -2$",
-            v: "Time response is overdamped (two real distinct poles)."
+            a: "Stable; poles at $-1, -2$.",
+            v: "Two distinct real poles -> OVERdamped (no overshoot). Both negative -> every mode decays -> stable."
           }),
           ref: "Handbook p.365" },
 
@@ -1829,13 +1827,13 @@ const QUESTION_BANK = {
           choices: ["$1/10$", "$1/9$", "$0$", "$\\infty$"],
           correct: 0,
           solution: S({
-            c: "Final value theorem applied: for Type-0 system with unit step input, $e_{ss} = \\dfrac{1}{1+K_p}$, where $K_p = \\lim_{s\\to 0} G(s)H(s)$ (position constant).",
+            c: "Type-0 step error: $e_{ss}=\\dfrac{1}{1+K_p}$, where $K_p=\\lim_{s\\to0}G(s)H(s)$ (position constant).",
             s: [
-              "Type 0 has $K_p$ finite (so $e_{ss}$ to step is finite, nonzero).",
-              "Plug in: $e_{ss} = 1/(1+9) = 1/10 = 0.1$ (10%)."
+              "<b>Step 1 — Apply.</b> $e_{ss}=1/(1+9)=1/10=0.1$ (10%).",
+              "<b>Step 2 — Distractor audit.</b> $1/9$ forgets the +1; $0$ would need an integrator (Type 1); infinity would be the ramp error."
             ],
-            a: "$e_{ss} = 1/10 = 0.1$",
-            v: "To eliminate step error, use Type 1+ (integrator in loop) which gives $K_p = \\infty$ and $e_{ss}=0$."
+            a: "$e_{ss}=1/10=0.1$",
+            v: "To ZERO the step error, add an integrator (Type 1+) -> $K_p=\\infty$, $e_{ss}=0$. This is why the I term in PID exists."
           }),
           ref: "Handbook p.366" },
 
@@ -1843,12 +1841,13 @@ const QUESTION_BANK = {
           choices: ["$G_{eq}=20$", "$G_{eq}=9$", "$G_{eq}=0.8$", "$G_{eq}=1.25$"],
           correct: 0,
           solution: S({
-            c: "Block diagram reduction: blocks in series multiply ($G_1 G_2$); blocks in parallel add ($G_1 + G_2$).",
+            c: "Block-diagram reduction: series blocks MULTIPLY ($G_1 G_2$); parallel blocks ADD.",
             s: [
-              "Series: $G_{eq} = G_1 \\cdot G_2 = 4 \\cdot 5 = 20$."
+              "<b>Step 1 — Apply.</b> $4\\times5=20$.",
+              "<b>Step 2 — Distractor audit.</b> $9$ is PARALLEL (sum); $0.8$ and $1.25$ are ratios."
             ],
-            a: "$G_{eq} = 20$",
-            v: "If in parallel (summing junction): $G_{eq} = 4 + 5 = 9$ (choice B)."
+            a: "$G_{eq}=20$",
+            v: "Series multiplies, parallel adds, and a feedback loop becomes $G/(1+GH)$ - the three reduction rules that collapse any block diagram."
           }),
           ref: "Handbook p.365" },
 
@@ -1856,13 +1855,14 @@ const QUESTION_BANK = {
           choices: ["$-20$ dB", "$20$ dB", "$0$ dB", "$10$ dB"],
           correct: 0,
           solution: S({
-            c: "For $H(s)=1/s$, $|H(j\\omega)| = 1/\\omega$. In dB: $20\\log_{10}(1/\\omega) = -20\\log_{10}\\omega$.",
+            c: "For $H(s)=1/s$, $|H(j\\omega)|=1/\\omega$; in dB that's $-20\\log_{10}\\omega$.",
             s: [
-              "At $\\omega = 10$: $|H| = 1/10 = 0.1$.",
-              "dB: $20\\log_{10}(0.1) = 20(-1) = -20$ dB."
+              "<b>Step 1 — Magnitude.</b> At $\\omega=10$: $|H|=0.1$.",
+              "<b>Step 2 — dB.</b> $20\\log(0.1)=-20$ dB.",
+              "<b>Step 3 — Distractor audit.</b> $+20$ dB is a differentiator ($s$); $0$ dB is at $\\omega=1$; $10$ dB is wrong."
             ],
             a: "$-20$ dB",
-            v: "Integrator $1/s$ has straight-line Bode magnitude with slope $-20$ dB/decade, crossing 0 dB at $\\omega = 1$."
+            v: "The integrator $1/s$ has a straight Bode magnitude at $-20$ dB/decade, crossing 0 dB at $\\omega=1$ - infinite gain at DC (which kills steady-state error)."
           }),
           ref: "Handbook p.366" },
 
@@ -1870,13 +1870,14 @@ const QUESTION_BANK = {
           choices: ["$2$ (two sign changes)", "$1$", "$0$", "$3$"],
           correct: 0,
           solution: S({
-            c: "Routh-Hurwitz criterion: number of sign changes in the first column = number of right-half-plane (unstable) poles.",
+            c: "Routh-Hurwitz: the number of SIGN CHANGES in the first column equals the number of right-half-plane (unstable) poles.",
             s: [
-              "Sequence: $1 \\to 2$ (no change), $2 \\to -1$ (sign change #1), $-1 \\to 5$ (sign change #2).",
-              "Total: 2 sign changes → 2 RHP poles."
+              "<b>Step 1 — Scan.</b> $1\\to2$ (no change), $2\\to-1$ (change #1), $-1\\to5$ (change #2).",
+              "<b>Step 2 — Count.</b> 2 sign changes -> 2 RHP poles.",
+              "<b>Step 3 — Distractor audit.</b> $1$, $0$, $3$ miscount the sign changes."
             ],
-            a: "2 RHP poles → unstable",
-            v: "Any RHP pole → instability. Routh saves us from explicit factoring."
+            a: "2 RHP poles -> unstable.",
+            v: "Any RHP pole means instability - and Routh tells you HOW MANY without factoring the polynomial, its big practical advantage (also works symbolically with a gain K)."
           }),
           ref: "Handbook p.365" },
 
@@ -1884,13 +1885,14 @@ const QUESTION_BANK = {
           choices: ["$\\approx 1$ s", "$\\approx 0.25$ s", "$\\approx 4$ s", "$\\approx 2$ s"],
           correct: 0,
           solution: S({
-            c: "First-order system: $\\tau = 1/a$. 2% settling time $t_s \\approx 4\\tau = 4/a$.",
+            c: "First-order system: time constant $\\tau=1/a$; 2% settling time $t_s\\approx4\\tau=4/a$.",
             s: [
-              "$\\tau = 1/4 = 0.25$ s.",
-              "$t_s \\approx 4 \\cdot 0.25 = 1$ s."
+              "<b>Step 1 — Tau.</b> $\\tau=1/4=0.25$ s.",
+              "<b>Step 2 — Settling.</b> $t_s\\approx4(0.25)=1$ s.",
+              "<b>Step 3 — Distractor audit.</b> $0.25$ s is just $\\tau$; $4$ s and $2$ s misuse the factor."
             ],
-            a: "$t_s \\approx 1$ s",
-            v: "Rule of thumb: 5% settling = $3\\tau$, 2% = $4\\tau$, 1% = $5\\tau$."
+            a: "$t_s\\approx1$ s",
+            v: "Settling rules of thumb: 5% -> $3\\tau$, 2% -> $4\\tau$, 1% -> $5\\tau$. Faster decay (larger $a$, pole further left) settles sooner."
           }),
           ref: "Handbook p.366" },
 
@@ -1898,15 +1900,13 @@ const QUESTION_BANK = {
           choices: ["$30°$ to $60°$", "$> 180°$", "$< 0°$", "Exactly $0°$"],
           correct: 0,
           solution: S({
-            c: "Phase margin (PM) measures how much added phase delay would cause instability. PM > 0 → stable. Good design: 30-60° for good damping.",
+            c: "Phase margin = how much extra phase lag would push the loop to instability ($-180°$ at gain crossover). PM > 0 is stable; 30-60 degrees gives good damping.",
             s: [
-              "PM = 180° + ∠G(jω_gc) where ω_gc is gain crossover frequency.",
-              "PM < 30°: too oscillatory, ringing.",
-              "PM = 45-60°: well-damped (target).",
-              "PM = 60° corresponds roughly to $\\zeta \\approx 0.6$."
+              "<b>Step 1 — Match.</b> 30 to 60 degrees.",
+              "<b>Step 2 — Distractor audit.</b> >180 is unrealistic/sluggish; <0 is unstable; exactly 0 is on the edge."
             ],
-            a: "30° to 60°",
-            v: "Auto-tuning algorithms (Ziegler-Nichols, etc.) typically target PM ≈ 45°."
+            a: "$30°$ to $60°$.",
+            v: "PM is the frequency-domain damping measure: ~60 degrees corresponds to $\\zeta\\approx0.6$ (fast, low overshoot). PID auto-tuners typically target ~45 degrees."
           }),
           ref: "Handbook p.366" },
 
@@ -1914,15 +1914,14 @@ const QUESTION_BANK = {
           choices: ["Underdamped, about 4% overshoot", "Critically damped, no overshoot", "Overdamped", "Undamped oscillation"],
           correct: 0,
           solution: S({
-            c: "2nd-order system damping cases — based on $\\zeta$ (damping ratio): $\\zeta = 0$ undamped (pure oscillation); $0 < \\zeta < 1$ underdamped (overshoots, then decays); $\\zeta = 1$ critically damped (fastest with no overshoot); $\\zeta > 1$ overdamped (slow, no overshoot).",
+            c: "Damping cases: $\\zeta=0$ undamped; $0<\\zeta<1$ underdamped (overshoots); $\\zeta=1$ critically damped (fastest, no overshoot); $\\zeta>1$ overdamped (slow).",
             s: [
-              "$\\zeta = 0.707 = 1/\\sqrt{2}$ is in $(0, 1)$ → <b>underdamped</b>.",
-              "Overshoot formula: $M_p = e^{-\\zeta\\pi/\\sqrt{1-\\zeta^2}}$.",
-              "Plug $\\zeta = 0.707$: $M_p = e^{-0.707\\pi/0.707} = e^{-\\pi} \\approx 0.043 = 4.3\\%$ overshoot.",
-              "$\\zeta = 0.707$ is a common target — fast and well-damped."
+              "<b>Step 1 — Classify.</b> $0.707\\in(0,1)$ -> underdamped.",
+              "<b>Step 2 — Overshoot.</b> $M_p=e^{-\\zeta\\pi/\\sqrt{1-\\zeta^2}}=e^{-\\pi}\\approx4.3\\%$.",
+              "<b>Step 3 — Distractor audit.</b> Critically damped is $\\zeta=1$; overdamped is $\\zeta>1$; undamped is $\\zeta=0$."
             ],
-            a: "Underdamped, ~4.3% overshoot",
-            v: "Common control-design targets: $\\zeta = 0.5$ (~16% overshoot), $\\zeta = 0.707$ (~4% overshoot), $\\zeta = 1$ (0% overshoot but slow)."
+            a: "Underdamped, ~4.3% overshoot.",
+            v: "$\\zeta=0.707$ is THE popular design target - fast response with only ~4% overshoot. Calibration: $\\zeta=0.5$->16%, 0.707->4.3%, 1.0->0%."
           }),
           ref: "Handbook p.366" },
       ],
