@@ -504,64 +504,252 @@
     6: [
       { q: "Find $V_2$ in voltage divider: $V_{in}=24$V, $R_1=8$Ω, $R_2=4$Ω.",
         choices: ["$8$ V", "$12$ V", "$16$ V", "$24$ V"], correct: 0,
-        solution: S({ c: "$V_2 = V_{in} \\cdot R_2/(R_1+R_2)$.", s: ["$V_2 = 24 \\cdot 4/12 = 8$ V."], a: "$8$ V" }), ref: "p.356" },
+        solution: S({
+          c: "A series voltage divider splits the source voltage in proportion to resistance: $V_2 = V_{in}\\cdot\\dfrac{R_2}{R_1+R_2}$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $V_2 = 24\\cdot\\dfrac{4}{8+4} = 24\\cdot\\dfrac{4}{12} = 8$ V.",
+            "<b>Step 2 — Distractor audit.</b> 12 V would be an even split (equal R); 16 V is the drop across $R_1$; 24 V is the whole source."
+          ],
+          a: "$V_2 = 8$ V",
+          v: "Check: $V_1 = 24\\cdot8/12 = 16$ V, and $V_1+V_2 = 24$ V ✓ (KVL). The smaller resistor drops the smaller voltage — $R_2$ is half of $R_1$, so it gets half the voltage."
+
+        }), ref: "p.356" },
       { q: "Calc current through 5Ω resistor in parallel with 10Ω with $V$ = 20V across:",
         choices: ["$4$ A through 5Ω; $2$ A through 10Ω", "$6$ A; $0$ A", "Both 4 A", "Both 2 A"], correct: 0,
-        solution: S({ c: "Same V across both parallel branches. $I = V/R$.", s: ["$I_5 = 20/5 = 4$ A. $I_{10} = 20/10 = 2$ A."], a: "4 A and 2 A" }), ref: "p.356" },
+        solution: S({
+          c: "Elements in PARALLEL share the SAME voltage. Current divides by Ohm's law: $I = V/R$ in each branch (smaller R → bigger current).",
+          s: [
+            "<b>Step 1 — Same V = 20 V on both.</b> $I_5 = 20/5 = 4$ A.",
+            "<b>Step 2 — Other branch.</b> $I_{10} = 20/10 = 2$ A.",
+            "<b>Step 3 — Distractor audit.</b> '6 A; 0 A' and 'both equal' violate Ohm's law per branch."
+          ],
+          a: "4 A through 5Ω; 2 A through 10Ω.",
+          v: "Total current 6 A splits inversely to resistance — the 5Ω (lower R) hogs twice the current of the 10Ω ✓. Series shares current; parallel shares voltage."
+
+        }), ref: "p.356" },
       { q: "Power factor correction adds:",
         choices: ["Shunt capacitor for inductive load", "Series inductor", "Higher voltage", "More resistors"], correct: 0,
-        solution: S({ c: "Inductive load draws lagging Q; cap supplies leading Q → cancels.", s: [""], a: "Shunt capacitor" }), ref: "p.362" },
+        solution: S({
+          c: "Inductive loads (motors) draw LAGGING reactive power. A SHUNT (parallel) capacitor supplies LEADING reactive power that cancels it, raising the power factor toward 1.",
+          s: [
+            "<b>Step 1 — Match.</b> Shunt capacitor for inductive load.",
+            "<b>Step 2 — Distractor audit.</b> A series inductor would WORSEN it; higher voltage and more resistors don't correct pf."
+          ],
+          a: "A shunt (parallel) capacitor.",
+          v: "The capacitor's leading VARs offset the load's lagging VARs locally, so the source delivers mostly real power ✓ — cutting line current and $I^2R$ losses. It's wired in PARALLEL so it doesn't change the load's voltage."
+
+        }), ref: "p.362" },
       { q: "$V_s = 100$ V drives series $R = 10$Ω, $L = 0.1$H, $C = 100$µF at $\\omega = 100$ rad/s. Total Z:",
         choices: ["$10 + j(10-100)$ = $10 - j90$", "$10 + j10$", "$10 - j10$", "$100$"], correct: 0,
-        solution: S({ c: "$Z_L = j\\omega L = j10$. $Z_C = -j/(\\omega C) = -j100$. Series sum.", s: ["$Z = 10 + j10 - j100 = 10 - j90$."], a: "$10 - j90$ Ω (capacitive net)" }), ref: "p.360" },
+        solution: S({
+          c: "Series RLC impedance: $Z = R + j(X_L - X_C)$, where $X_L=\\omega L$ and $X_C=1/(\\omega C)$. The reactances partly cancel.",
+          s: [
+            "<b>Step 1 — Reactances.</b> $X_L=\\omega L=100(0.1)=10\\ \\Omega$; $X_C=1/(\\omega C)=1/(100\\cdot10^{-4})=100\\ \\Omega$.",
+            "<b>Step 2 — Combine.</b> $Z = 10 + j(10-100) = 10 - j90\\ \\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> $10+j10$ keeps only $X_L$; $10-j10$ mis-subtracts; $100$ ignores reactance."
+          ],
+          a: "$Z = 10 - j90\\ \\Omega$ (net capacitive).",
+          v: "Negative imaginary part → CAPACITIVE (current leads voltage) ✓. Since $X_C \\gg X_L$, the capacitor dominates — we're well BELOW the resonant frequency where they'd cancel exactly."
+
+        }), ref: "p.360" },
       { q: "Find Norton equivalent: voltage source 24V with 12Ω series.",
         choices: ["$I_N = 2$ A, $R_N = 12$Ω", "$24$ A", "$1$ A", "$0.5$ A"], correct: 0,
-        solution: S({ c: "$I_N = V_{Th}/R_{Th}$.", s: ["$24/12 = 2$ A. $R_N = 12$ Ω."], a: "$2$ A; $12$ Ω" }), ref: "p.357" },
+        solution: S({
+          c: "Source transformation: a Thévenin (voltage source $V_{Th}$ + series $R$) converts to a Norton (current source $I_N$ ∥ same $R$) via $I_N = V_{Th}/R_{Th}$, with $R_N = R_{Th}$.",
+          s: [
+            "<b>Step 1 — Norton current.</b> $I_N = 24/12 = 2$ A.",
+            "<b>Step 2 — Resistance unchanged.</b> $R_N = 12\\ \\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 24 A forgets the resistance; 1 A and 0.5 A misdivide."
+          ],
+          a: "$I_N = 2$ A, $R_N = 12\\ \\Omega$.",
+          v: "$I_N$ is also the SHORT-CIRCUIT current (short the terminals: $24/12 = 2$ A) ✓ — Norton and Thévenin are the same network seen two ways, with R identical in both."
+
+        }), ref: "p.357" },
       { q: "What is the rms value of a half-wave rectified sinusoid of peak $V_m$?",
         choices: ["$V_m/2$", "$V_m/\\pi$", "$V_m/\\sqrt{2}$", "$2V_m/\\pi$"], correct: 0,
-        solution: S({ c: "Half-wave: contains only half the energy of full sinusoid.", s: ["Average value: $V_m/\\pi$. RMS: $V_m/2$.", "Full sine RMS: $V_m/\\sqrt{2}$."], a: "$V_m/2$" }), ref: "p.383" },
+        solution: S({
+          c: "A half-wave rectifier passes only one half of each cycle (the other half is zero). Because only half the energy is present, its RMS is $V_m/2$ (vs $V_m/\\sqrt2$ for a full sine).",
+          s: [
+            "<b>Step 1 — Match.</b> $V_m/2$.",
+            "<b>Step 2 — Distractor audit.</b> $V_m/\\pi$ is the AVERAGE (DC) value; $V_m/\\sqrt2$ is the FULL-sine RMS; $2V_m/\\pi$ is the full-wave average."
+          ],
+          a: "$V_{rms} = V_m/2$",
+          v: "Compare the family: full sine RMS $V_m/\\sqrt2=0.707V_m$; half-wave RMS $V_m/2=0.5V_m$; half-wave average $V_m/\\pi=0.318V_m$ ✓. Half-wave keeps half the cycle, so RMS² is half → RMS is $V_m/2$."
+
+        }), ref: "p.383" },
       { q: "An AC source provides $V = 100\\sin(\\omega t)$ V. Half-wave rectified output average:",
         choices: ["$\\approx 31.8$ V", "$50$ V", "$100$ V", "$0$"], correct: 0,
-        solution: S({ c: "$V_{DC} = V_m/\\pi$.", s: ["$100/\\pi \\approx 31.83$ V."], a: "$\\approx 31.83$ V" }), ref: "p.383" },
+        solution: S({
+          c: "The AVERAGE (DC) value of a half-wave rectified sine is $V_{DC} = V_m/\\pi$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $V_{DC} = 100/\\pi = 31.83$ V.",
+            "<b>Step 2 — Distractor audit.</b> 50 V over-estimates; 100 V is the peak; 0 would be a symmetric AC (the rectifier removes the negative half)."
+          ],
+          a: "$\\approx 31.83$ V",
+          v: "A FULL-wave rectifier doubles this to $2V_m/\\pi = 63.7$ V ✓ — it captures both half-cycles. The DC value (average) is what a moving-coil meter reads; the RMS ($V_m/2=50$ V here) is what determines heating."
+
+        }), ref: "p.383" },
       { q: "Energy stored in 200 µF cap charged to 20 V:",
-        choices: ["$40$ mJ", "$2$ mJ", "$0.04$ J = 40 mJ (same)", "$80$ mJ"], correct: 0,
-        solution: S({ c: "$W = CV^2/2$.", s: ["$200\\times 10^{-6} \\cdot 400/2 = 0.04$ J = 40 mJ."], a: "$40$ mJ" }), ref: "p.358" },
+        choices: ["$40$ mJ", "$2$ mJ", "$0.4$ J", "$80$ mJ"], correct: 0,
+        solution: S({
+          c: "Capacitor energy: $W = \\tfrac12 CV^2$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $W = \\tfrac12(200\\times10^{-6})(20^2) = \\tfrac12(200\\times10^{-6})(400) = 0.04$ J = 40 mJ.",
+            "<b>Step 2 — Distractor audit.</b> 2 mJ forgets to square V; 0.4 J slips a decade; 80 mJ forgets the ½."
+          ],
+          a: "$W = 40$ mJ",
+          v: "The $V^2$ dependence means doubling voltage QUADRUPLES stored energy ✓ — which is why high-voltage capacitor banks store dangerous energy. Units: F·V² = J."
+
+        }), ref: "p.358" },
       { q: "RC discharge: 100V across cap, $\\tau = 1$ s. At $t = 3$ s:",
         choices: ["$\\approx 4.98$ V", "$50$ V", "$10$ V", "$0$"], correct: 0,
-        solution: S({ c: "$v(t) = V_0 e^{-t/\\tau}$.", s: ["$100 \\cdot e^{-3} = 100 \\cdot 0.0498 = 4.98$ V."], a: "$\\approx 4.98$ V" }), ref: "p.358" },
+        solution: S({
+          c: "A discharging capacitor decays exponentially: $v(t) = V_0 e^{-t/\\tau}$.",
+          s: [
+            "<b>Step 1 — At t = 3τ.</b> $v = 100\\,e^{-3} = 100(0.0498) = 4.98$ V.",
+            "<b>Step 2 — Distractor audit.</b> 50 V would be ~0.7τ; 10 V ~2.3τ; 0 would need many more τ."
+          ],
+          a: "$\\approx 4.98$ V",
+          v: "The discharge ladder: after $1\\tau$→37%, $2\\tau$→13.5%, $3\\tau$→5%, $5\\tau$→0.7% ✓. The '5τ rule' (≈99% done) is why a capacitor is considered fully discharged after five time constants."
+
+        }), ref: "p.358" },
       { q: "Switching frequency 1 kHz: period",
         choices: ["$1$ ms", "$1$ µs", "$1$ Hz", "$1$ s"], correct: 0,
-        solution: S({ c: "$T = 1/f$.", s: ["$T = 1/1000 = 0.001$ s = 1 ms."], a: "$1$ ms" }), ref: "p.360" },
+        solution: S({
+          c: "Period and frequency are reciprocals: $T = 1/f$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $T = 1/1000 = 0.001$ s = 1 ms.",
+            "<b>Step 2 — Distractor audit.</b> 1 µs is 1 MHz; 1 Hz and 1 s confuse the units."
+          ],
+          a: "$T = 1$ ms",
+          v: "Handy anchors: 1 kHz↔1 ms, 1 MHz↔1 µs, 1 GHz↔1 ns ✓ — each factor of 1000 in frequency is a factor of 1000 in period, the other way."
+
+        }), ref: "p.360" },
       { q: "Calculate $i(t) = di/dt$ of $i(t) = 5\\cos(100t)$ A at $t = 0$:",
         choices: ["$0$ (since $\\sin 0 = 0$, and derivative is $-500\\sin$)", "$500$", "$5$", "$-5$"], correct: 0,
-        solution: S({ c: "$di/dt = -500\\sin(100t)$. At $t=0$: $\\sin 0 = 0$, so $di/dt = 0$.", s: ["Maximum rate of change at t when $\\sin = 1$."], a: "$0$ at $t=0$" }), ref: "p.358" },
+        solution: S({
+          c: "The derivative of $\\cos$ is $-\\sin$ (times the chain-rule factor): $\\dfrac{d}{dt}[5\\cos(100t)] = -500\\sin(100t)$.",
+          s: [
+            "<b>Step 1 — Differentiate.</b> $di/dt = -5(100)\\sin(100t) = -500\\sin(100t)$.",
+            "<b>Step 2 — At t = 0.</b> $\\sin 0 = 0$, so $di/dt = 0$.",
+            "<b>Step 3 — Distractor audit.</b> 500 is the PEAK rate (at $\\sin=\\pm1$); 5 and −5 confuse the value with the derivative."
+          ],
+          a: "$di/dt = 0$ at $t=0$.",
+          v: "A cosine is at its PEAK at $t=0$, where its slope is momentarily zero ✓ — the rate of change is MAXIMUM (±500) where the cosine crosses zero, a quarter period later."
+
+        }), ref: "p.358" },
       { q: "Across what element is voltage AND current in phase?",
         choices: ["Resistor (only)", "Inductor", "Capacitor", "Any"], correct: 0,
-        solution: S({ c: "Pure R: $V = IR$ instantaneously → same waveform, same phase.", s: ["L: V leads I by 90°.", "C: V lags I by 90°."], a: "Resistor" }), ref: "p.360" },
+        solution: S({
+          c: "For a pure RESISTOR, $v = iR$ holds instantaneously, so voltage and current have the same waveform and ZERO phase difference. Reactive elements shift the phase by 90°.",
+          s: [
+            "<b>Step 1 — Match.</b> Resistor only.",
+            "<b>Step 2 — Distractor audit.</b> Inductor: V LEADS I by 90°; Capacitor: V LAGS I by 90°; 'any' is false."
+          ],
+          a: "Resistor (V and I in phase).",
+          v: "Mnemonic ELI the ICE man: in an inductor (L), EMF leads I; in a capacitor (C), I leads EMF ✓. Only the resistor has them aligned — which is why a resistor dissipates real power continuously, while pure reactances don't."
+
+        }), ref: "p.360" },
       { q: "Calc avg power for $v = 50\\cos\\omega t$, $i = 10\\cos(\\omega t-60°)$:",
         choices: ["$125$ W", "$250$ W", "$500$ W", "$0$"], correct: 0,
-        solution: S({ c: "$P = (V_m I_m / 2)\\cos\\theta$. $\\theta=60°$.", s: ["$P = (50\\cdot 10/2)\\cos 60° = 250 \\cdot 0.5 = 125$ W."], a: "$125$ W" }), ref: "p.362" },
+        solution: S({
+          c: "Average AC power: $P = \\dfrac{V_m I_m}{2}\\cos\\theta$, where θ is the phase angle between voltage and current.",
+          s: [
+            "<b>Step 1 — Phase angle.</b> $\\theta = 60°$ (current lags by 60°).",
+            "<b>Step 2 — Apply.</b> $P = \\dfrac{50\\times10}{2}\\cos60° = 250\\times0.5 = 125$ W.",
+            "<b>Step 3 — Distractor audit.</b> 250 W forgets $\\cos\\theta$ (apparent power); 500 W forgets the ½ too; 0 would need θ=90°."
+          ],
+          a: "$P = 125$ W",
+          v: "The $\\cos60°=0.5$ is the power factor — only HALF the apparent power (250 VA) becomes real power ✓. The other half sloshes back and forth as reactive power."
+
+        }), ref: "p.362" },
       { q: "Wye source with $V_{LL} = 240$ V supplies a 3-phase load. Phase voltage:",
         choices: ["$\\approx 138.6$ V", "$240$ V", "$416$ V", "$80$ V"], correct: 0,
-        solution: S({ c: "$V_\\phi = V_{LL}/\\sqrt{3}$.", s: ["$240/1.732 = 138.6$ V."], a: "$\\approx 138.6$ V" }), ref: "p.363" },
+        solution: S({
+          c: "In a wye connection, phase (line-to-neutral) voltage is line-to-line divided by $\\sqrt3$: $V_\\phi = V_{LL}/\\sqrt3$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $V_\\phi = 240/\\sqrt3 = 240/1.732 = 138.6$ V.",
+            "<b>Step 2 — Distractor audit.</b> 240 V is line-to-line (delta phase); 416 V MULTIPLIES by $\\sqrt3$; 80 V divides by 3."
+          ],
+          a: "$V_\\phi \\approx 138.6$ V",
+          v: "The $\\sqrt3$ factor is wye's signature ✓ — in DELTA, phase voltage equals line voltage instead. The familiar 208/120 V building system is the same relationship: $208/\\sqrt3 = 120$ V."
+
+        }), ref: "p.363" },
       { q: "Two 100 µF caps in series:",
         choices: ["$50$ µF", "$200$ µF", "$100$ µF", "$10$ µF"], correct: 0,
-        solution: S({ c: "Caps in series: $1/C_{eq} = 1/C_1 + 1/C_2$. Equal: $C/2$.", s: ["$100/2 = 50$ µF."], a: "$50$ µF" }), ref: "p.358" },
+        solution: S({
+          c: "Capacitors in SERIES combine by reciprocals (like resistors in parallel): $1/C_{eq} = 1/C_1 + 1/C_2$. Two equal caps give half: $C/2$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $1/C_{eq} = 1/100 + 1/100 = 2/100 \\Rightarrow C_{eq} = 50$ µF.",
+            "<b>Step 2 — Distractor audit.</b> 200 µF would be PARALLEL (caps add in parallel); 100 µF and 10 µF are wrong."
+          ],
+          a: "$C_{eq} = 50$ µF",
+          v: "Capacitors are the OPPOSITE of resistors: series caps combine like parallel resistors, parallel caps add ✓ — because capacitance is inversely related to plate separation, and series effectively increases separation."
+
+        }), ref: "p.358" },
       { q: "Calc rms of $i(t) = 5 + 3\\cos\\omega t$ (DC + AC):",
         choices: ["$\\sqrt{25 + 9/2} \\approx 5.43$", "$5$", "$3$", "$8$"], correct: 0,
-        solution: S({ c: "RMS of DC + AC: $\\sqrt{V_{DC}^2 + V_{AC,RMS}^2}$.", s: ["$V_{AC,RMS} = 3/\\sqrt{2} = 2.12$.", "Total: $\\sqrt{25 + 4.5} = \\sqrt{29.5} \\approx 5.43$ A."], a: "$\\approx 5.43$ A" }), ref: "p.360" },
+        solution: S({
+          c: "For a signal with a DC component plus an AC component, the total RMS combines them in quadrature: $I_{rms} = \\sqrt{I_{DC}^2 + I_{AC,rms}^2}$ (since the DC and AC parts are orthogonal).",
+          s: [
+            "<b>Step 1 — AC RMS.</b> $I_{AC,rms} = 3/\\sqrt2 = 2.12$ A.",
+            "<b>Step 2 — Combine.</b> $\\sqrt{5^2 + 2.12^2} = \\sqrt{25 + 4.5} = \\sqrt{29.5} = 5.43$ A.",
+            "<b>Step 3 — Distractor audit.</b> 5 is DC only; 3 is AC peak; 8 wrongly adds peaks ($5+3$)."
+          ],
+          a: "$I_{rms} \\approx 5.43$ A",
+          v: "Add in QUADRATURE, never linearly — the DC and AC contributions are independent (orthogonal) so their squared values add ✓. This is the same rule as combining independent error sources."
+
+        }), ref: "p.360" },
       { q: "Total impedance of 4Ω in series with parallel(6Ω, j8Ω):",
-        choices: ["Calc parallel first then add: $\\approx 7.84\\angle 21.6°$ Ω", "$10$", "$j8$", "$14$"], correct: 0,
-        solution: S({ c: "$Z_{parallel} = (6)(j8)/(6+j8) = j48/(6+j8)$. Multiply by conjugate: $j48(6-j8)/(36+64) = (j288+384)/100 = 3.84 + j2.88$.", s: ["Series with 4: $Z = 4+3.84+j2.88 = 7.84+j2.88$.", "Magnitude: $\\sqrt{61.4+8.3} \\approx 8.34$. Angle: $\\arctan(2.88/7.84) \\approx 20.2°$."], a: "$\\approx 8.34\\angle 20.2°$ Ω" }), ref: "p.360" },
+        choices: ["$\\approx 8.35\\angle 20.2°$ Ω", "$10$", "$j8$", "$14$"], correct: 0,
+        solution: S({
+          c: "Combine the parallel pair first (product-over-sum with complex arithmetic), then add the series resistor. Convert to polar at the end for magnitude/angle.",
+          s: [
+            "<b>Step 1 — Parallel.</b> $\\dfrac{(6)(j8)}{6+j8} = \\dfrac{j48}{6+j8}$. Multiply by conjugate: $\\dfrac{j48(6-j8)}{100} = \\dfrac{384 + j288}{100} = 3.84 + j2.88$.",
+            "<b>Step 2 — Add series 4Ω.</b> $Z = 4 + 3.84 + j2.88 = 7.84 + j2.88$.",
+            "<b>Step 3 — Polar.</b> $|Z| = \\sqrt{7.84^2 + 2.88^2} = \\sqrt{69.8} = 8.35$; angle $= \\arctan(2.88/7.84) = 20.2°$.",
+            "<b>Step 4 — Distractor audit.</b> 10, j8, 14 ignore the complex parallel combination."
+          ],
+          a: "$Z \\approx 8.35\\angle 20.2°\\ \\Omega$",
+          v: "Sanity: the real part 7.84 alone would give 7.84∠0°, and adding the +j2.88 reactance bumps the magnitude to 8.35 and tilts it 20° inductive ✓. Order matters — reduce the parallel block before adding the series element."
+
+        }), ref: "p.360" },
       { q: "Short-circuit current of 24V source with 6Ω internal R:",
         choices: ["$4$ A", "$0.25$ A", "$24$ A", "$144$ A"], correct: 0,
-        solution: S({ c: "SC current = $V/R_{internal}$.", s: ["$24/6 = 4$ A."], a: "$4$ A" }), ref: "p.357" },
+        solution: S({
+          c: "Shorting the terminals leaves only the internal resistance to limit current: $I_{SC} = V/R_{internal}$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $I_{SC} = 24/6 = 4$ A.",
+            "<b>Step 2 — Distractor audit.</b> 0.25 A inverts ($R/V$); 24 A forgets R; 144 A multiplies."
+          ],
+          a: "$I_{SC} = 4$ A",
+          v: "This is also the NORTON current of the source ✓. Internal resistance is what keeps short-circuit current finite — an ideal source (R=0) would deliver infinite current, which is why real sources and supplies have current limits."
+
+        }), ref: "p.357" },
       { q: "Capacitor voltage cannot change:",
         choices: ["Instantaneously (requires infinite current)", "At all", "Quickly", "Without breaking"], correct: 0,
-        solution: S({ c: "$i = C\\,dv/dt$. Step change in v → infinite i → impossible.", s: ["Dual: inductor current can't change instantly."], a: "Instantaneously" }), ref: "p.358" },
+        solution: S({
+          c: "Capacitor current is $i = C\\,dv/dt$. A sudden (step) change in voltage would require $dv/dt=\\infty$, hence INFINITE current — physically impossible. So capacitor voltage is continuous.",
+          s: [
+            "<b>Step 1 — Match.</b> Cannot change instantaneously.",
+            "<b>Step 2 — Distractor audit.</b> 'At all' is wrong (it changes, just not instantly); 'quickly'/'without breaking' miss the continuity principle."
+          ],
+          a: "Instantaneously (would need infinite current).",
+          v: "The dual rule: an INDUCTOR's current can't change instantly (would need infinite voltage, $v=L\\,di/dt$) ✓. These two continuity rules set the initial conditions for every transient circuit analysis."
+
+        }), ref: "p.358" },
       { q: "Crest factor of pure sinusoid:",
         choices: ["$\\sqrt{2} \\approx 1.414$", "$2$", "$1$", "$\\pi$"], correct: 0,
-        solution: S({ c: "Crest factor = peak/RMS.", s: ["For sinusoid: $V_m / (V_m/\\sqrt{2}) = \\sqrt{2}$.", "Square wave: 1. Triangle: $\\sqrt{3}$."], a: "$\\sqrt{2}$" }), ref: "p.360" },
+        solution: S({
+          c: "Crest factor = peak value / RMS value — a measure of how 'peaky' a waveform is. For a sinusoid, peak is $V_m$ and RMS is $V_m/\\sqrt2$, so crest factor $= \\sqrt2$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $V_m / (V_m/\\sqrt2) = \\sqrt2 \\approx 1.414$.",
+            "<b>Step 2 — Distractor audit.</b> 2 and π aren't the sine's crest factor; 1 is a square wave (peak = RMS)."
+          ],
+          a: "$\\sqrt2 \\approx 1.414$",
+          v: "Crest-factor ladder: square wave = 1 (flat), sine = √2, triangle = √3 ✓. High crest factor (spiky signals) stresses amplifiers and meters — true-RMS meters handle it, averaging meters don't."
+
+        }), ref: "p.360" },
     ],
 
     // Linear Sys — +10
