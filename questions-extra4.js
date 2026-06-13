@@ -1156,64 +1156,259 @@
     9: [
       { q: "Common-mode gain of an ideal op-amp:",
         choices: ["Zero", "$\\infty$", "$1$", "Depends"], correct: 0,
-        solution: S({ c: "Ideal op-amp: infinite differential gain, ZERO common-mode gain → CMRR = ∞.", s: ["Real op-amps have small but non-zero common-mode gain."], a: "Zero" }), ref: "Handbook p.380" },
+        solution: S({
+          c: "An ideal op-amp amplifies only the DIFFERENCE between its inputs; anything common to both (same signal on + and −) is rejected completely: common-mode gain = 0, hence CMRR = ∞.",
+          s: [
+            "<b>Step 1 — Match.</b> Zero.",
+            "<b>Step 2 — Distractor audit.</b> ∞ is the DIFFERENTIAL gain (the other ideal property — the swap trap); 1 and 'depends' describe nothing ideal."
+          ],
+          a: "Zero (ideal).",
+          v: "Reality check: real op-amps leak a little common-mode through — CMRR 80-120 dB, meaning common-mode gain is $10^{4}$-$10^{6}$ times smaller than differential, not zero ✓ — the ideal is the limit the spec approaches."
+
+        }), ref: "Handbook p.380" },
       { q: "Slew rate of $1$ V/µs: max frequency for full-scale 10V signal:",
         choices: ["$\\approx 15.9$ kHz", "$1$ MHz", "$100$ Hz", "$10$ MHz"], correct: 0,
-        solution: S({ c: "Max sinusoid frequency: $f_{max} = \\text{SR}/(2\\pi V_{peak})$.", s: ["$SR = 10^6$ V/s, $V_{peak} = 10$ V.", "$f_{max} = 10^6/(2\\pi \\cdot 10) = 15915$ Hz $\\approx 15.9$ kHz."], a: "$\\approx 15.9$ kHz", v: "Above this, output cannot keep up with input — slew-rate distortion (triangulation)." }), ref: "Handbook p.380" },
+        solution: S({
+          c: "A sinusoid's steepest slope is $2\\pi fV_{peak}$ (at its zero crossings). The op-amp tracks it only if that slope stays below the slew rate: $f_{max} = \\dfrac{SR}{2\\pi V_{peak}}$ — the 'full-power bandwidth'.",
+          s: [
+            "<b>Step 1 — Convert SR.</b> 1 V/µs $= 10^{6}$ V/s.",
+            "<b>Step 2 — Apply.</b> $f_{max} = \\dfrac{10^{6}}{2\\pi\\times10} \\approx 15.9$ kHz.",
+            "<b>Step 3 — Distractor audit.</b> 1 MHz ignores the amplitude (that's small-signal GBW thinking); 100 Hz and 10 MHz slip decades."
+          ],
+          a: "$f_{max} \\approx 15.9$ kHz",
+          v: "The amplitude trade this formula encodes: at 1 V peak the same op-amp manages 159 kHz — big swings slew-limit TEN times sooner ✓. Symptom above the limit: sine in, triangle out."
+
+        }), ref: "Handbook p.380" },
       { q: "BJT $\\beta = 50$. $I_C = 100$ mA. $I_B$:",
         choices: ["$2$ mA", "$5000$ mA", "$50$ mA", "$0.05$ mA"], correct: 0,
-        solution: S({ c: "$I_B = I_C/\\beta$.", s: ["$100/50 = 2$ mA."], a: "$2$ mA" }), ref: "Handbook p.384" },
+        solution: S({
+          c: "Active-region current gain run backwards: $I_B = I_C/\\beta$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $100\\,\\text{mA}/50 = 2$ mA.",
+            "<b>Step 2 — Distractor audit.</b> 5000 mA MULTIPLIES; 50 echoes β; 0.05 over-divides."
+          ],
+          a: "$I_B = 2$ mA",
+          v: "Closure: $I_E = I_C + I_B = 102$ mA ✓. Design reading: the base needs a real 2 mA of drive here — power BJTs' modest β is why MOSFETs (voltage-driven gates) took over switching."
+
+        }), ref: "Handbook p.384" },
       { q: "$V_{CE,sat}$ of typical BJT in saturation:",
         choices: ["$\\approx 0.2$ V", "$0.7$ V", "$5$ V", "$0$ V"], correct: 0,
-        solution: S({ c: "Saturated BJT: low $V_{CE}$, both junctions forward-biased.", s: ["Memorize: $V_{CE,sat} \\approx 0.2$ V."], a: "$0.2$ V" }), ref: "Handbook p.384" },
+        solution: S({
+          c: "Saturation = the BJT switch fully ON: both junctions forward-biased, collector-emitter voltage collapsed to a small residual ≈ 0.2 V.",
+          s: [
+            "<b>Step 1 — Match.</b> $V_{CE,sat} \\approx 0.2$ V.",
+            "<b>Step 2 — Distractor audit.</b> 0.7 V is $V_{BE}$ — the base-emitter diode drop, the eternal mix-up; 5 V is cutoff territory; exactly 0 is ideal-switch fiction."
+          ],
+          a: "$\\approx 0.2$ V",
+          v: "Why it matters: ON-state loss $= I_C\\times0.2$ V — small but not zero (100 mA → 20 mW) ✓. The 0.2/0.7 pair also explains why saturated logic (old TTL) output lows sat near 0.2 V."
+
+        }), ref: "Handbook p.384" },
       { q: "Class B audio amp: efficiency limit:",
         choices: ["$\\approx 78.5\\%$ ($\\pi/4$)", "$50\\%$", "$25\\%$", "$100\\%$"], correct: 0,
-        solution: S({ c: "Class B: two transistors each conduct 180°. Theoretical max efficiency = $\\pi/4 \\approx 78.5\\%$.", s: ["Real Class B: 60-70% due to losses.", "Class AB: slightly less efficient but eliminates crossover distortion."], a: "$\\approx 78.5\\%$" }), ref: "Handbook p.384" },
+        solution: S({
+          c: "Class B: a push-pull pair, each transistor conducting exactly half the cycle (180°) — no idle bias current. Theoretical efficiency ceiling: $\\pi/4 \\approx 78.5\\%$.",
+          s: [
+            "<b>Step 1 — Match.</b> 78.5%.",
+            "<b>Step 2 — Class ladder for the distractors.</b> 25% = Class A resistive; 50% = Class A transformer-coupled; 100% is thermodynamically off-limits for linear stages (Class D switching gets >90%).",
+            "<b>Step 3 — The catch.</b> Pure Class B suffers crossover distortion at the handoff near zero — Class AB adds a sliver of bias to fix it, costing a few points of efficiency."
+          ],
+          a: "$\\pi/4 \\approx 78.5\\%$",
+          v: "Where π/4 comes from: average output power vs average supply draw for a full-swing sine — the math integrates to exactly π/4 ✓. Real Class B/AB amps land 60-70%."
+
+        }), ref: "Handbook p.384" },
       { q: "Op-amp comparator output:",
         choices: ["Saturated high or low (no feedback)", "Linear", "Zero", "Random"], correct: 0,
-        solution: S({ c: "Comparator: op-amp without feedback. Tiny input difference → output rails (saturates).", s: ["$v_+ > v_-$: output = $+V_{sat}$.", "$v_+ < v_-$: output = $-V_{sat}$.", "Used in: zero-crossing detector, peak detector, A/D conversion."], a: "Saturated rails" }), ref: "Handbook p.380" },
+        solution: S({
+          c: "A comparator is an op-amp with NO feedback: the huge open-loop gain multiplies any input difference past the supply limits — output lives at one RAIL or the other, never in between.",
+          s: [
+            "<b>Step 1 — Match.</b> Saturated high or low.",
+            "<b>Step 2 — The rule.</b> $v_+ > v_-$ → $+V_{sat}$; $v_+ < v_-$ → $-V_{sat}$ — a 1-bit answer to 'which input is bigger?'.",
+            "<b>Step 3 — Distractor audit.</b> 'Linear' requires negative feedback (the virtual-short world); zero/random have no mechanism."
+          ],
+          a: "Saturated at a rail (no feedback → no linear region).",
+          v: "Applications that ARE this behavior: zero-crossing detectors, ADC front-ends, thermostat logic ✓. Practical note: dedicated comparator ICs (LM393) switch faster than op-amps pressed into the role — they're built to slam rails."
+
+        }), ref: "Handbook p.380" },
       { q: "MOSFET threshold voltage $V_{th}$ for nMOS in enhancement:",
         choices: ["Positive (typically 0.5-2 V)", "Negative", "Zero", "$10$ V"], correct: 0,
-        solution: S({ c: "Enhancement nMOS: $V_{th} > 0$. Needs positive gate voltage to form channel.", s: ["pMOS enhancement: $V_{th} < 0$.", "Depletion mode: opposite signs."], a: "Positive (0.5-2 V typical)" }), ref: "Handbook p.386" },
+        solution: S({
+          c: "Enhancement-mode nMOS is OFF at zero gate voltage; it needs a POSITIVE $V_{GS}$ beyond threshold (typically +0.5 to +2 V) to invert the channel and conduct.",
+          s: [
+            "<b>Step 1 — Match.</b> Positive, ~0.5-2 V.",
+            "<b>Step 2 — The sign map.</b> pMOS enhancement: $V_{th} < 0$; DEPLETION devices flip the logic (conduct at zero, need bias to turn OFF).",
+            "<b>Step 3 — Distractor audit.</b> Negative is pMOS; zero would be depletion-ish; 10 V is no modern threshold."
+          ],
+          a: "Positive — typically 0.5-2 V.",
+          v: "Trend note: logic-process thresholds have scaled down with supply voltages (0.3-0.5 V at advanced nodes) — leakage vs speed is the trade ✓. 'Logic-level' power FETs are specified to enhance fully at 4.5 V gate drive."
+
+        }), ref: "Handbook p.386" },
       { q: "Op-amp $A_{OL} = 10^5$, $A_{CL} = 100$. Loop gain $A\\beta$:",
         choices: ["$10^3 - 1 \\approx 10^3$", "$10^5$", "$100$", "$10^7$"], correct: 0,
-        solution: S({ c: "$A_{CL} = A_{OL}/(1 + A\\beta)$. Solve: $A\\beta = A_{OL}/A_{CL} - 1 \\approx 10^5/100 - 1 = 999$.", s: ["Equivalently: $1/\\beta \\approx 100$ (closed-loop gain)."], a: "$\\approx 10^3$" }), ref: "Handbook p.380" },
+        solution: S({
+          c: "Loop gain — the quantity feedback theory cares about — is $A\\beta$. From $A_{CL} = \\dfrac{A_{OL}}{1 + A\\beta}$: $A\\beta = \\dfrac{A_{OL}}{A_{CL}} - 1$.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $10^{5}/100 - 1 = 999 \\approx 10^{3}$.",
+            "<b>Step 2 — Distractor audit.</b> $10^{5}$ is the open-loop gain; 100 the closed-loop; $10^{7}$ multiplies them."
+          ],
+          a: "$A\\beta \\approx 10^{3}$",
+          v: "What the 1000 buys: gain accuracy and distortion improve by the factor $1 + A\\beta \\approx 1000$ — the closed-loop gain sits within 0.1% of the ideal $1/\\beta$ ✓. Loop gain IS the currency of feedback design."
+
+        }), ref: "Handbook p.380" },
       { q: "Increasing feedback ($\\beta$ larger) does what to bandwidth?",
         choices: ["Widens bandwidth (gain-BW tradeoff)", "Narrows", "No effect", "Causes oscillation"], correct: 0,
-        solution: S({ c: "Gain-bandwidth product is constant. More feedback (smaller closed-loop gain) → larger BW.", s: ["$f_{cl} \\times A_{cl} = $ GBW.", "Reducing gain extends usable frequency range."], a: "Widens BW" }), ref: "Handbook p.380" },
+        solution: S({
+          c: "The gain-bandwidth conservation law: $A_{CL}\\times BW = $ GBW (constant). MORE feedback → LOWER closed-loop gain → WIDER bandwidth, in exact proportion.",
+          s: [
+            "<b>Step 1 — Match.</b> Widens bandwidth.",
+            "<b>Step 2 — See it numerically.</b> GBW = 1 MHz: gain 100 → 10 kHz; raise feedback so gain = 10 → 100 kHz.",
+            "<b>Step 3 — Distractor audit.</b> 'Narrows' inverts the law; 'no effect' denies it; oscillation concerns PHASE margin, not β's size per se."
+          ],
+          a: "Widens bandwidth (gain-bandwidth trade).",
+          v: "The design corollary: need both gain AND bandwidth? Cascade low-gain stages — two ×10 stages each at 100 kHz beat one ×100 stage at 10 kHz ✓."
+
+        }), ref: "Handbook p.380" },
       { q: "Schottky diode advantage over Si diode:",
         choices: ["Lower forward drop (~0.3 V)", "Higher voltage", "Slower switching", "Cheaper always"], correct: 0,
-        solution: S({ c: "Schottky: metal-semiconductor junction. Lower $V_F$ (~0.3 V vs 0.7 V), faster switching.", s: ["Used in: rectifiers (lower loss), high-frequency switching, RF detection."], a: "Lower $V_F$ ≈ 0.3 V" }), ref: "Handbook p.383" },
+        solution: S({
+          c: "A Schottky diode is a METAL-semiconductor junction: majority-carrier conduction gives a LOW forward drop (~0.3 V vs silicon's 0.7) and near-zero reverse-recovery time.",
+          s: [
+            "<b>Step 1 — Match.</b> Lower forward drop (~0.3 V) — plus fast switching as the bonus.",
+            "<b>Step 2 — Distractor audit.</b> Higher voltage is actually a Schottky WEAKNESS (limited reverse ratings, more leakage); 'slower' inverts; 'cheaper always' isn't a physical property.",
+            "<b>Step 3 — The price paid.</b> Higher reverse leakage and modest breakdown voltages — Schottkys own the low-voltage, high-frequency corner."
+          ],
+          a: "Lower forward drop, ≈0.3 V (and fast switching).",
+          v: "Where the 0.4-V saving matters: a 5-V/10-A buck loses 7 W to silicon diodes but 3 W to Schottkys — efficiency points you can feel ✓. RF detectors exploit the speed side of the same physics."
+
+        }), ref: "Handbook p.383" },
       { q: "Power dissipation in a switching MOSFET:",
         choices: ["$P_{cond} = I^2 R_{ds,on}$ + switching losses", "$IV$ always", "Zero in saturation", "$V_{ds}^2/R$"], correct: 0,
-        solution: S({ c: "Switching losses: $P_{sw} = \\frac{1}{2} V_{ds} I (t_{rise} + t_{fall}) f_{sw}$. Plus conduction $I^2 R_{ds,on}$.", s: ["Hard switching: significant power lost in transitions.", "Soft switching (zero-voltage/current): reduces losses."], a: "Conduction + switching losses" }), ref: "Handbook p.386" },
+        solution: S({
+          c: "A switching MOSFET loses power TWO ways: conduction loss while ON ($P_{cond} = I^2R_{ds,on}$ — it's just a small resistor) plus switching loss during each transition, when voltage and current overlap: $P_{sw} \\approx \\tfrac{1}{2}V_{ds}I(t_r + t_f)f_{sw}$.",
+          s: [
+            "<b>Step 1 — Match.</b> $I^2R_{ds,on}$ + switching losses.",
+            "<b>Step 2 — Why transitions cost.</b> Mid-switch, the FET briefly holds BOTH high voltage and high current — that $V\\times I$ overlap, $f_{sw}$ times a second, is the switching loss.",
+            "<b>Step 3 — Distractor audit.</b> '$IV$ always' describes a LINEAR pass element (the loss switching exists to avoid); 'zero' is the ideal-switch fantasy; $V_{ds}^2/R$ misapplies resistor formulas."
+          ],
+          a: "$P = I^2R_{ds,on} + $ switching (transition-overlap) losses.",
+          v: "The design tension this creates: higher $f_{sw}$ shrinks inductors/capacitors but scales switching loss linearly ✓ — soft-switching (ZVS/ZCS) topologies exist precisely to break that trade."
+
+        }), ref: "Handbook p.386" },
       { q: "Output impedance of an emitter follower:",
         choices: ["Very low (≈ $r_e$ + $R_S/\\beta$)", "Very high", "$R_C$", "Zero exactly"], correct: 0,
-        solution: S({ c: "Emitter follower acts as buffer: high $Z_{in}$, low $Z_{out}$.", s: ["$Z_{out} \\approx r_e + R_{source}/(\\beta+1)$.", "Typical: a few ohms to tens of ohms."], a: "Very low" }), ref: "Handbook p.384" },
+        solution: S({
+          c: "The emitter follower (common-collector) is THE buffer stage: gain ≈ 1, but it transforms impedances — looking into the emitter you see the source resistance DIVIDED by $(\\beta+1)$: $Z_{out} \\approx r_e + R_S/(\\beta+1)$, typically just ohms.",
+          s: [
+            "<b>Step 1 — Match.</b> Very low.",
+            "<b>Step 2 — Feel the division.</b> $R_S = 10$ kΩ, β = 100, $r_e = 25$ Ω → $Z_{out} \\approx 25 + 99 \\approx 124$ Ω — a 10-kΩ source now looks like ~120 Ω.",
+            "<b>Step 3 — Distractor audit.</b> 'Very high' describes its INPUT side (the same β-multiplication, run the other way); $R_C$ belongs to common-emitter outputs; exactly zero needs an ideal op-amp."
+          ],
+          a: "Very low: $Z_{out} \\approx r_e + R_S/(\\beta+1)$ — ohms to tens of ohms.",
+          v: "The two-sided check: high $Z_{in}$ (≈$\\beta R_E$) + low $Z_{out}$ + gain ≈ 1 = the complete buffer résumé ✓ — it's why followers sit between delicate sources and heavy loads."
+
+        }), ref: "Handbook p.384" },
       { q: "Two transistors in cascode configuration provide:",
         choices: ["High gain + high bandwidth (Miller reduced)", "Lower gain", "Just isolation", "Lower input Z"], correct: 0,
-        solution: S({ c: "Cascode = CE + CB stack. CB stage isolates output from input — Miller capacitance impact reduced.", s: ["Same gain as CE alone but much wider bandwidth.", "Common in RF amplifiers and op-amp internals."], a: "High gain + wide BW" }), ref: "Handbook p.384" },
+        solution: S({
+          c: "Cascode = common-emitter stage feeding a common-base stage stacked on top. The CB stage pins the CE collector voltage nearly constant, killing the MILLER EFFECT — the gain-multiplied input capacitance that normally strangles CE bandwidth.",
+          s: [
+            "<b>Step 1 — Match.</b> High gain + high bandwidth.",
+            "<b>Step 2 — The Miller story.</b> In a plain CE amp, feedback capacitance $C_{\\mu}$ appears at the input magnified by $(1+|A_v|)$. Cascode holds the CE stage's voltage gain near 1 → no magnification → bandwidth survives.",
+            "<b>Step 3 — Distractor audit.</b> Gain is NOT lower (the CB stage passes the full current through to the load); 'just isolation' undersells it; input Z is set by the CE stage, unchanged."
+          ],
+          a: "CE-gain with CB-bandwidth: Miller effect suppressed.",
+          v: "Where you meet it: RF front-ends, op-amp internals, current sources needing high output impedance ✓ — one extra transistor buys a decade of bandwidth."
+
+        }), ref: "Handbook p.384" },
       { q: "An op-amp is configured as integrator. Input is square wave. Output is:",
         choices: ["Triangle wave", "Square wave inverted", "Sine wave", "Zero"], correct: 0,
-        solution: S({ c: "Integral of square wave (constant during each half) is linear ramp → triangle.", s: ["Conversely: differentiator of triangle would give square."], a: "Triangle wave" }), ref: "Handbook p.380" },
+        solution: S({
+          c: "An integrator outputs the running INTEGRAL of its input. A square wave is a sequence of constant levels — and the integral of a constant is a straight-line RAMP. Alternating constants → alternating ramps → triangle wave.",
+          s: [
+            "<b>Step 1 — Trace one cycle.</b> Input high (constant +V): output ramps one way at a fixed slope. Input flips low: slope reverses. Repeat → triangle.",
+            "<b>Step 2 — Distractor audit.</b> Inverted square is what a unity AMPLIFIER would give; sine requires a filter picking off the fundamental; zero has no mechanism.",
+            "<b>Step 3 — The inverse pair.</b> Differentiator does the reverse: triangle in → square out. Integrate/differentiate are the calculus pair of op-amp circuits."
+          ],
+          a: "Triangle wave.",
+          v: "Slope check: ramp rate $= V_{in}/(RC)$ — bigger input or smaller RC → steeper triangle ✓. This square→triangle trick is exactly how function generators synthesize their triangle output."
+
+        }), ref: "Handbook p.380" },
       { q: "Voltage regulator IC like 7805 has minimum input voltage of about:",
         choices: ["$\\sim 7$ V (dropout 2 V above output)", "$5$ V", "$12$ V", "$0$ V"], correct: 0,
-        solution: S({ c: "Linear regulators need 'dropout voltage' = $V_{in,min} - V_{out}$.", s: ["7805: standard ~2 V dropout, so $V_{in} \\ge 7$ V.", "LDO variants: 0.3-0.5 V dropout."], a: "$\\sim 7$ V" }), ref: "Handbook p.383" },
+        solution: S({
+          c: "A linear regulator must keep some minimum 'headroom' between input and output — the DROPOUT voltage — or regulation collapses. The classic 7805 (5 V out) needs about 2 V of headroom: $V_{in} \\ge 7$ V.",
+          s: [
+            "<b>Step 1 — Match.</b> ~7 V (5 V output + 2 V dropout).",
+            "<b>Step 2 — Distractor audit.</b> 5 V gives zero headroom — output sags out of regulation; 12 V works fine but isn't the MINIMUM; 0 V is no regulator at all.",
+            "<b>Step 3 — The modern fix.</b> LDO (low-dropout) regulators shrink the headroom to 0.1-0.5 V — essential for battery rails like 3.7 V → 3.3 V, where a 7805-style part physically can't fit."
+          ],
+          a: "$V_{in,min} \\approx 7$ V for a 7805.",
+          v: "Thermal corollary: every volt ABOVE the minimum burns as heat — $P = (V_{in}-5)\\times I$; at 12 V in and 1 A that's 7 W on the heatsink ✓ — run linear regulators near their dropout, not far above it."
+
+        }), ref: "Handbook p.383" },
       { q: "Common-collector (emitter-follower): voltage gain ≈",
         choices: ["$\\approx 1$ (just under)", "$-\\beta$", "$+\\beta R_C$", "$0$"], correct: 0,
-        solution: S({ c: "CC: input at base, output at emitter, follows input.", s: ["$A_v = R_E/(R_E + r_e) \\approx 1$ when $R_E \\gg r_e$."], a: "$\\approx 1$" }), ref: "Handbook p.384" },
+        solution: S({
+          c: "The common-collector (emitter follower): input at base, output at emitter. The emitter FOLLOWS the base (one $V_{BE}$ below), so voltage gain is just under 1: $A_v = \\dfrac{R_E}{R_E + r_e} \\approx 1$.",
+          s: [
+            "<b>Step 1 — Match.</b> ≈ 1 (slightly under).",
+            "<b>Step 2 — Distractor audit.</b> $-\\beta$-flavored gains belong to common-EMITTER (inverting, large); $+\\beta R_C$ isn't dimensionally a voltage gain; 0 would mean no output.",
+            "<b>Step 3 — Why use a gain-of-1 stage?</b> CURRENT gain ≈ β and the impedance transformation — it's a buffer, not an amplifier."
+          ],
+          a: "$A_v \\approx 1$ (non-inverting, just under unity).",
+          v: "Numbers: $R_E = 1$ kΩ, $r_e = 25$ Ω → $A_v = 1000/1025 = 0.976$ ✓ — 'follows' to within 2.4%, while the source sees a load β times lighter."
+
+        }), ref: "Handbook p.384" },
       { q: "BJT amplifier with low input impedance:",
         choices: ["Common-Base (CB)", "Common-Emitter", "Common-Collector", "Class A"], correct: 0,
-        solution: S({ c: "CB has $Z_{in} \\approx r_e \\approx 25\\ \\Omega/I_E$ (mA). Very low.", s: ["CE: $\\beta r_e$ medium.", "CC (emitter follower): $\\beta R_E$ high."], a: "Common-Base", v: "CB used in RF for matching to 50-ohm transmission lines." }), ref: "Handbook p.384" },
+        solution: S({
+          c: "The three BJT topologies sort cleanly by input impedance: Common-Base is the LOW one — its input is the emitter, looking straight into $r_e = 25\\,\\text{mV}/I_E$, just ohms.",
+          s: [
+            "<b>Step 1 — Match.</b> Common-Base.",
+            "<b>Step 2 — The Z-ladder.</b> CB: $r_e$ (ohms — low). CE: $\\beta r_e$ (kΩ — medium). CC: $\\beta R_E$ (100s of kΩ — high). Same $r_e$, different multipliers.",
+            "<b>Step 3 — Distractor audit.</b> CE and CC sit higher on the ladder; 'Class A' is a BIAS class, not a topology — a category-error distractor."
+          ],
+          a: "Common-Base: $Z_{in} \\approx r_e$, ohms-low.",
+          v: "Why low-Z input is a FEATURE: at $I_E = 0.5$ mA, $r_e = 50$ Ω — naturally close to 50-Ω RF lines ✓, which is why CB stages front RF receivers (and they dodge Miller, too)."
+
+        }), ref: "Handbook p.384" },
       { q: "Op-amp instrumentation amplifier: 3 op-amps with specific R network. Used for:",
         choices: ["High-CMRR differential amplification", "Logarithmic conversion", "Filtering", "Comparators"], correct: 0,
-        solution: S({ c: "INA: very high CMRR (>100 dB), high $Z_{in}$, single gain resistor.", s: ["Used in: bridge sensors (strain gauges, thermocouples), medical instrumentation (ECG).", "Common ICs: INA125, AD620."], a: "High-CMRR diff amp" }), ref: "Handbook p.380" },
+        solution: S({
+          c: "An instrumentation amplifier (INA): three op-amps — two buffering inputs, one differencing — built to amplify a tiny DIFFERENCE riding on a large common voltage. Signature specs: CMRR > 100 dB, huge $Z_{in}$, gain set by ONE resistor.",
+          s: [
+            "<b>Step 1 — Match.</b> High-CMRR differential amplification.",
+            "<b>Step 2 — Why not a plain diff-amp?</b> A one-op-amp difference amplifier loads its sources and its CMRR hangs on perfect resistor matching; the INA's input buffers fix both.",
+            "<b>Step 3 — Distractor audit.</b> Log conversion uses a diode/BJT in feedback; filtering needs reactive elements; comparators run open-loop."
+          ],
+          a: "Precision differential amplifier with very high CMRR and $Z_{in}$.",
+          v: "The use-case test: a strain-gauge bridge offers millivolts of signal on volts of common-mode — only 100+ dB of rejection makes that readable ✓. ECG amplifiers face the same problem (µV heartbeats on volts of body noise); INA125/AD620 are the stock answers."
+
+        }), ref: "Handbook p.380" },
       { q: "Voltage-controlled oscillator (VCO) frequency is proportional to:",
         choices: ["Control voltage (linearly)", "Power supply", "Temperature", "Capacitor charge"], correct: 0,
-        solution: S({ c: "VCO: output frequency varies linearly with input control voltage.", s: ["Key element of PLL (phase-locked loop).", "Used in FM modulation, frequency synthesis, clock generation."], a: "Control voltage" }), ref: "Handbook p.383" },
+        solution: S({
+          c: "A VCO is an oscillator whose output FREQUENCY is steered by an input voltage — ideally linearly: $f_{out} = f_0 + K_{VCO}V_{ctrl}$, with $K_{VCO}$ in Hz/V.",
+          s: [
+            "<b>Step 1 — Match.</b> Control voltage, linearly.",
+            "<b>Step 2 — Distractor audit.</b> Supply and temperature CAN shift a VCO — but as unwanted drift, not the design relationship; 'capacitor charge' describes the internal mechanism of some VCOs, not the control law."
+          ],
+          a: "$f_{out} \\propto V_{ctrl}$ (slope $K_{VCO}$, Hz/V).",
+          v: "Where it lives: the VCO is the tunable heart of every PLL — the loop measures phase error and trims $V_{ctrl}$ until the VCO locks ✓. Same idea drives FM modulators (voltage = audio, frequency follows) and clock synthesizers."
+
+        }), ref: "Handbook p.383" },
       { q: "Pulse-width modulation (PWM) duty cycle:",
         choices: ["Ratio of ON time to total period", "Frequency", "Amplitude", "Phase"], correct: 0,
-        solution: S({ c: "Duty cycle = $t_{on}/T$ (0 to 100%).", s: ["50% duty = symmetric square wave.", "Used in motor speed control, switching power supplies, LED dimming."], a: "$t_{on}/T$" }), ref: "Handbook p.383" },
+        solution: S({
+          c: "PWM encodes a value in TIME, not amplitude: the duty cycle $D = t_{on}/T$ is the fraction of each period the signal is high (0-100%). The average value delivered is $D \\times V_{high}$.",
+          s: [
+            "<b>Step 1 — Match.</b> Ratio of ON time to total period.",
+            "<b>Step 2 — Anchor points.</b> $D = 50\\%$: symmetric square wave; $D = 100\\%$: solid high; $D = 10\\%$: brief blips.",
+            "<b>Step 3 — Distractor audit.</b> Frequency is $1/T$ — PWM typically holds it FIXED and varies only $t_{on}$; amplitude and phase aren't what PWM modulates."
+          ],
+          a: "$D = t_{on}/T$, from 0 to 100%.",
+          v: "Why the trick wins: the switch is always fully ON or fully OFF — minimal dissipation — yet a filter (or a motor's inertia, or your eye watching an LED) recovers the smooth average $DV$ ✓. Buck converters literally compute $V_{out} = DV_{in}$."
+
+        }), ref: "Handbook p.383" },
     ],
 
     // ====================== Ch 10: Power — +15 ======================
