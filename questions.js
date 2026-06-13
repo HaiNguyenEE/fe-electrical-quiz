@@ -355,13 +355,14 @@ const QUESTION_BANK = {
           choices: ["$6.0$", "$5.5$", "$6.5$", "$7.0$"],
           correct: 0,
           solution: S({
-            c: "Sample mean: $\\bar{x} = \\dfrac{1}{n}\\sum x_i$ — sum divided by count.",
+            c: "Sample mean: $\\bar x=\\dfrac1n\\sum x_i$ - the sum divided by the count.",
             s: [
-              "Sum: $4+8+6+5+7 = 30$.",
-              "Count: $n = 5$.",
-              "Divide: $\\bar{x} = 30/5 = 6.0$."
+              "<b>Step 1 — Sum.</b> $4+8+6+5+7=30$.",
+              "<b>Step 2 — Divide by n=5.</b> $30/5=6.0$.",
+              "<b>Step 3 — Distractor audit.</b> $5.5$, $6.5$, $7.0$ are off - the arithmetic mean is exactly 6."
             ],
-            a: "$\\bar{x} = 6.0$"
+            a: "$\\bar x=6.0$",
+            v: "The mean sits in the middle of the data range (4 to 8) ✓ - a basic sanity check."
           }),
           ref: "Handbook p.63" },
 
@@ -369,16 +370,15 @@ const QUESTION_BANK = {
           choices: ["$1.581$", "$1.414$", "$2.0$", "$2.5$"],
           correct: 0,
           solution: S({
-            c: "Sample std: $s = \\sqrt{\\dfrac{1}{n-1}\\sum (x_i-\\bar{x})^2}$. The Bessel correction $(n-1)$ gives an unbiased estimator.",
+            c: "Sample std: $s=\\sqrt{\\dfrac{1}{n-1}\\sum(x_i-\\bar x)^2}$. The $n-1$ (Bessel's correction) gives an unbiased estimate.",
             s: [
-              "First $\\bar{x} = 6$ (from previous question).",
-              "Squared deviations: $(4-6)^2 = 4$; $(8-6)^2 = 4$; $(6-6)^2 = 0$; $(5-6)^2 = 1$; $(7-6)^2 = 1$.",
-              "Sum of squares: $4+4+0+1+1 = 10$.",
-              "Sample variance: $s^2 = 10/(5-1) = 2.5$.",
-              "Std dev: $s = \\sqrt{2.5} \\approx 1.581$."
+              "<b>Step 1 — Squared deviations from $\\bar x=6$.</b> $4,4,0,1,1$; sum $=10$.",
+              "<b>Step 2 — Sample variance.</b> $s^2=10/(5-1)=2.5$.",
+              "<b>Step 3 — Root.</b> $s=\\sqrt{2.5}\\approx1.581$.",
+              "<b>Step 4 — Distractor audit.</b> $1.414=\\sqrt2$ uses POPULATION /n (wrong here); $2.0$ and $2.5$ confuse variance/std."
             ],
-            a: "$s \\approx 1.581$",
-            v: "Note: population std (divide by $n$) would give $\\sqrt{2} \\approx 1.414$ — that's choice B (wrong)."
+            a: "$s\\approx1.581$",
+            v: "Sample uses $n-1$, population uses $n$ - the question asks SAMPLE, so 1.581 not 1.414 ✓."
           }),
           ref: "Handbook p.63" },
 
@@ -386,14 +386,15 @@ const QUESTION_BANK = {
           choices: ["$1/221$", "$1/169$", "$1/52$", "$1/26$"],
           correct: 0,
           solution: S({
-            c: "Dependent events: $P(A_1\\cap A_2) = P(A_1)\\cdot P(A_2|A_1)$. After drawing first ace, only 3 aces left in 51 cards.",
+            c: "Dependent events multiply with conditional probability: $P(A_1\\cap A_2)=P(A_1)P(A_2|A_1)$. Without replacement, the deck shrinks.",
             s: [
-              "$P(\\text{1st ace}) = 4/52 = 1/13$.",
-              "$P(\\text{2nd ace} | \\text{1st ace}) = 3/51 = 1/17$.",
-              "Joint: $P = (1/13)(1/17) = 1/221$."
+              "<b>Step 1 — First ace.</b> $4/52=1/13$.",
+              "<b>Step 2 — Second ace (3 left in 51).</b> $3/51=1/17$.",
+              "<b>Step 3 — Multiply.</b> $(1/13)(1/17)=1/221$.",
+              "<b>Step 4 — Distractor audit.</b> $1/169=(4/52)^2$ assumes WITH replacement; $1/52$ and $1/26$ are single-draw values."
             ],
-            a: "$P = 1/221 \\approx 0.452\\%$",
-            v: "If with replacement, it would be $(4/52)^2 = 1/169$ (choice B). Without replacement is slightly less likely."
+            a: "$P=1/221\\approx0.45\\%$",
+            v: "Without replacement is slightly LESS likely than with ($1/221<1/169$) because removing the first ace lowers the second chance ✓."
           }),
           ref: "Handbook p.64-65" },
 
@@ -401,14 +402,15 @@ const QUESTION_BANK = {
           choices: ["$6.68\\%$", "$15\\%$", "$1\\%$", "$32\\%$"],
           correct: 0,
           solution: S({
-            c: "Standardize using $z = (x-\\mu)/\\sigma$, then look up $P(Z>z)$ in the standard normal table (Handbook p.67).",
+            c: "Standardize with $z=(x-\\mu)/\\sigma$, then read $P(Z>z)$ from the normal table.",
             s: [
-              "Compute z-score: $z = (90-75)/10 = 1.5$.",
-              "From z-table: $P(Z \\le 1.5) = 0.9332$.",
-              "Complement: $P(Z > 1.5) = 1 - 0.9332 = 0.0668 = 6.68\\%$."
+              "<b>Step 1 — z-score.</b> $z=(90-75)/10=1.5$.",
+              "<b>Step 2 — Table.</b> $P(Z\\le1.5)=0.9332$.",
+              "<b>Step 3 — Complement.</b> $P(Z>1.5)=1-0.9332=0.0668=6.68\\%$.",
+              "<b>Step 4 — Distractor audit.</b> $15\\%$ is near $z=1$; $1\\%$ is near $z=2.3$; $32\\%$ is near $z=0.5$."
             ],
-            a: "$\\approx 6.68\\%$",
-            v: "Empirical rule check: at $z=2$ (i.e. score 95), only ~2.5% above; at $z=1$ (score 85), ~16% above. So 90 → 6.68% is consistent."
+            a: "$\\approx6.68\\%$",
+            v: "Empirical-rule check: ~16% above $z=1$ (score 85), ~2.5% above $z=2$ (score 95) - so 6.68% at score 90 fits between ✓."
           }),
           ref: "Handbook p.67" },
 
@@ -416,14 +418,15 @@ const QUESTION_BANK = {
           choices: ["$\\$2.00$", "$\\$3.50$", "$\\$1.00$", "$\\$2.30$"],
           correct: 0,
           solution: S({
-            c: "Expected value: $E[X] = \\sum x_i \\cdot P(x_i)$. Find missing prob first if needed.",
+            c: "Expected value: $E[X]=\\sum x_i P(x_i)$ - probability-weighted average of payouts.",
             s: [
-              "Missing prob: $P(\\$0) = 1 - 0.2 - 0.5 = 0.3$.",
-              "Multiply each value by prob: $5(0.2) = 1.0$; $2(0.5) = 1.0$; $0(0.3) = 0$.",
-              "Sum: $E[X] = 1.0 + 1.0 + 0 = \\$2.00$."
+              "<b>Step 1 — Missing prob.</b> $P(\\$0)=1-0.2-0.5=0.3$.",
+              "<b>Step 2 — Weighted terms.</b> $5(0.2)=1.0$; $2(0.5)=1.0$; $0(0.3)=0$.",
+              "<b>Step 3 — Sum.</b> $E[X]=2.00$.",
+              "<b>Step 4 — Distractor audit.</b> $\\$3.50$ averages the nonzero payouts; $\\$1.00$ keeps one term; $\\$2.30$ misweights."
             ],
-            a: "$E[X] = \\$2.00$",
-            v: "If game cost > $2 to play, expected loss; if cost < $2, expected profit."
+            a: "$E[X]=\\$2.00$",
+            v: "Decision rule: play only if the cost to enter is below the $2.00 expected payout ✓."
           }),
           ref: "Handbook p.65" },
 
@@ -431,14 +434,13 @@ const QUESTION_BANK = {
           choices: ["$np(1-p)$", "$np$", "$n(1-p)$", "$p(1-p)$"],
           correct: 0,
           solution: S({
-            c: "Binomial RV: count of successes in $n$ Bernoulli trials with prob $p$. Standard parameters: $\\mu=np$, $\\sigma^2=np(1-p)$.",
+            c: "A binomial counts successes in $n$ independent trials: mean $\\mu=np$, variance $\\sigma^2=np(1-p)$.",
             s: [
-              "Mean: $\\mu = np$ (so choice B is the mean, not variance).",
-              "Variance: $\\sigma^2 = np(1-p)$.",
-              "Note: variance maxes at $p=0.5$ (most uncertainty)."
+              "<b>Step 1 — Match.</b> $\\sigma^2=np(1-p)$.",
+              "<b>Step 2 — Distractor audit.</b> $np$ is the MEAN; $n(1-p)$ and $p(1-p)$ drop a factor."
             ],
-            a: "$\\sigma^2 = np(1-p)$",
-            v: "Coin flip $n=100$, $p=0.5$: $\\mu=50$, $\\sigma^2=25$, $\\sigma=5$ (familiar)."
+            a: "$\\sigma^2=np(1-p)$",
+            v: "Variance is MAXIMIZED at $p=0.5$ (most uncertainty) - e.g. 100 fair flips: $\\mu=50$, $\\sigma^2=25$, $\\sigma=5$ ✓."
           }),
           ref: "Handbook p.66" },
 
@@ -446,13 +448,14 @@ const QUESTION_BANK = {
           choices: ["$0.58$", "$0.70$", "$0.12$", "$0.42$"],
           correct: 0,
           solution: S({
-            c: "Union formula: $P(A\\cup B) = P(A) + P(B) - P(A\\cap B)$. For independent events $P(A\\cap B) = P(A)\\cdot P(B)$.",
+            c: "Union: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. For INDEPENDENT events, $P(A\\cap B)=P(A)P(B)$.",
             s: [
-              "$P(A\\cap B) = 0.4 \\cdot 0.3 = 0.12$ (independence).",
-              "Apply inclusion-exclusion: $P(A\\cup B) = 0.4 + 0.3 - 0.12 = 0.58$."
+              "<b>Step 1 — Intersection.</b> $0.4\\times0.3=0.12$.",
+              "<b>Step 2 — Inclusion-exclusion.</b> $0.4+0.3-0.12=0.58$.",
+              "<b>Step 3 — Distractor audit.</b> $0.70$ forgets to subtract overlap (the mutually-exclusive case); $0.12$ is the intersection; $0.42$ is wrong."
             ],
-            a: "$P(A\\cup B) = 0.58$",
-            v: "If $A,B$ were mutually exclusive (impossible together): $P(A\\cup B) = 0.4+0.3 = 0.7$ (choice B is that case)."
+            a: "$P(A\\cup B)=0.58$",
+            v: "The $-0.12$ avoids double-counting the overlap - subtracting it is the whole point of inclusion-exclusion ✓."
           }),
           ref: "Handbook p.64-65" },
 
@@ -460,14 +463,15 @@ const QUESTION_BANK = {
           choices: ["$1/2$", "$1/3$", "$2/3$", "$1/4$"],
           correct: 0,
           solution: S({
-            c: "Classical probability: $P = \\dfrac{\\text{favorable outcomes}}{\\text{total outcomes}}$.",
+            c: "Classical probability: $P=\\dfrac{\\text{favorable}}{\\text{total}}$.",
             s: [
-              "Favorable: {2, 3, 5} → 3 outcomes.",
-              "Total: {1,2,3,4,5,6} → 6 outcomes.",
-              "$P = 3/6 = 1/2$."
+              "<b>Step 1 — Favorable.</b> Primes in 1-6: {2,3,5} -> 3 outcomes.",
+              "<b>Step 2 — Total.</b> 6 faces.",
+              "<b>Step 3 — Divide.</b> $3/6=1/2$.",
+              "<b>Step 4 — Distractor audit.</b> $1/3$ counts only 2 primes; $2/3$ counts 4; $1/4$ is wrong."
             ],
-            a: "$P = 1/2$",
-            v: "Note: 1 is NOT prime by definition."
+            a: "$P=1/2$",
+            v: "Key reminder: 1 is NOT prime by definition - including it (4 outcomes) would wrongly give 2/3 ✓."
           }),
           ref: "Handbook p.64" },
       ],
@@ -480,14 +484,14 @@ const QUESTION_BANK = {
           choices: ["Safety, health, and welfare of the public", "Client's financial interest", "Employer's profitability", "Engineering society's reputation"],
           correct: 0,
           solution: S({
-            c: "NCEES Rule of Professional Conduct #1 — the foundational ethic in engineering.",
+            c: "NCEES Rule of Professional Conduct #1 - the foundational engineering ethic: the engineer's first responsibility is the PUBLIC.",
             s: [
-              "Rule 1 (verbatim): 'Engineers shall, in the performance of their services for clients, employers, and customers, be cognizant that their first and foremost responsibility is to the safety, health, and welfare of the public.'",
-              "Client/employer interest comes <i>after</i> public welfare, never before.",
-              "When in doubt, the test answer is almost always 'public safety'."
+              "<b>Step 1 — The rule.</b> Engineers shall hold paramount the safety, health, and welfare of the public.",
+              "<b>Step 2 — Distractor audit.</b> Client finances, employer profit, and society reputation all rank BELOW public welfare, never above it.",
+              "<b>Step 3 — Exam heuristic.</b> When unsure, the answer is almost always 'public safety'."
             ],
-            a: "Public safety, health, and welfare",
-            v: "This is also why engineers can refuse unsafe work even if directed by the boss."
+            a: "Public safety, health, and welfare.",
+            v: "This is exactly why an engineer may refuse unsafe work even when directed by a boss - the public duty overrides loyalty."
           }),
           ref: "Handbook p.4-5" },
 
@@ -495,15 +499,13 @@ const QUESTION_BANK = {
           choices: ["Decline or partner with someone qualified", "Accept and learn on the job", "Subcontract anonymously", "Refuse all outside consulting"],
           correct: 0,
           solution: S({
-            c: "NCEES Rule #2: Engineers shall perform services only in areas of their competence. Outside expertise = potential public harm.",
+            c: "NCEES Rule #2: perform services ONLY in your area of competence. Working unqualified risks public harm.",
             s: [
-              "Choice A complies with Rule 2 (decline or partner with someone qualified).",
-              "Choice B violates Rule 2 (working unqualified).",
-              "Choice C still violates if the engineer's name is on the work — must disclose.",
-              "Choice D is too restrictive; consulting <i>within</i> competence is fine."
+              "<b>Step 1 — Match.</b> Decline, or partner with someone qualified.",
+              "<b>Step 2 — Distractor audit.</b> 'Accept and learn on the job' violates Rule 2; 'subcontract anonymously' still puts your name on unqualified work; 'refuse ALL consulting' is needlessly restrictive."
             ],
             a: "Decline or partner with a qualified engineer.",
-            v: "You can stamp work outside your specialty <i>only</i> if you've reviewed it thoroughly and accept responsibility."
+            v: "You may stamp work outside your specialty ONLY if you have thoroughly reviewed it and accept full responsibility (responsible charge)."
           }),
           ref: "Handbook p.4" },
 
@@ -511,14 +513,14 @@ const QUESTION_BANK = {
           choices: ["Trade secret", "Patent", "Copyright", "Trademark"],
           correct: 0,
           solution: S({
-            c: "IP categories: <b>Patent</b> protects inventions (20 years); <b>Copyright</b> protects creative works (life+70); <b>Trademark</b> protects brand identifiers; <b>Trade secret</b> protects confidential business info indefinitely while kept secret.",
+            c: "IP categories: PATENT (inventions, 20 yr), COPYRIGHT (creative works, life+70), TRADEMARK (brand identifiers), TRADE SECRET (confidential business info, indefinite while kept secret).",
             s: [
-              "Coke formula has been protected > 100 years — far longer than a patent's 20 years.",
-              "Patents require public disclosure; secrets do not.",
-              "Trade secret is the only category with indefinite duration."
+              "<b>Step 1 — Match.</b> Trade secret.",
+              "<b>Step 2 — Why.</b> The formula has been protected 100+ years - far beyond a patent's 20, and patents REQUIRE public disclosure (a secret wouldn't survive).",
+              "<b>Step 3 — Distractor audit.</b> Patent/copyright/trademark all expire or require disclosure; only a trade secret lasts indefinitely while secret."
             ],
-            a: "Trade secret",
-            v: "Other famous trade secrets: KFC's 11 herbs & spices, Google's search algorithm, WD-40 formula."
+            a: "Trade secret.",
+            v: "Other famous trade secrets: KFC's spice blend, Google's ranking algorithm, WD-40's formula - all kept rather than patented."
           }),
           ref: "Handbook p.11" },
 
@@ -526,14 +528,13 @@ const QUESTION_BANK = {
           choices: ["20 years", "10 years", "Life + 70 years", "Indefinite"],
           correct: 0,
           solution: S({
-            c: "US utility patent: 20 years from filing date (not granted date). Design patent: 15 years. After expiry, invention enters public domain.",
+            c: "A US utility patent lasts 20 years from the FILING date; after expiry the invention enters the public domain.",
             s: [
-              "20 years is the standard period for utility patents.",
-              "After 20 years, anyone can freely use the invention.",
-              "Renewal fees must be paid throughout the term."
+              "<b>Step 1 — Match.</b> 20 years.",
+              "<b>Step 2 — Distractor audit.</b> 10 years is too short; 'life + 70' is COPYRIGHT; 'indefinite' is a trade secret. (Design patents are 15 years.)"
             ],
-            a: "20 years",
-            v: "Choice C ('life + 70') is copyright duration."
+            a: "20 years.",
+            v: "Patents trade temporary monopoly for PUBLIC disclosure - after 20 years anyone can use the invention freely, which is the deal society strikes with inventors."
           }),
           ref: "Handbook p.11" },
 
@@ -541,14 +542,13 @@ const QUESTION_BANK = {
           choices: ["All affected parties in writing", "Only the immediate supervisor", "No one, to avoid problems", "Only after the project is complete"],
           correct: 0,
           solution: S({
-            c: "Rule 4 (faithful agent / trustee): disclose all conflicts proactively, in writing, so clients can make informed decisions.",
+            c: "Rule 4 (faithful agent/trustee): disclose ALL conflicts proactively and IN WRITING so clients can make informed decisions.",
             s: [
-              "Written disclosure protects both engineer and client (provides paper trail).",
-              "Disclose <i>before</i> work begins, not after (Choice D).",
-              "All affected parties, not just the boss (Choice B)."
+              "<b>Step 1 — Match.</b> All affected parties, in writing.",
+              "<b>Step 2 — Distractor audit.</b> 'Only the supervisor' is too narrow; 'no one' hides the conflict; 'after the project' is too late - disclose BEFORE work begins."
             ],
             a: "All affected parties, in writing.",
-            v: "Even apparent conflicts must be disclosed — perception matters."
+            v: "Even an APPARENT conflict must be disclosed - perception of bias is itself a problem, and written disclosure protects both engineer and client."
           }),
           ref: "Handbook p.4" },
 
@@ -556,14 +556,13 @@ const QUESTION_BANK = {
           choices: ["Required by public safety", "Asked by a friend", "Competing for the same project", "Never"],
           correct: 0,
           solution: S({
-            c: "General rule: don't review another engineer's work without their knowledge. <b>Exception:</b> when public safety is at risk.",
+            c: "General courtesy: don't review another engineer's work without their knowledge - EXCEPT when public safety is at risk (Rule 1 overrides).",
             s: [
-              "If safety is at risk, the duty to the public (Rule 1) overrides courtesy to the colleague.",
-              "Otherwise, get the original engineer's consent first.",
-              "Competing for the same project is NEVER an excuse (B, C wrong)."
+              "<b>Step 1 — Match.</b> When required by public safety.",
+              "<b>Step 2 — Distractor audit.</b> 'A friend asks' or 'competing for the project' are not valid reasons; 'never' is wrong (safety is the exception)."
             ],
             a: "When required by public safety.",
-            v: "Even then, document your concerns and report to the proper authority."
+            v: "Even then, document your concerns and report to the proper authority - the public-welfare duty justifies the review, not personal or competitive motives."
           }),
           ref: "Handbook p.5-7" },
       ],
@@ -576,14 +575,15 @@ const QUESTION_BANK = {
           choices: ["$\\$6,806$", "$\\$8,500$", "$\\$7,350$", "$\\$5,000$"],
           correct: 0,
           solution: S({
-            c: "Present worth from future amount: $P = \\dfrac{F}{(1+i)^n}$. Discount the future $F$ back $n$ periods.",
+            c: "Present worth: $P=\\dfrac{F}{(1+i)^n}$ - discount the future amount back $n$ periods.",
             s: [
-              "Identify: $F = 10{,}000$, $i = 0.08$, $n = 5$.",
-              "Compute growth factor: $(1+0.08)^5 = (1.08)^5 = 1.4693$.",
-              "Divide: $P = 10{,}000 / 1.4693 = \\$6{,}806$."
+              "<b>Step 1 — Identify.</b> $F=10{,}000$, $i=0.08$, $n=5$.",
+              "<b>Step 2 — Growth factor.</b> $(1.08)^5=1.4693$.",
+              "<b>Step 3 — Divide.</b> $P=10{,}000/1.4693=\\$6{,}806$.",
+              "<b>Step 4 — Distractor audit.</b> $\\$8{,}500$ and $\\$7{,}350$ under-discount; $\\$5{,}000$ over-discounts."
             ],
-            a: "$P \\approx \\$6{,}806$",
-            v: "Verify: $\\$6{,}806 \\cdot (1.08)^5 = \\$6{,}806 \\cdot 1.4693 \\approx \\$10{,}000$ ✓"
+            a: "$P\\approx\\$6{,}806$",
+            v: "Check: $6{,}806\\times1.4693\\approx10{,}000$ ✓ - it grows back to the target."
           }),
           ref: "Handbook p.230" },
 
@@ -591,17 +591,15 @@ const QUESTION_BANK = {
           choices: ["$\\$5,772$", "$\\$5,000$", "$\\$6,500$", "$\\$4,800$"],
           correct: 0,
           solution: S({
-            c: "Capital recovery factor (CRF): $A = P \\cdot \\dfrac{i(1+i)^n}{(1+i)^n - 1}$ converts present principal to uniform annual payment.",
+            c: "Capital recovery factor: $A=P\\dfrac{i(1+i)^n}{(1+i)^n-1}$ converts a present principal into level annual payments.",
             s: [
-              "Identify: $P = 20{,}000$, $i = 0.06$, $n = 4$.",
-              "$(1+i)^n = (1.06)^4 = 1.2625$.",
-              "Numerator: $i(1+i)^n = 0.06 \\cdot 1.2625 = 0.07575$.",
-              "Denominator: $(1+i)^n - 1 = 0.2625$.",
-              "CRF: $A/P = 0.07575 / 0.2625 = 0.2886$.",
-              "Annual payment: $A = 20{,}000 \\cdot 0.2886 = \\$5{,}772$."
+              "<b>Step 1 — Growth.</b> $(1.06)^4=1.2625$.",
+              "<b>Step 2 — CRF.</b> $\\dfrac{0.06(1.2625)}{0.2625}=0.2886$.",
+              "<b>Step 3 — Payment.</b> $A=20{,}000\\times0.2886=\\$5{,}772$/yr.",
+              "<b>Step 4 — Distractor audit.</b> $\\$5{,}000$ is just $P/4$ (ignores interest); $\\$6{,}500$ and $\\$4{,}800$ are off."
             ],
-            a: "$A \\approx \\$5{,}772$/year",
-            v: "Total paid: $4 \\cdot 5772 = \\$23{,}088$; interest = $\\$3{,}088$ on $\\$20{,}000$ over 4 years — reasonable for 6%."
+            a: "$A\\approx\\$5{,}772$/year",
+            v: "Total paid $4\\times5772=\\$23{,}088$, so $\\$3{,}088$ interest on $\\$20{,}000$ over 4 years at 6% ✓ - the same formula behind every fixed loan/mortgage."
           }),
           ref: "Handbook p.232" },
 
@@ -609,14 +607,14 @@ const QUESTION_BANK = {
           choices: ["$1000$ units", "$625$ units", "$1667$ units", "$2500$ units"],
           correct: 0,
           solution: S({
-            c: "Break-even point: revenue = total cost. $P\\cdot Q = FC + VC\\cdot Q$, solve for $Q$.",
+            c: "Break-even: revenue = total cost. Each unit's contribution margin $(P-VC)$ pays down fixed cost, so $Q=FC/(P-VC)$.",
             s: [
-              "Contribution margin per unit: $P - VC = 80 - 30 = \\$50$.",
-              "Each unit covers $\\$50$ of fixed cost.",
-              "Break-even: $Q = FC / (P - VC) = 50{,}000 / 50 = 1{,}000$ units."
+              "<b>Step 1 — Margin.</b> $80-30=\\$50$/unit.",
+              "<b>Step 2 — Divide.</b> $Q=50{,}000/50=1000$ units.",
+              "<b>Step 3 — Distractor audit.</b> $625$ uses price (80) as the divisor; $1667$ uses VC; $2500$ is wrong."
             ],
-            a: "$Q = 1{,}000$ units",
-            v: "At $Q=1000$: revenue $= 80{,}000$; cost $= 50{,}000 + 30(1000) = 80{,}000$ ✓"
+            a: "$Q=1000$ units",
+            v: "At Q=1000: revenue $=80{,}000$; cost $=50{,}000+30(1000)=80{,}000$ ✓ - they balance exactly."
           }),
           ref: "Handbook p.232" },
 
@@ -624,14 +622,15 @@ const QUESTION_BANK = {
           choices: ["$\\$23,000$", "$\\$27,000$", "$\\$20,000$", "$\\$30,000$"],
           correct: 0,
           solution: S({
-            c: "Straight-line depreciation: equal yearly amount $D = (C - SV)/n$. Book value after $t$ years: $BV_t = C - tD$.",
+            c: "Straight-line: equal annual depreciation $D=(C-SV)/n$; book value $BV_t=C-tD$.",
             s: [
-              "Annual depreciation: $D = (50{,}000 - 5{,}000) / 10 = \\$4{,}500$ /year.",
-              "Cumulative depreciation after 6 years: $6 \\cdot 4{,}500 = 27{,}000$.",
-              "Book value: $BV_6 = 50{,}000 - 27{,}000 = \\$23{,}000$."
+              "<b>Step 1 — Annual D.</b> $(50{,}000-5{,}000)/10=\\$4{,}500$/yr.",
+              "<b>Step 2 — Cumulative.</b> $6\\times4{,}500=27{,}000$.",
+              "<b>Step 3 — Book value.</b> $50{,}000-27{,}000=\\$23{,}000$.",
+              "<b>Step 4 — Distractor audit.</b> $\\$27{,}000$ is the accumulated DEPRECIATION, not the book value; $\\$20{,}000$/$\\$30{,}000$ are off."
             ],
-            a: "$BV_6 = \\$23{,}000$",
-            v: "At year 10: $BV_{10} = 50000 - 10(4500) = \\$5{,}000 = SV$ ✓"
+            a: "$BV_6=\\$23{,}000$",
+            v: "At year 10: $50{,}000-10(4{,}500)=\\$5{,}000=SV$ ✓ - straight-line lands exactly on salvage."
           }),
           ref: "Handbook p.230" },
 
@@ -639,14 +638,14 @@ const QUESTION_BANK = {
           choices: ["$\\$1,611$", "$\\$1,500$", "$\\$1,700$", "$\\$1,100$"],
           correct: 0,
           solution: S({
-            c: "Compound growth: $F = P(1+i)^n$.",
+            c: "Compound growth: $F=P(1+i)^n$.",
             s: [
-              "Identify: $P = 1000$, $i = 0.10$, $n = 5$.",
-              "$(1.10)^5 = 1.6105$.",
-              "$F = 1000 \\cdot 1.6105 = \\$1{,}610.51$."
+              "<b>Step 1 — Factor.</b> $(1.10)^5=1.6105$.",
+              "<b>Step 2 — Multiply.</b> $F=1000\\times1.6105=\\$1{,}611$.",
+              "<b>Step 3 — Distractor audit.</b> $\\$1{,}500$ assumes simple interest ($1000+5\\times100$); $\\$1{,}100$ is one year; $\\$1{,}700$ overshoots."
             ],
-            a: "$F \\approx \\$1{,}611$",
-            v: "Rule of 72: at 10%, money doubles in ~7.2 years. After 5 years, about $\\$1{,}600$ — consistent."
+            a: "$F\\approx\\$1{,}611$",
+            v: "Rule of 72: at 10% money doubles in ~7.2 yr, so after 5 yr ~1.6x ✓. Compound ($1611) beats simple ($1500)."
           }),
           ref: "Handbook p.230" },
 
@@ -654,15 +653,14 @@ const QUESTION_BANK = {
           choices: ["$\\$25,156$", "$\\$20,000$", "$\\$30,000$", "$\\$18,500$"],
           correct: 0,
           solution: S({
-            c: "Future value of an annuity: $F = A\\cdot\\dfrac{(1+i)^n - 1}{i}$. (Each deposit grows for fewer years; sum is a geometric series.)",
+            c: "Future value of an annuity: $F=A\\dfrac{(1+i)^n-1}{i}$ - each deposit compounds for a different number of years; the sum is geometric.",
             s: [
-              "Identify: $A = 2000$, $i = 0.05$, $n = 10$.",
-              "$(1.05)^{10} = 1.6289$.",
-              "$F/A$ factor: $(1.6289 - 1)/0.05 = 12.578$.",
-              "Future value: $F = 2000 \\cdot 12.578 = \\$25{,}157$."
+              "<b>Step 1 — Factor.</b> $(1.05)^{10}=1.6289$; $(F/A)=(1.6289-1)/0.05=12.578$.",
+              "<b>Step 2 — Multiply.</b> $F=2000\\times12.578=\\$25{,}157$.",
+              "<b>Step 3 — Distractor audit.</b> $\\$20{,}000$ is the deposits with NO interest; $\\$30{,}000$/$\\$18{,}500$ are off."
             ],
-            a: "$F \\approx \\$25{,}157$",
-            v: "Without interest: $10 \\cdot 2000 = \\$20{,}000$. Compound interest adds ~$5{,}157$."
+            a: "$F\\approx\\$25{,}157$",
+            v: "Raw deposits total $\\$20{,}000$; compounding adds ~$\\$5{,}157$ ✓ - earlier deposits grow the longest."
           }),
           ref: "Handbook p.231" },
 
@@ -670,14 +668,14 @@ const QUESTION_BANK = {
           choices: ["Need EUAW comparison for unequal lives", "B (higher NPV)", "A (faster payback)", "Same"],
           correct: 0,
           solution: S({
-            c: "<b>Unequal lives</b> rule: cannot compare NPVs directly. Convert to Equivalent Uniform Annual Worth (EUAW) using $A/P$ factor — this normalizes to per-year values.",
+            c: "UNEQUAL lives: you cannot compare NPVs directly. Convert each to Equivalent Uniform Annual Worth: $EUAW=NPV\\times(A/P,i,n)$ (a per-year basis).",
             s: [
-              "Higher NPV alone doesn't win — Project A could be repeated twice over 10 years.",
-              "Standard methods: (1) convert each to EUAW, or (2) use a common multiple study period.",
-              "EUAW formula: $EUAW = NPV \\cdot (A/P, i, n)$."
+              "<b>Step 1 — Match.</b> Need an EUAW comparison.",
+              "<b>Step 2 — Why.</b> Project A (5 yr) could repeat to cover B's 10 years - so higher raw NPV alone (B) doesn't decide it.",
+              "<b>Step 3 — Distractor audit.</b> 'B (higher NPV)' and 'A (faster payback)' ignore the life mismatch; 'same' is wrong."
             ],
-            a: "Need EUAW comparison",
-            v: "If $i=10\\%$: $EUAW_A = 50k(0.2638) = \\$13{,}190$/yr; $EUAW_B = 80k(0.1627) = \\$13{,}016$/yr. A wins slightly!"
+            a: "Compare via EUAW.",
+            v: "At i=10%: $EUAW_A=50k(0.2638)=\\$13{,}190$/yr vs $EUAW_B=80k(0.1627)=\\$13{,}016$/yr - A actually wins slightly, despite lower NPV ✓."
           }),
           ref: "Handbook p.232" },
 
@@ -685,13 +683,14 @@ const QUESTION_BANK = {
           choices: ["$8.15\\%$", "$8\\%$", "$2\\%$", "$15\\%$"],
           correct: 0,
           solution: S({
-            c: "Fisher equation: $(1+i_{nominal}) = (1+i_{real})(1+f)$, NOT simple addition.",
+            c: "Fisher equation (exact): $1+i_{nom}=(1+i_r)(1+f)$ - NOT simple addition.",
             s: [
-              "Multiply: $(1+i_r)(1+f) = (1.05)(1.03) = 1.0815$.",
-              "Solve: $i_{nominal} = 1.0815 - 1 = 0.0815 = 8.15\\%$."
+              "<b>Step 1 — Multiply.</b> $(1.05)(1.03)=1.0815$.",
+              "<b>Step 2 — Subtract 1.</b> $i_{nom}=0.0815=8.15\\%$.",
+              "<b>Step 3 — Distractor audit.</b> $8\\%$ is the APPROXIMATION $i_r+f$; $2\\%$ subtracts; $15\\%$ is wrong."
             ],
-            a: "$i_{nominal} \\approx 8.15\\%$",
-            v: "Quick approximation: $i_r + f = 8\\%$ (choice B). Exact answer is slightly higher because compounding."
+            a: "$i_{nom}\\approx8.15\\%$",
+            v: "The simple sum $i_r+f=8\\%$ is close; the exact Fisher value (8.15%) is slightly higher due to the cross-term $i_r f$, which matters more at high rates ✓."
           }),
           ref: "Handbook p.230" },
       ],
