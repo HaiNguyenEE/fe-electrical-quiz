@@ -1473,246 +1473,616 @@
     12: [
       { q: "PID controller transfer function in parallel form:",
         choices: ["$K_p + K_i/s + K_d s$", "$K_p(K_i)(K_d)$", "$K/s$", "Just $K$"], correct: 0,
-        solution: S({ c: "Standard PID.", s: [""], a: "$K_p+K_i/s+K_d s$" }), ref: "p.366" },
+        solution: S({
+          c: "Parallel-form PID transfer function: $K_p + \\dfrac{K_i}{s} + K_d s$ (proportional + integral + derivative).",
+          s: ["<b>Step 1 — Match.</b> $K_p + K_i/s + K_d s$.","<b>Step 2 — Distractor audit.</b> Multiplying the gains, $K/s$, or 'just K' aren't the PID structure."],
+          a: "$K_p + K_i/s + K_d s$",
+          v: "The $1/s$ is the integrator (kills steady-state error), the $s$ is the differentiator (adds damping) - each term shapes a different aspect of the response."
+        }), ref: "p.366" },
       { q: "Pure proportional control of plant $G = 1/(s+1)$, K = 10. Closed-loop pole:",
         choices: ["$s = -11$", "$s = -1$", "$s = -10$", "$s = -1/10$"], correct: 0,
-        solution: S({ c: "$T = KG/(1+KG) = 10/(s+1+10) = 10/(s+11)$.", s: [""], a: "$s = -11$" }), ref: "p.365" },
+        solution: S({
+          c: "Unity-feedback closed loop: $T = \\dfrac{KG}{1+KG}$. Find the pole from the denominator.",
+          s: ["<b>Step 1 — Form T.</b> $T = \\dfrac{10/(s+1)}{1+10/(s+1)} = \\dfrac{10}{s+11}$.","<b>Step 2 — Pole.</b> $s = -11$.","<b>Step 3 — Distractor audit.</b> $-1$ is the OPEN-loop pole; $-10$ and $-1/10$ misuse K."],
+          a: "$s = -11$",
+          v: "Feedback moved the pole from $-1$ to $-11$ - higher gain pushes it further left (faster response). This pole-shifting is the whole point of feedback control."
+        }), ref: "p.365" },
       { q: "If $G(s) = K/s$ and $H(s) = 1$ (unity feedback), closed-loop is:",
         choices: ["$K/(s+K)$ (1st-order LPF)", "$1$", "$1/(s+1)$", "$Ks$"], correct: 0,
-        solution: S({ c: "$T = G/(1+G) = (K/s)/(1+K/s) = K/(s+K)$.", s: ["Pole at $-K$. DC gain = 1."], a: "$K/(s+K)$" }), ref: "p.365" },
+        solution: S({
+          c: "Unity feedback of an integrator: $T = \\dfrac{G}{1+G} = \\dfrac{K/s}{1+K/s} = \\dfrac{K}{s+K}$ - a first-order low-pass.",
+          s: ["<b>Step 1 — Form T.</b> $K/(s+K)$.","<b>Step 2 — Read it.</b> Pole at $-K$, DC gain $K/K=1$.","<b>Step 3 — Distractor audit.</b> 1, $1/(s+1)$, $Ks$ don't follow the feedback formula."],
+          a: "$K/(s+K)$ (1st-order LPF).",
+          v: "Wrapping feedback around an integrator turns it into a stable first-order tracker with unity DC gain and bandwidth K - the basis of simple servo loops."
+        }), ref: "p.365" },
       { q: "Gain crossover frequency $\\omega_{gc}$:",
         choices: ["Where $|G(j\\omega)H(j\\omega)| = 1$", "Where phase = 0", "DC", "Resonance"], correct: 0,
-        solution: S({ c: "$\\omega_{gc}$: magnitude crosses 1 (0 dB).", s: ["Used to find phase margin."], a: "$|GH| = 1$" }), ref: "p.366" },
+        solution: S({
+          c: "The gain crossover frequency is where the open-loop magnitude $|G(j\\omega)H(j\\omega)| = 1$ (0 dB).",
+          s: ["<b>Step 1 — Match.</b> Where $|GH| = 1$.","<b>Step 2 — Distractor audit.</b> Phase = -180 is the PHASE crossover; DC and resonance are different points."],
+          a: "Where $|GH| = 1$.",
+          v: "At $\\omega_{gc}$ you read off the PHASE MARGIN (how far phase is from -180) - the key stability metric. It also roughly equals the closed-loop bandwidth."
+        }), ref: "p.366" },
       { q: "Phase crossover frequency $\\omega_{pc}$:",
         choices: ["Where phase = -180°", "Where gain = 1", "DC", "Resonance"], correct: 0,
-        solution: S({ c: "$\\omega_{pc}$: phase crosses -180°.", s: ["Used to find gain margin."], a: "Phase = $-180°$" }), ref: "p.366" },
+        solution: S({
+          c: "The phase crossover frequency is where the open-loop PHASE = -180 degrees.",
+          s: ["<b>Step 1 — Match.</b> Where phase = -180.","<b>Step 2 — Distractor audit.</b> Gain = 1 is the GAIN crossover; DC/resonance are different."],
+          a: "Where phase = $-180°$.",
+          v: "At $\\omega_{pc}$ you read off the GAIN MARGIN (how far $|GH|$ is below 1) - if gain reaches 1 exactly at -180 phase, the loop is on the edge of instability."
+        }), ref: "p.366" },
       { q: "Lead compensator effect on $\\omega_{gc}$:",
         choices: ["Shifts $\\omega_{gc}$ higher (faster response)", "Shifts lower", "No effect", "Random"], correct: 0,
-        solution: S({ c: "Lead adds gain at high freq → pushes crossover higher.", s: ["Result: faster transient response."], a: "Higher $\\omega_{gc}$" }), ref: "p.366" },
+        solution: S({
+          c: "A lead compensator adds gain and positive phase at high frequencies, pushing the gain crossover HIGHER - giving faster response.",
+          s: ["<b>Step 1 — Match.</b> Shifts $\\omega_{gc}$ higher (faster).","<b>Step 2 — Distractor audit.</b> It doesn't lower it or leave it unchanged."],
+          a: "Higher $\\omega_{gc}$ (faster response).",
+          v: "Lead is the frequency-domain cousin of derivative action - it boosts bandwidth AND adds phase margin near crossover, improving both speed and stability."
+        }), ref: "p.366" },
       { q: "Acceptable gain margin minimum:",
         choices: ["$\\ge 6$ dB typically", "$0$ dB", "$\\infty$", "$3$ dB"], correct: 0,
-        solution: S({ c: "Design rule of thumb: GM ≥ 6 dB.", s: ["Combined with PM ≥ 30° for robust design."], a: "$\\ge 6$ dB" }), ref: "p.366" },
+        solution: S({
+          c: "A common robustness rule of thumb: gain margin >= 6 dB.",
+          s: ["<b>Step 1 — Match.</b> >= 6 dB.","<b>Step 2 — Distractor audit.</b> 0 dB is the edge of instability; infinity is unrealistic; 3 dB is too marginal."],
+          a: ">= 6 dB.",
+          v: "GM >= 6 dB means the loop gain could double before instability - paired with phase margin >= 30-45 degrees for a robust design with reasonable damping."
+        }), ref: "p.366" },
       { q: "Acceptable phase margin minimum:",
         choices: ["$\\ge 30°$ (60° is better)", "$\\ge 0°$", "$\\ge 90°$", "$0°$"], correct: 0,
-        solution: S({ c: "PM ≥ 30° minimum, 45-60° typical target.", s: [""], a: "$\\ge 30°$" }), ref: "p.366" },
+        solution: S({
+          c: "Phase margin >= 30 degrees is the usual minimum; 45-60 degrees is the preferred target for a well-damped response.",
+          s: ["<b>Step 1 — Match.</b> >= 30 degrees (60 is better).","<b>Step 2 — Distractor audit.</b> >= 0 is on the edge; >= 90 is overly conservative/sluggish; 0 is unstable-adjacent."],
+          a: ">= 30 degrees.",
+          v: "Phase margin is the frequency-domain stand-in for damping ratio - ~60 degrees is the sweet spot (fast with little overshoot); low PM means a ringing, near-unstable response."
+        }), ref: "p.366" },
       { q: "Integral term in PI controller eliminates:",
         choices: ["Steady-state error to step", "Overshoot", "Noise", "Settling time"], correct: 0,
-        solution: S({ c: "Integral adds a pole at origin → raises system type → zeros SS error to step.", s: [""], a: "SS step error" }), ref: "p.366" },
+        solution: S({
+          c: "The integral term adds a pole at the origin (an integrator), raising the system TYPE and driving steady-state error to a STEP to zero.",
+          s: ["<b>Step 1 — Match.</b> Steady-state error to a step.","<b>Step 2 — Distractor audit.</b> It doesn't reduce overshoot (often worsens it), filter noise, or shorten settling."],
+          a: "Steady-state step error.",
+          v: "Any residual error keeps charging the integrator until the error is driven to zero - the only stable point. This is exactly why nearly every controller includes an I term."
+        }), ref: "p.366" },
       { q: "Derivative term in PID:",
         choices: ["Improves damping but amplifies noise", "No effect", "Eliminates offset", "Adds gain only"], correct: 0,
-        solution: S({ c: "D term: phase lead → damping. But high-freq noise amplified.", s: ["Usually filtered: D acts on filtered signal."], a: "Damping + noise issue" }), ref: "p.366" },
+        solution: S({
+          c: "The derivative term adds phase lead -> DAMPING (it anticipates and brakes overshoot), but it also AMPLIFIES high-frequency noise.",
+          s: ["<b>Step 1 — Match.</b> Improves damping but amplifies noise.","<b>Step 2 — Distractor audit.</b> Not 'no effect'; 'eliminates offset' is the INTEGRAL term; not just gain."],
+          a: "Damping (with noise amplification).",
+          v: "Because differentiating boosts high frequencies, real controllers use a FILTERED derivative $\\dfrac{K_d s}{1+s/N}$ to cap the noise gain - pure D is rarely used alone."
+        }), ref: "p.366" },
       { q: "Time scaling: if $G(s)$ stable, $G(s/T)$ for $T > 0$:",
         choices: ["Still stable but slower", "Unstable", "Faster", "Unrelated"], correct: 0,
-        solution: S({ c: "$s \\to s/T$ scales time. Poles scale by T. All move along ray from origin.", s: ["LHP stays LHP for $T>0$."], a: "Stable, slower" }), ref: "p.365" },
+        solution: S({
+          c: "Replacing $s$ with $s/T$ scales time: the poles all scale by $T$ along rays from the origin. For $T>0$ they stay in the left-half plane, so the system remains STABLE (just rescaled in speed).",
+          s: ["<b>Step 1 — Match.</b> Still stable but slower (for T > 1).","<b>Step 2 — Distractor audit.</b> It can't become unstable for $T>0$; speed depends on T (slower if T>1)."],
+          a: "Stable, time-rescaled.",
+          v: "Since poles only move radially (sign of real part preserved), LHP stays LHP - time scaling stretches or compresses the response without changing stability."
+        }), ref: "p.365" },
       { q: "Closed-loop bandwidth ≈ gain crossover frequency for:",
         choices: ["Common 1st-order or moderately damped systems", "Always", "Never", "Only DC"], correct: 0,
-        solution: S({ c: "Rule of thumb for moderate $\\zeta$. Exact relationship depends on system.", s: [""], a: "Approximately equal" }), ref: "p.366" },
+        solution: S({
+          c: "For common first-order or moderately-damped second-order systems, closed-loop bandwidth is approximately the open-loop gain crossover frequency.",
+          s: ["<b>Step 1 — Match.</b> Common 1st-order / moderately damped systems.","<b>Step 2 — Distractor audit.</b> 'Always' overstates (exact relation varies); 'never'/'only DC' are wrong."],
+          a: "Approximately, for moderate damping.",
+          v: "This rule of thumb lets you estimate bandwidth straight from a Bode plot's crossover - handy for quick design, though the exact factor depends on the damping ratio."
+        }), ref: "p.366" },
     ],
 
     // Comm — +12
     13: [
       { q: "BPSK transmits how many bits per symbol?",
         choices: ["$1$", "$2$", "$4$", "$8$"], correct: 0,
-        solution: S({ c: "BPSK: 2 phase states → 1 bit.", s: [""], a: "$1$" }), ref: "p.371" },
+        solution: S({
+          c: "BPSK has 2 phase states (0 and pi), so it carries $\\log_2 2 = 1$ bit per symbol.",
+          s: ["<b>Step 1 — Apply.</b> $\\log_2 2 = 1$ bit.","<b>Step 2 — Distractor audit.</b> 2 is QPSK; 4 is 16-QAM; 8 is 256-QAM."],
+          a: "1 bit/symbol.",
+          v: "Fewest bits = most ROBUST: BPSK's two far-apart points give the best noise immunity at the cost of the lowest data rate."
+        }), ref: "p.371" },
       { q: "QPSK uses ___ symbol states:",
         choices: ["$4$ (2 bits each)", "$2$", "$8$", "$16$"], correct: 0,
-        solution: S({ c: "Quadrature PSK: 4 phases.", s: [""], a: "$4$" }), ref: "p.371" },
+        solution: S({
+          c: "QPSK (Quadrature PSK) has 4 phase states, carrying 2 bits per symbol.",
+          s: ["<b>Step 1 — Apply.</b> 4 states, 2 bits each.","<b>Step 2 — Distractor audit.</b> 2 is BPSK; 8 is 8-PSK; 16 is 16-QAM."],
+          a: "4 states (2 bits each).",
+          v: "QPSK doubles BPSK's rate in the same bandwidth with essentially the same energy-per-bit performance - a free win, hence its ubiquity."
+        }), ref: "p.371" },
       { q: "16-QAM transmits ___ bits per symbol:",
         choices: ["$4$", "$2$", "$8$", "$16$"], correct: 0,
-        solution: S({ c: "$\\log_2 16 = 4$ bits.", s: [""], a: "$4$" }), ref: "p.371" },
+        solution: S({
+          c: "Bits per symbol = $\\log_2(\\text{constellation size})$. $\\log_2 16 = 4$.",
+          s: ["<b>Step 1 — Apply.</b> $\\log_2 16 = 4$ bits.","<b>Step 2 — Distractor audit.</b> 2 is QPSK; 8 is 256-QAM; 16 is the point count, not bits."],
+          a: "4 bits/symbol.",
+          v: "More bits/symbol = higher data rate but needs higher SNR (points are closer together) - 16-QAM needs ~18 dB SNR for a good BER."
+        }), ref: "p.371" },
       { q: "AM bandwidth for message with $f_m$ = 5 kHz:",
         choices: ["$10$ kHz", "$5$ kHz", "$2.5$ kHz", "$15$ kHz"], correct: 0,
-        solution: S({ c: "AM: $BW = 2 f_m$.", s: [""], a: "$10$ kHz" }), ref: "p.371" },
+        solution: S({
+          c: "Standard AM (double-sideband) bandwidth is twice the highest message frequency: $BW = 2f_m$.",
+          s: ["<b>Step 1 — Apply.</b> $2\\times5 = 10$ kHz.","<b>Step 2 — Distractor audit.</b> 5 kHz is SSB; 2.5 kHz halves; 15 kHz is wrong."],
+          a: "$10$ kHz",
+          v: "AM carries both an upper and lower sideband (mirror images), so it needs double the message bandwidth - SSB cuts that in half by sending only one."
+        }), ref: "p.371" },
       { q: "SSB bandwidth for message with $f_m$ = 5 kHz:",
         choices: ["$5$ kHz", "$10$ kHz", "$2.5$ kHz", "$15$ kHz"], correct: 0,
-        solution: S({ c: "SSB: only $f_m$. Half of AM.", s: [""], a: "$5$ kHz" }), ref: "p.371" },
+        solution: S({
+          c: "Single-sideband transmits only ONE sideband, so its bandwidth equals the message bandwidth: $BW = f_m$.",
+          s: ["<b>Step 1 — Apply.</b> $5$ kHz.","<b>Step 2 — Distractor audit.</b> 10 kHz is AM (both sidebands); 2.5 and 15 kHz are wrong."],
+          a: "$5$ kHz",
+          v: "SSB is the most spectrum-efficient analog scheme - half the bandwidth of AM and no wasted carrier power, which is why ham radio and old telephony favored it."
+        }), ref: "p.371" },
       { q: "Carrier-to-noise ratio (CNR) units:",
         choices: ["dB (logarithmic ratio)", "Watts", "Hz", "Volts"], correct: 0,
-        solution: S({ c: "Ratio in dB.", s: [""], a: "dB" }), ref: "p.371" },
+        solution: S({
+          c: "CNR is a power RATIO, conventionally expressed in decibels (dB).",
+          s: ["<b>Step 1 — Match.</b> dB (logarithmic ratio).","<b>Step 2 — Distractor audit.</b> Watts/Hz/Volts are absolute units, not a ratio."],
+          a: "dB.",
+          v: "Like SNR, CNR is dimensionless - dB compresses the huge dynamic range of power ratios into manageable numbers (10 dB = 10x, 20 dB = 100x)."
+        }), ref: "p.371" },
       { q: "Spectral efficiency unit:",
         choices: ["bps/Hz", "bps", "Hz/bit", "W/Hz"], correct: 0,
-        solution: S({ c: "Bits per second per Hz of bandwidth.", s: [""], a: "bps/Hz" }), ref: "p.371" },
+        solution: S({
+          c: "Spectral efficiency measures data rate per unit bandwidth: bits per second per hertz (bps/Hz).",
+          s: ["<b>Step 1 — Match.</b> bps/Hz.","<b>Step 2 — Distractor audit.</b> bps is raw rate; Hz/bit inverts it; W/Hz is power spectral density."],
+          a: "bps/Hz.",
+          v: "It's how you compare modulation schemes fairly - QPSK ~2 bps/Hz, 64-QAM ~6 bps/Hz - and what Shannon's limit ultimately bounds for a given SNR."
+        }), ref: "p.371" },
       { q: "Shannon limit for AWGN channel:",
         choices: ["$C = B\\log_2(1 + S/N)$ bps", "$C = BS/N$", "$C = SN/B$", "$C = SNR$"], correct: 0,
-        solution: S({ c: "Shannon-Hartley theorem.", s: [""], a: "$B\\log_2(1+S/N)$" }), ref: "p.371" },
+        solution: S({
+          c: "The Shannon-Hartley theorem gives channel capacity: $C = B\\log_2(1+S/N)$ bits/second.",
+          s: ["<b>Step 1 — Match.</b> $C = B\\log_2(1+S/N)$.","<b>Step 2 — Distractor audit.</b> The other forms drop the logarithm or misplace S, N, B."],
+          a: "$C = B\\log_2(1+S/N)$ bps.",
+          v: "This is the absolute upper bound on error-free data rate - bandwidth helps linearly, SNR only logarithmically. No code can beat it."
+        }), ref: "p.371" },
       { q: "Carrier frequency 100 MHz, FM deviation 50 kHz, audio 10 kHz. Carson BW:",
         choices: ["$120$ kHz", "$50$ kHz", "$200$ kHz", "$100$ MHz"], correct: 0,
-        solution: S({ c: "Carson: $BW = 2(\\Delta f + f_m)$.", s: ["$2(50 + 10) = 120$ kHz."], a: "$120$ kHz" }), ref: "p.371" },
+        solution: S({
+          c: "Carson's rule for FM bandwidth: $BW = 2(\\Delta f + f_m)$, where $\\Delta f$ is peak deviation and $f_m$ the modulating frequency.",
+          s: ["<b>Step 1 — Apply.</b> $2(50 + 10) = 120$ kHz.","<b>Step 2 — Distractor audit.</b> 50 kHz is just the deviation; 200 kHz over-counts; 100 MHz is the carrier (irrelevant to BW)."],
+          a: "$120$ kHz",
+          v: "Note the carrier frequency doesn't enter the bandwidth - only deviation and message do. Wider deviation buys noise immunity at the cost of more spectrum."
+        }), ref: "p.371" },
       { q: "Source coding (compression):",
         choices: ["Removes redundancy in data", "Adds error correction", "Modulates", "Encrypts"], correct: 0,
-        solution: S({ c: "Source coding: minimize bits to represent info (e.g., Huffman, LZ).", s: ["Channel coding: add redundancy for error correction."], a: "Compression" }), ref: "p.371" },
+        solution: S({
+          c: "Source coding REMOVES redundancy to represent information with fewer bits (e.g. Huffman, Lempel-Ziv). It's the opposite job from channel coding.",
+          s: ["<b>Step 1 — Match.</b> Removes redundancy in data.","<b>Step 2 — Distractor audit.</b> Adding error correction is CHANNEL coding; modulation and encryption are separate."],
+          a: "Compression (redundancy removal).",
+          v: "Source vs channel coding are complementary: source coding SHRINKS data (efficiency), channel coding ADDS controlled redundancy back (reliability over noisy channels)."
+        }), ref: "p.371" },
       { q: "Channel coding rate $R_c = k/n$ means:",
         choices: ["k info bits per n coded bits", "k errors per n bits", "Speed", "Frequency"], correct: 0,
-        solution: S({ c: "Code rate: info / total. Lower rate = more redundancy.", s: ["E.g., (7,4) Hamming: rate 4/7."], a: "$k$ info per $n$ coded" }), ref: "p.371" },
+        solution: S({
+          c: "Code rate $R_c = k/n$: $k$ information bits are carried in $n$ transmitted (coded) bits. Lower rate = more redundancy = stronger protection.",
+          s: ["<b>Step 1 — Match.</b> k info bits per n coded bits.","<b>Step 2 — Distractor audit.</b> It's not errors-per-bit, a speed, or a frequency."],
+          a: "k info bits per n coded bits.",
+          v: "Example: Hamming(7,4) has rate 4/7 - 3 parity bits protect 4 data bits. The trade is reliability (more correction) vs efficiency (lower rate)."
+        }), ref: "p.371" },
       { q: "Differential encoding (e.g., DPSK):",
         choices: ["Encodes by phase changes (not absolute phase)", "Differential equation", "Subtracts", "Linear"], correct: 0,
-        solution: S({ c: "DPSK: receiver doesn't need phase reference. Compares current vs previous symbol.", s: ["Cost: 3 dB worse BER vs coherent.", "Benefit: no phase recovery needed."], a: "Phase changes" }), ref: "p.371" },
+        solution: S({
+          c: "Differential encoding (DPSK) carries information in phase CHANGES between successive symbols, not the absolute phase - so the receiver needs no phase reference.",
+          s: ["<b>Step 1 — Match.</b> Encodes by phase changes (not absolute phase).","<b>Step 2 — Distractor audit.</b> Not a differential equation, subtraction, or 'linear'."],
+          a: "Encoded in phase changes.",
+          v: "DPSK trades ~3 dB worse BER for a much simpler receiver (no carrier phase recovery) - valuable where establishing a phase reference is hard or costly."
+        }), ref: "p.371" },
     ],
 
     // Networks — +10
     14: [
       { q: "MAC address bytes:",
         choices: ["$6$ (48 bits)", "$4$", "$8$", "$32$"], correct: 0,
-        solution: S({ c: "Standard MAC: 48 bits = 6 bytes.", s: ["Format: XX:XX:XX:XX:XX:XX (hex)."], a: "$6$ bytes" }), ref: "p.399" },
+        solution: S({
+          c: "A standard IEEE MAC address is 48 bits = 6 bytes (written as 6 hex pairs, e.g. XX:XX:XX:XX:XX:XX).",
+          s: ["<b>Step 1 — Apply.</b> 48 bits / 8 = 6 bytes.","<b>Step 2 — Distractor audit.</b> 4 bytes is an IPv4 address; 8 and 32 are wrong."],
+          a: "6 bytes (48 bits).",
+          v: "First 3 bytes = manufacturer OUI, last 3 = device serial - a Layer-2 hardware address, distinct from the Layer-3 IP address."
+        }), ref: "p.399" },
       { q: "IPv4 multicast address range:",
         choices: ["$224.0.0.0 - 239.255.255.255$ (Class D)", "$10.0.0.0/8$", "$127.0.0.0/8$", "$192.168.0.0/16$"], correct: 0,
-        solution: S({ c: "Class D: 224.0.0.0/4. Multicast group addressing.", s: ["Used in: streaming, IGMP, OSPF, video conferencing."], a: "$224-239$" }), ref: "p.394" },
+        solution: S({
+          c: "Class D (multicast) spans 224.0.0.0 to 239.255.255.255 - addresses for one-to-many group delivery.",
+          s: ["<b>Step 1 — Match.</b> 224-239 first octet.","<b>Step 2 — Distractor audit.</b> 10/8 and 192.168/16 are private unicast; 127/8 is loopback."],
+          a: "224.0.0.0 - 239.255.255.255.",
+          v: "Multicast efficiently serves streaming, IGMP, and routing protocols (OSPF) - one packet reaches all subscribers instead of a separate copy per receiver."
+        }), ref: "p.394" },
       { q: "Hub vs switch differences:",
         choices: ["Hub broadcasts to all ports; switch forwards selectively by MAC", "Same", "Hub is newer", "Switch slower"], correct: 0,
-        solution: S({ c: "Hub: physical layer repeater. Switch: data link, learns MAC table.", s: [""], a: "Hub broadcast, switch forward" }), ref: "p.399" },
+        solution: S({
+          c: "A HUB (Layer 1) repeats every incoming bit to ALL ports; a SWITCH (Layer 2) learns MAC addresses and forwards frames only to the destination port.",
+          s: ["<b>Step 1 — Match.</b> Hub broadcasts to all; switch forwards selectively by MAC.","<b>Step 2 — Distractor audit.</b> Not 'same'; hubs are OLDER; switches are faster."],
+          a: "Hub broadcasts; switch forwards by MAC.",
+          v: "A switch gives each port its own collision-free, full-duplex segment - far better than a hub's shared, collision-prone medium. Hubs are essentially obsolete."
+        }), ref: "p.399" },
       { q: "OSPF uses what algorithm to find shortest path?",
         choices: ["Dijkstra's", "Bellman-Ford", "Floyd-Warshall", "Heap sort"], correct: 0,
-        solution: S({ c: "OSPF: link-state protocol using Dijkstra's algorithm.", s: ["RIP uses Bellman-Ford (distance-vector)."], a: "Dijkstra" }), ref: "p.400" },
+        solution: S({
+          c: "OSPF is a link-state protocol that runs Dijkstra's shortest-path algorithm on the learned topology.",
+          s: ["<b>Step 1 — Match.</b> Dijkstra's.","<b>Step 2 — Distractor audit.</b> Bellman-Ford is RIP (distance-vector); Floyd-Warshall is all-pairs; heap sort isn't a routing algorithm."],
+          a: "Dijkstra's algorithm.",
+          v: "Each OSPF router builds the full map then computes shortest paths itself - faster convergence and no routing loops vs distance-vector's neighbor-rumor approach."
+        }), ref: "p.400" },
       { q: "Default gateway:",
         choices: ["Router for traffic outside local subnet", "DNS server", "Switch", "DHCP server"], correct: 0,
-        solution: S({ c: "Default gateway: where to send packets destined outside the host's subnet.", s: ["Typically configured via DHCP."], a: "Outbound router" }), ref: "p.400" },
+        solution: S({
+          c: "The default gateway is the router a host sends packets to when the destination is OUTSIDE its local subnet.",
+          s: ["<b>Step 1 — Match.</b> Router for traffic outside the local subnet.","<b>Step 2 — Distractor audit.</b> Not a DNS server, switch, or DHCP server (though DHCP often assigns the gateway)."],
+          a: "The outbound router.",
+          v: "When a host's routing table has no specific route, it sends to the default gateway - the 'door' to everything beyond the local network."
+        }), ref: "p.400" },
       { q: "Latency in ms = round-trip time. For 10 ms RTT, propagation delay (assuming negligible queuing):",
         choices: ["$\\approx 5$ ms one-way", "$10$ ms one-way", "$0$", "$100$ ms"], correct: 0,
-        solution: S({ c: "RTT = 2× one-way.", s: ["One-way ≈ 5 ms."], a: "$\\approx 5$ ms" }), ref: "p.399" },
+        solution: S({
+          c: "Round-trip time = 2x the one-way delay (there and back), so one-way ~ RTT/2.",
+          s: ["<b>Step 1 — Apply.</b> $10/2 = 5$ ms one-way.","<b>Step 2 — Distractor audit.</b> 10 ms one-way ignores the round trip; 0 and 100 ms are wrong."],
+          a: "$\\approx 5$ ms one-way.",
+          v: "Ping reports RTT; halve it for one-way latency (assuming a symmetric path) - useful for estimating distance, since propagation is bounded by light speed."
+        }), ref: "p.399" },
       { q: "VLAN purpose:",
         choices: ["Logical segmentation on physical switch", "Encryption", "Speed boost", "Routing"], correct: 0,
-        solution: S({ c: "VLAN: isolated broadcast domains on shared switch.", s: ["Used: separating departments, security zones, IP phones."], a: "Logical segmentation" }), ref: "p.399" },
+        solution: S({
+          c: "A VLAN (Virtual LAN) logically segments one physical switch into separate broadcast domains - isolating traffic without separate hardware.",
+          s: ["<b>Step 1 — Match.</b> Logical segmentation on a physical switch.","<b>Step 2 — Distractor audit.</b> VLANs don't encrypt, speed up, or route (routing between VLANs needs a Layer-3 device)."],
+          a: "Logical network segmentation.",
+          v: "VLANs separate departments, security zones, or voice/data on shared infrastructure - confining broadcasts and improving security/manageability."
+        }), ref: "p.399" },
       { q: "Reliable delivery in TCP enforced by:",
         choices: ["Sequence numbers + ACKs + retransmission", "Just sequence numbers", "Just ACK", "UDP fallback"], correct: 0,
-        solution: S({ c: "TCP: sender numbers bytes; receiver ACKs. Lost or unACKed → resend.", s: [""], a: "Seq + ACK + retx" }), ref: "p.400" },
+        solution: S({
+          c: "TCP guarantees reliable, ordered delivery using sequence numbers, acknowledgments (ACKs), and retransmission of unacknowledged data.",
+          s: ["<b>Step 1 — Match.</b> Sequence numbers + ACKs + retransmission.","<b>Step 2 — Distractor audit.</b> Sequence numbers or ACKs ALONE aren't sufficient; UDP has no such mechanism."],
+          a: "Sequence numbers, ACKs, and retransmission.",
+          v: "The sender numbers bytes and resends anything not ACKed in time; the receiver reorders by sequence number - this trio is what makes TCP reliable (vs UDP's fire-and-forget)."
+        }), ref: "p.400" },
       { q: "UDP characteristics:",
         choices: ["Connectionless, no reliability, low overhead", "Connection-oriented", "Reliable", "Heavy header"], correct: 0,
-        solution: S({ c: "UDP: 8-byte header, fire-and-forget.", s: ["Used: DNS queries, video streaming, gaming, VoIP."], a: "Connectionless, fast" }), ref: "p.400" },
+        solution: S({
+          c: "UDP is connectionless, unreliable (no ACKs/retransmission), and low-overhead (8-byte header) - fast but best-effort.",
+          s: ["<b>Step 1 — Match.</b> Connectionless, no reliability, low overhead.","<b>Step 2 — Distractor audit.</b> Connection-oriented and reliable describe TCP; UDP's header is small, not heavy."],
+          a: "Connectionless and fast.",
+          v: "UDP suits real-time/latency-sensitive traffic (DNS, VoIP, gaming, streaming) where a late retransmission is useless - speed and low overhead beat guaranteed delivery."
+        }), ref: "p.400" },
       { q: "ARP request is sent to:",
         choices: ["Broadcast MAC FF:FF:FF:FF:FF:FF", "Specific MAC", "Multicast", "Source"], correct: 0,
-        solution: S({ c: "ARP request: 'who has this IP?' — broadcast on local network.", s: ["Reply: unicast back to requester."], a: "Broadcast" }), ref: "p.399" },
+        solution: S({
+          c: "An ARP request ('who has this IP?') is BROADCAST to all hosts on the local network using the destination MAC FF:FF:FF:FF:FF:FF.",
+          s: ["<b>Step 1 — Match.</b> Broadcast MAC FF:FF:FF:FF:FF:FF.","<b>Step 2 — Distractor audit.</b> The REPLY is unicast back to the requester; it's not multicast or sent to source."],
+          a: "Broadcast (FF:FF:FF:FF:FF:FF).",
+          v: "ARP bridges Layer 3 (IP) to Layer 2 (MAC): broadcast the question, the owner replies with its MAC, and the result is cached - so each address resolves only occasionally."
+        }), ref: "p.399" },
     ],
 
     // Digital — +20
     15: [
       { q: "Binary 10101010 in decimal:",
         choices: ["$170$", "$85$", "$255$", "$160$"], correct: 0,
-        solution: S({ c: "$128+32+8+2 = 170$.", s: [""], a: "$170$" }), ref: "p.388" },
+        solution: S({
+          c: "Sum the place values ($2^n$) of the 1-bits.",
+          s: ["<b>Step 1 — Add.</b> $128+32+8+2 = 170$.","<b>Step 2 — Distractor audit.</b> 85 is 01010101 (the complement); 255 is all ones; 160 drops bits."],
+          a: "$170$",
+          v: "10101010 alternates bits - its complement 01010101 = 85, and together they sum to 255 (all ones). A quick consistency check."
+        }), ref: "p.388" },
       { q: "Hex 0xFF in decimal:",
         choices: ["$255$", "$256$", "$15$", "$170$"], correct: 0,
-        solution: S({ c: "$F = 15$. $15 \\cdot 16 + 15 = 255$.", s: [""], a: "$255$" }), ref: "p.388" },
+        solution: S({
+          c: "Hex to decimal: each digit times its $16^n$ place. $FF = 15\\times16 + 15$.",
+          s: ["<b>Step 1 — Apply.</b> $240 + 15 = 255$.","<b>Step 2 — Distractor audit.</b> 256 is $2^8$ (one more); 15 is single F; 170 is 0xAA."],
+          a: "$255$",
+          v: "0xFF = 255 = the largest 8-bit value (one full byte of ones) - worth memorizing as a landmark."
+        }), ref: "p.388" },
       { q: "Largest 16-bit unsigned integer:",
         choices: ["$65{,}535$", "$32{,}767$", "$255$", "$65{,}536$"], correct: 0,
-        solution: S({ c: "$2^{16} - 1$.", s: [""], a: "$65535$" }), ref: "p.389" },
+        solution: S({
+          c: "An n-bit unsigned integer ranges 0 to $2^n - 1$.",
+          s: ["<b>Step 1 — Apply.</b> $2^{16} - 1 = 65{,}535$.","<b>Step 2 — Distractor audit.</b> 32,767 is the signed max ($2^{15}-1$); 255 is 8-bit; 65,536 forgets the $-1$."],
+          a: "$65{,}535$",
+          v: "The $-1$ matters: $2^{16}=65{,}536$ is the COUNT of values (0 to 65,535), and the largest VALUE is one less."
+        }), ref: "p.389" },
       { q: "Two's complement 8-bit range:",
         choices: ["$-128$ to $+127$", "$-127$ to $+128$", "$0$ to $255$", "$-255$ to $+255$"], correct: 0,
-        solution: S({ c: "Signed n-bit: $-2^{n-1}$ to $2^{n-1}-1$.", s: [""], a: "$-128$ to $+127$" }), ref: "p.389" },
+        solution: S({
+          c: "Signed n-bit two's complement spans $-2^{n-1}$ to $+2^{n-1}-1$ (one extra negative value).",
+          s: ["<b>Step 1 — Apply.</b> $-2^7$ to $2^7-1$ = $-128$ to $+127$.","<b>Step 2 — Distractor audit.</b> '-127 to +128' is backwards; '0 to 255' is unsigned; '-255 to 255' is wrong."],
+          a: "$-128$ to $+127$.",
+          v: "There's one more negative than positive because 0 takes a 'positive' slot - the asymmetry is two's complement's signature (and why $-128$ has no positive twin)."
+        }), ref: "p.389" },
       { q: "Boolean: $A + AB$ simplifies to:",
         choices: ["$A$ (absorption)", "$AB$", "$B$", "$0$"], correct: 0,
-        solution: S({ c: "Absorption: $A + AB = A(1+B) = A$.", s: [""], a: "$A$" }), ref: "p.389" },
+        solution: S({
+          c: "Absorption law: $A + AB = A(1+B) = A$ (since $1+B=1$).",
+          s: ["<b>Step 1 — Factor.</b> $A(1+B) = A\\cdot1 = A$.","<b>Step 2 — Distractor audit.</b> $AB$, $B$, $0$ all ignore the absorption identity."],
+          a: "$A$",
+          v: "If A is true the expression is true regardless of B, so B is redundant - absorption is one of the most useful simplification laws in logic minimization."
+        }), ref: "p.389" },
       { q: "Boolean: $AB + A\\bar{B}$:",
         choices: ["$A$", "$B$", "$AB$", "$\\bar{B}$"], correct: 0,
-        solution: S({ c: "Factor: $A(B + \\bar{B}) = A \\cdot 1 = A$.", s: [""], a: "$A$" }), ref: "p.389" },
+        solution: S({
+          c: "Factor out A: $A(B+\\bar B) = A\\cdot1 = A$ (a variable OR its complement = 1).",
+          s: ["<b>Step 1 — Factor.</b> $A(B+\\bar B)$.","<b>Step 2 — Simplify.</b> $B+\\bar B=1$, so $=A$.","<b>Step 3 — Distractor audit.</b> $B$, $AB$, $\\bar B$ ignore the complement identity."],
+          a: "$A$",
+          v: "$B+\\bar B=1$ (the complement law) is the key - B drops out entirely. This is the algebraic version of combining two adjacent K-map cells."
+        }), ref: "p.389" },
       { q: "NOR truth: 1 iff:",
         choices: ["Both inputs are 0", "Both 1", "Differ", "Same"], correct: 0,
-        solution: S({ c: "NOR = NOT OR. True only when all inputs 0.", s: [""], a: "Both 0" }), ref: "p.389" },
+        solution: S({
+          c: "NOR = NOT(OR). Its output is 1 ONLY when all inputs are 0 (the one case where OR is 0).",
+          s: ["<b>Step 1 — Match.</b> Both inputs 0.","<b>Step 2 — Distractor audit.</b> 'Both 1'/'differ'/'same' don't match the NOR table."],
+          a: "Both inputs 0.",
+          v: "NOR is functionally COMPLETE - any logic function can be built from NOR gates alone (as can NAND), which is why they're fundamental in IC design."
+        }), ref: "p.389" },
       { q: "NAND truth: 0 iff:",
         choices: ["Both 1", "Both 0", "Differ", "Same"], correct: 0,
-        solution: S({ c: "NAND = NOT AND. False only when all inputs 1.", s: [""], a: "Both 1" }), ref: "p.389" },
+        solution: S({
+          c: "NAND = NOT(AND). Its output is 0 ONLY when all inputs are 1 (the one case where AND is 1).",
+          s: ["<b>Step 1 — Match.</b> Both inputs 1.","<b>Step 2 — Distractor audit.</b> 'Both 0'/'differ'/'same' don't match the NAND table."],
+          a: "Both inputs 1.",
+          v: "Like NOR, NAND is functionally complete - entire CPUs can be (and are) built from NAND gates. CMOS makes NAND/NOR cheaper than AND/OR (fewer transistors)."
+        }), ref: "p.389" },
       { q: "Half adder Sum (XOR) and Carry (AND): inputs $A=B=1$:",
         choices: ["Sum=0, Carry=1", "S=1, C=1", "S=1, C=0", "S=0, C=0"], correct: 0,
-        solution: S({ c: "$1 \\oplus 1 = 0$. $1 \\cdot 1 = 1$.", s: [""], a: "S=0, C=1" }), ref: "p.390" },
+        solution: S({
+          c: "Half adder: Sum $= A\\oplus B$, Carry $= A\\cdot B$. For $A=B=1$: Sum $=1\\oplus1=0$, Carry $=1\\cdot1=1$.",
+          s: ["<b>Step 1 — Sum.</b> $1\\oplus1=0$.","<b>Step 2 — Carry.</b> $1\\cdot1=1$.","<b>Step 3 — Distractor audit.</b> The others mismatch XOR/AND."],
+          a: "Sum=0, Carry=1.",
+          v: "1+1 = binary 10: sum bit 0, carry bit 1 - exactly what the half adder computes. Chaining full adders (with carry-in) builds multi-bit addition."
+        }), ref: "p.390" },
       { q: "Mod-10 counter (decade): how many flip-flops minimum?",
         choices: ["$4$ (need 10 states ≤ $2^4$)", "$10$", "$3$", "$5$"], correct: 0,
-        solution: S({ c: "$\\lceil\\log_2 10\\rceil = 4$.", s: ["4 FFs handle 0-15; logic resets at 10 → 0."], a: "$4$" }), ref: "p.391" },
+        solution: S({
+          c: "Need enough flip-flops so $2^n \\ge$ number of states: $\\lceil\\log_2 10\\rceil = 4$.",
+          s: ["<b>Step 1 — Apply.</b> $2^3=8 < 10 \\le 16=2^4$ -> 4 FFs.","<b>Step 2 — Distractor audit.</b> 3 only reaches 8 states; 10 and 5 over-count."],
+          a: "4 flip-flops.",
+          v: "4 FFs give 16 states; logic detects 10 and resets to 0, skipping 10-15 - the standard BCD decade counter. You always round the log UP."
+        }), ref: "p.391" },
       { q: "Mealy machine outputs change when:",
         choices: ["State or input changes", "Clock edge only", "Power-on", "Reset"], correct: 0,
-        solution: S({ c: "Mealy: combinational output = $f(\\text{state, input})$. Changes with either.", s: [""], a: "State or input" }), ref: "p.391" },
+        solution: S({
+          c: "A Mealy machine's output is a combinational function of state AND input, so it can change whenever EITHER changes.",
+          s: ["<b>Step 1 — Match.</b> State or input changes.","<b>Step 2 — Distractor audit.</b> 'Clock edge only' is MOORE; power-on/reset are special events, not the general rule."],
+          a: "State or input changes.",
+          v: "This makes Mealy outputs faster (react to input immediately) but possibly glitchy - Moore outputs (state-only) change only at clock edges, cleaner but a cycle slower."
+        }), ref: "p.391" },
       { q: "D-FF setup violation cause:",
         choices: ["Metastability — output may be neither 0 nor 1 temporarily", "Faster operation", "Damage", "Reset"], correct: 0,
-        solution: S({ c: "Setup violation: input changing too close to clock edge → unpredictable state.", s: ["Resolved with synchronizers (two-FF chain) when crossing clock domains."], a: "Metastability" }), ref: "p.391" },
+        solution: S({
+          c: "If data changes too close to the clock edge (violating setup time), the flip-flop can enter METASTABILITY - output hovers between 0 and 1 before settling unpredictably.",
+          s: ["<b>Step 1 — Match.</b> Metastability.","<b>Step 2 — Distractor audit.</b> It's not faster operation, physical damage, or a reset."],
+          a: "Metastability.",
+          v: "Crossing clock domains is the classic cause - mitigated with a two-FF synchronizer chain that gives metastability time to resolve before the signal is used."
+        }), ref: "p.391" },
       { q: "BCD: 7 in 4 bits:",
         choices: ["$0111$", "$111$", "$1000$", "$0110$"], correct: 0,
-        solution: S({ c: "7 = 4+2+1 = 0111.", s: [""], a: "$0111$" }), ref: "p.388" },
+        solution: S({
+          c: "BCD encodes each decimal digit in 4 bits: 7 = 4+2+1 = 0111.",
+          s: ["<b>Step 1 — Apply.</b> 0111.","<b>Step 2 — Distractor audit.</b> 111 is only 3 bits; 1000 is 8; 0110 is 6."],
+          a: "$0111$",
+          v: "BCD always uses 4 bits per digit (0-9), wasting codes 1010-1111 - the trade for easy decimal display/conversion."
+        }), ref: "p.388" },
       { q: "Bitwise XOR of $1100$ and $1010$:",
         choices: ["$0110$", "$1000$", "$1110$", "$0000$"], correct: 0,
-        solution: S({ c: "XOR: 1 when differ.", s: ["1100", "1010", "0110."], a: "$0110$" }), ref: "p.388" },
+        solution: S({
+          c: "XOR outputs 1 where the bits DIFFER, 0 where they match.",
+          s: ["<b>Step 1 — Compare.</b> 1100 vs 1010: bit3 same(0), bit2 differ(1), bit1 differ(1), bit0 same(0) -> 0110.","<b>Step 2 — Distractor audit.</b> 1000 is AND-ish; 1110 is OR; 0000 would be identical inputs."],
+          a: "$0110$",
+          v: "XOR is the 'difference detector' - used for parity, toggling bits, and (XOR with itself = 0) the basis of simple swaps and checksums."
+        }), ref: "p.388" },
       { q: "PLA (Programmable Logic Array) vs PAL:",
         choices: ["PLA: programmable AND + OR; PAL: prog AND + fixed OR", "Same", "PAL is older only", "PLA has fewer outputs"], correct: 0,
-        solution: S({ c: "PLA more flexible; PAL simpler.", s: ["Both predecessors to modern FPGAs/CPLDs."], a: "PLA: both prog; PAL: fixed OR" }), ref: "p.390" },
+        solution: S({
+          c: "A PLA has BOTH a programmable AND-plane and a programmable OR-plane (most flexible). A PAL has a programmable AND-plane but a FIXED OR-plane (simpler, cheaper).",
+          s: ["<b>Step 1 — Match.</b> PLA: programmable AND + OR; PAL: programmable AND + fixed OR.","<b>Step 2 — Distractor audit.</b> Not 'same'; the difference is the OR-plane flexibility, not age or output count."],
+          a: "PLA both programmable; PAL fixed OR.",
+          v: "PLA's extra flexibility costs speed/area; PAL trades it for simplicity - both are ancestors of today's CPLDs and FPGAs."
+        }), ref: "p.390" },
       { q: "Tristate buffer outputs when enable is low (active-high enable):",
         choices: ["High impedance (Hi-Z)", "$0$", "$1$", "Floating undefined"], correct: 0,
-        solution: S({ c: "Disabled tristate: output disconnected from line.", s: ["Allows shared bus with multiple drivers."], a: "Hi-Z" }), ref: "p.391" },
+        solution: S({
+          c: "With an active-high enable held LOW, the tristate buffer is DISABLED -> output goes high-impedance (Hi-Z), electrically disconnected.",
+          s: ["<b>Step 1 — Match.</b> High impedance (Hi-Z).","<b>Step 2 — Distractor audit.</b> 0 and 1 are driven states (enabled); 'floating undefined' mischaracterizes the controlled Hi-Z."],
+          a: "High impedance (Hi-Z).",
+          v: "Hi-Z lets many devices share one bus wire - only the enabled driver controls it, the rest 'let go.' Without it, simultaneous drivers would short."
+        }), ref: "p.391" },
       { q: "Don't care in K-map represented by:",
         choices: ["$X$ or $d$", "$0$", "$1$", "Empty"], correct: 0,
-        solution: S({ c: "Don't cares: cells where output value doesn't matter. Use to simplify.", s: [""], a: "$X$ / $d$" }), ref: "p.390" },
+        solution: S({
+          c: "A 'don't care' (output value irrelevant for that input combo) is marked X (or d) on a Karnaugh map.",
+          s: ["<b>Step 1 — Match.</b> X or d.","<b>Step 2 — Distractor audit.</b> 0 and 1 are fixed outputs; 'empty' isn't standard notation."],
+          a: "$X$ (or $d$).",
+          v: "Don't cares are GOLD for minimization - you may treat each as 0 OR 1, whichever makes bigger groupings and a simpler expression. They arise from impossible/unused input combos."
+        }), ref: "p.390" },
       { q: "Convert decimal 25 to binary:",
         choices: ["$11001$", "$10101$", "$01001$", "$10011$"], correct: 0,
-        solution: S({ c: "$25 = 16+8+1 = 11001$.", s: [""], a: "$11001$" }), ref: "p.388" },
+        solution: S({
+          c: "Decompose into powers of 2 (or repeatedly divide by 2).",
+          s: ["<b>Step 1 — Decompose.</b> $25 = 16+8+1 = 2^4+2^3+2^0$.","<b>Step 2 — Bits.</b> 11001.","<b>Step 3 — Distractor audit.</b> 10101=21; 01001=9; 10011=19."],
+          a: "$11001$",
+          v: "Check: $16+8+1=25$ ✓. Odd numbers always end in 1 (bit 0 set), which 11001 does - a quick sanity test."
+        }), ref: "p.388" },
       { q: "Hex 0x1A + 0x06 = ?",
         choices: ["$0x20$", "$0x1F$", "$0x26$", "$0x16$"], correct: 0,
-        solution: S({ c: "26 + 6 = 32 = 0x20.", s: [""], a: "$0x20$" }), ref: "p.388" },
+        solution: S({
+          c: "Convert to decimal, add, convert back (or add hex columns with carry).",
+          s: ["<b>Step 1 — Decimal.</b> 0x1A = 26; 0x06 = 6.","<b>Step 2 — Add.</b> $26+6 = 32 = 0x20$.","<b>Step 3 — Distractor audit.</b> 0x1F=31; 0x26 adds wrong; 0x16=22."],
+          a: "$0x20$",
+          v: "Column check: A(10)+6 = 16 = 0x10, write 0 carry 1; 1+0+1 = 2 -> 0x20 ✓. Hex rolls over at 16, not 10."
+        }), ref: "p.388" },
       { q: "How many bits to address 1 MB byte-addressable memory:",
         choices: ["$20$", "$10$", "$30$", "$24$"], correct: 0,
-        solution: S({ c: "$2^{20} = 1048576 \\approx 1$ MB.", s: [""], a: "$20$" }), ref: "p.407" },
+        solution: S({
+          c: "Bits needed = $\\log_2(\\text{locations})$. 1 MB = $2^{20}$ bytes.",
+          s: ["<b>Step 1 — Apply.</b> $\\log_2(2^{20}) = 20$ bits.","<b>Step 2 — Distractor audit.</b> 10 bits = 1 KB; 30 bits = 1 GB; 24 bits = 16 MB."],
+          a: "$20$ bits.",
+          v: "Memory landmarks: 10 bits -> 1 KB, 20 -> 1 MB, 30 -> 1 GB, 32 -> 4 GB ✓ - each 10 address bits multiplies capacity by 1024."
+        }), ref: "p.407" },
     ],
 
     // CompSys — +10
     16: [
       { q: "Pipeline IF, ID, EX, MEM, WB stages: standard for:",
         choices: ["Classic RISC 5-stage", "x86", "ARM7", "GPU"], correct: 0,
-        solution: S({ c: "MIPS classic 5-stage pipeline. Used in textbooks for clarity.", s: [""], a: "RISC 5-stage" }), ref: "p.408" },
+        solution: S({
+          c: "IF/ID/EX/MEM/WB is the classic 5-stage RISC (MIPS) pipeline: Instruction Fetch, Decode, Execute, Memory, Write-Back.",
+          s: ["<b>Step 1 — Match.</b> Classic RISC 5-stage.","<b>Step 2 — Distractor audit.</b> x86 (CISC) has far deeper, more complex pipelines; ARM7 and GPUs differ."],
+          a: "Classic RISC 5-stage.",
+          v: "It's the textbook teaching model - each stage handles a different instruction simultaneously, raising THROUGHPUT (not single-instruction latency)."
+        }), ref: "p.408" },
       { q: "Cache locality types:",
         choices: ["Temporal + Spatial", "Time + Space + Code", "Just spatial", "Memory + I/O"], correct: 0,
-        solution: S({ c: "Temporal: recent access likely repeated. Spatial: nearby data accessed together.", s: [""], a: "Temporal + Spatial" }), ref: "p.407" },
+        solution: S({
+          c: "Two forms of locality: TEMPORAL (recently used data likely reused soon) and SPATIAL (data near a recent access likely used soon).",
+          s: ["<b>Step 1 — Match.</b> Temporal + Spatial.","<b>Step 2 — Distractor audit.</b> The other lists invent categories."],
+          a: "Temporal and spatial.",
+          v: "Caches exploit both: temporal by keeping recent items, spatial by fetching whole cache LINES (neighbors) - which is why sequential array access is so much faster than random."
+        }), ref: "p.407" },
       { q: "Direct-mapped cache: address with 4-bit offset, 6-bit index, 22-bit tag. Cache size:",
         choices: ["$2^{6} \\cdot 2^4 = 1024$ bytes = 1 KB", "$2^{22}$", "$64$ bytes", "$10$ KB"], correct: 0,
-        solution: S({ c: "Lines = $2^6 = 64$. Line size = $2^4 = 16$ bytes. Total $= 1024$.", s: [""], a: "$1$ KB" }), ref: "p.407" },
+        solution: S({
+          c: "Cache size = (number of lines) x (bytes per line) = $2^{index} \\times 2^{offset}$.",
+          s: ["<b>Step 1 — Lines.</b> $2^6 = 64$.","<b>Step 2 — Line size.</b> $2^4 = 16$ bytes.","<b>Step 3 — Total.</b> $64\\times16 = 1024$ bytes = 1 KB.","<b>Step 4 — Distractor audit.</b> $2^{22}$ is the tag space; 64 bytes is one set of lines; 10 KB is wrong."],
+          a: "$1$ KB.",
+          v: "The TAG (22 bits) is stored per line but doesn't count toward DATA size - only index (which line) x offset (byte within line) gives the data capacity."
+        }), ref: "p.407" },
       { q: "Volatility: which RAM is volatile?",
         choices: ["DRAM and SRAM (both)", "Only DRAM", "Only SRAM", "Neither"], correct: 0,
-        solution: S({ c: "Both lose contents without power. Flash/ROM is non-volatile.", s: [""], a: "Both" }), ref: "p.407" },
+        solution: S({
+          c: "Both DRAM and SRAM are VOLATILE - they lose their contents when power is removed.",
+          s: ["<b>Step 1 — Match.</b> DRAM and SRAM (both).","<b>Step 2 — Distractor audit.</b> 'Only DRAM'/'only SRAM' are wrong; 'neither' is false."],
+          a: "Both volatile.",
+          v: "Flash and ROM are NON-volatile (retain data without power). DRAM additionally needs periodic REFRESH even while powered; SRAM holds its bit as long as power is on."
+        }), ref: "p.407" },
       { q: "Word-aligned data for 32-bit machine:",
         choices: ["Address divisible by 4", "By 8", "By 1", "Random"], correct: 0,
-        solution: S({ c: "4-byte words: align at 4-byte boundaries.", s: ["64-bit: align at 8."], a: "Divisible by 4" }), ref: "p.407" },
+        solution: S({
+          c: "A 32-bit (4-byte) word is aligned when its address is divisible by 4.",
+          s: ["<b>Step 1 — Match.</b> Address divisible by 4.","<b>Step 2 — Distractor audit.</b> Divisible by 8 is 64-bit alignment; by 1 means no alignment; 'random' is wrong."],
+          a: "Address divisible by 4.",
+          v: "Aligned access completes in one bus cycle; an unaligned word may straddle two and take two cycles (or fault) - compilers pad structs to keep fields aligned."
+        }), ref: "p.407" },
       { q: "Floating-point IEEE 754 single-precision:",
         choices: ["1 sign + 8 exponent + 23 mantissa = 32 bits", "16 bits", "64 bits", "Variable"], correct: 0,
-        solution: S({ c: "Standard single-precision: 1+8+23.", s: ["Double: 1+11+52."], a: "1+8+23" }), ref: "p.388" },
+        solution: S({
+          c: "IEEE 754 single-precision (32 bits) = 1 sign bit + 8 exponent bits + 23 mantissa (fraction) bits.",
+          s: ["<b>Step 1 — Match.</b> 1 + 8 + 23 = 32 bits.","<b>Step 2 — Distractor audit.</b> 16 bits is half-precision; 64 is double (1+11+52); not variable."],
+          a: "1 sign + 8 exp + 23 mantissa = 32 bits.",
+          v: "The 8-bit exponent gives the huge dynamic range (~10^38); the 23-bit mantissa gives ~7 decimal digits of precision. Double (64-bit) extends both: 1+11+52."
+        }), ref: "p.388" },
       { q: "Cache coherence protocols (multicore): MESI states:",
         choices: ["Modified, Exclusive, Shared, Invalid", "Memory ECC", "Sync, write", "Stack"], correct: 0,
-        solution: S({ c: "MESI cache line states.", s: [""], a: "MESI" }), ref: "p.408" },
+        solution: S({
+          c: "MESI tracks each cache line's state across cores: Modified, Exclusive, Shared, Invalid - keeping multiple caches consistent.",
+          s: ["<b>Step 1 — Match.</b> Modified, Exclusive, Shared, Invalid.","<b>Step 2 — Distractor audit.</b> ECC is error correction; the others aren't coherence states."],
+          a: "Modified, Exclusive, Shared, Invalid.",
+          v: "MESI lets one core write (Modified) while invalidating others' copies, avoiding stale reads without flushing to memory each time - the backbone of multicore consistency (variants MOESI/MESIF refine sharing)."
+        }), ref: "p.408" },
       { q: "Process address space components:",
         choices: ["Text, data, heap, stack", "Just code", "Just data", "Memory"], correct: 0,
-        solution: S({ c: "Typical process layout: code (text), initialized data, BSS, heap (grows up), stack (grows down).", s: [""], a: "Text/data/heap/stack" }), ref: "p.408" },
+        solution: S({
+          c: "A process's virtual address space typically has four regions: TEXT (code), DATA (globals), HEAP (dynamic, grows up), and STACK (locals/calls, grows down).",
+          s: ["<b>Step 1 — Match.</b> Text, data, heap, stack.","<b>Step 2 — Distractor audit.</b> 'Just code'/'just data' are incomplete."],
+          a: "Text, data, heap, stack.",
+          v: "Heap and stack grow toward each other from opposite ends - a collision is 'out of memory.' This layout is why stack overflow (deep recursion) and heap leaks are distinct failure modes."
+        }), ref: "p.408" },
       { q: "Interrupt vs trap:",
         choices: ["Interrupt: external; trap: software-triggered", "Same", "Trap is faster", "Interrupt is for OS only"], correct: 0,
-        solution: S({ c: "Interrupt: async hardware event. Trap: synchronous software event (syscall, div-by-zero).", s: [""], a: "External vs internal" }), ref: "p.408" },
+        solution: S({
+          c: "An INTERRUPT is an asynchronous EXTERNAL hardware event (a device signaling); a TRAP is a synchronous INTERNAL software event (syscall, divide-by-zero, page fault).",
+          s: ["<b>Step 1 — Match.</b> Interrupt external; trap software-triggered.","<b>Step 2 — Distractor audit.</b> Not 'same'; speed isn't the distinction; interrupts aren't OS-only."],
+          a: "Interrupt = external; trap = internal.",
+          v: "Interrupts arrive unpredictably (between any instructions); traps occur deterministically AT a specific instruction - both transfer control to a handler, but for different reasons."
+        }), ref: "p.408" },
       { q: "Hyperthreading:",
         choices: ["One physical core appears as 2 logical (better utilization)", "Two cores in one", "Faster clock", "Encryption"], correct: 0,
-        solution: S({ c: "Intel HT: share execution resources between threads. Up to ~30% throughput gain.", s: [""], a: "Logical core sharing" }), ref: "p.408" },
+        solution: S({
+          c: "Hyperthreading makes one PHYSICAL core appear as two LOGICAL cores, interleaving two threads to better utilize idle execution resources.",
+          s: ["<b>Step 1 — Match.</b> One physical core appears as 2 logical.","<b>Step 2 — Distractor audit.</b> It's not two real cores, a faster clock, or encryption."],
+          a: "One core -> two logical cores.",
+          v: "When one thread stalls (cache miss), the other uses the idle execution units - typically ~15-30% throughput gain, not a doubling, since they SHARE the physical hardware."
+        }), ref: "p.408" },
     ],
 
     // Software — +10
     17: [
       { q: "Algorithm complexity of Heapsort:",
         choices: ["$O(n\\log n)$ worst case", "$O(n^2)$", "$O(n)$", "$O(\\log n)$"], correct: 0,
-        solution: S({ c: "Heapsort: build heap O(n), then n extracts at O(log n) each.", s: ["Total $O(n\\log n)$ guaranteed (unlike quicksort which can be $O(n^2)$)."], a: "$O(n\\log n)$" }), ref: "p.415" },
+        solution: S({
+          c: "Heapsort builds a heap in O(n), then does n extract-max operations at O(log n) each: total $O(n\\log n)$ - guaranteed in the worst case.",
+          s: ["<b>Step 1 — Apply.</b> $O(n) + n\\times O(\\log n) = O(n\\log n)$.","<b>Step 2 — Distractor audit.</b> $O(n^2)$ is the quicksort worst case; $O(n)$ and $O(\\log n)$ are too fast for comparison sorts."],
+          a: "$O(n\\log n)$ worst case.",
+          v: "Unlike quicksort (which can degrade to $O(n^2)$), heapsort GUARANTEES $O(n\\log n)$ and sorts in place - the trade is worse cache behavior, so quicksort is often faster in practice."
+        }), ref: "p.415" },
       { q: "Hash collision resolution: chaining means:",
         choices: ["Linked list at each bucket", "Probe next bucket", "Discard", "Resize immediately"], correct: 0,
-        solution: S({ c: "Chaining: multiple items in same bucket linked.", s: ["Open addressing: probe sequence.", "Both maintain $O(1)$ avg if load low."], a: "Linked list per bucket" }), ref: "p.415" },
+        solution: S({
+          c: "CHAINING stores colliding entries in a linked list (or similar) AT each bucket.",
+          s: ["<b>Step 1 — Match.</b> Linked list at each bucket.","<b>Step 2 — Distractor audit.</b> Probing the next bucket is OPEN ADDRESSING; discard/resize aren't collision resolution per se."],
+          a: "Linked list per bucket.",
+          v: "Chaining vs open addressing are the two main strategies - both keep average lookup O(1) at low load factor, but chaining degrades more gracefully when the table fills."
+        }), ref: "p.415" },
       { q: "Tail recursion can be optimized to:",
         choices: ["Iteration (no stack growth)", "Faster recursion", "Same as regular", "Faster memory"], correct: 0,
-        solution: S({ c: "Tail call: last action is recursive call. Compiler can reuse current stack frame.", s: ["Avoids stack overflow for deep recursion.", "Some languages (Scheme, Scala) guarantee TCO."], a: "Iteration (TCO)" }), ref: "p.415" },
+        solution: S({
+          c: "A TAIL call (recursion as the function's last action) can be optimized into ITERATION, reusing the current stack frame instead of growing the stack.",
+          s: ["<b>Step 1 — Match.</b> Iteration (no stack growth).","<b>Step 2 — Distractor audit.</b> It's not 'faster recursion' or 'faster memory' - it's converting recursion to a loop."],
+          a: "Iteration (TCO).",
+          v: "Tail-call optimization avoids stack overflow on deep recursion - some languages (Scheme, Scala) guarantee it; others (Python, Java) don't, so deep recursion there must be rewritten as loops."
+        }), ref: "p.415" },
       { q: "Compile-time vs run-time:",
         choices: ["Compile: before exec; run-time: during exec", "Same", "Compile is faster", "Random"], correct: 0,
-        solution: S({ c: "Compile-time: code generation, static checks. Run-time: actual execution.", s: ["Templates/macros: compile-time. Reflection: run-time."], a: "Before vs during exec" }), ref: "p.415" },
+        solution: S({
+          c: "Compile-time happens BEFORE execution (code generation, static type checks); run-time happens DURING execution (actual computation, dynamic behavior).",
+          s: ["<b>Step 1 — Match.</b> Compile: before exec; run-time: during exec.","<b>Step 2 — Distractor audit.</b> Not 'same'; neither is universally 'faster'; not random."],
+          a: "Before vs during execution.",
+          v: "Templates/macros and type checking are compile-time; reflection, dynamic dispatch, and exceptions are run-time - catching errors at compile time is cheaper than at run time."
+        }), ref: "p.415" },
       { q: "Linked list vs array dynamic insertion:",
         choices: ["List: $O(1)$ with pointer; Array: $O(n)$ shift", "Both $O(1)$", "Both $O(n)$", "List slower"], correct: 0,
-        solution: S({ c: "List relink pointers. Array shift remaining elements.", s: [""], a: "List faster (with pointer)" }), ref: "p.415" },
+        solution: S({
+          c: "Inserting into a linked list is O(1) once you hold the position (just relink pointers); into an array it's O(n) because elements must shift.",
+          s: ["<b>Step 1 — Match.</b> List O(1) with pointer; array O(n) shift.","<b>Step 2 — Distractor audit.</b> Not 'both O(1)' or 'both O(n)'; the list is faster for insertion."],
+          a: "List O(1) (with pointer); array O(n).",
+          v: "The flip side: arrays give O(1) random ACCESS while lists need O(n) traversal - choose based on whether you do more inserts/deletes or more lookups."
+        }), ref: "p.415" },
       { q: "Bubble sort best case:",
         choices: ["$O(n)$ if optimized with early exit on sorted input", "Always $O(n^2)$", "$O(\\log n)$", "$O(n!)$"], correct: 0,
-        solution: S({ c: "Optimized bubble: detect no swaps in a pass → already sorted, exit.", s: [""], a: "$O(n)$ best (sorted)" }), ref: "p.415" },
+        solution: S({
+          c: "An optimized bubble sort exits early if a full pass makes no swaps (already sorted), giving O(n) best case.",
+          s: ["<b>Step 1 — Match.</b> O(n) with early-exit on sorted input.","<b>Step 2 — Distractor audit.</b> Unoptimized is always $O(n^2)$; it's never $O(\\log n)$ or $O(n!)$."],
+          a: "$O(n)$ best (already sorted).",
+          v: "Best case O(n), average/worst O(n^2) - bubble sort is mainly pedagogical; for real work use $O(n\\log n)$ sorts (quicksort, mergesort, heapsort)."
+        }), ref: "p.415" },
       { q: "Recursive vs iterative tree traversal:",
         choices: ["Recursive cleaner; iterative may need explicit stack", "Recursive slower", "Same code", "Iterative is impossible"], correct: 0,
-        solution: S({ c: "Tree traversal naturally recursive; iterative needs stack to simulate call frames.", s: [""], a: "Recursive cleaner" }), ref: "p.415" },
+        solution: S({
+          c: "Tree traversal is naturally RECURSIVE (cleaner code); an iterative version must use an EXPLICIT stack to simulate the recursion's call frames.",
+          s: ["<b>Step 1 — Match.</b> Recursive cleaner; iterative needs explicit stack.","<b>Step 2 — Distractor audit.</b> Recursion isn't necessarily slower; the code differs; iterative IS possible."],
+          a: "Recursive cleaner; iterative uses a stack.",
+          v: "Recursion uses the CALL stack implicitly; the iterative form makes that stack explicit - useful when recursion depth would overflow, or for fine control over traversal order."
+        }), ref: "p.415" },
       { q: "Garbage collection (GC) in Java/C#/Python:",
         choices: ["Automatic memory management", "Manual free", "Stack only", "No effect"], correct: 0,
-        solution: S({ c: "GC: runtime reclaims unreferenced memory.", s: ["Generational GC: optimize for short-lived objects.", "Tradeoff: pauses, overhead."], a: "Auto mem management" }), ref: "p.415" },
+        solution: S({
+          c: "Garbage collection is AUTOMATIC memory management: the runtime reclaims memory no longer referenced, freeing the programmer from manual free()/delete.",
+          s: ["<b>Step 1 — Match.</b> Automatic memory management.","<b>Step 2 — Distractor audit.</b> Manual free is C/C++; GC isn't stack-only and definitely has effects (pauses)."],
+          a: "Automatic memory management.",
+          v: "GC eliminates leaks and dangling pointers but adds overhead and occasional PAUSES - generational GC optimizes by collecting short-lived objects most often (most objects die young)."
+        }), ref: "p.415" },
       { q: "Trie data structure:",
         choices: ["Tree for storing strings with shared prefixes", "Hash variant", "Array", "Stack"], correct: 0,
-        solution: S({ c: "Trie: each node represents a character. Path from root spells a string.", s: ["Used: autocomplete, dictionary, IP routing tables."], a: "Prefix tree" }), ref: "p.415" },
+        solution: S({
+          c: "A trie (prefix tree) stores strings by character: each node is a character, and a root-to-node path spells a prefix. Strings sharing prefixes share nodes.",
+          s: ["<b>Step 1 — Match.</b> Tree for strings with shared prefixes.","<b>Step 2 — Distractor audit.</b> It's not a hash variant, plain array, or stack."],
+          a: "Prefix tree.",
+          v: "Tries give fast prefix lookups - O(key length), independent of how many keys are stored - which is why they power autocomplete, spell-checkers, and IP routing tables (longest-prefix match)."
+        }), ref: "p.415" },
       { q: "Big-O of finding all pairs that sum to target in array (naive):",
         choices: ["$O(n^2)$", "$O(n)$", "$O(n\\log n)$", "$O(1)$"], correct: 0,
-        solution: S({ c: "Check every pair: nested loops.", s: ["With hash set: $O(n)$ — store complements seen so far."], a: "$O(n^2)$ naive" }), ref: "p.415" },
+        solution: S({
+          c: "The naive approach checks every pair with nested loops: $O(n^2)$.",
+          s: ["<b>Step 1 — Match.</b> $O(n^2)$ naive.","<b>Step 2 — Distractor audit.</b> $O(n)$ is the HASH-SET optimization; $O(n\\log n)$ would be sort-based two-pointer; $O(1)$ is impossible."],
+          a: "$O(n^2)$ naive.",
+          v: "A hash set cuts it to O(n): for each element, check if (target - element) was already seen - storing complements as you go. Classic time-vs-space trade."
+        }), ref: "p.415" },
     ],
   };
 
