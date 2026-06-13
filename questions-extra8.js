@@ -9,113 +9,288 @@
     1: [
       { q: "Numerical integration: Trapezoid rule for $\\int f(x)dx$ on $[a,b]$ with 2 intervals:",
         choices: ["$(h/2)[f_0 + 2f_1 + f_2]$ where $h=(b-a)/2$", "$h \\cdot f_1$", "$(b-a)(f_0+f_2)/2$", "Simpson's 3rd"], correct: 0,
-        solution: S({ c: "Trapezoid composite: $h/2$ × (sum with interior points doubled).", s: ["For $n$ intervals: $(h/2)[f_0 + 2(f_1+...+f_{n-1}) + f_n]$.", "n=2: $(h/2)[f_0 + 2f_1 + f_2]$."], a: "$(h/2)[f_0+2f_1+f_2]$" }), ref: "p.61" },
+        solution: S({
+          c: "The composite trapezoid rule approximates an integral by summing trapezoids: $(h/2)[f_0 + 2(\\text{interior}) + f_n]$, with $h=(b-a)/n$.",
+          s: ["<b>Step 1 — For n=2.</b> One interior point $f_1$: $(h/2)[f_0 + 2f_1 + f_2]$.","<b>Step 2 — Distractor audit.</b> $h\\cdot f_1$ is the midpoint rule; $(b-a)(f_0+f_2)/2$ is a single trapezoid (no interior); Simpson's is a different rule."],
+          a: "$(h/2)[f_0 + 2f_1 + f_2]$",
+          v: "Interior points are doubled because each is shared by two adjacent trapezoids - the endpoints count once. Error is $O(h^2)$; Simpson's (parabolas) does better at $O(h^4)$."
+        }), ref: "p.61" },
       { q: "Simpson's 1/3 rule requires:",
         choices: ["Even number of intervals (odd points)", "Any n", "Only n=1", "Odd n"], correct: 0,
-        solution: S({ c: "Simpson 1/3: fits parabolas through 3 points → needs even intervals.", s: ["Formula: $(h/3)[f_0 + 4f_1 + 2f_2 + 4f_3 + ... + f_n]$."], a: "Even intervals" }), ref: "p.61" },
+        solution: S({
+          c: "Simpson's 1/3 rule fits a parabola through each group of 3 points, so it needs an EVEN number of intervals (odd number of points).",
+          s: ["<b>Step 1 — Match.</b> Even number of intervals.","<b>Step 2 — Distractor audit.</b> 'Any n' and 'odd n' break the pairing; n=1 is too few."],
+          a: "Even number of intervals.",
+          v: "The 1-4-2-4-...-1 weight pattern requires pairs of intervals - which is why Simpson's needs even n. It's far more accurate ($O(h^4)$) than the trapezoid rule for smooth functions."
+        }), ref: "p.61" },
       { q: "Newton-Raphson root-finding: $f(x) = x^3 - 8$, $x_0 = 2.1$. Next iterate:",
         choices: ["$\\approx 2.001$", "$2$", "$1.9$", "$2.2$"], correct: 0,
-        solution: S({ c: "$x_{n+1} = x_n - f(x_n)/f'(x_n)$. $f'(x) = 3x^2$.", s: ["$f(2.1) = 9.261 - 8 = 1.261$. $f'(2.1) = 3(4.41) = 13.23$.", "$x_1 = 2.1 - 1.261/13.23 \\approx 2.1 - 0.0953 = 2.005$."], a: "$\\approx 2.005$" }), ref: "p.61" },
+        solution: S({
+          c: "Newton-Raphson: $x_{n+1} = x_n - f(x_n)/f'(x_n)$, with $f'(x)=3x^2$ here.",
+          s: ["<b>Step 1 — Evaluate.</b> $f(2.1)=9.261-8=1.261$; $f'(2.1)=3(4.41)=13.23$.","<b>Step 2 — Iterate.</b> $2.1 - 1.261/13.23 = 2.005$.","<b>Step 3 — Distractor audit.</b> 2 is the exact root (limit, not one step); 1.9 and 2.2 are off."],
+          a: "$\\approx 2.005$",
+          v: "It's converging fast toward the true root 2 (since $2^3=8$) - Newton's quadratic convergence roughly doubles the correct digits each step."
+        }), ref: "p.61" },
       { q: "Euler's method for $y' = f(x,y)$, step $h$:",
         choices: ["$y_{n+1} = y_n + h \\cdot f(x_n, y_n)$", "$y_{n+1} = y_n \\cdot f$", "$y_n + h^2$", "Linear sum"], correct: 0,
-        solution: S({ c: "Forward Euler — simplest ODE integrator. Local error $O(h^2)$, global $O(h)$.", s: ["Improvements: Runge-Kutta methods (RK2, RK4) for higher accuracy."], a: "$y + hf(x,y)$" }), ref: "p.62" },
+        solution: S({
+          c: "Forward Euler is the simplest ODE integrator: step along the current slope, $y_{n+1} = y_n + h\\,f(x_n,y_n)$.",
+          s: ["<b>Step 1 — Match.</b> $y_{n+1} = y_n + h\\,f(x_n,y_n)$.","<b>Step 2 — Distractor audit.</b> The others aren't the Euler update."],
+          a: "$y_{n+1} = y_n + h\\,f(x_n,y_n)$",
+          v: "Local error $O(h^2)$, global $O(h)$ - crude but intuitive. Runge-Kutta (RK4) samples the slope multiple times per step for much higher accuracy, the standard upgrade."
+        }), ref: "p.62" },
       { q: "Taylor series of $f$ around $x_0$, second-order approximation:",
         choices: ["$f(x_0) + f'(x_0)(x-x_0) + (1/2)f''(x_0)(x-x_0)^2$", "$f(x_0) + f'$", "Linear", "Just $f(x_0)$"], correct: 0,
-        solution: S({ c: "Taylor: $\\sum f^{(n)}(x_0)/n! \\cdot (x-x_0)^n$. Second-order keeps first 3 terms.", s: [""], a: "Quadratic Taylor expansion" }), ref: "p.50" },
+        solution: S({
+          c: "Taylor series: $f(x) = \\sum \\dfrac{f^{(n)}(x_0)}{n!}(x-x_0)^n$. Second-order keeps the first three terms (constant, linear, quadratic).",
+          s: ["<b>Step 1 — Match.</b> $f(x_0) + f'(x_0)(x-x_0) + \\tfrac12 f''(x_0)(x-x_0)^2$.","<b>Step 2 — Distractor audit.</b> The others stop at linear or constant order."],
+          a: "$f(x_0)+f'(x_0)(x-x_0)+\\tfrac12 f''(x_0)(x-x_0)^2$",
+          v: "Each term refines the approximation: value, then slope, then curvature - the basis of linearization (1st order) and many numerical methods. Higher orders add smaller corrections near $x_0$."
+        }), ref: "p.50" },
       { q: "Cofactor expansion of 4×4 matrix: typical number of subdeterminants computed:",
         choices: ["$4$ (along one row/col)", "$16$", "$24$", "$1$"], correct: 0,
-        solution: S({ c: "Expand along row/col with most zeros to reduce work.", s: ["Each entry contributes a 3×3 minor → 4 minors for 4×4."], a: "$4$" }), ref: "p.57" },
+        solution: S({
+          c: "Cofactor (Laplace) expansion along one row or column of an n×n matrix produces n minors (each one size (n-1)x(n-1)). For 4×4, that's 4 minors.",
+          s: ["<b>Step 1 — Match.</b> 4 minors (along one row/col).","<b>Step 2 — Distractor audit.</b> 16 is all entries; 24 is 4!; 1 is too few."],
+          a: "4 (one per entry in the chosen row/col).",
+          v: "Choose the row/col with the most ZEROS to skip those minors - each 4x4 minor is a 3x3 determinant, so the work compounds. For large matrices, Gaussian elimination is far cheaper."
+        }), ref: "p.57" },
       { q: "L'Hôpital's rule applies when limit gives:",
         choices: ["$0/0$ or $\\infty/\\infty$", "Finite values", "Any limit", "Linear"], correct: 0,
-        solution: S({ c: "Indeterminate forms only. For $0/0$ or $\\infty/\\infty$: $\\lim f/g = \\lim f'/g'$.", s: ["Other indeterminate: $0 \\cdot \\infty$, $\\infty - \\infty$, $0^0$, $1^\\infty$, $\\infty^0$ — rewrite into $0/0$ form first."], a: "Indeterminate forms" }), ref: "p.47" },
+        solution: S({
+          c: "L'Hopital's rule applies only to INDETERMINATE forms $0/0$ or $\\infty/\\infty$: then $\\lim f/g = \\lim f'/g'$.",
+          s: ["<b>Step 1 — Match.</b> $0/0$ or $\\infty/\\infty$.","<b>Step 2 — Distractor audit.</b> A determinate (finite) limit doesn't need it; it doesn't apply to 'any' limit."],
+          a: "$0/0$ or $\\infty/\\infty$.",
+          v: "Other indeterminate forms ($0\\cdot\\infty$, $\\infty-\\infty$, $1^\\infty$, $0^0$) must first be ALGEBRAICALLY rewritten into a $0/0$ or $\\infty/\\infty$ quotient before applying the rule."
+        }), ref: "p.47" },
       { q: "Vector triple product: $\\vec{A}\\cdot(\\vec{B}\\times\\vec{C})$ is a:",
         choices: ["Scalar", "Vector", "Matrix", "Zero always"], correct: 0,
-        solution: S({ c: "Cross product → vector. Dot with vector → scalar.", s: ["Geometrically: volume of parallelepiped spanned by A, B, C."], a: "Scalar (volume)" }), ref: "p.38" },
+        solution: S({
+          c: "The scalar triple product: cross product gives a vector, then dotting with a vector gives a SCALAR. Geometrically it's the signed volume of the parallelepiped spanned by A, B, C.",
+          s: ["<b>Step 1 — Match.</b> Scalar.","<b>Step 2 — Distractor audit.</b> The VECTOR triple product $A\\times(B\\times C)$ gives a vector; this dot version gives a scalar; not a matrix; not always zero."],
+          a: "A scalar (the box volume).",
+          v: "If the scalar triple product is ZERO, the three vectors are coplanar (zero volume) - a quick linear-dependence test. It equals the determinant of the matrix with rows A, B, C."
+        }), ref: "p.38" },
       { q: "Convergence of $\\sum 1/n^p$ requires:",
         choices: ["$p > 1$", "$p \\ge 1$", "Any $p$", "$p < 0$"], correct: 0,
-        solution: S({ c: "p-series test.", s: ["$p=1$: harmonic series, diverges.", "$p=2$: converges to $\\pi^2/6$."], a: "$p > 1$" }), ref: "p.50" },
+        solution: S({
+          c: "The p-series $\\sum 1/n^p$ converges if and only if $p > 1$ (strictly greater).",
+          s: ["<b>Step 1 — Match.</b> $p > 1$.","<b>Step 2 — Distractor audit.</b> $p \\ge 1$ wrongly includes $p=1$ (the harmonic series, which DIVERGES)."],
+          a: "$p > 1$.",
+          v: "The boundary case $p=1$ (harmonic series) diverges despite its terms shrinking - the classic counterintuitive result. $p=2$ converges to $\\pi^2/6$."
+        }), ref: "p.50" },
       { q: "Determinant of $\\begin{pmatrix}1&2\\\\3&6\\end{pmatrix}$:",
         choices: ["$0$ (singular)", "$6$", "$12$", "$3$"], correct: 0,
-        solution: S({ c: "Row 2 = 3 × row 1 → linearly dependent → det = 0.", s: ["$ad-bc = 6 - 6 = 0$ ✓"], a: "$0$" }), ref: "p.57" },
+        solution: S({
+          c: "2x2 determinant is $ad-bc$. Here the second row is 3x the first, so the rows are linearly DEPENDENT and the determinant is 0 (singular matrix).",
+          s: ["<b>Step 1 — Compute.</b> $(1)(6)-(2)(3) = 6-6 = 0$.","<b>Step 2 — Distractor audit.</b> 6, 12, 3 ignore the cancellation."],
+          a: "$0$ (singular).",
+          v: "Det = 0 means no inverse exists and the rows/columns are linearly dependent - here row 2 = 3 x row 1, a dead giveaway before even computing."
+        }), ref: "p.57" },
     ],
 
     // Probability & Statistics — +25 (deep dive from p.63-85)
     2: [
       { q: "Permutations $P(n, r)$ formula:",
         choices: ["$n!/(n-r)!$", "$n!$", "$n!/r!$", "$n^r$"], correct: 0,
-        solution: S({ c: "Permutations of $n$ taken $r$ at a time (order matters).", s: ["$P(5,3) = 5 \\cdot 4 \\cdot 3 = 60$."], a: "$n!/(n-r)!$" }), ref: "p.64" },
+        solution: S({
+          c: "Permutations (order matters): $P(n,r) = \\dfrac{n!}{(n-r)!}$ - the number of ordered arrangements of r items from n.",
+          s: ["<b>Step 1 — Match.</b> $n!/(n-r)!$.","<b>Step 2 — Distractor audit.</b> $n!$ arranges all n; $n!/r!$ is wrong; $n^r$ allows repetition."],
+          a: "$n!/(n-r)!$",
+          v: "Example: $P(5,3)=5\\cdot4\\cdot3=60$. Permutations COUNT order; combinations don't (divide by an extra $r!$). Ranking = permutation, choosing = combination."
+        }), ref: "p.64" },
       { q: "Combinations: $C(10, 4)$:",
         choices: ["$210$", "$5040$", "$24$", "$40$"], correct: 0,
-        solution: S({ c: "$C(n,k) = n!/(k!(n-k)!)$.", s: ["$10!/(4!6!) = (10 \\cdot 9 \\cdot 8 \\cdot 7)/24 = 5040/24 = 210$."], a: "$210$" }), ref: "p.64" },
+        solution: S({
+          c: "Combinations (order irrelevant): $C(n,k)=\\dfrac{n!}{k!(n-k)!}$.",
+          s: ["<b>Step 1 — Apply.</b> $\\dfrac{10\\cdot9\\cdot8\\cdot7}{4!} = \\dfrac{5040}{24} = 210$.","<b>Step 2 — Distractor audit.</b> 5040 is $P(10,4)$ (ordered); 24 is 4!; 40 is wrong."],
+          a: "$210$",
+          v: "$C(10,4)=210$ ways to choose a 4-person team from 10 - dividing the 5040 ordered arrangements by 4! removes the orderings that don't matter."
+        }), ref: "p.64" },
       { q: "P(A ∪ B) where A, B mutually exclusive: $P(A)=0.3$, $P(B)=0.4$:",
         choices: ["$0.7$", "$0.12$", "$0.5$", "$0.1$"], correct: 0,
-        solution: S({ c: "Mutually exclusive: $P(A \\cap B) = 0$. $P(A∪B) = P(A) + P(B)$.", s: ["$0.3 + 0.4 = 0.7$."], a: "$0.7$" }), ref: "p.64" },
+        solution: S({
+          c: "For MUTUALLY EXCLUSIVE events, $P(A\\cap B)=0$, so $P(A\\cup B)=P(A)+P(B)$.",
+          s: ["<b>Step 1 — Apply.</b> $0.3+0.4 = 0.7$.","<b>Step 2 — Distractor audit.</b> 0.12 multiplies (that's independence); 0.5 and 0.1 are wrong."],
+          a: "$0.7$",
+          v: "Mutually exclusive means they can't both happen, so no overlap to subtract - just add. Don't confuse with INDEPENDENT (where you'd multiply for the intersection)."
+        }), ref: "p.64" },
       { q: "Bayes' theorem: $P(A|B)$ in terms of $P(B|A)$:",
         choices: ["$P(A|B) = P(B|A)P(A)/P(B)$", "$P(A|B) = P(B|A)$", "$P(A|B) = P(A)P(B)$", "$1/P(A)$"], correct: 0,
-        solution: S({ c: "Bayes inverts conditional.", s: [""], a: "$P(B|A)P(A)/P(B)$" }), ref: "p.65" },
+        solution: S({
+          c: "Bayes' theorem inverts a conditional: $P(A|B) = \\dfrac{P(B|A)P(A)}{P(B)}$.",
+          s: ["<b>Step 1 — Match.</b> $P(B|A)P(A)/P(B)$.","<b>Step 2 — Distractor audit.</b> $P(B|A)$ alone forgets the prior/evidence; $P(A)P(B)$ is independence; $1/P(A)$ is nonsense."],
+          a: "$P(B|A)P(A)/P(B)$",
+          v: "It updates a prior $P(A)$ with evidence B - the engine of medical diagnosis, spam filters, and ML classifiers. Ignoring the prior $P(A)$ causes the base-rate fallacy."
+        }), ref: "p.65" },
       { q: "Expected value of discrete RV: $\\mu_X = ?$",
         choices: ["$\\sum x_i p(x_i)$", "$\\sum x_i$", "$\\sum p(x_i)$", "$\\max p$"], correct: 0,
-        solution: S({ c: "Weighted sum.", s: [""], a: "$\\sum x_i p(x_i)$" }), ref: "p.66" },
+        solution: S({
+          c: "Expected value of a discrete random variable is the probability-weighted sum: $\\mu_X = \\sum x_i\\,p(x_i)$.",
+          s: ["<b>Step 1 — Match.</b> $\\sum x_i p(x_i)$.","<b>Step 2 — Distractor audit.</b> $\\sum x_i$ ignores probabilities; $\\sum p(x_i)=1$; max p is the mode."],
+          a: "$\\sum x_i p(x_i)$",
+          v: "It's the long-run average - each outcome weighted by how likely it is. For a fair die: $\\sum k/6 = 3.5$, the 'expected' roll even though you can't roll 3.5."
+        }), ref: "p.66" },
       { q: "Variance: $\\sigma^2 = E[X^2] - $ ?",
         choices: ["$\\mu^2$", "$\\mu$", "$\\sigma$", "$2\\mu$"], correct: 0,
-        solution: S({ c: "$\\sigma^2 = E[(X-\\mu)^2] = E[X^2] - \\mu^2$ (computational formula).", s: [""], a: "$\\mu^2$" }), ref: "p.66" },
+        solution: S({
+          c: "The computational variance formula: $\\sigma^2 = E[X^2] - \\mu^2$ (mean of squares minus square of mean).",
+          s: ["<b>Step 1 — Match.</b> $\\mu^2$.","<b>Step 2 — Distractor audit.</b> $\\mu$, $\\sigma$, $2\\mu$ don't complete the identity."],
+          a: "$\\sigma^2 = E[X^2] - \\mu^2$",
+          v: "Equivalent to $E[(X-\\mu)^2]$ but easier to compute in one pass - this 'mean of squares minus square of mean' form is a workhorse in statistics."
+        }), ref: "p.66" },
       { q: "Binomial coefficient $\\binom{n}{k}$:",
         choices: ["$\\frac{n!}{k!(n-k)!}$", "$n!$", "$n^k$", "$n - k$"], correct: 0,
-        solution: S({ c: "Counts ways to choose $k$ items from $n$.", s: ["Coefficient of $x^k y^{n-k}$ in $(x+y)^n$."], a: "$\\frac{n!}{k!(n-k)!}$" }), ref: "p.64" },
+        solution: S({
+          c: "The binomial coefficient $\\binom{n}{k} = \\dfrac{n!}{k!(n-k)!}$ counts ways to choose k from n (= combinations).",
+          s: ["<b>Step 1 — Match.</b> $n!/[k!(n-k)!]$.","<b>Step 2 — Distractor audit.</b> $n!$, $n^k$, $n-k$ aren't the coefficient."],
+          a: "$\\dfrac{n!}{k!(n-k)!}$",
+          v: "It's also the coefficient of $x^k y^{n-k}$ in $(x+y)^n$ (binomial theorem) and a row entry of Pascal's triangle - the same number, three viewpoints."
+        }), ref: "p.64" },
       { q: "Geometric distribution: P(first success on k-th trial), success prob $p$:",
         choices: ["$(1-p)^{k-1} p$", "$p^k$", "$\\binom{n}{k}p^k$", "$p$"], correct: 0,
-        solution: S({ c: "Geometric: $k-1$ failures then 1 success.", s: ["Mean: $1/p$. Variance: $(1-p)/p^2$."], a: "$(1-p)^{k-1}p$" }), ref: "p.66" },
+        solution: S({
+          c: "Geometric distribution: $k-1$ failures then one success, $P(k) = (1-p)^{k-1}p$.",
+          s: ["<b>Step 1 — Match.</b> $(1-p)^{k-1}p$.","<b>Step 2 — Distractor audit.</b> $p^k$ forgets the failures; $\\binom{n}{k}p^k$ is binomial; $p$ alone is one trial."],
+          a: "$(1-p)^{k-1}p$",
+          v: "Models 'how long until the first success' - mean $1/p$, variance $(1-p)/p^2$. It's memoryless: past failures don't change the future."
+        }), ref: "p.66" },
       { q: "Standard normal table $\\Phi(1.96)$:",
         choices: ["$\\approx 0.975$", "$0.95$", "$0.50$", "$0.999$"], correct: 0,
-        solution: S({ c: "Memorize: $\\Phi(1.96) = 0.975$. Two-sided 95% CI uses ±1.96.", s: ["$\\Phi(1.645) = 0.95$ (one-sided).", "$\\Phi(2.576) = 0.995$."], a: "$0.975$" }), ref: "p.67" },
+        solution: S({
+          c: "$\\Phi(1.96) = 0.975$ - the cumulative probability up to z=1.96 for a standard normal. (Worth memorizing.)",
+          s: ["<b>Step 1 — Match.</b> 0.975.","<b>Step 2 — Distractor audit.</b> 0.95 is $\\Phi(1.645)$; 0.50 is the center; 0.999 is ~$\\Phi(3.1)$."],
+          a: "$\\approx 0.975$",
+          v: "This is WHY a two-sided 95% confidence interval uses +/-1.96: it leaves 2.5% in each tail ($\\Phi(1.96)=0.975$). $\\Phi(1.645)=0.95$ is the one-sided cousin."
+        }), ref: "p.67" },
       { q: "T-distribution converges to normal as:",
         choices: ["Degrees of freedom → ∞", "Sample size = 0", "Variance = 0", "Sample mean fixed"], correct: 0,
-        solution: S({ c: "t with df ~ ∞ approaches standard normal.", s: ["For df > 30, t ≈ z to good approximation."], a: "df → ∞" }), ref: "p.68" },
+        solution: S({
+          c: "The Student t-distribution approaches the standard normal as its degrees of freedom go to infinity.",
+          s: ["<b>Step 1 — Match.</b> Degrees of freedom -> infinity.","<b>Step 2 — Distractor audit.</b> Sample-size-0, variance-0, fixed-mean aren't the convergence condition."],
+          a: "df -> infinity.",
+          v: "For df > 30, t is essentially z - which is why small samples (where sigma is estimated) use the wider-tailed t, while large samples can use the normal."
+        }), ref: "p.68" },
       { q: "Chi-square test statistic: $\\sum (O-E)^2/E$ tests:",
         choices: ["Goodness of fit / independence", "Mean", "Variance", "Median"], correct: 0,
-        solution: S({ c: "Compares observed vs expected frequencies under null hypothesis.", s: ["Large $\\chi^2$ → reject null (observed differs from expected)."], a: "Goodness of fit" }), ref: "p.70" },
+        solution: S({
+          c: "The chi-square statistic $\\sum(O-E)^2/E$ compares OBSERVED to EXPECTED frequencies - testing goodness-of-fit or independence.",
+          s: ["<b>Step 1 — Match.</b> Goodness of fit / independence.","<b>Step 2 — Distractor audit.</b> Means use t-tests; variances use F-tests; median uses nonparametric tests."],
+          a: "Goodness of fit / independence.",
+          v: "A large chi-square means observed counts stray far from the model's expectation -> reject the null hypothesis. It works on CATEGORICAL frequency data."
+        }), ref: "p.70" },
       { q: "Type I error in hypothesis testing:",
         choices: ["Reject true null hypothesis", "Accept false null", "Compute mean wrong", "Sample too small"], correct: 0,
-        solution: S({ c: "Type I (α): false positive. Type II (β): false negative.", s: ["Significance level $\\alpha$ = max Type I error rate."], a: "Reject true null (false positive)" }), ref: "p.70" },
+        solution: S({
+          c: "A Type I error is REJECTING a TRUE null hypothesis - a false positive. Its rate is the significance level alpha.",
+          s: ["<b>Step 1 — Match.</b> Reject true null (false positive).","<b>Step 2 — Distractor audit.</b> 'Accept false null' is Type II (false negative); the others aren't error types."],
+          a: "Reject a true null (false positive).",
+          v: "Type I (alpha, false alarm) and Type II (beta, missed detection) trade off - lowering one usually raises the other unless you increase sample size."
+        }), ref: "p.70" },
       { q: "Power of statistical test:",
         choices: ["$1 - \\beta$ (probability of detecting true effect)", "$\\alpha$", "$\\beta$", "$1$"], correct: 0,
-        solution: S({ c: "Power: complement of Type II error.", s: ["Higher with larger sample size, larger effect, lower $\\sigma$."], a: "$1-\\beta$" }), ref: "p.70" },
+        solution: S({
+          c: "Power = $1-\\beta$ - the probability of correctly DETECTING a true effect (rejecting a false null).",
+          s: ["<b>Step 1 — Match.</b> $1-\\beta$.","<b>Step 2 — Distractor audit.</b> alpha is Type I rate; beta is the miss rate; 1 is impossible."],
+          a: "$1-\\beta$.",
+          v: "Power rises with larger sample size, larger true effect, and smaller variance - which is why studies do 'power analysis' to size their samples before collecting data."
+        }), ref: "p.70" },
       { q: "Confidence interval for mean (sigma known): $\\bar{x} \\pm z_{\\alpha/2}\\sigma/\\sqrt{n}$. For 99% CI, $z$ =",
         choices: ["$2.576$", "$1.96$", "$1.645$", "$2.0$"], correct: 0,
-        solution: S({ c: "$z_{0.005} = 2.576$ for two-tailed 99%.", s: ["99% leaves 0.5% in each tail."], a: "$2.576$" }), ref: "p.69" },
+        solution: S({
+          c: "For a 99% confidence interval, $z_{\\alpha/2} = z_{0.005} = 2.576$ (leaving 0.5% in each tail).",
+          s: ["<b>Step 1 — Match.</b> 2.576.","<b>Step 2 — Distractor audit.</b> 1.96 is 95%; 1.645 is 90% (or one-sided 95%); 2.0 is a rough approximation."],
+          a: "$z = 2.576$",
+          v: "Memorize the trio: 90% -> 1.645, 95% -> 1.96, 99% -> 2.576. Higher confidence = wider interval = larger z, the price of more certainty."
+        }), ref: "p.69" },
       { q: "Linear regression $y = \\beta_0 + \\beta_1 x$. Slope $\\beta_1$ estimator:",
         choices: ["$\\sum (x_i - \\bar{x})(y_i - \\bar{y}) / \\sum (x_i - \\bar{x})^2$", "$\\bar{y}/\\bar{x}$", "$\\sum xy/\\sum x$", "Median"], correct: 0,
-        solution: S({ c: "Least squares estimator for slope.", s: ["Intercept: $\\beta_0 = \\bar{y} - \\beta_1\\bar{x}$."], a: "Standard LS formula" }), ref: "p.69" },
+        solution: S({
+          c: "The least-squares slope is $\\beta_1 = \\dfrac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}$ - covariance of x,y over variance of x.",
+          s: ["<b>Step 1 — Match.</b> The standard LS ratio.","<b>Step 2 — Distractor audit.</b> $\\bar y/\\bar x$, $\\sum xy/\\sum x$, median don't minimize squared error."],
+          a: "$\\dfrac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}$",
+          v: "It's the slope that minimizes total squared residuals - and the intercept follows as $\\beta_0 = \\bar y - \\beta_1\\bar x$ (the line passes through the mean point)."
+        }), ref: "p.69" },
       { q: "Coefficient of determination $R^2$:",
         choices: ["Fraction of variance explained by model", "Correlation coefficient", "Error", "Always 1"], correct: 0,
-        solution: S({ c: "$R^2 \\in [0,1]$. 1 = perfect fit. 0 = no linear relationship.", s: ["$R^2 = r^2$ for simple linear regression."], a: "Variance explained" }), ref: "p.69" },
+        solution: S({
+          c: "$R^2$ is the fraction of the response's variance EXPLAINED by the model, ranging 0 (no fit) to 1 (perfect fit).",
+          s: ["<b>Step 1 — Match.</b> Fraction of variance explained.","<b>Step 2 — Distractor audit.</b> The correlation coefficient is r (R^2 is its square in simple regression); it's not 'error' or always 1."],
+          a: "Fraction of variance explained.",
+          v: "$R^2=0.9$ means the model accounts for 90% of the variability - but a high $R^2$ doesn't prove causation or a correct model (watch for overfitting)."
+        }), ref: "p.69" },
       { q: "ANOVA tests for:",
         choices: ["Differences among multiple group means", "Variance only", "Single mean", "Correlation"], correct: 0,
-        solution: S({ c: "Analysis of Variance: F-test comparing between-group vs within-group variance.", s: ["Null: all group means equal."], a: "Multiple group means" }), ref: "p.70" },
+        solution: S({
+          c: "ANOVA (Analysis of Variance) uses an F-test to compare multiple GROUP MEANS, by comparing between-group variance to within-group variance.",
+          s: ["<b>Step 1 — Match.</b> Differences among multiple group means.","<b>Step 2 — Distractor audit.</b> Despite the name it tests MEANS (via variances); not a single mean or correlation."],
+          a: "Differences among multiple group means.",
+          v: "Null hypothesis: all group means are equal. ANOVA extends the two-sample t-test to 3+ groups without inflating the Type I error from multiple pairwise tests."
+        }), ref: "p.70" },
       { q: "P(at least one ace in 5-card hand):",
         choices: ["$1 - C(48,5)/C(52,5) \\approx 0.341$", "$4/52$", "$1/13$", "$5/52$"], correct: 0,
-        solution: S({ c: "Use complement: P(no aces) = C(48,5)/C(52,5).", s: ["$C(48,5)/C(52,5) = 1712304/2598960 \\approx 0.659$.", "$P(\\ge 1) = 0.341$."], a: "$\\approx 0.341$" }), ref: "p.65" },
+        solution: S({
+          c: "Use the COMPLEMENT: $P(\\ge 1) = 1 - P(\\text{none})$, where P(no aces) = $C(48,5)/C(52,5)$.",
+          s: ["<b>Step 1 — No aces.</b> $C(48,5)/C(52,5) = 1{,}712{,}304/2{,}598{,}960 = 0.659$.","<b>Step 2 — Complement.</b> $1 - 0.659 = 0.341$.","<b>Step 3 — Distractor audit.</b> $4/52$, $1/13$, $5/52$ are single-card probabilities."],
+          a: "$\\approx 0.341$",
+          v: "'At least one' problems are almost always easier via the complement (none) - directly summing P(exactly 1)+P(2)+... is far more work."
+        }), ref: "p.65" },
       { q: "Normal distribution PDF symmetric about:",
         choices: ["Mean $\\mu$", "Mode", "Zero always", "Median only"], correct: 0,
-        solution: S({ c: "For normal: $\\mu = $ median = mode = center of symmetry.", s: [""], a: "$\\mu$" }), ref: "p.67" },
+        solution: S({
+          c: "The normal distribution is symmetric about its mean $\\mu$, where mean = median = mode all coincide.",
+          s: ["<b>Step 1 — Match.</b> Mean $\\mu$.","<b>Step 2 — Distractor audit.</b> Mode/median equal the mean here so they're not distinct; 'zero always' is only the STANDARD normal."],
+          a: "The mean $\\mu$.",
+          v: "Only the STANDARD normal centers at 0; a general normal centers at $\\mu$ - the bell is perfectly symmetric, so its skewness is zero."
+        }), ref: "p.67" },
       { q: "Joint probability $P(A,B)$ for independent: ",
         choices: ["$P(A) P(B)$", "$P(A) + P(B)$", "$\\max$", "$\\min$"], correct: 0,
-        solution: S({ c: "Independence definition.", s: [""], a: "$P(A)P(B)$" }), ref: "p.64" },
+        solution: S({
+          c: "For INDEPENDENT events, the joint probability factors: $P(A,B) = P(A)P(B)$.",
+          s: ["<b>Step 1 — Match.</b> $P(A)P(B)$.","<b>Step 2 — Distractor audit.</b> $P(A)+P(B)$ is for unions of disjoint events; max/min are wrong."],
+          a: "$P(A)P(B)$.",
+          v: "Independence means one event tells you nothing about the other, so their probabilities multiply - the defining property, distinct from mutually-exclusive (which would make the joint 0)."
+        }), ref: "p.64" },
       { q: "Standard error of sample proportion $\\hat{p}$: ",
         choices: ["$\\sqrt{\\hat{p}(1-\\hat{p})/n}$", "$\\hat{p}/n$", "$\\sqrt{n}$", "$1/n$"], correct: 0,
-        solution: S({ c: "SE for proportion from sample.", s: ["Max at $\\hat{p}=0.5$ → max margin of error.", "Why political polls use 0.5 in conservative calculations."], a: "$\\sqrt{\\hat{p}(1-\\hat{p})/n}$" }), ref: "p.69" },
+        solution: S({
+          c: "Standard error of a sample proportion: $SE = \\sqrt{\\dfrac{\\hat p(1-\\hat p)}{n}}$.",
+          s: ["<b>Step 1 — Match.</b> $\\sqrt{\\hat p(1-\\hat p)/n}$.","<b>Step 2 — Distractor audit.</b> $\\hat p/n$, $\\sqrt n$, $1/n$ have the wrong form."],
+          a: "$\\sqrt{\\hat p(1-\\hat p)/n}$",
+          v: "SE is maximized at $\\hat p = 0.5$ (giving the widest margin) - which is why pollsters use 0.5 for conservative worst-case sample-size planning."
+        }), ref: "p.69" },
       { q: "Sample size for desired margin of error $E$: $n =$",
         choices: ["$(z\\sigma/E)^2$", "$z\\sigma/E$", "$\\sigma/E$", "$E/\\sigma$"], correct: 0,
-        solution: S({ c: "Solve $E = z\\sigma/\\sqrt{n}$ for $n$.", s: [""], a: "$(z\\sigma/E)^2$" }), ref: "p.69" },
+        solution: S({
+          c: "Solve the margin formula $E = z\\sigma/\\sqrt n$ for n: $n = (z\\sigma/E)^2$.",
+          s: ["<b>Step 1 — Match.</b> $(z\\sigma/E)^2$.","<b>Step 2 — Distractor audit.</b> The non-squared forms don't follow from solving for n."],
+          a: "$n = (z\\sigma/E)^2$",
+          v: "The squaring means halving the margin E QUADRUPLES the required n - precision scales expensively, the recurring theme of sampling."
+        }), ref: "p.69" },
       { q: "Independent events vs disjoint events:",
         choices: ["Different: independent → $P(A∩B) = P(A)P(B)$. Disjoint → $P(A∩B) = 0$.", "Same", "Disjoint implies independent", "Always related"], correct: 0,
-        solution: S({ c: "Common confusion. Disjoint events with nonzero probabilities are NOT independent.", s: ["E.g., A = die rolls 1, B = die rolls 2. Disjoint, but knowing A occurred completely changes P(B): $P(B|A) = 0 \\ne P(B) = 1/6$."], a: "Distinct concepts" }), ref: "p.64-65" },
+        solution: S({
+          c: "DISTINCT concepts: independent means $P(A\\cap B)=P(A)P(B)$ (no info shared); disjoint (mutually exclusive) means $P(A\\cap B)=0$ (can't co-occur).",
+          s: ["<b>Step 1 — Match.</b> Independent: product; disjoint: zero intersection.","<b>Step 2 — Distractor audit.</b> Not 'same'; disjoint does NOT imply independent (in fact, for nonzero probs, disjoint implies DEPENDENT)."],
+          a: "Distinct concepts.",
+          v: "Counterexample: die rolls a 1 (A) vs a 2 (B) are disjoint, but if A happened then $P(B)=0\\ne1/6$ - knowing A changed B, so they're dependent. Disjoint and independent rarely coexist."
+        }), ref: "p.64-65" },
       { q: "Sample standard deviation uses denominator:",
         choices: ["$n-1$ (Bessel correction)", "$n$", "$n+1$", "$\\sqrt{n}$"], correct: 0,
-        solution: S({ c: "Sample $s^2 = \\sum(x_i-\\bar{x})^2/(n-1)$ for unbiased estimate.", s: ["Population variance: divide by $n$."], a: "$n-1$" }), ref: "p.63" },
+        solution: S({
+          c: "Sample variance divides by $n-1$ (Bessel's correction) for an unbiased estimate: $s^2 = \\dfrac{\\sum(x_i-\\bar x)^2}{n-1}$.",
+          s: ["<b>Step 1 — Match.</b> $n-1$.","<b>Step 2 — Distractor audit.</b> $n$ is for POPULATION variance; $n+1$ and $\\sqrt n$ are wrong."],
+          a: "$n-1$ (Bessel's correction).",
+          v: "Dividing by $n$ would underestimate spread because $\\bar x$ is itself estimated from the data (using up one degree of freedom) - the $n-1$ corrects that bias."
+        }), ref: "p.63" },
       { q: "Exponential distribution: P(X > t) = ",
         choices: ["$e^{-\\lambda t}$", "$\\lambda e^{-\\lambda t}$", "$1 - e^{-\\lambda t}$", "$\\lambda t$"], correct: 0,
-        solution: S({ c: "CCDF (complementary CDF) of exponential.", s: ["PDF: $\\lambda e^{-\\lambda t}$. CDF: $1 - e^{-\\lambda t}$."], a: "$e^{-\\lambda t}$" }), ref: "p.67" },
+        solution: S({
+          c: "The exponential distribution's survival function (CCDF) is $P(X>t) = e^{-\\lambda t}$.",
+          s: ["<b>Step 1 — Match.</b> $e^{-\\lambda t}$.","<b>Step 2 — Distractor audit.</b> $\\lambda e^{-\\lambda t}$ is the PDF; $1-e^{-\\lambda t}$ is the CDF; $\\lambda t$ is wrong."],
+          a: "$P(X>t) = e^{-\\lambda t}$",
+          v: "The exponential is MEMORYLESS: $P(X>s+t \\mid X>s)=P(X>t)$ - a component's remaining life doesn't depend on how long it's already survived. Models random failure times and arrival gaps (Poisson)."
+        }), ref: "p.67" },
     ],
 
     // Ethics — +5
