@@ -7,134 +7,497 @@
     1: [
       { q: "Find the inverse of $A = \\begin{pmatrix}2&1\\\\3&2\\end{pmatrix}$.",
         choices: ["$\\begin{pmatrix}2&-1\\\\-3&2\\end{pmatrix}$", "$\\begin{pmatrix}-2&1\\\\3&-2\\end{pmatrix}$", "Not invertible", "$\\frac{1}{2}A$"], correct: 0,
-        solution: S({ c: "2×2 inverse: $\\frac{1}{|A|}\\begin{pmatrix}d & -b\\\\-c & a\\end{pmatrix}$.", s: ["$|A| = (2)(2)-(1)(3) = 4-3 = 1$.", "Swap diagonals, negate off-diagonals: $\\begin{pmatrix}2&-1\\\\-3&2\\end{pmatrix}$.", "Divide by det=1: same."], a: "$\\begin{pmatrix}2&-1\\\\-3&2\\end{pmatrix}$", v: "Check: $A\\cdot A^{-1}$ top-left: $(2)(2)+(1)(-3)=1$ ✓" }), ref: "p.57" },
+        solution: S({
+          c: "For a 2×2 matrix $A=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, the inverse is $A^{-1} = \\dfrac{1}{|A|}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$: swap the diagonal, negate the off-diagonal, divide by the determinant.",
+          s: [
+            "<b>Step 1 — Determinant.</b> $|A| = ad-bc = (2)(2)-(1)(3) = 1$. Nonzero → invertible.",
+            "<b>Step 2 — Swap/negate.</b> $\\begin{pmatrix}2&-1\\\\-3&2\\end{pmatrix}$.",
+            "<b>Step 3 — Divide by det (=1).</b> Unchanged.",
+            "<b>Step 4 — Distractor audit.</b> 'Not invertible' would need det=0; $\\frac12A$ and the all-negated option don't follow the formula."
+          ],
+          a: "$\\begin{pmatrix}2&-1\\\\-3&2\\end{pmatrix}$",
+          v: "Verify $AA^{-1}=I$: top-left $(2)(2)+(1)(-3)=1$ ✓. A determinant of exactly 1 is the lucky case where no division is needed."
+
+        }), ref: "p.57" },
       { q: "Solve $3y' + 6y = 12$ with $y(0) = 0$.",
         choices: ["$y(t) = 2(1 - e^{-2t})$", "$y = 4t$", "$y = e^{-2t}$", "$y = 2e^{2t}$"], correct: 0,
-        solution: S({ c: "First-order linear ODE. Divide by 3: $y' + 2y = 4$. Steady state: $y_p = 2$. Homog: $C e^{-2t}$.", s: ["General: $y = 2 + Ce^{-2t}$.", "IC: $y(0) = 2 + C = 0 \\Rightarrow C = -2$.", "Solution: $y = 2(1 - e^{-2t})$."], a: "$y = 2(1-e^{-2t})$", v: "At $t \\to \\infty$: $y \\to 2$ ✓ (steady state)." }), ref: "p.54" },
+        solution: S({
+          c: "A first-order linear ODE solves as steady-state (particular) + transient (homogeneous): $y = y_p + Ce^{-t/\\tau}$. Normalize first by dividing through by the leading coefficient.",
+          s: [
+            "<b>Step 1 — Normalize.</b> Divide by 3: $y' + 2y = 4$.",
+            "<b>Step 2 — Steady state.</b> Set $y'=0$: $2y_p=4 \\Rightarrow y_p=2$. Homogeneous part: $Ce^{-2t}$.",
+            "<b>Step 3 — Apply IC.</b> $y(0)=2+C=0 \\Rightarrow C=-2$, so $y=2(1-e^{-2t})$.",
+            "<b>Step 4 — Distractor audit.</b> $4t$ isn't exponential; $e^{-2t}$ ignores the forcing; $2e^{2t}$ has the wrong (growing) sign."
+          ],
+          a: "$y = 2(1-e^{-2t})$",
+          v: "Limits: $y(0)=0$ ✓ and $y(\\infty)\\to2$ (the steady state) ✓. This is the same rise shape as a charging RC circuit toward its final value."
+
+        }), ref: "p.54" },
       { q: "$\\sin\\theta = 0.8$, find $\\tan\\theta$ in Q1:",
         choices: ["$4/3$", "$3/4$", "$0.8$", "$\\sqrt{0.36}$"], correct: 0,
-        solution: S({ c: "Pythagorean: $\\cos = \\sqrt{1-0.64} = 0.6$. $\\tan = \\sin/\\cos$.", s: ["$\\cos\\theta = 0.6$ (positive in Q1).", "$\\tan\\theta = 0.8/0.6 = 4/3$."], a: "$4/3$", v: "3-4-5 triangle: sin=4/5=0.8, cos=3/5=0.6, tan=4/3." }), ref: "p.37" },
+        solution: S({
+          c: "Given one trig ratio, find the others via the Pythagorean identity $\\sin^2+\\cos^2=1$, then $\\tan=\\sin/\\cos$. Quadrant I means all ratios are positive.",
+          s: [
+            "<b>Step 1 — Cosine.</b> $\\cos\\theta = \\sqrt{1-0.8^2} = \\sqrt{0.36} = 0.6$ (positive in Q1).",
+            "<b>Step 2 — Tangent.</b> $\\tan\\theta = 0.8/0.6 = 4/3$.",
+            "<b>Step 3 — Distractor audit.</b> $3/4$ inverts it; 0.8 is $\\sin$; $\\sqrt{0.36}=0.6$ is $\\cos$."
+          ],
+          a: "$\\tan\\theta = 4/3$",
+          v: "It's the 3-4-5 triangle: sin=4/5=0.8, cos=3/5=0.6, tan=4/3 ✓ — recognizing this Pythagorean triple lets you skip the algebra entirely."
+
+        }), ref: "p.37" },
       { q: "If $f(x) = x^3 + 2x$, find $f^{-1}(3)$:",
         choices: ["$1$", "$3$", "$\\sqrt{3}$", "$2$"], correct: 0,
-        solution: S({ c: "Solve $x^3 + 2x = 3$ for x.", s: ["Try $x=1$: $1 + 2 = 3$ ✓.", "So $f^{-1}(3) = 1$."], a: "$1$" }), ref: "p.35" },
+        solution: S({
+          c: "Finding $f^{-1}(3)$ means solving $f(x)=3$ — the input that produces output 3. For a strictly increasing function, the solution is unique.",
+          s: [
+            "<b>Step 1 — Set up.</b> $x^3+2x=3$.",
+            "<b>Step 2 — Try simple values.</b> $x=1$: $1+2=3$ ✓. So $f^{-1}(3)=1$.",
+            "<b>Step 3 — Distractor audit.</b> 3 confuses input with output; $\\sqrt3$ and 2 don't satisfy the equation."
+          ],
+          a: "$f^{-1}(3) = 1$",
+          v: "Uniqueness check: $f'(x)=3x^2+2>0$ everywhere → $f$ is strictly increasing → exactly one solution ✓. No need to find a general inverse formula; just solve for the one value."
+
+        }), ref: "p.35" },
       { q: "Volume of cylinder: $r=2$, $h=5$:",
         choices: ["$20\\pi$", "$10\\pi$", "$40\\pi$", "$4\\pi$"], correct: 0,
-        solution: S({ c: "$V = \\pi r^2 h$.", s: ["$V = \\pi(4)(5) = 20\\pi$."], a: "$20\\pi$" }), ref: "p.39" },
+        solution: S({
+          c: "Cylinder volume = base area × height = $\\pi r^2 h$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $V = \\pi(2^2)(5) = \\pi(4)(5) = 20\\pi$.",
+            "<b>Step 2 — Distractor audit.</b> $10\\pi$ forgets to square r; $40\\pi$ doubles wrongly; $4\\pi$ drops the height."
+          ],
+          a: "$V = 20\\pi$",
+          v: "Numerically ≈ 62.8 cubic units ✓. The $r^2$ (not $r$) is the common slip — area scales with radius squared."
+
+        }), ref: "p.39" },
       { q: "Surface area of sphere: $r = 3$:",
         choices: ["$36\\pi$", "$9\\pi$", "$12\\pi$", "$108\\pi$"], correct: 0,
-        solution: S({ c: "$A = 4\\pi r^2$.", s: ["$A = 4\\pi(9) = 36\\pi$."], a: "$36\\pi$" }), ref: "p.39" },
+        solution: S({
+          c: "Sphere surface area is $A = 4\\pi r^2$ (its volume, for contrast, is $\\tfrac43\\pi r^3$).",
+          s: [
+            "<b>Step 1 — Apply.</b> $A = 4\\pi(3^2) = 4\\pi(9) = 36\\pi$.",
+            "<b>Step 2 — Distractor audit.</b> $9\\pi$ forgets the 4; $12\\pi$ uses $4\\pi r$; $108\\pi$ is the volume-ish $4\\pi r^3$ mistake."
+          ],
+          a: "$A = 36\\pi$",
+          v: "Don't confuse area ($4\\pi r^2$) with volume ($\\tfrac43\\pi r^3 = 36\\pi$ here too, coincidentally at r=3) ✓ — at r=3 both happen to equal 36π, a fun coincidence, but the formulas differ."
+
+        }), ref: "p.39" },
       { q: "Hyperbolic identity: $\\cosh^2 x - \\sinh^2 x = ?$",
         choices: ["$1$", "$-1$", "$\\sin 2x$", "$0$"], correct: 0,
-        solution: S({ c: "Hyperbolic analog of $\\sin^2 + \\cos^2 = 1$, but with minus sign.", s: ["From $\\cosh x = (e^x+e^{-x})/2$, $\\sinh x = (e^x-e^{-x})/2$.", "Square and subtract: $(e^{2x}+2+e^{-2x})/4 - (e^{2x}-2+e^{-2x})/4 = 4/4 = 1$."], a: "$1$" }), ref: "p.37" },
+        solution: S({
+          c: "The hyperbolic functions obey $\\cosh^2 x - \\sinh^2 x = 1$ — like the circular $\\cos^2+\\sin^2=1$ but with a MINUS sign (and it equals 1 for all x).",
+          s: [
+            "<b>Step 1 — Use definitions.</b> $\\cosh x=(e^x+e^{-x})/2$, $\\sinh x=(e^x-e^{-x})/2$.",
+            "<b>Step 2 — Square and subtract.</b> $\\dfrac{(e^{2x}+2+e^{-2x})-(e^{2x}-2+e^{-2x})}{4} = \\dfrac{4}{4} = 1$.",
+            "<b>Step 3 — Distractor audit.</b> $-1$ flips the sign; $\\sin2x$ is unrelated; 0 is wrong."
+          ],
+          a: "1",
+          v: "The minus sign reflects the geometry: circular functions parametrize a circle ($x^2+y^2=1$), hyperbolic ones a hyperbola ($x^2-y^2=1$) ✓ — hence the names."
+
+        }), ref: "p.37" },
       { q: "Integrate $\\int x \\cos x \\, dx$:",
-        choices: ["$x\\sin x + \\cos x + C$", "$\\sin x + C$", "$x \\sin x - \\cos x + C$ → wait let me reverify", "$\\sin x - x\\cos x + C$"], correct: 0,
-        solution: S({ c: "Integration by parts: $u = x$, $dv = \\cos x dx$.", s: ["$du = dx$, $v = \\sin x$.", "$\\int x\\cos x = x\\sin x - \\int \\sin x dx = x\\sin x + \\cos x + C$."], a: "$x\\sin x + \\cos x + C$", v: "Differentiate: $\\sin x + x\\cos x - \\sin x = x\\cos x$ ✓" }), ref: "p.49" },
+        choices: ["$x\\sin x + \\cos x + C$", "$\\sin x + C$", "$x \\sin x - \\cos x + C$", "$\\sin x - x\\cos x + C$"], correct: 0,
+        solution: S({
+          c: "Integration by parts: $\\int u\\,dv = uv - \\int v\\,du$. Choose $u$ to be the part that SIMPLIFIES when differentiated (here $u=x$, since $du=dx$).",
+          s: [
+            "<b>Step 1 — Assign.</b> $u=x \\Rightarrow du=dx$; $dv=\\cos x\\,dx \\Rightarrow v=\\sin x$.",
+            "<b>Step 2 — Apply.</b> $x\\sin x - \\int\\sin x\\,dx = x\\sin x + \\cos x + C$.",
+            "<b>Step 3 — Distractor audit.</b> $\\sin x+C$ forgets the product; the $-\\cos x$ variants get the sign of the second term wrong."
+          ],
+          a: "$x\\sin x + \\cos x + C$",
+          v: "Differentiate back: $\\sin x + x\\cos x - \\sin x = x\\cos x$ ✓. The 'LIATE' rule (pick u in order: Log, Inverse, Algebraic, Trig, Exp) tells you to choose the algebraic $x$ as u here."
+
+        }), ref: "p.49" },
       { q: "Convergent series test for $\\sum 1/n^2$:",
         choices: ["Converges (p-series with p=2)", "Diverges", "Oscillates", "Unknown"], correct: 0,
-        solution: S({ c: "p-series $\\sum 1/n^p$ converges iff $p > 1$.", s: ["$p=2 > 1$ → converges.", "Famous result: $\\sum 1/n^2 = \\pi^2/6$ (Basel problem)."], a: "Converges" }), ref: "p.50" },
+        solution: S({
+          c: "The p-series $\\sum 1/n^p$ CONVERGES if and only if $p>1$. The exponent decides everything.",
+          s: [
+            "<b>Step 1 — Identify p.</b> $\\sum 1/n^2$ has $p=2$.",
+            "<b>Step 2 — Test.</b> $2>1$ → converges.",
+            "<b>Step 3 — Distractor audit.</b> 'Diverges' would need $p\\le1$ (e.g. the harmonic series $p=1$); series of positive terms don't 'oscillate'."
+          ],
+          a: "Converges (p=2 > 1).",
+          v: "Famous exact value (the Basel problem): $\\sum 1/n^2 = \\pi^2/6 \\approx 1.645$ ✓. Contrast the harmonic series ($p=1$) which DIVERGES despite its terms shrinking — the p=1 boundary is the key dividing line."
+
+        }), ref: "p.50" },
       { q: "Newton's method for $f(x) = x^2 - 2$ starting $x_0 = 1$: next iterate:",
         choices: ["$x_1 = 1.5$", "$x_1 = 2$", "$x_1 = 0$", "$x_1 = \\sqrt{2}$"], correct: 0,
-        solution: S({ c: "$x_{n+1} = x_n - f(x_n)/f'(x_n)$.", s: ["$f(1) = -1$, $f'(x) = 2x$, $f'(1) = 2$.", "$x_1 = 1 - (-1)/2 = 1.5$."], a: "$1.5$", v: "Converges to $\\sqrt{2} \\approx 1.414$. After $x_1=1.5$: $x_2 \\approx 1.417$." }), ref: "p.61" },
+        solution: S({
+          c: "Newton's method iterates $x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)}$ — following the tangent line to its x-intercept to home in on a root.",
+          s: [
+            "<b>Step 1 — Evaluate.</b> $f(1)=1-2=-1$; $f'(x)=2x$, so $f'(1)=2$.",
+            "<b>Step 2 — Iterate.</b> $x_1 = 1 - (-1)/2 = 1.5$.",
+            "<b>Step 3 — Distractor audit.</b> 2 and 0 misapply the formula; $\\sqrt2$ is the eventual LIMIT, not the first iterate."
+          ],
+          a: "$x_1 = 1.5$",
+          v: "It's converging to $\\sqrt2\\approx1.414$: the next step gives $x_2\\approx1.417$, already 3 correct digits ✓ — Newton's quadratic convergence roughly doubles accuracy each step."
+
+        }), ref: "p.61" },
       { q: "Continuity at $x_0$ requires:",
         choices: ["$\\lim_{x\\to x_0} f(x) = f(x_0)$", "Just $f(x_0)$ defined", "Limit exists only", "Derivative exists"], correct: 0,
-        solution: S({ c: "Three conditions: $f(x_0)$ defined, limit exists, they are equal.", s: ["Differentiable → continuous (but not reverse)."], a: "Limit equals value" }), ref: "p.47" },
+        solution: S({
+          c: "A function is continuous at $x_0$ when three things hold together: $f(x_0)$ is defined, the limit $\\lim_{x\\to x_0}f(x)$ exists, AND they are EQUAL. The full condition is $\\lim_{x\\to x_0}f(x)=f(x_0)$.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\lim_{x\\to x_0}f(x)=f(x_0)$.",
+            "<b>Step 2 — Distractor audit.</b> 'Just $f(x_0)$ defined' or 'limit exists only' are each just ONE of the three needed conditions; 'derivative exists' is a STRONGER property."
+          ],
+          a: "$\\lim_{x\\to x_0} f(x) = f(x_0)$.",
+          v: "Differentiable ⟹ continuous, but NOT the reverse — $|x|$ is continuous at 0 yet not differentiable there ✓. Continuity is the weaker, more basic requirement."
+
+        }), ref: "p.47" },
       { q: "$\\sin(\\pi - x) = ?$",
         choices: ["$\\sin x$", "$-\\sin x$", "$\\cos x$", "$0$"], correct: 0,
-        solution: S({ c: "Supplementary angle identity.", s: ["$\\sin(\\pi - x) = \\sin\\pi \\cos x - \\cos\\pi\\sin x = 0 - (-1)\\sin x = \\sin x$."], a: "$\\sin x$" }), ref: "p.37" },
+        solution: S({
+          c: "The supplementary-angle identity: $\\sin(\\pi-x)=\\sin x$ — sine is symmetric about 90°. (Derive it from the angle-subtraction formula.)",
+          s: [
+            "<b>Step 1 — Expand.</b> $\\sin\\pi\\cos x - \\cos\\pi\\sin x = (0)\\cos x - (-1)\\sin x = \\sin x$.",
+            "<b>Step 2 — Distractor audit.</b> $-\\sin x$ has the wrong sign; $\\cos x$ would be the $\\sin(\\pi/2-x)$ co-function identity; 0 is wrong."
+          ],
+          a: "$\\sin x$",
+          v: "Geometric meaning: angles $x$ and $\\pi-x$ are supplementary and share the same sine height ✓ — e.g. $\\sin30°=\\sin150°=0.5$. (Cosine, by contrast, flips sign: $\\cos(\\pi-x)=-\\cos x$.)"
+
+        }), ref: "p.37" },
       { q: "If $z_1 = 4+j3$ and $z_2 = 1-j2$, find $z_1 + z_2$:",
         choices: ["$5 + j1$", "$3 + j5$", "$4 - j6$", "$5 - j1$"], correct: 0,
-        solution: S({ c: "Complex addition: real + real, imag + imag.", s: ["Real: $4+1=5$. Imag: $3+(-2)=1$.", "Sum: $5+j$."], a: "$5+j$" }), ref: "p.36" },
+        solution: S({
+          c: "Complex addition is component-wise: add real parts, add imaginary parts.",
+          s: [
+            "<b>Step 1 — Add.</b> Real: $4+1=5$. Imag: $3+(-2)=1$.",
+            "<b>Step 2 — Distractor audit.</b> $3+j5$ swaps parts; $4-j6$ and $5-j1$ mishandle signs."
+          ],
+          a: "$5+j$",
+          v: "Addition is easiest in rectangular form (just stack components) ✓ — whereas multiplication/division are easiest in polar. Knowing which form suits which operation saves work."
+
+        }), ref: "p.36" },
       { q: "Matrix multiplication associative? $(AB)C = A(BC)$:",
         choices: ["Yes (always, when dimensions allow)", "No", "Only for square", "Only for diagonal"], correct: 0,
-        solution: S({ c: "Matrix multiplication: associative. But NOT commutative in general.", s: [""], a: "Yes" }), ref: "p.57" },
+        solution: S({
+          c: "Matrix multiplication IS associative — $(AB)C = A(BC)$ — whenever the dimensions are compatible. But it is NOT commutative ($AB \\ne BA$ in general).",
+          s: [
+            "<b>Step 1 — Match.</b> Yes, always (when dimensions allow).",
+            "<b>Step 2 — Distractor audit.</b> 'No' is false; it's not limited to square or diagonal matrices — associativity holds generally."
+          ],
+          a: "Yes — associative (but not commutative).",
+          v: "Associativity is what lets you chain transformations and optimize the multiplication ORDER (matrix-chain ordering) for efficiency ✓. The lack of COMMUTATIVITY is the property that trips people up — order of factors matters."
+
+        }), ref: "p.57" },
       { q: "Eigenvalue of identity matrix $I_n$:",
         choices: ["$1$ (with multiplicity $n$)", "$0$", "$n$", "Various"], correct: 0,
-        solution: S({ c: "$I\\vec{x} = \\vec{x}$ for all $\\vec{x}$: every nonzero vector is an eigenvector with $\\lambda = 1$.", s: ["Determinant: $\\det(I-\\lambda I) = (1-\\lambda)^n = 0 \\Rightarrow \\lambda = 1$ ($n$-fold)."], a: "$1$" }), ref: "p.58" },
+        solution: S({
+          c: "The identity matrix leaves every vector unchanged: $I\\vec x=\\vec x=1\\cdot\\vec x$. So EVERY nonzero vector is an eigenvector, all with eigenvalue $\\lambda=1$ (multiplicity $n$).",
+          s: [
+            "<b>Step 1 — Reason.</b> $I\\vec x = \\vec x$ for all $\\vec x$ → $\\lambda=1$.",
+            "<b>Step 2 — Confirm via char. poly.</b> $\\det(I-\\lambda I)=(1-\\lambda)^n=0 \\Rightarrow \\lambda=1$, $n$-fold.",
+            "<b>Step 3 — Distractor audit.</b> 0 would be a singular matrix; $n$ confuses eigenvalue with dimension; 'various' is wrong."
+          ],
+          a: "$\\lambda = 1$ (multiplicity n).",
+          v: "Consistent with the trace and determinant: $\\text{tr}(I)=n=\\sum\\lambda_i = n(1)$ ✓ and $\\det(I)=1=\\prod\\lambda_i=1^n$ ✓. The identity is the simplest possible eigen-problem."
+
+        }), ref: "p.58" },
     ],
 
     // Prob — +8
     2: [
       { q: "P(spade or king) drawing 1 card:",
         choices: ["$16/52 = 4/13$", "$13/52$", "$17/52$", "$12/52$"], correct: 0,
-        solution: S({ c: "Inclusion-exclusion: $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.", s: ["13 spades + 4 kings - 1 king of spades = 16.", "$P = 16/52 = 4/13$."], a: "$4/13$" }), ref: "p.65" },
+        solution: S({
+          c: "Inclusion-exclusion: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. Subtract the overlap so it isn't counted twice.",
+          s: [
+            "<b>Step 1 — Count each.</b> 13 spades, 4 kings.",
+            "<b>Step 2 — Subtract overlap.</b> The king of spades is in both → $13+4-1=16$.",
+            "<b>Step 3 — Probability.</b> $16/52 = 4/13$.",
+            "<b>Step 4 — Distractor audit.</b> $13/52$ counts only spades; $17/52$ forgets to remove the overlap; $12/52$ over-subtracts."
+          ],
+          a: "$4/13$",
+          v: "The −1 is the whole point of inclusion-exclusion ✓ — without it you'd double-count the one card that's both a spade AND a king."
+
+        }), ref: "p.65" },
       { q: "Variance of binomial $B(20, 0.3)$:",
         choices: ["$4.2$", "$6$", "$2.05$", "$14$"], correct: 0,
-        solution: S({ c: "$\\sigma^2 = np(1-p)$.", s: ["$20 \\cdot 0.3 \\cdot 0.7 = 4.2$."], a: "$4.2$" }), ref: "p.66" },
+        solution: S({
+          c: "A binomial distribution $B(n,p)$ has variance $\\sigma^2 = np(1-p)$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\sigma^2 = 20(0.3)(0.7) = 4.2$.",
+            "<b>Step 2 — Distractor audit.</b> 6 is the MEAN ($np$); 2.05 is the standard deviation ($\\sqrt{4.2}$); 14 misuses the formula."
+          ],
+          a: "$\\sigma^2 = 4.2$",
+          v: "Don't confuse mean ($np=6$) with variance ($np(1-p)=4.2$) with SD ($\\sqrt{4.2}=2.05$) ✓. Variance is maximized at $p=0.5$ (most uncertainty) and shrinks toward the extremes."
+
+        }), ref: "p.66" },
       { q: "If $X$ has mean 100, variance 25, then $Y = 2X + 10$ has mean and variance:",
         choices: ["$\\mu_Y=210$, $\\sigma_Y^2=100$", "$210, 25$", "$110, 25$", "$210, 50$"], correct: 0,
-        solution: S({ c: "$E[aX+b] = aE[X]+b$. $\\text{Var}(aX+b) = a^2 \\text{Var}(X)$.", s: ["$E[Y] = 2(100)+10 = 210$.", "$\\text{Var}(Y) = 4(25) = 100$."], a: "$210, 100$" }), ref: "p.66" },
+        solution: S({
+          c: "Linear transformation rules: $E[aX+b]=aE[X]+b$ (mean shifts and scales), but $\\text{Var}(aX+b)=a^2\\text{Var}(X)$ — the constant $b$ drops out and the scale is SQUARED.",
+          s: [
+            "<b>Step 1 — Mean.</b> $E[Y]=2(100)+10=210$.",
+            "<b>Step 2 — Variance.</b> $\\text{Var}(Y)=2^2(25)=100$ (the +10 has no effect).",
+            "<b>Step 3 — Distractor audit.</b> '210, 25' forgets to scale variance; '110, 25' misadds the mean; '210, 50' uses $a$ instead of $a^2$."
+          ],
+          a: "$\\mu_Y=210$, $\\sigma_Y^2=100$.",
+          v: "Why $b$ vanishes from variance: shifting data doesn't change its SPREAD ✓; only stretching (the factor $a$) does, and spread scales as $a^2$ because variance is in squared units."
+
+        }), ref: "p.66" },
       { q: "Hypergeometric: pick 5 from population with 10 successes and 20 failures. P(2 successes):",
         choices: ["$\\binom{10}{2}\\binom{20}{3}/\\binom{30}{5}$", "$(2/5)$", "$\\binom{30}{5}$", "$0.4$"], correct: 0,
-        solution: S({ c: "Hypergeometric formula: $P(k) = \\binom{K}{k}\\binom{N-K}{n-k}/\\binom{N}{n}$.", s: [""], a: "$\\binom{10}{2}\\binom{20}{3}/\\binom{30}{5}$" }), ref: "p.66" },
+        solution: S({
+          c: "The HYPERGEOMETRIC distribution models sampling WITHOUT replacement: $P(k)=\\dfrac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$, with $N$ total, $K$ successes, $n$ drawn.",
+          s: [
+            "<b>Step 1 — Identify.</b> $N=30$, $K=10$ successes, $n=5$ drawn, $k=2$ wanted.",
+            "<b>Step 2 — Apply.</b> $P=\\dfrac{\\binom{10}{2}\\binom{20}{3}}{\\binom{30}{5}}$.",
+            "<b>Step 3 — Distractor audit.</b> $2/5$ and 0.4 ignore the combinatorics; $\\binom{30}{5}$ alone is just the denominator."
+          ],
+          a: "$\\dfrac{\\binom{10}{2}\\binom{20}{3}}{\\binom{30}{5}}$",
+          v: "Use hypergeometric (not binomial) when draws AREN'T replaced, so probabilities shift each draw ✓ — e.g. dealing cards or quality-inspecting a finite batch. Binomial assumes replacement (constant p)."
+
+        }), ref: "p.66" },
       { q: "Sum of n indep Poisson($\\lambda_i$):",
         choices: ["Poisson with $\\lambda_{total} = \\sum \\lambda_i$", "Not Poisson", "Exponential", "Normal"], correct: 0,
-        solution: S({ c: "Closure property of Poisson under addition.", s: ["E.g., two stores serving customers independently: total arrivals are Poisson with combined rate."], a: "Poisson($\\Sigma\\lambda_i$)" }), ref: "p.66" },
+        solution: S({
+          c: "Poisson distributions are CLOSED under addition: the sum of independent Poisson variables is Poisson, with rate equal to the sum of the rates: $\\lambda_{total}=\\sum\\lambda_i$.",
+          s: [
+            "<b>Step 1 — Match.</b> Poisson with $\\lambda_{total}=\\sum\\lambda_i$.",
+            "<b>Step 2 — Distractor audit.</b> It stays Poisson (not 'not Poisson'); it's not exponential (that's the WAITING TIME between events) or normal."
+          ],
+          a: "Poisson($\\sum\\lambda_i$).",
+          v: "Intuitive: two independent counting processes combine into one counting process whose rate is the total ✓ — e.g. two checkout lines with rates 3 and 5/hr give a combined Poisson(8/hr) stream."
+
+        }), ref: "p.66" },
       { q: "Two normal RVs $X_1$ ~ $N(10, 4)$, $X_2$ ~ $N(20, 9)$ independent. $X_1 + X_2$ distribution:",
         choices: ["$N(30, 13)$", "$N(30, 5)$", "$N(15, 6.5)$", "$N(30, 25)$"], correct: 0,
-        solution: S({ c: "Sum of indep normals: mean adds, variance adds.", s: ["Mean: $10+20 = 30$.", "Variance: $4+9 = 13$."], a: "$N(30, 13)$" }), ref: "p.67" },
+        solution: S({
+          c: "For INDEPENDENT normals, the sum is normal with means added AND variances added: $X_1+X_2 \\sim N(\\mu_1+\\mu_2,\\ \\sigma_1^2+\\sigma_2^2)$.",
+          s: [
+            "<b>Step 1 — Mean.</b> $10+20=30$.",
+            "<b>Step 2 — Variance.</b> $4+9=13$ (add VARIANCES, not standard deviations).",
+            "<b>Step 3 — Distractor audit.</b> $N(30,5)$ wrongly added SDs ($2+3$); $N(15,6.5)$ averaged; $N(30,25)$ is off."
+          ],
+          a: "$N(30, 13)$.",
+          v: "The classic trap: variances add, standard deviations DON'T ✓ — here SD of the sum is $\\sqrt{13}=3.6$, not $2+3=5$. This 'add in quadrature' rule underlies error propagation."
+
+        }), ref: "p.67" },
       { q: "Margin of error in poll proportions: $1/\\sqrt{n}$ approximation. For $n = 400$:",
         choices: ["$\\pm 5\\%$", "$\\pm 1\\%$", "$\\pm 10\\%$", "$\\pm 0.5\\%$"], correct: 0,
-        solution: S({ c: "Approx for $p \\approx 0.5$: $MOE \\approx 1/\\sqrt{n}$ at 95% confidence.", s: ["$1/\\sqrt{400} = 1/20 = 0.05 = 5\\%$."], a: "$\\pm 5\\%$", v: "Why political polls often quote ±3-5%." }), ref: "p.69" },
+        solution: S({
+          c: "For a proportion near 0.5 at 95% confidence, margin of error is approximately $MOE \\approx 1/\\sqrt n$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $1/\\sqrt{400}=1/20=0.05=5\\%$.",
+            "<b>Step 2 — Distractor audit.</b> ±1% would need $n=10{,}000$; ±10% is $n=100$; ±0.5% needs $n=40{,}000$."
+          ],
+          a: "$\\pm 5\\%$",
+          v: "The $\\sqrt n$ law explains why polls quote ±3-5%: a typical $n\\approx1000$ gives ±3%, and cutting the margin in half requires QUADRUPLING the sample ✓ — diminishing returns make ultra-precise polls expensive."
+
+        }), ref: "p.69" },
       { q: "Goodness of fit: $\\chi^2$ test compares:",
         choices: ["Observed vs expected frequencies", "Means", "Variances", "Correlations"], correct: 0,
-        solution: S({ c: "$\\chi^2 = \\sum (O-E)^2/E$. Large value → poor fit.", s: ["Used: categorical data, contingency tables."], a: "Observed vs expected" }), ref: "p.70" },
+        solution: S({
+          c: "The chi-square goodness-of-fit test compares OBSERVED frequencies against EXPECTED frequencies: $\\chi^2=\\sum\\dfrac{(O-E)^2}{E}$. A large value signals a poor fit (observations stray from the model).",
+          s: [
+            "<b>Step 1 — Match.</b> Observed vs expected frequencies.",
+            "<b>Step 2 — Distractor audit.</b> Means are compared by t-tests; variances by F-tests; correlations by r — $\\chi^2$ is for CATEGORICAL frequency data."
+          ],
+          a: "Observed vs expected frequencies.",
+          v: "Used for dice-fairness, contingency tables, and distribution fitting ✓ — you reject the model if $\\chi^2$ exceeds the critical value for the degrees of freedom. It squares deviations and normalizes by expected count."
+
+        }), ref: "p.70" },
     ],
 
     // Ethics — +3
     3: [
       { q: "If approached with bribery, an engineer must:",
         choices: ["Refuse, document, report", "Accept and warn later", "Negotiate", "Ignore"], correct: 0,
-        solution: S({ c: "Bribery violates ethics + criminal law.", s: ["Refuse explicitly, document the request, report to employer/board/law enforcement."], a: "Refuse & report" }), ref: "p.5" },
+        solution: S({
+          c: "Bribery violates both the engineering ethics code AND criminal law. The required response: refuse, document the request, and report it.",
+          s: [
+            "<b>Step 1 — Match.</b> Refuse, document, report.",
+            "<b>Step 2 — Distractor audit.</b> 'Accept and warn later', 'negotiate', and 'ignore' all involve complicity or inaction — none is acceptable."
+          ],
+          a: "Refuse, document, and report.",
+          v: "Documenting protects you and creates a record; reporting (to employer, board, or law enforcement) fulfills the public-trust duty ✓ — silence can make you complicit in a crime."
+
+        }), ref: "p.5" },
       { q: "Engineers must report public-welfare-affecting violations to:",
         choices: ["Appropriate authority (board, regulator)", "Just supervisor", "Nobody", "Only when asked"], correct: 0,
-        solution: S({ c: "Canon 1 + safe-reporting laws.", s: ["Internal chain first, then external if not addressed."], a: "Appropriate authority" }), ref: "p.5" },
+        solution: S({
+          c: "When a violation threatens public welfare, the engineer must escalate to the APPROPRIATE AUTHORITY — typically the licensing board or regulator, after exhausting the internal chain.",
+          s: [
+            "<b>Step 1 — Match.</b> Appropriate authority (board, regulator).",
+            "<b>Step 2 — Distractor audit.</b> 'Just supervisor' may be insufficient if ignored; 'nobody' / 'only when asked' abandon the public-safety duty."
+          ],
+          a: "The appropriate authority (board/regulator).",
+          v: "Best practice: try internal resolution FIRST (supervisor, management), then go external if unaddressed ✓ — Canon 1 (public welfare paramount) and whistleblower protections back this escalation path."
+
+        }), ref: "p.5" },
       { q: "Engineering record retention period (typical):",
         choices: ["Years or decades (varies by jurisdiction)", "1 week", "Until project ends", "Indefinite by law"], correct: 0,
-        solution: S({ c: "Records: drawings, calcs, correspondence — kept for liability period.", s: ["Typical: 7-10 years for civil; can be longer for medical/aviation.", "Statute of repose limits liability after time."], a: "Years to decades" }), ref: "p.11" },
+        solution: S({
+          c: "Engineering records (drawings, calculations, correspondence) must be kept through the LIABILITY period — typically years to decades, varying by jurisdiction and project type.",
+          s: [
+            "<b>Step 1 — Match.</b> Years to decades (jurisdiction-dependent).",
+            "<b>Step 2 — Distractor audit.</b> '1 week' and 'until project ends' are far too short; 'indefinite by law' overstates — statutes of repose eventually cap liability."
+          ],
+          a: "Years to decades (varies by jurisdiction).",
+          v: "Typical: 7-10 years for civil work, longer for aviation/medical ✓. The STATUTE OF REPOSE limits how long after completion you can be sued — records are kept at least that long to defend your work."
+
+        }), ref: "p.11" },
     ],
 
     // Econ — +7
     4: [
       { q: "Inflation rate 4% per year. $1000 today worth in real terms after 5 years:",
         choices: ["$\\approx \\$822$", "$\\$1217$", "$\\$1000$", "$\\$1200$"], correct: 0,
-        solution: S({ c: "Real value = nominal / inflation factor.", s: ["$1000/(1.04)^5 = 1000/1.2167 = 821.93$."], a: "$\\approx \\$822$" }), ref: "p.230" },
+        solution: S({
+          c: "Inflation erodes purchasing power. The real (constant-dollar) value of money in the future is nominal ÷ inflation factor: $1000/(1+f)^n$.",
+          s: [
+            "<b>Step 1 — Inflation factor.</b> $(1.04)^5 = 1.2167$.",
+            "<b>Step 2 — Real value.</b> $1000/1.2167 = \\$822$.",
+            "<b>Step 3 — Distractor audit.</b> $\\$1217$ MULTIPLIED (that's future nominal cost of $1000 of goods); $\\$1000$ ignores inflation; $\\$1200$ is a rough guess."
+          ],
+          a: "$\\approx \\$822$",
+          v: "Note the direction: $1000 cash kept under a mattress BUYS only $822 worth after 5 years of 4% inflation ✓ — which is why money must earn at least the inflation rate just to hold real value."
+
+        }), ref: "p.230" },
       { q: "Effective vs nominal: 8% APR compounded continuously:",
         choices: ["$EAR \\approx 8.33\\%$", "$8\\%$", "$16\\%$", "$\\approx 9\\%$"], correct: 0,
-        solution: S({ c: "Continuous: $EAR = e^r - 1$.", s: ["$e^{0.08} - 1 \\approx 0.0833 = 8.33\\%$."], a: "$8.33\\%$" }), ref: "p.230" },
+        solution: S({
+          c: "Continuous compounding gives the maximum effective rate: $EAR = e^r - 1$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $EAR = e^{0.08}-1 = 1.0833-1 = 8.33\\%$.",
+            "<b>Step 2 — Distractor audit.</b> 8% ignores compounding; 16% doubles wrongly; 9% overshoots."
+          ],
+          a: "$EAR \\approx 8.33\\%$",
+          v: "Continuous compounding is the CEILING — quarterly gives 8.24%, monthly 8.30%, continuous 8.33% ✓. More frequent compounding raises EAR but with rapidly diminishing returns toward the $e^r-1$ limit."
+
+        }), ref: "p.230" },
       { q: "AOC (Annual Operating Cost) negative cash flow each year. NPV at $i$:",
         choices: ["Negative", "Positive", "Zero", "Cannot tell"], correct: 0,
-        solution: S({ c: "All cash flows negative → NPV negative.", s: ["Cost-only project: choose lowest |NPV| (least costly)."], a: "Negative" }), ref: "p.231" },
+        solution: S({
+          c: "If every cash flow is negative (a cost-only project), the net present value is necessarily negative — there's no income to offset.",
+          s: [
+            "<b>Step 1 — Reason.</b> All flows < 0 → NPV < 0.",
+            "<b>Step 2 — Distractor audit.</b> Positive/zero are impossible without inflows; 'cannot tell' is wrong — the sign is determined."
+          ],
+          a: "Negative.",
+          v: "For cost-only comparisons you don't seek positive NPV — you pick the LEAST negative (lowest-cost) alternative ✓. This is why service/infrastructure projects use equivalent-annual-cost rather than profit metrics."
+
+        }), ref: "p.231" },
       { q: "Future worth of $\\$200$/yr deposits for 30 years at 6%:",
         choices: ["$\\approx \\$15{,}815$", "$\\$6000$", "$\\$10{,}000$", "$\\$200$"], correct: 0,
-        solution: S({ c: "$(F/A, 6\\%, 30) = ((1.06)^{30}-1)/0.06$.", s: ["$(1.06)^{30} = 5.7435$.", "$(F/A) = 4.7435/0.06 = 79.058$.", "$F = 200 \\cdot 79.058 = 15{,}811.6$."], a: "$\\approx \\$15{,}812$" }), ref: "p.231" },
+        solution: S({
+          c: "The future worth of a uniform annual series uses the compound-amount factor: $F = A\\cdot(F/A,i,n)$ where $(F/A)=\\dfrac{(1+i)^n-1}{i}$.",
+          s: [
+            "<b>Step 1 — Growth factor.</b> $(1.06)^{30}=5.7435$.",
+            "<b>Step 2 — (F/A).</b> $(5.7435-1)/0.06 = 79.06$.",
+            "<b>Step 3 — Multiply.</b> $F=200\\times79.06 = \\$15{,}812$.",
+            "<b>Step 4 — Distractor audit.</b> $\\$6000$ is just the deposits ($200\\times30$, ignoring interest); $\\$10{,}000$ and $\\$200$ are far off."
+          ],
+          a: "$\\approx \\$15{,}812$",
+          v: "Compounding nearly TRIPLES the $6000 of raw deposits ✓ — the magic of long-horizon compound interest. Earlier deposits grow the most because they compound longest."
+
+        }), ref: "p.231" },
       { q: "Break-even point quantity: $FC = \\$20{,}000$, $P = \\$30$, $VC = \\$10$:",
         choices: ["$1000$ units", "$667$ units", "$2000$ units", "$500$ units"], correct: 0,
-        solution: S({ c: "$Q = FC/(P - VC)$.", s: ["$20000/(30-10) = 1000$."], a: "$1000$" }), ref: "p.232" },
+        solution: S({
+          c: "Break-even is where total revenue equals total cost. Per unit, each sale contributes $(P-VC)$ toward fixed costs, so $Q=\\dfrac{FC}{P-VC}$.",
+          s: [
+            "<b>Step 1 — Contribution margin.</b> $P-VC = 30-10 = \\$20$/unit.",
+            "<b>Step 2 — Divide.</b> $Q = 20{,}000/20 = 1000$ units.",
+            "<b>Step 3 — Distractor audit.</b> 667 uses P alone ($20000/30$); 2000 uses VC; 500 doubles the margin."
+          ],
+          a: "1000 units.",
+          v: "Above 1000 units you profit, below it you lose ✓. The contribution margin $(P-VC)$, not the price, is what pays down fixed cost — a key insight for pricing decisions."
+
+        }), ref: "p.232" },
       { q: "Equivalent annual cost (EAC) of $\\$100{,}000$ now over 10 years at 6%:",
         choices: ["$\\approx \\$13{,}587$/yr", "$\\$10{,}000$", "$\\$6{,}000$", "$\\$20{,}000$"], correct: 0,
-        solution: S({ c: "$EAC = P \\cdot (A/P, i, n)$.", s: ["$(A/P, 6\\%, 10) = 0.06(1.06)^{10}/((1.06)^{10}-1) = 0.13587$.", "$EAC = 100{,}000 \\cdot 0.13587 = 13{,}587$."], a: "$\\approx \\$13{,}587$" }), ref: "p.232" },
+        solution: S({
+          c: "EAC spreads a present cost into equal annual amounts using the capital-recovery factor: $EAC = P\\cdot(A/P,i,n)$ where $(A/P)=\\dfrac{i(1+i)^n}{(1+i)^n-1}$.",
+          s: [
+            "<b>Step 1 — Capital-recovery factor.</b> $(A/P,6\\%,10) = \\dfrac{0.06(1.06)^{10}}{(1.06)^{10}-1} = 0.13587$.",
+            "<b>Step 2 — Multiply.</b> $EAC = 100{,}000\\times0.13587 = \\$13{,}587$/yr.",
+            "<b>Step 3 — Distractor audit.</b> $\\$10{,}000$ ignores interest (just $P/n$); $\\$6000$ is only the first-year interest; $\\$20{,}000$ is too high."
+          ],
+          a: "$\\approx \\$13{,}587$/yr",
+          v: "EAC > $P/n$ = $10,000 because it accounts for the TIME VALUE of the tied-up capital ✓. It's the standard way to compare alternatives with different lifespans on an apples-to-apples annual basis."
+
+        }), ref: "p.232" },
       { q: "Bond yield to maturity (YTM) interpretation:",
         choices: ["Rate of return if held to maturity", "Coupon rate", "Current price/par", "Risk level"], correct: 0,
-        solution: S({ c: "YTM: IRR of bond's cash flows.", s: ["If YTM > coupon: bond trades at discount.", "If YTM < coupon: premium."], a: "IRR if held to maturity" }), ref: "p.230" },
+        solution: S({
+          c: "Yield to maturity is the bond's internal rate of return — the single discount rate that equates the present value of all its cash flows (coupons + face value) to its current price, ASSUMING it's held to maturity.",
+          s: [
+            "<b>Step 1 — Match.</b> Rate of return if held to maturity.",
+            "<b>Step 2 — Distractor audit.</b> Coupon rate is fixed at issue (different); current price/par is just the ratio; risk is a separate concept (though it influences YTM)."
+          ],
+          a: "The IRR of the bond if held to maturity.",
+          v: "The relationship to price: YTM > coupon → bond trades at a DISCOUNT; YTM < coupon → premium ✓. YTM is what lets you compare bonds with different coupons and prices on equal footing."
+
+        }), ref: "p.230" },
     ],
 
     // Materials — +5
     5: [
       { q: "Drift velocity of electrons in Cu with current density $J$:",
         choices: ["$v_d = J/(nq)$ — typically mm/s scale", "Near speed of light", "Random thermal", "Static"], correct: 0,
-        solution: S({ c: "Drift velocity small (mm/s) despite signal speeds being near $c$.", s: ["Signal propagation: EM field travels at $c$.", "Individual electron drift: very slow."], a: "$J/(nq)$, slow" }), ref: "p.354" },
+        solution: S({
+          c: "Drift velocity is the slow average speed of charge carriers under a field: $v_d = J/(nq)$, where $n$ is carrier density and $q$ the charge. It's surprisingly tiny — millimeters per second.",
+          s: [
+            "<b>Step 1 — Match.</b> $v_d=J/(nq)$, mm/s scale.",
+            "<b>Step 2 — Distractor audit.</b> Not near light speed (that's the FIELD/signal, not the electrons); not purely random thermal (drift is the net average on top of thermal motion); not static."
+          ],
+          a: "$v_d = J/(nq)$ — very slow (mm/s).",
+          v: "The paradox: electrons crawl at mm/s, yet a light switches on instantly because the electromagnetic FIELD propagates near $c$ ✓ — the electrons everywhere in the wire start moving almost together, like water already filling a pipe."
+
+        }), ref: "p.354" },
       { q: "Cu electron density approximately:",
         choices: ["$8.5\\times 10^{28}$/m³", "$10^{20}$", "$10^{16}$", "$10^{6}$"], correct: 0,
-        solution: S({ c: "Conductors have ~1 free electron per atom. Cu atomic density ≈ $8.5\\times 10^{28}$/m³.", s: [""], a: "$\\sim 10^{28}$/m³" }), ref: "p.354" },
+        solution: S({
+          c: "Copper contributes about one free electron per atom, giving a free-electron density of roughly $8.5\\times10^{28}$ per m³ — essentially its atomic density.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\sim8.5\\times10^{28}$/m³.",
+            "<b>Step 2 — Distractor audit.</b> $10^{20}$, $10^{16}$, $10^6$ are far too low — those resemble SEMICONDUCTOR carrier densities, not metals."
+          ],
+          a: "$\\sim 10^{28}$/m³.",
+          v: "This huge carrier density is exactly why metals conduct so well, AND why drift velocity is so slow (lots of carriers each moving little) ✓. Semiconductors have ~$10^{16}$/m³ — a trillion times fewer, hence far higher resistivity."
+
+        }), ref: "p.354" },
       { q: "Energy bandgap of GaAs:",
         choices: ["$\\approx 1.42$ eV", "$1.12$ eV", "$5$ eV", "$0$"], correct: 0,
-        solution: S({ c: "Memorize: GaAs $E_g = 1.42$ eV. Higher than Si — different applications.", s: ["GaAs: faster electron mobility, direct bandgap (good for LEDs/lasers).", "Used in: high-speed RF, solar cells, optoelectronics."], a: "$1.42$ eV" }), ref: "p.354" },
+        solution: S({
+          c: "Gallium arsenide has a bandgap of $E_g \\approx 1.42$ eV — larger than silicon's 1.12 eV, and crucially it's a DIRECT bandgap.",
+          s: [
+            "<b>Step 1 — Match.</b> ≈1.42 eV.",
+            "<b>Step 2 — Distractor audit.</b> 1.12 eV is SILICON; 5 eV is an insulator (diamond-like); 0 is a metal/semimetal."
+          ],
+          a: "$E_g \\approx 1.42$ eV.",
+          v: "GaAs's DIRECT bandgap lets it emit light efficiently (LEDs, lasers) — which silicon's indirect gap can't ✓ — and its high electron mobility suits high-speed RF. The trade is cost and fragility vs cheap, robust silicon."
+
+        }), ref: "p.354" },
       { q: "Thermal voltage at room temp:",
         choices: ["$V_T \\approx 25.85$ mV", "$0.7$ V", "$1$ V", "$1$ µV"], correct: 0,
-        solution: S({ c: "$V_T = kT/q$. At 300 K: $\\approx 25.85$ mV.", s: ["Used in: Shockley diode equation, BJT/MOSFET models.", "At higher temp: $V_T$ slightly higher."], a: "$\\sim 26$ mV" }), ref: "p.354" },
+        solution: S({
+          c: "The thermal voltage $V_T = kT/q$ sets the scale of semiconductor behavior. At room temperature (~300 K) it's about 25.85 mV (often rounded to 26 mV).",
+          s: [
+            "<b>Step 1 — Match.</b> ≈25.85 mV.",
+            "<b>Step 2 — Distractor audit.</b> 0.7 V is a diode's FORWARD DROP (not $V_T$); 1 V and 1 µV are off by orders of magnitude."
+          ],
+          a: "$V_T \\approx 26$ mV.",
+          v: "$V_T$ appears in the Shockley diode equation and BJT/MOSFET models ✓ — it's why a diode's current changes ~10× per 60 mV ($\\approx 2.3 V_T$) of voltage. It rises slightly with temperature ($\\propto T$)."
+
+        }), ref: "p.354" },
       { q: "Photovoltaic effect:",
         choices: ["Photon energy > $E_g$ → e-h pair → current", "Heat → voltage", "Magnetic → current", "Mechanical"], correct: 0,
-        solution: S({ c: "Solar cells: light creates electron-hole pairs in semiconductor; built-in pn junction field separates them.", s: ["Photon energy hν must exceed bandgap for absorption."], a: "Light → e-h pairs" }), ref: "p.354" },
+        solution: S({
+          c: "In the photovoltaic effect, a photon with energy ABOVE the bandgap ($h\\nu > E_g$) is absorbed, knocking an electron free and creating an electron-hole pair. A p-n junction's built-in field separates them, driving a current.",
+          s: [
+            "<b>Step 1 — Match.</b> Photon energy > $E_g$ → e-h pair → current.",
+            "<b>Step 2 — Distractor audit.</b> Heat→voltage is THERMOELECTRIC (Seebeck); magnetic→current is induction/Hall; mechanical→voltage is piezoelectric."
+          ],
+          a: "Light → electron-hole pairs → current.",
+          v: "The bandgap sets the cutoff: photons below $E_g$ pass through unabsorbed (wasted), while energy far above $E_g$ is lost as heat ✓ — which is why silicon's 1.12 eV gap (capturing much of the solar spectrum) makes good solar cells."
+
+        }), ref: "p.354" },
     ],
 
     // Circuits — +20
