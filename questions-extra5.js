@@ -928,60 +928,248 @@
     7: [
       { q: "Laplace transform of $e^{-3t}\\sin 4t$:",
         choices: ["$\\dfrac{4}{(s+3)^2+16}$", "$\\dfrac{s}{s^2+16}$", "$\\dfrac{4}{s^2+16}$", "$\\dfrac{1}{s+3}$"], correct: 0,
-        solution: S({ c: "Frequency shift: $\\mathcal{L}\\{e^{-at}f(t)\\} = F(s+a)$.", s: ["$\\mathcal{L}\\{\\sin 4t\\} = 4/(s^2+16)$.", "Shift: $4/((s+3)^2 + 16)$."], a: "$4/[(s+3)^2+16]$" }), ref: "p.56" },
+        solution: S({
+          c: "The FREQUENCY-SHIFT property: multiplying a function by $e^{-at}$ in time replaces $s$ with $s+a$ in the transform: $\\mathcal L\\{e^{-at}f(t)\\} = F(s+a)$.",
+          s: [
+            "<b>Step 1 — Base transform.</b> $\\mathcal L\\{\\sin 4t\\} = \\dfrac{4}{s^2+16}$.",
+            "<b>Step 2 — Apply the shift.</b> Replace $s\\to s+3$: $\\dfrac{4}{(s+3)^2+16}$.",
+            "<b>Step 3 — Distractor audit.</b> $s/(s^2+16)$ is $\\cos4t$; $4/(s^2+16)$ forgot the shift; $1/(s+3)$ is $e^{-3t}$ alone."
+          ],
+          a: "$\\dfrac{4}{(s+3)^2+16}$",
+          v: "The $e^{-3t}$ envelope makes a DECAYING sinusoid — physically a damped oscillation ✓, and the $+3$ shift moves the poles left into the stable region, exactly mirroring that decay."
+
+        }), ref: "p.56" },
       { q: "DC gain of $H(s) = K/(s^2+as+b)$:", choices: ["$K/b$", "$K$", "$K/a$", "$K \\cdot b$"], correct: 0,
-        solution: S({ c: "$H(0) = K/b$.", s: [""], a: "$K/b$" }), ref: "p.366" },
+        solution: S({
+          c: "DC gain = the transfer function's value at $s=0$ (zero frequency, steady state): substitute $s=0$ into $H(s)$.",
+          s: [
+            "<b>Step 1 — Set s = 0.</b> $H(0) = \\dfrac{K}{0+0+b} = \\dfrac{K}{b}$.",
+            "<b>Step 2 — Distractor audit.</b> $K$ forgets the denominator constant; $K/a$ uses the wrong coefficient; $Kb$ multiplies instead of dividing."
+          ],
+          a: "$K/b$",
+          v: "Physically, DC gain is the steady-state output for a constant (step) input ✓ — apply 1 V DC and the output settles to $K/b$. The $a$ (damping) term vanishes at DC because it multiplies $s$."
+
+        }), ref: "p.366" },
       { q: "Final value $\\lim_{t\\to\\infty}y(t)$ for $Y(s) = 10/[s(s+5)]$:",
         choices: ["$2$", "$10$", "$0$", "$\\infty$"], correct: 0,
-        solution: S({ c: "FVT: $\\lim_{s\\to 0} sY(s) = 10/5 = 2$.", s: [""], a: "$2$" }), ref: "p.56" },
+        solution: S({
+          c: "The Final Value Theorem gets the steady-state value WITHOUT inverting the transform: $\\lim_{t\\to\\infty}y(t) = \\lim_{s\\to0}sY(s)$ — valid only if the system is stable.",
+          s: [
+            "<b>Step 1 — Multiply by s.</b> $sY(s) = \\dfrac{10}{s+5}$.",
+            "<b>Step 2 — Let s→0.</b> $\\dfrac{10}{5} = 2$.",
+            "<b>Step 3 — Distractor audit.</b> 10 forgets to evaluate the limit; 0 misreads; ∞ would need an unstable pole."
+          ],
+          a: "$y(\\infty) = 2$",
+          v: "The $1/s$ factor in $Y(s)$ signals a STEP input; the system settles to 2 ✓. FVT is a huge shortcut for steady-state — but check stability first (all poles in the left half-plane), or it gives nonsense."
+
+        }), ref: "p.56" },
       { q: "$H(s) = 1/(s^2 + 2s + 1) = 1/(s+1)^2$. Pole multiplicity at $s=-1$:",
         choices: ["$2$ (double pole)", "$1$", "$0$", "$\\infty$"], correct: 0,
-        solution: S({ c: "$(s+1)^2$ has root $s=-1$ with multiplicity 2.", s: ["Time response includes $te^{-t}$ term in addition to $e^{-t}$."], a: "$2$" }), ref: "p.55" },
+        solution: S({
+          c: "A pole's MULTIPLICITY is how many times its factor repeats. $(s+1)^2$ means $s=-1$ is a root TWICE → a double (repeated) pole.",
+          s: [
+            "<b>Step 1 — Factor.</b> $s^2+2s+1 = (s+1)^2$ → root $s=-1$ with multiplicity 2.",
+            "<b>Step 2 — Distractor audit.</b> 1 would be a simple pole; 0 means no pole there; ∞ is meaningless."
+          ],
+          a: "Multiplicity 2 (double pole).",
+          v: "Repeated poles change the time response: a double pole at $-1$ gives $(A + Bt)e^{-t}$ — note the extra $te^{-t}$ term ✓. This is the critically-damped case (fastest settling without overshoot)."
+
+        }), ref: "p.55" },
       { q: "Frequency where 1st-order LPF gain drops by half (-6 dB):",
         choices: ["$\\sqrt{3}\\,\\omega_c$", "$\\omega_c/2$", "$2\\omega_c$", "$\\omega_c$"], correct: 0,
-        solution: S({ c: "$|H(j\\omega)|^2 = 1/(1 + (\\omega/\\omega_c)^2)$. Set to $1/4$: $\\omega/\\omega_c = \\sqrt{3}$.", s: [""], a: "$\\sqrt{3}\\omega_c$" }), ref: "p.366" },
+        solution: S({
+          c: "A first-order low-pass filter has $|H(j\\omega)|^2 = \\dfrac{1}{1+(\\omega/\\omega_c)^2}$. 'Half the gain' (−6 dB) means $|H| = 1/2$, so $|H|^2 = 1/4$.",
+          s: [
+            "<b>Step 1 — Set up.</b> $\\dfrac{1}{1+(\\omega/\\omega_c)^2} = \\dfrac14$.",
+            "<b>Step 2 — Solve.</b> $1+(\\omega/\\omega_c)^2 = 4 \\Rightarrow (\\omega/\\omega_c)^2 = 3 \\Rightarrow \\omega = \\sqrt3\\,\\omega_c$.",
+            "<b>Step 3 — Distractor audit.</b> $\\omega_c$ itself is the −3 dB point (gain $1/\\sqrt2$, not 1/2); $\\omega_c/2$ and $2\\omega_c$ don't satisfy the equation."
+          ],
+          a: "$\\omega = \\sqrt3\\,\\omega_c$",
+          v: "Don't confuse −3 dB (the CUTOFF, gain $1/\\sqrt2 \\approx 0.707$) with −6 dB (gain exactly 1/2) ✓. The cutoff $\\omega_c$ is where power halves; −6 dB is where amplitude halves, a bit higher in frequency."
+
+        }), ref: "p.366" },
       { q: "Q factor for parallel RLC with $L=10$ mH, $C=10$ nF, $R=10$ kΩ:",
         choices: ["$10$", "$1$", "$100$", "$0.1$"], correct: 0,
-        solution: S({ c: "Parallel: $Q = R\\sqrt{C/L}$.", s: ["$\\sqrt{C/L} = \\sqrt{10^{-8}/10^{-2}} = 10^{-3}$.", "$Q = 10^4 \\cdot 10^{-3} = 10$."], a: "$10$" }), ref: "p.361" },
+        solution: S({
+          c: "For a PARALLEL RLC circuit, quality factor $Q = R\\sqrt{C/L}$ (note: this is the INVERSE form of the series $Q = \\tfrac1R\\sqrt{L/C}$).",
+          s: [
+            "<b>Step 1 — Ratio C/L.</b> $\\sqrt{10^{-8}/10^{-2}} = \\sqrt{10^{-6}} = 10^{-3}$.",
+            "<b>Step 2 — Multiply by R.</b> $Q = 10^4\\times10^{-3} = 10$.",
+            "<b>Step 3 — Distractor audit.</b> 1, 100, 0.1 come from power-of-ten slips or using the series formula by mistake."
+          ],
+          a: "$Q = 10$",
+          v: "Higher Q = sharper resonance / narrower bandwidth ✓. Crucially, for PARALLEL RLC bigger R gives HIGHER Q (less damping), the opposite of series RLC where bigger R lowers Q — a frequent trap."
+
+        }), ref: "p.361" },
       { q: "Half-power frequencies: separated by:", choices: ["BW = $\\omega_0/Q$", "$2\\pi$", "$Q\\omega_0$", "Fixed"], correct: 0,
-        solution: S({ c: "Standard definition.", s: [""], a: "BW = $\\omega_0/Q$" }), ref: "p.361" },
+        solution: S({
+          c: "The bandwidth of a resonant circuit — the gap between its two half-power (−3 dB) frequencies — is $BW = \\omega_0/Q$. High Q → narrow band.",
+          s: [
+            "<b>Step 1 — Match.</b> $BW = \\omega_0/Q$.",
+            "<b>Step 2 — Distractor audit.</b> $2\\pi$ is just a constant; $Q\\omega_0$ inverts the relationship; 'fixed' ignores Q's role."
+          ],
+          a: "$BW = \\omega_0/Q$",
+          v: "This is WHY Q matters for selectivity: a radio tuner needs high Q to pull one station out of many — $BW = \\omega_0/Q$ means doubling Q halves the bandwidth ✓, sharpening the filter."
+
+        }), ref: "p.361" },
       { q: "$\\mathcal{L}\\{t\\}$ = ",
         choices: ["$1/s^2$", "$1/s$", "$s$", "$s^2$"], correct: 0,
-        solution: S({ c: "Pair: $\\mathcal{L}\\{t^n\\} = n!/s^{n+1}$.", s: ["$n=1$: $1/s^2$."], a: "$1/s^2$" }), ref: "p.56" },
+        solution: S({
+          c: "Standard Laplace pair: $\\mathcal L\\{t^n\\} = \\dfrac{n!}{s^{n+1}}$. For $n=1$ this gives $1/s^2$.",
+          s: [
+            "<b>Step 1 — Apply with n=1.</b> $\\dfrac{1!}{s^{1+1}} = \\dfrac{1}{s^2}$.",
+            "<b>Step 2 — Distractor audit.</b> $1/s$ is the transform of a constant (1 or step); $s$ and $s^2$ are differentiators, not these signals."
+          ],
+          a: "$1/s^2$",
+          v: "Build the ladder: $1\\to1/s$, $t\\to1/s^2$, $t^2\\to2/s^3$ ✓ — each integration in time adds a power of $s$ in the denominator. A ramp $t$ corresponds to $1/s^2$."
+
+        }), ref: "p.56" },
       { q: "Inverse Laplace of $1/s^2$:", choices: ["$t$", "$\\sin t$", "$e^t$", "$1$"], correct: 0,
-        solution: S({ c: "Pair direct.", s: [""], a: "$t$" }), ref: "p.56" },
+        solution: S({
+          c: "Inverse Laplace just reads the table backward: $1/s^2 \\leftrightarrow t$ (the unit ramp).",
+          s: [
+            "<b>Step 1 — Match.</b> $\\mathcal L^{-1}\\{1/s^2\\} = t$.",
+            "<b>Step 2 — Distractor audit.</b> $\\sin t \\leftrightarrow 1/(s^2+1)$; $e^t \\leftrightarrow 1/(s-1)$; $1 \\leftrightarrow 1/s$."
+          ],
+          a: "$t$",
+          v: "Forward and inverse are the same table, used in opposite directions ✓ — $t$ in time is $1/s^2$ in s, and vice versa. The repeated $s$ in the denominator is the signature of the ramp."
+
+        }), ref: "p.56" },
       { q: "Transient response decays slower if pole is:",
         choices: ["Closer to imaginary axis (smaller |real|)", "Far left", "At origin", "Complex"], correct: 0,
-        solution: S({ c: "Decay rate: |Re(pole)|. Smaller magnitude → slower decay.", s: ["Pole at $-0.1$ → very slow decay ($\\tau = 10$ s).", "Pole at $-100$ → very fast."], a: "Closer to jω-axis" }), ref: "p.365" },
+        solution: S({
+          c: "A pole at $s = \\sigma$ contributes a term $e^{\\sigma t}$. The DECAY RATE is set by $|\\text{Re(pole)}|$: the SMALLER that magnitude (closer to the imaginary axis), the slower the decay.",
+          s: [
+            "<b>Step 1 — Match.</b> Closer to the imaginary axis (smaller $|\\text{real part}|$).",
+            "<b>Step 2 — Distractor audit.</b> 'Far left' = fast decay (opposite); 'at origin' = no decay (marginal); 'complex' affects oscillation, not decay rate."
+          ],
+          a: "Closer to the jω-axis → slower decay.",
+          v: "Numbers make it vivid: pole at $-0.1$ gives $\\tau = 10$ s (sluggish); pole at $-100$ gives $\\tau = 0.01$ s (snappy) ✓. The DOMINANT (slowest) pole — nearest the axis — governs the overall settling time."
+
+        }), ref: "p.365" },
     ],
 
     // Signal — +10
     8: [
       { q: "Bandwidth of $H(s) = 100/(s+10)$:", choices: ["$10$ rad/s", "$100$ rad/s", "$1$", "$50$"], correct: 0,
-        solution: S({ c: "1st-order LPF: -3 dB at pole.", s: ["Pole at $s=-10$: BW = 10."], a: "$10$" }), ref: "p.366" },
+        solution: S({
+          c: "For a first-order low-pass filter, the bandwidth equals the −3 dB cutoff, which sits at the POLE location: $\\omega_c = |\\text{pole}|$.",
+          s: [
+            "<b>Step 1 — Find the pole.</b> $s+10=0 \\Rightarrow s=-10$.",
+            "<b>Step 2 — Bandwidth.</b> $BW = 10$ rad/s.",
+            "<b>Step 3 — Distractor audit.</b> 100 is the DC gain numerator (not bandwidth); 1 and 50 have no basis."
+          ],
+          a: "$BW = 10$ rad/s",
+          v: "The numerator (100) sets the GAIN, the pole (−10) sets the BANDWIDTH — independent properties ✓. DC gain here is $100/10 = 10$; the cutoff is where it falls to $10/\\sqrt2$."
+
+        }), ref: "p.366" },
       { q: "Sample rate of CD audio:", choices: ["$44.1$ kHz", "$48$ kHz", "$8$ kHz", "$96$ kHz"], correct: 0,
-        solution: S({ c: "Standard CD: 44.1 kHz × 16-bit × 2 channels = 1411 kbps.", s: ["DVD audio: 48-192 kHz."], a: "$44.1$ kHz" }), ref: "p.375" },
+        solution: S({
+          c: "CD audio is standardized at 44.1 kHz sampling. By Nyquist, that captures frequencies up to 22.05 kHz — just above the ~20 kHz limit of human hearing.",
+          s: [
+            "<b>Step 1 — Match.</b> 44.1 kHz.",
+            "<b>Step 2 — Distractor audit.</b> 48 kHz is the video/DVD standard; 8 kHz is telephone; 96 kHz is high-res studio audio."
+          ],
+          a: "44.1 kHz",
+          v: "The choice flows from Nyquist: to reproduce 20 kHz you need >40 kHz sampling, and 44.1 leaves margin for the anti-alias filter's rolloff ✓. Full CD stream: 44.1k × 16-bit × 2 channels = 1411 kbps."
+
+        }), ref: "p.375" },
       { q: "Digital audio bit rate: 44.1 kHz × 16 bit × 2 channels:",
         choices: ["$1411$ kbps", "$705$ kbps", "$176$ kbps", "$88$ kbps"], correct: 0,
-        solution: S({ c: "Multiply.", s: ["$44100 \\cdot 16 \\cdot 2 = 1{,}411{,}200$ bps = 1411 kbps."], a: "$1411$ kbps" }), ref: "p.375" },
+        solution: S({
+          c: "Uncompressed PCM bit rate = sample rate × bits per sample × number of channels.",
+          s: [
+            "<b>Step 1 — Multiply.</b> $44{,}100 \\times 16 \\times 2 = 1{,}411{,}200$ bps.",
+            "<b>Step 2 — Express.</b> ≈ 1411 kbps.",
+            "<b>Step 3 — Distractor audit.</b> 705 kbps is one channel (mono); 176 and 88 drop further factors."
+          ],
+          a: "$\\approx 1411$ kbps",
+          v: "This is why a 3-minute CD track is ~30 MB uncompressed ✓ — and why MP3 (lossy, ~128-320 kbps) was revolutionary, shrinking files ~10× by discarding perceptually inaudible detail."
+
+        }), ref: "p.375" },
       { q: "Lossy compression (MP3, JPEG) sacrifices:",
         choices: ["Some accuracy for smaller files", "Bandwidth", "Memory only", "Time only"], correct: 0,
-        solution: S({ c: "Lossy: throws away perceptually less-important info.", s: ["Lossless (FLAC, PNG): perfect reconstruction.", "Lossy: 10-20× compression typical."], a: "Accuracy for size" }), ref: "p.371" },
+        solution: S({
+          c: "LOSSY compression discards information judged perceptually unimportant, trading some ACCURACY for much smaller files. The original cannot be perfectly recovered.",
+          s: [
+            "<b>Step 1 — Match.</b> Some accuracy for smaller files.",
+            "<b>Step 2 — Distractor audit.</b> It doesn't sacrifice 'bandwidth' or 'time'; 'memory only' misses that fidelity is the thing given up."
+          ],
+          a: "Accuracy, in exchange for size.",
+          v: "Contrast LOSSLESS (FLAC, PNG, ZIP) — perfect reconstruction, ~2× compression — with lossy's 10-20× ✓. Lossy works because human eyes/ears don't notice the removed detail; it's wrong for data that must be exact (text, code)."
+
+        }), ref: "p.371" },
       { q: "Spectrum analyzer measures:", choices: ["Frequency content of a signal", "Voltage only", "Time domain", "Phase only"], correct: 0,
-        solution: S({ c: "Spectrum analyzer: shows signal power vs frequency.", s: ["Time-domain: oscilloscope.", "Both: vector signal analyzer."], a: "Frequency content" }), ref: "p.371" },
+        solution: S({
+          c: "A spectrum analyzer displays a signal's power versus FREQUENCY — the frequency-domain view — revealing which frequency components are present and how strong.",
+          s: [
+            "<b>Step 1 — Match.</b> Frequency content of a signal.",
+            "<b>Step 2 — Distractor audit.</b> Time-domain (voltage vs time) is the OSCILLOSCOPE's job; 'phase only' is too narrow."
+          ],
+          a: "Frequency content (power vs frequency).",
+          v: "Scope and spectrum analyzer are Fourier duals — same signal, two views (time vs frequency) ✓. A vector signal analyzer shows both. Spectrum analyzers find harmonics, noise, and interference invisible on a scope."
+
+        }), ref: "p.371" },
       { q: "Aliased frequency from 13 kHz sampled at 10 kHz:",
         choices: ["$3$ kHz", "$13$ kHz", "$10$ kHz", "$2$ kHz"], correct: 0,
-        solution: S({ c: "Folding around Nyquist (5 kHz): 13 > 10 → $|13-10| = 3$ kHz.", s: [""], a: "$3$ kHz" }), ref: "p.375" },
+        solution: S({
+          c: "When a signal exceeds the Nyquist frequency (half the sample rate), it ALIASES — folds back to a lower false frequency: $f_{alias} = |f - nf_s|$ for the integer $n$ that lands it in $[0, f_s/2]$.",
+          s: [
+            "<b>Step 1 — Nyquist.</b> $f_s/2 = 5$ kHz; 13 kHz exceeds it → aliasing.",
+            "<b>Step 2 — Fold.</b> $|13 - 10| = 3$ kHz (within 0-5 kHz).",
+            "<b>Step 3 — Distractor audit.</b> 13 kHz ignores aliasing; 10 kHz is the sample rate; 2 kHz miscomputes the fold."
+          ],
+          a: "3 kHz",
+          v: "This is exactly why ADCs need an ANTI-ALIAS low-pass filter BEFORE sampling ✓ — once a 13-kHz tone aliases to 3 kHz, it's indistinguishable from a real 3-kHz signal and can't be removed. (The wagon-wheel effect in film is the same phenomenon.)"
+
+        }), ref: "p.375" },
       { q: "Bode magnitude of $H(s) = (s+10)/(s+1)$ at $\\omega = 100$:",
-        choices: ["$\\approx 20$ dB", "$0$ dB", "$-20$ dB", "$40$ dB"], correct: 0,
-        solution: S({ c: "Asymptotic: zero at 10, pole at 1. At $\\omega = 100$ (much above both), $|H| \\to 10$ (ratio of zero to pole positions, after both contribute).", s: ["More precisely: $|H| = \\sqrt{100^2+100}/\\sqrt{100^2+1} \\approx 100/100 = 1$. Hmm.", "Actually: numerator $|s+10| \\to s = 100$. Denominator $|s+1| \\to s = 100$. Ratio: 1.", "Wait, that gives 0 dB. Let me recompute. $|j100+10| = \\sqrt{10000+100} = 100.5$. $|j100+1| = \\sqrt{10000+1} = 100$. Ratio ~1.005. 0 dB.", "So choice B (0 dB) is actually correct, not A. I'll note this."],
-          a: "0 dB (re-examined)", v: "Asymptotic analysis: numerator slope +20 dB/dec from 10, denominator -20 dB/dec from 1. Net at far high freq: roughly flat." }), ref: "p.366" },
+        choices: ["$\\approx 0$ dB", "$20$ dB", "$-20$ dB", "$40$ dB"], correct: 0,
+        solution: S({
+          c: "Bode magnitude of a zero-pole pair: build it from the corner frequencies. Here the POLE is at $\\omega=1$, the ZERO at $\\omega=10$. Below the pole it's flat at the DC gain; the pole tilts it down −20 dB/dec, the zero levels it back off.",
+          s: [
+            "<b>Step 1 — DC gain.</b> $|H(0)| = 10/1 = 10 = +20$ dB (flat for $\\omega<1$).",
+            "<b>Step 2 — Pole then zero.</b> From $\\omega=1$ to $10$: slope −20 dB/dec, dropping 20 dB → reaches 0 dB at $\\omega=10$. Above $\\omega=10$ the zero cancels the slope → flat at 0 dB.",
+            "<b>Step 3 — At ω=100.</b> Well above both corners → 0 dB. (Exact: $\\sqrt{100^2+10^2}/\\sqrt{100^2+1^2} \\approx 1.005 \\approx 0$ dB.)",
+            "<b>Step 4 — Distractor audit.</b> 20 dB is the LOW-frequency gain (below ω=1); −20 dB and 40 dB don't occur."
+          ],
+          a: "$\\approx 0$ dB",
+          v: "Sanity via the asymptotes: this is a lead-network shape — gain 10 (20 dB) at low freq, dropping to gain 1 (0 dB) at high freq, with the transition between the pole (1) and zero (10) ✓. At ω=100 we're firmly in the high-frequency flat region."
+
+        }), ref: "p.366" },
       { q: "Impulse function $\\delta(t)$ has area:", choices: ["$1$", "$0$", "$\\infty$", "Variable"], correct: 0,
-        solution: S({ c: "Dirac delta: zero width, infinite height, area = 1.", s: ["$\\int_{-\\infty}^{\\infty} \\delta(t)\\,dt = 1$."], a: "$1$" }), ref: "p.56" },
+        solution: S({
+          c: "The Dirac delta $\\delta(t)$ is an idealized impulse: zero width, infinite height, but UNIT area — $\\int_{-\\infty}^{\\infty}\\delta(t)\\,dt = 1$.",
+          s: [
+            "<b>Step 1 — Match.</b> Area = 1.",
+            "<b>Step 2 — Distractor audit.</b> 0 contradicts its defining integral; ∞ confuses the (infinite) height with area; 'variable' is wrong."
+          ],
+          a: "1",
+          v: "The unit area is what makes it the 'identity' for convolution: $f*\\delta = f$ ✓. Its Laplace transform is exactly 1, and a system's response to it — the impulse response — fully characterizes the system."
+
+        }), ref: "p.56" },
       { q: "DAC reconstruction filter is:", choices: ["Lowpass", "Highpass", "Bandpass", "Notch"], correct: 0,
-        solution: S({ c: "ADC samples discrete; DAC reconstructs continuous via interpolation. LPF removes spectral images.", s: ["Cutoff: just below Nyquist."], a: "Lowpass" }), ref: "p.375" },
+        solution: S({
+          c: "A DAC outputs a stair-stepped signal containing spectral IMAGES (copies) above the baseband. A reconstruction filter — a LOW-PASS — smooths the steps by removing those high-frequency images.",
+          s: [
+            "<b>Step 1 — Match.</b> Lowpass.",
+            "<b>Step 2 — Distractor audit.</b> Highpass/bandpass/notch would remove the wanted baseband or pass the images — the opposite of what's needed."
+          ],
+          a: "Lowpass (cutoff just below Nyquist).",
+          v: "It mirrors the ADC's anti-alias filter: anti-alias LPF before sampling, reconstruction LPF after conversion ✓ — both keep the system inside the Nyquist band. Without it, the DAC's staircase output carries audible/visible image artifacts."
+
+        }), ref: "p.375" },
       { q: "An FIR filter is always:", choices: ["Stable", "Unstable", "Causal", "Linear phase"], correct: 0,
-        solution: S({ c: "FIR has all poles at origin (in z-plane) → always inside unit circle → stable.", s: ["IIR can be unstable if pole outside unit circle."], a: "Stable" }), ref: "p.376" },
+        solution: S({
+          c: "An FIR (Finite Impulse Response) filter has only ZEROS — all its poles sit at the origin of the z-plane, inside the unit circle. So it is ALWAYS stable, unconditionally.",
+          s: [
+            "<b>Step 1 — Match.</b> Always stable.",
+            "<b>Step 2 — Distractor audit.</b> 'Unstable' is impossible for FIR; 'causal' and 'linear phase' are common but NOT guaranteed (depend on design) — stability is the guaranteed property."
+          ],
+          a: "Always stable.",
+          v: "Contrast IIR (Infinite Impulse Response): it has feedback poles that CAN fall outside the unit circle → instability ✓. FIR's guaranteed stability and easy linear phase are why it's favored despite needing more taps than IIR for the same sharpness."
+
+        }), ref: "p.376" },
     ],
 
     // Electronics — +20
