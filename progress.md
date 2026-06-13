@@ -142,7 +142,15 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
 - **2026-06-12 — extra8 (Round 9) COMPLETE (191/191):** all 17 chapters upgraded to teach-from-zero
   across 5 checkpoints, using the _b.py file-write method (write self-contained Python to repo, run
   `python3 _b.py`). Integrity scan 191/191 Step-format.
-- **Remaining upgrade target:** questions.js (164 — already has concept/steps/answer/verify,
-  user requested full Step-format upgrade anyway); extra9/extra10
-  (~60 q) use template-literal SVG helpers and need their own careful session.
-- **ALL compact-inline drill files now teach-from-zero:** extra, extra2-extra8, extra11-extra13.
+- **2026-06-12 — questions.js (Round 10, MAIN BANK) COMPLETE (164/164):** all 17 chapters given
+  the full Step-label + distractor-audit treatment, across 9 checkpoints. This file uses the
+  MULTI-LINE S({...}) format (anchor: last '})' before 'ref:') and has VARYING correct: indices
+  (not always 0) — the replacer only touches the solution block, leaving choices/correct/ref intact.
+  KEY-ESCAPING NOTES for the _b.py method on this file: (1) for LaTeX backslashes in keys use raw
+  strings with the literal '\\' (e.g. r'q: "...\\Delta'); (2) the Greek Ω/φ are LITERAL chars in the
+  q text — never key on '\\u03a9'/'\\u03c6', truncate the key BEFORE them; (3) for q's containing an
+  apostrophe (y', Maxwell's), truncate the key before the apostrophe or use a double-quoted Python
+  string; (4) value strings must END with a plain '"' (not '\\"'). Integrity scan 164/164 Step-format.
+- **ALL 9 question files now teach-from-zero / Step-format:** questions.js + extra, extra2-extra8,
+  extra11-extra13. ONLY remaining: extra9/extra10 (~60 q) which use template-literal SVG helpers
+  and need their own careful session.

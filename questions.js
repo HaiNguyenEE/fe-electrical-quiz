@@ -2338,13 +2338,14 @@ const QUESTION_BANK = {
           choices: ["$32$", "$30$", "$28$", "$36$"],
           correct: 0,
           solution: S({
-            c: "Address bits needed: $n = \\log_2(\\text{addressable units})$. For $N$ bytes: $n = \\log_2 N$.",
+            c: "Address bits $n=\\log_2(\\text{addressable units})$. For N bytes, $n=\\log_2 N$.",
             s: [
-              "$4$ GB $= 4 \\cdot 2^{30} = 2^2 \\cdot 2^{30} = 2^{32}$ bytes.",
-              "$n = 32$ address lines."
+              "<b>Step 1 — Express in powers.</b> $4$ GB $=2^2\\cdot2^{30}=2^{32}$ bytes.",
+              "<b>Step 2 — Bits.</b> $n=32$.",
+              "<b>Step 3 — Distractor audit.</b> $30$ is 1 GB; $28$ is 256 MB; $36$ is 64 GB."
             ],
-            a: "$32$ address lines",
-            v: "This is why 32-bit CPUs are limited to 4 GB of RAM — out of address space."
+            a: "32 address lines.",
+            v: "This is exactly why 32-bit CPUs cap at 4 GB of RAM - they run out of address space."
           }),
           ref: "Handbook p.407" },
 
@@ -2352,14 +2353,15 @@ const QUESTION_BANK = {
           choices: ["$5.9$ ns", "$2$ ns", "$80$ ns", "$50$ ns"],
           correct: 0,
           solution: S({
-            c: "Effective access time: $t_{avg} = h \\cdot t_{cache} + (1-h) \\cdot t_{main}$, where $h$ is hit rate. (Simple model; assumes miss goes directly to main memory.)",
+            c: "Effective access time: $t_{avg}=h\\,t_{cache}+(1-h)\\,t_{main}$ (h = hit rate).",
             s: [
-              "Hit contribution: $0.95 \\cdot 2 = 1.9$ ns.",
-              "Miss contribution: $0.05 \\cdot 80 = 4.0$ ns.",
-              "Total: $t_{avg} = 1.9 + 4.0 = 5.9$ ns."
+              "<b>Step 1 — Hit term.</b> $0.95\\times2=1.9$ ns.",
+              "<b>Step 2 — Miss term.</b> $0.05\\times80=4.0$ ns.",
+              "<b>Step 3 — Sum.</b> $1.9+4.0=5.9$ ns.",
+              "<b>Step 4 — Distractor audit.</b> $2$ ns ignores misses; $80$ ns ignores the cache; $50$ ns is wrong."
             ],
-            a: "$t_{avg} = 5.9$ ns",
-            v: "13.5× faster than no cache (80 ns) — huge speedup from a 95% hit rate."
+            a: "$t_{avg}=5.9$ ns",
+            v: "A 95% hit rate gives ~13.5x speedup over no cache (80 ns) - showing why even imperfect caches dominate performance. Misses are costly, so hit rate matters enormously."
           }),
           ref: "Handbook p.407" },
 
@@ -2367,13 +2369,13 @@ const QUESTION_BANK = {
           choices: ["Harvard has separate data and instruction memory", "Von Neumann uses Harvard layout", "Same thing", "Harvard is older"],
           correct: 0,
           solution: S({
-            c: "Von Neumann: single shared memory for instructions and data, single bus. Harvard: separate memory + bus for instructions vs data. Harvard allows simultaneous fetch and read.",
+            c: "Von Neumann: ONE shared memory/bus for instructions and data. Harvard: SEPARATE instruction and data memories/buses (allowing simultaneous fetch and read).",
             s: [
-              "Von Neumann (most desktop CPUs, simplicity): one memory, one bus.",
-              "Harvard (DSPs, many microcontrollers): two memories, two buses → parallel access."
+              "<b>Step 1 — Match.</b> Harvard has separate instruction/data memory.",
+              "<b>Step 2 — Distractor audit.</b> 'Von Neumann uses Harvard layout' is self-contradictory; 'same thing' is false; age isn't the distinction."
             ],
-            a: "Harvard has separate instruction/data memory",
-            v: "Modern CPUs use 'modified Harvard' — separate L1 caches for instructions and data, but unified main memory."
+            a: "Harvard = separate instruction/data memory.",
+            v: "Harvard's parallel access suits DSPs and microcontrollers; most desktop CPUs are 'modified Harvard' - split L1 caches (I and D) over a unified main memory."
           }),
           ref: "Handbook p.408" },
 
@@ -2381,14 +2383,14 @@ const QUESTION_BANK = {
           choices: ["SRAM > DRAM > Flash", "DRAM > SRAM > Flash", "Flash > SRAM > DRAM", "All equal"],
           correct: 0,
           solution: S({
-            c: "Memory speed/cost tradeoffs: SRAM (fastest, expensive — used for cache); DRAM (cheaper, slower — main RAM, needs refresh); Flash (non-volatile but slower — storage).",
+            c: "Speed/cost tiers: SRAM (fastest, expensive, cache) > DRAM (cheaper, slower, main memory, needs refresh) > Flash (non-volatile but slowest).",
             s: [
-              "SRAM: ~1-10 ns (used in caches).",
-              "DRAM: ~10-100 ns (main memory).",
-              "Flash/SSD: 25-100 µs read (~1000× slower than DRAM)."
+              "<b>Step 1 — Match.</b> SRAM > DRAM > Flash.",
+              "<b>Step 2 — Numbers.</b> SRAM ~1-10 ns, DRAM ~10-100 ns, Flash ~tens of us.",
+              "<b>Step 3 — Distractor audit.</b> Any ordering with DRAM or Flash fastest is wrong."
             ],
-            a: "SRAM > DRAM > Flash",
-            v: "Each level is roughly 100-1000× slower as you go bigger/cheaper."
+            a: "SRAM > DRAM > Flash.",
+            v: "Each tier is roughly 100-1000x slower (and cheaper/denser) than the one above - the basis of the whole memory hierarchy."
           }),
           ref: "Handbook p.407" },
 
@@ -2396,14 +2398,13 @@ const QUESTION_BANK = {
           choices: ["$1024$ bytes", "$1000$ bytes", "$1024$ bits", "$2^{20}$ bytes"],
           correct: 0,
           solution: S({
-            c: "In computing (binary): 1 KB = $2^{10}$ = 1024 bytes. (SI 'kilo' = 1000.) Some standards use 'KiB' for the binary unit and 'kB' for 1000.",
+            c: "In computing (binary), 1 KB $=2^{10}=1024$ bytes (SI 'kilo' would be 1000; 'KiB' is the strict binary unit).",
             s: [
-              "Binary: 1 KB = $2^{10}$ = 1024 bytes.",
-              "1 MB = $2^{20}$ = 1,048,576 bytes (choice D).",
-              "1 GB = $2^{30}$, 1 TB = $2^{40}$, ..."
+              "<b>Step 1 — Match.</b> 1024 bytes.",
+              "<b>Step 2 — Distractor audit.</b> 1000 bytes is SI/decimal; 1024 BITS confuses bits/bytes; $2^{20}$ is 1 MB."
             ],
-            a: "$1024$ bytes",
-            v: "Disk vendors sometimes use 1000-based for marketing — '500 GB' drive is 500×10⁹ bytes, ~465 GiB."
+            a: "1024 bytes.",
+            v: "Ladder: 1 MB=$2^{20}$, 1 GB=$2^{30}$, 1 TB=$2^{40}$. Disk vendors often use decimal (1000-based), so a '500 GB' drive is ~465 GiB - the source of the 'missing space' confusion."
           }),
           ref: "Handbook p.407" },
 
@@ -2411,13 +2412,13 @@ const QUESTION_BANK = {
           choices: ["Lowest address", "Highest address", "Random", "Middle"],
           correct: 0,
           solution: S({
-            c: "Endianness: byte ordering in multi-byte data. Big-endian: MSB first (lowest address). Little-endian: LSB first (lowest address).",
+            c: "Endianness = byte order of multi-byte values. BIG-endian puts the most-significant byte at the LOWEST address; little-endian puts the least-significant byte there.",
             s: [
-              "Big-endian (network byte order, IBM, Sun): MSB at low address — 'reads' naturally.",
-              "Little-endian (x86, ARM): LSB at low address — easier arithmetic."
+              "<b>Step 1 — Match.</b> Lowest address.",
+              "<b>Step 2 — Distractor audit.</b> Highest address would be little-endian's MSB; random/middle are wrong."
             ],
-            a: "Lowest address",
-            v: "Mnemonic: 'big-end-first'. TCP/IP uses big-endian — hence 'network byte order'."
+            a: "Lowest address.",
+            v: "Mnemonic: 'big-end first'. Big-endian is 'network byte order' (TCP/IP); x86/ARM are little-endian - byte-swapping is needed when they exchange binary data."
           }),
           ref: "Handbook p.408" },
 
@@ -2425,17 +2426,14 @@ const QUESTION_BANK = {
           choices: ["Registers→Cache→RAM→SSD→HDD", "HDD→SSD→RAM→Cache→Registers", "Cache→Registers→RAM→HDD", "RAM→Cache→Registers→SSD"],
           correct: 0,
           solution: S({
-            c: "Memory hierarchy: trade-off speed vs capacity vs cost. Higher levels = faster, smaller, more expensive.",
+            c: "The memory hierarchy trades speed for capacity: faster levels are smaller and pricier.",
             s: [
-              "Registers (fastest, ~32-64 of them): < 1 ns.",
-              "L1/L2/L3 cache (SRAM): 1-30 ns.",
-              "Main memory (DRAM): 50-100 ns.",
-              "SSD: 25-100 µs.",
-              "HDD: 5-10 ms.",
-              "Tape: seconds."
+              "<b>Step 1 — Order.</b> Registers -> Cache -> RAM -> SSD -> HDD.",
+              "<b>Step 2 — Timescales.</b> registers <1 ns, cache 1-30 ns, RAM ~100 ns, SSD ~tens of us, HDD ~ms.",
+              "<b>Step 3 — Distractor audit.</b> The reversed and scrambled orders contradict the speed gradient."
             ],
-            a: "Registers → Cache → RAM → SSD → HDD",
-            v: "Each level is typically 10-100× larger and 10-100× slower than the one above."
+            a: "Registers -> Cache -> RAM -> SSD -> HDD.",
+            v: "Each level is ~10-100x larger and slower than the one above - and locality (caching) is what bridges the enormous register-to-disk gap."
           }),
           ref: "Handbook p.407" },
 
@@ -2443,13 +2441,13 @@ const QUESTION_BANK = {
           choices: ["$4$ GB", "$4$ MB", "$2$ GB", "$8$ GB"],
           correct: 0,
           solution: S({
-            c: "Address space = $2^n$ bytes where $n$ is the address width.",
+            c: "Address space $=2^n$ bytes for an n-bit address.",
             s: [
-              "$2^{32} = 4{,}294{,}967{,}296 \\approx 4.29 \\times 10^9$ bytes.",
-              "$= 4$ GiB (binary) or roughly 4 GB."
+              "<b>Step 1 — Apply.</b> $2^{32}\\approx4.29\\times10^9$ bytes = 4 GB.",
+              "<b>Step 2 — Distractor audit.</b> 4 MB is $2^{22}$; 2 GB is $2^{31}$; 8 GB is $2^{33}$."
             ],
-            a: "$4$ GB",
-            v: "Why 32-bit OSs are capped at 4 GB RAM (less if some address space reserved for I/O)."
+            a: "4 GB.",
+            v: "The 4-GB ceiling of 32-bit systems (often less after reserving I/O space) is exactly why the industry moved to 64-bit addressing."
           }),
           ref: "Handbook p.407" },
       ],
@@ -2462,14 +2460,13 @@ const QUESTION_BANK = {
           choices: ["$O(n^2)$", "$O(n)$", "$O(n\\log n)$", "$O(1)$"],
           correct: 0,
           solution: S({
-            c: "Time complexity = product of nested loop counts. Two nested loops over $n$ → $n \\cdot n = n^2$ operations.",
+            c: "Nested loop complexity multiplies the iteration counts: two loops each over n give $n\\times n=n^2$.",
             s: [
-              "Outer: $n$ iterations.",
-              "Inner: $n$ iterations per outer.",
-              "Total: $n^2$ → $O(n^2)$."
+              "<b>Step 1 — Multiply.</b> $n\\times n=n^2$.",
+              "<b>Step 2 — Distractor audit.</b> $O(n)$ is a single loop; $O(n\\log n)$ is divide-and-conquer; $O(1)$ is constant."
             ],
             a: "$O(n^2)$",
-            v: "Three nested loops would be $O(n^3)$, etc."
+            v: "Three nested loops -> $O(n^3)$, and so on. Nesting is the most common source of polynomial blow-up - watch for hidden inner loops."
           }),
           ref: "Handbook p.415" },
 
@@ -2477,13 +2474,13 @@ const QUESTION_BANK = {
           choices: ["$10$", "$1024$", "$32$", "$512$"],
           correct: 0,
           solution: S({
-            c: "Binary search halves the search space each step → $O(\\log_2 n)$ comparisons.",
+            c: "Binary search halves the search space each step: $O(\\log_2 n)$ comparisons worst case.",
             s: [
-              "$\\log_2 1024 = 10$ (since $2^{10} = 1024$).",
-              "Worst case: 10 comparisons to find or rule out any element."
+              "<b>Step 1 — Apply.</b> $\\log_2 1024=10$ (since $2^{10}=1024$).",
+              "<b>Step 2 — Distractor audit.</b> $1024$ is linear search; $32$ is $\\sqrt n$; $512$ is $n/2$."
             ],
-            a: "$10$ comparisons",
-            v: "Linear search would need up to 1024 comparisons — binary is 100× faster here."
+            a: "10 comparisons.",
+            v: "Linear search would take up to 1024 - binary is ~100x faster here. But it REQUIRES sorted data."
           }),
           ref: "Handbook p.415" },
 
@@ -2491,14 +2488,14 @@ const QUESTION_BANK = {
           choices: ["$O(n\\log n)$", "$O(n^2)$", "$O(n)$", "$O(\\log n)$"],
           correct: 0,
           solution: S({
-            c: "Merge sort: divide-and-conquer. $\\log n$ levels of recursion, each level merges $n$ elements → $O(n \\log n)$.",
+            c: "Merge sort is divide-and-conquer: $\\log n$ levels of recursion, each merging $n$ elements -> $O(n\\log n)$.",
             s: [
-              "Recurrence: $T(n) = 2T(n/2) + O(n)$.",
-              "Solving: $T(n) = O(n \\log n)$.",
-              "Heap sort and quicksort (avg) also $O(n \\log n)$."
+              "<b>Step 1 — Recurrence.</b> $T(n)=2T(n/2)+O(n)$.",
+              "<b>Step 2 — Solve.</b> $T(n)=O(n\\log n)$.",
+              "<b>Step 3 — Distractor audit.</b> $O(n^2)$ is bubble/insertion; $O(n)$ and $O(\\log n)$ are too fast for a comparison sort."
             ],
             a: "$O(n\\log n)$",
-            v: "Worst case quicksort is $O(n^2)$ but average is $O(n \\log n)$. Merge sort is reliably $O(n \\log n)$."
+            v: "Merge sort GUARANTEES $O(n\\log n)$ (unlike quicksort's $O(n^2)$ worst case) - the trade is needing $O(n)$ extra space for merging."
           }),
           ref: "Handbook p.415" },
 
@@ -2506,14 +2503,13 @@ const QUESTION_BANK = {
           choices: ["$O(n^2)$", "$O(n\\log n)$", "$O(n)$", "$O(2^n)$"],
           correct: 0,
           solution: S({
-            c: "Bubble sort makes up to $n$ passes, each comparing up to $n-1$ adjacent pairs and swapping → $O(n^2)$.",
+            c: "Bubble sort makes up to n passes, each comparing ~n adjacent pairs -> $O(n^2)$.",
             s: [
-              "Outer loop: $n$ passes.",
-              "Inner loop: $n-1$ comparisons.",
-              "Total: $n(n-1)/2 \\approx n^2/2 = O(n^2)$."
+              "<b>Step 1 — Count.</b> $n$ passes x $(n-1)$ comparisons $\\approx n^2/2$.",
+              "<b>Step 2 — Distractor audit.</b> $O(n\\log n)$ is merge/heap sort; $O(n)$ is its BEST case (already sorted, optimized); $O(2^n)$ is exponential."
             ],
             a: "$O(n^2)$",
-            v: "Insertion sort and selection sort are also $O(n^2)$. Use for small lists only."
+            v: "Selection and insertion sort are also $O(n^2)$ - fine for tiny lists, but $O(n\\log n)$ algorithms win at scale."
           }),
           ref: "Handbook p.415" },
 
@@ -2521,14 +2517,13 @@ const QUESTION_BANK = {
           choices: ["LIFO", "FIFO", "Random", "Priority"],
           correct: 0,
           solution: S({
-            c: "Stack: Last-In-First-Out. Last item pushed is first popped.",
+            c: "A stack is LIFO (Last-In-First-Out): the last item pushed is the first popped.",
             s: [
-              "Operations: push (add to top), pop (remove from top), peek/top (view top without removing).",
-              "Implementation: array with index, or linked list.",
-              "Use cases: function call stack, undo/redo, expression evaluation."
+              "<b>Step 1 — Match.</b> LIFO.",
+              "<b>Step 2 — Distractor audit.</b> FIFO is a QUEUE; 'priority' is a heap; 'random' isn't a stack."
             ],
-            a: "LIFO",
-            v: "Queue is FIFO (first-in first-out) — opposite ordering."
+            a: "LIFO.",
+            v: "Operations: push, pop, peek. Stacks power the function CALL stack, undo/redo, and expression evaluation. A queue (FIFO) is the opposite ordering."
           }),
           ref: "Handbook p.415" },
 
@@ -2536,14 +2531,13 @@ const QUESTION_BANK = {
           choices: ["$O(1)$", "$O(\\log n)$", "$O(n)$", "$O(n^2)$"],
           correct: 0,
           solution: S({
-            c: "Hash table with good hash function: average $O(1)$ lookup (constant). Worst case $O(n)$ if all keys collide.",
+            c: "With a good hash function and low collisions, hash-table lookup is $O(1)$ average; worst case $O(n)$ if everything collides.",
             s: [
-              "Hash function maps key → bucket index in $O(1)$.",
-              "With low collision rate, retrieval is $O(1)$ on average.",
-              "Bad hash or full table → degrades toward $O(n)$."
+              "<b>Step 1 — Match.</b> $O(1)$ average.",
+              "<b>Step 2 — Distractor audit.</b> $O(\\log n)$ is a balanced tree; $O(n)$ is the WORST case (all collisions); $O(n^2)$ is wrong."
             ],
-            a: "$O(1)$ average",
-            v: "Why dictionaries/maps are so heavily used in modern programming."
+            a: "$O(1)$ average.",
+            v: "Near-constant lookup is why hash-based dictionaries/maps are ubiquitous - the trade vs balanced trees is no ordering and a rare $O(n)$ worst case."
           }),
           ref: "Handbook p.415" },
       ],
