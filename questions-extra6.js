@@ -1378,247 +1378,907 @@
     11: [
       { q: "Wave equation: $\\nabla^2 E = \\mu\\varepsilon (\\partial^2 E/\\partial t^2)$. Speed:",
         choices: ["$c = 1/\\sqrt{\\mu\\varepsilon}$", "$\\mu\\varepsilon$", "$\\mu/\\varepsilon$", "$\\sqrt{\\mu\\varepsilon}$"], correct: 0,
-        solution: S({ c: "From wave eq form: $v = 1/\\sqrt{\\mu\\varepsilon}$.", s: ["In vacuum: $c = 1/\\sqrt{\\mu_0\\varepsilon_0} \\approx 3\\times 10^8$ m/s."], a: "$1/\\sqrt{\\mu\\varepsilon}$" }), ref: "p.355" },
+        solution: S({
+          c: "The EM wave equation $\\nabla^2E = \\mu\\varepsilon\\,\\partial^2E/\\partial t^2$ has the standard form $\\nabla^2E = (1/v^2)\\partial^2E/\\partial t^2$, so the propagation speed is $v = 1/\\sqrt{\\mu\\varepsilon}$.",
+          s: [
+            "<b>Step 1 — Match.</b> $v = 1/\\sqrt{\\mu\\varepsilon}$.",
+            "<b>Step 2 — Distractor audit.</b> $\\mu\\varepsilon$, $\\mu/\\varepsilon$, $\\sqrt{\\mu\\varepsilon}$ don't have units of speed."
+          ],
+          a: "$v = 1/\\sqrt{\\mu\\varepsilon}$",
+          v: "In vacuum: $c = 1/\\sqrt{\\mu_0\\varepsilon_0} \\approx 3\\times10^8$ m/s ✓ — Maxwell's stunning result that light IS an EM wave. In media, $v = c/\\sqrt{\\mu_r\\varepsilon_r}$ (slower)."
+
+        }), ref: "p.355" },
       { q: "Polarization of antenna:",
         choices: ["Direction of E-field of emitted wave", "Polar coordinate system", "Charge separation", "Phase angle"], correct: 0,
-        solution: S({ c: "Antenna polarization (linear V/H, circular RH/LH) — must match for max signal.", s: ["Linear V: dipole vertical. Circular: helical antenna."], a: "E-field direction" }), ref: "p.368" },
+        solution: S({
+          c: "Antenna polarization is the orientation of the radiated wave's ELECTRIC field — linear (vertical/horizontal) or circular (right/left-hand). Transmit and receive antennas must MATCH for maximum signal.",
+          s: [
+            "<b>Step 1 — Match.</b> Direction of the E-field of the emitted wave.",
+            "<b>Step 2 — Distractor audit.</b> It's not a coordinate system, charge separation, or phase angle."
+          ],
+          a: "The E-field direction of the wave.",
+          v: "Mismatched polarization causes huge signal loss (cross-polar can be −20 dB or worse) ✓ — a vertical dipole barely hears a horizontally-polarized transmitter. Circular polarization (helical antennas) is used for satellites to tolerate rotation."
+
+        }), ref: "p.368" },
       { q: "Antenna gain definition:",
         choices: ["Ratio of antenna's max radiated power density to isotropic", "Same as efficiency", "Amplification", "Phase shift"], correct: 0,
-        solution: S({ c: "Gain (dBi): how much an antenna focuses energy compared to isotropic radiator.", s: ["Dipole: ~2.15 dBi. Yagi: 6-15 dBi. Parabolic: 20-50+ dBi."], a: "Directivity vs isotropic" }), ref: "p.368" },
+        solution: S({
+          c: "Antenna gain (dBi) compares the antenna's maximum radiated power density to that of an ISOTROPIC radiator (which spreads power equally in all directions). It measures how well the antenna FOCUSES energy.",
+          s: [
+            "<b>Step 1 — Match.</b> Ratio of max radiated power density to isotropic.",
+            "<b>Step 2 — Distractor audit.</b> It's not efficiency (a separate factor), not amplification (antennas are passive), not phase shift."
+          ],
+          a: "Directivity relative to isotropic (dBi).",
+          v: "Gain ladder: dipole ~2.15 dBi, Yagi 6-15 dBi, parabolic dish 20-50+ dBi ✓. A passive antenna doesn't add power — it concentrates the same power into a narrower beam, trading coverage angle for range."
+
+        }), ref: "p.368" },
       { q: "Friis formula for received power:",
         choices: ["$P_r = P_t G_t G_r (\\lambda/4\\pi d)^2$", "$P_r = P_t \\cdot d$", "$P_r = P_t/d$", "$P_r = G$"], correct: 0,
-        solution: S({ c: "Free-space path loss formula.", s: ["Path loss: $(\\lambda/4\\pi d)^2$. Power falls $1/d^2$.", "Gain factors $G_t G_r$ help against this."], a: "Friis formula" }), ref: "p.368" },
+        solution: S({
+          c: "The Friis transmission equation gives received power in free space: $P_r = P_t G_t G_r\\left(\\dfrac{\\lambda}{4\\pi d}\\right)^2$ — power falls as $1/d^2$, and antenna gains help recover it.",
+          s: [
+            "<b>Step 1 — Match.</b> $P_r = P_t G_t G_r(\\lambda/4\\pi d)^2$.",
+            "<b>Step 2 — Distractor audit.</b> $P_t\\cdot d$ and $P_t/d$ have the wrong distance dependence; '$G$' alone is incomplete."
+          ],
+          a: "$P_r = P_t G_t G_r(\\lambda/4\\pi d)^2$",
+          v: "The $(\\lambda/4\\pi d)^2$ is free-space path loss — note SHORTER wavelength (higher frequency) means MORE loss at fixed distance ✓, partly why high-frequency links need high-gain antennas. Doubling distance quarters received power (−6 dB)."
+
+        }), ref: "p.368" },
       { q: "Radiated power from short dipole proportional to:",
         choices: ["$\\omega^2$ (or $1/\\lambda^2$)", "Constant", "$\\omega$", "$1/\\omega$"], correct: 0,
-        solution: S({ c: "Larmor formula: power radiated $\\propto (di/dt)^2$ averaged.", s: ["Higher freq → more radiation.", "Why low-freq antennas are huge (poor efficiency at long $\\lambda$)."], a: "$\\omega^2$" }), ref: "p.368" },
+        solution: S({
+          c: "Radiation from an accelerating charge (Larmor) means power scales with the square of frequency: short-dipole radiated power $\\propto \\omega^2$ (equivalently $1/\\lambda^2$) for a fixed current.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\omega^2$ (or $1/\\lambda^2$).",
+            "<b>Step 2 — Distractor audit.</b> 'Constant', '$\\omega$', '$1/\\omega$' don't match the squared dependence."
+          ],
+          a: "$\\propto \\omega^2$.",
+          v: "Higher frequency radiates far more efficiently — which is why low-frequency (long-wavelength) antennas must be physically HUGE to radiate appreciable power ✓ (e.g. submarine VLF antennas are kilometers long and still inefficient)."
+
+        }), ref: "p.368" },
       { q: "Permittivity of vacuum $\\varepsilon_0$:",
         choices: ["$\\approx 8.854\\times 10^{-12}$ F/m", "$1$ F/m", "$\\mu_0$", "$10^{-7}$"], correct: 0,
-        solution: S({ c: "Memorize.", s: [""], a: "$8.854\\times 10^{-12}$ F/m" }), ref: "p.355" },
+        solution: S({
+          c: "The permittivity of free space is the fundamental constant $\\varepsilon_0 \\approx 8.854\\times10^{-12}$ F/m, linking electric fields to charge.",
+          s: [
+            "<b>Step 1 — Match.</b> $8.854\\times10^{-12}$ F/m.",
+            "<b>Step 2 — Distractor audit.</b> 1 F/m is absurd; $\\mu_0$ is the magnetic constant; $10^{-7}$ is the order of $\\mu_0$, not $\\varepsilon_0$."
+          ],
+          a: "$\\varepsilon_0 \\approx 8.854\\times10^{-12}$ F/m.",
+          v: "Pairs with $\\mu_0 = 4\\pi\\times10^{-7}$ H/m to give $c = 1/\\sqrt{\\mu_0\\varepsilon_0}$ ✓. It appears in Coulomb's law, Gauss's law, and the parallel-plate capacitance $C = \\varepsilon_0\\varepsilon_r A/d$."
+
+        }), ref: "p.355" },
       { q: "Electric flux density $D$ in dielectric: $D = ?$",
         choices: ["$\\varepsilon E$", "$\\varepsilon_0 E$", "$E$", "$\\mu E$"], correct: 0,
-        solution: S({ c: "Constitutive: $D = \\varepsilon E$ where $\\varepsilon = \\varepsilon_0\\varepsilon_r$.", s: ["$D$ continuous across dielectric interface (unlike E)."], a: "$\\varepsilon E$" }), ref: "p.355" },
+        solution: S({
+          c: "The constitutive relation in a dielectric: $D = \\varepsilon E$, where $\\varepsilon = \\varepsilon_0\\varepsilon_r$ (free-space times relative permittivity).",
+          s: [
+            "<b>Step 1 — Match.</b> $D = \\varepsilon E$.",
+            "<b>Step 2 — Distractor audit.</b> $\\varepsilon_0 E$ ignores the material ($\\varepsilon_r$); $E$ alone drops permittivity; $\\mu E$ confuses magnetic with electric."
+          ],
+          a: "$D = \\varepsilon E$",
+          v: "Useful boundary fact: the NORMAL component of $D$ is continuous across a dielectric interface (in the absence of free surface charge), while $E$ jumps ✓ — which is why $D$ is the natural field to track through layered dielectrics."
+
+        }), ref: "p.355" },
       { q: "Boundary condition for $E$ at conductor surface:",
         choices: ["Tangential $E = 0$, normal $D = \\rho_s$", "$E = 0$", "Normal $E = 0$", "All same"], correct: 0,
-        solution: S({ c: "Static conductor: no E inside. At surface: tangential E = 0; normal D = surface charge density.", s: [""], a: "Tang E=0, normal D=$\\rho_s$" }), ref: "p.355" },
+        solution: S({
+          c: "At a static conductor surface: the TANGENTIAL E-field is zero (or charges would move), and the NORMAL flux density equals the surface charge density: $D_n = \\rho_s$.",
+          s: [
+            "<b>Step 1 — Match.</b> Tangential $E = 0$, normal $D = \\rho_s$.",
+            "<b>Step 2 — Distractor audit.</b> 'E=0' everywhere is true only INSIDE; 'normal E=0' is wrong (normal E is nonzero); 'all same' is vague."
+          ],
+          a: "Tangential $E=0$; normal $D=\\rho_s$.",
+          v: "Tangential E = 0 means field lines hit a conductor PERPENDICULARLY ✓ — which is why charge redistributes on a conductor until the surface is an equipotential. Inside a static conductor, E is zero entirely (the basis of Faraday-cage shielding)."
+
+        }), ref: "p.355" },
     ],
 
     // Control — +12
     12: [
       { q: "PID parallel form: output =",
         choices: ["$K_p e + K_i\\int e\\,dt + K_d\\,de/dt$", "$K_p + K_i + K_d$", "$\\int e dt$", "$K_p e$"], correct: 0,
-        solution: S({ c: "Standard PID parallel form.", s: ["Series form: $K_c(1 + 1/(\\tau_i s) + \\tau_d s)$.", "Both equivalent with different parameter mapping."], a: "P + I + D" }), ref: "p.366" },
+        solution: S({
+          c: "The standard parallel PID control law sums three terms: proportional, integral, and derivative — $u = K_p e + K_i\\int e\\,dt + K_d\\,de/dt$.",
+          s: [
+            "<b>Step 1 — Match.</b> $K_p e + K_i\\int e\\,dt + K_d\\,de/dt$.",
+            "<b>Step 2 — Distractor audit.</b> '$K_p+K_i+K_d$' adds gains not terms; '$\\int e\\,dt$' is just the I part; '$K_p e$' is just P."
+          ],
+          a: "$u = K_p e + K_i\\int e\\,dt + K_d\\,de/dt$.",
+          v: "Each term has a distinct job: P reacts to present error, I erases steady-state error (past), D anticipates (future) ✓. The equivalent SERIES form $K_c(1+1/(\\tau_i s)+\\tau_d s)$ uses time constants instead of separate gains."
+
+        }), ref: "p.366" },
       { q: "Ziegler-Nichols ultimate-gain method: increase $K_p$ until:",
         choices: ["Sustained oscillation at $K_u$", "Steady state", "Instability", "First peak"], correct: 0,
-        solution: S({ c: "$K_u$ = ultimate gain (point of sustained oscillation). $P_u$ = oscillation period.", s: ["Then apply formulas to get PID parameters."], a: "Sustained oscillation" }), ref: "p.366" },
+        solution: S({
+          c: "The Z-N ultimate-gain method: with only proportional control, increase $K_p$ until the output shows SUSTAINED (constant-amplitude) oscillation. That gain is the ultimate gain $K_u$, and the oscillation period is $P_u$.",
+          s: [
+            "<b>Step 1 — Match.</b> Sustained oscillation at $K_u$.",
+            "<b>Step 2 — Distractor audit.</b> Not steady state, not full instability (growing oscillation overshoots $K_u$), not 'first peak'."
+          ],
+          a: "Sustained oscillation (gain $K_u$).",
+          v: "From $K_u$ and $P_u$, table formulas give P, PI, or PID settings ✓ — e.g. classic PID uses $K_p=0.6K_u$. It's a quick empirical tune; the result is aggressive (oscillatory) and often refined afterward."
+
+        }), ref: "p.366" },
       { q: "Servomechanism vs regulator:",
         choices: ["Servo follows reference; regulator rejects disturbances", "Same", "Servo is digital", "Regulator is analog"], correct: 0,
-        solution: S({ c: "Servo: tracks reference inputs (positioning, trajectory). Regulator: keeps output at setpoint despite disturbances.", s: ["Many systems do both."], a: "Tracking vs disturbance rejection" }), ref: "p.365" },
+        solution: S({
+          c: "A SERVOMECHANISM tracks a changing reference (positioning, trajectory following); a REGULATOR holds the output at a fixed setpoint despite disturbances. Different control goals.",
+          s: [
+            "<b>Step 1 — Match.</b> Servo follows reference; regulator rejects disturbances.",
+            "<b>Step 2 — Distractor audit.</b> Neither is defined by being digital or analog; they're not the same."
+          ],
+          a: "Servo = tracking; regulator = disturbance rejection.",
+          v: "Examples: a robot arm following a path is servo; a thermostat holding 20°C against drafts is regulation ✓. Many real controllers do both — track a setpoint AND reject disturbances — which shapes the loop design trade-offs."
+
+        }), ref: "p.365" },
       { q: "Type-0, $K_v = $",
         choices: ["$0$", "$1$", "$\\infty$", "Finite nonzero"], correct: 0,
-        solution: S({ c: "Type-0: $K_v = \\lim_{s\\to 0} s G(s) H(s) = 0$ (no s in denominator).", s: ["Hence ramp error infinite for type-0."], a: "$0$" }), ref: "p.366" },
+        solution: S({
+          c: "The velocity error constant is $K_v = \\lim_{s\\to0} sG(s)H(s)$. A Type-0 system (no pole at the origin) gives $K_v=0$.",
+          s: [
+            "<b>Step 1 — Apply.</b> No $1/s$ factor → $sG(s)H(s)\\to0$ as $s\\to0$ → $K_v=0$.",
+            "<b>Step 2 — Distractor audit.</b> Finite nonzero $K_v$ is TYPE-1; ∞ is Type-2+; 1 is arbitrary."
+          ],
+          a: "$K_v = 0$.",
+          v: "$K_v=0$ means INFINITE steady-state error to a ramp ($e_{ss}=1/K_v$) ✓ — a Type-0 system simply can't track a ramp. You need at least one integrator (Type-1) to get a finite ramp error."
+
+        }), ref: "p.366" },
       { q: "Hand-tuned PID: typical starting ratio $\\tau_d / \\tau_i$:",
         choices: ["About $0.25$ ($\\tau_d \\approx \\tau_i/4$)", "$10$", "$1$", "$0.1$"], correct: 0,
-        solution: S({ c: "Z-N classic: $\\tau_d = \\tau_i/4$.", s: [""], a: "$\\approx 1/4$" }), ref: "p.366" },
+        solution: S({
+          c: "A common Ziegler-Nichols rule sets the derivative time to one-quarter of the integral time: $\\tau_d \\approx \\tau_i/4$, a ratio of about 0.25.",
+          s: [
+            "<b>Step 1 — Match.</b> About 0.25 ($\\tau_d\\approx\\tau_i/4$).",
+            "<b>Step 2 — Distractor audit.</b> 10 and 1 make D too strong (noise); 0.1 makes it too weak."
+          ],
+          a: "$\\tau_d/\\tau_i \\approx 0.25$.",
+          v: "Keeping $\\tau_d < \\tau_i$ ensures the derivative (fast, anticipatory) acts on a shorter timescale than the integral (slow, accuracy) ✓ — a sensible separation. The exact ratio is then fine-tuned for the specific process."
+
+        }), ref: "p.366" },
       { q: "Lyapunov stability:",
         choices: ["Method to prove stability without solving system", "Same as Bode", "Linear only", "Discrete only"], correct: 0,
-        solution: S({ c: "Lyapunov: find energy-like function V(x) decreasing along trajectories. Works for nonlinear systems.", s: [""], a: "Energy-based proof" }), ref: "p.365" },
+        solution: S({
+          c: "Lyapunov's direct method proves stability WITHOUT solving the differential equations: find an 'energy-like' function $V(x) > 0$ whose time derivative $\\dot V \\le 0$ along trajectories. It even works for NONLINEAR systems.",
+          s: [
+            "<b>Step 1 — Match.</b> Method to prove stability without solving the system.",
+            "<b>Step 2 — Distractor audit.</b> It's not Bode (frequency-domain, linear); it's NOT limited to linear or discrete systems — its strength is nonlinear systems."
+          ],
+          a: "Energy-based stability proof.",
+          v: "If you can show a system's 'energy' always decreases, it must settle to equilibrium — no need for explicit solutions ✓. This makes Lyapunov the go-to tool where linear frequency methods (Bode, Routh) simply don't apply."
+
+        }), ref: "p.365" },
       { q: "Discrete-time z-plane stability requires:",
         choices: ["Poles inside unit circle", "Outside", "On real axis", "Symmetric"], correct: 0,
-        solution: S({ c: "Same as before — fundamental for digital control.", s: [""], a: "$|z| < 1$" }), ref: "p.376" },
+        solution: S({
+          c: "A discrete-time system is stable iff all poles lie INSIDE the unit circle ($|z|<1$) of the z-plane.",
+          s: [
+            "<b>Step 1 — Match.</b> Poles inside the unit circle.",
+            "<b>Step 2 — Distractor audit.</b> Outside = unstable; 'on real axis' and 'symmetric' aren't stability conditions."
+          ],
+          a: "$|z| < 1$ (poles inside unit circle).",
+          v: "It's the discrete analog of 'poles in the left-half plane' for continuous systems ✓ — and the bilinear transform maps one to the other. Sampling delay erodes this margin, so digital controllers must sample fast enough."
+
+        }), ref: "p.376" },
       { q: "State-space: x' = Ax + Bu; y = Cx + Du. Output y depends on:",
         choices: ["States x and input u", "States only", "Input only", "Neither"], correct: 0,
-        solution: S({ c: "Output eq: state contribution Cx + direct input feedthrough Du.", s: ["D = 0 in most physical systems (no instant input→output)."], a: "x and u (via C, D)" }), ref: "p.365" },
+        solution: S({
+          c: "In the output equation $y = Cx + Du$, the output depends on the STATES $x$ (through C) AND directly on the INPUT $u$ (through the feedthrough term D).",
+          s: [
+            "<b>Step 1 — Match.</b> States x and input u (via C and D).",
+            "<b>Step 2 — Distractor audit.</b> 'States only' ignores D; 'input only' ignores C; 'neither' is wrong."
+          ],
+          a: "States x and input u.",
+          v: "In most physical systems $D=0$ — there's no INSTANT path from input to output (everything goes through dynamics/states) ✓. A nonzero D means a direct feedthrough, like a resistor straight across input to output."
+
+        }), ref: "p.365" },
       { q: "Controllability of state space system: test:",
         choices: ["Controllability matrix $[B, AB, A^2 B, ...]$ has full rank", "Eigenvalues real", "Bounded inputs", "Linearity"], correct: 0,
-        solution: S({ c: "Kalman's test. Rank n → fully controllable.", s: ["Controllable: can reach any state from any other in finite time."], a: "Rank test on $[B, AB, ...]$" }), ref: "p.365" },
+        solution: S({
+          c: "Kalman's controllability test: the system is fully controllable iff the controllability matrix $[B,\\ AB,\\ A^2B,\\ \\dots,\\ A^{n-1}B]$ has FULL RANK (n).",
+          s: [
+            "<b>Step 1 — Match.</b> Controllability matrix $[B,AB,A^2B,\\dots]$ has full rank.",
+            "<b>Step 2 — Distractor audit.</b> Real eigenvalues, bounded inputs, and linearity aren't the controllability test."
+          ],
+          a: "Full rank of $[B, AB, A^2B, \\dots]$.",
+          v: "Controllable means inputs can drive the state from ANY initial condition to ANY target in finite time ✓. Its dual is OBSERVABILITY (can outputs reveal the full state?) — together they determine whether a state-feedback design is even possible."
+
+        }), ref: "p.365" },
       { q: "Anti-windup in PID:",
         choices: ["Prevents integral term from growing when actuator saturates", "Filters", "Adds derivative", "Increases gain"], correct: 0,
-        solution: S({ c: "If actuator saturated, integral keeps accumulating. When error reverses, integrator must 'unwind' → overshoot.", s: ["Solutions: clamp integral when saturated, back-calculation, conditional integration."], a: "Prevents integral windup" }), ref: "p.366" },
+        solution: S({
+          c: "Anti-windup stops the INTEGRAL term from accumulating uncontrollably while the actuator is SATURATED (maxed out). Without it, the integrator 'winds up' and must later 'unwind,' causing large overshoot.",
+          s: [
+            "<b>Step 1 — Match.</b> Prevents integral growth when actuator saturates.",
+            "<b>Step 2 — Distractor audit.</b> It's not a filter, doesn't add derivative action, and doesn't increase gain."
+          ],
+          a: "Prevents integral windup during saturation.",
+          v: "The problem: when the actuator is pinned at max, error persists and the integrator keeps growing; when error finally reverses, the huge integral overshoots badly ✓. Fixes: clamp the integral, back-calculation, or conditional (stop) integration when saturated."
+
+        }), ref: "p.366" },
       { q: "Cascade vs feedforward control:",
         choices: ["Cascade: nested loops; Feedforward: predicts disturbance", "Same", "Opposite", "Both same"], correct: 0,
-        solution: S({ c: "Different strategies. Cascade: inner-outer loop, addresses different time scales. Feedforward: anticipates and compensates measured disturbances.", s: ["Often combined for robust control."], a: "Different methods" }), ref: "p.365" },
+        solution: S({
+          c: "Two distinct strategies: CASCADE uses nested inner/outer loops (the inner handles fast disturbances); FEEDFORWARD measures a disturbance and compensates for it BEFORE it affects the output.",
+          s: [
+            "<b>Step 1 — Match.</b> Cascade = nested loops; feedforward = predicts/compensates disturbance.",
+            "<b>Step 2 — Distractor audit.</b> They're not the same or simply opposite — they're complementary techniques."
+          ],
+          a: "Cascade = nested loops; feedforward = disturbance prediction.",
+          v: "They're often COMBINED: feedforward acts immediately on measured disturbances (no waiting for error), while feedback/cascade cleans up the rest ✓. Feedforward needs a good disturbance model; feedback corrects whatever it misses."
+
+        }), ref: "p.365" },
       { q: "Settling time $t_s$ for $\\zeta = 0.7, \\omega_n = 4$ rad/s (2%):",
         choices: ["$\\approx 1.43$ s", "$1$ s", "$3$ s", "$0.5$ s"], correct: 0,
-        solution: S({ c: "$t_s \\approx 4/(\\zeta\\omega_n)$.", s: ["$4/(0.7 \\cdot 4) = 1.43$ s."], a: "$\\approx 1.43$ s" }), ref: "p.366" },
+        solution: S({
+          c: "For a 2nd-order system, the 2% settling time is approximately $t_s \\approx \\dfrac{4}{\\zeta\\omega_n}$ — set by the real part of the poles ($\\zeta\\omega_n$, the decay rate).",
+          s: [
+            "<b>Step 1 — Apply.</b> $t_s = 4/(0.7\\times4) = 4/2.8 = 1.43$ s.",
+            "<b>Step 2 — Distractor audit.</b> 1 s, 3 s, 0.5 s come from misusing the formula or wrong ζω product."
+          ],
+          a: "$t_s \\approx 1.43$ s",
+          v: "The product $\\zeta\\omega_n$ (pole real part) governs settling — push the poles further LEFT to settle faster ✓. The 4 is for the 2% band; use 3 for the 5% band ($t_s\\approx3/\\zeta\\omega_n$)."
+
+        }), ref: "p.366" },
     ],
 
     // Comm — +10
     13: [
       { q: "AM signal $s(t) = A_c(1+m\\cos\\omega_m t)\\cos\\omega_c t$. Sideband power if carrier is $P_c = 100$ W, $m = 0.5$:",
         choices: ["$12.5$ W (total sidebands)", "$50$ W", "$100$ W", "$200$ W"], correct: 0,
-        solution: S({ c: "Sideband power: $P_c m^2/2$.", s: ["$P_{SB} = 100 \\cdot 0.25/2 = 12.5$ W total (6.25 W each sideband)."], a: "$12.5$ W" }), ref: "p.371" },
+        solution: S({
+          c: "In standard AM, total sideband power is $P_{SB} = P_c\\dfrac{m^2}{2}$ (both sidebands combined), where $m$ is the modulation index.",
+          s: [
+            "<b>Step 1 — Apply.</b> $P_{SB} = 100\\times\\dfrac{0.5^2}{2} = 100\\times0.125 = 12.5$ W.",
+            "<b>Step 2 — Split.</b> 6.25 W in each of the two sidebands.",
+            "<b>Step 3 — Distractor audit.</b> 50 W, 100 W, 200 W ignore the $m^2/2$ factor."
+          ],
+          a: "$P_{SB} = 12.5$ W total.",
+          v: "With $m=0.5$, the carrier (100 W) dwarfs the sidebands (12.5 W) — only ~11% of total power carries information ✓. Even at full modulation ($m=1$) sidebands are just 1/3 of total, which is why DSB-SC/SSB exist."
+
+        }), ref: "p.371" },
       { q: "DSB-SC vs DSB-LC:",
         choices: ["SC suppresses carrier — more power efficient", "Same", "LC is for SSB", "SC has stronger carrier"], correct: 0,
-        solution: S({ c: "DSB-SC: double sideband, suppressed carrier. All power in sidebands → efficient.", s: ["DSB-LC (regular AM): wastes power in carrier.", "SSB: even more efficient — only one sideband."], a: "SC more efficient" }), ref: "p.371" },
+        solution: S({
+          c: "DSB-SC (suppressed carrier) transmits only the sidebands — all power carries information, so it's power-efficient. DSB-LC (large carrier, i.e. standard AM) wastes power on the carrier.",
+          s: [
+            "<b>Step 1 — Match.</b> SC suppresses the carrier → more power-efficient.",
+            "<b>Step 2 — Distractor audit.</b> LC isn't 'for SSB'; SC has NO carrier (not 'stronger')."
+          ],
+          a: "DSB-SC is more power-efficient (no carrier).",
+          v: "The efficiency ladder: standard AM (carrier wasted) → DSB-SC (carrier removed) → SSB (carrier AND one sideband removed) ✓. The catch: removing the carrier forces COHERENT demodulation, unlike AM's cheap envelope detector."
+
+        }), ref: "p.371" },
       { q: "Coherent vs non-coherent demodulation:",
         choices: ["Coherent needs phase reference; non doesn't", "Same", "Non needs more bandwidth", "Coherent is digital"], correct: 0,
-        solution: S({ c: "Coherent (synchronous): better BER, requires phase-locked local oscillator. Non-coherent (envelope detection): simpler but worse BER.", s: ["AM envelope detection: simplest non-coherent.", "DSB-SC requires coherent demod."], a: "Phase reference needed for coherent" }), ref: "p.371" },
+        solution: S({
+          c: "COHERENT (synchronous) demodulation needs a local oscillator phase-locked to the carrier; it gives the best bit-error rate. NON-COHERENT (e.g. envelope detection) needs no phase reference — simpler, but worse BER.",
+          s: [
+            "<b>Step 1 — Match.</b> Coherent needs a phase reference; non-coherent doesn't.",
+            "<b>Step 2 — Distractor audit.</b> Non-coherent doesn't need more bandwidth; coherent isn't inherently digital."
+          ],
+          a: "Coherent requires a phase reference.",
+          v: "AM envelope detection is the simplest non-coherent scheme (cheap radios) ✓; DSB-SC/PSK REQUIRE coherent demod since the info is in the phase. The trade is receiver complexity vs noise performance."
+
+        }), ref: "p.371" },
       { q: "ASK in noise vs PSK:",
         choices: ["PSK better BER (3dB advantage in BPSK over OOK)", "ASK better", "Same", "Depends"], correct: 0,
-        solution: S({ c: "PSK uses both polarities — more distance in constellation → better BER.", s: ["BPSK ~3 dB better than coherent OOK ASK."], a: "PSK better" }), ref: "p.371" },
+        solution: S({
+          c: "PSK achieves a lower bit-error rate than ASK at the same energy. PSK uses opposite phases (±), putting constellation points twice as far apart as on-off keying — about a 3 dB advantage for BPSK over coherent OOK.",
+          s: [
+            "<b>Step 1 — Match.</b> PSK better BER (~3 dB advantage for BPSK over OOK).",
+            "<b>Step 2 — Distractor audit.</b> ASK is worse, not better; not the same; the advantage is consistent, not 'depends'."
+          ],
+          a: "PSK has the better BER.",
+          v: "More distance between constellation points = more noise tolerance ✓ — BPSK's two antipodal points sit ±A apart, vs OOK's points at 0 and A. This is also why PSK/QAM dominate modern data links over amplitude schemes."
+
+        }), ref: "p.371" },
       { q: "FM threshold effect:",
         choices: ["Below threshold SNR, output noise spikes abruptly", "Linear all the way", "Threshold is gain", "No effect"], correct: 0,
-        solution: S({ c: "FM SNR improves linearly with input SNR above threshold (~10 dB). Below: 'capture effect' breaks down, noise dominates.", s: [""], a: "Abrupt noise increase" }), ref: "p.371" },
+        solution: S({
+          c: "FM's noise advantage holds only ABOVE a threshold input SNR (~10 dB). Below it, the 'capture effect' breaks down and output noise spikes abruptly — the threshold effect.",
+          s: [
+            "<b>Step 1 — Match.</b> Below threshold SNR, output noise rises sharply.",
+            "<b>Step 2 — Distractor audit.</b> It's not linear all the way down; 'threshold is gain' is wrong; there IS an effect."
+          ],
+          a: "Abrupt noise increase below threshold.",
+          v: "Above threshold, FM trades bandwidth for a big SNR improvement (why FM radio sounds clean) ✓; below it, FM degrades FASTER than AM — the sudden cliff is why weak FM stations crackle then vanish."
+
+        }), ref: "p.371" },
       { q: "Discrete digital constellation 64-QAM symbols per second of bandwidth:",
         choices: ["6 bits/symbol → ~6 bps/Hz", "16 bps/Hz", "32 bps/Hz", "1 bps/Hz"], correct: 0,
-        solution: S({ c: "64-QAM: $\\log_2 64 = 6$ bits/symbol.", s: ["With ideal Nyquist filtering, symbol rate ≈ BW → 6 bps/Hz.", "Real systems: rolloff reduces slightly."], a: "~6 bps/Hz" }), ref: "p.371" },
+        solution: S({
+          c: "Bits per symbol = $\\log_2(\\text{constellation size})$. 64-QAM packs $\\log_2 64 = 6$ bits/symbol, giving ~6 bits/s per Hz with ideal Nyquist filtering.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\log_2 64 = 6$ bits/symbol → ~6 bps/Hz.",
+            "<b>Step 2 — Distractor audit.</b> 16 and 32 bps/Hz are unrealistic; 1 bps/Hz is BPSK."
+          ],
+          a: "~6 bps/Hz.",
+          v: "The spectral-efficiency ladder: BPSK 1, QPSK 2, 16-QAM 4, 64-QAM 6, 256-QAM 8 ✓. Real systems fall a bit short due to filter rolloff and coding overhead, but the $\\log_2 M$ rule sets the ceiling."
+
+        }), ref: "p.371" },
       { q: "Higher-order QAM (256-QAM vs 16-QAM):",
         choices: ["More bps/Hz but needs higher SNR", "Always better", "Simpler", "Lower bandwidth"], correct: 0,
-        solution: S({ c: "More constellation points → smaller min distance → need higher SNR.", s: ["256-QAM: 8 bps/Hz, needs ~30 dB SNR for BER $10^{-6}$.", "16-QAM: 4 bps/Hz, ~18 dB."], a: "Higher BPS/Hz, higher SNR" }), ref: "p.371" },
+        solution: S({
+          c: "Higher-order QAM packs more bits per symbol (more spectral efficiency) but crams constellation points closer together, so it needs a HIGHER SNR to keep them distinguishable.",
+          s: [
+            "<b>Step 1 — Match.</b> More bps/Hz but needs higher SNR.",
+            "<b>Step 2 — Distractor audit.</b> Not 'always better' (fails at low SNR), not simpler, not lower bandwidth."
+          ],
+          a: "Higher bps/Hz, but requires higher SNR.",
+          v: "Numbers: 16-QAM (4 bps/Hz) needs ~18 dB SNR; 256-QAM (8 bps/Hz) needs ~30 dB ✓. This is why adaptive modulation drops to lower-order QAM as signal quality falls — Wi-Fi and cellular do this constantly."
+
+        }), ref: "p.371" },
       { q: "Doppler shift on a 1 GHz signal from car at 30 m/s:",
         choices: ["$\\approx 100$ Hz", "$1$ kHz", "$10$ Hz", "$1$ Hz"], correct: 0,
-        solution: S({ c: "$\\Delta f = (v/c) f$.", s: ["$\\Delta f = (30/3\\times 10^8)(10^9) = 100$ Hz."], a: "$\\approx 100$ Hz", v: "Higher freq + faster vehicle = bigger Doppler. 5G needs Doppler compensation." }), ref: "p.371" },
+        solution: S({
+          c: "Doppler frequency shift for a moving source/receiver: $\\Delta f = \\dfrac{v}{c}f$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\Delta f = \\dfrac{30}{3\\times10^8}\\times10^9 = 100$ Hz.",
+            "<b>Step 2 — Distractor audit.</b> 1 kHz, 10 Hz, 1 Hz come from decimal/exponent slips."
+          ],
+          a: "$\\Delta f \\approx 100$ Hz.",
+          v: "Doppler grows with both speed AND carrier frequency ✓ — which is why high-speed, high-frequency links (5G, satellites, high-speed rail) need Doppler compensation, while low-frequency slow systems can ignore it."
+
+        }), ref: "p.371" },
       { q: "Spread spectrum benefits:",
         choices: ["Anti-jam, low power detection, multi-user via codes", "Higher data rate only", "Lower BW", "Linear"], correct: 0,
-        solution: S({ c: "Spread spectrum: signal energy spread over wide BW → looks like noise.", s: ["Military/secure: hard to detect.", "Commercial: CDMA cell phones, WiFi (originally), Bluetooth (FHSS)."], a: "Multiple benefits" }), ref: "p.371" },
+        solution: S({
+          c: "Spreading a signal over a wide bandwidth (so it resembles noise) brings several benefits at once: anti-jamming, low probability of detection, and multi-user access via distinct codes.",
+          s: [
+            "<b>Step 1 — Match.</b> Anti-jam, low-power detection, multi-user via codes.",
+            "<b>Step 2 — Distractor audit.</b> It doesn't raise raw data rate, doesn't lower bandwidth (it WIDENS it), and isn't about linearity."
+          ],
+          a: "Anti-jam, covert, and multi-user (code-based).",
+          v: "Despreading concentrates the wanted signal while spreading interferers — the processing gain ✓. Military prizes the anti-jam/covert side; commercially it became CDMA cellular, GPS (works below noise), and Bluetooth (frequency-hopping)."
+
+        }), ref: "p.371" },
       { q: "Hamming(7,4) code: rate:",
         choices: ["$4/7$", "$7/4$", "$1$", "$3/7$"], correct: 0,
-        solution: S({ c: "Code rate = info bits / total bits. (7,4) means 7 transmitted bits with 4 info bits.", s: ["Can correct any single-bit error."], a: "$4/7$" }), ref: "p.371" },
+        solution: S({
+          c: "Code rate = information bits / total transmitted bits. Hamming(7,4) sends 7 bits carrying 4 information bits (3 parity), so the rate is 4/7.",
+          s: [
+            "<b>Step 1 — Apply.</b> rate $= 4/7 \\approx 0.57$.",
+            "<b>Step 2 — Distractor audit.</b> 7/4 inverts it; 1 means no overhead; 3/7 uses the PARITY bits as the numerator."
+          ],
+          a: "$4/7$.",
+          v: "The 3 parity bits let it CORRECT any single-bit error (and detect doubles) ✓ — the cost is 43% overhead (rate 4/7 < 1). Stronger codes correct more errors but lower the rate further."
+
+        }), ref: "p.371" },
     ],
 
     // Networks — +8
     14: [
       { q: "ICMP used for:",
         choices: ["Diagnostics: ping, traceroute, error msgs", "TCP setup", "DNS", "DHCP"], correct: 0,
-        solution: S({ c: "ICMP: control/diagnostic protocol over IP. Ping uses ICMP echo request/reply.", s: ["Traceroute: TTL trick using ICMP TTL exceeded responses."], a: "Ping, traceroute" }), ref: "p.400" },
+        solution: S({
+          c: "ICMP (Internet Control Message Protocol) is IP's companion for diagnostics and error reporting — it carries ping, traceroute, and 'unreachable'/'TTL exceeded' messages, not user data.",
+          s: [
+            "<b>Step 1 — Match.</b> Diagnostics: ping, traceroute, error messages.",
+            "<b>Step 2 — Distractor audit.</b> TCP setup is the SYN handshake; DNS resolves names; DHCP assigns addresses — all different protocols."
+          ],
+          a: "Diagnostics (ping, traceroute).",
+          v: "Ping uses ICMP echo request/reply; traceroute cleverly sends low-TTL packets and reads the ICMP 'TTL exceeded' replies from each hop ✓ — which is why firewalls that block ICMP break these tools."
+
+        }), ref: "p.400" },
       { q: "MTU (Maximum Transmission Unit) typical Ethernet:",
         choices: ["$1500$ bytes", "$1024$", "$9000$", "$64$"], correct: 0,
-        solution: S({ c: "Standard Ethernet: 1500 byte payload (MTU). With headers: 1518 frame size.", s: ["Jumbo frames: 9000 bytes (some networks)."], a: "$1500$" }), ref: "p.399" },
+        solution: S({
+          c: "MTU is the largest payload a link will carry in one frame. Standard Ethernet's MTU is 1500 bytes (frame ~1518 with headers).",
+          s: [
+            "<b>Step 1 — Match.</b> 1500 bytes.",
+            "<b>Step 2 — Distractor audit.</b> 1024 is a round-number guess; 9000 is JUMBO frames (special networks); 64 is the minimum frame size."
+          ],
+          a: "1500 bytes.",
+          v: "Exceeding the MTU forces FRAGMENTATION (or drops), hurting performance ✓ — which is why VPNs/tunnels that add headers can cause mysterious slowdowns. Jumbo frames (9000) cut overhead in data centers but need end-to-end support."
+
+        }), ref: "p.399" },
       { q: "Path MTU discovery:",
         choices: ["Find smallest MTU along route to avoid fragmentation", "Find biggest packet", "Routing protocol", "DNS"], correct: 0,
-        solution: S({ c: "Different links have different MTUs. PMTU finds the smallest along path → avoid fragmentation/loss.", s: [""], a: "Find min MTU on path" }), ref: "p.400" },
+        solution: S({
+          c: "Different links along a route can have different MTUs. Path MTU Discovery finds the SMALLEST MTU on the path so the sender can size packets to avoid fragmentation.",
+          s: [
+            "<b>Step 1 — Match.</b> Find the smallest MTU along the route.",
+            "<b>Step 2 — Distractor audit.</b> Not 'biggest packet', not a routing protocol, not DNS."
+          ],
+          a: "Find the minimum MTU on the path.",
+          v: "It works by sending 'don't fragment' packets and reading ICMP 'fragmentation needed' replies ✓ — which is exactly why blocking ICMP can break PMTUD, causing large packets to silently vanish (the classic 'works for small files, hangs on big ones' bug)."
+
+        }), ref: "p.400" },
       { q: "Half-duplex vs full-duplex Ethernet:",
         choices: ["Half: one direction at a time (hub); Full: simultaneous both ways (switch)", "Same", "Half is faster", "Full uses 1 wire pair"], correct: 0,
-        solution: S({ c: "Half-duplex: shared medium, CSMA/CD. Full-duplex: dedicated link, no collisions.", s: ["Modern switched Ethernet: full duplex everywhere."], a: "Half: alternating; Full: simultaneous" }), ref: "p.399" },
+        solution: S({
+          c: "HALF-duplex allows transmission in only one direction at a time on a shared medium (hubs, with CSMA/CD collision handling). FULL-duplex allows simultaneous both-way transmission on a dedicated link (switches), with no collisions.",
+          s: [
+            "<b>Step 1 — Match.</b> Half: one direction at a time; Full: simultaneous both ways.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; half isn't faster; full-duplex actually uses SEPARATE pairs for each direction."
+          ],
+          a: "Half = alternating; Full = simultaneous.",
+          v: "Modern switched Ethernet is full-duplex everywhere, which is why collisions and CSMA/CD are now historical ✓ — each device has a dedicated, collision-free link to the switch."
+
+        }), ref: "p.399" },
       { q: "QoS (Quality of Service):",
         choices: ["Prioritize traffic types (voice, video) over best-effort data", "Compression", "Encryption", "Routing"], correct: 0,
-        solution: S({ c: "QoS: traffic classification, queuing, scheduling to meet latency/jitter requirements.", s: ["Voice: low latency, jitter sensitive.", "Bulk data: tolerates delay but wants throughput."], a: "Traffic prioritization" }), ref: "p.399" },
+        solution: S({
+          c: "QoS prioritizes certain traffic types (voice, video) over best-effort data, using classification, queuing, and scheduling to meet latency and jitter requirements.",
+          s: [
+            "<b>Step 1 — Match.</b> Prioritize traffic types over best-effort data.",
+            "<b>Step 2 — Distractor audit.</b> QoS isn't compression, encryption, or routing — it's traffic prioritization."
+          ],
+          a: "Traffic prioritization.",
+          v: "Voice needs LOW latency and jitter (a late packet is useless); bulk file transfer tolerates delay but wants throughput ✓ — QoS gives each what it needs when the link is congested. Without it, a big download could starve a phone call."
+
+        }), ref: "p.399" },
       { q: "Network latency components:",
         choices: ["Propagation + transmission + queuing + processing", "Just distance", "Bandwidth only", "Random"], correct: 0,
-        solution: S({ c: "End-to-end latency: sum of physical (light), transmission (packet/BW), queuing, processing.", s: ["High BW reduces transmission delay; nothing reduces propagation below speed of light."], a: "Multiple components" }), ref: "p.399" },
+        solution: S({
+          c: "End-to-end latency is the SUM of four parts: propagation (distance ÷ light speed), transmission (packet size ÷ bandwidth), queuing (waiting in buffers), and processing (router/switch handling).",
+          s: [
+            "<b>Step 1 — Match.</b> Propagation + transmission + queuing + processing.",
+            "<b>Step 2 — Distractor audit.</b> 'Just distance' and 'bandwidth only' each capture only one term; latency isn't random."
+          ],
+          a: "Propagation + transmission + queuing + processing.",
+          v: "Key insight: more BANDWIDTH cuts only the transmission term — it does NOTHING for propagation delay (speed of light is fixed) ✓. That's why a transcontinental link has irreducible latency no matter how 'fast' the pipe."
+
+        }), ref: "p.399" },
       { q: "Layer 2 vs Layer 3 redundancy protocols:",
         choices: ["STP (L2) prevents loops; HSRP/VRRP (L3) for gateway redundancy", "Same protocol", "STP is L4", "VRRP is L2"], correct: 0,
-        solution: S({ c: "Different layers have different problems. STP: spanning tree breaks L2 loops. HSRP/VRRP: virtual default gateway for L3 redundancy.", s: [""], a: "Different layers" }), ref: "p.399" },
+        solution: S({
+          c: "Redundancy is handled differently per layer. STP (Layer 2) prevents switching LOOPS by disabling redundant links. HSRP/VRRP (Layer 3) provide a redundant default GATEWAY (a virtual IP that fails over).",
+          s: [
+            "<b>Step 1 — Match.</b> STP (L2) prevents loops; HSRP/VRRP (L3) for gateway redundancy.",
+            "<b>Step 2 — Distractor audit.</b> They're different protocols at different layers; STP isn't L4; VRRP isn't L2."
+          ],
+          a: "STP (L2 loops) vs HSRP/VRRP (L3 gateway).",
+          v: "Each layer has its own failure mode: L2 needs loop-free topology, L3 needs a backup gateway if the primary router dies ✓ — robust networks deploy both. They solve different problems and coexist."
+
+        }), ref: "p.399" },
       { q: "Wi-Fi WPA2/WPA3 encryption:",
         choices: ["AES-based, modern wireless security", "WEP", "RC4", "None"], correct: 0,
-        solution: S({ c: "Old WEP: broken (~2001). WPA: improved but vulnerabilities. WPA2: AES-CCMP standard. WPA3: even stronger.", s: ["WPA3 introduces SAE (Simultaneous Authentication of Equals)."], a: "AES-based" }), ref: "p.412" },
+        solution: S({
+          c: "WPA2 and WPA3 are the modern AES-based Wi-Fi security standards. They replaced the broken WEP (cracked ~2001) and the transitional WPA.",
+          s: [
+            "<b>Step 1 — Match.</b> AES-based modern wireless security.",
+            "<b>Step 2 — Distractor audit.</b> WEP and RC4 are the old, BROKEN schemes; 'none' is obviously insecure."
+          ],
+          a: "AES-based (WPA2/WPA3).",
+          v: "WPA2 uses AES-CCMP; WPA3 adds SAE (Simultaneous Authentication of Equals), resisting offline password-guessing ✓. Never use WEP — it can be cracked in minutes. This is why router firmware nudges you to WPA2/WPA3."
+
+        }), ref: "p.412" },
     ],
 
     // Digital — +15
     15: [
       { q: "How many states does a 3-bit binary counter cycle through?",
         choices: ["$8$", "$3$", "$4$", "$6$"], correct: 0,
-        solution: S({ c: "$2^3 = 8$.", s: [""], a: "$8$" }), ref: "p.391" },
+        solution: S({
+          c: "An $n$-bit counter has $2^n$ states. A 3-bit counter: $2^3 = 8$ (counts 0 through 7).",
+          s: [
+            "<b>Step 1 — Apply.</b> $2^3 = 8$.",
+            "<b>Step 2 — Distractor audit.</b> 3 is the bit count; 4 is $2^2$; 6 isn't a power of 2."
+          ],
+          a: "8 states.",
+          v: "It cycles 000→111 then wraps to 000 ✓. To make a counter stop at a non-power-of-2 (e.g. mod-10 for BCD), you add reset logic — but the raw capacity is always $2^n$."
+
+        }), ref: "p.391" },
       { q: "Mealy state machine output depends on:",
         choices: ["Current state AND current input", "State only", "Input only", "Both states and inputs simultaneously synchronously"], correct: 0,
-        solution: S({ c: "Mealy: outputs are functions of state and input. Moore: outputs depend on state only.", s: [""], a: "State + input (Mealy)" }), ref: "p.391" },
+        solution: S({
+          c: "A MEALY finite state machine's outputs depend on BOTH the current state AND the current input. (A MOORE machine's outputs depend on the state only.)",
+          s: [
+            "<b>Step 1 — Match.</b> Current state AND current input.",
+            "<b>Step 2 — Distractor audit.</b> 'State only' is MOORE; 'input only' is plain combinational; the last option is vague/wrong."
+          ],
+          a: "Current state and current input (Mealy).",
+          v: "Because the input feeds the output directly, Mealy outputs can change MID-cycle (asynchronously with input) and often need fewer states ✓ — the trade vs Moore's clean, glitch-free, state-only outputs."
+
+        }), ref: "p.391" },
       { q: "Moore state machine output advantage:",
         choices: ["Output glitch-free, synchronous with clock", "Faster", "Smaller", "Asynchronous"], correct: 0,
-        solution: S({ c: "Moore: output is function of state only → updates only at state transitions (clock edge).", s: ["Mealy: output can change asynchronously with input."], a: "Synchronous, glitch-free" }), ref: "p.391" },
+        solution: S({
+          c: "A MOORE machine's output is a function of the STATE ONLY, so it changes only at clock-driven state transitions — making outputs synchronous and glitch-free.",
+          s: [
+            "<b>Step 1 — Match.</b> Output glitch-free, synchronous with the clock.",
+            "<b>Step 2 — Distractor audit.</b> Moore isn't inherently faster or smaller, and its outputs are SYNCHRONOUS not asynchronous."
+          ],
+          a: "Synchronous, glitch-free outputs.",
+          v: "The trade: Moore is safer (outputs stable between edges) but may need MORE states than Mealy for the same behavior ✓; Mealy reacts faster but can glitch. Designers pick Moore when clean timing matters most."
+
+        }), ref: "p.391" },
       { q: "Bitwise OR of $0101_2$ and $0011_2$:",
         choices: ["$0111_2$", "$0001_2$", "$0110_2$", "$1000_2$"], correct: 0,
-        solution: S({ c: "OR each bit position.", s: ["0101 OR 0011 = 0111."], a: "$0111$" }), ref: "p.388" },
+        solution: S({
+          c: "Bitwise OR sets each output bit to 1 if EITHER input bit is 1.",
+          s: [
+            "<b>Step 1 — Per-bit OR.</b> 0101 OR 0011: (0|0)=0, (1|0)=1, (0|1)=1, (1|1)=1 → 0111.",
+            "<b>Step 2 — Distractor audit.</b> 0001 is AND; 0110 is XOR; 1000 is unrelated."
+          ],
+          a: "$0111_2$",
+          v: "Contrast the three: OR=0111 (either), AND=0001 (both), XOR=0110 (differ) ✓. OR is used to SET bits (mask with 1s), AND to clear/test bits, XOR to toggle them."
+
+        }), ref: "p.388" },
       { q: "XNOR is also called:",
         choices: ["Equivalence", "AND", "NOT", "Identity"], correct: 0,
-        solution: S({ c: "XNOR is true when inputs are equal. Sometimes called 'equivalence' or 'iff' gate.", s: [""], a: "Equivalence" }), ref: "p.389" },
+        solution: S({
+          c: "XNOR outputs 1 when its inputs are EQUAL, so it's called the equivalence (or 'iff') gate.",
+          s: [
+            "<b>Step 1 — Match.</b> Equivalence.",
+            "<b>Step 2 — Distractor audit.</b> AND, NOT, identity are different gates/operations."
+          ],
+          a: "Equivalence.",
+          v: "XNOR = NOT(XOR): 1 when bits match, 0 when they differ ✓ — which makes it the building block of equality comparators (all-bits-XNOR then AND). It's the logical 'if and only if.'"
+
+        }), ref: "p.389" },
       { q: "Implication $A \\to B$ false when:",
         choices: ["$A=1, B=0$", "$A=0, B=1$", "Both 0", "Both 1"], correct: 0,
-        solution: S({ c: "$A \\to B$ ('A implies B') false only when antecedent true but consequent false.", s: ["Equivalent: $\\bar{A} + B$."], a: "$A=1, B=0$" }), ref: "p.389" },
+        solution: S({
+          c: "Logical implication $A\\to B$ ('A implies B') is FALSE only when the antecedent A is true but the consequent B is false. In all other cases it's true. Equivalent: $\\bar A + B$.",
+          s: [
+            "<b>Step 1 — Match.</b> $A=1, B=0$.",
+            "<b>Step 2 — Distractor audit.</b> $A=0,B=1$ is true (vacuously-ish); both-0 and both-1 are true."
+          ],
+          a: "$A=1, B=0$.",
+          v: "The tricky part: a FALSE premise makes the implication TRUE regardless of B ('vacuously true') ✓ — 'if pigs fly, then...' is always true. Only a true premise with a false conclusion breaks the promise."
+
+        }), ref: "p.389" },
       { q: "Look-up table (LUT) in FPGA implements:",
         choices: ["Any combinational function up to n inputs", "Counters", "Memory", "Clocks"], correct: 0,
-        solution: S({ c: "LUT: small memory addressed by inputs, outputs the truth table value. Reprogrammable.", s: ["FPGA: thousands of LUTs + interconnect."], a: "Combinational logic" }), ref: "p.391" },
+        solution: S({
+          c: "An FPGA LUT is a tiny memory addressed by the logic inputs; it stores the truth-table output for each input combination — so a k-input LUT can implement ANY combinational function of up to k inputs.",
+          s: [
+            "<b>Step 1 — Match.</b> Any combinational function up to n inputs.",
+            "<b>Step 2 — Distractor audit.</b> Counters need flip-flops; 'memory' and 'clocks' are other FPGA resources — the LUT itself is combinational logic."
+          ],
+          a: "Any combinational logic (up to n inputs).",
+          v: "An FPGA is essentially thousands of small LUTs (typically 4-6 inputs) plus flip-flops and programmable interconnect ✓ — reconfigure the LUT contents and routing, and you've built different hardware. This is why FPGAs are 'field-programmable.'"
+
+        }), ref: "p.391" },
       { q: "JK FF with $J=1, K=0, Q_{prev}=1$. Next:",
         choices: ["$Q = 1$ (set/hold)", "$Q = 0$", "Toggle", "Indeterminate"], correct: 0,
-        solution: S({ c: "J=1, K=0 is SET. Output = 1 regardless of previous.", s: [""], a: "$Q = 1$" }), ref: "p.391" },
+        solution: S({
+          c: "JK flip-flop truth table: J=1,K=0 is the SET command → output goes to (or stays) 1, regardless of the previous state.",
+          s: [
+            "<b>Step 1 — Apply.</b> J=1, K=0 → SET → $Q=1$.",
+            "<b>Step 2 — Distractor audit.</b> $Q=0$ is reset (J=0,K=1); toggle is J=K=1; indeterminate is the FORBIDDEN SR state (which JK eliminates)."
+          ],
+          a: "$Q = 1$ (set).",
+          v: "Full JK map: 00=hold, 10=set, 01=reset, 11=toggle ✓. Since $Q_{prev}$ was already 1, this is set-and-hold — but the result would be 1 even from $Q_{prev}=0$."
+
+        }), ref: "p.391" },
       { q: "Convert 0.375 (decimal) to binary fraction:",
         choices: ["$0.011_2$", "$0.110$", "$0.101$", "$0.100$"], correct: 0,
-        solution: S({ c: "0.375 = 1/4 + 1/8 = $2^{-2} + 2^{-3}$.", s: ["Binary: 0.011."], a: "$0.011$" }), ref: "p.388" },
+        solution: S({
+          c: "Convert a decimal fraction by recognizing it as a sum of negative powers of 2 (or by the multiply-by-2 method).",
+          s: [
+            "<b>Step 1 — Decompose.</b> $0.375 = 0.25 + 0.125 = 2^{-2} + 2^{-3}$.",
+            "<b>Step 2 — Set bits.</b> positions 2 and 3 after the point → 0.011.",
+            "<b>Step 3 — Distractor audit.</b> 0.110 = 0.75; 0.101 = 0.625; 0.100 = 0.5."
+          ],
+          a: "$0.011_2$",
+          v: "Check: $1/4 + 1/8 = 0.375$ ✓. Like 0.625 and 0.5, this terminates cleanly because it's a sum of halves/quarters/eighths — many decimals (e.g. 0.1) never terminate in binary."
+
+        }), ref: "p.388" },
       { q: "Pipeline register count for 5-stage pipeline:",
         choices: ["$4$ (between stages)", "$5$", "$1$", "$10$"], correct: 0,
-        solution: S({ c: "5 stages need 4 inter-stage registers.", s: [""], a: "$4$" }), ref: "p.408" },
+        solution: S({
+          c: "A pipeline needs a register BETWEEN each pair of adjacent stages to hold intermediate results. For $n$ stages, that's $n-1$ inter-stage register banks.",
+          s: [
+            "<b>Step 1 — Apply.</b> 5 stages → 4 inter-stage registers.",
+            "<b>Step 2 — Distractor audit.</b> 5 counts stages not gaps; 1 and 10 are wrong."
+          ],
+          a: "4 inter-stage registers.",
+          v: "These pipeline registers are what let stages operate on DIFFERENT instructions simultaneously ✓ — each register latches one stage's output for the next to consume on the following clock. (The classic MIPS 5-stage has IF/ID, ID/EX, EX/MEM, MEM/WB — exactly 4.)"
+
+        }), ref: "p.408" },
       { q: "Karnaugh map: 4-variable, identifies pair of adjacent 1s → eliminates how many variables?",
         choices: ["$1$ variable", "$2$ variables", "All", "None"], correct: 0,
-        solution: S({ c: "$2^k$ cells covered eliminates $k$ variables. Pair = $2^1$ = eliminates 1.", s: [""], a: "$1$" }), ref: "p.390" },
+        solution: S({
+          c: "On a K-map, grouping $2^k$ adjacent 1-cells eliminates $k$ variables. A PAIR is $2^1$ cells → eliminates 1 variable.",
+          s: [
+            "<b>Step 1 — Apply.</b> Pair = 2 cells = $2^1$ → 1 variable eliminated.",
+            "<b>Step 2 — Distractor audit.</b> 2 variables needs a quad (4 cells); 'all' needs the whole map; 'none' would be a single cell."
+          ],
+          a: "1 variable eliminated.",
+          v: "Bigger groups eliminate more: pair→1, quad→2, octet→3 ✓. The art of K-map minimization is finding the LARGEST legal groupings to drop the most variables and get the simplest expression."
+
+        }), ref: "p.390" },
       { q: "Asynchronous reset of FF:",
         choices: ["Independent of clock", "Triggered by clock edge", "Has delay", "Sync only"], correct: 0,
-        solution: S({ c: "Async reset: takes effect immediately, no clock needed.", s: ["Synchronous reset: waits for clock edge."], a: "Clock independent" }), ref: "p.391" },
+        solution: S({
+          c: "An asynchronous reset forces the flip-flop output immediately, independent of the clock — it doesn't wait for an edge.",
+          s: [
+            "<b>Step 1 — Match.</b> Independent of clock.",
+            "<b>Step 2 — Distractor audit.</b> 'Triggered by clock edge' / 'sync only' describe SYNCHRONOUS reset; 'has delay' isn't the defining trait."
+          ],
+          a: "Clock-independent (immediate).",
+          v: "Great for power-on init (works before the clock runs), but its RELEASE must be timed away from the clock edge to avoid metastability ✓ — the classic FPGA design caution. Synchronous reset, by contrast, only acts on a clock edge."
+
+        }), ref: "p.391" },
       { q: "Setup time:",
         choices: ["Min time input must be stable before clock edge", "Hold time", "Propagation", "Output stable"], correct: 0,
-        solution: S({ c: "Setup time: input must be valid before clock edge to capture correctly.", s: ["Violations cause metastability or wrong value latching."], a: "Stable before edge" }), ref: "p.391" },
+        solution: S({
+          c: "Setup time is the minimum interval the data input must be STABLE BEFORE the clock edge for the flip-flop to capture it reliably.",
+          s: [
+            "<b>Step 1 — Match.</b> Min time input must be stable before the clock edge.",
+            "<b>Step 2 — Distractor audit.</b> HOLD time is stability AFTER the edge; propagation is output delay; 'output stable' is unrelated."
+          ],
+          a: "Stable-before-edge requirement.",
+          v: "Violating setup (data arrives too late) causes METASTABILITY or wrong latching ✓ — it sets the maximum clock speed: the slowest logic path between registers must settle within (clock period − setup time). Setup + hold define the data 'window' around each edge."
+
+        }), ref: "p.391" },
       { q: "Glitch in combinational circuit caused by:",
         choices: ["Different propagation delays of paths", "Bad power", "Frequency", "Random"], correct: 0,
-        solution: S({ c: "Different paths from same input have different delays → transient incorrect output.", s: ["Hazards: static (one transition causes glitch) and dynamic (multiple)."], a: "Path delay mismatch" }), ref: "p.391" },
+        solution: S({
+          c: "A glitch (hazard) is a brief wrong output that appears because different signal PATHS from the same input have different propagation delays, arriving at the output at slightly different times.",
+          s: [
+            "<b>Step 1 — Match.</b> Different propagation delays of paths.",
+            "<b>Step 2 — Distractor audit.</b> Not bad power, not the clock frequency, not random — it's a deterministic timing-mismatch effect."
+          ],
+          a: "Path-delay mismatch.",
+          v: "Hazards come in static (a momentary flip when output should hold) and dynamic (multiple transitions) forms ✓. Synchronous design tames them by only SAMPLING outputs at clock edges, after the glitches have settled — which is why edge-triggered FFs are glitch-tolerant."
+
+        }), ref: "p.391" },
       { q: "BCD to 7-segment decoder converts:",
         choices: ["4-bit BCD digit to 7 segment-control bits", "Hex to binary", "Sums to digits", "Linear to log"], correct: 0,
-        solution: S({ c: "Display digit needs 7 segments. Decoder translates 4-bit BCD (0-9) into segment activation pattern.", s: [""], a: "BCD digit → segments" }), ref: "p.390" },
+        solution: S({
+          c: "A BCD-to-7-segment decoder translates a 4-bit BCD digit (0-9) into the 7 control signals that light the segments of a numeric display.",
+          s: [
+            "<b>Step 1 — Match.</b> 4-bit BCD digit → 7 segment-control bits.",
+            "<b>Step 2 — Distractor audit.</b> It's not hex-to-binary, summing, or a log conversion."
+          ],
+          a: "BCD digit → segment pattern.",
+          v: "Each digit 0-9 maps to a unique on/off pattern of the 7 segments (e.g. '1' lights just two segments) ✓ — the decoder is just combinational logic (or a LUT) implementing that mapping. The 7447 IC is the classic part."
+
+        }), ref: "p.390" },
     ],
 
     // CompSys — +10
     16: [
       { q: "Memory hierarchy: SRAM vs DRAM cost per bit:",
         choices: ["SRAM more expensive (6T vs 1T1C)", "Same", "DRAM more expensive", "Both free"], correct: 0,
-        solution: S({ c: "SRAM: 6 transistors per bit. DRAM: 1 transistor + 1 capacitor per bit.", s: ["DRAM denser → cheaper.", "SRAM faster, no refresh, used in caches."], a: "SRAM costlier" }), ref: "p.407" },
+        solution: S({
+          c: "SRAM uses ~6 transistors per bit; DRAM uses just 1 transistor + 1 capacitor. Fewer components make DRAM denser and cheaper per bit — so SRAM is the MORE expensive.",
+          s: [
+            "<b>Step 1 — Match.</b> SRAM more expensive (6T vs 1T1C).",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; DRAM is CHEAPER not more expensive."
+          ],
+          a: "SRAM costs more per bit.",
+          v: "The trade: SRAM is fast and needs no refresh (used for caches), DRAM is dense and cheap but must be periodically refreshed (used for main memory) ✓ — exactly why caches are small SRAM and RAM is big DRAM."
+
+        }), ref: "p.407" },
       { q: "Pipeline branch penalty mitigation:",
         choices: ["Branch prediction (BTB, BHT)", "Slower clock", "Smaller cache", "Fewer registers"], correct: 0,
-        solution: S({ c: "Predict branches → speculatively execute. Correct prediction = no stall. Mispredict = flush.", s: ["Modern: 95-99% accurate."], a: "Branch prediction" }), ref: "p.408" },
+        solution: S({
+          c: "Branches stall a pipeline because the next instruction's address isn't known yet. BRANCH PREDICTION (using a Branch Target Buffer / Branch History Table) guesses and speculatively executes, avoiding stalls when correct.",
+          s: [
+            "<b>Step 1 — Match.</b> Branch prediction (BTB, BHT).",
+            "<b>Step 2 — Distractor audit.</b> Slower clock, smaller cache, fewer registers don't address branch stalls."
+          ],
+          a: "Branch prediction.",
+          v: "Modern predictors hit 95-99% accuracy ✓ — a correct prediction means zero branch penalty; a miss flushes the pipeline (~15-20 cycles). This is why prediction accuracy is a major performance lever in deep pipelines."
+
+        }), ref: "p.408" },
       { q: "Two-level page table (32-bit address, 4K page, 4K page directory entries):",
         choices: ["10-bit directory + 10-bit table + 12-bit offset", "All 32 in offset", "Single 32-bit table", "16-bit each"], correct: 0,
-        solution: S({ c: "Split: 12 bits offset (4K page), remaining 20 bits split into directory (10) + table index (10).", s: [""], a: "10+10+12" }), ref: "p.408" },
+        solution: S({
+          c: "A 32-bit virtual address with 4 KB pages splits as: 12 bits for the page OFFSET ($2^{12}=4$K), leaving 20 bits — divided into a 10-bit page-directory index and a 10-bit page-table index.",
+          s: [
+            "<b>Step 1 — Offset.</b> 4 KB page → $\\log_2 4096 = 12$ offset bits.",
+            "<b>Step 2 — Split the rest.</b> $32-12 = 20$ bits → 10 (directory) + 10 (table).",
+            "<b>Step 3 — Distractor audit.</b> 'All 32 in offset' or a single 32-bit table miss the two-level structure; '16-bit each' doesn't fit."
+          ],
+          a: "10 + 10 + 12.",
+          v: "Two levels save memory: you only allocate page tables for address ranges actually USED, instead of one giant flat table ✓ — this is exactly the classic x86 32-bit paging layout."
+
+        }), ref: "p.408" },
       { q: "MMU's TLB caches:",
         choices: ["Virtual-to-physical address translations", "Data", "Instructions", "Branches"], correct: 0,
-        solution: S({ c: "Translation Lookaside Buffer: small fast cache for page table entries. Avoids walking page table every memory access.", s: ["Typical: ~64-1024 entries.", "TLB miss: penalty 10-100 cycles."], a: "Address translations" }), ref: "p.408" },
+        solution: S({
+          c: "The TLB (Translation Lookaside Buffer) is a small, fast cache inside the MMU holding recent VIRTUAL-to-PHYSICAL address translations — so the CPU avoids walking the page table on every memory access.",
+          s: [
+            "<b>Step 1 — Match.</b> Virtual-to-physical address translations.",
+            "<b>Step 2 — Distractor audit.</b> Data/instruction caches hold data/code; the branch predictor handles branches — the TLB specifically caches translations."
+          ],
+          a: "Address translations.",
+          v: "Without the TLB, every access would require a multi-level page-table walk (slow) ✓. Typical TLBs hold 64-1024 entries with very high hit rates; a TLB miss costs 10-100 cycles to walk the table."
+
+        }), ref: "p.408" },
       { q: "Race condition:",
         choices: ["Concurrent access without synchronization → wrong result", "Fast execution", "Single thread", "Hardware fault"], correct: 0,
-        solution: S({ c: "Race: result depends on timing — different runs yield different results.", s: ["Mitigation: locks, atomics, message passing."], a: "Concurrent access issue" }), ref: "p.408" },
+        solution: S({
+          c: "A race condition occurs when concurrent threads access shared data WITHOUT proper synchronization, so the result depends on unpredictable timing — different runs can give different answers.",
+          s: [
+            "<b>Step 1 — Match.</b> Concurrent access without synchronization → wrong result.",
+            "<b>Step 2 — Distractor audit.</b> It's not about being fast, single-threaded, or a hardware fault — it's a concurrency bug."
+          ],
+          a: "Unsynchronized concurrent access.",
+          v: "Classic example: two threads doing 'count++' (read-modify-write) can lose an update ✓. Fixes: locks/mutexes, atomic operations, or message passing. Races are notoriously hard to reproduce because they're timing-dependent."
+
+        }), ref: "p.408" },
       { q: "Atomic operation:",
         choices: ["Indivisible — completes fully or not at all", "Very fast", "Single byte", "Read-only"], correct: 0,
-        solution: S({ c: "Atomic ops can't be interrupted. Useful for: counters, locks, lock-free structures.", s: ["E.g., compare-and-swap (CAS), atomic increment."], a: "Indivisible" }), ref: "p.408" },
+        solution: S({
+          c: "An atomic operation is INDIVISIBLE — it completes entirely or not at all, with no possibility of another thread observing a partial state mid-operation.",
+          s: [
+            "<b>Step 1 — Match.</b> Indivisible — completes fully or not at all.",
+            "<b>Step 2 — Distractor audit.</b> Atomicity isn't about being fast, single-byte, or read-only."
+          ],
+          a: "Indivisible (all-or-nothing).",
+          v: "Atomics like compare-and-swap (CAS) and atomic increment are the foundation of locks and lock-free data structures ✓ — they let threads coordinate without a race. Hardware guarantees no interruption mid-operation."
+
+        }), ref: "p.408" },
       { q: "Hash table average lookup with good hash:",
         choices: ["$O(1)$", "$O(\\log n)$", "$O(n)$", "$O(n^2)$"], correct: 0,
-        solution: S({ c: "Hash maps key to bucket directly.", s: ["Worst case $O(n)$ if all collide."], a: "$O(1)$ avg" }), ref: "p.415" },
+        solution: S({
+          c: "With a good hash function spreading keys evenly and a reasonable load factor, a hash table looks up in O(1) average time — the key maps almost directly to its bucket.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(1)$ average.",
+            "<b>Step 2 — Distractor audit.</b> $O(\\log n)$ is a balanced tree; $O(n)$ is the WORST case (all collisions); $O(n^2)$ is wrong."
+          ],
+          a: "$O(1)$ average.",
+          v: "The catch is the WORST case $O(n)$ if everything collides into one bucket ✓ — so hash tables give speed but no guarantee, unlike balanced trees' guaranteed $O(\\log n)$. Good hashing + resizing keeps the average near O(1)."
+
+        }), ref: "p.415" },
       { q: "Process scheduler types:",
         choices: ["FCFS, SJF, Round-robin, priority, multilevel", "Just FCFS", "Random only", "All same"], correct: 0,
-        solution: S({ c: "OS schedulers: First-Come First-Served, Shortest Job First, Round-Robin, Priority, Multilevel.", s: ["Tradeoffs: latency, fairness, throughput.", "Modern OS: complex multilevel feedback queues."], a: "Many strategies" }), ref: "p.408" },
+        solution: S({
+          c: "Operating systems use several CPU scheduling strategies: First-Come First-Served (FCFS), Shortest Job First (SJF), Round-Robin, Priority, and Multilevel (feedback) queues — each trading latency, fairness, and throughput differently.",
+          s: [
+            "<b>Step 1 — Match.</b> FCFS, SJF, Round-robin, priority, multilevel.",
+            "<b>Step 2 — Distractor audit.</b> 'Just FCFS' or 'random only' are too narrow; they're not 'all the same'."
+          ],
+          a: "Multiple strategies (FCFS, SJF, RR, priority, multilevel).",
+          v: "The trade-offs: SJF minimizes average wait but can starve long jobs; round-robin is fair but adds context-switch overhead ✓. Modern OSes use multilevel feedback queues to balance interactivity and throughput."
+
+        }), ref: "p.408" },
       { q: "Cache coherence protocol:",
         choices: ["MESI (Modified, Exclusive, Shared, Invalid)", "Routing", "Memory protection", "Address translation"], correct: 0,
-        solution: S({ c: "MESI: states of cache line in multicore systems. Maintains consistency without flushing.", s: ["Variants: MOESI, MESIF."], a: "MESI" }), ref: "p.408" },
+        solution: S({
+          c: "In a multicore system, each core's private cache may hold copies of the same memory. A coherence protocol like MESI (Modified, Exclusive, Shared, Invalid) tracks each cache line's state to keep all cores consistent.",
+          s: [
+            "<b>Step 1 — Match.</b> MESI (Modified, Exclusive, Shared, Invalid).",
+            "<b>Step 2 — Distractor audit.</b> Routing, memory protection, and address translation are different mechanisms."
+          ],
+          a: "MESI (and variants).",
+          v: "MESI lets one core write to a line (Modified/Exclusive) while invalidating others' copies, avoiding stale reads WITHOUT constant memory flushing ✓. Variants (MOESI, MESIF) optimize sharing further — the backbone of multicore consistency."
+
+        }), ref: "p.408" },
       { q: "Word alignment:",
         choices: ["Accessing aligned words is faster on most CPUs", "Slows down access", "Irrelevant", "Only for memory"], correct: 0,
-        solution: S({ c: "Aligned memory access: single cycle. Unaligned: may require multiple accesses or even fault.", s: ["Compilers usually align by default."], a: "Faster aligned access" }), ref: "p.407" },
+        solution: S({
+          c: "Memory access is fastest when data sits on its natural ALIGNMENT boundary (a 4-byte word at an address divisible by 4). Unaligned access may need multiple memory cycles or even fault.",
+          s: [
+            "<b>Step 1 — Match.</b> Accessing aligned words is faster on most CPUs.",
+            "<b>Step 2 — Distractor audit.</b> Alignment SPEEDS access, isn't irrelevant, and matters for registers/structs too."
+          ],
+          a: "Aligned access is faster.",
+          v: "Compilers pad structs to keep fields aligned for this reason ✓ — an aligned word loads in one bus cycle, while an unaligned one may straddle two words (two cycles, or a hardware exception on strict architectures like some ARM/MIPS)."
+
+        }), ref: "p.407" },
     ],
 
     // Software — +10
     17: [
       { q: "Quicksort pivot choice for adversary-proof:",
         choices: ["Random or median-of-three", "Always first", "Always last", "Middle index"], correct: 0,
-        solution: S({ c: "Random pivot avoids worst-case $O(n^2)$ on sorted input.", s: ["Median-of-three: median of first/mid/last as pivot.", "Introsort: switches to heapsort if recursion too deep."], a: "Random / median-of-3" }), ref: "p.415" },
+        solution: S({
+          c: "Quicksort degrades to $O(n^2)$ when the pivot is consistently the smallest/largest element (e.g. always-first pivot on already-sorted data). RANDOM or median-of-three pivots avoid this worst case.",
+          s: [
+            "<b>Step 1 — Match.</b> Random or median-of-three.",
+            "<b>Step 2 — Distractor audit.</b> Always-first, always-last, and fixed middle-index all have adversarial inputs that force $O(n^2)$."
+          ],
+          a: "Random / median-of-three pivot.",
+          v: "Randomization makes the worst case astronomically unlikely (no fixed input can target it) ✓; median-of-three samples first/mid/last. Introsort goes further — it switches to heapsort if recursion gets too deep, guaranteeing $O(n\\log n)$."
+
+        }), ref: "p.415" },
       { q: "Memoization:",
         choices: ["Cache results of expensive function calls", "Memory allocation", "Garbage collection", "Caching DRAM"], correct: 0,
-        solution: S({ c: "Memoization: store result of pure function call, reuse on identical inputs.", s: ["Dynamic programming = recursion + memoization.", "Transparent in some languages (lazy evaluation)."], a: "Cache function results" }), ref: "p.415" },
+        solution: S({
+          c: "Memoization caches the results of expensive (pure) function calls, so a repeated call with the same inputs returns the stored result instead of recomputing.",
+          s: [
+            "<b>Step 1 — Match.</b> Cache results of expensive function calls.",
+            "<b>Step 2 — Distractor audit.</b> It's not memory allocation, garbage collection, or DRAM caching — it's result caching."
+          ],
+          a: "Cache function results for reuse.",
+          v: "Dynamic programming = recursion + memoization ✓ — it's what turns exponential recursive Fibonacci ($O(2^n)$) into linear ($O(n)$). Requires PURE functions (same input → same output) for correctness."
+
+        }), ref: "p.415" },
       { q: "Heap operations: insertion and extraction:",
         choices: ["Both $O(\\log n)$", "$O(1)$", "$O(n)$", "Insertion fast, extraction slow"], correct: 0,
-        solution: S({ c: "Binary heap: tree of height $\\log n$. Bubble up (insert) or down (extract) = O(log n).", s: [""], a: "Both $O(\\log n)$" }), ref: "p.415" },
+        solution: S({
+          c: "A binary heap is a complete tree of height $\\log n$. Insertion 'bubbles up' and extraction 'sifts down' — each traverses at most the tree height, so both are $O(\\log n)$.",
+          s: [
+            "<b>Step 1 — Match.</b> Both $O(\\log n)$.",
+            "<b>Step 2 — Distractor audit.</b> $O(1)$ is only PEEK (top element); $O(n)$ is too slow; insertion and extraction are symmetric in cost."
+          ],
+          a: "Both $O(\\log n)$.",
+          v: "Peeking the min/max is $O(1)$ (it's the root), but removing it requires re-heapifying in $O(\\log n)$ ✓ — this balance makes the heap the natural priority queue, and the basis of heapsort ($O(n\\log n)$)."
+
+        }), ref: "p.415" },
       { q: "Binary search tree (BST) worst case search:",
         choices: ["$O(n)$ if unbalanced", "$O(\\log n)$", "$O(1)$", "$O(n^2)$"], correct: 0,
-        solution: S({ c: "Worst case: BST degenerates to linked list (e.g., inserting sorted data).", s: ["Self-balancing trees (AVL, red-black): guarantee $O(\\log n)$."], a: "$O(n)$ worst" }), ref: "p.415" },
+        solution: S({
+          c: "A BST gives $O(\\log n)$ search only when balanced. In the WORST case (e.g. inserting already-sorted data) it degenerates into a linked list → $O(n)$ search.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(n)$ if unbalanced.",
+            "<b>Step 2 — Distractor audit.</b> $O(\\log n)$ is the BALANCED/average case; $O(1)$ and $O(n^2)$ are wrong."
+          ],
+          a: "$O(n)$ worst case (degenerate tree).",
+          v: "Self-balancing trees (AVL, red-black) GUARANTEE $O(\\log n)$ by rebalancing on insert/delete ✓ — which is why production libraries use them instead of plain BSTs, where sorted input would otherwise create a linked-list-like tree."
+
+        }), ref: "p.415" },
       { q: "Recursive Fibonacci with memoization complexity:",
         choices: ["$O(n)$ time, $O(n)$ space", "$O(2^n)$", "$O(1)$", "$O(\\log n)$"], correct: 0,
-        solution: S({ c: "Each fib(k) for k=0..n computed once. Linear time with memo table.", s: ["Iterative: $O(n)$ time, $O(1)$ space."], a: "$O(n), O(n)$" }), ref: "p.415" },
+        solution: S({
+          c: "Naive recursive Fibonacci recomputes subproblems exponentially ($O(2^n)$). MEMOIZATION computes each fib(k) once and caches it → $O(n)$ time and $O(n)$ space.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(n)$ time, $O(n)$ space.",
+            "<b>Step 2 — Distractor audit.</b> $O(2^n)$ is the UN-memoized version; $O(1)$ and $O(\\log n)$ are too optimistic."
+          ],
+          a: "$O(n)$ time, $O(n)$ space.",
+          v: "The classic dynamic-programming win — caching collapses the exponential recursion tree to linear ✓. An ITERATIVE version does even better on space: $O(n)$ time, $O(1)$ space (keep only the last two values)."
+
+        }), ref: "p.415" },
       { q: "Depth-first search (DFS) uses:",
         choices: ["Stack (or recursion)", "Queue", "Heap", "Hashtable"], correct: 0,
-        solution: S({ c: "DFS explores deep before backtracking — natural fit for stack/recursion.", s: ["BFS uses queue."], a: "Stack" }), ref: "p.415" },
+        solution: S({
+          c: "DFS explores as DEEP as possible before backtracking — a natural fit for a STACK (or equivalently, recursion's call stack).",
+          s: [
+            "<b>Step 1 — Match.</b> Stack (or recursion).",
+            "<b>Step 2 — Distractor audit.</b> A QUEUE gives BFS (breadth-first); heap and hashtable aren't the traversal structure."
+          ],
+          a: "A stack (or recursion).",
+          v: "The data structure determines the traversal order: stack→DFS (deep), queue→BFS (level-by-level) ✓. DFS suits cycle detection, topological sort, and maze-solving; BFS finds shortest paths in unweighted graphs."
+
+        }), ref: "p.415" },
       { q: "Big-O of finding shortest path in unweighted graph (BFS):",
         choices: ["$O(V + E)$", "$O(V \\log V)$", "$O(V^2)$", "$O(E)$"], correct: 0,
-        solution: S({ c: "BFS visits each vertex and edge once.", s: ["Dijkstra (weighted): $O((V+E)\\log V)$ with priority queue."], a: "$O(V+E)$" }), ref: "p.415" },
+        solution: S({
+          c: "Breadth-first search finds shortest paths in an UNWEIGHTED graph by visiting each vertex and each edge once: $O(V+E)$.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(V+E)$.",
+            "<b>Step 2 — Distractor audit.</b> $O(V\\log V)$ and $O((V+E)\\log V)$ are Dijkstra (weighted); $O(V^2)$ is a dense-matrix variant."
+          ],
+          a: "$O(V+E)$.",
+          v: "BFS works for unweighted graphs because the first time it reaches a node IS via a shortest path ✓. For WEIGHTED graphs you need Dijkstra ($O((V+E)\\log V)$ with a heap) — BFS alone would give wrong distances."
+
+        }), ref: "p.415" },
       { q: "Big-O of accessing first vs last element of linked list:",
         choices: ["First: $O(1)$; Last: $O(n)$ (singly), $O(1)$ (doubly with tail)", "Both $O(1)$", "Both $O(n)$", "Variable"], correct: 0,
-        solution: S({ c: "Singly linked: head O(1), tail O(n).", s: ["Doubly with tail pointer: tail O(1).", "Circular linked: both O(1) from current."], a: "Depends" }), ref: "p.415" },
+        solution: S({
+          c: "In a singly-linked list, the head is $O(1)$ but reaching the tail requires walking all nodes: $O(n)$. A doubly-linked list WITH a tail pointer makes the last element $O(1)$ too.",
+          s: [
+            "<b>Step 1 — Match.</b> First $O(1)$; last $O(n)$ singly, $O(1)$ doubly-with-tail.",
+            "<b>Step 2 — Distractor audit.</b> 'Both $O(1)$' ignores singly-linked traversal; 'both $O(n)$' ignores the head."
+          ],
+          a: "First $O(1)$; last $O(n)$ (singly) or $O(1)$ (doubly+tail).",
+          v: "This is why list design matters: keeping a TAIL pointer makes append $O(1)$ ✓. Circular and doubly-linked lists trade extra pointers for cheaper end-access — a recurring data-structure trade-off."
+
+        }), ref: "p.415" },
       { q: "Algorithm with $O(n^3)$ on small input — feasible vs $n = 10^6$:",
         choices: ["Small $n$ fine; $n = 10^6$ infeasible ($10^{18}$ ops)", "Both fine", "Both bad", "Neither"], correct: 0,
-        solution: S({ c: "Cubic scales poorly. $n = 10^6$: 10^18 ops = trillions of seconds.", s: ["Practical limits: $n \\le 10^3$ for $O(n^3)$ in seconds."], a: "Small only" }), ref: "p.415" },
+        solution: S({
+          c: "Cubic complexity scales terribly. It's fine for small n, but at $n=10^6$ it needs $(10^6)^3 = 10^{18}$ operations — utterly infeasible.",
+          s: [
+            "<b>Step 1 — Match.</b> Small n fine; $n=10^6$ infeasible ($10^{18}$ ops).",
+            "<b>Step 2 — Distractor audit.</b> 'Both fine'/'both bad' miss that feasibility depends entirely on n."
+          ],
+          a: "Feasible only for small n.",
+          v: "Rough practical limits: $O(n^3)$ handles n≈1000 in seconds; $O(n^2)$ up to ~$10^4$-$10^5$; $O(n\\log n)$ up to $10^8$+ ✓. At $10^{18}$ ops, even a billion ops/sec would take ~30 YEARS — algorithm choice is everything at scale."
+
+        }), ref: "p.415" },
       { q: "Software complexity metric McCabe:",
         choices: ["Cyclomatic complexity — counts independent paths", "Lines of code", "Number of functions", "Memory used"], correct: 0,
-        solution: S({ c: "Cyclomatic complexity: $E - N + 2P$ for control flow graph. Roughly counts independent decision paths.", s: ["High complexity → hard to test/maintain.", "Typical guideline: keep < 10."], a: "Cyclomatic complexity" }), ref: "p.415" },
+        solution: S({
+          c: "McCabe's cyclomatic complexity counts the number of linearly-independent paths through a program's control-flow graph: $M = E - N + 2P$ (edges, nodes, connected components). It roughly counts decision points + 1.",
+          s: [
+            "<b>Step 1 — Match.</b> Cyclomatic complexity — counts independent paths.",
+            "<b>Step 2 — Distractor audit.</b> It's not lines of code, function count, or memory used."
+          ],
+          a: "Cyclomatic complexity (independent paths).",
+          v: "Higher complexity → more test cases needed and harder maintenance ✓. A common guideline keeps it under 10 per function — beyond that, refactoring into smaller pieces is usually warranted. It directly bounds the minimum number of tests for full path coverage."
+
+        }), ref: "p.415" },
     ],
   };
 

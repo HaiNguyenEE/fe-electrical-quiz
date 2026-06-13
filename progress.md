@@ -128,6 +128,12 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   but correct:0 said 125 W (250 W reordered to index 0); (2) Ch8 Bode-magnitude of (s+10)/(s+1)
   at ω=100 — correct answer is 0 dB not 20 dB (0 dB reordered to index 0); both had embedded
   meta-commentary admitting the mismatch, now removed. Integrity scan 209/209 Step-format.
-- **Remaining upgrade targets:** questions.js (164),
-  extra6 (181), extra7 (222), extra8 (191) — standard S() format; extra9/extra10
+- **2026-06-12 — extra6 (Round 7) COMPLETE (181/181):** all 17 chapters upgraded to the
+  teach-from-zero standard across 4 checkpoints. Compact INLINE format. Cleaned 3 flawed items:
+  Ch1 Q8 choice had "→ wait let me reverify" meta-text; Ch6 energy-stored had a duplicate-value
+  distractor ("0.04 J = 40 mJ (same)" → "0.4 J"); Ch6 series-parallel impedance choice had wrong
+  magnitude (7.84∠21.6° → 8.35∠20.2°). Integrity scan 181/181 Step-format.
+- **Remaining upgrade targets:** questions.js (164 — already has concept/steps/answer/verify,
+  user requested full Step-format upgrade anyway),
+  extra7 (222), extra8 (191) — standard S() format; extra9/extra10
   (~60 q) use template-literal SVG helpers and need their own careful session.
