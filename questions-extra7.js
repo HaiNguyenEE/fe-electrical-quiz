@@ -305,13 +305,13 @@
 
         }), ref: "p.64" },
       { q: "P(red queen from a deck):",
-        choices: ["$2/52 = 1/26$", "$4/52$", "$1/52$", "$1/13$"], correct: 0,
+        choices: ["$2/52 = 1/26$", "$4/52$", "$1/52$", "$3/52$"], correct: 0,
         solution: S({
           c: "Probability = favorable / total. A standard deck has 52 cards; red queens are the queen of hearts and queen of diamonds = 2.",
           s: [
             "<b>Step 1 — Count.</b> 2 red queens.",
             "<b>Step 2 — Divide.</b> $2/52 = 1/26$.",
-            "<b>Step 3 — Distractor audit.</b> $4/52$ counts ALL queens; $1/52$ is one card; $1/13$ counts all queens differently."
+            "<b>Step 3 — Distractor audit.</b> $4/52$ counts ALL queens; $1/52$ is one card; $3/52$ is an arbitrary miscount."
           ],
           a: "$2/52 = 1/26$",
           v: "Red = hearts + diamonds (2 of the 4 queens) ✓. Being specific about the qualifier (red AND queen) narrows 4 queens to 2."
@@ -522,7 +522,7 @@
 
         }), ref: "p.230" },
       { q: "Annual operating cost grows at $g = 5\\%$/year. PW of $\\$1000$ first-year cost over 10 years at $i = 8\\%$:",
-        choices: ["$\\approx \\$8{,}530$ (geom gradient)", "$\\$10000$", "$\\$1000$", "$\\$3000$"], correct: 0,
+        choices: ["$\\approx \\$8{,}200$ (geom gradient)", "$\\$10000$", "$\\$1000$", "$\\$3000$"], correct: 0,
         solution: S({
           c: "A GEOMETRIC GRADIENT (cash flow growing at rate g) has present worth $P = A_1\\dfrac{1-[(1+g)/(1+i)]^n}{i-g}$ (for $i\\ne g$).",
           s: [
