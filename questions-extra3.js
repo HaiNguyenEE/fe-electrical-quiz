@@ -1024,16 +1024,16 @@
         }),
         ref: "Handbook p.355" },
       { q: "Magnetic flux density inside long solenoid with $n$ turns/m and current $I$:",
-        choices: ["$B = \\mu_0 n I$", "$B = \\mu_0 N I/L$", "$B = 2\\pi r$", "Both A and B (same)"],
+        choices: ["$B = \\mu_0 n I$", "$B = \\mu_0 I/(2\\pi r)$", "$B = 2\\pi r$", "$B = \\mu_0 n^2 I$"],
         correct: 0,
         solution: S({
-          c: "Inside an ideal long solenoid the field is UNIFORM and axial: $B = \\mu_0 nI$, with $n$ = turns per meter. Written with total turns: $B = \\mu_0 NI/L$ — the SAME formula since $n = N/L$.",
+          c: "Inside an ideal long solenoid the field is UNIFORM and axial: $B = \\mu_0 nI$, with $n$ = turns per meter (equivalently $\\mu_0 NI/L$ since $n=N/L$).",
           s: [
-            "<b>Step 1 — Recognize the equivalence.</b> Choices A and B are one formula in two notations — but the answer key wants the per-unit-length form A (and D acknowledges the equivalence).",
-            "<b>Step 2 — Where it comes from.</b> Ampere's law around a rectangle straddling the winding: only the inside leg picks up $\\oint H\\,dl$, enclosing $nI$ per unit length.",
-            "<b>Step 3 — Distractor audit.</b> $2\\pi r$ isn't even a field expression (it's a circumference — from the toroid/wire formulas)."
+            "<b>Step 1 — Apply Ampere's law.</b> Around a rectangle straddling the winding, only the inside leg picks up $\\oint H\\,dl$, enclosing $nI$ per unit length → $B=\\mu_0 nI$.",
+            "<b>Step 2 — Uniform field.</b> The field is the same everywhere inside and $\\approx 0$ outside an ideal long solenoid.",
+            "<b>Step 3 — Distractor audit.</b> $\\mu_0 I/(2\\pi r)$ is the long straight WIRE field; $2\\pi r$ is a circumference, not a field; $\\mu_0 n^2 I$ confuses $B$ with the inductance dependence (which carries $n^2$)."
           ],
-          a: "$B = \\mu_0 nI$ (equivalently $\\mu_0NI/L$).",
+          a: "$B = \\mu_0 nI$.",
           v: "Number feel: 1000 turns/m at 1 A → $B = 4\\pi\\times10^{-7}\\times1000 = 1.26$ mT — small, which is why real electromagnets add iron cores ($\\times\\mu_r$, thousands) ✓. Outside the ideal solenoid: $B \\approx 0$ — the return flux spreads over infinite space."
 
         }),
