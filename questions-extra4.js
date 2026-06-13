@@ -1715,74 +1715,296 @@
     12: [
       { q: "Open-loop step response of $G(s) = 1/(s+2)$:",
         choices: ["$(1 - e^{-2t})/2 \\cdot u(t)$", "$e^{-2t}$", "Constant 0.5", "Sine wave"], correct: 0,
-        solution: S({ c: "Y(s) = G(s)/s. Partial fractions.", s: ["$Y(s) = 1/[s(s+2)] = (1/2)[1/s - 1/(s+2)]$.", "Inverse: $(1/2)(1 - e^{-2t})$."], a: "$(1-e^{-2t})/2$", v: "Final value 0.5 = DC gain × step amplitude." }), ref: "Handbook p.366" },
+        solution: S({
+          c: "Step response in the Laplace world: multiply by the step's transform $1/s$, then invert: $Y(s) = G(s)\\cdot\\dfrac{1}{s}$. Partial fractions split it into pieces you can look up.",
+          s: [
+            "<b>Step 1 — Set up.</b> $Y(s) = \\dfrac{1}{s(s+2)}$.",
+            "<b>Step 2 — Partial fractions.</b> $\\dfrac{1}{s(s+2)} = \\dfrac{1/2}{s} - \\dfrac{1/2}{s+2}$ (cover-up: at $s=0$ → 1/2; at $s=-2$ → −1/2).",
+            "<b>Step 3 — Invert term by term.</b> $1/s \\to u(t)$; $1/(s+2) \\to e^{-2t}$. So $y(t) = \\tfrac{1}{2}(1 - e^{-2t})u(t)$.",
+            "<b>Step 4 — Distractor audit.</b> $e^{-2t}$ alone is the IMPULSE response (forgot the $1/s$); constant 0.5 is only the final value; nothing oscillates — the pole is real."
+          ],
+          a: "$y(t) = \\tfrac{1}{2}(1 - e^{-2t})u(t)$",
+          v: "Two checks beat one: final-value theorem $\\lim_{s\\to0} sY(s) = 1/2$ ✓ matches DC gain $G(0) = 1/2$; and the time constant $\\tau = 1/2$ s says 63% of the way up at $t = 0.5$ s — plug in: $\\tfrac12(1-e^{-1}) = 0.316 = 63\\%$ of 0.5 ✓."
+
+        }), ref: "Handbook p.366" },
       { q: "Steady-state error for type-2 system to ramp input:",
         choices: ["$0$", "$1/K_v$", "Infinite", "$1/K_p$"], correct: 0,
-        solution: S({ c: "Type-2 has 2 integrators → handles ramp perfectly.", s: ["Type-0 step: $1/(1+K_p)$. Type-1 step: 0; ramp: $1/K_v$. Type-2 ramp: 0; parabola: $1/K_a$."], a: "$0$" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "SYSTEM TYPE = number of pure integrators ($s = 0$ poles) in the open loop. Each integrator 'absorbs' one polynomial degree of input: an integrator can track what one degree below it throws. Type 2 vs a ramp (degree 1): two integrators against one degree — perfect tracking, zero error.",
+          s: [
+            "<b>Step 1 — The error grid (memorize as a staircase).</b> Type 0: step → $\\tfrac{1}{1+K_p}$, ramp → ∞. Type 1: step → 0, ramp → $1/K_v$, parabola → ∞. Type 2: step, ramp → 0; parabola → $1/K_a$.",
+            "<b>Step 2 — Read off.</b> Type 2 + ramp → 0.",
+            "<b>Step 3 — Distractor audit.</b> $1/K_v$ is the TYPE-1 ramp answer (one row off — the standard trap); infinite would be type 0; $1/K_p$ pairs with steps."
+          ],
+          a: "$e_{ss} = 0$",
+          v: "The pattern in one sentence: each system type zeroes the error for inputs up to degree (type − 1), gives a FINITE error at degree = type, and loses entirely above ✓ — one rule replaces the whole table."
+
+        }), ref: "Handbook p.366" },
       { q: "Maximum overshoot $M_p$ for $\\zeta = 0.6$:",
         choices: ["$\\approx 9.5\\%$", "$0\\%$", "$50\\%$", "$25\\%$"], correct: 0,
-        solution: S({ c: "$M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^2}}$.", s: ["$\\zeta = 0.6$: $\\sqrt{1-0.36} = 0.8$. $\\pi(0.6/0.8) = 2.36$. $e^{-2.36} \\approx 0.0948$."], a: "$\\approx 9.5\\%$", v: "$\\zeta=0.7$ → ~4.6%. $\\zeta=0.5$ → ~16%. Linear in pre-exp expression but exponential overall." }), ref: "Handbook p.366" },
+        solution: S({
+          c: "For a standard 2nd-order underdamped system, peak overshoot depends ONLY on damping ratio: $M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^2}}$.",
+          s: [
+            "<b>Step 1 — The radical.</b> $\\sqrt{1 - 0.36} = 0.8$.",
+            "<b>Step 2 — The exponent.</b> $-\\pi(0.6)/0.8 = -2.356$.",
+            "<b>Step 3 — Exponentiate.</b> $e^{-2.356} \\approx 0.0948 \\to 9.5\\%$.",
+            "<b>Step 4 — Distractor audit.</b> 0% needs $\\zeta \\ge 1$ — critically damped or overdamped, no oscillation at all; 50% would be $\\zeta \\approx 0.22$; 25% is $\\zeta \\approx 0.4$."
+          ],
+          a: "$M_p \\approx 9.5\\%$",
+          v: "Calibration points worth carrying into the exam: ζ = 0.5 → 16%, 0.6 → 9.5%, 0.707 → 4.3%, 1.0 → 0% ✓ — and note $\\omega_n$ appears nowhere: frequency sets HOW FAST you overshoot, ζ sets HOW MUCH."
+
+        }), ref: "Handbook p.366" },
       { q: "Pole at origin in open-loop transfer means:",
         choices: ["Type-1 system (integrator)", "Type-0", "Unstable", "Resonant"], correct: 0,
-        solution: S({ c: "Number of $s=0$ poles in open loop = system type.", s: ["Affects steady-state error formulas."], a: "Type-1" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "A pole at $s = 0$ IS an integrator ($1/s$ = integration in Laplace). Count them in the OPEN loop and you have the system TYPE — the single number that predicts steady-state errors.",
+          s: [
+            "<b>Step 1 — Match.</b> One pole at origin → Type 1.",
+            "<b>Step 2 — What Type 1 buys.</b> Zero steady-state error to a step, finite error $1/K_v$ to a ramp.",
+            "<b>Step 3 — Distractor audit.</b> Type 0 has NO origin pole; an OPEN-loop integrator doesn't make the CLOSED loop unstable (closed-loop poles decide that); 'resonant' needs a complex pole pair, not $s=0$."
+          ],
+          a: "Type-1 system — one open-loop integrator.",
+          v: "Intuition for why integrators kill step error: any persistent error keeps charging the integrator, ramping the actuator until the error is driven to zero — only $e = 0$ is an equilibrium ✓. (Same reason the I in PID exists.)"
+
+        }), ref: "Handbook p.366" },
       { q: "Routh array first column has all positive entries. Conclusion:",
         choices: ["All poles in LHP — stable", "Unstable", "Marginal", "Cannot tell"], correct: 0,
-        solution: S({ c: "No sign changes → no RHP poles → stable.", s: ["Special cases: row of zeros (marginal) or zero in first column (auxiliary equation)."], a: "Stable" }), ref: "Handbook p.365" },
+        solution: S({
+          c: "The Routh-Hurwitz criterion reads stability straight off the characteristic polynomial — no root-solving: the number of SIGN CHANGES down the first column equals the number of right-half-plane poles.",
+          s: [
+            "<b>Step 1 — Apply.</b> All entries positive → zero sign changes → zero RHP poles → STABLE.",
+            "<b>Step 2 — Distractor audit.</b> Unstable requires at least one sign change; marginal shows up as a ROW OF ZEROS (poles on the jω-axis — handle with the auxiliary equation); 'cannot tell' underrates the theorem — it's conclusive.",
+            "<b>Step 3 — The special cases worth one glance.</b> Zero in the first column (others nonzero): substitute ε and take limits. Entire row zero: differentiate the auxiliary polynomial."
+          ],
+          a: "All poles in the LHP — the system is stable.",
+          v: "Why Routh survives in the calculator age: it works SYMBOLICALLY — leave a gain K in the polynomial and the first-column conditions hand you the exact stability range of K ✓, which is its classic exam role."
+
+        }), ref: "Handbook p.365" },
       { q: "Lead compensator pole-zero relationship:",
         choices: ["Zero closer to origin than pole", "Pole closer to origin", "Pole = zero", "Both at origin"], correct: 0,
-        solution: S({ c: "Lead: $(s+z)/(s+p)$ with $z < p$. Adds positive phase between $z$ and $p$.", s: ["Lag: $z > p$. Lead-lag: combines both."], a: "$z < p$" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "A lead compensator $\\dfrac{s+z}{s+p}$ needs $z < p$ — ZERO closer to the origin. Between those corner frequencies the zero's +90° arrives before the pole's −90°, leaving a hump of POSITIVE (lead) phase.",
+          s: [
+            "<b>Step 1 — Match.</b> Zero closer to origin ($z < p$).",
+            "<b>Step 2 — What the phase hump is FOR.</b> Injected near the gain-crossover frequency, it raises PHASE MARGIN → less overshoot, faster response — lead is the frequency-domain cousin of derivative action.",
+            "<b>Step 3 — Distractor audit.</b> Pole closer ($p < z$) is a LAG compensator — negative phase, used instead to boost low-frequency gain and shrink steady-state error; $p = z$ cancels itself; both at origin is no compensator."
+          ],
+          a: "$z < p$: zero nearer the origin → positive phase lead.",
+          v: "The duality table to retain: LEAD ↔ better transient/phase margin ↔ derivative-like; LAG ↔ better steady-state accuracy ↔ integral-like; lead-lag ↔ both ✓. Max lead occurs at $\\omega_m = \\sqrt{zp}$, the geometric mean — place IT at crossover."
+
+        }), ref: "Handbook p.366" },
       { q: "PID controller derivative term effect on:",
         choices: ["Adds damping, predicts future, but amplifies noise", "Eliminates SS error", "Increases gain only", "No effect"], correct: 0,
-        solution: S({ c: "$K_d \\cdot de/dt$: responds to rate of error change.", s: ["Adds damping: anticipates overshoot.", "Drawback: amplifies high-freq noise.", "Often filtered (PID with derivative filter)."], a: "Adds damping" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "The D term computes $K_d\\,de/dt$ — it reacts to how FAST the error is changing, not its size. That look-ahead adds DAMPING (it sees overshoot coming and brakes early), but differentiating also magnifies high-frequency NOISE.",
+          s: [
+            "<b>Step 1 — Match.</b> Adds damping / anticipates, but amplifies noise.",
+            "<b>Step 2 — The three terms, divided.</b> P reacts to present error; I erases STEADY-STATE error (accumulates the past); D anticipates the future. The question pins the D role precisely.",
+            "<b>Step 3 — Distractor audit.</b> 'Eliminates SS error' is the INTEGRAL term's job (the classic mix-up); 'increases gain only' describes P; 'no effect' is wrong."
+          ],
+          a: "Adds damping and anticipation — at the cost of noise amplification.",
+          v: "The practical fix that confirms the trade: real controllers use a 'filtered derivative' $\\dfrac{K_d s}{1 + s/N}$ — a low-pass cap on the D gain so noise doesn't blow up the actuator ✓. Pure D is never used alone (it ignores constant errors entirely)."
+
+        }), ref: "Handbook p.366" },
       { q: "A system has $\\omega_n = 5$ rad/s, $\\zeta = 0.5$. Damped frequency:",
         choices: ["$\\approx 4.33$ rad/s", "$5$ rad/s", "$2.5$ rad/s", "$10$ rad/s"], correct: 0,
-        solution: S({ c: "$\\omega_d = \\omega_n \\sqrt{1-\\zeta^2}$.", s: ["$\\sqrt{1-0.25} = 0.866$.", "$\\omega_d = 5 \\cdot 0.866 = 4.33$ rad/s."], a: "$\\approx 4.33$ rad/s" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "An underdamped system rings at its DAMPED frequency, which is the natural frequency pulled down by damping: $\\omega_d = \\omega_n\\sqrt{1 - \\zeta^2}$.",
+          s: [
+            "<b>Step 1 — Radical.</b> $\\sqrt{1 - 0.25} = \\sqrt{0.75} = 0.866$.",
+            "<b>Step 2 — Multiply.</b> $\\omega_d = 5\\times0.866 = 4.33$ rad/s.",
+            "<b>Step 3 — Distractor audit.</b> 5 rad/s is $\\omega_n$ itself (the UNdamped frequency — true only at ζ = 0); 2.5 halves; 10 doubles."
+          ],
+          a: "$\\omega_d \\approx 4.33$ rad/s",
+          v: "The geometry behind it: the pole sits at $-\\zeta\\omega_n \\pm j\\omega_d$ — a point distance $\\omega_n$ from the origin at angle $\\cos^{-1}\\zeta$ off the negative-real axis, so $\\omega_d$ is just its imaginary (vertical) coordinate ✓. Damping always lowers the ringing frequency."
+
+        }), ref: "Handbook p.366" },
       { q: "Bode plot magnitude slope of pure $K$ (gain only):",
         choices: ["$0$ dB/dec (flat)", "$-20$ dB/dec", "$+20$ dB/dec", "Variable"], correct: 0,
-        solution: S({ c: "Constant in $s$ → no slope in Bode.", s: ["Phase contribution: 0° (assuming K > 0)."], a: "0 dB/dec" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "A pure gain $K$ has the same magnitude at EVERY frequency — so its Bode magnitude is a horizontal line: slope 0 dB/decade, sitting at $20\\log_{10}K$.",
+          s: [
+            "<b>Step 1 — Match.</b> 0 dB/dec (flat).",
+            "<b>Step 2 — Distractor audit.</b> −20 dB/dec is a POLE ($1/s$); +20 is a ZERO ($s$); 'variable' would need mixed dynamics. K alone has none.",
+            "<b>Step 3 — Phase too.</b> A positive constant adds 0° of phase (a negative K would add ±180°)."
+          ],
+          a: "0 dB/decade — flat, at $20\\log K$.",
+          v: "Why this is the Bode baseline: every transfer function is a product, and on the log scale products ADD — you stack the flat K level, then tilt by ∓20 dB/dec at each zero/pole corner ✓. K just sets the starting height."
+
+        }), ref: "Handbook p.366" },
       { q: "Differentiator $H(s) = s$: Bode magnitude:",
         choices: ["$+20$ dB/dec (rising)", "Flat", "$-20$ dB/dec", "Constant"], correct: 0,
-        solution: S({ c: "$|H(j\\omega)| = \\omega$. dB: $20\\log\\omega$. Slope: 20 dB/dec.", s: ["Phase: $+90°$ (constant)."], a: "+20 dB/dec" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "For $H(s) = s$, the magnitude is $|H(j\\omega)| = \\omega$ — it grows in direct proportion to frequency. In dB that's $20\\log\\omega$, a line rising at +20 dB/decade.",
+          s: [
+            "<b>Step 1 — Match.</b> +20 dB/dec, rising.",
+            "<b>Step 2 — Why +20.</b> Ten times the frequency → ten times the magnitude → $20\\log 10 = +20$ dB. That's the definition of one decade of +20 slope.",
+            "<b>Step 3 — Distractor audit.</b> Flat is a constant; −20 is the INTEGRATOR $1/s$ (exact opposite — the most common confusion); 'constant' ignores the s entirely."
+          ],
+          a: "+20 dB/decade (and constant +90° phase).",
+          v: "The integrator/differentiator mirror, worth memorizing as a pair: $1/s$ → −20 dB/dec, −90°; $s$ → +20 dB/dec, +90° ✓. The rising gain is also why pure differentiators amplify high-frequency noise — same caution as PID's D term."
+
+        }), ref: "Handbook p.366" },
       { q: "Closed-loop poles all in LHP. Conclusion:",
         choices: ["Closed-loop stable", "Open loop unstable", "Marginal", "Insufficient info"], correct: 0,
-        solution: S({ c: "Stability of closed-loop is determined by closed-loop pole locations.", s: ["Open-loop instability doesn't preclude closed-loop stability — feedback can stabilize."], a: "Stable" }), ref: "Handbook p.365" },
+        solution: S({
+          c: "Stability is decided ENTIRELY by where the CLOSED-loop poles sit. All in the left-half plane (negative real parts) → every natural mode decays → BIBO stable. Full stop.",
+          s: [
+            "<b>Step 1 — Match.</b> Closed-loop stable.",
+            "<b>Step 2 — The key insight (and the trap).</b> Open-loop stability is IRRELEVANT to this conclusion — feedback routinely stabilizes open-loop-unstable plants (an inverted pendulum, a fighter jet). So 'open loop unstable' is neither implied nor contradicted.",
+            "<b>Step 3 — Distractor audit.</b> Marginal needs poles ON the jω-axis; 'insufficient info' underrates a complete pole map — LHP poles ARE the definition of stable."
+          ],
+          a: "The closed-loop system is stable.",
+          v: "Why 'left = decay': a pole at $s = \\sigma + j\\omega$ produces $e^{\\sigma t}$; σ < 0 means shrinking, σ > 0 growing, σ = 0 sustained ✓. Feedback's whole purpose is to drag poles leftward into that stable region."
+
+        }), ref: "Handbook p.365" },
       { q: "Block diagram: input $X$ → $G_1$ → summing junction (- feedback from $H_1$) → $G_2$ → output $Y$. Transfer function:",
         choices: ["$Y/X = G_1 G_2/(1 + G_1 H_1)$ ... depends on where feedback taps", "Always $G_1 G_2$", "Always $1/G$", "$G + H$"], correct: 0,
-        solution: S({ c: "Use block diagram reduction rules. Negative feedback around the front part: $G_1/(1+G_1 H_1)$. Then series with $G_2$.", s: ["Depends on exact topology. The given structure: $G_1/(1+G_1 H_1) \\cdot G_2$."], a: "Depends; using given: $G_1 G_2/(1+G_1 H_1)$" }), ref: "Handbook p.365" },
+        solution: S({
+          c: "Block-diagram reduction has one workhorse rule: a NEGATIVE feedback loop with forward gain $G$ and feedback gain $H$ collapses to $\\dfrac{G}{1 + GH}$. Blocks simply in series MULTIPLY.",
+          s: [
+            "<b>Step 1 — Reduce the inner loop.</b> The feedback $H_1$ wraps the forward path; that loop becomes $\\dfrac{G_1}{1 + G_1H_1}$ (using the stated topology).",
+            "<b>Step 2 — Series with $G_2$.</b> Multiply: $\\dfrac{Y}{X} = \\dfrac{G_1G_2}{1 + G_1H_1}$.",
+            "<b>Step 3 — Distractor audit.</b> 'Always $G_1G_2$' ignores feedback; '$1/G$' and '$G+H$' aren't reduction results — series multiplies, loops use the $1/(1+GH)$ rule, parallel paths add."
+          ],
+          a: "$\\dfrac{Y}{X} = \\dfrac{G_1G_2}{1 + G_1H_1}$ (topology-dependent).",
+          v: "The caveat the answer flags honestly: WHERE the feedback taps matters — if $H_1$ enclosed both $G_1$ and $G_2$, the result would be $\\dfrac{G_1G_2}{1 + G_1G_2H_1}$ ✓. Always identify exactly what the loop wraps before applying the formula."
+
+        }), ref: "Handbook p.365" },
     ],
 
     // ====================== Ch 13: Comm — +10 ======================
     13: [
       { q: "PCM telephone channel: 8000 samples/s × 8 bits = ",
         choices: ["$64$ kbps", "$8$ kbps", "$1$ Mbps", "$56$ kbps"], correct: 0,
-        solution: S({ c: "Bit rate = samples/s × bits/sample.", s: ["$8000 \\cdot 8 = 64{,}000$ bps = 64 kbps."], a: "$64$ kbps" }), ref: "Handbook p.371" },
+        solution: S({
+          c: "Pulse-code modulation bit rate is simply samples per second × bits per sample.",
+          s: [
+            "<b>Step 1 — Multiply.</b> $8000\\times8 = 64{,}000$ bps = 64 kbps.",
+            "<b>Step 2 — Where the numbers come from.</b> 8 kHz sampling = 2× the 4-kHz voice band (Nyquist); 8 bits = 256 quantization levels (μ-law/A-law companding).",
+            "<b>Step 3 — Distractor audit.</b> 8 kbps drops a factor of 8; 1 Mbps is wildly high; 56 kbps is the old modem cap (one bit robbed for signaling) — a real but different number."
+          ],
+          a: "64 kbps",
+          v: "This 64-kbps 'DS0' is the atom of the entire telephone hierarchy: 24 of them make a 1.544-Mbps T1, and it's why ISDN and early digital lines came in 64-kbps chunks ✓."
+
+        }), ref: "Handbook p.371" },
       { q: "Hartley channel capacity for noiseless 4 kHz channel, 8 levels:",
         choices: ["$24$ kbps", "$8$ kbps", "$32$ kbps", "$4$ kbps"], correct: 0,
-        solution: S({ c: "Hartley: $C = 2B \\log_2 M$.", s: ["$C = 2(4000) \\log_2 8 = 8000 \\cdot 3 = 24000$ bps."], a: "$24$ kbps" }), ref: "Handbook p.371" },
+        solution: S({
+          c: "Hartley's law (noiseless, M discrete levels): $C = 2B\\log_2 M$. The $2B$ is the Nyquist symbol rate; $\\log_2 M$ is bits carried per symbol.",
+          s: [
+            "<b>Step 1 — Bits per symbol.</b> $\\log_2 8 = 3$.",
+            "<b>Step 2 — Symbol rate.</b> $2B = 2\\times4000 = 8000$ symbols/s.",
+            "<b>Step 3 — Multiply.</b> $C = 8000\\times3 = 24{,}000$ bps = 24 kbps.",
+            "<b>Step 4 — Distractor audit.</b> 8 kbps forgot $\\log_2 M$; 32 kbps used $\\log_2 16$; 4 kbps is just B."
+          ],
+          a: "24 kbps",
+          v: "The catch real systems hit: Hartley says more LEVELS → more capacity with no limit — but noise blurs closely-spaced levels, so Shannon ($C = B\\log_2(1+S/N)$) sets the true ceiling ✓. Noiseless is the ideal Hartley assumes."
+
+        }), ref: "Handbook p.371" },
       { q: "AM with carrier 1 MHz, modulation index $m = 1$ (full modulation):",
         choices: ["Sideband power equals 1/3 of total", "All power in carrier", "All in sidebands", "Equal split"], correct: 0,
-        solution: S({ c: "$\\eta = m^2/(2+m^2) = 1/3$ for m=1.", s: ["Each sideband carries 1/6 of total power."], a: "1/3 of total in sidebands", v: "Why suppressed-carrier AM (DSB-SC) is more efficient." }), ref: "Handbook p.371" },
+        solution: S({
+          c: "In standard AM the carrier holds a FIXED amount of power and conveys NO information; only the sidebands carry the message. Sideband fraction: $\\eta = \\dfrac{m^2}{2 + m^2}$.",
+          s: [
+            "<b>Step 1 — Plug m = 1.</b> $\\eta = \\dfrac{1}{2+1} = \\dfrac{1}{3}$.",
+            "<b>Step 2 — Split it.</b> Two symmetric sidebands → each carries 1/6 of total; the carrier hogs the remaining 2/3.",
+            "<b>Step 3 — Distractor audit.</b> 'All in carrier' / 'all in sidebands' ignore the split; 'equal' would be 1/2 each, never true for standard AM."
+          ],
+          a: "Sidebands = 1/3 of total power (carrier wastes 2/3).",
+          v: "This 67% waste is exactly WHY efficient variants exist: DSB-SC removes the carrier, SSB removes carrier AND one sideband — half the bandwidth, far less power ✓. Standard AM keeps the carrier only so cheap envelope detectors work."
+
+        }), ref: "Handbook p.371" },
       { q: "Bandwidth of QPSK modulating bit stream at $R_b$ bps:",
         choices: ["$\\approx R_b/2$", "$\\approx R_b$", "$2 R_b$", "$4 R_b$"], correct: 0,
-        solution: S({ c: "QPSK: 2 bits/symbol, symbol rate $R_b/2$. Bandwidth $\\approx$ symbol rate.", s: ["BPSK: BW $\\approx R_b$.", "16-QAM: BW $\\approx R_b/4$."], a: "$R_b/2$" }), ref: "Handbook p.371" },
+        solution: S({
+          c: "Bandwidth scales with SYMBOL rate, not bit rate. QPSK packs 2 bits per symbol, so its symbol rate — and thus bandwidth — is half the bit rate: $BW \\approx R_b/2$.",
+          s: [
+            "<b>Step 1 — Bits per symbol.</b> QPSK has 4 phases → $\\log_2 4 = 2$ bits/symbol.",
+            "<b>Step 2 — Symbol rate.</b> $R_s = R_b/2$, and minimum BW ≈ $R_s$.",
+            "<b>Step 3 — Distractor audit.</b> $R_b$ is BPSK (1 bit/symbol); $R_b/4$ would be 16-QAM; $2R_b$, $4R_b$ go the wrong way entirely."
+          ],
+          a: "$BW \\approx R_b/2$",
+          v: "The spectral-efficiency ladder this sits on: BPSK 1 bit/Hz, QPSK 2, 16-QAM 4, 64-QAM 6 ✓ — each step doubles the constellation to send more bits in the same band, paying in required SNR (denser points, smaller noise margin)."
+
+        }), ref: "Handbook p.371" },
       { q: "Hamming distance between 10110 and 11011:",
         choices: ["$3$", "$2$", "$5$", "$0$"], correct: 0,
-        solution: S({ c: "Hamming distance: number of bit positions that differ.", s: ["10110", "11011", "Diff: pos 2, 4, 5 → 3 differences."], a: "$3$", v: "Codes with min Hamming distance $d$ can detect $d-1$ errors and correct $\\lfloor(d-1)/2\\rfloor$." }), ref: "Handbook p.371" },
+        solution: S({
+          c: "Hamming distance = the count of bit positions where two equal-length codewords DIFFER (equivalently, the number of 1s in their XOR).",
+          s: [
+            "<b>Step 1 — Align and compare.</b> 1<b>0</b>1<b>10</b> vs 1<b>1</b>1<b>01</b>: positions 2, 4, 5 differ; 1 and 3 match.",
+            "<b>Step 2 — Count.</b> 3 differing positions.",
+            "<b>Step 3 — Distractor audit.</b> 2 misses one; 5 counts every position; 0 would mean identical."
+          ],
+          a: "Hamming distance = 3.",
+          v: "Why coders care: a code with MINIMUM distance $d$ can DETECT $d-1$ errors and CORRECT $\\lfloor(d-1)/2\\rfloor$ ✓ — so spacing valid codewords far apart in Hamming space is literally how error-correcting codes buy reliability."
+
+        }), ref: "Handbook p.371" },
       { q: "ASK modulation efficiency:",
         choices: ["Poor — wastes power in carrier", "Best", "Same as FSK", "Linear with $m$"], correct: 0,
-        solution: S({ c: "ASK varies amplitude → wastes carrier power when transmitting 0 (or vice versa).", s: ["FSK / PSK have constant envelope — more efficient."], a: "Poor" }), ref: "Handbook p.371" },
+        solution: S({
+          c: "Amplitude-shift keying encodes bits by turning carrier amplitude up/down (on-off keying in the extreme). Because amplitude itself carries the data, power is wasted and the signal is fragile to amplitude noise/fading.",
+          s: [
+            "<b>Step 1 — Match.</b> Poor efficiency / noise-sensitive.",
+            "<b>Step 2 — Why FSK and PSK beat it.</b> They have a CONSTANT envelope — info lives in frequency or phase — so amplifiers can run in efficient saturation and amplitude noise doesn't corrupt the bit.",
+            "<b>Step 3 — Distractor audit.</b> 'Best' is backwards; 'same as FSK' is false (FSK is more robust); 'linear with m' confuses ASK with analog AM's index."
+          ],
+          a: "Poor — amplitude-based, power-wasteful, noise-prone.",
+          v: "Where ASK survives anyway: dirt-cheap short-range links — TV remotes, garage openers, basic RFID — where simplicity beats efficiency ✓. Fiber optics also use on-off keying because light amplitude is easy to switch and detect."
+
+        }), ref: "Handbook p.371" },
       { q: "Why use modulation? Primary reason:",
         choices: ["Shift to higher frequency for antenna size, multiplexing", "Reduce signal power", "Increase bandwidth", "Smaller signals"], correct: 0,
-        solution: S({ c: "Modulation: shifts baseband to carrier frequency. Allows: (1) practical antenna size, (2) FDM channel sharing, (3) better propagation at certain frequencies.", s: ["Antenna efficient size ≈ λ/4. At low freq, antennas would be impossibly large."], a: "Antenna size, multiplexing" }), ref: "Handbook p.371" },
+        solution: S({
+          c: "Modulation lifts a low-frequency 'baseband' message onto a high-frequency CARRIER. That upward shift is what makes practical antennas, channel sharing, and good propagation possible.",
+          s: [
+            "<b>Step 1 — Match.</b> Higher frequency → feasible antenna size + multiplexing.",
+            "<b>Step 2 — The antenna driver.</b> Efficient antennas are ~λ/4. Baseband audio (~3 kHz, λ = 100 km) would need a 25-km antenna; shift to 100 MHz and λ/4 ≈ 0.75 m.",
+            "<b>Step 3 — Distractor audit.</b> Modulation doesn't reduce power or shrink signals; it generally INCREASES bandwidth (sidebands) — the opposite of 'increase bandwidth' being the goal."
+          ],
+          a: "To reach a frequency where antennas are practical and many channels coexist (FDM).",
+          v: "The multiplexing payoff makes it concrete: every FM station shares the air by sitting at its own carrier — your radio tunes one out of dozens ✓. Same principle stacks TV channels, cellular bands, and Wi-Fi."
+
+        }), ref: "Handbook p.371" },
       { q: "Shannon capacity: $C = B\\log_2(1 + S/N)$. Doubling B with same SNR:",
         choices: ["Doubles C", "Quadruples C", "Halves C", "No effect"], correct: 0,
-        solution: S({ c: "Linear in B.", s: ["Doubling B → doubles C (SNR unchanged)."], a: "Doubles" }), ref: "Handbook p.371" },
+        solution: S({
+          c: "In Shannon's law $C = B\\log_2(1 + S/N)$, bandwidth $B$ sits OUTSIDE the log as a linear multiplier. So with SNR held fixed, doubling B doubles C.",
+          s: [
+            "<b>Step 1 — Apply.</b> $C' = 2B\\log_2(1+S/N) = 2C$.",
+            "<b>Step 2 — Distractor audit.</b> 'Quadruples' would need B², which it isn't; 'halves' is backwards; 'no effect' ignores the linear term."
+          ],
+          a: "Doubles C.",
+          v: "The subtlety worth knowing: in real systems widening B also lets in more noise ($N = N_0B$), which DROPS the SNR inside the log — so capacity rises but sub-linearly, approaching the bandwidth-limited ceiling $C \\to 1.44\\,S/N_0$ ✓. The clean 'doubles' holds only at fixed SNR, as stated."
+
+        }), ref: "Handbook p.371" },
       { q: "Manchester encoding: how many transitions per bit?",
         choices: ["Exactly 1 (mid-bit)", "0", "2", "Variable"], correct: 0,
-        solution: S({ c: "Manchester: each bit period has transition in middle (encoding 0 or 1 by direction).", s: ["Pro: self-clocking, no DC offset.", "Con: doubles signal bandwidth."], a: "1 mid-bit transition" }), ref: "Handbook p.371" },
+        solution: S({
+          c: "Manchester coding forces exactly ONE transition in the MIDDLE of every bit — the DIRECTION of that mid-bit edge (rising vs falling) encodes 0 vs 1.",
+          s: [
+            "<b>Step 1 — Match.</b> Exactly 1 mid-bit transition.",
+            "<b>Step 2 — What the guaranteed edge buys.</b> SELF-CLOCKING — the receiver recovers timing from every bit, no separate clock line; and zero DC offset (each bit is half-high, half-low).",
+            "<b>Step 3 — Distractor audit.</b> 0 transitions would lose clock sync on long runs (the problem Manchester solves); 2 and 'variable' describe other schemes."
+          ],
+          a: "One transition per bit, mid-bit.",
+          v: "The cost that pins it down: guaranteeing an edge every bit DOUBLES the bandwidth vs raw NRZ ✓ — which is why classic 10-Mbps Ethernet used it (robust clocking) but faster standards switched to more bandwidth-efficient codes."
+
+        }), ref: "Handbook p.371" },
       { q: "TDMA, FDMA, CDMA differ by:",
         choices: ["Time slots, frequency bands, code separation", "Same thing", "Amplitude levels", "Phase angles"], correct: 0,
-        solution: S({ c: "Multiple access methods for sharing channel.", s: ["TDMA: time slots (GSM 2G).", "FDMA: frequency bands (FM radio, AMPS).", "CDMA: spreading codes (CDMA2000, 3G)."], a: "Time, freq, code" }), ref: "Handbook p.371" },
+        solution: S({
+          c: "Three ways to let many users share one physical channel: split it by TIME (TDMA), by FREQUENCY (FDMA), or by orthogonal CODES occupying the same time and frequency (CDMA).",
+          s: [
+            "<b>Step 1 — Match.</b> Time slots / frequency bands / code separation.",
+            "<b>Step 2 — Anchor each.</b> FDMA: each user a distinct band (analog AMPS, FM radio). TDMA: each user a time slot on a shared band (GSM 2G). CDMA: all users overlap, separated by spreading codes (IS-95/3G).",
+            "<b>Step 3 — Distractor audit.</b> 'Same thing' ignores the distinct axes; amplitude levels and phase angles are MODULATION dimensions, not multiple-access methods."
+          ],
+          a: "Time slots (TDMA), frequency bands (FDMA), spreading codes (CDMA).",
+          v: "Modern systems blend them: 4G/5G OFDMA carves the channel into a TIME×FREQUENCY grid of resource blocks — FDMA and TDMA at once ✓ — showing these are orthogonal axes you can combine, not rival choices."
+
+        }), ref: "Handbook p.371" },
     ],
 
     // ====================== Ch 14: Networks — +8 ======================
