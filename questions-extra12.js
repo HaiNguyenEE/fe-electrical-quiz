@@ -31,7 +31,7 @@
             "<b>Step 4 — Evaluate.</b> $f(1,2) = 1 + 4 = 5$. It is a minimum because $f$ grows without bound along the constraint line in both directions."
           ],
           a: "$(x,y) = (1,2)$ with $f_{min} = 5$.",
-          v: "Geometric check: minimizing $x^{2}+y^{2}$ on a line finds the closest point to the origin. Distance from origin to $x+2y=5$ is $|{-5}|/\\sqrt{1^{2}+2^{2}} = 5/\\sqrt 5 = \\sqrt 5$, and $(\\sqrt 5)^{2} = 5$ ✓. Distractor $(2,1)$ also gives $f = 5$ but is NOT on the gradient-parallel condition ($2+2 = 4 \\ne 5$ constraint ✓ wait: $2+2(1)=4\\ne5$ — it violates the constraint entirely)."
+          v: "Geometric check: minimizing $x^{2}+y^{2}$ on a line finds the closest point to the origin. Distance from origin to $x+2y=5$ is $|{-5}|/\\sqrt{1^{2}+2^{2}} = 5/\\sqrt 5 = \\sqrt 5$, and $(\\sqrt 5)^{2} = 5$ ✓. Distractor $(2,1)$ also gives $f = 5$ but violates the constraint ($2+2(1)=4\\ne 5$), so it is not even feasible."
 
         })
       },
@@ -1387,7 +1387,7 @@
           s: [
             "<b>Step 1 — Stack the budget.</b> $P_R = 50\\,\\text{dBW} - 130\\,\\text{dB} + 30\\,\\text{dBi} = -50$ dBW.",
             "<b>Step 2 — Convert to watts.</b> $-50$ dBW $= 10^{-5}$ W $= 10\\,\\mu$W.",
-            "<b>Step 3 — Distractor audit.</b> $-90$ dBW forgets the receive gain... ($50-130-... $ hmm $-110+30$? no — it subtracts $G_R$ instead of adding); $+10$ dBW drops the path loss sign; $-130$ dBW ignores both antenna terms."
+            "<b>Step 3 — Distractor audit.</b> $-90$ dBW subtracts the receive gain $G_R$ instead of adding it; $+10$ dBW drops the path-loss sign; $-130$ dBW ignores both antenna terms."
           ],
           a: "$P_R = -50$ dBW (10 μW).",
           v: "Unit discipline check: dBW + dB + dBi keeps everything in dBW ✓ (dBi is gain relative to isotropic — dimensionless in dB). Scale context: 10 μW is a STRONG received signal — GPS arrives near $-158$ dBW; satellite TV LNB inputs run $-120$ to $-90$ dBW — so a 130-dB path with 80 dB of combined EIRP+gain is a comfortable link ✓."
@@ -1440,7 +1440,7 @@
             "<b>Step 1 — Encode +50.</b> $50 = 32 + 16 + 2 = 0011\\,0010_2$.",
             "<b>Step 2 — Invert.</b> $1100\\,1101$.",
             "<b>Step 3 — Add one.</b> $1100\\,1101 + 1 = 1100\\,1110$.",
-            "<b>Step 4 — Distractor audit.</b> $1100\\,1111$ forgets nothing — wait, it ADDS 1 twice... it is $-49$; $1011\\,0010$ just flips the sign bit of +50 (sign-magnitude thinking); $0011\\,0010$ IS +50."
+            "<b>Step 4 — Distractor audit.</b> $1100\\,1111$ adds one too many (it encodes $-49$); $1011\\,0010$ just flips the sign bit of $+50$ (sign-magnitude thinking); $0011\\,0010$ is $+50$ itself."
           ],
           a: "$-50 = 1100\\,1110_2$ (two's complement, 8-bit).",
           v: "Weighted check (MSB carries $-128$): $-128 + 64 + 8 + 4 + 2 = -50$ ✓. Additive check: $0011\\,0010 + 1100\\,1110 = 1\\,0000\\,0000$ → discard carry → 0 ✓ — a number plus its two's complement is zero, by construction."
