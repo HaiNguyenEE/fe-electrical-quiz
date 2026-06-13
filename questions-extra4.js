@@ -895,68 +895,261 @@
     7: [
       { q: "Laplace of $u(t)$ (unit step):",
         choices: ["$1/s$", "$1$", "$s$", "$\\delta(s)$"], correct: 0,
-        solution: S({ c: "Standard.", s: ["$\\mathcal{L}\\{u(t)\\} = \\int_0^\\infty 1 \\cdot e^{-st} dt = 1/s$."], a: "$1/s$" }), ref: "Handbook p.56" },
+        solution: S({
+          c: "The unit step's transform — first entry of every Laplace table: $\\mathcal L\\{u(t)\\} = 1/s$, from $\\int_0^{\\infty}e^{-st}dt = 1/s$.",
+          s: [
+            "<b>Step 1 — Integrate.</b> $\\left[-\\dfrac{e^{-st}}{s}\\right]_0^{\\infty} = 0 - \\left(-\\dfrac1s\\right) = \\dfrac1s$.",
+            "<b>Step 2 — Distractor audit.</b> 1 is the IMPULSE's transform; $s$ is differentiation's operator; $\\delta(s)$ mixes domains."
+          ],
+          a: "$1/s$",
+          v: "Consistency: a step is the integral of an impulse, and dividing the impulse's transform (1) by $s$ — the integration operator — gives $1/s$ ✓ — the table entries respect calculus."
+
+        }), ref: "Handbook p.56" },
       { q: "Laplace of $\\delta(t)$ (unit impulse):",
         choices: ["$1$", "$1/s$", "$0$", "$s$"], correct: 0,
-        solution: S({ c: "Standard.", s: ["Sifting property: $\\int_0^\\infty \\delta(t) e^{-st} dt = e^0 = 1$."], a: "$1$" }), ref: "Handbook p.56" },
+        solution: S({
+          c: "The impulse is the identity of transforms: sifting collapses the integral to one point — $\\mathcal L\\{\\delta(t)\\} = e^{-s\\cdot0} = 1$.",
+          s: [
+            "<b>Step 1 — Sift.</b> $\\int_0^{\\infty}\\delta(t)e^{-st}dt = e^{0} = 1$.",
+            "<b>Step 2 — Distractor audit.</b> $1/s$ is the STEP; 0 would mean the impulse vanishes; $s$ is the derivative operator."
+          ],
+          a: "$1$",
+          v: "Why this makes $\\delta$ special: feeding it to a system returns $H(s)\\times1 = H(s)$ — the impulse response IS the transfer function in time clothing ✓ — the entire reason impulse testing characterizes systems."
+
+        }), ref: "Handbook p.56" },
       { q: "Transfer function of an integrator:",
         choices: ["$H(s) = 1/s$", "$H(s) = s$", "$H(s) = 1$", "$H(s) = s^2$"], correct: 0,
-        solution: S({ c: "Integration in time = division by $s$ in Laplace.", s: ["Differentiation: multiplication by $s$."], a: "$1/s$", v: "Pure integrator has infinite DC gain — accumulates indefinitely." }), ref: "Handbook p.56" },
+        solution: S({
+          c: "Calculus → algebra is the Laplace bargain: INTEGRATION in time = division by $s$; differentiation = multiplication by $s$. An integrator is $H(s) = 1/s$.",
+          s: [
+            "<b>Step 1 — Match.</b> $H = 1/s$.",
+            "<b>Step 2 — Distractor audit.</b> $s$ is the DIFFERENTIATOR; 1 is a wire; $s^{2}$ differentiates twice."
+          ],
+          a: "$H(s) = 1/s$",
+          v: "Fingerprints to recognize it anywhere: Bode slope −20 dB/dec through all frequencies, constant −90° phase, infinite DC gain (it accumulates forever) ✓ — and in control loops it's the type-raising, error-killing block."
+
+        }), ref: "Handbook p.56" },
       { q: "First-order LPF $H(s) = K/(s + a)$. Time constant:",
         choices: ["$\\tau = 1/a$", "$\\tau = a$", "$\\tau = K$", "$\\tau = a/K$"], correct: 0,
-        solution: S({ c: "Standard form: $H(s) = K/(s + 1/\\tau)$. Compare.", s: ["Time constant = inverse of pole magnitude."], a: "$\\tau = 1/a$" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "Match to the standard form: $\\dfrac{K}{s + 1/\\tau}$ — the time constant is the RECIPROCAL of the pole magnitude: $\\tau = 1/a$.",
+          s: [
+            "<b>Step 1 — Compare denominators.</b> $s + a \\leftrightarrow s + 1/\\tau \\Rightarrow \\tau = 1/a$.",
+            "<b>Step 2 — Distractor audit.</b> $\\tau = a$ forgets the inversion; $K$ is the gain (independent); $a/K$ mixes the two."
+          ],
+          a: "$\\tau = 1/a$",
+          v: "Triple identity worth one card: pole at $-a$ ↔ $\\tau = 1/a$ ↔ bandwidth $= a$ rad/s — one number, three names ✓ (fast pole = short τ = wide band)."
+
+        }), ref: "Handbook p.366" },
       { q: "Bandwidth of $H(s) = 10/(s+5)$:",
         choices: ["$5$ rad/s", "$10$ rad/s", "$1$ rad/s", "$50$ rad/s"], correct: 0,
-        solution: S({ c: "1st-order LPF: $-3$dB at pole frequency.", s: ["Pole at $s=-5$, so $\\omega_c = 5$ rad/s."], a: "$5$ rad/s", v: "In Hz: $5/(2\\pi) \\approx 0.796$ Hz." }), ref: "Handbook p.366" },
+        solution: S({
+          c: "First-order low-pass bandwidth = the pole magnitude (where the response is −3 dB): pole at $-5$ → BW $= 5$ rad/s.",
+          s: [
+            "<b>Step 1 — Read the pole.</b> $s = -5 \\Rightarrow \\omega_c = 5$ rad/s.",
+            "<b>Step 2 — Distractor audit.</b> 10 reads the numerator (that's the gain); 1 and 50 garble the ratio."
+          ],
+          a: "BW $= 5$ rad/s ($\\approx 0.8$ Hz).",
+          v: "Verify the −3 dB: at $\\omega = 5$, $|H| = 10/\\sqrt{25+25} = 10/7.07 = 1.414$ — exactly $1/\\sqrt2$ of the DC gain 2 ✓."
+
+        }), ref: "Handbook p.366" },
       { q: "Phase at DC of $H(s) = 1/(s+1)$:",
         choices: ["$0°$", "$-45°$", "$-90°$", "$90°$"], correct: 0,
-        solution: S({ c: "At $\\omega = 0$: $H(0) = 1/1 = 1$ (real). Phase = 0°.", s: ["As $\\omega$ increases, phase moves toward $-90°$ (1st-order LPF)."], a: "$0°$" }), ref: "Handbook p.366" },
+        solution: S({
+          c: "Evaluate at $\\omega = 0$: $H(j0) = 1/1 = 1$ — a positive REAL number, whose phase is 0°.",
+          s: [
+            "<b>Step 1 — Substitute.</b> $H(0) = 1$ → phase 0°.",
+            "<b>Step 2 — The trajectory for context.</b> Phase slides to −45° AT the corner ($\\omega = 1$) and approaches −90° far above — the distractors are the OTHER landmarks of the same curve.",
+            "<b>Step 3 — Distractor audit.</b> −45° is the corner value; −90° the high-frequency limit; +90° would need a zero."
+          ],
+          a: "$0°$ at DC.",
+          v: "General rule worth keeping: any system with a finite, positive DC gain has 0° phase at DC ✓ — phase shifts develop only where poles/zeros begin to act (within ~a decade of their corner)."
+
+        }), ref: "Handbook p.366" },
       { q: "Resonant frequency of $H(s) = 1/(s^2 + 0.1 s + 100)$:",
         choices: ["$10$ rad/s", "$100$ rad/s", "$1$ rad/s", "$5$ rad/s"], correct: 0,
-        solution: S({ c: "Standard 2nd-order: $s^2 + 2\\zeta\\omega_n s + \\omega_n^2$. Compare: $\\omega_n^2 = 100 \\Rightarrow \\omega_n = 10$.", s: ["Damping: $2\\zeta\\omega_n = 0.1 \\Rightarrow \\zeta = 0.005$ (very lightly damped)."], a: "$10$ rad/s", v: "Low damping → sharp resonance peak. $Q = 1/(2\\zeta) = 100$." }), ref: "Handbook p.366" },
+        solution: S({
+          c: "Match the denominator to $s^{2} + 2\\zeta\\omega_ns + \\omega_n^{2}$: the CONSTANT term is $\\omega_n^{2}$.",
+          s: [
+            "<b>Step 1 — Natural frequency.</b> $\\omega_n^{2} = 100 \\Rightarrow \\omega_n = 10$ rad/s.",
+            "<b>Step 2 — Damping for the full picture.</b> $2\\zeta\\omega_n = 0.1 \\Rightarrow \\zeta = 0.005$ — nearly undamped → the resonant PEAK sits essentially at $\\omega_n$.",
+            "<b>Step 3 — Distractor audit.</b> 100 forgets the square root; 1 and 5 misread coefficients."
+          ],
+          a: "$\\omega_n = 10$ rad/s",
+          v: "Sharpness read: $Q = 1/(2\\zeta) = 100$ — a violent, narrow resonance (peak gain ~100× the DC level) ✓. Fine print: the exact peak is at $\\omega_n\\sqrt{1-2\\zeta^{2}}$, indistinguishable from 10 at this tiny ζ."
+
+        }), ref: "Handbook p.366" },
       { q: "If $H(s) = 1/[(s+1)(s+2)]$, time-domain impulse response includes:",
         choices: ["$e^{-t}$ and $e^{-2t}$ terms", "Sine and cosine", "Constant only", "Ramp"], correct: 0,
-        solution: S({ c: "Each pole contributes an exponential in time. Pole at $s = -a \\to e^{-at}$.", s: ["Two distinct poles → two exponentials."], a: "$e^{-t}, e^{-2t}$", v: "Partial fractions decomposition gives the coefficients." }), ref: "Handbook p.56" },
+        solution: S({
+          c: "Each REAL pole contributes one decaying exponential to the impulse response: pole at $s = -a$ → term $e^{-at}$.",
+          s: [
+            "<b>Step 1 — Read the poles.</b> $-1$ and $-2$ → terms $e^{-t}$ and $e^{-2t}$.",
+            "<b>Step 2 — Distractor audit.</b> Sines/cosines need COMPLEX poles; a constant needs a pole at the origin; a ramp needs a DOUBLE origin pole."
+          ],
+          a: "$e^{-t}$ and $e^{-2t}$ terms.",
+          v: "Partial fractions supply the weights: $H = \\dfrac{1}{s+1} - \\dfrac{1}{s+2}$ → $h(t) = e^{-t} - e^{-2t}$ ✓ — pole LOCATIONS fix the shapes, residues fix the amounts; the pole-map-to-time-domain dictionary in one example."
+
+        }), ref: "Handbook p.56" },
       { q: "Group delay of $H(s) = e^{-2s}$ (pure delay):",
         choices: ["$2$ seconds (constant)", "Variable", "$1/2$ second", "$0$"], correct: 0,
-        solution: S({ c: "$e^{-as}$ in Laplace = time shift by $a$ seconds. Constant group delay = $a$.", s: ["Linear phase: $\\angle H(j\\omega) = -2\\omega$.", "Group delay: $-d\\phi/d\\omega = 2$."], a: "$2$ s", v: "Ideal delay preserves waveform shape — important in audio/communications." }), ref: "Handbook p.366" },
+        solution: S({
+          c: "$e^{-as}$ is the Laplace signature of a PURE TIME DELAY of $a$ seconds. Group delay $= -d\\phi/d\\omega$, and with phase $\\phi = -2\\omega$ (linear), the delay is constant: 2 s.",
+          s: [
+            "<b>Step 1 — Phase.</b> $\\angle H(j\\omega) = -2\\omega$ — linear in frequency.",
+            "<b>Step 2 — Differentiate.</b> $-d\\phi/d\\omega = 2$ s, the same at every frequency.",
+            "<b>Step 3 — Distractor audit.</b> 'Variable' would need NONlinear phase; 1/2 inverts; 0 is no delay."
+          ],
+          a: "2 seconds, constant.",
+          v: "Why constant group delay is gold: every frequency arrives equally late → the waveform's SHAPE survives ✓ — the property linear-phase FIR filters chase and dispersive channels destroy. Magnitude check: $|e^{-2j\\omega}| = 1$ — a delay changes timing, never amplitude."
+
+        }), ref: "Handbook p.366" },
       { q: "$H(s) = 5(s+2)/[(s+1)(s+3)]$. Number of zeros and poles:",
         choices: ["1 zero, 2 poles", "2 zeros, 2 poles", "1 zero, 1 pole", "0 zeros, 3 poles"], correct: 0,
-        solution: S({ c: "Zeros: roots of numerator. Poles: roots of denominator.", s: ["Numerator $s+2$ has 1 zero at $s=-2$.", "Denominator has 2 poles at $s=-1, -3$."], a: "1 zero, 2 poles", v: "When poles > zeros, called 'proper'; ensures system is causal/realizable." }), ref: "Handbook p.365" },
+        solution: S({
+          c: "Count roots where they live: ZEROS in the numerator, POLES in the denominator (the constant 5 is gain, not a root).",
+          s: [
+            "<b>Step 1 — Zeros.</b> $s + 2 = 0$ → one zero at $-2$.",
+            "<b>Step 2 — Poles.</b> $(s+1)(s+3)$ → two poles, at $-1$ and $-3$.",
+            "<b>Step 3 — Distractor audit.</b> '2 zeros' counts the gain or a phantom; the others miscount."
+          ],
+          a: "1 zero, 2 poles.",
+          v: "Vocabulary the count unlocks: poles > zeros makes the function (strictly) PROPER — realizable as a causal physical system, with $|H| \\to 0$ at high frequency ✓. Relative degree 1 here → high-frequency rolloff of −20 dB/dec."
+
+        }), ref: "Handbook p.365" },
     ],
 
     // ====================== Ch 8: Signal — +10 ======================
     8: [
       { q: "Energy of a discrete signal $x[n] = \\{1, 2, -1\\}$:",
         choices: ["$6$", "$2$", "$0$", "$3$"], correct: 0,
-        solution: S({ c: "Energy: $E = \\sum |x[n]|^2$.", s: ["$1^2 + 2^2 + (-1)^2 = 1 + 4 + 1 = 6$."], a: "$6$" }), ref: "Handbook p.376" },
+        solution: S({
+          c: "Discrete-signal energy: $E = \\sum|x[n]|^{2}$ — square each sample, add.",
+          s: [
+            "<b>Step 1 — Square and sum.</b> $1 + 4 + 1 = 6$.",
+            "<b>Step 2 — Distractor audit.</b> 2 SUMS the samples (signs cancel — exactly why energy squares); 3 counts samples; 0 confuses with the sum of this nearly-balanced signal."
+          ],
+          a: "$E = 6$",
+          v: "Why squares: energy must be positive and sign-blind — $(-1)^{2}$ counts the same as $1^{2}$ ✓. Parseval's theorem later guarantees the same 6 shows up in the frequency domain."
+
+        }), ref: "Handbook p.376" },
       { q: "Periodic signal has __ Fourier series:",
         choices: ["Discrete spectrum", "Continuous spectrum", "No spectrum", "Random spectrum"], correct: 0,
-        solution: S({ c: "Periodic signals decompose into discrete harmonics — frequencies are integer multiples of fundamental.", s: ["Aperiodic signals → continuous Fourier transform."], a: "Discrete spectrum (harmonics)", v: "Square wave: contains odd harmonics 1, 3, 5, ... of fundamental." }), ref: "Handbook p.371-376" },
+        solution: S({
+          c: "Periodicity ↔ DISCRETE spectrum: a periodic signal contains only exact integer multiples (harmonics) of its fundamental — spectral lines, not a continuum.",
+          s: [
+            "<b>Step 1 — Match.</b> Discrete (line) spectrum.",
+            "<b>Step 2 — The duality.</b> APERIODIC signals need the continuous Fourier TRANSFORM — every frequency present in general.",
+            "<b>Step 3 — Distractor audit.</b> 'Continuous' belongs to aperiodic; 'no spectrum'/'random' have no basis."
+          ],
+          a: "Discrete spectrum (harmonics).",
+          v: "Concrete anchor: a square wave's spectrum is lines at $f_0, 3f_0, 5f_0, \\ldots$ with $1/n$ amplitudes ✓. The duality chain to remember: periodic↔discrete spectrum, discrete time↔periodic spectrum — sampling and Fourier series are mirror images."
+
+        }), ref: "Handbook p.371-376" },
       { q: "Convolution in time = ___ in frequency:",
         choices: ["Multiplication", "Convolution again", "Addition", "Differentiation"], correct: 0,
-        solution: S({ c: "Convolution theorem: $\\mathcal{F}\\{x * h\\} = X(\\omega) H(\\omega)$.", s: ["This is why we describe filters via $H(\\omega)$ — just multiply the input spectrum.", "Reverse: multiplication in time = convolution in frequency."], a: "Multiplication", v: "Saves computation: FFT-based fast convolution." }), ref: "Handbook p.376" },
+        solution: S({
+          c: "The convolution theorem — DSP's central shortcut: convolution in time ⇔ MULTIPLICATION in frequency: $\\mathcal F\\{x*h\\} = X(\\omega)H(\\omega)$.",
+          s: [
+            "<b>Step 1 — Match.</b> Multiplication.",
+            "<b>Step 2 — Why it matters.</b> Filtering (a convolution) becomes 'multiply the spectrum by $H(\\omega)$' — the whole reason filters are SPECIFIED by frequency response.",
+            "<b>Step 3 — The mirror.</b> Multiplication in time ⇔ convolution in frequency (windowing spreads spectra — spectral leakage)."
+          ],
+          a: "Multiplication.",
+          v: "Computational payoff: FFT → multiply → inverse FFT beats direct convolution for long filters ($N\\log N$ vs $N^{2}$) — 'fast convolution' ✓."
+
+        }), ref: "Handbook p.376" },
       { q: "A 1st order HPF cutoff at 1 kHz, signal at 100 Hz, gain:",
         choices: ["$\\approx -20$ dB (attenuated)", "$0$ dB", "$+20$ dB", "$-3$ dB"], correct: 0,
-        solution: S({ c: "HPF: opposite of LPF. Frequencies below cutoff attenuated at 20 dB/decade.", s: ["From 100 Hz to 1 kHz is 1 decade below cutoff: -20 dB."], a: "$-20$ dB" }), ref: "Handbook p.375" },
+        solution: S({
+          c: "A high-pass filter attenuates BELOW its cutoff at 20 dB/decade (first order). The signal at 100 Hz sits one decade UNDER the 1-kHz corner.",
+          s: [
+            "<b>Step 1 — Count decades.</b> $1000/100 = 10\\times$ below cutoff → 1 decade.",
+            "<b>Step 2 — Apply the slope.</b> $-20$ dB.",
+            "<b>Step 3 — Distractor audit.</b> 0 dB is the PASSBAND (above cutoff); +20 dB would be gain; −3 dB is AT the corner."
+          ],
+          a: "$\\approx -20$ dB.",
+          v: "Mirror symmetry with the LPF case: same slope, opposite side of the corner ✓. Exact value: $20\\log\\frac{0.1}{\\sqrt{1.01}} = -20.04$ dB — asymptote essentially exact a decade out."
+
+        }), ref: "Handbook p.375" },
       { q: "Notch filter is used to:",
         choices: ["Remove a narrow band of frequencies", "Pass all frequencies", "Amplify one frequency", "Generate signals"], correct: 0,
-        solution: S({ c: "Notch filter: very narrow stop band. Typical use: remove 60 Hz mains hum from audio/instrumentation.", s: ["Inverse of bandpass.", "Implemented with parallel RLC or twin-T networks."], a: "Remove specific narrow band" }), ref: "Handbook p.375" },
+        solution: S({
+          c: "A notch (band-stop) filter removes a NARROW band and passes everything else — the inverse of a narrow bandpass.",
+          s: [
+            "<b>Step 1 — Match.</b> Remove a narrow band of frequencies.",
+            "<b>Step 2 — The canonical use.</b> Killing 60-Hz mains hum in audio and instrumentation (50 Hz in EU) without touching the rest of the signal.",
+            "<b>Step 3 — Distractor audit.</b> 'Pass all' is an all-pass; 'amplify one' is a resonator; filters don't generate."
+          ],
+          a: "Remove a narrow band (band-stop).",
+          v: "Implementation anchors: twin-T RC network or series/parallel RLC tuned to the offending frequency; quality factor sets how surgical the notch is ✓ — high Q removes 60 Hz while sparing 55 and 65."
+
+        }), ref: "Handbook p.375" },
       { q: "Nyquist plot for an integrator $H(s) = 1/s$ starts at:",
         choices: ["$-j\\infty$ (low freq)", "Origin", "$+j\\infty$", "$1$"], correct: 0,
-        solution: S({ c: "At $\\omega \\to 0^+$: $H(j\\omega) = 1/(j\\omega) \\to -j\\infty$.", s: ["At $\\omega \\to \\infty$: $H \\to 0$.", "Nyquist trace: pure imaginary axis from $-j\\infty$ to 0."], a: "$-j\\infty$", v: "Phase always $-90°$ for ideal integrator." }), ref: "Handbook p.366" },
+        solution: S({
+          c: "Trace $H(j\\omega) = 1/(j\\omega) = -j/\\omega$: pure negative-imaginary at every frequency — starting at $-j\\infty$ as $\\omega\\to0^{+}$ and shrinking to the origin as $\\omega\\to\\infty$.",
+          s: [
+            "<b>Step 1 — Low-frequency end.</b> $\\omega\\to0^{+}$: magnitude blows up along the NEGATIVE imaginary axis → $-j\\infty$.",
+            "<b>Step 2 — High end.</b> $\\to 0$ — the plot is the lower imaginary semi-axis.",
+            "<b>Step 3 — Distractor audit.</b> Origin is the END; $+j\\infty$ has the wrong sign ($1/j = -j$); 1 would be a flat gain."
+          ],
+          a: "At $-j\\infty$ (low-frequency end).",
+          v: "Phase view confirms: an integrator holds −90° at ALL frequencies — the plot can only live on the negative imaginary axis ✓ — and this quarter-circle-at-infinity detail is what closes Nyquist contours for type-1 loops."
+
+        }), ref: "Handbook p.366" },
       { q: "Quantization noise power of an n-bit ADC over full-scale range $V_{FS}$:",
         choices: ["$\\Delta^2/12$ where $\\Delta = V_{FS}/2^n$", "$\\Delta$", "$V_{FS}/n$", "$2^n$"], correct: 0,
-        solution: S({ c: "Uniform quantization: error uniformly distributed over $\\pm \\Delta/2$. Variance = $\\Delta^2/12$.", s: ["For full-scale sinusoid signal of variance $V_{FS}^2/8$: SQNR ≈ $1.5 \\cdot 2^{2n}$ ≈ $6.02n + 1.76$ dB."], a: "$\\Delta^2/12$" }), ref: "Handbook p.375" },
+        solution: S({
+          c: "Uniform quantization error is spread evenly over ±Δ/2 (one LSB wide); the variance of that uniform distribution is the noise power: $\\Delta^{2}/12$, with $\\Delta = V_{FS}/2^{n}$.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\Delta^{2}/12$.",
+            "<b>Step 2 — Where 12 comes from.</b> Var of Uniform($-\\Delta/2, \\Delta/2$) $= \\Delta^{2}/12$ — the same '12' as the uniform-distribution variance in statistics.",
+            "<b>Step 3 — Distractor audit.</b> Δ alone is the step, not a power; the rest are dimensional mismatches."
+          ],
+          a: "$\\Delta^{2}/12$",
+          v: "This is the seed of the famous formula: ratio it against a full-scale sine's power and the dB version collapses to $SQNR = 6.02n + 1.76$ ✓ — the '6 dB per bit' rule traces straight back to this 12."
+
+        }), ref: "Handbook p.375" },
       { q: "Sample-and-hold output between samples is:",
         choices: ["Constant (held value)", "Linearly interpolated", "Zero", "Smoothed"], correct: 0,
-        solution: S({ c: "ZOH (zero-order hold): holds each sample's value until the next sample.", s: ["Effect: introduces $\\text{sinc}$-shape frequency response.", "Followed by reconstruction filter to smooth."], a: "Constant value" }), ref: "Handbook p.375" },
+        solution: S({
+          c: "A zero-order hold (ZOH) — the standard sample-and-hold — FREEZES each sample's value until the next arrives: a staircase output.",
+          s: [
+            "<b>Step 1 — Match.</b> Constant (held) value between samples.",
+            "<b>Step 2 — The spectral price.</b> The staircase imposes a $\\text{sinc}$-shaped droop on the spectrum and leaves images at multiples of $f_s$ — hence the reconstruction (smoothing) filter after every DAC.",
+            "<b>Step 3 — Distractor audit.</b> Linear interpolation is a FIRST-order hold; zero between samples describes impulse trains; 'smoothed' is the filter's job, later."
+          ],
+          a: "Constant — held at the last sample value.",
+          v: "You've seen the staircase on any scope probing a DAC output ✓. The droop is real: at $f_s/2$ the ZOH already loses $\\sin(\\pi/2)/(\\pi/2) \\approx -3.9$ dB — precision systems pre-compensate for it."
+
+        }), ref: "Handbook p.375" },
       { q: "FIR vs IIR filter primary difference:",
         choices: ["FIR has finite impulse response; IIR has infinite", "Same thing", "IIR is non-causal", "FIR is unstable"], correct: 0,
-        solution: S({ c: "FIR: output depends only on inputs (feedforward). IIR: output depends on past outputs (feedback).", s: ["FIR: always stable, linear phase possible, more taps for same selectivity.", "IIR: efficient (fewer coefficients), but stability concerns."], a: "FIR finite, IIR infinite response" }), ref: "Handbook p.376" },
+        solution: S({
+          c: "The names say it: FIR — Finite Impulse Response (feedforward only; the response to an impulse dies after N taps); IIR — Infinite Impulse Response (feedback; the response rings forever, decaying).",
+          s: [
+            "<b>Step 1 — Match.</b> FIR finite, IIR infinite impulse response — feedforward vs feedback structure.",
+            "<b>Step 2 — The engineering trade.</b> FIR: unconditionally stable, exact linear phase available, but needs MANY taps for sharp cutoffs. IIR: sharp response from few coefficients, but stability and phase must be managed.",
+            "<b>Step 3 — Distractor audit.</b> Both are causal as implemented; FIR is never unstable (no poles except at origin)."
+          ],
+          a: "FIR has finite impulse response; IIR infinite (feedback).",
+          v: "Selection rule of practice: phase-critical (data, audio crossovers) → FIR; compute-constrained sharp filtering → IIR (elliptic/Butterworth digitized) ✓ — the trade appears on every DSP design review."
+
+        }), ref: "Handbook p.376" },
       { q: "Discrete-time signal $x[n]$ shifted: $x[n - 2]$ means:",
         choices: ["Delayed by 2 samples", "Advanced by 2", "Doubled", "Halved"], correct: 0,
-        solution: S({ c: "Subtraction in index = delay. $x[n-k]$ is $x$ delayed by $k$ samples.", s: ["Z-transform: multiplication by $z^{-k}$.", "$x[n+k]$ would be advance."], a: "Delayed by 2 samples" }), ref: "Handbook p.376" },
+        solution: S({
+          c: "Index arithmetic reads backwards from intuition: $x[n-2]$ — SUBTRACTING in the index — is a DELAY: today's output is the input from 2 samples ago.",
+          s: [
+            "<b>Step 1 — Match.</b> Delayed by 2 samples.",
+            "<b>Step 2 — Check with a point.</b> The value that was at $n = 0$ now appears at $n = 2$ — the signal moved RIGHT (later) ✓.",
+            "<b>Step 3 — Distractor audit.</b> $x[n+2]$ is the ADVANCE (non-causal for real-time); doubling/halving touch amplitude, not time."
+          ],
+          a: "Delayed by 2 samples.",
+          v: "Transform fingerprint: a $k$-sample delay multiplies the z-transform by $z^{-k}$ ✓ — which is why digital filter diagrams label their memory boxes '$z^{-1}$': each is one sample of delay."
+
+        }), ref: "Handbook p.376" },
     ],
 
     // ====================== Ch 9: Electronics — +20 ======================
