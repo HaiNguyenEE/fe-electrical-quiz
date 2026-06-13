@@ -1498,12 +1498,13 @@ const QUESTION_BANK = {
           choices: ["$208$ V", "$120$ V", "$240$ V", "$69.3$ V"],
           correct: 0,
           solution: S({
-            c: "Wye (Y / star) relations: $V_{LL} = \\sqrt{3}\\,V_{LN}$, $I_L = I_\\phi$. (The $\\sqrt{3}$ factor comes from vector subtraction of two phase voltages 120° apart.)",
+            c: "Wye relations: $V_{LL}=\\sqrt3\\,V_{LN}$ (line current = phase current). The $\\sqrt3$ comes from subtracting two phase voltages 120 degrees apart.",
             s: [
-              "Multiply: $V_{LL} = \\sqrt{3} \\cdot 120 = 1.732 \\cdot 120 \\approx 207.85$ V."
+              "<b>Step 1 — Apply.</b> $V_{LL}=\\sqrt3\\times120\\approx208$ V.",
+              "<b>Step 2 — Distractor audit.</b> $120$ V is line-to-neutral; $69.3$ V divides by $\\sqrt3$; $240$ V is split-phase, not wye."
             ],
-            a: "$V_{LL} \\approx 208$ V",
-            v: "Standard US 120/208 V system. In Europe: 230/400 V."
+            a: "$V_{LL}\\approx208$ V",
+            v: "The standard US commercial 120/208 V system (Europe: 230/400 V) - the $\\sqrt3$ between phase and line voltage is wye's signature."
           }),
           ref: "Handbook p.363" },
 
@@ -1511,14 +1512,14 @@ const QUESTION_BANK = {
           choices: ["$I_L = \\sqrt{3} I_\\phi$", "$I_L = I_\\phi$", "$I_L = I_\\phi/\\sqrt{3}$", "$I_L = 3 I_\\phi$"],
           correct: 0,
           solution: S({
-            c: "Delta ($\\Delta$) relations: $V_{LL} = V_\\phi$, $I_L = \\sqrt{3}\\,I_\\phi$. (Dual of Y: in Y, voltage gets $\\sqrt{3}$; in $\\Delta$, current does.)",
+            c: "Delta relations: $V_{LL}=V_\\phi$ but $I_L=\\sqrt3\\,I_\\phi$ - the dual of wye (where VOLTAGE gets the $\\sqrt3$).",
             s: [
-              "Phase current = current through each branch of $\\Delta$.",
-              "Line current = vector sum of two adjacent phase currents (120° apart).",
-              "Result: $I_L = \\sqrt{3}\\,I_\\phi$."
+              "<b>Step 1 — Match.</b> $I_L=\\sqrt3\\,I_\\phi$.",
+              "<b>Step 2 — Why.</b> Line current is the vector sum of two adjacent phase currents 120 degrees apart.",
+              "<b>Step 3 — Distractor audit.</b> $I_L=I_\\phi$ is WYE; $I_\\phi/\\sqrt3$ inverts; $3I_\\phi$ is wrong."
             ],
-            a: "$I_L = \\sqrt{3}\\,I_\\phi$",
-            v: "Y vs Δ: line current is bigger in Δ; line voltage is bigger in Y. Same total power either way."
+            a: "$I_L=\\sqrt3\\,I_\\phi$",
+            v: "Y vs Delta: line VOLTAGE gets $\\sqrt3$ in wye, line CURRENT gets $\\sqrt3$ in delta - the same total power either way."
           }),
           ref: "Handbook p.363" },
 
@@ -1526,14 +1527,14 @@ const QUESTION_BANK = {
           choices: ["$14.1$ kW", "$10$ kW", "$16.6$ kW", "$8.7$ kW"],
           correct: 0,
           solution: S({
-            c: "Three-phase real power (using line quantities): $P_{3\\phi} = \\sqrt{3}\\,V_{LL}\\,I_L\\cos\\theta$.",
+            c: "Three-phase real power in line quantities: $P_{3\\phi}=\\sqrt3\\,V_{LL}I_L\\cos\\theta$.",
             s: [
-              "Plug in: $P = \\sqrt{3} \\cdot 480 \\cdot 20 \\cdot 0.85$.",
-              "$\\sqrt{3} \\cdot 480 \\cdot 20 = 16{,}628$ VA (this is |S|).",
-              "Multiply by pf: $16{,}628 \\cdot 0.85 = 14{,}134$ W ≈ 14.1 kW."
+              "<b>Step 1 — Apparent.</b> $\\sqrt3\\times480\\times20=16{,}628$ VA.",
+              "<b>Step 2 — Real.</b> $\\times0.85=14{,}134$ W = 14.1 kW.",
+              "<b>Step 3 — Distractor audit.</b> $16.6$ kW forgets pf (that's |S|); $10$/$8.7$ kW are off."
             ],
-            a: "$P \\approx 14.1$ kW",
-            v: "Formula works whether Y or Δ — using line quantities."
+            a: "$P\\approx14.1$ kW",
+            v: "The $\\sqrt3$ formula works for both Y and Delta when stated in LINE quantities ✓. Reactive part: $Q=\\sqrt3 V_{LL}I_L\\sin\\theta\\approx8.7$ kVAR."
           }),
           ref: "Handbook p.363" },
 
@@ -1541,12 +1542,13 @@ const QUESTION_BANK = {
           choices: ["$16.6$ kVA", "$14.1$ kVA", "$10$ kVA", "$20$ kVA"],
           correct: 0,
           solution: S({
-            c: "Apparent power: $|S| = \\sqrt{3}\\,V_{LL}\\,I_L$. Independent of pf.",
+            c: "Apparent power $|S|=\\sqrt3\\,V_{LL}I_L$ - independent of power factor.",
             s: [
-              "$|S| = \\sqrt{3} \\cdot 480 \\cdot 20 \\approx 16{,}628$ VA."
+              "<b>Step 1 — Apply.</b> $\\sqrt3\\times480\\times20\\approx16{,}628$ VA = 16.6 kVA.",
+              "<b>Step 2 — Distractor audit.</b> $14.1$ kVA is REAL power (includes pf); $10$/$20$ kVA are off."
             ],
-            a: "$|S| \\approx 16.6$ kVA",
-            v: "$|S|^2 = P^2 + Q^2 \\Rightarrow Q = \\sqrt{16.6^2 - 14.1^2} \\approx 8.7$ kVAR (reactive)."
+            a: "$|S|\\approx16.6$ kVA",
+            v: "Power triangle: $Q=\\sqrt{16.6^2-14.1^2}\\approx8.7$ kVAR. |S| sets the current and equipment rating regardless of pf."
           }),
           ref: "Handbook p.363" },
 
@@ -1554,12 +1556,13 @@ const QUESTION_BANK = {
           choices: ["$20$", "$1/20$", "$48$", "$2$"],
           correct: 0,
           solution: S({
-            c: "Turns ratio $a = N_1/N_2 = V_1/V_2$ (primary/secondary).",
+            c: "Turns ratio $a=N_1/N_2=V_1/V_2$ (primary over secondary).",
             s: [
-              "$a = 4800/240 = 20$."
+              "<b>Step 1 — Apply.</b> $a=4800/240=20$.",
+              "<b>Step 2 — Distractor audit.</b> $1/20$ inverts; $48$ and $2$ are arithmetic errors."
             ],
-            a: "$a = 20$",
-            v: "Step-down ratio: secondary has $1/a = 1/20$ as many turns."
+            a: "$a=20$",
+            v: "A 20:1 step-down: secondary has 1/20 the turns, 1/20 the voltage, 20x the current. Power is (nearly) conserved."
           }),
           ref: "Handbook p.364" },
 
@@ -1567,13 +1570,13 @@ const QUESTION_BANK = {
           choices: ["$2.08$ A", "$41.7$ A", "$20$ A", "$0.5$ A"],
           correct: 0,
           solution: S({
-            c: "Rated current = $S_{rated}/V_{rated}$ on each side. Power ($|S|$) is the same on both sides; current scales inverse to voltage.",
+            c: "Rated current = $S_{rated}/V_{rated}$ on each side; the SAME apparent power, so current scales inversely with voltage.",
             s: [
-              "$I_1 = S/V_1 = 10{,}000 / 4800 \\approx 2.083$ A.",
-              "(Secondary: $I_2 = 10{,}000 / 240 \\approx 41.67$ A.)"
+              "<b>Step 1 — Apply.</b> $I_1=10{,}000/4800\\approx2.08$ A.",
+              "<b>Step 2 — Distractor audit.</b> $41.7$ A is the SECONDARY current ($10{,}000/240$); $20$ A and $0.5$ A are off."
             ],
-            a: "$I_1 \\approx 2.08$ A",
-            v: "Check: $I_1/I_2 = 2.083/41.67 = 0.05 = 1/20 = 1/a$ ✓"
+            a: "$I_1\\approx2.08$ A",
+            v: "Ratio check: $I_1/I_2=2.08/41.67=1/20=1/a$ ✓ - the low-voltage side carries proportionally more current."
           }),
           ref: "Handbook p.364" },
 
@@ -1581,14 +1584,14 @@ const QUESTION_BANK = {
           choices: ["$\\approx 6.91$ kVAR", "$10$ kVAR", "$3.29$ kVAR", "$2.5$ kVAR"],
           correct: 0,
           solution: S({
-            c: "PF correction: add capacitors to supply reactive power $Q_C = P(\\tan\\theta_1 - \\tan\\theta_2)$, where $\\theta = \\arccos(pf)$.",
+            c: "PF correction: add capacitors supplying $Q_C=P(\\tan\\theta_1-\\tan\\theta_2)$, where $\\theta=\\arccos(pf)$.",
             s: [
-              "Old angle: $\\theta_1 = \\arccos(0.70) = 45.57°$, $\\tan\\theta_1 = 1.0202$.",
-              "New angle: $\\theta_2 = \\arccos(0.95) = 18.19°$, $\\tan\\theta_2 = 0.3287$.",
-              "Required: $Q_C = 10{,}000 \\cdot (1.0202 - 0.3287) = 10{,}000 \\cdot 0.6915 \\approx 6{,}915$ VAR."
+              "<b>Step 1 — Angles.</b> $\\theta_1=\\arccos0.7=45.6°$ ($\\tan=1.020$); $\\theta_2=\\arccos0.95=18.2°$ ($\\tan=0.329$).",
+              "<b>Step 2 — Apply.</b> $Q_C=10{,}000(1.020-0.329)\\approx6{,}915$ VAR.",
+              "<b>Step 3 — Distractor audit.</b> $10$ kVAR overshoots; $3.29$/$2.5$ kVAR misuse the tangent difference."
             ],
-            a: "$Q_C \\approx 6.91$ kVAR",
-            v: "After correction: smaller |S|, smaller line current, less I²R loss, lower utility bills."
+            a: "$Q_C\\approx6.91$ kVAR",
+            v: "Adding leading VARs cancels part of the load's lagging VARs -> lower |S|, lower line current, less $I^2R$ loss, lower utility penalty ✓."
           }),
           ref: "Handbook p.364" },
 
@@ -1596,14 +1599,13 @@ const QUESTION_BANK = {
           choices: ["$Z'_2 = a^2 Z_2$", "$Z'_2 = Z_2/a$", "$Z'_2 = a Z_2$", "$Z'_2 = Z_2/a^2$"],
           correct: 0,
           solution: S({
-            c: "Reflected impedance: $Z'_2 = a^2 Z_2$ (square of turns ratio). Comes from: $Z'_2 = V_1/I_1 = (a V_2)/(I_2/a) = a^2 (V_2/I_2) = a^2 Z_2$.",
+            c: "Reflected impedance: $Z'_2=a^2 Z_2$ - impedance scales by the SQUARE of the turns ratio.",
             s: [
-              "Voltage scales by $a$.",
-              "Current scales by $1/a$.",
-              "Impedance ($V/I$) scales by $a^2$."
+              "<b>Step 1 — Reason.</b> Voltage scales by $a$, current by $1/a$, so $Z=V/I$ scales by $a^2$.",
+              "<b>Step 2 — Distractor audit.</b> $Z_2/a$, $aZ_2$, $Z_2/a^2$ use the wrong power of $a$."
             ],
-            a: "$Z'_2 = a^2 Z_2$",
-            v: "Used to combine primary and secondary impedances on one side for analysis."
+            a: "$Z'_2=a^2 Z_2$",
+            v: "This lets you 'move' a secondary impedance to the primary side and combine everything on one side - the basis of transformer impedance matching."
           }),
           ref: "Handbook p.364" },
 
@@ -1611,12 +1613,13 @@ const QUESTION_BANK = {
           choices: ["$1800$ rpm", "$3600$ rpm", "$900$ rpm", "$1500$ rpm"],
           correct: 0,
           solution: S({
-            c: "Synchronous speed: $n_s = \\dfrac{120 f}{p}$ where $f$ in Hz and $p$ is the number of poles.",
+            c: "Synchronous speed: $n_s=\\dfrac{120f}{p}$ (f in Hz, p = poles).",
             s: [
-              "$n_s = 120 \\cdot 60 / 4 = 7200/4 = 1800$ rpm."
+              "<b>Step 1 — Apply.</b> $120\\times60/4=1800$ rpm.",
+              "<b>Step 2 — Distractor audit.</b> $3600$ rpm is 2-pole; $1200$ rpm is 6-pole; $1500$ rpm is 4-pole at 50 Hz."
             ],
-            a: "$n_s = 1800$ rpm",
-            v: "Common motors: 2-pole = 3600 rpm; 4-pole = 1800 rpm; 6-pole = 1200 rpm (all at 60 Hz)."
+            a: "$n_s=1800$ rpm",
+            v: "At 60 Hz: 2-pole=3600, 4-pole=1800, 6-pole=1200 rpm - fewer poles spin faster. Induction motors run slightly below this (slip)."
           }),
           ref: "Handbook p.365" },
 
@@ -1624,12 +1627,13 @@ const QUESTION_BANK = {
           choices: ["$1728$ rpm", "$72$ rpm", "$1872$ rpm", "$1800$ rpm"],
           correct: 0,
           solution: S({
-            c: "Induction motor slip: $s = (n_s - n_r)/n_s$, so $n_r = n_s(1-s)$.",
+            c: "Induction-motor slip: $s=(n_s-n_r)/n_s$, so rotor speed $n_r=n_s(1-s)$.",
             s: [
-              "$n_r = 1800(1 - 0.04) = 1800 \\cdot 0.96 = 1728$ rpm."
+              "<b>Step 1 — Apply.</b> $n_r=1800(1-0.04)=1800(0.96)=1728$ rpm.",
+              "<b>Step 2 — Distractor audit.</b> $72$ rpm is the slip SPEED ($n_s-n_r$); $1872$ rpm exceeds synchronous; $1800$ rpm is zero slip."
             ],
-            a: "$n_r = 1728$ rpm",
-            v: "Typical full-load slip: 2-5%. At no-load, $s \\approx 0$ (rotor nearly synchronous)."
+            a: "$n_r=1728$ rpm",
+            v: "Typical full-load slip is 2-5%. At no load slip is near 0 (rotor nearly synchronous); slip is what induces rotor current and makes torque."
           }),
           ref: "Handbook p.365" },
 
@@ -1637,15 +1641,14 @@ const QUESTION_BANK = {
           choices: ["$12\\angle -30°$ A", "$12\\angle 30°$ A", "$20.8\\angle -30°$ A", "$120\\angle 0°$ A"],
           correct: 0,
           solution: S({
-            c: "Phase current $I_\\phi = V_\\phi / Z_\\phi$ (use phase voltage for Y, which equals $V_{LN}$).",
+            c: "Phase current $I_\\phi=V_\\phi/Z_\\phi$; for wye, $V_\\phi=V_{LN}$. Phasor division: divide magnitudes, subtract angles.",
             s: [
-              "$V_\\phi = V_{LN} = 120\\angle 0°$.",
-              "Divide phasors: $I_\\phi = (120\\angle 0°)/(10\\angle 30°)$.",
-              "Magnitudes divide: $120/10 = 12$. Angles subtract: $0° - 30° = -30°$.",
-              "$I_\\phi = 12\\angle -30°$ A."
+              "<b>Step 1 — Voltage.</b> $V_\\phi=120\\angle0°$.",
+              "<b>Step 2 — Divide.</b> $120/10=12$; $0°-30°=-30°$.",
+              "<b>Step 3 — Distractor audit.</b> $12\\angle+30°$ adds the angle; $20.8\\angle-30°$ uses $V_{LL}$; $120\\angle0°$ forgets to divide by Z."
             ],
-            a: "$I_\\phi = 12\\angle -30°$ A",
-            v: "Lagging current (negative angle) — load is inductive (positive Z angle)."
+            a: "$I_\\phi=12\\angle-30°$ A",
+            v: "Current LAGS by 30 degrees -> inductive load (positive Z angle), consistent with a lagging power factor ✓."
           }),
           ref: "Handbook p.363" },
 
@@ -1653,14 +1656,13 @@ const QUESTION_BANK = {
           choices: ["$\\frac{V_{NL}-V_{FL}}{V_{FL}}\\times 100\\%$", "$V_{FL}/V_{NL}$", "$V_{NL}+V_{FL}$", "$V_{FL}-V_{NL}$"],
           correct: 0,
           solution: S({
-            c: "Voltage regulation = (no-load V − full-load V) / full-load V × 100%. Measures voltage stability of a transformer or generator.",
+            c: "Voltage regulation: $VR=\\dfrac{V_{NL}-V_{FL}}{V_{FL}}\\times100\\%$ - how much terminal voltage sags from no-load to full-load.",
             s: [
-              "Ideal transformer: VR = 0% (output independent of load).",
-              "Real transformer: VR a few % due to winding resistance and leakage inductance.",
-              "High VR = poor regulation."
+              "<b>Step 1 — Match.</b> $(V_{NL}-V_{FL})/V_{FL}\\times100\\%$.",
+              "<b>Step 2 — Distractor audit.</b> The ratio $V_{FL}/V_{NL}$, the sum, and the bare difference aren't the VR definition."
             ],
-            a: "$VR = \\frac{V_{NL}-V_{FL}}{V_{FL}}\\times 100\\%$",
-            v: "Sometimes written with $V_{NL}$ in the denominator — be careful which convention the question uses."
+            a: "$VR=\\dfrac{V_{NL}-V_{FL}}{V_{FL}}\\times100\\%$",
+            v: "LOWER VR is better (more stable output). Ideal transformer: 0%; real units: a few % from winding R and leakage. Some texts use $V_{NL}$ in the denominator - check the convention."
           }),
           ref: "Handbook p.364" },
       ],
