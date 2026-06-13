@@ -240,13 +240,13 @@
 
         }), ref: "p.66" },
       { q: "Hypergeometric: pick 5 from population with 10 successes and 20 failures. P(2 successes):",
-        choices: ["$\\binom{10}{2}\\binom{20}{3}/\\binom{30}{5}$", "$(2/5)$", "$\\binom{30}{5}$", "$0.4$"], correct: 0,
+        choices: ["$\\binom{10}{2}\\binom{20}{3}/\\binom{30}{5}$", "$(2/5)$", "$\\binom{30}{5}$", "$\\binom{10}{2}/\\binom{30}{5}$"], correct: 0,
         solution: S({
           c: "The HYPERGEOMETRIC distribution models sampling WITHOUT replacement: $P(k)=\\dfrac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$, with $N$ total, $K$ successes, $n$ drawn.",
           s: [
             "<b>Step 1 — Identify.</b> $N=30$, $K=10$ successes, $n=5$ drawn, $k=2$ wanted.",
             "<b>Step 2 — Apply.</b> $P=\\dfrac{\\binom{10}{2}\\binom{20}{3}}{\\binom{30}{5}}$.",
-            "<b>Step 3 — Distractor audit.</b> $2/5$ and 0.4 ignore the combinatorics; $\\binom{30}{5}$ alone is just the denominator."
+            "<b>Step 3 — Distractor audit.</b> $2/5$ ignores the combinatorics; $\\binom{30}{5}$ alone is just the denominator; $\\binom{10}{2}/\\binom{30}{5}$ drops the failures term $\\binom{20}{3}$."
           ],
           a: "$\\dfrac{\\binom{10}{2}\\binom{20}{3}}{\\binom{30}{5}}$",
           v: "Use hypergeometric (not binomial) when draws AREN'T replaced, so probabilities shift each draw ✓ — e.g. dealing cards or quality-inspecting a finite batch. Binomial assumes replacement (constant p)."
