@@ -1415,77 +1415,300 @@
     10: [
       { q: "120 V single phase, 1500 W resistive load. Current:",
         choices: ["$12.5$ A", "$1500$ A", "$0.08$ A", "$180$ A"], correct: 0,
-        solution: S({ c: "$P = VI$ for resistive (pf=1).", s: ["$I = P/V = 1500/120 = 12.5$ A."], a: "$12.5$ A", v: "Hair dryer or coffee maker — typical 1500W appliance." }), ref: "Handbook p.362" },
+        solution: S({
+          c: "For a purely RESISTIVE load, power factor = 1 and the power formula collapses to the simplest case: $P = VI$, so $I = P/V$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $I = 1500/120 = 12.5$ A.",
+            "<b>Step 2 — Distractor audit.</b> 1500 A forgets to divide; 0.08 A divides the WRONG way ($V/P$); 180 A is $1500/8.33$ — nothing."
+          ],
+          a: "$I = 12.5$ A",
+          v: "Sanity anchor: US 15-A branch circuits exist precisely because 1500-W appliances (hair dryer, space heater, kettle) draw ~12.5 A — one such load nearly fills the circuit ✓."
+
+        }), ref: "Handbook p.362" },
       { q: "3-phase delta-connected source with $V_{LL}=480$ V. Each phase voltage:",
         choices: ["$480$ V", "$277$ V", "$240$ V", "$830$ V"], correct: 0,
-        solution: S({ c: "Delta: $V_{phase} = V_{LL}$.", s: ["Delta connection has phase voltage = line voltage."], a: "$480$ V" }), ref: "Handbook p.363" },
+        solution: S({
+          c: "The Δ/Y voltage-current duality: in DELTA, each phase winding is connected directly between two lines, so $V_{phase} = V_{LL}$ (it's the CURRENTS that differ by $\\sqrt{3}$). In WYE it's the reverse: $V_{phase} = V_{LL}/\\sqrt{3}$.",
+          s: [
+            "<b>Step 1 — Apply delta rule.</b> $V_{phase} = V_{LL} = 480$ V.",
+            "<b>Step 2 — Distractor audit.</b> 277 V $= 480/\\sqrt{3}$ — the WYE phase voltage, the classic swap; 240 V halves; 830 V $= 480\\sqrt{3}$ multiplies when nothing should."
+          ],
+          a: "$V_{phase} = 480$ V (delta).",
+          v: "The memory device: Δ looks like windings strung line-to-line — same voltage, split currents; Y has a neutral point — split voltages, same currents ✓. 480/277 V is exactly the US commercial Y system's pair."
+
+        }), ref: "Handbook p.363" },
       { q: "Power dissipated in line resistance: 3-phase 120 A line current, 0.1 Ω per line:",
         choices: ["$\\approx 4320$ W (sum of 3 lines)", "$\\approx 1440$ W (one line)", "$\\approx 14.4$ W", "Zero"], correct: 0,
-        solution: S({ c: "Each line: $P = I^2 R$. Three lines.", s: ["Per line: $120^2 \\cdot 0.1 = 1440$ W.", "Three lines: $3 \\cdot 1440 = 4320$ W."], a: "$\\approx 4320$ W", v: "Why higher voltage → lower current → lower I²R losses." }), ref: "Handbook p.363" },
+        solution: S({
+          c: "Each conductor of a 3-phase line carries the line current through its own resistance, dissipating $I^2R$ — and there are THREE conductors: $P_{loss} = 3I_L^2R$.",
+          s: [
+            "<b>Step 1 — One line.</b> $120^2\\times0.1 = 1440$ W.",
+            "<b>Step 2 — Three lines.</b> $3\\times1440 = 4320$ W.",
+            "<b>Step 3 — Distractor audit.</b> 1440 W stops at one conductor; 14.4 W drops $I^2$ to $I$; zero ignores resistance."
+          ],
+          a: "$P_{loss} = 4320$ W total.",
+          v: "The grid's founding equation: same power at 10× the voltage needs 1/10 the current → 1/100 the $I^2R$ loss ✓ — which is the entire reason transmission runs at hundreds of kV and transformers won the AC-vs-DC war."
+
+        }), ref: "Handbook p.363" },
       { q: "Single-phase 240 V/120 V split-phase service is common in:",
         choices: ["US residential", "European residential", "Industrial only", "Aviation"], correct: 0,
-        solution: S({ c: "US homes: 240V split into two 120V hot legs by center-tapped transformer.", s: ["240V for high-power loads (dryer, range, AC).", "120V for normal outlets, lights."], a: "US residential" }), ref: "Handbook p.363" },
+        solution: S({
+          c: "US residential service is SPLIT-PHASE: one transformer secondary, center-tapped and grounded. Each 'hot' leg is 120 V to neutral; hot-to-hot gives 240 V.",
+          s: [
+            "<b>Step 1 — Match.</b> US residential.",
+            "<b>Step 2 — How the two voltages divide the work.</b> 120 V: outlets, lights, electronics. 240 V (both legs): dryer, range, A/C, EV charger.",
+            "<b>Step 3 — Distractor audit.</b> European homes: single 230 V leg, no split; industry uses 3-phase (208/480 V); aircraft use 115 V at 400 Hz."
+          ],
+          a: "US residential (240 V center-tapped → two 120-V legs).",
+          v: "Naming precision worth keeping: split-phase is NOT two-phase — the two legs are 180° apart (one winding, opposite ends), not 90° ✓. Balanced legs also cancel neutral current — why the neutral can be sized same as the hots."
+
+        }), ref: "Handbook p.363" },
       { q: "Capacitor bank used for PF correction is connected in:",
         choices: ["Parallel with load", "Series with load", "Series with source", "Replaces load"], correct: 0,
-        solution: S({ c: "Shunt capacitors provide leading VAR to offset lagging VAR of inductive loads.", s: ["Improves PF without affecting load operation.", "Sometimes switched in steps via contactors."], a: "Parallel" }), ref: "Handbook p.363" },
+        solution: S({
+          c: "Inductive loads (motors) draw lagging reactive power. A capacitor connected in PARALLEL supplies leading VARs locally, cancelling the lagging VARs — the utility then ships mostly real power.",
+          s: [
+            "<b>Step 1 — Match.</b> Parallel with the load.",
+            "<b>Step 2 — Why parallel and not series?</b> Parallel leaves the load's voltage untouched — the load never knows the capacitor exists; SERIES capacitance would drop voltage and carry full load current (that's a transmission-line compensation trick, different job).",
+            "<b>Step 3 — Distractor audit.</b> 'Series with source' and 'replaces load' both disturb the circuit being corrected."
+          ],
+          a: "In parallel (shunt) with the inductive load.",
+          v: "The vector picture: load draws $P + jQ_L$; capacitor injects $-jQ_C$; the source sees $P + j(Q_L - Q_C)$ — angle shrinks, pf → 1 ✓. Utilities bill industrial customers for poor pf, so banks (often contactor-switched in steps) pay for themselves."
+
+        }), ref: "Handbook p.363" },
       { q: "Star-Delta motor starter purpose:",
         choices: ["Reduce starting current (~1/3 of direct-online)", "Increase starting torque", "Speed control", "Reverse rotation"], correct: 0,
-        solution: S({ c: "Starts in Y (lower phase voltage → lower inrush), switches to Δ (full power) once near speed.", s: ["Reduces starting current to ~1/3 of DOL.", "Starting torque also reduced to 1/3 — only suitable for light loads at start."], a: "Reduce starting current" }), ref: "Handbook p.365" },
+        solution: S({
+          c: "A large induction motor started direct-on-line gulps 6-8× rated current. The Y-Δ starter first connects the windings in WYE — each sees $V/\\sqrt{3}$ — then switches to DELTA at speed. Lower voltage → current AND torque both drop to 1/3.",
+          s: [
+            "<b>Step 1 — Match.</b> Reduce starting current to ~1/3 of DOL.",
+            "<b>Step 2 — Where 1/3 comes from.</b> Phase voltage down by $\\sqrt{3}$; torque $\\propto V^2$ → $(1/\\sqrt{3})^2 = 1/3$; line current likewise 1/3.",
+            "<b>Step 3 — Distractor audit.</b> Torque DECREASES (the price, not the goal — so only light-start loads qualify: fans, pumps); speed control needs a VFD; reversal = swap two phases."
+          ],
+          a: "Cut starting inrush to ≈1/3 of direct-on-line.",
+          v: "The fine print that fails exams and motors: the Y→Δ transition causes a current spike if switched at the wrong moment, and starting torque of 1/3 may stall a loaded conveyor ✓ — modern soft-starters and VFDs replaced Y-Δ for exactly these reasons."
+
+        }), ref: "Handbook p.365" },
       { q: "Open-circuit test of transformer measures:",
         choices: ["Core (iron) losses primarily", "Winding (copper) losses", "Insulation", "Voltage ratio only"], correct: 0,
-        solution: S({ c: "OC test: rated V on one side, other open. Only excitation current flows → core losses dominate.", s: ["Short-circuit test: low V, rated I, primarily copper losses.", "Together: characterize the transformer model."], a: "Core losses" }), ref: "Handbook p.364" },
+        solution: S({
+          c: "The two classic transformer tests split the loss budget. OPEN-circuit test: rated voltage, secondary open → only tiny magnetizing current flows → copper loss negligible → wattmeter reads CORE (iron) loss.",
+          s: [
+            "<b>Step 1 — Match.</b> Core losses.",
+            "<b>Step 2 — The mirror test.</b> SHORT-circuit test: low voltage, rated current → flux tiny → core loss negligible → wattmeter reads COPPER loss. The pair fully populates the equivalent-circuit model.",
+            "<b>Step 3 — Distractor audit.</b> Copper loss belongs to the SC test (the eternal swap); insulation is a hipot test; the ratio is a side-benefit, not what the test 'measures'."
+          ],
+          a: "Core (iron) losses — hysteresis + eddy currents.",
+          v: "Why the split matters operationally: core loss runs 24/7 whenever energized (voltage-set), copper loss tracks load² ✓ — so an always-on, lightly-loaded transformer should be optimized for low core loss."
+
+        }), ref: "Handbook p.364" },
       { q: "Per-unit (pu) impedance of a transformer is the same on both sides because:",
         choices: ["Base impedance also transforms by $a^2$", "Real impedance is the same", "Both sides have same windings", "Coincidence"], correct: 0,
-        solution: S({ c: "Actual Z transforms by $a^2$. Base Z also transforms by $a^2$ (since $Z_{base} = V^2/S$ and V scales by $a$). Ratio = same.", s: ["Why per-unit is preferred for multi-voltage systems — uniform numbers across all parts."], a: "Base also scales" }), ref: "Handbook p.363-364" },
+        solution: S({
+          c: "Per-unit = actual value ÷ base value. Across a transformer, actual impedance transforms by $a^2$ (turns ratio squared) — but the BASE impedance $Z_{base} = V_{base}^2/S_{base}$ ALSO transforms by $a^2$ (voltage base scales by $a$, power base is common). The ratio is identical on both sides.",
+          s: [
+            "<b>Step 1 — Match.</b> Base impedance also transforms by $a^2$ — the $a^2$'s cancel.",
+            "<b>Step 2 — Distractor audit.</b> The real (ohmic) impedance is NOT the same on both sides — it differs by $a^2$, which is the whole point; 'same windings' is false; 'coincidence' — it's engineered, by choosing bases that track the ratio."
+          ],
+          a: "$Z_{pu}$ is side-independent because base and actual scale together.",
+          v: "What this buys: in a grid with 13.8 kV, 138 kV, and 500 kV sections, per-unit erases every transformer — the network becomes one flat impedance diagram ✓. It's why nameplate impedance is quoted as '5%' with no side specified."
+
+        }), ref: "Handbook p.363-364" },
       { q: "Synchronous generator frequency depends on:",
         choices: ["Rotor speed and pole count", "Voltage only", "Load only", "Stator winding"], correct: 0,
-        solution: S({ c: "$f = (poles \\cdot rpm)/120$ for synchronous machines.", s: ["Constant speed → constant frequency.", "Grid-tie requires synchronization (frequency, voltage, phase match)."], a: "Speed × poles" }), ref: "Handbook p.365" },
+        solution: S({
+          c: "A synchronous machine's electrical frequency is mechanically LOCKED to its shaft: $f = \\dfrac{P\\times N}{120}$, with $P$ = number of poles, $N$ = speed in rpm.",
+          s: [
+            "<b>Step 1 — Match.</b> Rotor speed and pole count — nothing else.",
+            "<b>Step 2 — Feel the formula.</b> 60 Hz options: 2 poles @ 3600 rpm (steam turbine), 4 @ 1800, dozens of poles @ ~100 rpm (hydro).",
+            "<b>Step 3 — Distractor audit.</b> Voltage is set by field excitation (a separate knob); load affects the torque ANGLE, not locked frequency; stator winding sets voltage/phases, not f."
+          ],
+          a: "$f = PN/120$ — speed × poles.",
+          v: "Check 4-pole: $4\\times1800/120 = 60$ Hz ✓. Grid corollary: paralleling a generator requires matching frequency, voltage, AND phase before the breaker closes — get it wrong and the grid wins."
+
+        }), ref: "Handbook p.365" },
       { q: "DC machine commutator function:",
         choices: ["Converts AC in armature to DC at brushes (or vice versa)", "Generates field", "Bearings", "Cooling"], correct: 0,
-        solution: S({ c: "Rotating armature generates AC; commutator reverses connections to brushes every half-rotation → unidirectional DC at brushes.", s: ["In DC motor: brush-fed DC current is commutated → torque in same direction."], a: "AC↔DC rectification" }), ref: "Handbook p.365" },
+        solution: S({
+          c: "Inside any rotating DC machine the armature conductors actually carry AC — each conductor's EMF flips every half-turn as it passes opposite poles. The COMMUTATOR is a mechanical rectifier: a segmented copper ring that swaps the brush connections every half-rotation, so the outside world sees DC.",
+          s: [
+            "<b>Step 1 — Match.</b> Converts armature AC ↔ brush DC.",
+            "<b>Step 2 — Both directions.</b> Generator: internal AC → DC out. Motor: DC in gets commutated so torque always pushes the SAME way — without it, the rotor would just jitter.",
+            "<b>Step 3 — Distractor audit.</b> The FIELD comes from field windings or magnets; bearings and cooling are mechanical bystanders."
+          ],
+          a: "Mechanical AC↔DC converter between armature and brushes.",
+          v: "The maintenance reality this creates: brushes wear, spark, and limit speed — which is why 'brushless DC' motors moved the magnets to the rotor and replaced the commutator with electronic switching ✓."
+
+        }), ref: "Handbook p.365" },
       { q: "Three-phase induction motor reversal:",
         choices: ["Swap any two of the three lines", "Reverse polarity", "Change frequency", "Reduce voltage"], correct: 0,
-        solution: S({ c: "Swapping two phases reverses the rotating magnetic field direction → motor reverses.", s: ["Single-phase induction: must reconfigure capacitor or use start winding reversal."], a: "Swap two phases" }), ref: "Handbook p.365" },
+        solution: S({
+          c: "An induction motor follows its ROTATING magnetic field, whose direction is set by the phase sequence (A-B-C vs A-C-B). Swapping ANY two of the three supply lines reverses the sequence — and the motor.",
+          s: [
+            "<b>Step 1 — Match.</b> Swap any two lines.",
+            "<b>Step 2 — Distractor audit.</b> 'Reverse polarity' is a DC concept — AC has no fixed polarity; changing frequency changes SPEED (that's a VFD's job); reducing voltage just weakens torque ($\\propto V^2$)."
+          ],
+          a: "Interchange any two of the three phases.",
+          v: "Field check: this is literally how reversing starters are wired — two contactors, interlocked, with two leads crossed ✓. The single-phase exception: no rotating field to reverse — you must re-wire the start winding or capacitor instead."
+
+        }), ref: "Handbook p.365" },
       { q: "Power factor of pure inductor:",
         choices: ["$0$ (lagging)", "$1$", "$0.5$", "$-1$"], correct: 0,
-        solution: S({ c: "Pure inductor: V leads I by 90°. $\\cos 90° = 0$.", s: ["All power is reactive, none real."], a: "$0$ lagging" }), ref: "Handbook p.362" },
+        solution: S({
+          c: "Power factor $= \\cos\\theta$, where θ is the angle between voltage and current. A pure inductor puts current 90° BEHIND voltage: $\\cos 90° = 0$ — 'zero, lagging'.",
+          s: [
+            "<b>Step 1 — Match.</b> 0 (lagging).",
+            "<b>Step 2 — What pf = 0 means physically.</b> Energy sloshes into the magnetic field and back out every quarter-cycle — average REAL power is exactly zero; everything is reactive (VARs).",
+            "<b>Step 3 — Distractor audit.</b> 1 is a pure resistor; 0.5 implies θ = 60° (a mixed load); −1 isn't a power factor — pf is a cosine magnitude tagged 'leading' or 'lagging'."
+          ],
+          a: "pf = 0, lagging.",
+          v: "Symmetry check: a pure CAPACITOR is also pf = 0 but LEADING (ELI the ICE man: inductor L — EMF leads I; capacitor C — I leads EMF) ✓ — which is exactly why capacitors can cancel inductive VARs."
+
+        }), ref: "Handbook p.362" },
       { q: "Wye-connected load: line voltage 480V, line current 25 A, pf 0.85. Total real power:",
         choices: ["$\\approx 17.66$ kW", "$\\approx 20$ kW", "$\\approx 12$ kW", "$\\approx 8.4$ kW"], correct: 0,
-        solution: S({ c: "$P = \\sqrt{3} V_{LL} I_L \\cos\\theta$.", s: ["$\\sqrt{3} \\cdot 480 \\cdot 25 = 20{,}785$ VA.", "$P = 20785 \\cdot 0.85 = 17{,}667$ W."], a: "$\\approx 17.67$ kW" }), ref: "Handbook p.363" },
+        solution: S({
+          c: "Universal 3-phase power formula (works for Y or Δ when stated in LINE quantities): $P = \\sqrt{3}\\,V_{LL}I_L\\cos\\theta$.",
+          s: [
+            "<b>Step 1 — Apparent power.</b> $S = \\sqrt{3}\\times480\\times25 = 20{,}785$ VA ≈ 20.8 kVA.",
+            "<b>Step 2 — Real power.</b> $P = S\\cos\\theta = 20{,}785\\times0.85 = 17{,}667$ W ≈ 17.66 kW.",
+            "<b>Step 3 — Distractor audit.</b> 20 kW is S mislabeled as P (forgot the pf); 12 kW drops the $\\sqrt{3}$; 8.4 kW commits both sins."
+          ],
+          a: "$P \\approx 17.7$ kW",
+          v: "The √3's origin, so it never feels arbitrary: per-phase $P = 3V_{ph}I_{ph}\\cos\\theta$ with $V_{ph} = V_{LL}/\\sqrt{3}$ (wye) → $3/\\sqrt{3} = \\sqrt{3}$ ✓. Reactive completes the triangle: $Q = S\\sin\\theta \\approx 10.9$ kVAR."
+
+        }), ref: "Handbook p.363" },
       { q: "Voltage drop across transmission line = ?",
         choices: ["$I \\cdot (R + jX)$", "$I \\cdot R$", "$I \\cdot X$", "$IL$"], correct: 0,
-        solution: S({ c: "Line has resistance and inductive reactance. Drop is complex.", s: ["Short line: $\\Delta V = I \\cdot Z_{line}$ approximately.", "Long line: distributed parameters; use ABCD model."], a: "$I(R + jX)$" }), ref: "Handbook p.363" },
+        solution: S({
+          c: "A real transmission line is not just wire resistance — its conductors form loops with INDUCTANCE, so the series impedance is complex: $Z = R + jX$. Voltage drop is the phasor product $\\Delta V = I(R + jX)$.",
+          s: [
+            "<b>Step 1 — Match.</b> $I(R + jX)$.",
+            "<b>Step 2 — Why X can't be ignored.</b> For typical lines $X > R$ (often 3-10×) — the REACTIVE drop dominates; modeling only $IR$ badly underestimates regulation.",
+            "<b>Step 3 — Distractor audit.</b> $IR$ alone and $IX$ alone are each half the story; $IL$ confuses inductance with its reactance $\\omega L$."
+          ],
+          a: "$\\Delta V = I(R + jX)$ — a complex (phasor) drop.",
+          v: "Model ladder for perspective: short line (<80 km) → series $R+jX$ as here; medium → add shunt capacitance (π-model); long → distributed ABCD parameters ✓. The phasor nature also explains why drawing MORE reactive current sags voltage hardest."
+
+        }), ref: "Handbook p.363" },
       { q: "Transformer rated 100 kVA, 13.8 kV / 480 V. Short-circuit current (primary, rated impedance 5%):",
         choices: ["$\\approx 145$ A (20× rated)", "Rated 7.25 A", "$\\approx 7.25$ A", "$10$ A"], correct: 0,
-        solution: S({ c: "Short-circuit current $\\approx I_{rated}/Z_{pu}$.", s: ["$I_{rated} = 100000/13800 = 7.25$ A.", "$I_{SC} = 7.25/0.05 = 145$ A (20× rated)."], a: "$\\approx 145$ A", v: "Why fault current calculations matter — selecting protective devices that can interrupt these currents safely." }), ref: "Handbook p.364" },
+        solution: S({
+          c: "A transformer's nameplate impedance (here 5% = 0.05 pu) IS its short-circuit current rating in disguise: with a bolted fault on the secondary, the only thing limiting current is that impedance, so $I_{SC} = I_{rated}/Z_{pu}$.",
+          s: [
+            "<b>Step 1 — Rated primary current.</b> $I_{rated} = S/V = 100{,}000/13{,}800 = 7.25$ A.",
+            "<b>Step 2 — Fault current.</b> $I_{SC} = 7.25/0.05 = 145$ A — exactly $1/0.05 = 20\\times$ rated.",
+            "<b>Step 3 — Distractor audit.</b> 7.25 A (twice offered) is the RATED current — a fault is 20× worse; 10 A is a guess."
+          ],
+          a: "$I_{SC} \\approx 145$ A on the primary (20× rated).",
+          v: "Why the number runs protection engineering: breakers and fuses must INTERRUPT this current, and bus bracing must survive its magnetic forces ✓. Note the trade hiding in Z%: lower impedance → better regulation but FIERCER fault currents."
+
+        }), ref: "Handbook p.364" },
     ],
 
     // ====================== Ch 11: EM — +8 ======================
     11: [
       { q: "Electrostatic force between two 1 C charges 1 m apart:",
         choices: ["$\\approx 9 \\times 10^9$ N (HUGE)", "$1$ N", "$10^{-9}$ N", "$8.99$ N"], correct: 0,
-        solution: S({ c: "Coulomb: $F = k_e q_1 q_2/r^2$.", s: ["$F = 8.99\\times 10^9 \\cdot 1 \\cdot 1 / 1^2 = 8.99\\times 10^9$ N."], a: "$\\sim 9\\times 10^9$ N", v: "1 C is enormous — typical charges are µC or smaller." }), ref: "Handbook p.355" },
+        solution: S({
+          c: "Coulomb's law: $F = \\dfrac{k_e q_1 q_2}{r^2}$ with $k_e = 8.99\\times10^{9}$ N·m²/C². With ones everywhere, the answer IS the constant.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $F = 8.99\\times10^{9}\\times1\\times1/1^2 \\approx 9\\times10^{9}$ N.",
+            "<b>Step 2 — Grasp the size.</b> ~9 billion newtons — roughly the weight of a million tons. Two coulombs a meter apart would tear themselves apart.",
+            "<b>Step 3 — Distractor audit.</b> 1 N treats $k_e$ as 1; $10^{-9}$ inverts the constant; 8.99 N drops the $10^9$."
+          ],
+          a: "$F \\approx 9\\times10^{9}$ N — enormous.",
+          v: "The real lesson: 1 C is a huge charge — static electricity lives at µC and nC scales ✓ (a doorknob zap is ~µC). Currents move coulombs per second only because conductors stay NEUTRAL while charge flows through."
+
+        }), ref: "Handbook p.355" },
       { q: "Electric field of a point charge at distance $r$:",
         choices: ["$E = k_e q/r^2$", "$E = k_e q/r$", "$E = q r$", "$E = qr^2$"], correct: 0,
-        solution: S({ c: "From Coulomb force: $E = F/q_{test} = k_e q/r^2$.", s: ["Falls off as $1/r^2$ — same as gravity.", "Line charge: $E \\propto 1/r$. Plane charge: $E$ constant."], a: "$k_e q/r^2$" }), ref: "Handbook p.355" },
+        solution: S({
+          c: "Electric field = force per unit test charge: $E = F/q_{test}$. Dividing Coulomb's law by $q_{test}$: $E = \\dfrac{k_e q}{r^2}$ — inverse-SQUARE, pointing radially.",
+          s: [
+            "<b>Step 1 — Match.</b> $E = k_e q/r^2$.",
+            "<b>Step 2 — The geometry ladder (worth memorizing as a set).</b> Point charge: $1/r^2$. Infinite LINE charge: $1/r$. Infinite PLANE: constant. Each lost dimension of spreading softens the falloff.",
+            "<b>Step 3 — Distractor audit.</b> $k_eq/r$ is the POTENTIAL's form (V, not E); $qr$ and $qr^2$ grow with distance — backwards."
+          ],
+          a: "$E = k_e q/r^2$, radial.",
+          v: "Units check: N·m²/C² × C / m² = N/C = V/m ✓. The $1/r^2$ is geometry itself — the same flux through ever-larger spheres of area $4\\pi r^2$ — which is why gravity obeys the identical law."
+
+        }), ref: "Handbook p.355" },
       { q: "Voltage between parallel plates with E-field $E$ and separation $d$:",
         choices: ["$V = Ed$", "$V = E/d$", "$V = Ed^2$", "$V = E + d$"], correct: 0,
-        solution: S({ c: "Uniform field: $V = \\int E \\, dx = Ed$ for distance $d$.", s: ["$E = V/d$ inversely."], a: "$V = Ed$" }), ref: "Handbook p.355" },
+        solution: S({
+          c: "Between parallel plates the field is UNIFORM, so the integral $V = \\int E\\,dx$ collapses to a product: $V = Ed$.",
+          s: [
+            "<b>Step 1 — Match.</b> $V = Ed$.",
+            "<b>Step 2 — Distractor audit.</b> $E/d$ rearranges the inverse relation wrongly (it's $E = V/d$); $Ed^2$ and $E+d$ fail dimensionally."
+          ],
+          a: "$V = Ed$",
+          v: "Units read it back: (V/m)×m = V ✓. The inverse form $E = V/d$ is the practical one: 5 kV across a 1-mm gap = 5 MV/m — beyond air's ~3 MV/m breakdown, so it arcs. That division is the whole science of insulation spacing."
+
+        }), ref: "Handbook p.355" },
       { q: "Faraday's law: induced EMF =",
         choices: ["$-d\\Phi/dt$", "$+d\\Phi/dt$", "$\\Phi$", "$1/\\Phi$"], correct: 0,
-        solution: S({ c: "EMF = $-d\\Phi_B/dt$. Negative sign (Lenz's law): induced current opposes the flux change.", s: ["Time-varying flux through loop → EMF around loop."], a: "$-d\\Phi/dt$", v: "Generators, transformers, induction motors all rely on this." }), ref: "Handbook p.355" },
+        solution: S({
+          c: "Faraday's law: a CHANGING magnetic flux through a loop induces an EMF around it: $\\mathcal{E} = -\\dfrac{d\\Phi_B}{dt}$. The minus sign is Lenz's law — the induced current opposes the change that made it.",
+          s: [
+            "<b>Step 1 — Match.</b> $-d\\Phi/dt$.",
+            "<b>Step 2 — Why the sign matters.</b> Lenz = energy conservation in disguise: if induction AIDED the change, flux would grow its own cause — a free-energy machine. Opposition is what makes generators take torque to turn.",
+            "<b>Step 3 — Distractor audit.</b> $+d\\Phi/dt$ violates exactly that; $\\Phi$ alone — STEADY flux induces nothing (the most-tested misconception); $1/\\Phi$ is dimensionless nonsense."
+          ],
+          a: "$\\mathcal{E} = -d\\Phi_B/dt$",
+          v: "Everything AC stands on this one line: generators (motion changes Φ), transformers (AC current changes Φ), induction motors (rotating field changes Φ through rotor bars) ✓. Multi-turn coils just multiply: $\\mathcal{E} = -N\\,d\\Phi/dt$."
+
+        }), ref: "Handbook p.355" },
       { q: "Inductance of a solenoid: $N = 200$, $l = 10$ cm, $A = 5$ cm², $\\mu_r = 1$:",
         choices: ["$\\approx 25\\ \\mu$H", "$25$ mH", "$2.5$ H", "$250$ µH"], correct: 0,
-        solution: S({ c: "$L = \\mu_0 \\mu_r N^2 A/l$.", s: ["$L = (4\\pi\\times 10^{-7})(200)^2 (5\\times 10^{-4})/(0.1)$.", "$= (4\\pi\\times 10^{-7})(40000)(0.005) = 4\\pi\\times 10^{-5} \\cdot 0.1 \\approx 2.51\\times 10^{-5}$ H = 25 µH."], a: "$\\approx 25$ µH" }), ref: "Handbook p.355" },
+        solution: S({
+          c: "Solenoid inductance: $L = \\dfrac{\\mu_0\\mu_r N^2 A}{l}$ — note inductance scales as turns SQUARED (each turn both makes flux and links it).",
+          s: [
+            "<b>Step 1 — SI units first.</b> $A = 5$ cm² $= 5\\times10^{-4}$ m²; $l = 0.1$ m; $\\mu_0 = 4\\pi\\times10^{-7}$ H/m.",
+            "<b>Step 2 — Compute.</b> $N^2A/l = 40{,}000\\times5\\times10^{-4}/0.1 = 200$. Then $L = 4\\pi\\times10^{-7}\\times200 \\approx 2.51\\times10^{-5}$ H.",
+            "<b>Step 3 — Distractor audit.</b> 25 mH and 2.5 H are unit-conversion slips (cm² left unconverted, or both errors); 250 µH is one stray factor of 10."
+          ],
+          a: "$L \\approx 25$ µH",
+          v: "Order-of-magnitude instinct: air-core coils live in µH; mH needs ferrite or iron ($\\mu_r$ of 100s-1000s — the formula's one free multiplier); H means a massive iron-core choke ✓. The $N^2$ is the designer's lever: double the turns, quadruple the L."
+
+        }), ref: "Handbook p.355" },
       { q: "EM wave impedance of free space:",
         choices: ["$\\approx 377\\ \\Omega$", "$50\\ \\Omega$", "$1\\ \\Omega$", "$0$"], correct: 0,
-        solution: S({ c: "$\\eta_0 = \\sqrt{\\mu_0/\\varepsilon_0} \\approx 377\\ \\Omega$ (or $120\\pi$).", s: ["Memorized value.", "In dielectric: $\\eta = \\eta_0/\\sqrt{\\varepsilon_r}$ (for non-magnetic)."], a: "$\\approx 377\\ \\Omega$" }), ref: "Handbook p.368" },
+        solution: S({
+          c: "Free space itself has a wave impedance — the fixed ratio of E to H in a propagating wave: $\\eta_0 = \\sqrt{\\mu_0/\\varepsilon_0} \\approx 377\\ \\Omega$ (exactly $120\\pi$). A memorized constant.",
+          s: [
+            "<b>Step 1 — Match.</b> ≈377 Ω.",
+            "<b>Step 2 — Distractor audit.</b> 50 Ω is COAX-CABLE impedance — a human design choice, not nature's (the classic confusion); 1 Ω and 0 have no basis.",
+            "<b>Step 3 — Inside a dielectric.</b> $\\eta = \\eta_0/\\sqrt{\\varepsilon_r}$ (non-magnetic) — denser medium, lower impedance, same pattern as $v = c/\\sqrt{\\varepsilon_r}$."
+          ],
+          a: "$\\eta_0 = 120\\pi \\approx 377\\ \\Omega$",
+          v: "Units check: in a wave, E is V/m and H is A/m — their ratio is V/A = ohms ✓. Where it bites: an antenna is precisely a matching device between a 50-Ω line and 377-Ω space — mismatch either interface and power reflects."
+
+        }), ref: "Handbook p.368" },
       { q: "Wavelength of microwave at 2.45 GHz (microwave oven):",
         choices: ["$\\approx 12.2$ cm", "$30$ cm", "$1$ m", "$1$ mm"], correct: 0,
-        solution: S({ c: "$\\lambda = c/f$.", s: ["$\\lambda = 3\\times 10^8/2.45\\times 10^9 = 0.1224$ m = 12.24 cm."], a: "$\\approx 12.2$ cm", v: "Why microwave ovens have hot/cold spots ~6 cm apart (half-wavelength standing waves)." }), ref: "Handbook p.368" },
+        solution: S({
+          c: "Wavelength and frequency share the speed of light: $\\lambda = c/f$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $\\lambda = \\dfrac{3\\times10^{8}}{2.45\\times10^{9}} = 0.1224$ m $\\approx 12.2$ cm.",
+            "<b>Step 2 — Distractor audit.</b> 30 cm is 1 GHz's wavelength; 1 m is 300 MHz; 1 mm is 300 GHz — each a decade-slip on the same formula."
+          ],
+          a: "$\\lambda \\approx 12.2$ cm",
+          v: "Why your microwave has a turntable: standing waves put hot spots every HALF wavelength ≈ 6 cm apart — stationary food cooks in stripes ✓. Wi-Fi shares this 2.4-GHz band, which is also why the oven can jam the router."
+
+        }), ref: "Handbook p.368" },
       { q: "For a TEM wave in dielectric ($\\varepsilon_r = 4$): speed:",
         choices: ["$\\approx 1.5\\times 10^8$ m/s", "$3\\times 10^8$ m/s", "$3\\times 10^8/4$", "$3\\times 10^8 \\cdot 4$"], correct: 0,
-        solution: S({ c: "$v = c/\\sqrt{\\varepsilon_r}$ (non-magnetic).", s: ["$v = c/2 = 1.5\\times 10^8$ m/s."], a: "$\\approx 1.5\\times 10^8$ m/s", v: "Coax with PE dielectric ($\\varepsilon_r \\approx 2.25$): velocity factor ~0.66." }), ref: "Handbook p.368" },
+        solution: S({
+          c: "Light slows in a dielectric: $v = \\dfrac{c}{\\sqrt{\\varepsilon_r}}$ (non-magnetic media, $\\mu_r = 1$). Note the SQUARE ROOT — the most-tested detail.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\sqrt{4} = 2$, so $v = c/2 = 1.5\\times10^{8}$ m/s.",
+            "<b>Step 2 — Distractor audit.</b> $c$ unchanged ignores the medium; $c/4$ forgets the square root (THE trap); $c\\times4$ exceeds light speed — impossible."
+          ],
+          a: "$v = 1.5\\times10^{8}$ m/s",
+          v: "The practical name is VELOCITY FACTOR: polyethylene coax ($\\varepsilon_r \\approx 2.25$) → VF $= 1/1.5 \\approx 0.66$ — signals crawl at 2/3 of c, about 20 cm/ns ✓. Cable-length timing (radar delay lines, phased antennas) is built on this number."
+
+        }), ref: "Handbook p.368" },
     ],
 
     // ====================== Ch 12: Control — +12 ======================
