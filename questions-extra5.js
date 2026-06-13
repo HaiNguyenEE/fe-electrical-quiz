@@ -30,12 +30,12 @@
 
         }), ref: "p.37" },
       { q: "Express $5\\cos\\omega t - 12\\sin\\omega t$ as $A\\cos(\\omega t + \\phi)$. Find A:",
-        choices: ["$13$", "$17$", "$7$", "$\\sqrt{169}$"], correct: 0,
+        choices: ["$13$", "$17$", "$7$", "$\\sqrt{119}$"], correct: 0,
         solution: S({
           c: "Any sum $a\\cos x - b\\sin x$ combines into a single sinusoid $R\\cos(x+\\phi)$ with amplitude $R = \\sqrt{a^2+b^2}$ and phase $\\tan\\phi = b/a$ — the phasor-addition trick used constantly in AC analysis.",
           s: [
             "<b>Step 1 — Amplitude.</b> $R = \\sqrt{5^2 + 12^2} = \\sqrt{25+144} = \\sqrt{169} = 13$.",
-            "<b>Step 2 — Distractor audit.</b> 17 adds the coefficients ($5+12$); 7 subtracts them; $\\sqrt{169}$ is correct but unsimplified (= 13, the intended answer)."
+            "<b>Step 2 — Distractor audit.</b> 17 adds the coefficients ($5+12$); 7 subtracts them; $\\sqrt{119}$ wrongly uses $12^2-5^2$ under the root."
           ],
           a: "$A = 13$",
           v: "It's the 5-12-13 Pythagorean triple ✓ — the two orthogonal components (cosine and sine) add like perpendicular legs. Phase: $\\phi = \\arctan(12/5) \\approx 67.4°$."
@@ -55,13 +55,13 @@
 
         }), ref: "p.36" },
       { q: "Magnitude of vector $\\vec{v} = 2\\hat{i}+3\\hat{j}+6\\hat{k}$:",
-        choices: ["$7$", "$11$", "$\\sqrt{49}$", "Same as A"], correct: 0,
+        choices: ["$7$", "$11$", "$\\sqrt{41}$", "$49$"], correct: 0,
         solution: S({
           c: "A vector's magnitude (length) is the root-sum-of-squares of its components: $|\\vec v| = \\sqrt{x^2+y^2+z^2}$ — the Pythagorean theorem in 3-D.",
           s: [
             "<b>Step 1 — Square and sum.</b> $2^2 + 3^2 + 6^2 = 4 + 9 + 36 = 49$.",
             "<b>Step 2 — Root.</b> $\\sqrt{49} = 7$.",
-            "<b>Step 3 — Distractor audit.</b> 11 adds the components ($2+3+6$); $\\sqrt{49}$ is correct unsimplified (=7); 'same as A' is a non-answer."
+            "<b>Step 3 — Distractor audit.</b> 11 adds the components ($2+3+6$); $\\sqrt{41}$ drops the largest term; $49$ is the sum of squares before taking the root."
           ],
           a: "$|\\vec v| = 7$",
           v: "It's a 2-3-6-7 Pythagorean quadruple ✓. The formula generalizes the 2-D hypotenuse: each added dimension just contributes one more squared term under the root."
@@ -2211,14 +2211,14 @@
           v: "The carry-out completes it: $C_{out} = AB + C_{in}(A\\oplus B)$ — carry when at least two inputs are 1 ✓. Chain $n$ full adders, carry to carry, and you get an $n$-bit ripple adder."
 
         }), ref: "p.390" },
-      { q: "Encoder (n-to-log n):", choices: ["Converts $2^n$ inputs to n-bit output", "Reverse of decoder", "Both A and B", "Random"], correct: 0,
+      { q: "Encoder (n-to-log n):", choices: ["Converts $2^n$ input lines to an $n$-bit code — the reverse of a decoder", "Converts an $n$-bit code to $2^n$ output lines", "Passes the input through unchanged", "Outputs a random code"], correct: 0,
         solution: S({
           c: "An ENCODER is the reverse of a decoder: given one active line out of $2^n$ inputs, it outputs the $n$-bit binary code identifying WHICH input is active.",
           s: [
-            "<b>Step 1 — Match.</b> Converts $2^n$ inputs to an $n$-bit output (and yes, it's the reverse of a decoder — 'both A and B').",
-            "<b>Step 2 — Distractor audit.</b> 'Random' is wrong; the answer captures both the $2^n\\to n$ mapping AND the decoder-reverse description."
+            "<b>Step 1 — Match.</b> An encoder maps $2^n$ input lines down to an $n$-bit code — equivalently, it is the reverse of a decoder. Both phrasings describe the one correct option.",
+            "<b>Step 2 — Distractor audit.</b> 'Converts an $n$-bit code to $2^n$ lines' is the DECODER (opposite direction); 'passes through unchanged' is a buffer; 'random code' is nonsense.",
           ],
-          a: "$2^n$ inputs → $n$-bit code (reverse of decoder).",
+          a: "Maps $2^n$ inputs → $n$-bit code (the reverse of a decoder).",
           v: "A PRIORITY encoder handles the realistic case of multiple simultaneous active inputs by outputting the highest-priority one ✓ — used in interrupt controllers to pick which of many pending interrupts to service first."
 
         }), ref: "p.390" },
