@@ -1233,56 +1233,60 @@
         choices: ["Hostname to IP address", "MAC to IP", "Port to socket", "URL to HTML"],
         correct: 0,
         solution: S({
-          c: "DNS = Domain Name System. Translates human-readable names (www.example.com) to IP addresses (93.184.216.34).",
+          c: "DNS (Domain Name System) is the internet's phone book: it translates human-friendly HOSTNAMES (www.example.com) into the numeric IP ADDRESSES routers actually use.",
           s: [
-            "Hierarchical: root → TLD → authoritative servers.",
-            "Often cached locally for performance.",
-            "Modern DNS-over-HTTPS encrypts queries."
+            "<b>Step 1 — Match.</b> Hostname → IP address.",
+            "<b>Step 2 — How a lookup flows.</b> Your resolver asks the hierarchy: root servers → .com (TLD) servers → the domain's authoritative server — with answers cached at every step.",
+            "<b>Step 3 — Distractor audit.</b> MAC↔IP is ARP's job (local network, layer 2/3); ports/sockets are the OS's transport bookkeeping; fetching HTML is HTTP — a step AFTER the name resolves."
           ],
-          a: "Hostname → IP",
-          v: "Without DNS, you'd memorize IPs. With DNSSEC, responses are cryptographically signed."
+          a: "Hostname to IP address.",
+          v: "The job-separation check that organizes networking: DNS names → IPs, routing moves IPs, ARP finds MACs, HTTP moves content — one translation per layer ✓. Security postscript: DNSSEC signs answers; DNS-over-HTTPS hides your queries."
+
         }),
         ref: "Handbook p.400" },
       { q: "Maximum Ethernet frame size (standard, no jumbo):",
         choices: ["$1518$ bytes", "$1500$ bytes", "$9000$ bytes", "$64$ bytes"],
         correct: 0,
         solution: S({
-          c: "Standard Ethernet frame: 14 header + 1500 payload (MTU) + 4 FCS = 1518 bytes. Plus 8-byte preamble + 12-byte interframe gap.",
+          c: "Standard Ethernet's size arithmetic: payload MTU = 1500 bytes, plus 14 bytes of header (MACs + EtherType) and 4 bytes of FCS checksum → maximum FRAME = 1518 bytes.",
           s: [
-            "MTU (Maximum Transmission Unit) = 1500.",
-            "Frame size includes header + FCS: 1518.",
-            "Jumbo frames: ~9000 bytes (improves throughput on supporting networks)."
+            "<b>Step 1 — Add the pieces.</b> $14 + 1500 + 4 = 1518$ bytes.",
+            "<b>Step 2 — Distractor audit.</b> 1500 is the MTU (payload only — the most-confused pair); 9000 is JUMBO frames (non-standard, datacenter use); 64 is the MINIMUM frame.",
+            "<b>Step 3 — The minimum's story.</b> 64 bytes exists so a transmitter is still sending when a far-end collision propagates back — a CSMA/CD fossil still enforced."
           ],
-          a: "1518 bytes",
-          v: "Min frame: 64 bytes (to ensure collision detection in original Ethernet)."
+          a: "1518 bytes (1522 with a VLAN tag).",
+          v: "Cross-question consistency: add 802.1Q's 4-byte tag → 1522 ✓ (matching the earlier VLAN answer). Practical bite: a 1500-byte IP packet plus tunneling overhead EXCEEDS the MTU → fragmentation or path-MTU problems — the everyday face of these numbers."
+
         }),
         ref: "Handbook p.399" },
       { q: "DHCP server provides:",
         choices: ["IP, subnet, gateway, DNS info to clients", "Web pages", "MAC addresses", "Routing"],
         correct: 0,
         solution: S({
-          c: "DHCP (Dynamic Host Configuration Protocol): leases IP and network config to clients dynamically.",
+          c: "DHCP (Dynamic Host Configuration Protocol) hands a joining device its complete network identity package: IP address, subnet mask, default gateway, and DNS server addresses — leased, not permanent.",
           s: [
-            "Process: DISCOVER → OFFER → REQUEST → ACK (DORA).",
-            "Lease time typically hours to days.",
-            "Avoids manual IP assignment."
+            "<b>Step 1 — Match.</b> IP + mask + gateway + DNS — the config bundle.",
+            "<b>Step 2 — The handshake.</b> DORA: Discover (broadcast 'any DHCP here?') → Offer → Request → Acknowledge; the lease renews periodically.",
+            "<b>Step 3 — Distractor audit.</b> Web pages are HTTP; MAC addresses are burned into hardware (never assigned by DHCP); routing is the router's data-plane job."
           ],
-          a: "Network config (IP, mask, gateway, DNS)",
-          v: "Critical for plug-and-play networks. Most home routers run DHCP server."
+          a: "Network configuration: IP, subnet mask, gateway, DNS.",
+          v: "You use it daily: 'joining Wi-Fi' = your phone running DORA with the router ✓. Without DHCP every device would need hand-typed static settings — the plug-and-play internet is this protocol working silently."
+
         }),
         ref: "Handbook p.400" },
       { q: "Layer 1 (Physical) examples:",
         choices: ["Cables, hubs, voltage levels", "TCP/UDP", "IP routing", "HTTP requests"],
         correct: 0,
         solution: S({
-          c: "L1 = Physical: media (copper, fiber, RF), connectors, signaling levels, bit timing.",
+          c: "Layer 1 is the PHYSICAL layer: everything about raw bits on a medium — cables, connectors, voltage/light/radio signaling, bit timing. No addresses, no frames — just symbols on a wire.",
           s: [
-            "L1 devices: repeaters, hubs, cables.",
-            "L2 devices: switches, NICs.",
-            "L3 devices: routers."
+            "<b>Step 1 — Match.</b> Cables, hubs, voltage levels — pure L1.",
+            "<b>Step 2 — Device-to-layer map.</b> Repeater/hub = L1 (regenerate signals blindly); switch/NIC = L2 (frames, MACs); router = L3 (packets, IPs).",
+            "<b>Step 3 — Distractor audit.</b> TCP/UDP live at L4; IP routing at L3; HTTP at L7 — each distractor is a higher floor of the same building."
           ],
-          a: "Cables, hubs, signaling",
-          v: "Higher layers ride on L1. Bad cable = no amount of software fixes."
+          a: "Cables, hubs, and signaling levels.",
+          v: "The troubleshooting order this teaches: check L1 FIRST — a bad cable defeats all software ('it's always the cable' is networking folklore for a reason) ✓. Examples to anchor: 1000BASE-T's PAM-5 voltages, fiber wavelengths, Wi-Fi RF — all L1 specs."
+
         }),
         ref: "Handbook p.399" },
     ],
@@ -1293,103 +1297,120 @@
         choices: ["$345_8$", "$229_8$", "$352_8$", "$E5_{16}$"],
         correct: 0,
         solution: S({
-          c: "Group binary into 3s from the right, convert each group to octal.",
+          c: "Binary → octal is a grouping trick: octal digits carry exactly 3 bits, so split the binary into 3-bit groups FROM THE RIGHT (pad the left with zeros) and convert each group.",
           s: [
-            "11100101 → 011 100 101 (pad left with 0).",
-            "011 = 3, 100 = 4, 101 = 5.",
-            "Octal: 345."
+            "<b>Step 1 — Group.</b> 11100101 → 011 | 100 | 101 (one pad bit).",
+            "<b>Step 2 — Convert groups.</b> 011 = 3, 100 = 4, 101 = 5 → $345_8$.",
+            "<b>Step 3 — Distractor audit.</b> 229 is the DECIMAL value dressed as octal; 352 groups from the LEFT (the classic error); E5 is the HEX conversion (4-bit groups)."
           ],
           a: "$345_8$",
-          v: "Decimal check: $3\\cdot 64 + 4\\cdot 8 + 5 = 229_{10}$. And $11100101_2 = 229_{10}$ ✓"
+          v: "Decimal cross-check: $3(64) + 4(8) + 5 = 229$, and $11100101_2 = 128+64+32+4+1 = 229$ ✓ — both paths meet. Sister rule: hex uses 4-bit groups (1110 0101 → E5) — group size IS the only difference."
+
         }),
         ref: "Handbook p.388" },
       { q: "Decimal 100 in binary:",
         choices: ["$1100100$", "$1001000$", "$1100110$", "$111100$"],
         correct: 0,
         solution: S({
-          c: "Decompose: 100 = 64 + 32 + 4 = $2^6 + 2^5 + 2^2$.",
+          c: "Decimal → binary by greedy powers of 2: subtract the largest power that fits, repeat. $100 = 64 + 32 + 4$.",
           s: [
-            "Bits at positions 6, 5, 2: 1100100 (7 bits).",
-            "$64 + 32 + 4 = 100$ ✓"
+            "<b>Step 1 — Decompose.</b> $100 - 64 = 36$; $36 - 32 = 4$; $4 - 4 = 0$ → powers 6, 5, 2.",
+            "<b>Step 2 — Place the bits.</b> Positions 6,5,2 set: $1100100_2$.",
+            "<b>Step 3 — Distractor audit.</b> 1001000 = 72; 1100110 = 102; 111100 = 60 — each one mis-placed bit."
           ],
-          a: "$1100100$",
-          v: "Quick check: $1100100_2 = 100_{10}$, and 100 in hex = $64_{16}$."
+          a: "$100_{10} = 1100100_2$",
+          v: "Reverse read: $64+32+4 = 100$ ✓. Bonus anchor: $100_{10} = 64_{16}$ — recognizing 100 = 0x64 turns up constantly in low-level work."
+
         }),
         ref: "Handbook p.388" },
       { q: "$ABC + \\bar{A}BC + AB\\bar{C} + \\bar{A}\\bar{B}C$ — number of minterms:",
         choices: ["$4$ minterms", "$3$", "$8$", "$2$"],
         correct: 0,
         solution: S({
-          c: "Each AND of all 3 vars (in true or complement form) is one minterm. Count the unique terms.",
+          c: "A MINTERM is a product term containing EVERY variable exactly once (true or complemented) — each minterm lights exactly one row of the truth table. Counting minterms = counting distinct full products.",
           s: [
-            "Terms: $ABC$, $\\bar{A}BC$, $AB\\bar{C}$, $\\bar{A}\\bar{B}C$.",
-            "All have 3 variables → 4 minterms."
+            "<b>Step 1 — Check each term.</b> $ABC$, $\\bar ABC$, $AB\\bar C$, $\\bar A\\bar BC$ — every term uses all three variables → all four are minterms.",
+            "<b>Step 2 — Check distinctness.</b> They decode to rows 7, 3, 6, 1 — four different rows → 4 minterms.",
+            "<b>Step 3 — Distractor audit.</b> 3 and 2 undercount; 8 is the TOTAL possible minterms for 3 variables, not this function's count."
           ],
-          a: "4 minterms",
-          v: "3-variable function has up to 8 minterms. This function has 4 → truth table has 4 ones."
+          a: "4 minterms (truth table has four 1s).",
+          v: "Sum-of-minterms notation check: $F = \\sum m(1, 3, 6, 7)$ — the K-map would show 4 ones, groupable as $BC + \\bar AC$... ($m_1,m_3$ share $\\bar A C$; $m_6,m_7$ share $AB$) — counting first, simplifying second ✓."
+
         }),
         ref: "Handbook p.389" },
       { q: "A multiplexer with 8 data inputs needs ___ select lines:",
         choices: ["$3$", "$8$", "$4$", "$2$"],
         correct: 0,
         solution: S({
-          c: "$N$ inputs → $\\log_2 N$ select lines.",
-          s: ["$\\log_2 8 = 3$ select lines."],
-          a: "3 select lines",
-          v: "Encoders/decoders use the same relationship: 8-line to 3-line encoder."
+          c: "Select lines are a binary ADDRESS naming which of the $N$ data inputs reaches the output: $\\log_2N$ lines needed.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\log_28 = 3$ select lines (000 through 111).",
+            "<b>Step 2 — Distractor audit.</b> 8 counts the data inputs; 4 would address 16; 2 only reaches 4."
+          ],
+          a: "3 select lines.",
+          v: "Same logarithm everywhere: 8-to-3 priority encoder, 3-to-8 decoder, 3 address bits for 8 memory words — one counting principle wearing four costumes ✓."
+
         }),
         ref: "Handbook p.390" },
       { q: "Implement XOR using only NAND gates: minimum number of gates:",
         choices: ["$4$ NAND gates", "$2$", "$6$", "$1$"],
         correct: 0,
         solution: S({
-          c: "XOR(A,B) = (A NAND (A NAND B)) NAND (B NAND (A NAND B)). Total: 4 NAND gates.",
+          c: "NAND is UNIVERSAL — any Boolean function can be built from NANDs alone. The classic XOR construction uses exactly 4: one shared front gate, two middle gates, one combiner.",
           s: [
-            "Stage 1: $X = A\\,\\text{NAND}\\,B$.",
-            "Stage 2: $Y_1 = A\\,\\text{NAND}\\,X$; $Y_2 = B\\,\\text{NAND}\\,X$.",
-            "Stage 3: $Y_1\\,\\text{NAND}\\,Y_2 = A \\oplus B$."
+            "<b>Step 1 — Front gate.</b> $X = \\overline{AB}$.",
+            "<b>Step 2 — Middle pair.</b> $Y_1 = \\overline{A\\cdot X}$, $Y_2 = \\overline{B\\cdot X}$.",
+            "<b>Step 3 — Combine.</b> $\\overline{Y_1Y_2} = A\\oplus B$ — verify at $(1,1)$: $X=0 \\Rightarrow Y_1=Y_2=1 \\Rightarrow$ out $= 0$ ✓; at $(1,0)$: $X=1, Y_1 = \\bar1{=}0$... evaluates to 1 ✓.",
+            "<b>Step 4 — Distractor audit.</b> 2 gates can't generate XOR's nonmonotone truth table; 1 NAND is just NAND; 6 over-builds."
           ],
-          a: "4 NAND gates",
-          v: "NAND (and NOR) are 'universal' — any Boolean function can be built from them alone."
+          a: "4 NAND gates (minimum).",
+          v: "Why this matters beyond trivia: standard-cell libraries price functions in gate counts, and 'XOR = 4 NANDs' is the canonical universality demo — NOR enjoys the same status (4 NORs → XNOR) ✓."
+
         }),
         ref: "Handbook p.389-390" },
       { q: "Mealy vs Moore state machine:",
         choices: ["Mealy outputs depend on state AND input; Moore on state only", "Same", "Moore on input only", "Both depend on input only"],
         correct: 0,
         solution: S({
-          c: "<b>Moore</b>: output = $f(\\text{state})$. <b>Mealy</b>: output = $f(\\text{state, input})$ — faster, fewer states often, but transitions can be glitchy.",
+          c: "The one-line distinction: MOORE outputs depend on STATE only (outputs attached to states); MEALY outputs depend on STATE AND CURRENT INPUT (outputs attached to transitions).",
           s: [
-            "Moore: output is registered with state → glitch-free, synchronous output.",
-            "Mealy: output combinational → can have hazards but typically fewer states needed."
+            "<b>Step 1 — Match.</b> Mealy: state + input; Moore: state only.",
+            "<b>Step 2 — Consequences.</b> Moore: outputs change only on clock edges — glitch-free, one cycle slower to react. Mealy: reacts within the cycle and often needs fewer states, but combinational outputs can glitch.",
+            "<b>Step 3 — Distractor audit.</b> The reversed and 'input-only' options scramble the definitions; 'same' denies the distinction the FE tests."
           ],
-          a: "Mealy: state + input; Moore: state only",
-          v: "Same machine can be implemented either way — design choice based on requirements."
+          a: "Mealy: f(state, input); Moore: f(state).",
+          v: "Designer's rule of thumb: Moore for clean synchronous interfaces, Mealy for speed/state-economy — and registering a Mealy output converts it into Moore-like timing, the best of both ✓."
+
         }),
         ref: "Handbook p.391" },
       { q: "Synchronous vs asynchronous counters:",
         choices: ["Sync: all FFs use same clock; Async: cascaded", "Same", "Sync uses NAND only", "Sync is slower"],
         correct: 0,
         solution: S({
-          c: "<b>Synchronous</b>: all flip-flops triggered by same clock edge → fast, no propagation delays accumulate. <b>Asynchronous (ripple)</b>: output of one FF clocks the next → simple but slow & glitchy.",
+          c: "SYNCHRONOUS counter: every flip-flop shares the SAME clock — all bits update together. ASYNCHRONOUS (ripple): each FF is clocked by its neighbor's output — changes RIPPLE through with accumulating delay.",
           s: [
-            "Sync: fast, glitch-free outputs.",
-            "Async: simpler, fewer connections, but propagation delay through all stages → output skew."
+            "<b>Step 1 — Match.</b> Sync = shared clock; async = cascaded clocking.",
+            "<b>Step 2 — The cost of rippling.</b> An $n$-bit ripple counter's MSB settles after $n$ propagation delays — transient FALSE states appear (e.g., 0111→0110→0100→0000→1000), poison for decoders.",
+            "<b>Step 3 — Distractor audit.</b> 'NAND only' is irrelevant; sync is FASTER, not slower; 'same' misses the architecture."
           ],
-          a: "Sync: shared clock; Async: cascade",
-          v: "High-speed systems always use synchronous design."
+          a: "Synchronous: one clock for all FFs; asynchronous: cascaded (ripple).",
+          v: "Speed math that settles designs: max clock of a ripple counter ≈ $1/(n\\,t_{pd})$ vs a synchronous counter's $1/(t_{pd} + t_{logic})$ — the gap widens with every bit ✓. Async's one virtue: minimal wiring — fine for slow event counting."
+
         }),
         ref: "Handbook p.391" },
       { q: "Gray code: only ___ bit changes between adjacent codes:",
         choices: ["1 bit", "2 bits", "All bits", "Variable"],
         correct: 0,
         solution: S({
-          c: "Gray code: sequence where adjacent codes differ by exactly 1 bit. Useful in: position encoders, K-maps (adjacent cells differ by 1 bit), state minimization.",
+          c: "Gray code reorders binary counting so ADJACENT codes differ in exactly ONE bit — eliminating the multi-bit 'race' moments of natural binary (like 0111→1000, where four bits change at once).",
           s: [
-            "Binary 0,1,2,3 = 00,01,10,11. Note 1→2 changes both bits!",
-            "Gray 0,1,2,3 = 00,01,11,10. Each step: 1 bit only."
+            "<b>Step 1 — Match.</b> One bit per step — the defining property.",
+            "<b>Step 2 — See the contrast.</b> Binary 1→2 is 01→10 (TWO bits flip; momentarily reading 00 or 11 is possible). Gray 0,1,2,3 = 00,01,11,10 — single flips only.",
+            "<b>Step 3 — Distractor audit.</b> '2 bits'/'all bits'/'variable' describe natural binary's worst cases, not Gray."
           ],
-          a: "1 bit",
-          v: "Rotary encoders use Gray code to avoid transient misreads — at a transition, only one bit can be ambiguous."
+          a: "Exactly 1 bit changes between adjacent codes.",
+          v: "Why encoders insist on it: a rotary sensor caught mid-transition can mis-read AT MOST one bit → error of ±1 position, never a wild jump ✓. Same property is why K-map rows/columns are Gray-ordered — logical adjacency becomes physical adjacency. Conversion: $g = b \\oplus (b \\gg 1)$."
+
         }),
         ref: "Handbook p.388" },
     ],
@@ -1400,81 +1421,90 @@
         choices: ["Data hazard", "Control hazard", "Structural hazard", "Cache miss"],
         correct: 0,
         solution: S({
-          c: "Three pipeline hazard types: <b>Data</b> (dependent on prior result), <b>Control</b> (branch — don't know next PC yet), <b>Structural</b> (resource conflict).",
+          c: "The three pipeline hazard classes, each named for its cause: DATA (an instruction needs a result still in flight), CONTROL (a branch leaves the next fetch address unknown), STRUCTURAL (two instructions want the same hardware at once).",
           s: [
-            "Data: forwarding/bypassing helps.",
-            "Control: branch prediction, delayed branches.",
-            "Structural: extra hardware (e.g., separate I and D caches)."
+            "<b>Step 1 — Match.</b> 'Data dependency between instructions' = data hazard (the RAW, read-after-write case).",
+            "<b>Step 2 — Cure per class.</b> Data → forwarding/bypass paths (plus a stall for load-use); control → branch prediction; structural → duplicate the resource (separate I/D caches).",
+            "<b>Step 3 — Distractor audit.</b> Control is branches, not dependencies; structural is resource contention; a cache miss is a MEMORY event, not a hazard class."
           ],
-          a: "Data hazard",
-          v: "Modern CPUs use out-of-order execution + register renaming to mitigate hazards."
+          a: "Data hazard.",
+          v: "The canonical pair to recognize on sight: add r1,... followed by sub ...,r1 — RAW on r1 ✓. Modern endgame: out-of-order execution with register renaming dissolves the false hazards and schedules around the true ones."
+
         }),
         ref: "Handbook p.408" },
       { q: "MIPS instruction format LW (load word): how many operands?",
         choices: ["$3$ (rt, offset, rs)", "$2$", "$1$", "$4$"],
         correct: 0,
         solution: S({
-          c: "MIPS LW format: lw $rt, offset($rs)$ — destination register, offset, base register. 3 operands.",
+          c: "MIPS load-word syntax: lw $rt, offset($rs) — THREE operands: destination register, a constant offset, and the base address register. Effective address = rs + offset.",
           s: [
-            "Example: lw $t0, 4($s0) — load word from address ($s0$+4) into $t0$."
+            "<b>Step 1 — Parse an example.</b> lw \\$t0, 4(\\$s0): fetch the word at address \\$s0+4 into \\$t0 — rt, offset, rs all present.",
+            "<b>Step 2 — Count.</b> 3 operands.",
+            "<b>Step 3 — Distractor audit.</b> 2 forgets the offset; 1 and 4 miscount the I-format fields."
           ],
-          a: "3 operands (rt, offset, rs)",
-          v: "RISC ISAs have regular 3-operand format for clarity and pipelining."
+          a: "3 operands: rt, offset, rs.",
+          v: "Why base+offset wins: one addressing mode covers array indexing (base = array, offset = element) and struct fields (base = object, offset = member) — RISC keeps exactly this one and synthesizes the rest ✓. Encoded as I-format: op|rs|rt|16-bit immediate."
+
         }),
         ref: "Handbook p.408" },
       { q: "Page size 4 KB, virtual address space 32 bits. Number of pages:",
         choices: ["$2^{20}$ pages (≈1M)", "$2^{32}$", "$4096$", "$32$"],
         correct: 0,
         solution: S({
-          c: "Page bits: $\\log_2(\\text{page size}) = \\log_2 4096 = 12$ offset bits. Page number bits = total - offset = 32-12=20.",
+          c: "Count pages by splitting the address: a $2^{12}$-byte page consumes 12 OFFSET bits, leaving $32 - 12 = 20$ bits of page NUMBER → $2^{20}$ pages.",
           s: [
-            "Pages: $2^{20}$ ≈ 1 million.",
-            "Each VA splits into 20-bit page # + 12-bit offset."
+            "<b>Step 1 — Offset bits.</b> $\\log_24096 = 12$.",
+            "<b>Step 2 — Page-number bits.</b> $32 - 12 = 20$ → $2^{20} \\approx 1$M pages.",
+            "<b>Step 3 — Distractor audit.</b> $2^{32}$ counts BYTES; 4096 is the page SIZE; 32 is the address width."
           ],
-          a: "$2^{20}$ pages",
-          v: "Page tables get huge if every entry is stored — solved by multi-level page tables, TLBs."
+          a: "$2^{20}$ pages (≈1 million).",
+          v: "Closure check: $2^{20}$ pages × $2^{12}$ bytes/page = $2^{32}$ bytes — the full address space, nothing lost ✓. Downstream: 1M table entries × 4 B = 4 MB per process — the size problem TLBs and multi-level tables exist to tame."
+
         }),
         ref: "Handbook p.408" },
       { q: "Compiler vs interpreter:",
         choices: ["Compiler translates whole program first; interpreter executes step-by-step", "Same", "Interpreter is faster", "Compiler outputs source code"],
         correct: 0,
         solution: S({
-          c: "<b>Compiler</b>: source → machine code (or IR) ahead of time. <b>Interpreter</b>: reads + executes source line by line at run-time. <b>JIT</b>: combines — compile at run-time for performance.",
+          c: "Two strategies for running source code: a COMPILER translates the whole program to machine code AHEAD of execution; an INTERPRETER reads and executes statement by statement AT runtime. JIT compilers blend the two.",
           s: [
-            "Compiler: faster execution, slower dev cycle.",
-            "Interpreter: faster iteration, slower runtime.",
-            "JIT (Java, V8): runtime compilation with profile-guided optimization."
+            "<b>Step 1 — Match.</b> Compiler = whole-program, ahead-of-time; interpreter = step-by-step at runtime.",
+            "<b>Step 2 — The trade.</b> Compiled: fast execution, slower build/iterate; interpreted: instant iteration, slower runtime (each line re-decoded).",
+            "<b>Step 3 — Distractor audit.</b> 'Interpreter is faster' inverts the runtime trade; compilers output MACHINE code (or bytecode), never source."
           ],
-          a: "Compiler ahead-of-time; Interpreter at runtime",
-          v: "Python is typically interpreted; C/C++/Rust compiled; JavaScript JIT-compiled."
+          a: "Compiler translates the whole program first; interpreter executes step-by-step.",
+          v: "Language census check: C/C++/Rust compiled; classic Python interpreted (to bytecode); Java and JavaScript JIT-compiled — V8 profiles hot code at runtime and compiles exactly that, getting both iteration speed AND execution speed ✓."
+
         }),
         ref: "Handbook p.408-415" },
       { q: "Process vs thread:",
         choices: ["Process has own memory; threads share within a process", "Same thing", "Threads are slower", "Process can't multitask"],
         correct: 0,
         solution: S({
-          c: "Process: independent memory space, expensive to create. Thread: lighter, shares memory with sibling threads in same process.",
+          c: "A PROCESS owns an isolated memory space (own page tables); THREADS are execution streams INSIDE one process, sharing its memory. Isolation vs sharing is the whole distinction.",
           s: [
-            "Process switching: expensive (full context, MMU update).",
-            "Thread switching: cheap (within same memory space).",
-            "Threads communicate via shared memory; processes via IPC."
+            "<b>Step 1 — Match.</b> Process = own memory; threads = shared memory within the process.",
+            "<b>Step 2 — Costs that follow.</b> Process switch: full context + MMU/TLB churn (expensive); thread switch: registers/stack only (cheap). Communication: processes need IPC (pipes, sockets); threads just read shared variables — convenient AND dangerous (race conditions).",
+            "<b>Step 3 — Distractor audit.</b> 'Same' erases isolation; 'threads slower' inverts; processes multitask fine — that's the OS's job."
           ],
-          a: "Process: isolated memory; Threads: shared",
-          v: "Tradeoff: thread efficiency vs process isolation/safety."
+          a: "Process: isolated memory; threads: shared memory within a process.",
+          v: "Design example that uses both: Chrome — a PROCESS per tab (one crash can't kill the rest) with THREADS inside each for rendering/IO ✓. The isolation-vs-efficiency dial, set per problem."
+
         }),
         ref: "Handbook p.408" },
       { q: "RAID 0 vs RAID 1:",
         choices: ["RAID 0: striping (speed, no redundancy); RAID 1: mirroring (redundancy, no speed gain)", "Same", "RAID 0 is safer", "RAID 1 is for speed"],
         correct: 0,
         solution: S({
-          c: "<b>RAID 0</b>: stripes data across disks → speed but ANY disk failure loses all data. <b>RAID 1</b>: mirrors data → tolerates one disk failure, same capacity per disk effective.",
+          c: "Two opposite RAID philosophies: RAID 0 STRIPES data across disks for speed/capacity but ANY disk death loses everything; RAID 1 MIRRORS identical copies — half the capacity, survives a disk failure.",
           s: [
-            "RAID 0: 2× capacity, speed; 0% redundancy.",
-            "RAID 1: 50% effective capacity; tolerates one failure.",
-            "RAID 5: stripes + parity; tolerates one disk failure."
+            "<b>Step 1 — Match.</b> 0 = striping (performance, zero redundancy); 1 = mirroring (redundancy, no capacity gain).",
+            "<b>Step 2 — Reliability arithmetic.</b> RAID 0 with two disks is LESS reliable than one disk (two ways to die); RAID 1 is far more reliable (both must fail).",
+            "<b>Step 3 — Distractor audit.</b> 'RAID 0 safer' inverts (the 0 is how much data survives a failure, jokes the folklore); 'RAID 1 for speed' misses that writes go to BOTH disks."
           ],
-          a: "RAID 0: striping; RAID 1: mirroring",
-          v: "Modern alternatives: ZFS RAIDZ, btrfs RAID5/6 with proper checksumming."
+          a: "RAID 0: striping for speed; RAID 1: mirroring for redundancy.",
+          v: "The middle grounds the exam may probe: RAID 5 (striping + parity, survives one disk, $n-1$ capacity), RAID 10 (mirror then stripe) ✓. Mantra worth keeping: RAID is uptime, NOT backup — mirroring happily replicates your accidental deletion."
+
         }),
         ref: "Handbook p.407" },
     ],
@@ -1485,70 +1515,75 @@
         choices: ["Avg $O(n\\log n)$, Worst $O(n^2)$", "Always $O(n\\log n)$", "Always $O(n^2)$", "Avg $O(n^2)$"],
         correct: 0,
         solution: S({
-          c: "Quicksort: divide via pivot. Best/avg case balanced → $O(n\\log n)$. Worst case (pivot is min or max each time, e.g., sorted input with naive pivot): $O(n^2)$.",
+          c: "Quicksort partitions around a pivot: balanced splits give $\\log n$ levels × $n$ work = $O(n\\log n)$ average; a degenerate pivot (min/max every time — e.g., sorted input with first-element pivot) gives $n$ levels = $O(n^{2})$ worst.",
           s: [
-            "Random pivot or median-of-three: avoids worst case in practice.",
-            "Quicksort is typically fastest comparison sort due to good cache locality and low constants.",
-            "Introsort (used in C++ std::sort): switches to heapsort if recursion depth too deep."
+            "<b>Step 1 — Average.</b> Random pivots land near the middle on average → $T(n) = 2T(n/2) + n \\Rightarrow O(n\\log n)$.",
+            "<b>Step 2 — Worst.</b> Always-extreme pivot → $T(n) = T(n-1) + n \\Rightarrow O(n^{2})$.",
+            "<b>Step 3 — Distractor audit.</b> 'Always $n\\log n$' is MERGESORT's guarantee; 'always $n^{2}$' slanders the average; 'avg $n^{2}$' inverts."
           ],
-          a: "Avg $O(n\\log n)$, Worst $O(n^2)$",
-          v: "Merge sort guarantees $O(n\\log n)$ but more memory and slower constants."
+          a: "Average $O(n\\log n)$, worst $O(n^{2})$.",
+          v: "Why it still rules: lowest constants + cache-friendly in-place partitioning; the worst case is engineered away (random/median-of-3 pivots), and introsort (C++ std::sort) bails to heapsort if recursion runs deep — capping the worst case ✓."
+
         }),
         ref: "Handbook p.415" },
       { q: "Space complexity of iterative Fibonacci (storing only last 2):",
         choices: ["$O(1)$", "$O(n)$", "$O(2^n)$", "$O(\\log n)$"],
         correct: 0,
         solution: S({
-          c: "Iterative with two variables: constant space regardless of $n$.",
+          c: "Fibonacci needs only its two latest values to make the next — an iterative loop holding two variables runs in CONSTANT space, $O(1)$, no matter how large $n$ grows.",
           s: [
-            "Naive recursion: $O(n)$ stack space.",
-            "Memoized: $O(n)$ space (cache table).",
-            "Iterative: $O(1)$ — only keep last 2 values."
+            "<b>Step 1 — Match.</b> Two variables, swap-and-add per step → $O(1)$ space.",
+            "<b>Step 2 — The space ladder of the three versions.</b> Naive recursion: $O(n)$ STACK depth (and $O(2^{n})$ time!); memoized: $O(n)$ cache; iterative: $O(1)$.",
+            "<b>Step 3 — Distractor audit.</b> $O(n)$ belongs to the other two versions; $O(2^{n})$ confuses naive TIME with space; $O(\\log n)$ has no mechanism here."
           ],
-          a: "$O(1)$",
-          v: "Time: still $O(n)$ — must compute each fib once."
+          a: "$O(1)$ space (time still $O(n)$).",
+          v: "The general lesson the FE wants: when a recurrence only references a FIXED WINDOW of past values, rolling variables replace the whole table — the standard space optimization of dynamic programming ✓. (A $O(\\log n)$-time path exists via matrix exponentiation — different question.)"
+
         }),
         ref: "Handbook p.415" },
       { q: "Linked list vs array — better for frequent insertion at the middle:",
         choices: ["Linked list ($O(1)$ insertion given pointer)", "Array", "Same", "Neither"],
         correct: 0,
         solution: S({
-          c: "Linked list: insertion just relinks pointers, $O(1)$ once you have the target node. Array: shift all later elements, $O(n)$.",
+          c: "Middle insertion costs are where lists and arrays trade places: a linked list splices in $O(1)$ ONCE YOU HOLD a pointer to the spot; an array must SHIFT every later element — $O(n)$ no matter what.",
           s: [
-            "Caveat: finding the position is $O(n)$ in linked list (no random access).",
-            "If you already have a pointer to insertion point → O(1).",
-            "Arrays: O(1) access, O(n) insert at middle."
+            "<b>Step 1 — Match.</b> Frequent mid-insertions (position known) → linked list.",
+            "<b>Step 2 — The honest caveat.</b> FINDING the position in a list is $O(n)$ (no random access) — the $O(1)$ claim starts after the pointer is in hand (iterator-based workloads, LRU lists).",
+            "<b>Step 3 — Distractor audit.</b> Array inserts shift $O(n)$ elements; 'same' ignores the structural difference; 'neither' dodges."
           ],
-          a: "Linked list (after position known)",
-          v: "Tradeoff: arrays better for read-heavy; lists better for insertion-heavy workloads."
+          a: "Linked list — $O(1)$ insertion given the pointer.",
+          v: "The flip side that completes the trade: arrays win READ-heavy work ($O(1)$ indexing + cache locality so strong it often beats lists even at their own game for small n) ✓. Choose by the dominant operation — the FE's recurring data-structure moral."
+
         }),
         ref: "Handbook p.415" },
       { q: "Recurrence $T(n) = T(n/2) + 1$ solves to:",
         choices: ["$O(\\log n)$", "$O(n)$", "$O(n\\log n)$", "$O(1)$"],
         correct: 0,
         solution: S({
-          c: "Master theorem case 2 (or unroll): each level adds constant work, depth is $\\log n$.",
+          c: "Read the recurrence as an algorithm: halve the problem, pay constant work per level. Levels until size 1: $\\log_2n$; constant pay each → $O(\\log n)$.",
           s: [
-            "Levels: $T(n), T(n/2), T(n/4), ..., T(1)$ — $\\log_2 n$ levels.",
-            "Each level: +1 work.",
-            "Total: $\\log_2 n + 1 = O(\\log n)$."
+            "<b>Step 1 — Unroll.</b> $T(n) = T(n/2)+1 = T(n/4)+2 = \\cdots = T(1) + \\log_2n$.",
+            "<b>Step 2 — Conclude.</b> $O(\\log n)$.",
+            "<b>Step 3 — Distractor audit.</b> $O(n)$ would need linear work per level or linear levels; $O(n\\log n)$ needs $n$ work per level; $O(1)$ ignores the recursion entirely."
           ],
           a: "$O(\\log n)$",
-          v: "This is binary search's recurrence."
+          v: "Name the algorithm: this IS binary search's recurrence — one comparison, half the array remains ✓. Master-theorem framing: $a=1, b=2, f=O(1)$ → case 2 → $\\Theta(\\log n)$."
+
         }),
         ref: "Handbook p.415" },
       { q: "Recurrence $T(n) = 2T(n/2) + n$ (merge sort) solves to:",
         choices: ["$O(n\\log n)$", "$O(n)$", "$O(n^2)$", "$O(\\log n)$"],
         correct: 0,
         solution: S({
-          c: "Master theorem case 2: $n$ at every level, $\\log n$ levels → $n \\log n$.",
+          c: "Two subproblems of half size plus LINEAR merge work: every level of the recursion tree costs $n$ total, and there are $\\log_2n$ levels → $O(n\\log n)$.",
           s: [
-            "Levels: $\\log_2 n$.",
-            "Per-level work: $n$ (combining).",
-            "Total: $n\\log n$."
+            "<b>Step 1 — Per-level work.</b> Level 0: $n$; level 1: $2\\times n/2 = n$; level 2: $4\\times n/4 = n$ — constant $n$ per level.",
+            "<b>Step 2 — Count levels.</b> $\\log_2n$ halvings → total $n\\log_2n$.",
+            "<b>Step 3 — Distractor audit.</b> $O(n)$ forgets the levels; $O(n^{2})$ belongs to $T(n)=2T(n/2)+n^{2}$-type or naive sorts; $O(\\log n)$ forgets the merge work."
           ],
           a: "$O(n\\log n)$",
-          v: "Merge sort, mergesort variants all follow this recurrence."
+          v: "Name it: mergesort's recurrence — split, sort halves, linear merge ✓. The same shape governs FFT ($N\\log N$) and divide-and-conquer generally; Master theorem case 2 confirms: $n^{\\log_22} = n = f(n)$ → $\\Theta(n\\log n)$."
+
         }),
         ref: "Handbook p.415" },
     ],

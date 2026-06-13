@@ -110,6 +110,10 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   standard, committed in 9 checkpoints. Bug fixed: Ch 15 K-map minterms {1,3,5,7} — listed answer
   "F = D" was wrong (needs 8 cells); correct minimal cover F = A'D added as correct:0 choice.
   Integrity scan: 129/129 Step-format.
-- **Remaining upgrade targets:** questions.js (164), extra3 (101), extra4 (194),
+- **2026-06-12 — extra3 (Round 4) COMPLETE (101/101):** all 17 chapters in the teach-from-zero
+  standard, 4 checkpoints. TWO broken answer keys repaired: RL transient (computed 3.16 A but
+  correct:0 said 1.97 A) and unbalanced Y-to-Delta (computed 18.33 ohm but choice said 13.33 ohm)
+  — both had embedded meta-commentary admitting the mismatch, now removed. Integrity scan 101/101.
+- **Remaining upgrade targets:** questions.js (164), extra4 (194),
   extra5 (209), extra6 (181), extra7 (222), extra8 (191) — standard S() format; extra9/extra10
   (~60 q) use template-literal SVG helpers and need their own careful session.
