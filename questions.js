@@ -48,17 +48,16 @@ const QUESTION_BANK = {
           ref: "Handbook p.35" },
 
         { q: "Convert $z = 6\\angle 30°$ to rectangular form.",
-          choices: ["$5.20 + j3.00$", "$3.00 + j5.20$", "$6\\cos 30° + j6\\sin 30°$ which equals $5.20+j3.00$", "Both A and C"],
-          correct: 3,
+          choices: ["$5.20 + j3.00$", "$3.00 + j5.20$", "$5.20 - j3.00$", "$6 + j30$"],
+          correct: 0,
           solution: S({
-            c: "Polar to rectangular: $z=r\\cos\\theta+jr\\sin\\theta$. Here the answer is 'Both A and C' because both express the same value.",
+            c: "Polar to rectangular: $z=r\\cos\\theta+jr\\sin\\theta$ — the real part is $r\\cos\\theta$, the imaginary part is $r\\sin\\theta$.",
             s: [
-              "<b>Step 1 — Real part.</b> $6\\cos30°=6(0.866)=5.196$.",
-              "<b>Step 2 — Imag part.</b> $6\\sin30°=6(0.5)=3.000$.",
-              "<b>Step 3 — Recognize both forms.</b> Choice A (numeric $5.20+j3.00$) and choice C (symbolic, equal to it) are BOTH correct.",
-              "<b>Step 4 — Distractor audit.</b> $3.00+j5.20$ swaps real/imag (used $\\sin$ for real); picking only A misses that C states the same thing."
+              "<b>Step 1 — Real part.</b> $6\\cos30°=6(0.866)=5.196\\approx5.20$.",
+              "<b>Step 2 — Imag part.</b> $6\\sin30°=6(0.5)=3.000$, so $z=5.20+j3.00$.",
+              "<b>Step 3 — Distractor audit.</b> $3.00+j5.20$ swaps real/imag (used $\\sin$ for the real part); $5.20-j3.00$ flips the angle sign; $6+j30$ treats $r$ and the angle as the components."
             ],
-            a: "Both A and C ($z\\approx5.20+j3.00$).",
+            a: "$z\\approx5.20+j3.00$.",
             v: "$|z|=\\sqrt{5.196^2+3^2}=\\sqrt{36}=6$ ✓ recovers the original magnitude."
           }),
           ref: "Handbook p.36" },
@@ -935,14 +934,14 @@ const QUESTION_BANK = {
           ref: "Handbook p.362" },
 
         { q: "RC time constant: $R=1$ k$\\Omega$, $C=100\\ \\mu$F:",
-          choices: ["$0.1$ s", "$0.01$ s", "$1$ s", "$10$ ms"],
+          choices: ["$0.1$ s", "$0.01$ s", "$1$ s", "$1$ ms"],
           correct: 0,
           solution: S({
             c: "RC time constant $\\tau=RC$; units of ohm-farad are seconds.",
             s: [
               "<b>Step 1 — Convert.</b> $C=100\\ \\mu$F $=10^{-4}$ F.",
               "<b>Step 2 — Multiply.</b> $\\tau=(1000)(10^{-4})=0.1$ s.",
-              "<b>Step 3 — Distractor audit.</b> $0.01$ s and $1$ s are power-of-ten slips; '10 ms' is off by 10."
+              "<b>Step 3 — Distractor audit.</b> $0.01$ s and $1$ s are power-of-ten slips; $1$ ms is off by 100."
             ],
             a: "$\\tau=0.1$ s (100 ms)",
             v: "After $5\\tau=500$ ms the capacitor is >99% charged - the standard 'settled' rule of thumb."
