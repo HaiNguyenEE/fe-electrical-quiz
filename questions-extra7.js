@@ -1093,150 +1093,380 @@
     9: [
       { q: "Inverting amp $R_f = 50$ k, $R_{in} = 5$ k, $v_{in} = 100$ mV. Output:",
         choices: ["$-1.0$ V", "$+1.0$ V", "$-10$ V", "$-0.01$ V"], correct: 0,
-        solution: S({ c: "Gain $= -R_f/R_{in} = -10$.", s: ["$-10 \\cdot 0.1 = -1.0$ V."], a: "$-1.0$ V" }), ref: "p.380" },
+        solution: S({
+          c: "Inverting amplifier gain is $-R_f/R_{in}$; output $= $ gain $\\times v_{in}$.",
+          s: ["<b>Step 1 — Gain.</b> $-50k/5k = -10$.","<b>Step 2 — Output.</b> $-10\\times0.1 = -1.0$ V.","<b>Step 3 — Distractor audit.</b> $+1.0$ misses the sign; $-10$ forgets to scale by vin; $-0.01$ is off."],
+          a: "$-1.0$ V",
+          v: "The minus sign is the inverting topology's signature - output is 180 degrees out of phase. Gain depends only on the resistor RATIO, not the op-amp."
+        }), ref: "p.380" },
       { q: "Non-inverting amp output when $v_{in} = 0$:",
         choices: ["$0$ V", "$\\infty$", "$V_{cc}$", "$-V_{cc}$"], correct: 0,
-        solution: S({ c: "Linear with positive gain. $v_{out} = G \\cdot v_{in} = 0$.", s: [""], a: "$0$ V" }), ref: "p.380" },
+        solution: S({
+          c: "A non-inverting amp has positive gain in the linear region: $v_{out}=G\\,v_{in}$. Zero in gives zero out.",
+          s: ["<b>Step 1 — Apply.</b> $G\\times0 = 0$ V.","<b>Step 2 — Distractor audit.</b> infinity/$\\pm V_{cc}$ would require saturation (no negative feedback) - not the linear case."],
+          a: "$0$ V",
+          v: "With negative feedback the op-amp stays linear, so output tracks input proportionally - zero input, zero output (ignoring tiny offset voltage)."
+        }), ref: "p.380" },
       { q: "Voltage follower input impedance:",
         choices: ["Very high (ideal op-amp's $Z_{in}$)", "Zero", "$R$", "$1$ Ω"], correct: 0,
-        solution: S({ c: "Buffer: no feedback to input → full op-amp Z_in seen.", s: [""], a: "Very high" }), ref: "p.380" },
+        solution: S({
+          c: "A voltage follower (buffer) presents the op-amp's full (very high) input impedance - it barely loads the source.",
+          s: ["<b>Step 1 — Match.</b> Very high.","<b>Step 2 — Distractor audit.</b> Zero/R/1 ohm contradict the high-Zin purpose of a buffer."],
+          a: "Very high (op-amp Zin).",
+          v: "Unity gain but huge Zin and low Zout makes it the ideal buffer - isolating a delicate source from a heavy load without loading it down."
+        }), ref: "p.380" },
       { q: "BJT bias: $V_{CC} = 12$, $R_C = 1$ kΩ, $R_B = 220$ kΩ, $\\beta = 100$. $V_{BE}=0.7$V. $I_B$:",
         choices: ["$\\approx 51.4$ µA", "$10$ mA", "$1$ mA", "$0.05$ mA"], correct: 0,
-        solution: S({ c: "$I_B = (V_{CC} - V_{BE})/R_B$.", s: ["$(12-0.7)/220000 = 51.4$ µA."], a: "$\\approx 51.4$ µA" }), ref: "p.384" },
+        solution: S({
+          c: "Base current from the base loop: $I_B=(V_{CC}-V_{BE})/R_B$.",
+          s: ["<b>Step 1 — Apply.</b> $(12-0.7)/220000 = 51.4$ uA.","<b>Step 2 — Distractor audit.</b> 10 mA, 1 mA, 0.05 mA misplace the kohm/voltage."],
+          a: "$I_B \\approx 51.4$ uA",
+          v: "Fixed-bias (single $R_B$) makes $I_B$ depend only on supply and $R_B$ - but the resulting Q-point varies with beta, the weakness this design has."
+        }), ref: "p.384" },
       { q: "Above BJT: $I_C$:",
         choices: ["$\\approx 5.14$ mA", "$0.5$ mA", "$50$ mA", "$1$ A"], correct: 0,
-        solution: S({ c: "$I_C = \\beta I_B$.", s: ["$100 \\cdot 51.4 µA = 5.14$ mA."], a: "$\\approx 5.14$ mA" }), ref: "p.384" },
+        solution: S({
+          c: "In active region, $I_C=\\beta I_B$.",
+          s: ["<b>Step 1 — Apply.</b> $100\\times51.4\\,\\mu A = 5.14$ mA.","<b>Step 2 — Distractor audit.</b> 0.5 mA, 50 mA, 1 A misuse beta."],
+          a: "$I_C \\approx 5.14$ mA",
+          v: "Collector current is beta times base current - and because beta varies unit-to-unit, this Q-point isn't well controlled (why voltage-divider bias is preferred)."
+        }), ref: "p.384" },
       { q: "$V_{CE}$ for above:",
         choices: ["$\\approx 6.86$ V (active region)", "$0.2$ V", "$12$ V", "$0$"], correct: 0,
-        solution: S({ c: "$V_{CE} = V_{CC} - I_C R_C$.", s: ["$12 - 5.14 \\cdot 1 = 6.86$ V. Active region (between sat and cutoff)."], a: "$\\approx 6.86$ V" }), ref: "p.384" },
+        solution: S({
+          c: "Collector loop: $V_{CE}=V_{CC}-I_C R_C$.",
+          s: ["<b>Step 1 — Apply.</b> $12-5.14\\times1 = 6.86$ V.","<b>Step 2 — Check region.</b> 6.86 V is between $V_{CE,sat}$ (0.2) and $V_{CC}$ (12) -> active.","<b>Step 3 — Distractor audit.</b> 0.2 V is saturation; 12 V is cutoff; 0 is wrong."],
+          a: "$V_{CE} \\approx 6.86$ V (active).",
+          v: "Sitting near mid-supply is ideal for a linear amplifier - it gives symmetric headroom for the output to swing both ways without clipping."
+        }), ref: "p.384" },
       { q: "Class A amp: transistor conducts for:",
         choices: ["Full 360°", "180°", "Pulses only", "Variable"], correct: 0,
-        solution: S({ c: "Class A: continuous conduction → linear but inefficient.", s: [""], a: "$360°$" }), ref: "p.384" },
+        solution: S({
+          c: "Class A conducts over the FULL 360 degrees of the cycle - the transistor never turns off.",
+          s: ["<b>Step 1 — Match.</b> Full 360 degrees.","<b>Step 2 — Distractor audit.</b> 180 deg is Class B; pulses are Class C; 'variable' isn't a class."],
+          a: "360 degrees.",
+          v: "Continuous conduction gives Class A the lowest distortion but worst efficiency (<=25-50%) - it draws full bias current even with no signal."
+        }), ref: "p.384" },
       { q: "Push-pull (Class B) amp uses:",
         choices: ["Two complementary transistors", "One BJT", "Single FET", "MOSFET only"], correct: 0,
-        solution: S({ c: "Class B: NPN + PNP (or N/P MOSFET) — each conducts half-cycle.", s: ["Higher efficiency but crossover distortion."], a: "Complementary pair" }), ref: "p.384" },
+        solution: S({
+          c: "Class B push-pull uses two COMPLEMENTARY transistors (NPN+PNP, or N+P MOSFET), each conducting one half-cycle.",
+          s: ["<b>Step 1 — Match.</b> Two complementary transistors.","<b>Step 2 — Distractor audit.</b> A single BJT/FET can't push AND pull; 'MOSFET only' is too narrow."],
+          a: "A complementary transistor pair.",
+          v: "Efficiency jumps to ~78.5% (vs Class A) since each device is off half the time - the cost is crossover distortion near zero, fixed by Class AB biasing."
+        }), ref: "p.384" },
       { q: "Zener regulator: $V_Z = 5.6$ V, $I_{Z,min} = 5$ mA. With load 1 kΩ, source 12V, find $R_s$:",
         choices: ["$\\approx 581$ Ω", "$1$ kΩ", "$100$ Ω", "$2$ kΩ"], correct: 0,
-        solution: S({ c: "$R_s$ must allow $I_{load} + I_{Z,min}$ to flow.", s: ["$I_{load} = 5.6/1000 = 5.6$ mA.", "$I_s = I_{load} + I_Z = 5.6 + 5 = 10.6$ mA.", "$R_s = (12 - 5.6)/0.0106 = 604$ Ω. Close enough — round."], a: "$\\sim 600$ Ω" }), ref: "p.383" },
+        solution: S({
+          c: "The series resistor must pass the load current PLUS the Zener's minimum current: $R_s=(V_{in}-V_Z)/(I_{load}+I_{Z,min})$.",
+          s: ["<b>Step 1 — Load current.</b> $I_{load}=5.6/1000=5.6$ mA.","<b>Step 2 — Total.</b> $I_s=5.6+5=10.6$ mA.","<b>Step 3 — Resistor.</b> $R_s=(12-5.6)/0.0106 \\approx 600\\ \\Omega$ (the only choice near this).","<b>Step 4 — Distractor audit.</b> 1k, 100, 2k Ohm all fail to keep the Zener above its minimum current."],
+          a: "$R_s \\approx 580$-$600\\ \\Omega$",
+          v: "Size $R_s$ for the WORST case (max load + minimum Zener current) so the Zener never drops out of regulation - too large an $R_s$ starves it."
+        }), ref: "p.383" },
       { q: "Op-amp output current limit typically:",
         choices: ["~20-50 mA (general purpose)", "1 A", "1 µA", "Unlimited"], correct: 0,
-        solution: S({ c: "Most general-purpose op-amps source/sink 20-50 mA short-circuit safe.", s: ["Power op-amps: 1-5 A."], a: "20-50 mA typical" }), ref: "p.380" },
+        solution: S({
+          c: "General-purpose op-amps source/sink only about 20-50 mA (internally short-circuit protected).",
+          s: ["<b>Step 1 — Match.</b> ~20-50 mA.","<b>Step 2 — Distractor audit.</b> 1 A needs a POWER op-amp; 1 uA is far too low; 'unlimited' is impossible."],
+          a: "~20-50 mA.",
+          v: "To drive heavier loads (speakers, motors) you add a buffer transistor stage or use a power op-amp (1-5 A) - the small-signal op-amp alone can't supply much current."
+        }), ref: "p.380" },
       { q: "Common-emitter amplifier output impedance:",
         choices: ["$\\approx R_C$ (collector resistor)", "Very low", "Zero", "$r_e$"], correct: 0,
-        solution: S({ c: "$Z_{out}$ at collector $\\approx R_C \\| r_o$, where $r_o$ usually large.", s: [""], a: "$R_C$" }), ref: "p.384" },
+        solution: S({
+          c: "Looking into the collector, output impedance is approximately $R_C$ (in parallel with the large intrinsic $r_o$).",
+          s: ["<b>Step 1 — Match.</b> $\\approx R_C$.","<b>Step 2 — Distractor audit.</b> 'Very low'/'zero' describe a follower output; $r_e$ is the emitter side."],
+          a: "$\\approx R_C$.",
+          v: "High output impedance is typical of CE stages - which is why they often feed a follower (low Zout) to drive real loads. Input impedance, by contrast, is ~beta*re."
+        }), ref: "p.384" },
       { q: "Crystal oscillator stability:",
         choices: ["1-100 ppm typically", "1%", "10%", "No drift"], correct: 0,
-        solution: S({ c: "Crystals: $10^{-6}$ to $10^{-8}$ stability over T.", s: ["TCXO (temp-compensated): even better. OCXO (oven-controlled): $10^{-9}$."], a: "1-100 ppm" }), ref: "p.380" },
+        solution: S({
+          c: "Quartz crystals achieve frequency stability around 1-100 ppm (parts per million) over temperature.",
+          s: ["<b>Step 1 — Match.</b> 1-100 ppm.","<b>Step 2 — Distractor audit.</b> 1% and 10% are RC-oscillator territory; 'no drift' is impossible."],
+          a: "1-100 ppm.",
+          v: "Temperature-compensated (TCXO) and oven-controlled (OCXO) versions reach 10^-8 to 10^-9 - which is why every precise clock and RF reference uses a crystal, not an RC network."
+        }), ref: "p.380" },
       { q: "An LC oscillator frequency:",
         choices: ["$f_0 = 1/(2\\pi\\sqrt{LC})$", "$RC$", "Same as $\\omega L$", "Fixed"], correct: 0,
-        solution: S({ c: "Tank circuit resonance.", s: [""], a: "$1/(2\\pi\\sqrt{LC})$" }), ref: "p.361" },
+        solution: S({
+          c: "An LC tank oscillates at its resonant frequency $f_0=\\dfrac{1}{2\\pi\\sqrt{LC}}$.",
+          s: ["<b>Step 1 — Match.</b> $1/(2\\pi\\sqrt{LC})$.","<b>Step 2 — Distractor audit.</b> $RC$ is an RC oscillator; $\\omega L$ is reactance; 'fixed' ignores L and C."],
+          a: "$f_0 = 1/(2\\pi\\sqrt{LC})$.",
+          v: "At $f_0$, $X_L=X_C$ cancel and the tank sustains oscillation - the same resonance formula as a series/parallel RLC. Depends only on the LC product."
+        }), ref: "p.361" },
       { q: "Photodiode operating mode for max speed:",
         choices: ["Reverse bias", "Forward bias", "Zero bias", "AC"], correct: 0,
-        solution: S({ c: "Reverse bias: widens depletion → faster carrier collection. Lower capacitance.", s: ["Zero bias (photovoltaic mode): low noise but slower."], a: "Reverse bias" }), ref: "p.383" },
+        solution: S({
+          c: "REVERSE bias (photoconductive mode) widens the depletion region, speeding carrier collection and lowering junction capacitance - the fastest mode.",
+          s: ["<b>Step 1 — Match.</b> Reverse bias.","<b>Step 2 — Distractor audit.</b> Forward bias floods the junction; zero bias (photovoltaic) is low-noise but SLOW; AC isn't a bias mode."],
+          a: "Reverse bias.",
+          v: "Wider depletion = lower capacitance = faster response, ideal for high-speed optical receivers - the trade is more dark current (noise) than zero-bias photovoltaic mode."
+        }), ref: "p.383" },
       { q: "MOSFET enhancement vs depletion mode:",
         choices: ["Enhancement: needs gate V > $V_{th}$ to turn on; depletion conducts at $V_{GS}=0$", "Same", "Depletion is always on", "Enhancement is faster"], correct: 0,
-        solution: S({ c: "Enhancement: 'normally off'. Depletion: 'normally on'.", s: [""], a: "Enhancement off, depletion on" }), ref: "p.386" },
+        solution: S({
+          c: "ENHANCEMENT-mode MOSFETs are normally OFF (need $V_{GS}$ beyond $V_{th}$ to conduct); DEPLETION-mode are normally ON (conduct at $V_{GS}=0$, need bias to turn off).",
+          s: ["<b>Step 1 — Match.</b> Enhancement needs gate V > Vth; depletion conducts at VGS=0.","<b>Step 2 — Distractor audit.</b> Not 'same'; 'depletion always on' is too absolute; speed isn't the distinction."],
+          a: "Enhancement normally-off; depletion normally-on.",
+          v: "Almost all digital/power MOSFETs are enhancement-mode (normally off = safe default) - depletion-mode is niche (e.g. some RF and current-source applications)."
+        }), ref: "p.386" },
       { q: "Power dissipated by 5V Zener carrying 100 mA:",
         choices: ["$0.5$ W", "$5$ W", "$50$ mW", "$2.5$ W"], correct: 0,
-        solution: S({ c: "$P = V_Z \\cdot I_Z$.", s: ["$5 \\cdot 0.1 = 0.5$ W."], a: "$0.5$ W" }), ref: "p.383" },
+        solution: S({
+          c: "Power in a Zener is $P=V_Z I_Z$.",
+          s: ["<b>Step 1 — Apply.</b> $5\\times0.1 = 0.5$ W.","<b>Step 2 — Distractor audit.</b> 5 W, 50 mW, 2.5 W misplace a factor."],
+          a: "$0.5$ W",
+          v: "You'd pick at least a 1 W Zener here for derating margin - exceeding the Zener's power rating destroys it, so the series resistor must limit current."
+        }), ref: "p.383" },
       { q: "Inverting summer with $R_f = R_1 = R_2 = 10$ k. $v_1 = 1$, $v_2 = 2$. Output:",
         choices: ["$-3$ V", "$+3$ V", "$3/2$ V", "$0$"], correct: 0,
-        solution: S({ c: "Summer: $v_{out} = -R_f \\sum v_i/R_i$.", s: ["All $R$ equal: $v_{out} = -(v_1 + v_2) = -3$."], a: "$-3$ V" }), ref: "p.380" },
+        solution: S({
+          c: "An inverting summing amp: $v_{out}=-R_f\\sum(v_i/R_i)$. With all resistors equal, $v_{out}=-(v_1+v_2)$.",
+          s: ["<b>Step 1 — Apply.</b> $-(1+2) = -3$ V.","<b>Step 2 — Distractor audit.</b> $+3$ misses the sign; $3/2$ averages; 0 is wrong."],
+          a: "$-3$ V",
+          v: "Equal resistors give a true (inverted) sum - choosing different $R_i$ would weight the inputs, the basis of analog mixing and weighted-average circuits."
+        }), ref: "p.380" },
       { q: "Common-source MOSFET amp output impedance:",
         choices: ["$R_D \\| r_o$", "Zero", "Infinite", "$r_e$"], correct: 0,
-        solution: S({ c: "Parallel combination of drain resistor and intrinsic $r_o$.", s: [""], a: "$R_D \\| r_o$" }), ref: "p.386" },
+        solution: S({
+          c: "Output impedance of a common-source stage is $R_D \\| r_o$ (drain resistor in parallel with the transistor's intrinsic output resistance).",
+          s: ["<b>Step 1 — Match.</b> $R_D \\| r_o$.","<b>Step 2 — Distractor audit.</b> Zero/infinite are wrong; $r_e$ is a BJT quantity."],
+          a: "$R_D \\| r_o$.",
+          v: "Usually $r_o \\gg R_D$, so $Z_{out}\\approx R_D$ - analogous to the BJT common-emitter's $\\approx R_C$. Common-source is the MOSFET inverting gain stage."
+        }), ref: "p.386" },
       { q: "Buck-boost converter polarity of output (continuous mode):",
         choices: ["Opposite sign of input (inverted)", "Same sign", "Always positive", "AC"], correct: 0,
-        solution: S({ c: "Standard buck-boost inverts polarity.", s: ["Non-inverting topologies (Ćuk, SEPIC) preserve polarity but more components."], a: "Inverted" }), ref: "p.383" },
+        solution: S({
+          c: "The standard (inverting) buck-boost converter produces an output of OPPOSITE polarity to the input.",
+          s: ["<b>Step 1 — Match.</b> Opposite sign (inverted).","<b>Step 2 — Distractor audit.</b> 'Same sign'/'always positive' describe non-inverting topologies; output is DC, not AC."],
+          a: "Inverted (opposite sign).",
+          v: "Non-inverting alternatives (Cuk, SEPIC) preserve polarity but need more components - the basic buck-boost trades that for simplicity, useful when a negative rail is wanted."
+        }), ref: "p.383" },
       { q: "ADC SAR (Successive Approximation Register) speed:",
         choices: ["Medium ($\\sim$ MSps for 12-bit)", "Fastest", "Slow", "Hz range"], correct: 0,
-        solution: S({ c: "SAR: binary search per bit. $N$-bit needs $N$ steps.", s: ["Pipelined: faster but more silicon.", "Sigma-delta: slow but high resolution.", "Flash: fastest but expensive."], a: "Medium speed" }), ref: "p.388" },
+        solution: S({
+          c: "A SAR ADC does a binary search - one comparison per bit - giving MEDIUM speed (around MSps for 12-bit) and good resolution.",
+          s: ["<b>Step 1 — Match.</b> Medium (~MSps for 12-bit).","<b>Step 2 — Distractor audit.</b> Flash is fastest; sigma-delta is slow/high-res; 'Hz range' is far too slow."],
+          a: "Medium speed.",
+          v: "The ADC speed/resolution ladder: flash (fastest, low bits, expensive) > pipelined > SAR (balanced) > sigma-delta (slow, highest resolution) - SAR is the popular general-purpose choice."
+        }), ref: "p.388" },
     ],
 
     // Power — +18
     10: [
       { q: "Line current for 30 kW load at $V_{LL} = 480$ V, $pf = 0.85$:",
         choices: ["$\\approx 42.5$ A", "$\\$30$ A", "$\\$60$ A", "$\\$15$ A"], correct: 0,
-        solution: S({ c: "$P = \\sqrt{3} V_{LL} I_L \\cos\\theta$.", s: ["$I_L = P/(\\sqrt{3} V_{LL} \\cos\\theta) = 30000/(1.732 \\cdot 480 \\cdot 0.85) = 42.45$ A."], a: "$\\approx 42.5$ A" }), ref: "p.363" },
+        solution: S({
+          c: "Solve the three-phase power formula for current: $I_L = \\dfrac{P}{\\sqrt3\\,V_{LL}\\cos\\theta}$.",
+          s: ["<b>Step 1 — Apply.</b> $30000/(1.732\\times480\\times0.85) = 42.45$ A.","<b>Step 2 — Distractor audit.</b> 30/60/15 A ignore the $\\sqrt3$, voltage, or pf."],
+          a: "$I_L \\approx 42.5$ A",
+          v: "Lower pf would RAISE this current for the same 30 kW - which is why poor pf wastes line capacity and is penalized."
+        }), ref: "p.363" },
       { q: "Wye→Delta with each Y impedance $5\\angle 30°$ Ω. Delta phase Z:",
         choices: ["$15\\angle 30°$ Ω", "$5\\angle 30°$", "$1.67\\angle 30°$", "$25\\angle 60°$"], correct: 0,
-        solution: S({ c: "Balanced Y→Δ: $Z_\\Delta = 3 Z_Y$.", s: ["$3 \\cdot 5\\angle 30° = 15\\angle 30°$."], a: "$15\\angle 30°$" }), ref: "p.363" },
+        solution: S({
+          c: "Balanced Y-to-Delta: $Z_\\Delta = 3Z_Y$.",
+          s: ["<b>Step 1 — Apply.</b> $3\\times5\\angle30° = 15\\angle30°$.","<b>Step 2 — Distractor audit.</b> $5\\angle30$ unchanged; $1.67\\angle30$ divides (Delta to Y); $25\\angle60$ wrong."],
+          a: "$15\\angle 30°$ Ω",
+          v: "The angle is unchanged; only the magnitude triples - Y to Delta multiplies by 3, Delta to Y divides by 3."
+        }), ref: "p.363" },
       { q: "Transformer with primary 240V, secondary 24V. Reflect 10Ω load on secondary to primary:",
         choices: ["$1000$ Ω", "$1$ Ω", "$10$ Ω", "$100$ Ω"], correct: 0,
-        solution: S({ c: "$Z' = a^2 Z$. $a = 10$.", s: ["$10^2 \\cdot 10 = 1000$ Ω."], a: "$1000$ Ω" }), ref: "p.364" },
+        solution: S({
+          c: "Impedance reflects across a transformer by the turns ratio SQUARED: $Z' = a^2 Z$, where $a = N_1/N_2 = V_1/V_2$.",
+          s: ["<b>Step 1 — Turns ratio.</b> $a = 240/24 = 10$.","<b>Step 2 — Reflect.</b> $10^2\\times10 = 1000\\ \\Omega$.","<b>Step 3 — Distractor audit.</b> 1 Ohm divides; 10 forgets to reflect; 100 uses $a$ not $a^2$."],
+          a: "$1000\\ \\Omega$",
+          v: "Impedance scales as turns-ratio SQUARED - the basis of impedance matching with transformers (e.g. tube amp output to 8-Ohm speaker)."
+        }), ref: "p.364" },
       { q: "Motor at 60 Hz, 4 poles, 1750 rpm full-load. Slip:",
         choices: ["$\\approx 2.8\\%$", "$5\\%$", "$10\\%$", "$0$"], correct: 0,
-        solution: S({ c: "Sync: $n_s = 120f/p = 1800$. Slip: $(1800-1750)/1800$.", s: ["$50/1800 = 2.78\\%$."], a: "$\\approx 2.78\\%$" }), ref: "p.365" },
+        solution: S({
+          c: "Slip = $(n_s - n)/n_s$, where synchronous speed $n_s = 120f/p$.",
+          s: ["<b>Step 1 — Sync speed.</b> $120\\times60/4 = 1800$ rpm.","<b>Step 2 — Slip.</b> $(1800-1750)/1800 = 2.78\\%$.","<b>Step 3 — Distractor audit.</b> 5% and 10% overestimate; 0 would be synchronous (no induction torque)."],
+          a: "$\\approx 2.78\\%$",
+          v: "Induction motors MUST slip (a few %) to induce rotor current and make torque - zero slip means no torque, which is why they never quite reach synchronous speed."
+        }), ref: "p.365" },
       { q: "DC motor armature current with $V = 220$V, $E_b = 200$V, $R_a = 0.5$Ω:",
         choices: ["$40$ A", "$20$ A", "$440$ A", "$100$ A"], correct: 0,
-        solution: S({ c: "$I_a = (V - E_b)/R_a$.", s: ["$(220-200)/0.5 = 40$ A."], a: "$40$ A" }), ref: "p.365" },
+        solution: S({
+          c: "Armature current $I_a = (V - E_b)/R_a$, where $E_b$ is the back-EMF.",
+          s: ["<b>Step 1 — Apply.</b> $(220-200)/0.5 = 40$ A.","<b>Step 2 — Distractor audit.</b> 20 A halves wrongly; 440 A forgets $E_b$; 100 A is off."],
+          a: "$I_a = 40$ A",
+          v: "Back-EMF $E_b$ rises with speed and OPPOSES the supply - at startup $E_b=0$, so inrush is huge ($220/0.5=440$ A), which is why DC motors need starting resistors."
+        }), ref: "p.365" },
       { q: "Active power formula in three-phase using line quantities:",
         choices: ["$P = \\sqrt{3} V_{LL} I_L \\cos\\theta$", "$P = V_{LL} I_L \\cos\\theta$", "$P = 3 V_{LL} I_L$", "$V/R$"], correct: 0,
-        solution: S({ c: "Standard 3-φ formula (Y or Δ).", s: [""], a: "$\\sqrt{3} V_{LL} I_L \\cos\\theta$" }), ref: "p.363" },
+        solution: S({
+          c: "Three-phase real power in line quantities: $P = \\sqrt3\\,V_{LL}I_L\\cos\\theta$ (valid for both Y and Delta).",
+          s: ["<b>Step 1 — Match.</b> $\\sqrt3 V_{LL}I_L\\cos\\theta$.","<b>Step 2 — Distractor audit.</b> Missing $\\sqrt3$, or '$3V_{LL}I_L$' (no pf), or '$V/R$' are wrong."],
+          a: "$P = \\sqrt3\\,V_{LL}I_L\\cos\\theta$",
+          v: "The $\\sqrt3$ arises because $V_{LL}=\\sqrt3 V_{phase}$ in wye - this single formula works for any balanced three-phase load in line terms."
+        }), ref: "p.363" },
       { q: "Transformer turns ratio 10:1 step down. Apply 4800V primary, get:",
         choices: ["$480$ V", "$48{,}000$ V", "$4800$ V", "$48$ V"], correct: 0,
-        solution: S({ c: "$V_2 = V_1/a$.", s: ["$4800/10 = 480$ V."], a: "$480$ V" }), ref: "p.364" },
+        solution: S({
+          c: "Voltage steps by the turns ratio: $V_2 = V_1/a$ for a step-down (a:1).",
+          s: ["<b>Step 1 — Apply.</b> $4800/10 = 480$ V.","<b>Step 2 — Distractor audit.</b> 48,000 V steps UP; 4800 V unchanged; 48 V over-divides."],
+          a: "$480$ V",
+          v: "Step-down lowers voltage but RAISES current by the same ratio (power conserved) - the secondary here carries 10x the primary current."
+        }), ref: "p.364" },
       { q: "Apparent vs real power: $|S|^2$ =",
         choices: ["$P^2 + Q^2$", "$P + Q$", "$P - Q$", "$P/Q$"], correct: 0,
-        solution: S({ c: "Power triangle: $|S|^2 = P^2 + Q^2$.", s: [""], a: "$P^2+Q^2$" }), ref: "p.362" },
+        solution: S({
+          c: "The power triangle relates the three powers: $|S|^2 = P^2 + Q^2$ (apparent = hypotenuse of real and reactive).",
+          s: ["<b>Step 1 — Match.</b> $P^2+Q^2$.","<b>Step 2 — Distractor audit.</b> $P+Q$, $P-Q$, $P/Q$ ignore the right-triangle (Pythagorean) relationship."],
+          a: "$|S|^2 = P^2 + Q^2$",
+          v: "S in VA, P in W, Q in VAR form a right triangle - power factor is $\\cos\\theta = P/|S|$. Know any two and you get the third."
+        }), ref: "p.362" },
       { q: "Per-unit impedance of 50 MVA, 13.8 kV transformer with $Z_{actual} = 0.5$ Ω:",
         choices: ["$\\approx 0.131$ pu", "$0.5$ pu", "$1.0$ pu", "$10$ pu"], correct: 0,
-        solution: S({ c: "$Z_{base} = V^2/S$. $Z_{pu} = Z_{actual}/Z_{base}$.", s: ["$Z_{base} = 13800^2/50000000 = 3.808$ Ω.", "$Z_{pu} = 0.5/3.808 = 0.131$ pu."], a: "$0.131$ pu" }), ref: "p.363" },
+        solution: S({
+          c: "Per-unit: $Z_{pu} = Z_{actual}/Z_{base}$, where $Z_{base} = V_{base}^2/S_{base}$.",
+          s: ["<b>Step 1 — Base impedance.</b> $13800^2/50{,}000{,}000 = 3.808\\ \\Omega$.","<b>Step 2 — Per-unit.</b> $0.5/3.808 = 0.131$ pu.","<b>Step 3 — Distractor audit.</b> 0.5 pu forgets to divide; 1.0 and 10 pu are wrong."],
+          a: "$\\approx 0.131$ pu",
+          v: "Per-unit normalizes a whole multi-voltage system to common bases, making transformers 'disappear' from the impedance diagram - the standard for power-flow and fault studies."
+        }), ref: "p.363" },
       { q: "Synchronous speed of 2-pole machine at 50 Hz:",
         choices: ["$3000$ rpm", "$1500$ rpm", "$6000$ rpm", "$1800$ rpm"], correct: 0,
-        solution: S({ c: "$n_s = 120 f / p$.", s: ["$120 \\cdot 50/2 = 3000$ rpm."], a: "$3000$ rpm" }), ref: "p.365" },
+        solution: S({
+          c: "Synchronous speed $n_s = 120f/p$.",
+          s: ["<b>Step 1 — Apply.</b> $120\\times50/2 = 3000$ rpm.","<b>Step 2 — Distractor audit.</b> 1500 is 4-pole; 6000 doubles; 1800 is 60 Hz/4-pole."],
+          a: "$3000$ rpm",
+          v: "Fewer poles = faster - a 2-pole machine spins twice as fast as a 4-pole at the same frequency. At 60 Hz the 2-pole value is 3600 rpm."
+        }), ref: "p.365" },
       { q: "Three-phase rectifier output ripple vs single-phase:",
         choices: ["Lower ripple, 6-pulse per cycle", "Higher", "Same", "Zero"], correct: 0,
-        solution: S({ c: "3-φ full-wave: 6 pulses/cycle → smoother DC.", s: ["1-φ full-wave: 2 pulses."], a: "Lower ripple" }), ref: "p.383" },
+        solution: S({
+          c: "A three-phase full-wave rectifier produces 6 pulses per cycle, giving much LOWER ripple than a single-phase (2-pulse) rectifier.",
+          s: ["<b>Step 1 — Match.</b> Lower ripple, 6 pulses/cycle.","<b>Step 2 — Distractor audit.</b> Not higher, not the same, not zero."],
+          a: "Lower ripple (6-pulse).",
+          v: "More pulses per cycle = smoother DC = smaller filter needed - which is why industrial DC supplies use three-phase rectification. 12-pulse setups smooth it even further."
+        }), ref: "p.383" },
       { q: "Power factor 0.5 lagging means:",
         choices: ["$\\theta = 60°$, current lags voltage", "Resistive", "Capacitive", "Leading"], correct: 0,
-        solution: S({ c: "$\\cos 60° = 0.5$. Lagging → inductive.", s: [""], a: "$60°$ lag (inductive)" }), ref: "p.362" },
+        solution: S({
+          c: "pf $=\\cos\\theta = 0.5$ means $\\theta=60°$; 'lagging' means current lags voltage (inductive load).",
+          s: ["<b>Step 1 — Angle.</b> $\\arccos0.5 = 60°$.","<b>Step 2 — Distractor audit.</b> Resistive is pf=1; capacitive/leading have current ahead of voltage."],
+          a: "$\\theta=60°$, current lags (inductive).",
+          v: "A pf of 0.5 is poor - reactive power equals $\\sqrt3$ times real power here, heavily loading the line. Motors (inductive) cause lagging pf; capacitor banks correct it."
+        }), ref: "p.362" },
       { q: "Voltage drop in transmission line approximately:",
         choices: ["$V_R \\approx |I|(R\\cos\\theta + X\\sin\\theta)$", "$IR$ only", "$IZ$ vector", "$V$"], correct: 0,
-        solution: S({ c: "Approximate voltage regulation: $\\Delta V = I(R\\cos\\theta + X\\sin\\theta)$.", s: ["Sometimes called Vd formula in distribution analysis."], a: "$IR\\cos+IX\\sin$" }), ref: "p.363" },
+        solution: S({
+          c: "The approximate line voltage drop (regulation) is $\\Delta V \\approx |I|(R\\cos\\theta + X\\sin\\theta)$, combining resistive and reactive drops weighted by the load angle.",
+          s: ["<b>Step 1 — Match.</b> $|I|(R\\cos\\theta + X\\sin\\theta)$.","<b>Step 2 — Distractor audit.</b> '$IR$ only' drops the reactance; the others are incomplete."],
+          a: "$\\Delta V \\approx |I|(R\\cos\\theta + X\\sin\\theta)$",
+          v: "Both R and X matter, weighted by the power-factor angle - for inductive loads (lagging) the $X\\sin\\theta$ term often dominates, since $X \\gg R$ on long lines."
+        }), ref: "p.363" },
       { q: "Why X >> R for long transmission lines:",
         choices: ["Inductive reactance dominates over copper R", "Capacitive", "Mutual coupling", "Frequency low"], correct: 0,
-        solution: S({ c: "Long lines: inductance per km × length grows; R relatively small.", s: ["Why power flow controlled mostly by phase angle (governed by reactance)."], a: "$X$ dominant" }), ref: "p.363" },
+        solution: S({
+          c: "On long transmission lines, inductive reactance ($X=\\omega L\\times$length) dominates the relatively small conductor resistance R.",
+          s: ["<b>Step 1 — Match.</b> Inductive reactance dominates over R.","<b>Step 2 — Distractor audit.</b> Not capacitive-dominated, not mutual coupling, not low frequency."],
+          a: "Inductive reactance dominates.",
+          v: "Because X >> R, real power flow is governed mainly by the voltage PHASE ANGLE across the line ($P \\approx V_1V_2\\sin\\delta/X$) - the foundation of power-flow and stability analysis."
+        }), ref: "p.363" },
       { q: "Capacitor bank for PF correction: $P = 50$ kW, raise PF 0.7→0.95:",
         choices: ["$\\approx 34.6$ kVAR", "$50$ kVAR", "$10$ kVAR", "$15$ kVAR"], correct: 0,
-        solution: S({ c: "$Q_C = P(\\tan\\theta_1 - \\tan\\theta_2)$.", s: ["$\\theta_1 = \\arccos 0.7 = 45.57°$, $\\tan = 1.0202$.", "$\\theta_2 = \\arccos 0.95 = 18.19°$, $\\tan = 0.3287$.", "$Q_C = 50(1.0202 - 0.3287) = 50 \\cdot 0.6915 = 34.58$ kVAR."], a: "$\\approx 34.6$ kVAR" }), ref: "p.362" },
+        solution: S({
+          c: "Required capacitor VARs: $Q_C = P(\\tan\\theta_1 - \\tan\\theta_2)$, where $\\theta=\\arccos(pf)$.",
+          s: ["<b>Step 1 — Angles.</b> $\\theta_1=\\arccos0.7=45.6°$ ($\\tan=1.02$); $\\theta_2=\\arccos0.95=18.2°$ ($\\tan=0.329$).","<b>Step 2 — Apply.</b> $Q_C=50(1.02-0.329)=34.6$ kVAR.","<b>Step 3 — Distractor audit.</b> 50/10/15 kVAR misuse the tangent difference."],
+          a: "$\\approx 34.6$ kVAR",
+          v: "The capacitor supplies leading VARs to cancel part of the load's lagging VARs, raising pf without changing P - cutting line current and losses."
+        }), ref: "p.362" },
       { q: "Three-phase fault current $I_{SC}$ in pu: $V_{pu} = 1.0$, $Z_{pu} = 0.1$:",
         choices: ["$10$ pu", "$1$ pu", "$0.1$ pu", "$100$ pu"], correct: 0,
-        solution: S({ c: "$I_{SC,pu} = V_{pu}/Z_{pu}$.", s: ["$1/0.1 = 10$ pu."], a: "$10$ pu" }), ref: "p.363" },
+        solution: S({
+          c: "Per-unit short-circuit current is simply $I_{SC} = V_{pu}/Z_{pu}$.",
+          s: ["<b>Step 1 — Apply.</b> $1.0/0.1 = 10$ pu.","<b>Step 2 — Distractor audit.</b> 1, 0.1, 100 pu misuse the division."],
+          a: "$10$ pu",
+          v: "10 pu means the fault current is 10x rated - exactly the inverse of the per-unit impedance. Lower system impedance gives FIERCER faults, which protective devices must interrupt."
+        }), ref: "p.363" },
       { q: "DC generator with $V_t = 240$V, $I_a = 50$A, $R_a = 0.2$Ω. Generated EMF:",
         choices: ["$250$ V", "$240$ V", "$230$ V", "$10$ V"], correct: 0,
-        solution: S({ c: "Generator: $E_g = V_t + I_a R_a$ (drop is across armature when delivering current).", s: ["$240 + 50 \\cdot 0.2 = 250$ V."], a: "$250$ V" }), ref: "p.365" },
+        solution: S({
+          c: "A generator's internal EMF must EXCEED terminal voltage by the armature drop (it supplies current outward): $E_g = V_t + I_a R_a$.",
+          s: ["<b>Step 1 — Apply.</b> $240 + 50\\times0.2 = 250$ V.","<b>Step 2 — Distractor audit.</b> 240 V forgets the drop; 230 V SUBTRACTS (that's a motor); 10 V is just the drop."],
+          a: "$E_g = 250$ V",
+          v: "Note the sign vs a MOTOR: generator $E_g=V_t+I_aR_a$ (EMF above terminal), motor $E_b=V_t-I_aR_a$ (back-EMF below) - the armature drop flips direction with power flow."
+        }), ref: "p.365" },
       { q: "Service factor of motor at FL means:",
         choices: ["Continuous-duty capacity multiplier of nameplate rating", "Voltage tolerance", "Frequency", "Starting current"], correct: 0,
-        solution: S({ c: "SF: how much above nameplate the motor can run continuously without damage.", s: ["SF 1.0: only at nameplate.", "SF 1.15-1.25: typical general-purpose."], a: "Continuous overload" }), ref: "p.365" },
+        solution: S({
+          c: "Service factor is a continuous-duty overload multiplier on the nameplate rating - SF 1.15 means it can run continuously at 115% of rated power.",
+          s: ["<b>Step 1 — Match.</b> Continuous-duty capacity multiplier of nameplate.","<b>Step 2 — Distractor audit.</b> Not voltage tolerance, frequency, or starting current."],
+          a: "Continuous overload capacity.",
+          v: "Running in the SF zone shortens insulation life and lowers efficiency, so it's for occasional overload - SF 1.0 means no margin; 1.15-1.25 is typical general-purpose."
+        }), ref: "p.365" },
     ],
 
     // EM — +8
     11: [
       { q: "EM wave wavelength in vacuum at 300 MHz:",
         choices: ["$1$ m", "$300$ m", "$0.3$ m", "$3$ m"], correct: 0,
-        solution: S({ c: "$\\lambda = c/f$.", s: ["$3 \\cdot 10^8 / 3 \\cdot 10^8 = 1$ m."], a: "$1$ m" }), ref: "p.368" },
+        solution: S({
+          c: "Wavelength $\\lambda = c/f$.",
+          s: ["<b>Step 1 — Apply.</b> $3\\times10^8 / 3\\times10^8 = 1$ m.","<b>Step 2 — Distractor audit.</b> 300 m is 1 MHz; 0.3 m is 1 GHz; 3 m is 100 MHz."],
+          a: "$1$ m",
+          v: "Handy anchor: 300 MHz <-> 1 m (and scales inversely) - useful for sizing antennas (~lambda/4 = 25 cm here)."
+        }), ref: "p.368" },
       { q: "Power density of EM wave with $E_{rms} = 1$ V/m in vacuum:",
         choices: ["$\\approx 2.65$ mW/m²", "$1$ W/m²", "$120\\pi$ W/m²", "$0$"], correct: 0,
-        solution: S({ c: "Poynting vector magnitude: $S = E^2/\\eta_0$. $\\eta_0 \\approx 377$ Ω.", s: ["$1^2/377 \\approx 2.65$ mW/m²."], a: "$\\approx 2.65$ mW/m²" }), ref: "p.368" },
+        solution: S({
+          c: "Poynting (power) density: $S = E_{rms}^2/\\eta_0$, with free-space impedance $\\eta_0 \\approx 377\\ \\Omega$.",
+          s: ["<b>Step 1 — Apply.</b> $1^2/377 = 2.65\\times10^{-3}$ W/m^2 = 2.65 mW/m^2.","<b>Step 2 — Distractor audit.</b> 1 W/m^2 ignores $\\eta_0$; $120\\pi$ misuses it; 0 is wrong."],
+          a: "$\\approx 2.65$ mW/m^2",
+          v: "The 377-Ohm free-space impedance links E and power density - the same constant that relates E and H in a propagating wave ($\\eta_0=120\\pi$)."
+        }), ref: "p.368" },
       { q: "$\\nabla \\cdot \\vec{E} = \\rho/\\varepsilon_0$ is:",
         choices: ["Gauss's law (E-field divergence from charge)", "Faraday", "Ampere", "Coulomb"], correct: 0,
-        solution: S({ c: "First Maxwell equation.", s: [""], a: "Gauss" }), ref: "p.355" },
+        solution: S({
+          c: "This is GAUSS'S LAW (the first Maxwell equation): the divergence of E equals charge density over permittivity - electric field lines originate on charge.",
+          s: ["<b>Step 1 — Match.</b> Gauss's law.","<b>Step 2 — Distractor audit.</b> Faraday is $\\nabla\\times E=-\\partial B/\\partial t$; Ampere involves $\\nabla\\times B$; Coulomb is the force law."],
+          a: "Gauss's law.",
+          v: "It says charges are the SOURCES/SINKS of electric field - the integral form ($\\oint E\\cdot dA = Q/\\varepsilon_0$) is the symmetry tool for finding fields of charged spheres, lines, planes."
+        }), ref: "p.355" },
       { q: "Permittivity of vacuum $\\varepsilon_0$ ≈",
         choices: ["$8.854 \\times 10^{-12}$ F/m", "$1$ F/m", "$\\mu_0$", "$10^{-7}$"], correct: 0,
-        solution: S({ c: "Memorized constant.", s: [""], a: "$8.854\\times 10^{-12}$ F/m" }), ref: "p.355" },
+        solution: S({
+          c: "$\\varepsilon_0 \\approx 8.854\\times10^{-12}$ F/m - a fundamental constant in all of electrostatics and wave propagation.",
+          s: ["<b>Step 1 — Match.</b> $8.854\\times10^{-12}$ F/m.","<b>Step 2 — Distractor audit.</b> 1 F/m is absurd; $\\mu_0$ is the magnetic constant; $10^{-7}$ is the order of $\\mu_0$."],
+          a: "$8.854\\times10^{-12}$ F/m.",
+          v: "Pairs with $\\mu_0=4\\pi\\times10^{-7}$ H/m to set $c=1/\\sqrt{\\mu_0\\varepsilon_0}$ - appears in Coulomb's law, capacitance, and Gauss's law."
+        }), ref: "p.355" },
       { q: "Transmission line characteristic impedance for $L'=0.5$ µH/m, $C'=200$ pF/m:",
         choices: ["$50$ Ω", "$100$ Ω", "$25$ Ω", "$0.5$ Ω"], correct: 0,
-        solution: S({ c: "$Z_0 = \\sqrt{L/C}$.", s: ["$\\sqrt{0.5e-6/200e-12} = \\sqrt{2500} = 50$ Ω."], a: "$50$ Ω" }), ref: "p.368" },
+        solution: S({
+          c: "Characteristic impedance of a lossless line: $Z_0 = \\sqrt{L'/C'}$ (per-unit-length inductance over capacitance).",
+          s: ["<b>Step 1 — Apply.</b> $\\sqrt{0.5\\times10^{-6}/200\\times10^{-12}} = \\sqrt{2500} = 50\\ \\Omega$.","<b>Step 2 — Distractor audit.</b> 100, 25, 0.5 Ohm come from ratio/root errors."],
+          a: "$Z_0 = 50\\ \\Omega$",
+          v: "$Z_0$ depends on the L/C RATIO (geometry/dielectric), not the line length - 50 Ohm is the ubiquitous standard for RF coax and microstrip."
+        }), ref: "p.368" },
       { q: "Reflection coefficient at matched load:",
         choices: ["$\\Gamma = 0$ (no reflection)", "$1$", "$-1$", "Infinite"], correct: 0,
-        solution: S({ c: "$Z_L = Z_0$ → $\\Gamma = 0$. All power absorbed.", s: [""], a: "$0$" }), ref: "p.368" },
+        solution: S({
+          c: "Reflection coefficient $\\Gamma = (Z_L-Z_0)/(Z_L+Z_0)$. A MATCHED load ($Z_L=Z_0$) gives $\\Gamma=0$ - no reflection.",
+          s: ["<b>Step 1 — Apply.</b> $Z_L=Z_0$ -> $\\Gamma=0$.","<b>Step 2 — Distractor audit.</b> $+1$ is open; $-1$ is short; infinite isn't possible."],
+          a: "$\\Gamma = 0$ (no reflection).",
+          v: "Matched = all power absorbed by the load, none bounced back (VSWR=1) - the goal of impedance matching in RF/transmission systems."
+        }), ref: "p.368" },
       { q: "Short-circuited transmission line: $\\Gamma$ at short:",
         choices: ["$-1$ (180° phase flip)", "$+1$", "$0$", "$0.5$"], correct: 0,
-        solution: S({ c: "Short ($Z_L=0$): $\\Gamma = (0-Z_0)/(0+Z_0) = -1$.", s: ["Open: $\\Gamma = +1$."], a: "$-1$" }), ref: "p.368" },
+        solution: S({
+          c: "At a short ($Z_L=0$): $\\Gamma = (0-Z_0)/(0+Z_0) = -1$ - full reflection with a 180-degree phase flip.",
+          s: ["<b>Step 1 — Apply.</b> $\\Gamma = -1$.","<b>Step 2 — Distractor audit.</b> $+1$ is an OPEN; 0 is matched; 0.5 is partial."],
+          a: "$\\Gamma = -1$",
+          v: "Short -> $\\Gamma=-1$ (voltage inverts), Open -> $\\Gamma=+1$ (voltage doubles at the end), Matched -> $\\Gamma=0$ - the three canonical termination cases."
+        }), ref: "p.368" },
       { q: "Microstrip $Z_0$ depends on:",
         choices: ["Trace width, dielectric height, $\\varepsilon_r$", "Just length", "Frequency only", "Color"], correct: 0,
-        solution: S({ c: "Microstrip impedance formulas: depend on geometry and substrate.", s: ["Standard: 50 Ω with W/H ratio depending on dielectric."], a: "Geometry + $\\varepsilon_r$" }), ref: "p.368" },
+        solution: S({
+          c: "Microstrip characteristic impedance depends on the geometry (trace width, substrate height) and the dielectric constant $\\varepsilon_r$.",
+          s: ["<b>Step 1 — Match.</b> Trace width, dielectric height, and $\\varepsilon_r$.","<b>Step 2 — Distractor audit.</b> Not just length, not frequency alone, certainly not color."],
+          a: "Geometry (W, H) and $\\varepsilon_r$.",
+          v: "Designers solve these formulas to hit 50 Ohm for a given board stackup - wider trace or thinner/higher-$\\varepsilon_r$ dielectric lowers $Z_0$."
+        }), ref: "p.368" },
     ],
 
     // Control — +12
