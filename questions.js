@@ -1320,13 +1320,14 @@ const QUESTION_BANK = {
           choices: ["$-2$ V", "$+2$ V", "$-0.2$ V", "$-20$ V"],
           correct: 0,
           solution: S({
-            c: "Inverting amplifier: $v_{out} = -\\dfrac{R_f}{R_{in}} v_{in}$. The output is inverted (negative gain).",
+            c: "Inverting amplifier gain: $v_{out}=-\\dfrac{R_f}{R_{in}}v_{in}$ (negative = inverted).",
             s: [
-              "Compute gain: $-R_f/R_{in} = -100/10 = -10$.",
-              "Apply to input: $v_{out} = -10 \\cdot 0.2 = -2$ V."
+              "<b>Step 1 — Gain.</b> $-100/10=-10$.",
+              "<b>Step 2 — Apply.</b> $v_{out}=-10(0.2)=-2$ V.",
+              "<b>Step 3 — Distractor audit.</b> $+2$ V misses the sign; $-0.2$ V forgets the gain; $-20$ V uses gain $-100$."
             ],
-            a: "$v_{out} = -2$ V",
-            v: "Two golden rules: $v_+ = v_- = 0$ (virtual ground) and no current into op-amp inputs. KCL at inverting input gives the gain formula."
+            a: "$v_{out}=-2$ V",
+            v: "Derived from the two golden rules: virtual ground ($v_-=0$) plus no input current, then KCL. Gain depends only on the resistor RATIO."
           }),
           ref: "Handbook p.380" },
 
@@ -1334,13 +1335,14 @@ const QUESTION_BANK = {
           choices: ["$2.2$ V", "$2.0$ V", "$-2.0$ V", "$-2.2$ V"],
           correct: 0,
           solution: S({
-            c: "Non-inverting amplifier: $v_{out} = \\left(1 + \\dfrac{R_f}{R_{in}}\\right) v_{in}$. Always at least 1× gain (no inversion).",
+            c: "Non-inverting amplifier gain: $v_{out}=\\left(1+\\dfrac{R_f}{R_{in}}\\right)v_{in}$ - always at least 1, no inversion.",
             s: [
-              "Compute gain: $1 + R_f/R_{in} = 1 + 100/10 = 11$.",
-              "Apply to input: $v_{out} = 11 \\cdot 0.2 = 2.2$ V."
+              "<b>Step 1 — Gain.</b> $1+100/10=11$.",
+              "<b>Step 2 — Apply.</b> $v_{out}=11(0.2)=2.2$ V.",
+              "<b>Step 3 — Distractor audit.</b> $2.0$ V uses the INVERTING gain magnitude (10); negative options ignore the non-inverting sign."
             ],
-            a: "$v_{out} = 2.2$ V",
-            v: "Same R values as Q9.1, but the non-inverting topology gives gain $1+\\frac{R_f}{R_{in}}$ instead of $-\\frac{R_f}{R_{in}}$."
+            a: "$v_{out}=2.2$ V",
+            v: "Same resistors as the inverting case, but the $1+R_f/R_{in}$ form gives 11 instead of -10 - the '+1' is the signature of the non-inverting topology."
           }),
           ref: "Handbook p.380" },
 
@@ -1348,13 +1350,14 @@ const QUESTION_BANK = {
           choices: ["$50\\ \\mu$A", "$5$ mA", "$0.5$ mA", "$5\\ \\mu$A"],
           correct: 0,
           solution: S({
-            c: "BJT current relation: $I_C = \\beta I_B$. So $I_B = I_C/\\beta$.",
+            c: "Active-region relation: $I_C=\\beta I_B$, so $I_B=I_C/\\beta$.",
             s: [
-              "Divide: $I_B = 5\\text{ mA} / 100 = 0.05$ mA.",
-              "Convert: $0.05$ mA $= 50$ µA."
+              "<b>Step 1 — Divide.</b> $5\\text{ mA}/100=0.05$ mA.",
+              "<b>Step 2 — Convert.</b> $=50\\ \\mu$A.",
+              "<b>Step 3 — Distractor audit.</b> $5$ mA echoes $I_C$; $0.5$ mA uses $\\beta=10$; $5\\ \\mu$A uses $\\beta=1000$."
             ],
-            a: "$I_B = 50$ µA",
-            v: "$I_E = I_B + I_C = 0.05 + 5 = 5.05$ mA."
+            a: "$I_B=50\\ \\mu$A",
+            v: "Closure: $I_E=I_B+I_C=5.05$ mA ✓ - the small base current controls a 100x larger collector current."
           }),
           ref: "Handbook p.384" },
 
@@ -1362,12 +1365,13 @@ const QUESTION_BANK = {
           choices: ["$0.990$", "$0.500$", "$1.000$", "$100$"],
           correct: 0,
           solution: S({
-            c: "BJT parameter conversions: $\\alpha = \\dfrac{\\beta}{\\beta+1}$ and $\\beta = \\dfrac{\\alpha}{1-\\alpha}$.",
+            c: "BJT parameter conversion: $\\alpha=\\dfrac{\\beta}{\\beta+1}$ (and $\\beta=\\dfrac{\\alpha}{1-\\alpha}$).",
             s: [
-              "$\\alpha = 100/(100+1) = 100/101 = 0.9901$."
+              "<b>Step 1 — Apply.</b> $100/101=0.9901$.",
+              "<b>Step 2 — Distractor audit.</b> $0.500$ and $1.000$ are wrong; $100$ is $\\beta$ itself."
             ],
-            a: "$\\alpha \\approx 0.990$",
-            v: "$\\alpha$ is just under 1 — about 99% of emitter current makes it to collector. The other 1% leaves through the base."
+            a: "$\\alpha\\approx0.990$",
+            v: "$\\alpha=I_C/I_E$ is just under 1 - about 99% of emitter current reaches the collector, the other 1% leaving through the base ✓."
           }),
           ref: "Handbook p.384" },
 
@@ -1375,12 +1379,13 @@ const QUESTION_BANK = {
           choices: ["$3.18$ V", "$6.37$ V", "$10$ V", "$5$ V"],
           correct: 0,
           solution: S({
-            c: "Half-wave rectifier output average: $V_{DC} = V_m/\\pi$ (one half-cycle conducts, other half is zero, average over full period).",
+            c: "Half-wave rectifier average (DC) value: $V_{DC}=V_m/\\pi$ - only one half-cycle conducts.",
             s: [
-              "$V_{DC} = 10/\\pi = 10/3.1416 \\approx 3.183$ V."
+              "<b>Step 1 — Apply.</b> $10/\\pi\\approx3.18$ V.",
+              "<b>Step 2 — Distractor audit.</b> $6.37$ V is FULL-wave ($2V_m/\\pi$); $10$ V is the peak; $5$ V is wrong."
             ],
-            a: "$V_{DC} \\approx 3.18$ V",
-            v: "Full-wave version would give $2V_m/\\pi \\approx 6.37$ V (choice B)."
+            a: "$V_{DC}\\approx3.18$ V",
+            v: "Full-wave doubles it to $6.37$ V by capturing both half-cycles ✓. Adding a smoothing capacitor pushes the DC even closer to the peak."
           }),
           ref: "Handbook p.383" },
 
@@ -1388,15 +1393,13 @@ const QUESTION_BANK = {
           choices: ["$0.7$ V", "$0.3$ V", "$1.0$ V", "$0$ V"],
           correct: 0,
           solution: S({
-            c: "Standard model for forward-biased silicon diode: $V_D \\approx 0.7$ V (this is a simplified 'constant-voltage drop' model used in design).",
+            c: "The constant-voltage-drop model for a forward-biased silicon diode: $V_F\\approx0.7$ V.",
             s: [
-              "Silicon: 0.6 – 0.7 V (use 0.7 V on FE).",
-              "Germanium: 0.3 V (older technology).",
-              "Schottky: 0.3 – 0.4 V (fast switching).",
-              "LED: 1.5 – 3 V depending on color."
+              "<b>Step 1 — Match.</b> 0.7 V (silicon).",
+              "<b>Step 2 — Distractor audit.</b> 0.3 V is GERMANIUM (or Schottky); 1.0 V and 0 V don't fit silicon. (LEDs are 1.5-3 V.)"
             ],
-            a: "$V_F = 0.7$ V (Si)",
-            v: "More accurate model (Shockley): $I_D = I_s(e^{V_D/(nV_T)} - 1)$, but 0.7 V is fine for most circuit-level analysis."
+            a: "$V_F=0.7$ V (Si).",
+            v: "The 0.7 V model is fine for circuit analysis; the exact Shockley equation $I_D=I_s(e^{V_D/nV_T}-1)$ is the precise form. Don't confuse $V_F$ (0.7 V) with thermal voltage $V_T$ (26 mV)."
           }),
           ref: "Handbook p.383" },
 
@@ -1404,14 +1407,13 @@ const QUESTION_BANK = {
           choices: ["$v_+ = v_-$ and $i_+ = i_- = 0$", "Input bias current is finite", "Open-loop gain is finite", "Output impedance is infinite"],
           correct: 0,
           solution: S({
-            c: "Ideal op-amp with negative feedback: infinite open-loop gain forces $v_+ = v_-$ (virtual short). Infinite input impedance gives $i_+ = i_- = 0$.",
+            c: "Ideal op-amp with negative feedback obeys two golden rules: $v_+=v_-$ (virtual short, from infinite gain) and $i_+=i_-=0$ (no input current, from infinite input impedance).",
             s: [
-              "Rule 1 (Virtual short): output adjusts so that the inverting input matches the non-inverting input voltage.",
-              "Rule 2 (No input current): apply KCL at inputs without worrying about op-amp loading.",
-              "Combined with KCL/KVL, these solve any op-amp circuit."
+              "<b>Step 1 — Match.</b> $v_+=v_-$ and $i_+=i_-=0$.",
+              "<b>Step 2 — Distractor audit.</b> Finite bias current, finite open-loop gain, and infinite output impedance all describe NON-ideal op-amps."
             ],
-            a: "$v_+ = v_-$ and $i_+ = i_- = 0$",
-            v: "Choices B, C, D describe non-ideal op-amps."
+            a: "$v_+=v_-$ and $i_+=i_-=0$",
+            v: "These two rules plus KCL/KVL solve any ideal op-amp circuit - the virtual short lets you set $v_-$, and zero input current lets you do KCL at the node freely."
           }),
           ref: "Handbook p.380" },
 
@@ -1419,14 +1421,14 @@ const QUESTION_BANK = {
           choices: ["$v_2 - v_1$", "$v_1 + v_2$", "$v_1 - v_2$", "$-v_1$"],
           correct: 0,
           solution: S({
-            c: "Difference amplifier: $v_{out} = \\dfrac{R_f}{R_{in}}(v_2 - v_1)$ when both input resistor pairs match. With $R_f = R_{in}$, gain = 1.",
+            c: "Difference amplifier: $v_{out}=\\dfrac{R_f}{R_{in}}(v_2-v_1)$ when the resistor pairs match. With $R_f=R_{in}$ the gain is 1.",
             s: [
-              "Standard difference amp inputs: $v_1$ on inverting branch, $v_2$ on non-inverting branch.",
-              "Gain factor: $R_f/R_{in} = 1$.",
-              "$v_{out} = 1 \\cdot (v_2 - v_1) = v_2 - v_1$."
+              "<b>Step 1 — Gain.</b> $R_f/R_{in}=1$.",
+              "<b>Step 2 — Output.</b> $v_{out}=v_2-v_1$.",
+              "<b>Step 3 — Distractor audit.</b> $v_1+v_2$ is a summer; $v_1-v_2$ flips the sign; $-v_1$ ignores $v_2$."
             ],
-            a: "$v_{out} = v_2 - v_1$",
-            v: "Used in instrumentation amplifiers — measures difference while rejecting common-mode noise."
+            a: "$v_{out}=v_2-v_1$",
+            v: "It amplifies the DIFFERENCE while rejecting common-mode noise - the heart of instrumentation amplifiers (high CMRR)."
           }),
           ref: "Handbook p.380" },
 
@@ -1434,12 +1436,13 @@ const QUESTION_BANK = {
           choices: ["$6.37$ V", "$3.18$ V", "$10$ V", "$5$ V"],
           correct: 0,
           solution: S({
-            c: "Full-wave rectifier average: $V_{DC} = 2V_m/\\pi$ — both half-cycles contribute, so twice the half-wave case.",
+            c: "Full-wave rectifier average: $V_{DC}=2V_m/\\pi$ - both half-cycles contribute, twice the half-wave value.",
             s: [
-              "$V_{DC} = 2(10)/\\pi = 20/3.1416 \\approx 6.366$ V."
+              "<b>Step 1 — Apply.</b> $2(10)/\\pi\\approx6.37$ V.",
+              "<b>Step 2 — Distractor audit.</b> $3.18$ V is HALF-wave ($V_m/\\pi$); $10$ V is the peak; $5$ V is wrong."
             ],
-            a: "$V_{DC} \\approx 6.37$ V",
-            v: "Adding a capacitor (smoothing) brings $V_{DC}$ even closer to $V_m$, reducing ripple."
+            a: "$V_{DC}\\approx6.37$ V",
+            v: "Twice the half-wave DC because no half-cycle is wasted ✓. A smoothing capacitor pushes $V_{DC}$ further toward the peak and cuts ripple."
           }),
           ref: "Handbook p.383" },
 
@@ -1447,14 +1450,13 @@ const QUESTION_BANK = {
           choices: ["$(V_{GS}-V_{th})^2$", "$V_{DS}$", "$V_{GS}$", "$V_{DS}^2$"],
           correct: 0,
           solution: S({
-            c: "MOSFET (long-channel) saturation: $I_D = \\dfrac{1}{2}\\mu_n C_{ox}\\dfrac{W}{L}(V_{GS}-V_{th})^2 = \\dfrac{k_n}{2}(V_{GS}-V_{th})^2$. Quadratic in overdrive voltage $V_{GS}-V_{th}$.",
+            c: "Long-channel MOSFET in saturation: $I_D=\\tfrac{k_n}{2}(V_{GS}-V_{th})^2$ - SQUARE-LAW in the overdrive voltage, nearly independent of $V_{DS}$.",
             s: [
-              "$V_{GS}-V_{th}$ = overdrive (excess gate voltage above threshold).",
-              "In saturation, $I_D$ is (nearly) independent of $V_{DS}$.",
-              "In triode (ohmic) region, $I_D$ depends on both $V_{GS}$ and $V_{DS}$."
+              "<b>Step 1 — Match.</b> $(V_{GS}-V_{th})^2$.",
+              "<b>Step 2 — Distractor audit.</b> $V_{DS}$/$V_{DS}^2$ describe the TRIODE region; $V_{GS}$ (linear) omits the threshold and the square."
             ],
-            a: "$I_D \\propto (V_{GS}-V_{th})^2$",
-            v: "Contrast: BJT $I_C \\propto e^{V_{BE}/V_T}$ — exponential, not square-law."
+            a: "$I_D\\propto(V_{GS}-V_{th})^2$",
+            v: "Contrast the BJT: $I_C\\propto e^{V_{BE}/V_T}$ (exponential). The MOSFET's square-law vs the BJT's exponential is a key device distinction."
           }),
           ref: "Handbook p.386" },
 
@@ -1462,13 +1464,14 @@ const QUESTION_BANK = {
           choices: ["$-6$ V", "$-3$ V", "$6$ V", "$3$ V"],
           correct: 0,
           solution: S({
-            c: "Inverting summer: $v_{out} = -R_f \\left(\\dfrac{v_1}{R_1} + \\dfrac{v_2}{R_2}\\right)$. Each input weighted by $R_f/R_k$.",
+            c: "Inverting summer: $v_{out}=-R_f\\left(\\dfrac{v_1}{R_1}+\\dfrac{v_2}{R_2}\\right)$ - each input weighted by $R_f/R_k$.",
             s: [
-              "Per-input gains: $-R_f/R_1 = -10/5 = -2$ and $-R_f/R_2 = -2$.",
-              "Compute: $v_{out} = -2 v_1 - 2 v_2 = -2(1) - 2(2) = -2 - 4 = -6$ V."
+              "<b>Step 1 — Per-input gains.</b> $-10/5=-2$ each.",
+              "<b>Step 2 — Combine.</b> $-2(1)-2(2)=-6$ V.",
+              "<b>Step 3 — Distractor audit.</b> $-3$ V uses gain -1; positive options miss the inverting sign."
             ],
-            a: "$v_{out} = -6$ V",
-            v: "If $R_f = R_1 = R_2$: $v_{out} = -(v_1 + v_2)$ — direct (negated) sum."
+            a: "$v_{out}=-6$ V",
+            v: "If $R_f=R_1=R_2$, it's a direct (negated) sum $-(v_1+v_2)$; unequal resistors weight the inputs - the basis of analog mixing/weighted averages."
           }),
           ref: "Handbook p.380" },
 
@@ -1476,14 +1479,13 @@ const QUESTION_BANK = {
           choices: ["Voltage regulation in reverse breakdown", "Forward rectification only", "Amplification", "Switching only"],
           correct: 0,
           solution: S({
-            c: "Zener diode is designed to operate in <b>reverse breakdown</b> region where the voltage is nearly constant ($V_Z$) over a wide current range.",
+            c: "A Zener diode is built to operate in REVERSE BREAKDOWN, where its voltage stays nearly constant ($V_Z$) over a wide current range - ideal for voltage regulation/reference.",
             s: [
-              "Normal diode: avoid breakdown (can damage device).",
-              "Zener: built to operate in breakdown without damage (within current limits).",
-              "Use cases: voltage references, simple voltage regulators, overvoltage protection."
+              "<b>Step 1 — Match.</b> Voltage regulation in reverse breakdown.",
+              "<b>Step 2 — Distractor audit.</b> Forward rectification is an ordinary diode; Zeners don't amplify; switching is a different role."
             ],
-            a: "Voltage regulation (reverse breakdown)",
-            v: "Series resistor sized so current stays within Zener's safe range across input variation."
+            a: "Voltage regulation (reverse breakdown).",
+            v: "A series resistor sizes the current so the Zener stays in its safe range across input variation - giving a stable output. Normal diodes AVOID breakdown; Zeners exploit it."
           }),
           ref: "Handbook p.383" },
       ],
