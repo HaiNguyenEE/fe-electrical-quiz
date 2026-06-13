@@ -2158,14 +2158,14 @@ const QUESTION_BANK = {
           choices: ["$181$", "$165$", "$201$", "$129$"],
           correct: 0,
           solution: S({
-            c: "Binary to decimal: sum $b_i \\cdot 2^i$ over set bits. Or use place values 128, 64, 32, 16, 8, 4, 2, 1 from left.",
+            c: "A binary number is the sum of place values ($2^n$) at each 1-bit (positions from 0 on the right).",
             s: [
-              "Bits: 1 0 1 1 0 1 0 1.",
-              "Place values: 128, 64, 32, 16, 8, 4, 2, 1.",
-              "Active bits: 128 + 32 + 16 + 4 + 1 = 181."
+              "<b>Step 1 — Place values.</b> 128 64 32 16 8 4 2 1.",
+              "<b>Step 2 — Add 1-bits.</b> $128+32+16+4+1=181$.",
+              "<b>Step 3 — Distractor audit.</b> $165$, $201$, $129$ flip or miscount bits."
             ],
             a: "$181$",
-            v: "Crosscheck: 181 in hex = AD₁₆ (see next problem if relevant)."
+            v: "Cross-check: $181=\\text{AD}_{16}$ ✓ (10110101 -> nibbles 1010=A, 0101=D)."
           }),
           ref: "Handbook p.388" },
 
@@ -2173,14 +2173,14 @@ const QUESTION_BANK = {
           choices: ["$\\text{AD}$", "$\\text{D7}$", "$\\text{B5}$", "$\\text{AC}$"],
           correct: 0,
           solution: S({
-            c: "Decimal to hex: divide by 16 repeatedly, read remainders bottom-up. Or split into upper/lower nibble: $173 = 16 \\cdot q + r$.",
+            c: "Decimal to hex: divide by 16, the quotient and remainder give the two nibbles.",
             s: [
-              "$173 / 16 = 10$ remainder $13$.",
-              "$10 = A_{16}$, $13 = D_{16}$.",
-              "Combine: $173_{10} = \\text{AD}_{16}$."
+              "<b>Step 1 — Divide.</b> $173/16=10$ remainder $13$.",
+              "<b>Step 2 — To hex digits.</b> $10=A$, $13=D$ -> $\\text{AD}_{16}$.",
+              "<b>Step 3 — Distractor audit.</b> $D7$, $B5$, $AC$ result from digit/remainder errors."
             ],
             a: "$\\text{AD}_{16}$",
-            v: "Hex letters: A=10, B=11, C=12, D=13, E=14, F=15."
+            v: "Hex letters: A=10, B=11, C=12, D=13, E=14, F=15. Quotient is the high nibble, remainder the low."
           }),
           ref: "Handbook p.388" },
 
@@ -2188,13 +2188,14 @@ const QUESTION_BANK = {
           choices: ["1101 1110 1010 1101", "1101 1110 1010 1110", "1010 1101 1110 1101", "1110 1110 1011 1101"],
           correct: 0,
           solution: S({
-            c: "Hex to binary: each hex digit = 4 bits. Direct lookup, no math needed.",
+            c: "Hex to binary: each hex digit maps directly to 4 bits - no arithmetic needed.",
             s: [
-              "D = 1101, E = 1110, A = 1010, D = 1101.",
-              "Concatenate: 1101 1110 1010 1101."
+              "<b>Step 1 — Per nibble.</b> D=1101, E=1110, A=1010, D=1101.",
+              "<b>Step 2 — Concatenate.</b> 1101 1110 1010 1101.",
+              "<b>Step 3 — Distractor audit.</b> The others corrupt one nibble (e.g. last D as 1110, or A/D swapped)."
             ],
             a: "1101 1110 1010 1101",
-            v: "0xDEAD = 57,005 in decimal. Famous 'magic number' in programming."
+            v: "0xDEAD = 57,005 - a famous 'magic number' in programming. Hex is just compact binary (4 bits per digit)."
           }),
           ref: "Handbook p.388" },
 
@@ -2202,14 +2203,15 @@ const QUESTION_BANK = {
           choices: ["1111 0011", "0000 1101", "1000 1101", "1111 0010"],
           correct: 0,
           solution: S({
-            c: "Two's complement of negative number: <b>flip all bits then add 1</b>. Equivalent to: subtract from $2^n$.",
+            c: "Two's complement of a negative: take the positive, FLIP all bits, then ADD 1.",
             s: [
-              "$+13$ in 8 bits: 0000 1101.",
-              "Flip all bits: 1111 0010.",
-              "Add 1: 1111 0011."
+              "<b>Step 1 — +13.</b> 0000 1101.",
+              "<b>Step 2 — Flip.</b> 1111 0010.",
+              "<b>Step 3 — Add 1.</b> 1111 0011.",
+              "<b>Step 4 — Distractor audit.</b> 0000 1101 is +13; 1000 1101 is sign-magnitude (not two's comp); 1111 0010 forgot the +1."
             ],
-            a: "1111 0011 (binary)",
-            v: "Check: as signed 8-bit, $1111\\,0011 = -128 + 64 + 32 + 16 + 2 + 1 = -13$ ✓"
+            a: "1111 0011",
+            v: "Verify as signed: $-128+64+32+16+2+1=-13$ ✓. Two's complement makes subtraction into addition for hardware."
           }),
           ref: "Handbook p.389" },
 
@@ -2217,14 +2219,14 @@ const QUESTION_BANK = {
           choices: ["$A + B$", "$AB$", "$A'B'$", "$A \\oplus B$"],
           correct: 0,
           solution: S({
-            c: "Boolean simplification: use $X + X' = 1$ and absorption $X + X'Y = X + Y$.",
+            c: "Boolean simplification using $X+X'=1$ and absorption $X+X'Y=X+Y$.",
             s: [
-              "Group: $AB + AB' = A(B + B') = A \\cdot 1 = A$.",
-              "Now $F = A + A'B$.",
-              "Apply absorption ($X + X'Y = X+Y$): $F = A + B$."
+              "<b>Step 1 — Combine first two.</b> $AB+AB'=A(B+B')=A$.",
+              "<b>Step 2 — Absorb.</b> $A+A'B=A+B$.",
+              "<b>Step 3 — Distractor audit.</b> $AB$, $A'B'$, $A\\oplus B$ don't match the truth table."
             ],
-            a: "$F = A + B$",
-            v: "Truth table check: $F = AB+AB'+A'B$ is true when at least one of $A, B$ is true — same as $A+B$ ✓"
+            a: "$F=A+B$",
+            v: "Truth-table check: F is true whenever at least one of A,B is true - exactly $A+B$ (OR) ✓."
           }),
           ref: "Handbook p.389" },
 
@@ -2232,13 +2234,13 @@ const QUESTION_BANK = {
           choices: ["$A' + B'$", "$A' \\cdot B'$", "$A \\oplus B$", "$A + B$"],
           correct: 0,
           solution: S({
-            c: "DeMorgan's laws: $(AB)' = A' + B'$ and $(A+B)' = A'B'$. Convert NAND to OR-of-NOTs and NOR to AND-of-NOTs.",
+            c: "DeMorgan's laws: $(AB)'=A'+B'$ and $(A+B)'=A'B'$ - a NOT over a product becomes an OR of NOTs.",
             s: [
-              "NAND identity: $(A \\cdot B)' = A' + B'$.",
-              "Choice B is $(A+B)'$ — the dual."
+              "<b>Step 1 — Apply.</b> $(A\\cdot B)'=A'+B'$.",
+              "<b>Step 2 — Distractor audit.</b> $A'\\cdot B'$ is the DUAL $(A+B)'$; $A\\oplus B$ and $A+B$ are unrelated."
             ],
-            a: "$A' + B'$",
-            v: "Used in logic minimization and to convert gate types (e.g., NAND-only or NOR-only designs)."
+            a: "$A'+B'$",
+            v: "DeMorgan converts NAND<->OR-of-NOTs and NOR<->AND-of-NOTs - essential for building circuits from a single gate type (all-NAND or all-NOR)."
           }),
           ref: "Handbook p.389" },
 
@@ -2246,13 +2248,13 @@ const QUESTION_BANK = {
           choices: ["$-128$ to $+127$", "$-127$ to $+128$", "$0$ to $255$", "$-255$ to $+255$"],
           correct: 0,
           solution: S({
-            c: "$n$-bit two's complement range: $-2^{n-1}$ to $2^{n-1} - 1$. The negative side has one extra value (no $+0/-0$ distinction).",
+            c: "n-bit two's complement range: $-2^{n-1}$ to $2^{n-1}-1$ - one extra negative value (no separate +0/-0).",
             s: [
-              "$n = 8$: $-2^7$ to $2^7 - 1$ = $-128$ to $+127$.",
-              "Unsigned 8-bit: 0 to 255 (choice C)."
+              "<b>Step 1 — Apply.</b> $-2^7$ to $2^7-1$ = $-128$ to $+127$.",
+              "<b>Step 2 — Distractor audit.</b> '-127 to +128' reverses the asymmetry; '0 to 255' is UNSIGNED; '-255 to +255' is wrong."
             ],
             a: "$-128$ to $+127$",
-            v: "16-bit signed: $-32{,}768$ to $+32{,}767$. 32-bit signed: $-2{,}147{,}483{,}648$ to $+2{,}147{,}483{,}647$."
+            v: "16-bit: -32,768 to +32,767; 32-bit: about +/-2.1 billion. The extra negative comes from 0 occupying a 'positive' slot."
           }),
           ref: "Handbook p.389" },
 
@@ -2260,13 +2262,13 @@ const QUESTION_BANK = {
           choices: ["Toggles output", "Sets output", "Resets output", "Holds output"],
           correct: 0,
           solution: S({
-            c: "JK truth table: $J=0,K=0$: hold; $J=1,K=0$: set ($Q=1$); $J=0,K=1$: reset ($Q=0$); $J=1,K=1$: toggle ($Q \\to \\bar{Q}$).",
+            c: "JK truth table: 00 hold, 10 set, 01 reset, 11 TOGGLE ($Q\\to\\bar Q$).",
             s: [
-              "$J=K=1$ is the toggle condition.",
-              "On each clock edge, $Q$ flips state."
+              "<b>Step 1 — Match.</b> J=K=1 -> toggle.",
+              "<b>Step 2 — Distractor audit.</b> Set is 10; reset is 01; hold is 00."
             ],
-            a: "Toggles",
-            v: "JK avoids the indeterminate state of SR latch ($S=R=1$ is forbidden); JK turns that into a useful toggle."
+            a: "Toggles.",
+            v: "The toggle mode is what makes JK flip-flops the building block of counters - and it usefully repurposes the SR latch's forbidden 11 state."
           }),
           ref: "Handbook p.391" },
 
@@ -2274,14 +2276,13 @@ const QUESTION_BANK = {
           choices: ["$Q = D$", "$Q$ toggles", "$Q = 0$", "$Q = \\bar{D}$"],
           correct: 0,
           solution: S({
-            c: "D (delay) flip-flop: output Q takes the value of D at the clock edge. Effectively delays D by one clock cycle.",
+            c: "A D (delay) flip-flop latches Q = D at the clock edge, holding between edges - effectively delaying D by one clock.",
             s: [
-              "On clock edge: $Q \\leftarrow D$.",
-              "Between edges: $Q$ holds last value.",
-              "Used in registers, pipelines, synchronizers."
+              "<b>Step 1 — Match.</b> $Q=D$.",
+              "<b>Step 2 — Distractor audit.</b> Toggling is JK (J=K=1); $Q=0$ is reset; $Q=\\bar D$ is wrong."
             ],
-            a: "$Q = D$",
-            v: "JK with $J=D, K=\\bar{D}$ behaves identically to a D flip-flop."
+            a: "$Q=D$",
+            v: "D flip-flops are the workhorse storage element - registers, pipelines, and synchronizers are built from them. (A JK with $J=D$, $K=\\bar D$ behaves identically.)"
           }),
           ref: "Handbook p.391" },
 
@@ -2289,13 +2290,13 @@ const QUESTION_BANK = {
           choices: ["$1$", "$A$", "$0$", "$A'$"],
           correct: 0,
           solution: S({
-            c: "OR with constant 1: always 1 (one true input already makes the OR true). 'Annihilator' for OR.",
+            c: "OR with 1 is always 1 - one true input already makes the OR true (1 is the 'annihilator' for OR).",
             s: [
-              "$A + 1 = 1$ regardless of $A$.",
-              "Dual: $A \\cdot 0 = 0$ (annihilator for AND)."
+              "<b>Step 1 — Apply.</b> $A+1=1$ for any A.",
+              "<b>Step 2 — Distractor audit.</b> $A$ would be $A+0$ (identity); $0$ and $A'$ are wrong."
             ],
             a: "$1$",
-            v: "Identity laws: $A + 0 = A$, $A \\cdot 1 = A$ (additive/multiplicative identity)."
+            v: "Dual: $A\\cdot0=0$ (annihilator for AND). Identities: $A+0=A$, $A\\cdot1=A$. These constants simplify Boolean expressions instantly."
           }),
           ref: "Handbook p.389" },
 
@@ -2303,13 +2304,14 @@ const QUESTION_BANK = {
           choices: ["$4$", "$15$", "$5$", "$3$"],
           correct: 0,
           solution: S({
-            c: "$N$ states require $\\lceil \\log_2 N \\rceil$ flip-flops (each FF stores 1 bit = 1 binary digit).",
+            c: "$N$ states need $\\lceil\\log_2 N\\rceil$ flip-flops (each FF stores one bit).",
             s: [
-              "0 to 15 = 16 distinct states.",
-              "$\\log_2 16 = 4$, so 4 flip-flops."
+              "<b>Step 1 — Count states.</b> 0 to 15 = 16 states.",
+              "<b>Step 2 — Apply.</b> $\\log_2 16=4$.",
+              "<b>Step 3 — Distractor audit.</b> $15$ confuses states with FFs; $5$ over-counts; $3$ only reaches 8 states."
             ],
-            a: "4 flip-flops",
-            v: "n flip-flops → $2^n$ states: 1FF=2, 2FF=4, 3FF=8, 4FF=16, ..."
+            a: "4 flip-flops.",
+            v: "n FFs give $2^n$ states: 1->2, 2->4, 3->8, 4->16. Always round the log UP to the next whole flip-flop."
           }),
           ref: "Handbook p.391" },
 
@@ -2317,14 +2319,13 @@ const QUESTION_BANK = {
           choices: ["$1000_2$", "$1110_2$", "$0110_2$", "$0010_2$"],
           correct: 0,
           solution: S({
-            c: "Bitwise AND: result bit is 1 only where <b>both</b> input bits are 1.",
+            c: "Bitwise AND: output bit is 1 only where BOTH inputs are 1.",
             s: [
-              "  1 0 1 0",
-              "AND 1 1 0 0",
-              "  = 1 0 0 0"
+              "<b>Step 1 — Per bit.</b> 1010 AND 1100: (1&1)=1, (0&1)=0, (1&0)=0, (0&0)=0 -> 1000.",
+              "<b>Step 2 — Distractor audit.</b> 1110 is OR; 0110 is XOR; 0010 is wrong."
             ],
             a: "$1000_2$",
-            v: "Bitwise OR would give 1110₂; XOR gives 0110₂ (choice C)."
+            v: "Compare: AND=1000 (both), OR=1110 (either), XOR=0110 (differ). AND with a mask CLEARS/tests bits; OR SETS them; XOR TOGGLES."
           }),
           ref: "Handbook p.388" },
       ],
