@@ -114,11 +114,14 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   standard, 4 checkpoints. TWO broken answer keys repaired: RL transient (computed 3.16 A but
   correct:0 said 1.97 A) and unbalanced Y-to-Delta (computed 18.33 ohm but choice said 13.33 ohm)
   — both had embedded meta-commentary admitting the mismatch, now removed. Integrity scan 101/101.
-- **2026-06-12 — extra4 (Round 5) IN PROGRESS: Ch 1-8 done (97/194).** RESUME AT CH 9
-  (Electronics, 20 q), then Ch 10 Power (15), Ch 11 EM (8), Ch 12 Control (12), Ch 13 Comm (10),
-  Ch 14 Networks (8), Ch 15 Digital (12), Ch 16 CompSys (12), Ch 17 Software (8). NOTE: this file uses COMPACT INLINE format — solutions end with
-  ' }), ref:' on the same line, so the replacer anchor is ' }), ref:' (not the multi-line '\n        })').
-  Keep solutions compact (drill-style questions). Same teach-from-zero standard otherwise.
-- **Remaining upgrade targets:** questions.js (164), extra4 (194),
+- **2026-06-12 — extra4 (Round 5) COMPLETE (194/194):** all 17 chapters upgraded to the
+  teach-from-zero standard across 8 checkpoints (Ch 1-8 prior session; Ch 9 Electronics, Ch 10
+  Power, Ch 11 EM, Ch 12 Control, Ch 13 Comm, Ch 14 Networks, Ch 15 Digital, Ch 16 CompSys, Ch 17
+  Software this session). Integrity scan 194/194 Step-format; node syntax OK after every batch.
+  This file uses COMPACT INLINE format — solutions end with ' }), ref:' on the same line, so the
+  replacer anchor is ' }), ref:' (not the multi-line '\n        })'). KEY LESSON: replacement keys
+  must be q:-line SUBSTRINGS *without* a trailing quote (e.g. `q: "RISC vs CISC`, not
+  `q: "RISC vs CISC"`) — a trailing `"` fails to match when the real q ends with `:"`.
+- **Remaining upgrade targets:** questions.js (164),
   extra5 (209), extra6 (181), extra7 (222), extra8 (191) — standard S() format; extra9/extra10
   (~60 q) use template-literal SVG helpers and need their own careful session.

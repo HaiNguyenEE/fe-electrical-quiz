@@ -2274,68 +2274,268 @@
     16: [
       { q: "ISA = ",
         choices: ["Instruction Set Architecture", "Internal System Address", "Industry Standard Adapter", "Internet Service Account"], correct: 0,
-        solution: S({ c: "ISA = abstract interface between hardware and software. Defines available instructions, registers, addressing modes.", s: ["Examples: x86, ARM, RISC-V, MIPS."], a: "Instruction Set Architecture" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "ISA = Instruction Set Architecture: the abstract CONTRACT between hardware and software. It defines what instructions exist, the registers, data types, and addressing modes — everything a programmer (or compiler) can rely on, independent of how the chip is built inside.",
+          s: [
+            "<b>Step 1 — Match.</b> Instruction Set Architecture.",
+            "<b>Step 2 — Distractor audit.</b> The other three are invented expansions — plausible-sounding but not real terms."
+          ],
+          a: "Instruction Set Architecture.",
+          v: "Why the contract matters: x86, ARM, RISC-V are ISAs; many different chips can implement the SAME ISA and run the same binaries ✓ — the ISA is the stable interface, the microarchitecture (pipeline, caches) is the changeable implementation beneath it."
+
+        }), ref: "Handbook p.408" },
       { q: "RISC vs CISC:",
         choices: ["RISC = simple uniform instructions; CISC = complex variable", "Same thing", "RISC is older", "CISC is faster"], correct: 0,
-        solution: S({ c: "RISC: fixed-length instructions, load/store, register-based. CISC: variable-length, complex memory operations.", s: ["ARM, RISC-V, MIPS = RISC.", "x86 = CISC (though internally translates to micro-ops, blurring line)."], a: "RISC: simple; CISC: complex" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "RISC (Reduced Instruction Set Computer): few, simple, fixed-length instructions; only load/store touch memory; lots of registers. CISC (Complex): many variable-length instructions, some doing memory-operate-store in one shot.",
+          s: [
+            "<b>Step 1 — Match.</b> RISC = simple/uniform; CISC = complex/variable.",
+            "<b>Step 2 — Name examples.</b> RISC: ARM, RISC-V, MIPS. CISC: x86.",
+            "<b>Step 3 — Distractor audit.</b> Not 'the same'; RISC is actually the NEWER philosophy (1980s) not older; neither is universally 'faster' — it depends on workload and implementation."
+          ],
+          a: "RISC: simple uniform instructions; CISC: complex variable ones.",
+          v: "The line has blurred: modern x86 chips decode their CISC instructions into RISC-like internal micro-ops ✓ — so the CISC ISA survives for compatibility while the engine underneath runs RISC-style. ISA vs microarchitecture again."
+
+        }), ref: "Handbook p.408" },
       { q: "Cache hit time vs main memory access time:",
         choices: ["Cache much faster (10-100×)", "Same", "Cache slower", "Variable"], correct: 0,
-        solution: S({ c: "L1 cache: 1-5 ns. Main memory (DRAM): 50-100 ns.", s: ["L2/L3 between.", "SSD: 25-100 µs (1000× slower).", "HDD: ms (1000× slower again)."], a: "10-100× faster" }), ref: "Handbook p.407" },
+        solution: S({
+          c: "The memory hierarchy trades speed for size. A cache HIT (data already in fast SRAM near the core) is roughly 10-100× faster than fetching from main DRAM.",
+          s: [
+            "<b>Step 1 — Match.</b> Cache much faster (10-100×).",
+            "<b>Step 2 — The latency ladder.</b> L1 ≈ 1-5 ns, DRAM ≈ 50-100 ns, SSD ≈ tens of µs, HDD ≈ ms — each tier ~1000× slower than the one above by the bottom.",
+            "<b>Step 3 — Distractor audit.</b> 'Same' / 'cache slower' contradict the entire reason caches exist; 'variable' dodges the question."
+          ],
+          a: "Cache is 10-100× faster than main memory.",
+          v: "Why the hierarchy works at all: locality — programs reuse recent data/instructions — so a small fast cache catches most accesses, and the slow DRAM is hit only on misses ✓. This is the single biggest lever in CPU performance."
+
+        }), ref: "Handbook p.407" },
       { q: "Virtual memory provides:",
         choices: ["Per-process address space, more memory than physical", "Faster RAM", "Encryption", "Backup"], correct: 0,
-        solution: S({ c: "VM: each process sees its own address space; OS+MMU translates to physical. Allows over-commit via paging to disk.", s: ["Page table entries map virtual to physical.", "TLB caches translations for speed."], a: "Process isolation + more memory" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "Virtual memory gives each process its OWN private address space, mapped by the OS and MMU onto physical RAM (and disk). This delivers isolation between processes AND lets the system pretend to have more memory than it physically does, by paging to disk.",
+          s: [
+            "<b>Step 1 — Match.</b> Per-process address space + more apparent memory than physical.",
+            "<b>Step 2 — How.</b> Page tables map virtual pages → physical frames; a TLB caches recent translations so the lookup is fast; cold pages spill to disk.",
+            "<b>Step 3 — Distractor audit.</b> VM doesn't make RAM faster, doesn't encrypt, isn't backup — those are different mechanisms."
+          ],
+          a: "Process isolation plus address space larger than physical RAM.",
+          v: "The protection payoff: because each process sees only its own mapped pages, one program can't read or corrupt another's memory ✓ — and the same mechanism enables shared libraries (map one physical copy into many spaces) and memory-mapped files."
+
+        }), ref: "Handbook p.408" },
       { q: "Pipelining improves throughput, not necessarily:",
         choices: ["Individual instruction latency", "Total work", "Code complexity", "Memory usage"], correct: 0,
-        solution: S({ c: "Each instruction takes same total time (or slightly more due to stage delays). But many overlap → higher throughput.", s: ["Latency: time for one instruction.", "Throughput: instructions per second."], a: "Latency unchanged" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "Pipelining overlaps instruction stages (fetch, decode, execute, …) like an assembly line. It raises THROUGHPUT (instructions finished per second) but does NOT shorten any single instruction's LATENCY — one instruction still traverses every stage.",
+          s: [
+            "<b>Step 1 — Match.</b> Individual instruction latency (unchanged, even slightly worse).",
+            "<b>Step 2 — The distinction.</b> Latency = time for ONE instruction start-to-finish; throughput = rate of completion. Overlap boosts the rate, not the single-trip time.",
+            "<b>Step 3 — Distractor audit.</b> Total work and memory usage aren't the metric pipelining targets; code complexity is unrelated."
+          ],
+          a: "Latency per instruction is not improved (throughput is).",
+          v: "Car-wash analogy: each car still takes the full wash time (latency), but with stages overlapping, cars come OUT far more frequently (throughput) ✓. Hazards (data/control dependencies) are what keep real pipelines below the ideal one-per-cycle."
+
+        }), ref: "Handbook p.408" },
       { q: "Branch prediction misprediction penalty in deep pipeline:",
         choices: ["Many wasted cycles (flush + refetch)", "None", "1 cycle", "Random"], correct: 0,
-        solution: S({ c: "Mispredicted branch → flush pipeline, fetch from correct address. Cost: pipeline depth.", s: ["Modern CPU: 15-20 cycles penalty.", "Why branch prediction (accuracy >95%) is so important."], a: "Cycles = pipeline depth" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "When the CPU guesses a branch wrong, every instruction it speculatively fetched down the wrong path must be FLUSHED, and fetching restarts from the correct target. The wasted cycles ≈ the pipeline depth.",
+          s: [
+            "<b>Step 1 — Match.</b> Many wasted cycles (flush + refetch), scaling with pipeline depth.",
+            "<b>Step 2 — Magnitude.</b> A 15-20 stage pipeline loses roughly 15-20 cycles per misprediction.",
+            "<b>Step 3 — Distractor audit.</b> 'None' and '1 cycle' wildly understate it; 'random' isn't a penalty model — the cost is structural, set by depth."
+          ],
+          a: "Penalty ≈ pipeline depth in cycles.",
+          v: "Why predictors are obsessed-over: at >95% accuracy the rare 5% still costs ~15 cycles each, so a 1% accuracy gain measurably lifts performance ✓ — deeper pipelines clock higher but make every misprediction hurt more, a core design tension."
+
+        }), ref: "Handbook p.408" },
       { q: "SIMD (Single Instruction Multiple Data):",
         choices: ["Same op on multiple data simultaneously (vector ops)", "Multiple programs in parallel", "Memory replication", "Cache coherency"], correct: 0,
-        solution: S({ c: "SIMD: one instruction operates on a vector of values in one cycle.", s: ["x86: MMX, SSE, AVX. ARM: NEON.", "Used in: graphics, scientific computing, ML."], a: "Vector operations" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "SIMD = Single Instruction, Multiple Data: ONE instruction applies the same operation to a whole VECTOR of values at once, instead of looping element-by-element.",
+          s: [
+            "<b>Step 1 — Match.</b> Same op on multiple data simultaneously (vector ops).",
+            "<b>Step 2 — Where it lives.</b> x86 MMX/SSE/AVX, ARM NEON — registers hold several packed values, added/multiplied in parallel.",
+            "<b>Step 3 — Distractor audit.</b> 'Multiple programs in parallel' is MIMD/multitasking; memory replication and cache coherency are different concerns entirely."
+          ],
+          a: "One instruction, many data lanes (vector operations).",
+          v: "Why it matters now: image pixels, audio samples, and ML tensors are huge arrays of identical operations — exactly SIMD's sweet spot ✓, which is why media codecs and neural nets lean on these instructions (and on GPUs, SIMD taken to the extreme)."
+
+        }), ref: "Handbook p.408" },
       { q: "GPU vs CPU:",
         choices: ["GPU: many simple cores (parallel); CPU: few complex cores (serial)", "Same", "GPU only graphics", "CPU is faster always"], correct: 0,
-        solution: S({ c: "GPU: thousands of small cores, good for parallel/SIMD work. CPU: few cores, complex (branch prediction, caches).", s: ["GPU excels: graphics, ML, simulations.", "CPU excels: branching code, single-threaded tasks."], a: "GPU parallel; CPU serial+complex" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "CPU = a few powerful cores optimized for SERIAL work with complex control (branch prediction, big caches, low latency). GPU = thousands of simple cores optimized for massively PARALLEL, SIMD-style throughput.",
+          s: [
+            "<b>Step 1 — Match.</b> GPU: many simple cores (parallel); CPU: few complex cores (serial).",
+            "<b>Step 2 — Match the tool to the job.</b> GPU wins on graphics, ML, simulations (same op over millions of elements). CPU wins on branchy, sequential, latency-sensitive code.",
+            "<b>Step 3 — Distractor audit.</b> Not 'the same'; GPUs do far more than graphics now; 'CPU faster always' is false for parallel workloads."
+          ],
+          a: "GPU = parallel/simple cores; CPU = serial/complex cores.",
+          v: "The throughput-vs-latency framing nails it: a CPU finishes one hard task quickly; a GPU finishes a million easy tasks per unit time ✓ — which is exactly why training neural networks migrated from CPUs to GPUs."
+
+        }), ref: "Handbook p.408" },
       { q: "Stack pointer points to:",
         choices: ["Top of stack (most recent push)", "Bottom of stack", "Middle", "Heap"], correct: 0,
-        solution: S({ c: "SP register tracks the next free stack slot (or current top).", s: ["Stack typically grows downward (toward lower addresses).", "Push: SP decreases, then write. Pop: read, then SP increases."], a: "Top of stack" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "The stack pointer (SP) register tracks the TOP of the call stack — the location of the most recent push (or the next free slot). The stack typically grows DOWNWARD, toward lower addresses.",
+          s: [
+            "<b>Step 1 — Match.</b> Top of stack (most recent push).",
+            "<b>Step 2 — Push/pop mechanics.</b> Push: SP decreases, then value written. Pop: value read, then SP increases. Last-in-first-out.",
+            "<b>Step 3 — Distractor audit.</b> Bottom/middle aren't what SP tracks; the heap is a SEPARATE region (dynamic allocation), not where SP points."
+          ],
+          a: "The top of the stack.",
+          v: "Why this register is sacred: function calls push return addresses and local frames onto the stack via SP; corrupt it and returns go haywire ✓ — and 'stack overflow' is literally SP running past the stack's limit (e.g., from runaway recursion)."
+
+        }), ref: "Handbook p.408" },
       { q: "Interrupt vs polling:",
         choices: ["Interrupt: device notifies CPU; Polling: CPU checks", "Same", "Polling is faster", "Interrupt is older"], correct: 0,
-        solution: S({ c: "Interrupt: hardware signals CPU on event → CPU handles. Polling: CPU periodically checks status.", s: ["Interrupts: efficient for rare events.", "Polling: simpler, useful for high-rate events."], a: "Interrupt vs poll" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "Two ways for a CPU to learn a device needs attention. INTERRUPT: the device signals the CPU asynchronously, which drops what it's doing to service the event. POLLING: the CPU repeatedly CHECKS the device's status itself.",
+          s: [
+            "<b>Step 1 — Match.</b> Interrupt = device notifies CPU; Polling = CPU checks.",
+            "<b>Step 2 — When each wins.</b> Interrupts: efficient for RARE/unpredictable events (a keypress) — CPU does other work meanwhile. Polling: simpler, and can win for HIGH-rate steady events where checking is almost always productive.",
+            "<b>Step 3 — Distractor audit.</b> Not 'the same'; polling isn't generally faster (it wastes cycles checking); neither is simply 'older'."
+          ],
+          a: "Interrupt: device-initiated; Polling: CPU-initiated checking.",
+          v: "The efficiency intuition: polling a doorbell means standing at the door checking constantly; an interrupt is the doorbell ringing so you can do chores until it does ✓ — which is why most I/O uses interrupts, reserving polling for tight, high-throughput loops."
+
+        }), ref: "Handbook p.408" },
       { q: "ARM vs x86: ARM is generally:",
         choices: ["Lower power, RISC, dominant in mobile", "Older", "Faster on desktop", "Cheaper to license"], correct: 0,
-        solution: S({ c: "ARM: low power consumption, RISC architecture. Used in: phones, tablets, embedded systems, Apple Silicon Macs.", s: ["x86: higher performance per-thread historically, more complex.", "ARM gaining server share too (AWS Graviton)."], a: "Lower power, mobile-focused" }), ref: "Handbook p.408" },
+        solution: S({
+          c: "ARM is a RISC architecture designed for low power per operation, which made it dominant in battery-powered mobile devices. x86 (CISC) historically pushed maximum single-thread performance for desktops/servers.",
+          s: [
+            "<b>Step 1 — Match.</b> ARM: lower power, RISC, mobile-dominant.",
+            "<b>Step 2 — Reach today.</b> Phones, tablets, embedded, Apple Silicon Macs, and increasingly servers (AWS Graviton) — ARM's efficiency now competes in performance too.",
+            "<b>Step 3 — Distractor audit.</b> ARM isn't 'older' than x86; 'faster on desktop' isn't its defining trait; licensing cost isn't the headline distinction (efficiency is)."
+          ],
+          a: "Lower power, RISC, mobile-focused (and expanding).",
+          v: "Why efficiency translated to wins: performance-per-WATT decides battery life AND data-center electricity bills ✓ — so ARM's mobile-bred efficiency carried it into laptops (Apple M-series) and cloud servers, eroding x86's old turf."
+
+        }), ref: "Handbook p.408" },
       { q: "Word size of a 32-bit processor:",
         choices: ["$32$ bits", "$32$ bytes", "$4$ bits", "$8$ bits"], correct: 0,
-        solution: S({ c: "Word size = natural unit of data processing.", s: ["32-bit: 4-byte word, 32-bit address space (≤4 GB).", "64-bit: 8-byte word, huge address space."], a: "$32$ bits" }), ref: "Handbook p.407" },
+        solution: S({
+          c: "A processor's WORD size is its natural unit of data — the width of its registers and typical operations. A '32-bit' processor has a 32-bit (4-byte) word.",
+          s: [
+            "<b>Step 1 — Match.</b> 32 bits.",
+            "<b>Step 2 — Address-space consequence.</b> 32-bit addresses span $2^{32}$ = 4 GB — the classic limit on 32-bit RAM. 64-bit machines blow past it (8-byte words, astronomically large space).",
+            "<b>Step 3 — Distractor audit.</b> 32 bytes confuses bits with bytes; 4 bits and 8 bits are nibble/byte, far smaller than a word."
+          ],
+          a: "32 bits (4 bytes).",
+          v: "Why the jump to 64-bit happened: the 4-GB ceiling became the binding constraint as memory grew cheap ✓ — 64-bit addressing ($2^{64}$ ≈ 16 exabytes) removed it for the foreseeable future, the main everyday reason for the transition."
+
+        }), ref: "Handbook p.407" },
     ],
 
     // ====================== Ch 17: Software — +8 ======================
     17: [
       { q: "Big-O of accessing array index $a[i]$:",
         choices: ["$O(1)$", "$O(n)$", "$O(\\log n)$", "$O(n^2)$"], correct: 0,
-        solution: S({ c: "Array random access: constant time via pointer arithmetic.", s: ["Linked list access: $O(n)$ — must traverse from head."], a: "$O(1)$" }), ref: "Handbook p.415" },
+        solution: S({
+          c: "Big-O describes how runtime grows with input size $n$. Array random access is $O(1)$ — CONSTANT time — because the element's address is computed directly: $base + i\\times(element\\ size)$, one arithmetic step regardless of $n$.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(1)$.",
+            "<b>Step 2 — Contrast.</b> A LINKED LIST has no such formula — reaching index $i$ means walking $i$ nodes from the head: $O(n)$.",
+            "<b>Step 3 — Distractor audit.</b> $O(\\log n)$ is binary search; $O(n^2)$ is nested loops — neither applies to a single indexed read."
+          ],
+          a: "$O(1)$ — constant time.",
+          v: "This is THE array superpower (and the linked-list weakness): contiguous storage buys instant indexing but costly insertion; linked lists trade the opposite ✓. Choosing between them is largely choosing which operation you need fast."
+
+        }), ref: "Handbook p.415" },
       { q: "Inserting into sorted array at correct position:",
         choices: ["$O(n)$ — shift elements", "$O(1)$", "$O(\\log n)$", "$O(n^2)$"], correct: 0,
-        solution: S({ c: "Find position (binary search): $O(\\log n)$. Shift remaining: $O(n)$. Total: $O(n)$.", s: ["Linked list version: insertion $O(1)$ if you have pointer to spot."], a: "$O(n)$" }), ref: "Handbook p.415" },
+        solution: S({
+          c: "Inserting into a SORTED array means putting the value where it belongs AND shifting everything after it up one slot. Even if you find the spot instantly, the shift dominates: $O(n)$.",
+          s: [
+            "<b>Step 1 — Find the spot.</b> Binary search on the sorted array: $O(\\log n)$.",
+            "<b>Step 2 — Shift to make room.</b> Up to $n$ elements move over: $O(n)$.",
+            "<b>Step 3 — Total.</b> $O(\\log n) + O(n) = O(n)$ — the larger term wins.",
+            "<b>Step 4 — Distractor audit.</b> $O(1)$ ignores the shift; $O(\\log n)$ counts only the search; $O(n^2)$ overcounts a single insertion."
+          ],
+          a: "$O(n)$ — dominated by element shifting.",
+          v: "The contrast that explains data-structure choice: a linked list inserts in $O(1)$ once you hold the spot (just relink pointers) but can't binary-search ✓ — arrays give fast search/slow insert, lists the reverse."
+
+        }), ref: "Handbook p.415" },
       { q: "Recursion uses ___ data structure (implicit):",
         choices: ["Stack", "Queue", "Heap", "Array"], correct: 0,
-        solution: S({ c: "Each recursive call adds a frame to call stack.", s: ["LIFO: most recent call returns first.", "Stack overflow: too deep recursion exhausts stack memory."], a: "Stack" }), ref: "Handbook p.415" },
+        solution: S({
+          c: "Every function call pushes a frame (locals, return address) onto the CALL STACK; a recursive function pushes a new frame each call and pops on return — a stack (LIFO) by construction.",
+          s: [
+            "<b>Step 1 — Match.</b> Stack.",
+            "<b>Step 2 — LIFO behavior.</b> The most recent call must finish and return BEFORE the one that invoked it resumes — last in, first out.",
+            "<b>Step 3 — Distractor audit.</b> Queue is FIFO (wrong order); heap is dynamic allocation (different region); array isn't the implicit call mechanism."
+          ],
+          a: "Stack (the call stack).",
+          v: "The practical consequence: recursion too DEEP exhausts stack memory → stack overflow ✓ — which is why deep/unbounded recursion is often rewritten as iteration with an explicit stack, or as tail recursion the compiler can flatten."
+
+        }), ref: "Handbook p.415" },
       { q: "Heap data structure (binary heap):",
         choices: ["Tree where parent ≤ children (min-heap)", "Linear array", "Hashtable", "Stack"], correct: 0,
-        solution: S({ c: "Heap: complete binary tree with heap property.", s: ["Min-heap: parent ≤ children → root is minimum.", "Max-heap: parent ≥ children → root is max.", "Implemented as array (parent at $i/2$, children at $2i$ and $2i+1$)."], a: "Tree with order property" }), ref: "Handbook p.415" },
+        solution: S({
+          c: "A binary heap is a COMPLETE binary tree obeying the heap property: in a MIN-heap every parent ≤ its children (so the root is the minimum); in a MAX-heap every parent ≥ children (root is maximum).",
+          s: [
+            "<b>Step 1 — Match.</b> Tree with a parent-child order property.",
+            "<b>Step 2 — Clever storage.</b> Stored as a plain ARRAY: parent of index $i$ at $\\lfloor i/2\\rfloor$, children at $2i$ and $2i+1$ — no pointers needed.",
+            "<b>Step 3 — Distractor audit.</b> It's not a linear array conceptually, not a hashtable, not a stack — though it lives inside an array."
+          ],
+          a: "A complete binary tree with the heap-order property.",
+          v: "Don't confuse this with the memory 'heap' (dynamic allocation) — same word, unrelated thing ✓. The data-structure heap's value: $O(\\log n)$ insert and extract-min/max, making it the natural priority queue."
+
+        }), ref: "Handbook p.415" },
       { q: "Priority queue typically implemented as:",
         choices: ["Heap (O(log n) operations)", "Stack", "Array", "Linked list"], correct: 0,
-        solution: S({ c: "Heap: insert $O(\\log n)$, extract-min $O(\\log n)$. Used for: Dijkstra's algorithm, A* search, OS task scheduling.", s: ["Array-based: $O(n)$ insert OR extract.", "Sorted array: insert $O(n)$, extract $O(1)$."], a: "Heap" }), ref: "Handbook p.415" },
+        solution: S({
+          c: "A priority queue always serves the highest-(or lowest-)priority element next. A binary HEAP implements it efficiently: both insert and extract-min run in $O(\\log n)$.",
+          s: [
+            "<b>Step 1 — Match.</b> Heap, $O(\\log n)$ operations.",
+            "<b>Step 2 — Why not the alternatives.</b> Unsorted array: $O(1)$ insert but $O(n)$ extract-min. Sorted array: $O(1)$ extract but $O(n)$ insert. The heap balances BOTH at $O(\\log n)$.",
+            "<b>Step 3 — Distractor audit.</b> Plain stack/array/linked-list can't give logarithmic on both operations."
+          ],
+          a: "A binary heap.",
+          v: "Where it shows up: Dijkstra's shortest-path and A* search repeatedly grab the nearest unvisited node, and OS schedulers pick the highest-priority task — all priority-queue/heap patterns ✓."
+
+        }), ref: "Handbook p.415" },
       { q: "Memory allocated on heap vs stack: difference:",
         choices: ["Heap: dynamic, programmer-managed; Stack: automatic, function-local", "Same", "Heap is faster", "Stack is unlimited"], correct: 0,
-        solution: S({ c: "Stack: automatic (function variables), fast, LIFO, limited size. Heap: dynamic (malloc/new), flexible size, slower allocation, programmer must free.", s: ["Memory leaks: heap memory not freed.", "Stack overflow: too deep recursion / too large stack frames."], a: "Heap dynamic; Stack automatic" }), ref: "Handbook p.415" },
+        solution: S({
+          c: "STACK memory is automatic: function-local variables, allocated/freed as calls enter and exit, fast and LIFO but limited in size. HEAP memory is dynamic: requested explicitly (malloc/new), flexible in size and lifetime, slower, and the programmer must free it.",
+          s: [
+            "<b>Step 1 — Match.</b> Heap: dynamic, programmer-managed; Stack: automatic, function-local.",
+            "<b>Step 2 — Failure modes.</b> Heap not freed → memory LEAK. Stack pushed too deep → stack OVERFLOW.",
+            "<b>Step 3 — Distractor audit.</b> Not 'the same'; stack is actually FASTER to allocate (just move SP), not heap; stack is NOT unlimited (it's the small, bounded region)."
+          ],
+          a: "Heap = dynamic/manual; Stack = automatic/function-scoped.",
+          v: "The lifetime rule that decides which to use: data needed only during a call → stack; data that must OUTLIVE the call (or whose size is unknown at compile time) → heap ✓. Languages with garbage collection automate the heap's freeing."
+
+        }), ref: "Handbook p.415" },
       { q: "Big-O of Hash table worst case (with collisions):",
         choices: ["$O(n)$", "$O(1)$", "$O(\\log n)$", "$O(n^2)$"], correct: 0,
-        solution: S({ c: "Worst case: all keys collide into one bucket → linear search.", s: ["Good hash + reasonable load: average O(1).", "Modern implementations resize when load > threshold."], a: "$O(n)$ worst" }), ref: "Handbook p.415" },
+        solution: S({
+          c: "A hash table maps keys to buckets via a hash function — average $O(1)$ lookup. But in the WORST case every key collides into one bucket, degenerating to a linear scan: $O(n)$.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(n)$ worst case.",
+            "<b>Step 2 — Why average is still $O(1)$.</b> A good hash spreads keys evenly and the table resizes when the load factor climbs, keeping buckets short — so worst case is rare in practice.",
+            "<b>Step 3 — Distractor audit.</b> $O(1)$ is the AVERAGE not the worst; $O(\\log n)$ is a balanced tree's guarantee; $O(n^2)$ overstates a single lookup."
+          ],
+          a: "$O(n)$ in the worst case (all collisions).",
+          v: "The trade vs a balanced tree: hash tables give $O(1)$ average but $O(n)$ worst and no ordering; trees give a guaranteed $O(\\log n)$ AND sorted traversal ✓ — which is why latency-critical systems sometimes prefer the tree's predictability."
+
+        }), ref: "Handbook p.415" },
       { q: "Time complexity of finding max in unsorted array of n elements:",
         choices: ["$O(n)$", "$O(1)$", "$O(\\log n)$", "$O(n^2)$"], correct: 0,
-        solution: S({ c: "Must examine every element to be sure max wasn't somewhere later.", s: ["Sorted array: O(1) — max is last element.", "Heap: O(1) for max-heap."], a: "$O(n)$" }), ref: "Handbook p.415" },
+        solution: S({
+          c: "To find the maximum of an UNSORTED array you must inspect every element — any one you skip could be the largest. That's a single linear pass: $O(n)$.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(n)$.",
+            "<b>Step 2 — Contrast.</b> A SORTED array gives the max in $O(1)$ (it's the last element); a max-HEAP gives it in $O(1)$ (the root). Order bought ahead of time pays off.",
+            "<b>Step 3 — Distractor audit.</b> $O(1)$ would require pre-existing structure; $O(\\log n)$ needs sortedness (binary search); $O(n^2)$ overcounts one scan."
+          ],
+          a: "$O(n)$.",
+          v: "The lower-bound argument makes it airtight: with no ordering assumptions, any algorithm must read all $n$ elements at least once, so $O(n)$ is optimal here ✓ — you only beat it by maintaining structure (heap/sorted) as data arrives."
+
+        }), ref: "Handbook p.415" },
     ],
   };
 
