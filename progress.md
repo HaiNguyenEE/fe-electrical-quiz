@@ -151,6 +151,22 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   q text — never key on '\\u03a9'/'\\u03c6', truncate the key BEFORE them; (3) for q's containing an
   apostrophe (y', Maxwell's), truncate the key before the apostrophe or use a double-quoted Python
   string; (4) value strings must END with a plain '"' (not '\\"'). Integrity scan 164/164 Step-format.
-- **ALL 9 question files now teach-from-zero / Step-format:** questions.js + extra, extra2-extra8,
-  extra11-extra13. ONLY remaining: extra9/extra10 (~60 q) which use template-literal SVG helpers
-  and need their own careful session.
+- **2026-06-13 — extra9 + extra10 COMPLETE (70/70):** the two SVG-diagram packs upgraded to the
+  teach-from-zero Step-format. extra9 (32 q: Ch6 Circuits ×18, Ch9 ×8, Ch10 ×6); extra10 (38 q:
+  Ch15 Digital ×15, Ch12 Control ×10, Ch9 ×8, Ch7 LinSys ×5). Method: anchor each replacement on a
+  unique q-line substring and swap ONLY the block between `S({` and `}), ref:`, leaving the
+  template-literal `${svg…}` q-lines, choices, correct, and ref untouched. Pole-zero items keyed on
+  their `svgPoleZero([...],[...])` signature for uniqueness. FOUR broken items repaired:
+  (1) extra9 Ch6 RLC impedance — choice0 said `10+j50` but the answer is `10−j50` (sign fixed);
+  (2) extra9 Ch6 RL time-constant — duplicate "(same as A)" distractor replaced with `50 ms`;
+  (3) extra9 Ch6 resonant frequency — correct value (~225 Hz) was MISSING from the choices and the
+  solution had "let me recompute" meta-text; choices rebuilt to {225, 712, 1000, 318} Hz, clean
+  solution; (4) extra10 Ch12 series-combination — two mathematically identical choices plus a
+  "Both A and C" option (ambiguous); distractors rebuilt so choice0 is uniquely correct. Also fixed
+  extra10 Ch15 3-variable K-map: the `svgKMap3` values did not match the stated `A⊕B⊕C` answer
+  (they decoded to XNOR), so the diagram values were corrected to a true odd-parity pattern.
+  Runtime harness validation: 70/70 questions well-formed (4 choices, correct:0, solution carries
+  Step-1 + Distractor-audit + answer); node syntax OK on both files.
+- **ALL 11 standard question files now teach-from-zero / Step-format:** questions.js + extra,
+  extra2-extra13. extra9/extra10 were the last remaining and are now done. The entire standard
+  question bank is on the teach-from-zero standard.
