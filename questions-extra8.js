@@ -549,64 +549,164 @@
     6: [
       { q: "$\\delta(t)$ (impulse) input to integrator gives:",
         choices: ["Step output $u(t)$", "Zero", "Another impulse", "Linear ramp"], correct: 0,
-        solution: S({ c: "$\\int \\delta(\\tau) d\\tau = u(t)$.", s: [""], a: "Step" }), ref: "p.56" },
+        solution: S({
+          c: "Integrating an impulse gives a step: $\\int_{-\\infty}^{t}\\delta(\\tau)\\,d\\tau = u(t)$.",
+          s: ["<b>Step 1 — Match.</b> Step output $u(t)$.","<b>Step 2 — Distractor audit.</b> Zero/another-impulse/ramp don't follow from integrating delta."],
+          a: "Step $u(t)$.",
+          v: "The integration ladder: impulse -> step -> ramp -> parabola (each integration). Differentiation runs the other way - this pairing underlies all signal/system relationships."
+        }), ref: "p.56" },
       { q: "Step input to differentiator:",
         choices: ["Impulse $\\delta(t)$", "Zero", "Ramp", "Same step"], correct: 0,
-        solution: S({ c: "Derivative of step is impulse.", s: [""], a: "Impulse" }), ref: "p.56" },
+        solution: S({
+          c: "Differentiating a step gives an impulse: the step's instantaneous jump has infinite slope at $t=0$, captured by $\\delta(t)$.",
+          s: ["<b>Step 1 — Match.</b> Impulse $\\delta(t)$.","<b>Step 2 — Distractor audit.</b> Zero/ramp/same-step don't result from differentiating a step."],
+          a: "Impulse $\\delta(t)$.",
+          v: "It's the inverse of the previous question: $\\dfrac{d}{dt}u(t) = \\delta(t)$. Differentiation moves UP the ladder (step->impulse), integration moves down."
+        }), ref: "p.56" },
       { q: "Capacitor voltage at $t = 0^-$ then voltage source applied at $t=0$: $v_C(0^+)$ =",
         choices: ["$v_C(0^-)$ — continuous", "$V_s$", "$0$", "$\\infty$"], correct: 0,
-        solution: S({ c: "Cap voltage cannot change instantaneously.", s: [""], a: "$v_C(0^-)$" }), ref: "p.358" },
+        solution: S({
+          c: "Capacitor voltage is CONTINUOUS - it cannot jump instantaneously (would need infinite current, $i=C\\,dv/dt$). So $v_C(0^+) = v_C(0^-)$.",
+          s: ["<b>Step 1 — Match.</b> $v_C(0^-)$ (continuous).","<b>Step 2 — Distractor audit.</b> It does NOT jump to $V_s$, 0, or infinity at the instant of switching."],
+          a: "$v_C(0^+) = v_C(0^-)$.",
+          v: "This continuity rule sets the INITIAL CONDITION for transient analysis - the cap then charges toward $V_s$ exponentially. Its dual: inductor current is continuous."
+        }), ref: "p.358" },
       { q: "Inductor current at $t = 0^+$:",
         choices: ["$i_L(0^-)$ — continuous", "$V_s/R$", "$0$", "$\\infty$"], correct: 0,
-        solution: S({ c: "Inductor current cannot change instantaneously.", s: [""], a: "$i_L(0^-)$" }), ref: "p.358" },
+        solution: S({
+          c: "Inductor current is CONTINUOUS - it cannot change instantaneously (would need infinite voltage, $v=L\\,di/dt$). So $i_L(0^+) = i_L(0^-)$.",
+          s: ["<b>Step 1 — Match.</b> $i_L(0^-)$ (continuous).","<b>Step 2 — Distractor audit.</b> It doesn't instantly become $V_s/R$, 0, or infinity."],
+          a: "$i_L(0^+) = i_L(0^-)$.",
+          v: "The companion to the capacitor rule: cap VOLTAGE and inductor CURRENT are the continuous state variables - they set every transient's starting point."
+        }), ref: "p.358" },
       { q: "Star ($Y$) and delta ($\\Delta$) conversion for balanced load: $Z_Y = ?$",
         choices: ["$Z_\\Delta / 3$", "$3 Z_\\Delta$", "$Z_\\Delta$", "$Z_\\Delta^2$"], correct: 0,
-        solution: S({ c: "Y vs Δ: factor of 3.", s: [""], a: "$Z_\\Delta/3$" }), ref: "p.363" },
+        solution: S({
+          c: "For a balanced load, $Z_Y = Z_\\Delta/3$ (and conversely $Z_\\Delta = 3Z_Y$).",
+          s: ["<b>Step 1 — Match.</b> $Z_\\Delta/3$.","<b>Step 2 — Distractor audit.</b> $3Z_\\Delta$ is the reverse; $Z_\\Delta$ and $Z_\\Delta^2$ are wrong."],
+          a: "$Z_Y = Z_\\Delta/3$.",
+          v: "Delta-to-Y divides by 3, Y-to-Delta multiplies by 3 - the factor-of-3 relationship that simplifies three-phase and bridge networks into series/parallel form."
+        }), ref: "p.363" },
       { q: "Apparent power triangle: $P, Q, S$ relationship:",
         choices: ["$S = \\sqrt{P^2 + Q^2}$", "$S = P + Q$", "$S = P/Q$", "$S = PQ$"], correct: 0,
-        solution: S({ c: "Pythagorean in complex power plane.", s: [""], a: "Pythagorean" }), ref: "p.362" },
+        solution: S({
+          c: "The power triangle is Pythagorean: $S = \\sqrt{P^2 + Q^2}$ (apparent = hypotenuse of real P and reactive Q).",
+          s: ["<b>Step 1 — Match.</b> $S = \\sqrt{P^2+Q^2}$.","<b>Step 2 — Distractor audit.</b> $P+Q$, $P/Q$, $PQ$ ignore the right-triangle relationship."],
+          a: "$S = \\sqrt{P^2+Q^2}$",
+          v: "Power factor is $\\cos\\theta = P/S$. The triangle (S in VA, P in W, Q in VAR) ties all AC power quantities together - know two, get the third."
+        }), ref: "p.362" },
       { q: "RMS value of full-wave rectified sinusoid (peak $V_m$):",
         choices: ["$V_m/\\sqrt{2}$ — same as original sinusoid!", "$V_m$", "$V_m/2$", "$V_m/\\pi$"], correct: 0,
-        solution: S({ c: "Squaring positive and negative parts gives same.", s: ["Half-wave: $V_m/2$ (only half conducts)."], a: "$V_m/\\sqrt{2}$" }), ref: "p.383" },
+        solution: S({
+          c: "A full-wave rectified sine has the SAME RMS as the original sine, $V_m/\\sqrt2$ - because squaring makes the flipped negative halves identical to positive ones.",
+          s: ["<b>Step 1 — Match.</b> $V_m/\\sqrt2$.","<b>Step 2 — Distractor audit.</b> $V_m/2$ is HALF-wave RMS; $V_m$ is the peak; $V_m/\\pi$ is the half-wave AVERAGE."],
+          a: "$V_m/\\sqrt2$.",
+          v: "RMS measures heating, which depends on the SQUARE - and flipping the negative half (full-wave) doesn't change the squared values, so RMS is unchanged. Half-wave loses half the energy, giving $V_m/2$."
+        }), ref: "p.383" },
       { q: "Two AC sources $v_1 = 10\\cos\\omega t$ and $v_2 = 10\\sin\\omega t$ in series:",
         choices: ["$\\sqrt{2} \\cdot 10\\cos(\\omega t - 45°)$", "$20\\cos\\omega t$", "$0$", "$10\\sqrt{2}$"], correct: 0,
-        solution: S({ c: "$\\cos$ and $\\sin$ are 90° out of phase. Phasor: $10\\angle 0 + 10\\angle -90° = 10 - j10$.", s: ["Magnitude $10\\sqrt{2}$, angle $-45°$."], a: "$10\\sqrt{2}\\cos(\\omega t-45°)$" }), ref: "p.360" },
+        solution: S({
+          c: "Add as phasors. $\\cos\\to 10\\angle0°$, and $\\sin\\to 10\\angle-90°$ (sine lags cosine by 90 degrees). Sum the phasors.",
+          s: ["<b>Step 1 — Phasors.</b> $10\\angle0° + 10\\angle-90° = 10 - j10$.","<b>Step 2 — Polar.</b> magnitude $10\\sqrt2$, angle $-45°$.","<b>Step 3 — Distractor audit.</b> $20\\cos\\omega t$ wrongly adds magnitudes; 0 ignores the sum; $10\\sqrt2$ drops the phase."],
+          a: "$10\\sqrt2\\cos(\\omega t - 45°)$",
+          v: "Two equal but 90-degree-apart sinusoids combine to $\\sqrt2$ times the amplitude at 45 degrees - the phasor sum, NOT 20. This is why AC sources can't just be added arithmetically."
+        }), ref: "p.360" },
       { q: "Voltage across pure inductor leads current by:",
         choices: ["$90°$", "$0$", "$-90°$", "$180°$"], correct: 0,
-        solution: S({ c: "$v = L\\,di/dt$. For sinusoidal: V leads I by 90° in inductor.", s: ["Capacitor: V lags I by 90° (or I leads V)."], a: "$+90°$" }), ref: "p.358" },
+        solution: S({
+          c: "In an inductor, $v = L\\,di/dt$, so for a sinusoid the voltage LEADS the current by 90 degrees.",
+          s: ["<b>Step 1 — Match.</b> +90 degrees.","<b>Step 2 — Distractor audit.</b> 0 is resistive; -90 is capacitive (V lags); 180 is inversion."],
+          a: "+90 degrees (V leads I).",
+          v: "Mnemonic ELI the ICE man: in an inductor (L), EMF (E) leads I; in a capacitor (C), I leads E. Resistor: in phase."
+        }), ref: "p.358" },
       { q: "Series RC: at $\\omega \\to \\infty$, cap acts as:",
         choices: ["Short circuit ($X_C \\to 0$)", "Open", "$R$", "Variable"], correct: 0,
-        solution: S({ c: "$X_C = 1/(\\omega C) \\to 0$ as $\\omega \\to \\infty$.", s: ["At DC: open."], a: "Short" }), ref: "p.358" },
+        solution: S({
+          c: "Capacitive reactance $X_C = 1/(\\omega C) \\to 0$ as frequency rises - so at high frequency a capacitor behaves as a SHORT circuit.",
+          s: ["<b>Step 1 — Match.</b> Short circuit ($X_C\\to0$).","<b>Step 2 — Distractor audit.</b> At DC ($\\omega=0$) it's an OPEN; not R; not variable in the limit."],
+          a: "Short circuit.",
+          v: "Capacitors block DC (open) and pass high frequencies (short) - the basis of coupling/bypass capacitors and high-pass filters. Inductors do the opposite."
+        }), ref: "p.358" },
       { q: "Series RL: at $\\omega \\to \\infty$, inductor acts as:",
         choices: ["Open ($X_L \\to \\infty$)", "Short", "$R$", "Variable"], correct: 0,
-        solution: S({ c: "$X_L = \\omega L \\to \\infty$.", s: ["At DC: short."], a: "Open" }), ref: "p.358" },
+        solution: S({
+          c: "Inductive reactance $X_L = \\omega L \\to \\infty$ as frequency rises - so at high frequency an inductor behaves as an OPEN circuit.",
+          s: ["<b>Step 1 — Match.</b> Open ($X_L\\to\\infty$).","<b>Step 2 — Distractor audit.</b> At DC ($\\omega=0$) it's a SHORT; not R; not variable in the limit."],
+          a: "Open circuit.",
+          v: "Inductors pass DC (short) and block high frequencies (open) - exactly opposite to capacitors. This is the basis of low-pass filtering and RF chokes."
+        }), ref: "p.358" },
       { q: "Energy stored in a charged capacitor reversibly: ",
         choices: ["$\\frac{1}{2}QV = \\frac{1}{2}CV^2 = Q^2/(2C)$", "$QV$", "$2QV$", "Variable"], correct: 0,
-        solution: S({ c: "All three equivalent expressions.", s: [""], a: "$\\frac{1}{2}CV^2$" }), ref: "p.358" },
+        solution: S({
+          c: "Capacitor stored energy: $W = \\tfrac12 QV = \\tfrac12 CV^2 = Q^2/(2C)$ - three equivalent forms (using $Q=CV$).",
+          s: ["<b>Step 1 — Match.</b> $\\tfrac12 QV = \\tfrac12 CV^2 = Q^2/(2C)$.","<b>Step 2 — Distractor audit.</b> $QV$ (without the 1/2) and $2QV$ double-count; not variable."],
+          a: "$\\tfrac12 CV^2$.",
+          v: "The 1/2 arises because voltage RISES from 0 to V as charge accumulates (you average it) - not the full QV. The $V^2$ means doubling voltage quadruples stored energy."
+        }), ref: "p.358" },
       { q: "Power triangle: $|S|^2 = P^2 + Q^2$. Units:",
         choices: ["VA, W, VAR respectively", "All in W", "All in VA", "Hz"], correct: 0,
-        solution: S({ c: "Strict units: VA for apparent, W for real, VAR for reactive.", s: [""], a: "VA/W/VAR" }), ref: "p.362" },
+        solution: S({
+          c: "Each power has its own unit: apparent S in VA (volt-amperes), real P in W (watts), reactive Q in VAR (volt-amperes reactive).",
+          s: ["<b>Step 1 — Match.</b> VA, W, VAR respectively.","<b>Step 2 — Distractor audit.</b> They're NOT all the same unit; Hz is frequency."],
+          a: "VA (S), W (P), VAR (Q).",
+          v: "Distinct units flag the distinct concepts: P does real work (W), Q sloshes energy back and forth (VAR), S is the total the source must supply (VA). Equipment is rated in VA/kVA because that sets the current."
+        }), ref: "p.362" },
       { q: "Phasor representation of $5\\cos(\\omega t - 30°)$ V:",
         choices: ["$5\\angle -30°$ V (peak phasor)", "$5\\angle 30°$", "$3.54\\angle -30°$ (RMS)", "Both A and C valid"], correct: 0,
-        solution: S({ c: "Phasor magnitude can be peak or RMS — both conventions exist. Be consistent.", s: [""], a: "$5\\angle -30°$ peak" }), ref: "p.360" },
+        solution: S({
+          c: "Phasor = amplitude at phase angle. Using the PEAK convention, $5\\cos(\\omega t-30°) \\to 5\\angle-30°$ (RMS convention would give $3.54\\angle-30°$).",
+          s: ["<b>Step 1 — Match.</b> $5\\angle-30°$ (peak).","<b>Step 2 — Distractor audit.</b> $5\\angle+30°$ flips the sign; RMS is also valid but the question's first answer uses peak."],
+          a: "$5\\angle-30°$ (peak phasor).",
+          v: "Phasors assume a COSINE reference; sine would shift -90 first. Stay consistent with peak OR RMS throughout a problem - mixing them is a classic error."
+        }), ref: "p.360" },
       { q: "Three-phase balanced: sum of three line currents (Y connection without neutral, balanced load):",
         choices: ["$0$ (Kirchhoff's at the neutral node)", "$3 I_\\phi$", "Random", "$\\sqrt{3} I_L$"], correct: 0,
-        solution: S({ c: "Balanced: three currents are 120° apart, sum vectorially = 0.", s: ["Allows three-wire system without neutral.", "Unbalanced: neutral carries non-zero current."], a: "$0$" }), ref: "p.363" },
+        solution: S({
+          c: "Three balanced currents are 120 degrees apart and equal in magnitude, so their phasor sum is ZERO (Kirchhoff's law at the neutral node).",
+          s: ["<b>Step 1 — Match.</b> 0.","<b>Step 2 — Distractor audit.</b> $3I_\\phi$ would add magnitudes (ignoring phase); $\\sqrt3 I_L$ relates line/phase, not the sum."],
+          a: "0.",
+          v: "This cancellation is WHY a balanced three-phase system needs no neutral wire (three-wire delivery) - the return currents cancel. An UNbalanced load breaks this, and the neutral then carries the difference."
+        }), ref: "p.363" },
       { q: "Wattmeter measures: $W = V I \\cos\\theta$. With $V_{rms} = 200$, $I_{rms} = 5$, $\\theta = 60°$:",
         choices: ["$500$ W", "$1000$ W", "$0$", "$200$ W"], correct: 0,
-        solution: S({ c: "Just plug in formula.", s: ["$200 \\cdot 5 \\cdot 0.5 = 500$ W."], a: "$500$ W" }), ref: "p.362" },
+        solution: S({
+          c: "A wattmeter reads real power $P = V_{rms}I_{rms}\\cos\\theta$.",
+          s: ["<b>Step 1 — Apply.</b> $200\\times5\\times\\cos60° = 1000\\times0.5 = 500$ W.","<b>Step 2 — Distractor audit.</b> 1000 W forgets the pf (that's apparent VA); 0 needs 90 deg; 200 W is wrong."],
+          a: "$500$ W.",
+          v: "A true wattmeter measures REAL power (with the cos factor built in), unlike a V x I product which gives apparent VA - here only half the 1000 VA is real power (pf 0.5)."
+        }), ref: "p.362" },
       { q: "Two-wattmeter method for 3-phase: $P_{total} =$",
         choices: ["$W_1 + W_2$ (sum of both readings)", "$W_1 - W_2$", "$\\sqrt{W_1 W_2}$", "Variable"], correct: 0,
-        solution: S({ c: "Two-wattmeter method works for 3-φ 3-wire (balanced or unbalanced).", s: ["At low pf, one wattmeter may read negative."], a: "$W_1 + W_2$" }), ref: "p.363" },
+        solution: S({
+          c: "The two-wattmeter method gives total three-phase power as the SUM of the two readings: $P_{total} = W_1 + W_2$ (works for 3-wire systems, balanced or not).",
+          s: ["<b>Step 1 — Match.</b> $W_1 + W_2$.","<b>Step 2 — Distractor audit.</b> Difference, geometric mean, 'variable' are wrong."],
+          a: "$W_1 + W_2$.",
+          v: "At power factor below 0.5, ONE wattmeter reads negative - you still ADD (a negative value), and the difference $\\sqrt3(W_1-W_2)$ actually gives the reactive power Q. A clever two-meter trick for three-phase."
+        }), ref: "p.363" },
       { q: "Capacitor voltage builds up during charging follows:",
         choices: ["$v(t) = V_s(1 - e^{-t/\\tau})$ (exponential approach)", "Linear ramp", "Step instantly", "Random"], correct: 0,
-        solution: S({ c: "RC charging from 0.", s: ["At $t=\\tau$: 63.2% of $V_s$."], a: "Exponential rise" }), ref: "p.358" },
+        solution: S({
+          c: "RC charging from zero follows an exponential approach: $v(t) = V_s(1 - e^{-t/\\tau})$, with $\\tau = RC$.",
+          s: ["<b>Step 1 — Match.</b> $V_s(1-e^{-t/\\tau})$.","<b>Step 2 — Distractor audit.</b> Not a linear ramp, instant step, or random."],
+          a: "$v(t) = V_s(1-e^{-t/\\tau})$.",
+          v: "Landmarks: 63.2% at $1\\tau$, 86.5% at $2\\tau$, ~99% at $5\\tau$ (effectively done). The exponential reflects current falling as the cap voltage approaches the source."
+        }), ref: "p.358" },
       { q: "Op amp slew rate of 10 V/µs. Max sinusoid frequency for 5V amplitude undistorted:",
         choices: ["$\\approx 318$ kHz", "$10$ MHz", "$1$ Hz", "$1$ kHz"], correct: 0,
-        solution: S({ c: "$f_{max} = SR/(2\\pi V_{peak})$.", s: ["$10^7 / (2\\pi \\cdot 5) = 318,310$ Hz."], a: "$\\approx 318$ kHz" }), ref: "p.380" },
+        solution: S({
+          c: "Full-power bandwidth from slew rate: $f_{max} = \\dfrac{SR}{2\\pi V_{peak}}$ (the sine's max slope $2\\pi f V_{peak}$ must not exceed SR).",
+          s: ["<b>Step 1 — Convert.</b> SR = 10 V/us = $10^7$ V/s.","<b>Step 2 — Apply.</b> $10^7/(2\\pi\\times5) = 318{,}310$ Hz.","<b>Step 3 — Distractor audit.</b> 10 MHz ignores amplitude; 1 Hz and 1 kHz are far off."],
+          a: "$\\approx 318$ kHz.",
+          v: "Bigger amplitude slew-limits at LOWER frequency - at 1 V peak the same op-amp reaches 1.6 MHz. This LARGE-signal limit is distinct from the small-signal gain-bandwidth product."
+        }), ref: "p.380" },
       { q: "$V_{rms}$ of a sawtooth wave with peak $V_m$:",
         choices: ["$V_m/\\sqrt{3}$", "$V_m/\\sqrt{2}$", "$V_m/2$", "$V_m$"], correct: 0,
-        solution: S({ c: "Sawtooth RMS factor = $1/\\sqrt{3}$.", s: [""], a: "$V_m/\\sqrt{3}$" }), ref: "p.360" },
+        solution: S({
+          c: "A sawtooth (or triangular) wave has RMS = $V_m/\\sqrt3 \\approx 0.577 V_m$.",
+          s: ["<b>Step 1 — Match.</b> $V_m/\\sqrt3$.","<b>Step 2 — Distractor audit.</b> $V_m/\\sqrt2$ is a SINE; $V_m/2$ is half-wave-rectified sine; $V_m$ is a square wave."],
+          a: "$V_m/\\sqrt3$.",
+          v: "RMS factor ladder: square = 1, sine = 0.707, sawtooth/triangle = 0.577 - flatter waveforms pack more RMS per peak. The $1/\\sqrt3$ comes from integrating the linear ramp squared."
+        }), ref: "p.360" },
     ],
 
     // Instrumentation — Added to Ch 6 (Circuit Analysis treats it) — +6 (Handbook p.219-228)
