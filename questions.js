@@ -703,14 +703,13 @@ const QUESTION_BANK = {
           choices: ["$1.5 \\times 10^{10}$ cm$^{-3}$", "$1 \\times 10^{16}$ cm$^{-3}$", "$1 \\times 10^{22}$ cm$^{-3}$", "$1 \\times 10^{6}$ cm$^{-3}$"],
           correct: 0,
           solution: S({
-            c: "Intrinsic carrier concentration $n_i$ depends exponentially on temperature and bandgap. For Si at 300 K it's a memorized constant.",
+            c: "Intrinsic carrier concentration $n_i$ depends exponentially on temperature and bandgap; for Si at 300 K it's a memorized constant.",
             s: [
-              "Standard value: $n_i \\approx 1.5 \\times 10^{10}$ cm$^{-3}$ at 300 K (room temperature).",
-              "Compare: Ge $n_i \\approx 2.4 \\times 10^{13}$ (smaller bandgap → more carriers).",
-              "GaAs $n_i \\approx 2 \\times 10^{6}$ (larger bandgap → fewer carriers)."
+              "<b>Step 1 — Match.</b> $n_i\\approx1.5\\times10^{10}$ cm$^{-3}$ (Si, 300 K).",
+              "<b>Step 2 — Distractor audit.</b> $10^{16}$ is a typical DOPING level; $10^{22}$ is near atomic density; $10^6$ is GaAs-like (larger bandgap)."
             ],
-            a: "$n_i \\approx 1.5 \\times 10^{10}$ cm$^{-3}$",
-            v: "Atomic density of Si is ~$5 \\times 10^{22}$ cm$^{-3}$, so only 1 in $\\sim 10^{12}$ atoms contributes an intrinsic carrier."
+            a: "$n_i\\approx1.5\\times10^{10}$ cm$^{-3}$",
+            v: "Si atomic density is ~$5\\times10^{22}$ cm$^{-3}$, so only ~1 in $10^{12}$ atoms gives an intrinsic carrier - which is why doping (even ppm levels) dominates conductivity."
           }),
           ref: "Handbook p.354" },
 
@@ -718,14 +717,15 @@ const QUESTION_BANK = {
           choices: ["$2.25\\times 10^4$ cm$^{-3}$", "$10^{16}$ cm$^{-3}$", "$10^{10}$ cm$^{-3}$", "$0$"],
           correct: 0,
           solution: S({
-            c: "Mass action law: $n \\cdot p = n_i^2$ in thermal equilibrium. For heavily doped n-type, $n \\approx N_D$.",
+            c: "Mass-action law at equilibrium: $n\\cdot p=n_i^2$. For heavy n-type doping, $n\\approx N_D$.",
             s: [
-              "Majority: $n \\approx N_D = 10^{16}$ cm$^{-3}$.",
-              "Apply mass action: $p = n_i^2 / n = (1.5 \\times 10^{10})^2 / 10^{16}$.",
-              "Compute: $p = 2.25 \\times 10^{20} / 10^{16} = 2.25 \\times 10^4$ cm$^{-3}$."
+              "<b>Step 1 — Majority.</b> $n\\approx N_D=10^{16}$.",
+              "<b>Step 2 — Minority.</b> $p=n_i^2/n=(1.5\\times10^{10})^2/10^{16}$.",
+              "<b>Step 3 — Compute.</b> $=2.25\\times10^{20}/10^{16}=2.25\\times10^4$ cm$^{-3}$.",
+              "<b>Step 4 — Distractor audit.</b> $10^{16}$ is the ELECTRON (majority) level; $10^{10}$ is intrinsic; 0 is wrong."
             ],
-            a: "$p \\approx 2.25 \\times 10^4$ cm$^{-3}$",
-            v: "Holes (minority) are $10^{12}\\times$ less than electrons — that's why n-type is dominated by electrons."
+            a: "$p\\approx2.25\\times10^4$ cm$^{-3}$",
+            v: "Holes are ~$10^{12}\\times$ fewer than electrons here - doping makes one carrier dominate, the basis of n/p regions and junctions."
           }),
           ref: "Handbook p.354" },
 
@@ -733,15 +733,15 @@ const QUESTION_BANK = {
           choices: ["$0.0344\\ \\Omega$", "$34.4\\ \\Omega$", "$3.44\\ \\Omega$", "$0.344\\ \\Omega$"],
           correct: 0,
           solution: S({
-            c: "Resistance of a uniform conductor: $R = \\rho L / A$. Watch the unit conversions!",
+            c: "Conductor resistance: $R=\\rho L/A$. The trap is converting mm$^2$ to m$^2$.",
             s: [
-              "Convert area: $1$ mm$^2 = (10^{-3})^2$ m$^2 = 10^{-6}$ m$^2$.",
-              "Plug in: $R = (1.72\\times 10^{-8})(2) / (10^{-6})$.",
-              "Numerator: $1.72\\times 10^{-8} \\cdot 2 = 3.44 \\times 10^{-8}$.",
-              "Divide: $R = 3.44\\times 10^{-8} / 10^{-6} = 3.44 \\times 10^{-2} = 0.0344\\ \\Omega$."
+              "<b>Step 1 — Convert area.</b> $1$ mm$^2=10^{-6}$ m$^2$.",
+              "<b>Step 2 — Apply.</b> $R=(1.72\\times10^{-8})(2)/10^{-6}$.",
+              "<b>Step 3 — Compute.</b> $=3.44\\times10^{-8}/10^{-6}=0.0344\\ \\Omega$.",
+              "<b>Step 4 — Distractor audit.</b> $34.4\\ \\Omega$, $3.44\\ \\Omega$, $0.344\\ \\Omega$ are all area-conversion (power-of-ten) errors."
             ],
-            a: "$R \\approx 34.4$ m$\\Omega$",
-            v: "A short copper wire has very low resistance — about 30 m$\\Omega$ per meter for this size, which matches household wiring."
+            a: "$R\\approx0.0344\\ \\Omega$ (34.4 m$\\Omega$)",
+            v: "~30 m$\\Omega$ per meter for this gauge matches real household wiring ✓ - copper's tiny resistivity keeps wire losses low."
           }),
           ref: "Handbook p.354" },
 
@@ -749,15 +749,13 @@ const QUESTION_BANK = {
           choices: ["Glass", "Aluminum", "Silicon", "Copper"],
           correct: 0,
           solution: S({
-            c: "Conductivity hierarchy: <b>conductors</b> $\\sigma > 10^5$ S/m; <b>semiconductors</b> $10^{-6} < \\sigma < 10^4$ S/m; <b>insulators</b> $\\sigma < 10^{-8}$ S/m.",
+            c: "Conductivity tiers: conductors $\\sigma>10^5$ S/m; semiconductors $10^{-6}$ to $10^4$; insulators $\\sigma<10^{-8}$ S/m.",
             s: [
-              "Glass: $\\sigma \\sim 10^{-12}$ S/m → <b>insulator</b>.",
-              "Aluminum: $\\sigma \\sim 3.5 \\times 10^7$ S/m → conductor.",
-              "Silicon (pure): $\\sigma \\sim 10^{-3}$ S/m → semiconductor.",
-              "Copper: $\\sigma \\sim 5.8 \\times 10^7$ S/m → conductor."
+              "<b>Step 1 — Match.</b> Glass ($\\sigma\\sim10^{-12}$ S/m) -> insulator.",
+              "<b>Step 2 — Distractor audit.</b> Aluminum and copper are conductors ($\\sim10^7$ S/m); pure silicon is a semiconductor."
             ],
-            a: "Glass",
-            v: "Other common insulators: rubber, ceramic, plastic, SiO$_2$."
+            a: "Glass.",
+            v: "Other common insulators: rubber, ceramic, plastics, SiO2 - their huge bandgaps leave almost no free carriers, the opposite of metals."
           }),
           ref: "Handbook p.354" },
 
@@ -765,14 +763,13 @@ const QUESTION_BANK = {
           choices: ["n-type material", "p-type material", "Intrinsic material", "Insulator"],
           correct: 0,
           solution: S({
-            c: "Silicon has 4 valence electrons. Group V (P, As, Sb) donates 1 extra electron → n-type. Group III (B, Al, Ga) accepts 1 (creates hole) → p-type.",
+            c: "Silicon has 4 valence electrons. Group V (P, As, Sb) DONATES an extra electron -> n-type; Group III (B, Al, Ga) ACCEPTS one (makes a hole) -> p-type.",
             s: [
-              "Arsenic is Group V → donor → free electron → n-type.",
-              "Boron (Group III) would have given p-type.",
-              "Replacing Si with same-group Ge wouldn't change conduction type."
+              "<b>Step 1 — Match.</b> Arsenic is Group V -> donor -> n-type.",
+              "<b>Step 2 — Distractor audit.</b> p-type needs a Group III dopant (boron); 'intrinsic' is undoped; doping never makes an insulator."
             ],
-            a: "n-type",
-            v: "Mnemonic: <b>D</b>onor → <b>D</b>ominant electrons → <b>n</b>egative carriers → <b>n</b>-type."
+            a: "n-type.",
+            v: "Mnemonic: Donor -> Dominant electrons -> Negative carriers -> n-type ✓. Group V's 5th electron is loosely bound and easily freed to conduct."
           }),
           ref: "Handbook p.354" },
 
@@ -780,15 +777,13 @@ const QUESTION_BANK = {
           choices: ["$J = q(n\\mu_n + p\\mu_p)E = \\sigma E$", "$J = -qD\\nabla n$", "$J = nev$", "$J = \\sigma E^2$"],
           correct: 0,
           solution: S({
-            c: "Two current mechanisms in semiconductors: <b>drift</b> (response to E-field) and <b>diffusion</b> (response to concentration gradient).",
+            c: "Semiconductors carry current two ways: DRIFT (driven by an E-field) and DIFFUSION (driven by a concentration gradient). Drift sums both carrier types: $J=q(n\\mu_n+p\\mu_p)E=\\sigma E$.",
             s: [
-              "Drift: $J_{drift} = qn\\mu_n E + qp\\mu_p E = \\sigma E$ (sum of electron and hole drift).",
-              "Diffusion: $J_{diff} = qD_n \\nabla n - qD_p \\nabla p$.",
-              "Choice B is the diffusion formula (one species).",
-              "Choice D is wrong — current is linear in $E$, not quadratic."
+              "<b>Step 1 — Match.</b> $J=q(n\\mu_n+p\\mu_p)E=\\sigma E$.",
+              "<b>Step 2 — Distractor audit.</b> $-qD\\nabla n$ is the DIFFUSION current; $nev$ is incomplete (single species, no field); $\\sigma E^2$ is wrong (current is LINEAR in E)."
             ],
-            a: "$J = q(n\\mu_n + p\\mu_p)E = \\sigma E$",
-            v: "$\\sigma = q(n\\mu_n + p\\mu_p)$ is the semiconductor conductivity formula."
+            a: "$J=q(n\\mu_n+p\\mu_p)E=\\sigma E$",
+            v: "This defines conductivity $\\sigma=q(n\\mu_n+p\\mu_p)$ - and $J=\\sigma E$ is just Ohm's law in point form. Diffusion adds the gradient-driven term in junction devices."
           }),
           ref: "Handbook p.354" },
       ],
@@ -801,14 +796,15 @@ const QUESTION_BANK = {
           choices: ["$3$ A", "$2$ A", "$4$ A", "$6$ A"],
           correct: 0,
           solution: S({
-            c: "Reduce series-parallel circuits step by step. Parallel: $R_{12} = R_1 R_2/(R_1+R_2)$. Series: add.",
+            c: "Reduce series-parallel networks step by step: combine the parallel pair, add the series part, then apply Ohm's law $I=V/R_{eq}$.",
             s: [
-              "Parallel combo: $R_2 \\| R_3 = (6)(3)/(6+3) = 18/9 = 2\\ \\Omega$.",
-              "Total equivalent: $R_{eq} = R_1 + (R_2 \\| R_3) = 2 + 2 = 4\\ \\Omega$.",
-              "Ohm's law: $I = V/R_{eq} = 12/4 = 3$ A."
+              "<b>Step 1 — Parallel.</b> $R_2\\|R_3=(6)(3)/(6+3)=2\\ \\Omega$.",
+              "<b>Step 2 — Series.</b> $R_{eq}=2+2=4\\ \\Omega$.",
+              "<b>Step 3 — Ohm's law.</b> $I=12/4=3$ A.",
+              "<b>Step 4 — Distractor audit.</b> $2$ A uses $R_{eq}=6$; $4$ A and $6$ A drop the parallel step."
             ],
-            a: "$I = 3$ A",
-            v: "Check power: $P_{source} = VI = 36$ W. Sum of $I^2R$ on each: $3^2(2) + (V_2/R_2)\\cdot V_2$... can verify but tedious."
+            a: "$I=3$ A",
+            v: "Power check: $P=VI=36$ W delivered by the source - consistent with the resistances."
           }),
           ref: "Handbook p.356" },
 
@@ -816,14 +812,15 @@ const QUESTION_BANK = {
           choices: ["$24$ V", "$12$ V", "$16$ V", "$0$ V"],
           correct: 0,
           solution: S({
-            c: "Thévenin voltage = open-circuit voltage at the terminals. With load disconnected, no current flows → no voltage drop on series resistors.",
+            c: "Thevenin voltage = OPEN-circuit voltage at the terminals. With the load removed, no current flows, so series resistors drop nothing.",
             s: [
-              "Disconnect load: open circuit between terminals.",
-              "No current: $I = 0$ → drops on 8Ω and 4Ω are both 0.",
-              "Voltage at load terminals = source voltage = 24 V."
+              "<b>Step 1 — Open the load.</b> No current -> $I=0$.",
+              "<b>Step 2 — No drops.</b> Both series resistors drop 0 V.",
+              "<b>Step 3 — Read terminal voltage.</b> $V_{Th}=$ source $=24$ V.",
+              "<b>Step 4 — Distractor audit.</b> $12$/$16$ V assume a voltage divider (would apply only if the load resistor were in PARALLEL across the terminals)."
             ],
-            a: "$V_{Th} = 24$ V",
-            v: "If the 4Ω were in parallel (not series), then $V_{Th}$ would be different."
+            a: "$V_{Th}=24$ V",
+            v: "Series resistance with no load carries no current and thus drops no voltage - the open-circuit terminal sees the full source."
           }),
           ref: "Handbook p.357" },
 
@@ -831,14 +828,15 @@ const QUESTION_BANK = {
           choices: ["$12\\ \\Omega$", "$8\\ \\Omega$", "$2.67\\ \\Omega$", "$4\\ \\Omega$"],
           correct: 0,
           solution: S({
-            c: "Thévenin resistance = equivalent resistance seen from terminals with all <b>independent</b> sources zeroed (voltage→short, current→open).",
+            c: "Thevenin resistance = resistance seen from the terminals with all INDEPENDENT sources zeroed (voltage source -> short, current source -> open).",
             s: [
-              "Zero the 24V source: replace with a wire (short).",
-              "Now look from load terminals back: see 4Ω in series with 8Ω (which now connects to short).",
-              "Add: $R_{Th} = 4 + 8 = 12\\ \\Omega$."
+              "<b>Step 1 — Zero the 24 V.</b> Replace it with a wire.",
+              "<b>Step 2 — Look back.</b> The 4 ohm and 8 ohm are now in series.",
+              "<b>Step 3 — Add.</b> $R_{Th}=4+8=12\\ \\Omega$.",
+              "<b>Step 4 — Distractor audit.</b> $8$ or $4$ ohm drop a resistor; $2.67$ ohm would be the PARALLEL combination."
             ],
-            a: "$R_{Th} = 12\\ \\Omega$",
-            v: "Dependent sources (if present) stay — only independent sources are zeroed."
+            a: "$R_{Th}=12\\ \\Omega$",
+            v: "Only INDEPENDENT sources are zeroed; dependent sources (if present) stay and require a test-source method."
           }),
           ref: "Handbook p.357" },
 
@@ -846,14 +844,14 @@ const QUESTION_BANK = {
           choices: ["$R_{Th}$", "$R_{Th}^2$", "$2 R_{Th}$", "$R_{Th}/2$"],
           correct: 0,
           solution: S({
-            c: "Maximum Power Transfer Theorem: $R_L = R_{Th}$ delivers the most power to the load. Then $P_{max} = V_{Th}^2/(4 R_{Th})$.",
+            c: "Maximum Power Transfer Theorem: the load gets the most power when $R_L=R_{Th}$; then $P_{max}=V_{Th}^2/(4R_{Th})$.",
             s: [
-              "Derivation: $P_L = I^2 R_L = \\dfrac{V_{Th}^2 R_L}{(R_{Th}+R_L)^2}$.",
-              "Take $dP_L/dR_L = 0$ and solve: $R_L = R_{Th}$.",
-              "At that point, half the power dissipates in $R_{Th}$ (efficiency = 50%)."
+              "<b>Step 1 — Match.</b> $R_L=R_{Th}$.",
+              "<b>Step 2 — Why.</b> Setting $dP_L/dR_L=0$ on $P_L=V_{Th}^2 R_L/(R_{Th}+R_L)^2$ yields $R_L=R_{Th}$.",
+              "<b>Step 3 — Distractor audit.</b> $R_{Th}^2$, $2R_{Th}$, $R_{Th}/2$ don't satisfy the derivative condition."
             ],
-            a: "$R_L = R_{Th}$",
-            v: "Note: this maximizes power, NOT efficiency. For efficiency, $R_L \\gg R_{Th}$."
+            a: "$R_L=R_{Th}$",
+            v: "Caveat: this maximizes POWER, not EFFICIENCY - at the match only 50% reaches the load (half lost in $R_{Th}$). For efficiency you want $R_L\\gg R_{Th}$."
           }),
           ref: "Handbook p.360" },
 
@@ -861,14 +859,15 @@ const QUESTION_BANK = {
           choices: ["$j20\\ \\Omega$", "$j2\\ \\Omega$", "$-j50\\ \\Omega$", "$j0.02\\ \\Omega$"],
           correct: 0,
           solution: S({
-            c: "Inductor impedance: $Z_L = j\\omega L$. Positive imaginary → V leads I by 90°.",
+            c: "Inductor impedance is purely imaginary: $Z_L=j\\omega L$ (positive imag -> V leads I by 90 degrees).",
             s: [
-              "Convert: $L = 20$ mH $= 0.02$ H.",
-              "Multiply: $\\omega L = 1000 \\cdot 0.02 = 20$.",
-              "Add the $j$: $Z_L = j20\\ \\Omega$."
+              "<b>Step 1 — Convert.</b> $L=20$ mH $=0.02$ H.",
+              "<b>Step 2 — Multiply.</b> $\\omega L=1000\\times0.02=20$.",
+              "<b>Step 3 — Add j.</b> $Z_L=j20\\ \\Omega$.",
+              "<b>Step 4 — Distractor audit.</b> $j2$ and $j0.02$ are unit slips; $-j50$ is capacitive (wrong sign and element)."
             ],
-            a: "$Z_L = j20\\ \\Omega$",
-            v: "Pure imaginary — pure inductors store but don't dissipate energy."
+            a: "$Z_L=j20\\ \\Omega$",
+            v: "Pure imaginary -> an ideal inductor stores energy but dissipates none. Reactance grows with frequency ($X_L=\\omega L$)."
           }),
           ref: "Handbook p.360" },
 
@@ -876,14 +875,15 @@ const QUESTION_BANK = {
           choices: ["$10 + j10\\ \\Omega$", "$10\\ \\Omega$", "$10 + j30$", "$30\\ \\Omega$"],
           correct: 0,
           solution: S({
-            c: "Series impedance adds: $Z = R + jX_L - jX_C = R + j(X_L - X_C)$.",
+            c: "Series impedances add: $Z=R+j(X_L-X_C)$ - the reactances partly cancel.",
             s: [
-              "Real part: $R = 10$.",
-              "Imag part: $X_L - X_C = 20 - 10 = +10$ (net inductive).",
-              "Total: $Z = 10 + j10\\ \\Omega$."
+              "<b>Step 1 — Real part.</b> $R=10$.",
+              "<b>Step 2 — Net reactance.</b> $X_L-X_C=20-10=+10$ (net inductive).",
+              "<b>Step 3 — Combine.</b> $Z=10+j10\\ \\Omega$.",
+              "<b>Step 4 — Distractor audit.</b> $10\\ \\Omega$ assumes resonance ($X_L=X_C$); $10+j30$ ADDS the reactances; $30\\ \\Omega$ adds magnitudes."
             ],
-            a: "$Z = 10 + j10\\ \\Omega$",
-            v: "Magnitude $|Z| = \\sqrt{200} \\approx 14.14\\ \\Omega$; angle $\\arctan(10/10) = 45°$ (lagging)."
+            a: "$Z=10+j10\\ \\Omega$",
+            v: "Magnitude $\\sqrt{200}\\approx14.14\\ \\Omega$ at angle $45°$ lagging - net inductive since $X_L>X_C$ (above resonance)."
           }),
           ref: "Handbook p.360" },
 
@@ -891,13 +891,14 @@ const QUESTION_BANK = {
           choices: ["$7.07$ V", "$10$ V", "$3.18$ V", "$5$ V"],
           correct: 0,
           solution: S({
-            c: "For a pure sinusoid: $V_{RMS} = V_m / \\sqrt{2} = 0.707 V_m$.",
+            c: "For a pure sinusoid, $V_{RMS}=V_m/\\sqrt2\\approx0.707V_m$.",
             s: [
-              "Identify peak: $V_m = 10$ V.",
-              "Divide by $\\sqrt{2}$: $V_{RMS} = 10/\\sqrt{2} = 10/1.414 \\approx 7.07$ V."
+              "<b>Step 1 — Peak.</b> $V_m=10$ V.",
+              "<b>Step 2 — Divide.</b> $10/\\sqrt2\\approx7.07$ V.",
+              "<b>Step 3 — Distractor audit.</b> $10$ V is the peak; $3.18$ V is $V_m/\\pi$ (half-wave average); $5$ V is wrong."
             ],
-            a: "$V_{RMS} \\approx 7.07$ V",
-            v: "Mnemonic: US household 120 V <i>RMS</i> = $120\\sqrt{2} \\approx 170$ V peak."
+            a: "$V_{RMS}\\approx7.07$ V",
+            v: "Reminder: US household '120 V' is RMS, so the peak is $120\\sqrt2\\approx170$ V - RMS gives the equivalent DC heating value."
           }),
           ref: "Handbook p.360" },
 
@@ -905,14 +906,15 @@ const QUESTION_BANK = {
           choices: ["$0.707$ lagging", "$0.5$ lagging", "$1.0$", "$0.866$ leading"],
           correct: 0,
           solution: S({
-            c: "Power factor $pf = \\cos\\theta$ where $\\theta = \\angle Z$. <b>Inductive</b> Z (positive imag) → current lags voltage → <i>lagging</i> pf. Capacitive (negative imag) → leading.",
+            c: "Power factor $pf=\\cos\\theta$ where $\\theta=\\angle Z$. POSITIVE imaginary (inductive) -> current lags -> LAGGING pf.",
             s: [
-              "Angle of $Z$: $\\theta = \\arctan(10/10) = 45°$.",
-              "$pf = \\cos 45° = \\sqrt{2}/2 \\approx 0.707$.",
-              "Z has $+j$ part → inductive → <b>lagging</b>."
+              "<b>Step 1 — Angle.</b> $\\theta=\\arctan(10/10)=45°$.",
+              "<b>Step 2 — Cosine.</b> $\\cos45°=0.707$.",
+              "<b>Step 3 — Sign.</b> $+j$ -> inductive -> lagging.",
+              "<b>Step 4 — Distractor audit.</b> $0.5$ is $\\cos60°$; $1.0$ is purely resistive; '0.866 leading' is capacitive (wrong sign)."
             ],
-            a: "$pf = 0.707$ lagging",
-            v: "Industrial loads (motors) are typically inductive/lagging. PF correction adds capacitors to bring pf toward 1."
+            a: "$pf=0.707$ lagging",
+            v: "Motors (inductive) cause lagging pf; capacitor banks correct it back toward 1, cutting line current and losses."
           }),
           ref: "Handbook p.362" },
 
@@ -920,14 +922,15 @@ const QUESTION_BANK = {
           choices: ["$720$ W", "$1018$ W", "$510$ W", "$8.49$ W"],
           correct: 0,
           solution: S({
-            c: "Real (avg) power dissipated: $P = V_{rms} I_{rms} \\cos\\theta$. The $\\cos\\theta$ factor accounts for the phase shift.",
+            c: "Real power $P=V_{rms}I_{rms}\\cos\\theta$ - the $\\cos\\theta$ (power factor) accounts for the phase shift.",
             s: [
-              "Current magnitude: $I_{rms} = V_{rms} / |Z| = 120 / 14.14 \\approx 8.485$ A.",
-              "Power factor: $\\cos 45° = 0.707$.",
-              "Real power: $P = (120)(8.485)(0.707) = 720$ W."
+              "<b>Step 1 — Current.</b> $I_{rms}=120/14.14=8.485$ A.",
+              "<b>Step 2 — Power factor.</b> $\\cos45°=0.707$.",
+              "<b>Step 3 — Real power.</b> $P=120\\times8.485\\times0.707=720$ W.",
+              "<b>Step 4 — Distractor audit.</b> $1018$ W forgets pf (apparent VA); $510$/$8.49$ W are off."
             ],
-            a: "$P = 720$ W",
-            v: "Alternative: $P = I^2 R = (8.485)^2(10) = 720$ W ✓ (only resistor dissipates real power)."
+            a: "$P=720$ W",
+            v: "Cross-check $P=I^2R=(8.485)^2(10)=720$ W - only the resistive part dissipates real power."
           }),
           ref: "Handbook p.362" },
 
@@ -935,13 +938,14 @@ const QUESTION_BANK = {
           choices: ["$0.1$ s", "$0.01$ s", "$1$ s", "$10$ ms"],
           correct: 0,
           solution: S({
-            c: "RC time constant: $\\tau = RC$. Units: $\\Omega \\cdot$F $=$ seconds.",
+            c: "RC time constant $\\tau=RC$; units of ohm-farad are seconds.",
             s: [
-              "Compute: $\\tau = (1000)(100 \\times 10^{-6}) = 10^3 \\cdot 10^{-4} = 10^{-1}$ s.",
-              "So $\\tau = 0.1$ s = 100 ms."
+              "<b>Step 1 — Convert.</b> $C=100\\ \\mu$F $=10^{-4}$ F.",
+              "<b>Step 2 — Multiply.</b> $\\tau=(1000)(10^{-4})=0.1$ s.",
+              "<b>Step 3 — Distractor audit.</b> $0.01$ s and $1$ s are power-of-ten slips; '10 ms' is off by 10."
             ],
-            a: "$\\tau = 100$ ms",
-            v: "After $5\\tau = 500$ ms, capacitor essentially fully charged (>99%)."
+            a: "$\\tau=0.1$ s (100 ms)",
+            v: "After $5\\tau=500$ ms the capacitor is >99% charged - the standard 'settled' rule of thumb."
           }),
           ref: "Handbook p.358" },
 
@@ -949,14 +953,14 @@ const QUESTION_BANK = {
           choices: ["$> 99\\%$ of final", "$50\\%$", "$63\\%$", "$Steady too long$"],
           correct: 0,
           solution: S({
-            c: "Charging response: $v_C(t) = V_\\infty(1 - e^{-t/\\tau})$. Useful milestones: $1\\tau \\to 63.2\\%$, $3\\tau \\to 95\\%$, $5\\tau \\to 99.3\\%$.",
+            c: "Charging: $v_C(t)=V_\\infty(1-e^{-t/\\tau})$. Milestones: $1\\tau\\to63\\%$, $3\\tau\\to95\\%$, $5\\tau\\to99.3\\%$.",
             s: [
-              "$t/\\tau = 1/0.1 = 10$ time constants.",
-              "After $5\\tau$ already > 99%; at $10\\tau$ it's $1 - e^{-10} \\approx 1 - 0.0000454 = 99.995\\%$.",
-              "Practically fully charged."
+              "<b>Step 1 — Count tau.</b> $t/\\tau=1/0.1=10$ time constants.",
+              "<b>Step 2 — Evaluate.</b> $1-e^{-10}\\approx99.995\\%$.",
+              "<b>Step 3 — Distractor audit.</b> $50\\%$/$63\\%$ are ~$0.7\\tau$/$1\\tau$, far short of 10 tau."
             ],
-            a: "$> 99\\%$ of final value",
-            v: "Engineers commonly say 'steady state after $5\\tau$' as a rule of thumb."
+            a: ">99% of final value.",
+            v: "10 time constants is far past the '5-tau settled' rule, so the cap is effectively fully charged."
           }),
           ref: "Handbook p.358" },
 
@@ -964,14 +968,15 @@ const QUESTION_BANK = {
           choices: ["$8$ V", "$4$ V", "$6$ V", "$12$ V"],
           correct: 0,
           solution: S({
-            c: "Voltage divider rule: $V_k = V_{in} \\cdot \\dfrac{R_k}{R_{total}}$. Voltage splits proportionally to each resistance in a series chain.",
+            c: "Voltage divider: $V_k=V_{in}\\dfrac{R_k}{R_{total}}$ - voltage splits in proportion to each series resistance.",
             s: [
-              "Total resistance: $R_{total} = 4 + 8 = 12\\ \\Omega$.",
-              "$V_2 = 12 \\cdot (8/12) = 12 \\cdot 0.667 = 8$ V.",
-              "(Equivalently $V_1 = 12 \\cdot (4/12) = 4$ V, and $V_1 + V_2 = 12$ ✓)"
+              "<b>Step 1 — Total.</b> $R_{total}=4+8=12\\ \\Omega$.",
+              "<b>Step 2 — Apply.</b> $V_2=12(8/12)=8$ V.",
+              "<b>Step 3 — Check.</b> $V_1=12(4/12)=4$ V, and $4+8=12$ ✓ (KVL).",
+              "<b>Step 4 — Distractor audit.</b> $4$ V is the drop across $R_1$; $6$ V is an even split; $12$ V is the whole source."
             ],
-            a: "$V_2 = 8$ V",
-            v: "Larger resistor drops larger voltage — intuitive."
+            a: "$V_2=8$ V",
+            v: "The LARGER resistor drops the larger voltage - intuitive and a quick sanity check on any divider."
           }),
           ref: "Handbook p.356" },
 
@@ -979,13 +984,13 @@ const QUESTION_BANK = {
           choices: ["$3\\ \\Omega$", "$12\\ \\Omega$", "$6\\ \\Omega$", "$2\\ \\Omega$"],
           correct: 0,
           solution: S({
-            c: "For $n$ equal resistors $R$ in parallel: $R_{eq} = R/n$. (Special case of $1/R_{eq} = \\sum 1/R_i$.)",
+            c: "Equal resistors in parallel: $R_{eq}=R/n$ (a special case of $1/R_{eq}=\\sum1/R_i$).",
             s: [
-              "$R = 6\\ \\Omega$, $n = 2$.",
-              "$R_{eq} = 6/2 = 3\\ \\Omega$."
+              "<b>Step 1 — Apply.</b> $6/2=3\\ \\Omega$.",
+              "<b>Step 2 — Distractor audit.</b> $12\\ \\Omega$ adds them (series); $6\\ \\Omega$ ignores the parallel; $2\\ \\Omega$ is wrong."
             ],
-            a: "$R_{eq} = 3\\ \\Omega$",
-            v: "Always less than smallest individual R — parallel adds paths for current."
+            a: "$R_{eq}=3\\ \\Omega$",
+            v: "Parallel resistance is always LESS than the smallest resistor - more paths means less total opposition."
           }),
           ref: "Handbook p.356" },
 
@@ -993,14 +998,14 @@ const QUESTION_BANK = {
           choices: ["$0.125$ J", "$0.5$ J", "$0.25$ J", "$5$ J"],
           correct: 0,
           solution: S({
-            c: "Energy in a capacitor: $W = \\dfrac{1}{2}CV^2$. (Analogous to kinetic energy $\\frac{1}{2}mv^2$.)",
+            c: "Capacitor energy: $W=\\tfrac12CV^2$ (analogous to $\\tfrac12mv^2$).",
             s: [
-              "Convert: $C = 100\\ \\mu$F $= 10^{-4}$ F.",
-              "$V^2 = 50^2 = 2500$.",
-              "$W = 0.5 \\cdot 10^{-4} \\cdot 2500 = 0.125$ J."
+              "<b>Step 1 — Convert.</b> $C=10^{-4}$ F; $V^2=2500$.",
+              "<b>Step 2 — Apply.</b> $W=\\tfrac12(10^{-4})(2500)=0.125$ J.",
+              "<b>Step 3 — Distractor audit.</b> $0.25$ J forgets the $\\tfrac12$; $0.5$ J and $5$ J are off."
             ],
-            a: "$W = 0.125$ J",
-            v: "For comparison, AA battery stores ~10 kJ — this cap holds ~80,000$\\times$ less."
+            a: "$W=0.125$ J",
+            v: "The $V^2$ dependence means doubling voltage QUADRUPLES stored energy - why HV capacitor banks are dangerous."
           }),
           ref: "Handbook p.358" },
 
@@ -1008,14 +1013,14 @@ const QUESTION_BANK = {
           choices: ["$0.02$ J", "$0.04$ J", "$0.01$ J", "$0.1$ J"],
           correct: 0,
           solution: S({
-            c: "Energy in an inductor: $W = \\dfrac{1}{2}LI^2$. Dual of capacitor formula.",
+            c: "Inductor energy: $W=\\tfrac12LI^2$ - the dual of the capacitor formula.",
             s: [
-              "Convert: $L = 10$ mH $= 0.01$ H.",
-              "$I^2 = 4$.",
-              "$W = 0.5 \\cdot 0.01 \\cdot 4 = 0.02$ J."
+              "<b>Step 1 — Convert.</b> $L=0.01$ H; $I^2=4$.",
+              "<b>Step 2 — Apply.</b> $W=\\tfrac12(0.01)(4)=0.02$ J.",
+              "<b>Step 3 — Distractor audit.</b> $0.04$ J forgets the $\\tfrac12$; $0.01$ J and $0.1$ J are off."
             ],
-            a: "$W = 0.02$ J",
-            v: "If circuit broken suddenly, this energy is released as a voltage spike — why we put flyback diodes across relay coils."
+            a: "$W=0.02$ J",
+            v: "Interrupting this current abruptly releases the energy as a voltage spike ($v=L\\,di/dt$) - which is why flyback diodes protect switches driving coils."
           }),
           ref: "Handbook p.358" },
 
@@ -1023,14 +1028,14 @@ const QUESTION_BANK = {
           choices: ["$\\sqrt{10}$ A $\\approx 3.16$ A", "$10$ A", "$1$ A", "$100$ A"],
           correct: 0,
           solution: S({
-            c: "Power-current relation: $P = I^2 R$. Solve for $I$.",
+            c: "Power-current relation: $P=I^2R$; solve $I=\\sqrt{P/R}$.",
             s: [
-              "Rearrange: $I^2 = P/R$.",
-              "Plug in: $I^2 = 100/10 = 10$.",
-              "Square root: $I = \\sqrt{10} \\approx 3.16$ A."
+              "<b>Step 1 — Rearrange.</b> $I^2=P/R=100/10=10$.",
+              "<b>Step 2 — Root.</b> $I=\\sqrt{10}\\approx3.16$ A.",
+              "<b>Step 3 — Distractor audit.</b> $10$ A would be $P=1000$ W; $1$ A gives 10 W; $100$ A is absurd."
             ],
-            a: "$I \\approx 3.16$ A",
-            v: "Voltage check: $V = IR = 3.16(10) = 31.6$ V; then $P = V^2/R = 31.6^2/10 = 99.86$ W ✓"
+            a: "$I\\approx3.16$ A",
+            v: "Cross-check: $V=IR=31.6$ V, $P=V^2/R=31.6^2/10\\approx100$ W ✓."
           }),
           ref: "Handbook p.356" },
 
@@ -1038,14 +1043,14 @@ const QUESTION_BANK = {
           choices: ["$V_m/\\pi$", "$2V_m/\\pi$", "$V_m/2$", "$V_m/\\sqrt{2}$"],
           correct: 0,
           solution: S({
-            c: "Half-wave rectifier passes only positive half of input. Average = (area under one half cycle) / (full period).",
+            c: "A half-wave rectifier passes only the positive half; the DC (average) value is area-of-one-hump over a FULL period: $V_{DC}=V_m/\\pi$.",
             s: [
-              "Integrate over one cycle: $V_{avg} = \\dfrac{1}{T}\\int_0^{T/2} V_m \\sin(\\omega t)\\,dt$ (other half is 0).",
-              "Result: $V_{DC} = V_m/\\pi \\approx 0.318 V_m$.",
-              "Full-wave rectifier: $V_{DC} = 2V_m/\\pi \\approx 0.637 V_m$ (twice as much)."
+              "<b>Step 1 — Integrate.</b> $\\dfrac1T\\int_0^{T/2}V_m\\sin(\\omega t)\\,dt$ (other half is 0).",
+              "<b>Step 2 — Result.</b> $V_m/\\pi\\approx0.318V_m$.",
+              "<b>Step 3 — Distractor audit.</b> $2V_m/\\pi$ is FULL-wave average; $V_m/2$ is half-wave RMS; $V_m/\\sqrt2$ is full-sine RMS."
             ],
-            a: "$V_{DC} = V_m/\\pi$",
-            v: "Choice D ($V_m/\\sqrt{2}$) is RMS of full sinusoid, not the DC value of half-wave."
+            a: "$V_{DC}=V_m/\\pi$",
+            v: "Full-wave rectification doubles the DC value to $2V_m/\\pi$ since it captures BOTH humps ✓."
           }),
           ref: "Handbook p.383" },
 
@@ -1053,13 +1058,13 @@ const QUESTION_BANK = {
           choices: ["$1200$ VA", "$960$ W", "$720$ VAR", "$1500$ VA"],
           correct: 0,
           solution: S({
-            c: "Apparent power $|S| = V_{rms} I_{rms}$ — independent of pf. (Real $P$ and reactive $Q$ depend on pf, but $|S|$ does not.)",
+            c: "Apparent power $|S|=V_{rms}I_{rms}$ - independent of power factor (P and Q depend on pf, but |S| does not).",
             s: [
-              "$|S| = (240)(5) = 1200$ VA.",
-              "(For reference: $P = |S|\\cos\\theta = 1200 \\cdot 0.8 = 960$ W. $Q = |S|\\sin\\theta = 1200 \\cdot 0.6 = 720$ VAR.)"
+              "<b>Step 1 — Apply.</b> $|S|=240\\times5=1200$ VA.",
+              "<b>Step 2 — Distractor audit.</b> $960$ W is REAL power ($|S|\\cos\\theta$); $720$ VAR is REACTIVE ($|S|\\sin\\theta$); $1500$ VA is wrong."
             ],
-            a: "$|S| = 1200$ VA",
-            v: "Units matter: VA = apparent, W = real, VAR = reactive."
+            a: "$|S|=1200$ VA",
+            v: "Units distinguish them: VA (apparent), W (real), VAR (reactive). Equipment is rated in VA/kVA because |S| sets the CURRENT regardless of pf."
           }),
           ref: "Handbook p.362" },
       ],
