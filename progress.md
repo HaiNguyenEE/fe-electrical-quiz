@@ -122,6 +122,12 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   replacer anchor is ' }), ref:' (not the multi-line '\n        })'). KEY LESSON: replacement keys
   must be q:-line SUBSTRINGS *without* a trailing quote (e.g. `q: "RISC vs CISC`, not
   `q: "RISC vs CISC"`) — a trailing `"` fails to match when the real q ends with `:"`.
+- **2026-06-12 — extra5 (Round 6) COMPLETE (209/209):** all 17 chapters upgraded to the
+  teach-from-zero standard across 6 checkpoints. Compact INLINE format (anchor ' }), ref:').
+  THREE broken answer keys repaired: (1) Ch6 instantaneous-power question — solution computed 250 W
+  but correct:0 said 125 W (250 W reordered to index 0); (2) Ch8 Bode-magnitude of (s+10)/(s+1)
+  at ω=100 — correct answer is 0 dB not 20 dB (0 dB reordered to index 0); both had embedded
+  meta-commentary admitting the mismatch, now removed. Integrity scan 209/209 Step-format.
 - **Remaining upgrade targets:** questions.js (164),
-  extra5 (209), extra6 (181), extra7 (222), extra8 (191) — standard S() format; extra9/extra10
+  extra6 (181), extra7 (222), extra8 (191) — standard S() format; extra9/extra10
   (~60 q) use template-literal SVG helpers and need their own careful session.

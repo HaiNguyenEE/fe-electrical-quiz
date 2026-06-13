@@ -1920,158 +1920,656 @@
     // Comm — +12
     13: [
       { q: "BPSK constellation has __ points:", choices: ["$2$", "$4$", "$8$", "$16$"], correct: 0,
-        solution: S({ c: "Binary PSK: 2 phases (0 and π).", s: [""], a: "$2$ points" }), ref: "p.371" },
+        solution: S({
+          c: "A constellation diagram plots the distinct symbols of a digital modulation. BPSK (Binary Phase-Shift Keying) uses just two phases (0 and π) → 2 points, 1 bit per symbol.",
+          s: [
+            "<b>Step 1 — Match.</b> 2 points.",
+            "<b>Step 2 — Distractor audit.</b> 4 is QPSK, 8 is 8-PSK, 16 is 16-QAM — each packs more bits per symbol."
+          ],
+          a: "2 points (1 bit/symbol).",
+          v: "Maximum points apart for a given power → BPSK is the most ROBUST (lowest bit-error rate at a given SNR) but slowest ✓. The constellation-size ladder ($2^n$ points = n bits/symbol) trades robustness for data rate."
+
+        }), ref: "p.371" },
       { q: "QPSK constellation:", choices: ["$4$ points (2 bits each)", "$16$", "$2$", "$8$"], correct: 0,
-        solution: S({ c: "Quadrature PSK: 4 phases.", s: ["Bits/symbol = log_2(4) = 2."], a: "$4$ points" }), ref: "p.371" },
+        solution: S({
+          c: "QPSK (Quadrature PSK) uses four phases, giving 4 constellation points and $\\log_2 4 = 2$ bits per symbol.",
+          s: [
+            "<b>Step 1 — Match.</b> 4 points (2 bits each).",
+            "<b>Step 2 — Distractor audit.</b> 2 is BPSK, 8 is 8-PSK, 16 is 16-QAM."
+          ],
+          a: "4 points (2 bits/symbol).",
+          v: "QPSK doubles BPSK's data rate in the SAME bandwidth with the same energy-per-bit performance ✓ — a free win, which is why it's ubiquitous (satellite, cellular, Wi-Fi). Beyond it, denser constellations need more SNR."
+
+        }), ref: "p.371" },
       { q: "Effect of doubling bandwidth on Shannon capacity (constant SNR):",
         choices: ["Capacity doubles (linear in B)", "Quadruples", "Halves", "No change"], correct: 0,
-        solution: S({ c: "$C = B \\log_2(1+S/N)$. Linear in B.", s: [""], a: "Doubles" }), ref: "p.371" },
+        solution: S({
+          c: "Shannon capacity $C = B\\log_2(1+S/N)$ is LINEAR in bandwidth B (which sits outside the log). At constant SNR, doubling B doubles C.",
+          s: [
+            "<b>Step 1 — Apply.</b> $2B\\log_2(1+S/N) = 2C$.",
+            "<b>Step 2 — Distractor audit.</b> 'Quadruples' would need B²; 'halves' is backwards; 'no change' ignores the linear term."
+          ],
+          a: "Capacity doubles.",
+          v: "Bandwidth is the cheap lever — it scales capacity linearly, while SNR only helps logarithmically ✓. This is why 5G chases wide mmWave bands: adding spectrum beats fighting for marginal SNR gains."
+
+        }), ref: "p.371" },
       { q: "Repeater function:", choices: ["Amplifies/regenerates signal in long links", "Stores data", "Encrypts", "Routes packets"], correct: 0,
-        solution: S({ c: "Repeater: counters signal attenuation in long-distance links.", s: ["Analog: amplifier.", "Digital: amplifier + detection + retransmission."], a: "Signal regeneration" }), ref: "p.371" },
+        solution: S({
+          c: "A repeater combats ATTENUATION over long links by boosting the signal. Analog repeaters amplify; DIGITAL repeaters (regenerators) detect the bits and retransmit clean copies.",
+          s: [
+            "<b>Step 1 — Match.</b> Amplifies/regenerates the signal.",
+            "<b>Step 2 — Distractor audit.</b> Storing data is a buffer; encryption and packet routing are different functions."
+          ],
+          a: "Signal amplification/regeneration.",
+          v: "Digital regeneration's advantage: it removes accumulated NOISE entirely by reconstructing the bits, so quality doesn't degrade over many hops ✓ — whereas analog amplifiers boost the noise along with the signal."
+
+        }), ref: "p.371" },
       { q: "AM band frequencies:", choices: ["530-1700 kHz", "88-108 MHz", "1-30 MHz", "300-3000 MHz"], correct: 0,
-        solution: S({ c: "Standard broadcast AM in US: ~530-1700 kHz.", s: ["FM: 88-108 MHz.", "SW (shortwave): 1-30 MHz."], a: "0.5-1.7 MHz" }), ref: "p.371" },
+        solution: S({
+          c: "Standard US broadcast AM occupies roughly 530-1700 kHz (medium wave).",
+          s: [
+            "<b>Step 1 — Match.</b> 530-1700 kHz.",
+            "<b>Step 2 — Distractor audit.</b> 88-108 MHz is FM; 1-30 MHz is shortwave; 300-3000 MHz is UHF."
+          ],
+          a: "≈ 0.5-1.7 MHz.",
+          v: "AM's low frequency gives long wavelengths that follow the ground and bounce off the ionosphere at night — hence AM stations heard hundreds of miles away after dark ✓. FM's higher band gives better fidelity but line-of-sight range."
+
+        }), ref: "p.371" },
       { q: "Microwaves frequency range:", choices: ["~$0.3-300$ GHz", "$<1$ MHz", "$300$ THz", "Visible light"], correct: 0,
-        solution: S({ c: "Microwave: 0.3-300 GHz (1 m to 1 mm wavelength).", s: ["Below: RF (MHz). Above: mm-wave and infrared."], a: "0.3-300 GHz" }), ref: "p.371" },
+        solution: S({
+          c: "The microwave band spans roughly 0.3-300 GHz, corresponding to wavelengths from 1 m down to 1 mm.",
+          s: [
+            "<b>Step 1 — Match.</b> ~0.3-300 GHz.",
+            "<b>Step 2 — Distractor audit.</b> <1 MHz is RF/longwave; 300 THz is infrared/visible; visible light is far above microwave."
+          ],
+          a: "0.3-300 GHz.",
+          v: "This band carries radar, satellite links, Wi-Fi (2.4/5 GHz), and 5G ✓ — wide bandwidths and antennas small enough to be practical. Above it lies mm-wave (the new 5G frontier) then infrared."
+
+        }), ref: "p.371" },
       { q: "Direct-sequence spread spectrum (DSSS) benefit:",
         choices: ["Resistance to narrow-band interference, multipath", "Higher data rate only", "Lower power", "Smaller bandwidth"], correct: 0,
-        solution: S({ c: "DSSS spreads signal over wide bandwidth using PN code. Interference at one freq has small effect on total.", s: ["Used: CDMA, GPS, Wi-Fi (originally)."], a: "Interference resistance" }), ref: "p.371" },
+        solution: S({
+          c: "DSSS multiplies the data by a fast pseudo-noise (PN) code, SPREADING it over a much wider bandwidth. Spread signals resist narrow-band interference and multipath, since a jammer at one frequency only dents a fraction of the spread energy.",
+          s: [
+            "<b>Step 1 — Match.</b> Resistance to narrow-band interference and multipath.",
+            "<b>Step 2 — Distractor audit.</b> It doesn't raise raw data rate, lower power, or shrink bandwidth — it deliberately WIDENS bandwidth for robustness."
+          ],
+          a: "Interference and multipath resistance.",
+          v: "The despreading at the receiver concentrates the wanted signal while spreading any interferer — a processing gain ✓. DSSS underlies GPS (works below the noise floor), CDMA cellular, and early Wi-Fi."
+
+        }), ref: "p.371" },
       { q: "OFDM:", choices: ["Orthogonal Frequency-Division Multiplexing", "Optical Frequency Detector", "Off-the-shelf Decoder", "Other"], correct: 0,
-        solution: S({ c: "OFDM splits data over many orthogonal subcarriers. Resists multipath fading.", s: ["Used: WiFi (a/g/n/ac/ax), 4G/5G, DVB-T, ADSL."], a: "OFDM" }), ref: "p.371" },
+        solution: S({
+          c: "OFDM = Orthogonal Frequency-Division Multiplexing: data is split across many closely-spaced ORTHOGONAL subcarriers, each carrying a slow stream. The orthogonality lets them overlap without interfering.",
+          s: [
+            "<b>Step 1 — Match.</b> Orthogonal Frequency-Division Multiplexing.",
+            "<b>Step 2 — Distractor audit.</b> The other expansions are invented."
+          ],
+          a: "Orthogonal Frequency-Division Multiplexing.",
+          v: "Splitting one fast stream into many slow ones makes each symbol long compared to channel echoes → strong resistance to MULTIPATH fading ✓. That's why OFDM powers Wi-Fi (a/g/n/ac/ax), 4G/5G, DVB-T, and ADSL."
+
+        }), ref: "p.371" },
       { q: "$E_b/N_0$ vs SNR: relationship:",
         choices: ["$E_b/N_0 = (S/N)(B/R_b)$", "Same", "Reciprocal", "Unrelated"], correct: 0,
-        solution: S({ c: "$E_b$ = energy per bit; $N_0$ = noise PSD. $S = E_b R_b$; $N = N_0 B$.", s: ["$E_b/N_0 = (S/R_b)/(N/B) = (S/N)(B/R_b)$."], a: "$E_b/N_0 = SNR \\cdot B/R_b$" }), ref: "p.371" },
+        solution: S({
+          c: "$E_b/N_0$ (energy per bit over noise spectral density) is the normalized SNR used to compare digital systems fairly. Since $S = E_b R_b$ and $N = N_0 B$: $\\dfrac{E_b}{N_0} = \\dfrac{S}{N}\\cdot\\dfrac{B}{R_b}$.",
+          s: [
+            "<b>Step 1 — Substitute.</b> $E_b/N_0 = (S/R_b)/(N/B) = (S/N)(B/R_b)$.",
+            "<b>Step 2 — Distractor audit.</b> 'Same' ignores the $B/R_b$ factor; 'reciprocal' and 'unrelated' are wrong."
+          ],
+          a: "$E_b/N_0 = (S/N)(B/R_b)$",
+          v: "$E_b/N_0$ lets you compare modulation schemes independent of bandwidth and bit rate ✓ — it's the x-axis of every BER curve. The Shannon LIMIT puts a floor at $E_b/N_0 = -1.6$ dB, below which error-free comms is impossible."
+
+        }), ref: "p.371" },
       { q: "FSK Bessel function bandwidth (modulation index large):",
         choices: ["Approaches $2(\\Delta f + f_m)$ Carson's rule", "Same as ASK", "$f_m$", "$2f_m$"], correct: 0,
-        solution: S({ c: "Wideband FSK: bandwidth grows with deviation per Carson's rule.", s: ["Narrowband FSK (β<<1): BW ≈ $2 f_m$."], a: "Carson's rule" }), ref: "p.371" },
+        solution: S({
+          c: "For wideband FM/FSK, Carson's rule estimates the occupied bandwidth: $BW \\approx 2(\\Delta f + f_m)$, where $\\Delta f$ is the peak frequency deviation and $f_m$ the modulating frequency.",
+          s: [
+            "<b>Step 1 — Match.</b> Approaches $2(\\Delta f + f_m)$ (Carson's rule).",
+            "<b>Step 2 — Distractor audit.</b> 'Same as ASK' is false; $f_m$ and $2f_m$ describe NARROWband FSK (β≪1), not wideband."
+          ],
+          a: "$BW \\approx 2(\\Delta f + f_m)$ (Carson's rule).",
+          v: "FM/FSK bandwidth grows with DEVIATION — wider deviation buys noise immunity at the cost of spectrum ✓. Narrowband FSK ($\\beta\\ll1$) collapses to $\\approx2f_m$, like AM; wideband FM (broadcast) is dominated by the deviation term."
+
+        }), ref: "p.371" },
       { q: "Optical fiber bandwidth advantage:", choices: ["THz range (vs MHz/GHz for copper)", "Cheaper", "Easier to install", "Better at low power"], correct: 0,
-        solution: S({ c: "Light frequencies: $10^{14}$ Hz → potentially huge bandwidth via WDM.", s: ["Single fiber: terabits/sec achievable."], a: "Higher BW" }), ref: "p.371" },
+        solution: S({
+          c: "Optical fiber carries light at ~$10^{14}$ Hz (hundreds of THz), so even a tiny fractional bandwidth is enormous in absolute terms — vastly more than copper's MHz-GHz.",
+          s: [
+            "<b>Step 1 — Match.</b> THz-range bandwidth (vs MHz/GHz for copper).",
+            "<b>Step 2 — Distractor audit.</b> Fiber isn't cheaper or easier to install, and 'better at low power' isn't its headline advantage — raw BANDWIDTH is."
+          ],
+          a: "Enormous (THz-class) bandwidth.",
+          v: "Wavelength-division multiplexing (WDM) sends many colors down one fiber, reaching terabits/sec ✓. Fiber also beats copper on low loss (long spans without repeaters) and immunity to electromagnetic interference."
+
+        }), ref: "p.371" },
       { q: "ADC sampling theorem: signal max freq $f_{max}$, must sample at:",
         choices: ["$f_s > 2 f_{max}$", "$f_s = f_{max}$", "$f_s = f_{max}/2$", "Any rate"], correct: 0,
-        solution: S({ c: "Nyquist criterion.", s: [""], a: "$> 2 f_{max}$" }), ref: "p.375" },
+        solution: S({
+          c: "The Nyquist-Shannon sampling theorem: to capture a signal whose highest frequency is $f_{max}$ without aliasing, you must sample at MORE than twice that: $f_s > 2f_{max}$.",
+          s: [
+            "<b>Step 1 — Match.</b> $f_s > 2f_{max}$.",
+            "<b>Step 2 — Distractor audit.</b> $f_s = f_{max}$ and $f_{max}/2$ are far too slow (severe aliasing); 'any rate' ignores the theorem."
+          ],
+          a: "$f_s > 2f_{max}$ (Nyquist).",
+          v: "Sample at or below $2f_{max}$ and high frequencies alias into false low ones, unrecoverably ✓ — which is why CD audio uses 44.1 kHz for a 20-kHz limit, and why an anti-alias filter precedes every ADC."
+
+        }), ref: "p.375" },
     ],
 
     // Networks — +8
     14: [
       { q: "Class C IPv4 network range:", choices: ["192.0.0.0 - 223.255.255.255", "10.x.x.x", "172.16.x.x", "127.x.x.x"], correct: 0,
-        solution: S({ c: "Class C: leading bits 110. First octet 192-223.", s: [""], a: "192-223 first octet" }), ref: "p.393" },
+        solution: S({
+          c: "Classful IPv4 sorts addresses by leading bits. Class C starts with bits 110, putting its first octet in the range 192-223 (192.0.0.0 - 223.255.255.255).",
+          s: [
+            "<b>Step 1 — Match.</b> 192.0.0.0 - 223.255.255.255.",
+            "<b>Step 2 — Distractor audit.</b> 10.x is Class A private; 172.16.x is Class B private; 127.x is loopback."
+          ],
+          a: "First octet 192-223.",
+          v: "The class ladder: A (1-126, /8), B (128-191, /16), C (192-223, /24) ✓. Classful addressing is largely replaced by CIDR today, but the ranges still appear on exams and in legacy docs."
+
+        }), ref: "p.393" },
       { q: "RFC 1918 private addresses:", choices: ["10.0.0.0/8, 172.16/12, 192.168/16", "All Class A", "Routable", "Random"], correct: 0,
-        solution: S({ c: "Three blocks reserved for private networks (not routable on internet).", s: ["Common in homes/offices behind NAT."], a: "10/8, 172.16/12, 192.168/16" }), ref: "p.394" },
+        solution: S({
+          c: "RFC 1918 reserves three address blocks for PRIVATE networks — not routable on the public internet: 10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16.",
+          s: [
+            "<b>Step 1 — Match.</b> 10/8, 172.16/12, 192.168/16.",
+            "<b>Step 2 — Distractor audit.</b> Not 'all Class A'; private addresses are specifically NON-routable (not 'routable'); not random."
+          ],
+          a: "10/8, 172.16/12, 192.168/16.",
+          v: "These let every home and office reuse the same internal addresses (192.168.1.x is everywhere) ✓ — NAT translates them to a shared public IP at the gateway, conserving the scarce public IPv4 space."
+
+        }), ref: "p.394" },
       { q: "NAT (Network Address Translation):", choices: ["Maps private IPs to public for internet access", "Encrypts traffic", "Routes only", "DNS service"], correct: 0,
-        solution: S({ c: "NAT: gateway translates private addresses to a shared public address.", s: ["Enables many devices on private network to share one public IP.", "Side effect: provides some isolation."], a: "Private↔public address mapping" }), ref: "p.400" },
+        solution: S({
+          c: "NAT lets many devices on a private network share one (or a few) public IP addresses. The gateway rewrites private source addresses to its public address on the way out, and reverses it on replies.",
+          s: [
+            "<b>Step 1 — Match.</b> Maps private IPs to public for internet access.",
+            "<b>Step 2 — Distractor audit.</b> NAT doesn't encrypt, isn't just routing, and isn't DNS — it's address translation."
+          ],
+          a: "Private↔public address mapping.",
+          v: "NAT is the main reason IPv4 hasn't fully run out — billions of devices hide behind shared public IPs ✓. A side benefit is a basic firewall effect (unsolicited inbound traffic has nowhere to go); IPv6's huge space reduces the need for it."
+
+        }), ref: "p.400" },
       { q: "Routing protocols: OSPF type:", choices: ["Link-state (interior)", "Distance-vector", "Path-vector", "Bridge"], correct: 0,
-        solution: S({ c: "Routing protocols: distance-vector (RIP), link-state (OSPF, IS-IS), path-vector (BGP for AS-level).", s: ["OSPF: link-state, Dijkstra-based, used within AS."], a: "Link-state" }), ref: "p.400" },
+        solution: S({
+          c: "OSPF (Open Shortest Path First) is a LINK-STATE interior gateway protocol: every router learns the full network topology and runs Dijkstra's algorithm to compute shortest paths.",
+          s: [
+            "<b>Step 1 — Match.</b> Link-state (interior).",
+            "<b>Step 2 — Distractor audit.</b> Distance-vector is RIP; path-vector is BGP; 'bridge' is Layer 2."
+          ],
+          a: "Link-state (interior gateway protocol).",
+          v: "Link-state converges faster and avoids the routing loops that plague distance-vector protocols ✓ — each router has the whole map, not just neighbor rumors. OSPF runs WITHIN an autonomous system; BGP handles routing BETWEEN them."
+
+        }), ref: "p.400" },
       { q: "BGP (Border Gateway Protocol) used for:", choices: ["Inter-AS routing on internet", "Within a single network", "Layer 2", "DNS"], correct: 0,
-        solution: S({ c: "BGP: routes data between autonomous systems (ISPs) on the public internet.", s: [""], a: "Inter-AS routing" }), ref: "p.400" },
+        solution: S({
+          c: "BGP is the internet's inter-domain routing protocol: it exchanges reachability between AUTONOMOUS SYSTEMS (ISPs, large networks), deciding how traffic flows across the global internet.",
+          s: [
+            "<b>Step 1 — Match.</b> Inter-AS routing on the internet.",
+            "<b>Step 2 — Distractor audit.</b> Within a single network you'd use OSPF/RIP (interior protocols); BGP isn't Layer 2 or DNS."
+          ],
+          a: "Inter-AS (between autonomous systems) routing.",
+          v: "BGP is a PATH-VECTOR protocol — it tracks the AS path to avoid loops and apply policy ✓. It's the glue of the internet, but its trust-based design means a misconfiguration can cause global outages (route leaks/hijacks)."
+
+        }), ref: "p.400" },
       { q: "Switch loop prevention:", choices: ["Spanning Tree Protocol (STP)", "VLAN", "Port mirror", "DHCP"], correct: 0,
-        solution: S({ c: "STP: detects redundant links, disables enough to prevent forwarding loops.", s: ["Important: loop = broadcast storm = network meltdown."], a: "STP" }), ref: "p.399" },
+        solution: S({
+          c: "Redundant links between switches can form LOOPS, where broadcast frames circulate forever (a broadcast storm). The Spanning Tree Protocol (STP) detects loops and disables enough links to leave a loop-free tree.",
+          s: [
+            "<b>Step 1 — Match.</b> Spanning Tree Protocol (STP).",
+            "<b>Step 2 — Distractor audit.</b> VLANs segment traffic, port mirror copies it, DHCP assigns addresses — none prevent loops."
+          ],
+          a: "Spanning Tree Protocol (STP).",
+          v: "Without STP, a single accidental loop melts the network in seconds as frames multiply ✓ — STP keeps backup links on standby, activating them only if the primary fails (rapid STP recovers in milliseconds)."
+
+        }), ref: "p.399" },
       { q: "Cat 6 Ethernet cable supports up to:", choices: ["$10$ Gbps (short runs)", "$100$ Mbps", "$1$ Gbps", "$40$ Gbps"], correct: 0,
-        solution: S({ c: "Cat 6: 1 Gbps standard, 10 Gbps over short runs (<55 m). Cat 6a: 10 Gbps full 100 m.", s: ["Cat 5e: 1 Gbps. Cat 7/8: higher rates."], a: "$10$ Gbps (short)" }), ref: "p.399" },
+        solution: S({
+          c: "Category-6 twisted-pair supports 1 Gbps over full 100 m runs, and up to 10 Gbps over SHORTER runs (typically <55 m). Cat 6a extends 10 Gbps to the full 100 m.",
+          s: [
+            "<b>Step 1 — Match.</b> 10 Gbps (short runs).",
+            "<b>Step 2 — Distractor audit.</b> 100 Mbps is Cat 5; 1 Gbps is Cat 5e (and Cat 6 at full length); 40 Gbps needs Cat 8."
+          ],
+          a: "10 Gbps over short runs.",
+          v: "The cabling ladder: Cat 5e → 1 Gbps, Cat 6 → 10 Gbps short / 1 Gbps long, Cat 6a → 10 Gbps full, Cat 8 → 25-40 Gbps ✓. Higher categories add shielding/tighter twists to fight crosstalk at high frequencies."
+
+        }), ref: "p.399" },
       { q: "DNS recursive vs authoritative:", choices: ["Recursive: queries on user's behalf; Authoritative: holds the data", "Same", "Recursive is faster", "Authoritative is local"], correct: 0,
-        solution: S({ c: "Recursive resolver: walks DNS tree until it gets an answer. Authoritative server: holds the actual records for a domain.", s: ["Recursive caches answers for faster repeat lookups."], a: "Recursive vs authoritative" }), ref: "p.400" },
+        solution: S({
+          c: "A RECURSIVE resolver does the legwork — querying down the DNS tree on the user's behalf until it gets an answer. An AUTHORITATIVE server actually HOLDS the records for a domain and gives the definitive reply.",
+          s: [
+            "<b>Step 1 — Match.</b> Recursive queries on your behalf; authoritative holds the data.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; speed/locality aren't the defining distinction — it's WHO does the work vs who owns the records."
+          ],
+          a: "Recursive (does lookups) vs authoritative (holds records).",
+          v: "Your ISP's or 8.8.8.8's recursive resolver walks root → TLD → authoritative, then CACHES the result for speed on repeat lookups ✓. The authoritative server (run by the domain owner) is the source of truth."
+
+        }), ref: "p.400" },
     ],
 
     // Digital — +15
     15: [
       { q: "Sum of products (SOP) vs product of sums (POS):",
         choices: ["SOP: OR of ANDs; POS: AND of ORs", "Same", "POS only for NAND", "SOP is for 2-input"], correct: 0,
-        solution: S({ c: "Two canonical forms of Boolean functions.", s: ["Choose based on which has fewer minterms or which K-map grouping is simpler."], a: "SOP: OR of ANDs; POS: AND of ORs" }), ref: "p.389" },
+        solution: S({
+          c: "Two canonical ways to write a Boolean function. SOP (Sum of Products) = OR of AND-terms (e.g. $AB + C\\bar D$). POS (Product of Sums) = AND of OR-terms (e.g. $(A+B)(\\bar C+D)$).",
+          s: [
+            "<b>Step 1 — Match.</b> SOP = OR of ANDs; POS = AND of ORs.",
+            "<b>Step 2 — Distractor audit.</b> They're not 'the same'; POS isn't NAND-only; SOP isn't limited to 2 inputs."
+          ],
+          a: "SOP: OR of ANDs; POS: AND of ORs.",
+          v: "Pick whichever is simpler: SOP groups the 1s of a K-map, POS groups the 0s ✓. SOP maps naturally to AND-OR (or NAND-NAND) gate networks; POS to OR-AND (or NOR-NOR)."
+
+        }), ref: "p.389" },
       { q: "K-map identifies 4 adjacent cells with output 1: corresponds to:",
         choices: ["Term with 2 variables (3 vars eliminated)", "Single variable", "All 4 variables", "Constant"], correct: 0,
-        solution: S({ c: "$2^k$ cells covered → $n-k$ variables remain (with $n$ vars total). 4 cells = 2 eliminated.", s: ["E.g., 4-var K-map, 4 cells covered: result has 2 variables."], a: "$n-2$ variables" }), ref: "p.390" },
+        solution: S({
+          c: "On a Karnaugh map, grouping $2^k$ adjacent 1-cells eliminates $k$ variables. With $n$ total variables, the resulting product term has $n-k$ variables.",
+          s: [
+            "<b>Step 1 — Cells to k.</b> 4 cells $= 2^2$ → $k=2$ variables eliminated.",
+            "<b>Step 2 — Remaining.</b> In a 4-variable map, $4-2 = 2$ variables remain in the term.",
+            "<b>Step 3 — Distractor audit.</b> 'Single variable' would need 8 cells; 'all 4' would be 1 cell; 'constant' would be all 16 cells."
+          ],
+          a: "A term with $n-2$ variables (2 eliminated).",
+          v: "Bigger groups = simpler logic: each doubling of the group drops one more variable ✓. The whole point of K-maps is to find the LARGEST legal groupings, which give the minimal (cheapest) gate implementation."
+
+        }), ref: "p.390" },
       { q: "Number of states in synchronous counter with 4 FFs:",
         choices: ["$16$", "$4$", "$8$", "$32$"], correct: 0,
-        solution: S({ c: "$2^4 = 16$.", s: [""], a: "$16$" }), ref: "p.391" },
+        solution: S({
+          c: "Each flip-flop stores one bit, so $n$ flip-flops represent $2^n$ distinct states.",
+          s: [
+            "<b>Step 1 — Apply.</b> $2^4 = 16$ states.",
+            "<b>Step 2 — Distractor audit.</b> 4 confuses FFs with states; 8 is $2^3$; 32 is $2^5$."
+          ],
+          a: "16 states.",
+          v: "A 4-bit counter cycles 0→15 then wraps ✓. To make a counter that stops at a non-power-of-2 (say, mod-10 for BCD), you add logic to reset early — but the raw FF capacity is always $2^n$."
+
+        }), ref: "p.391" },
       { q: "Half adder outputs:", choices: ["Sum and Carry", "Just sum", "Sum and Borrow", "Carry and Subtract"], correct: 0,
-        solution: S({ c: "Half adder: A, B → Sum (XOR), Carry (AND).", s: ["No carry-in.", "Full adder: A, B, $C_{in}$ → Sum, $C_{out}$."], a: "Sum, Carry" }), ref: "p.390" },
+        solution: S({
+          c: "A HALF adder adds two single bits A and B, producing a SUM (= A XOR B) and a CARRY (= A AND B). It has no carry-IN.",
+          s: [
+            "<b>Step 1 — Match.</b> Sum and Carry.",
+            "<b>Step 2 — Distractor audit.</b> 'Just sum' omits the carry; 'borrow' and 'subtract' belong to subtractors, not adders."
+          ],
+          a: "Sum and Carry.",
+          v: "The limitation: no carry-in means you can't chain half adders for multi-bit addition ✓ — that needs the FULL adder (A, B, and $C_{in}$ → Sum, $C_{out}$), which is two half adders plus an OR gate."
+
+        }), ref: "p.390" },
       { q: "Full adder Sum logic:", choices: ["$A \\oplus B \\oplus C_{in}$", "$AB + C$", "$A+B+C$", "$ABC$"], correct: 0,
-        solution: S({ c: "Sum is XOR of all three inputs.", s: ["Carry out: $AB + C_{in}(A \\oplus B)$."], a: "$A \\oplus B \\oplus C_{in}$" }), ref: "p.390" },
+        solution: S({
+          c: "A FULL adder sums three bits (A, B, and carry-in). Its SUM output is the XOR of all three: $S = A \\oplus B \\oplus C_{in}$ (sum is 1 when an ODD number of inputs are 1).",
+          s: [
+            "<b>Step 1 — Match.</b> $A \\oplus B \\oplus C_{in}$.",
+            "<b>Step 2 — Distractor audit.</b> $AB+C$, $A+B+C$, $ABC$ are not the XOR-parity that sum requires."
+          ],
+          a: "$S = A \\oplus B \\oplus C_{in}$",
+          v: "The carry-out completes it: $C_{out} = AB + C_{in}(A\\oplus B)$ — carry when at least two inputs are 1 ✓. Chain $n$ full adders, carry to carry, and you get an $n$-bit ripple adder."
+
+        }), ref: "p.390" },
       { q: "Encoder (n-to-log n):", choices: ["Converts $2^n$ inputs to n-bit output", "Reverse of decoder", "Both A and B", "Random"], correct: 0,
-        solution: S({ c: "Encoder: takes single active input out of $2^n$ and outputs the n-bit code of which input is active.", s: ["Priority encoder: handles multiple active inputs by priority."], a: "$2^n \\to n$ bits" }), ref: "p.390" },
+        solution: S({
+          c: "An ENCODER is the reverse of a decoder: given one active line out of $2^n$ inputs, it outputs the $n$-bit binary code identifying WHICH input is active.",
+          s: [
+            "<b>Step 1 — Match.</b> Converts $2^n$ inputs to an $n$-bit output (and yes, it's the reverse of a decoder — 'both A and B').",
+            "<b>Step 2 — Distractor audit.</b> 'Random' is wrong; the answer captures both the $2^n\\to n$ mapping AND the decoder-reverse description."
+          ],
+          a: "$2^n$ inputs → $n$-bit code (reverse of decoder).",
+          v: "A PRIORITY encoder handles the realistic case of multiple simultaneous active inputs by outputting the highest-priority one ✓ — used in interrupt controllers to pick which of many pending interrupts to service first."
+
+        }), ref: "p.390" },
       { q: "ROM vs RAM:", choices: ["ROM read-only after programming; RAM read/write", "Same", "RAM is permanent", "ROM is faster"], correct: 0,
-        solution: S({ c: "ROM: non-volatile, generally read-only. RAM: volatile, full read/write.", s: ["Modern flash: re-writable ROM."], a: "Read-only vs read/write" }), ref: "p.407" },
+        solution: S({
+          c: "ROM (Read-Only Memory) is non-volatile and generally read-only after programming; RAM (Random-Access Memory) is volatile and supports full read/write at high speed.",
+          s: [
+            "<b>Step 1 — Match.</b> ROM read-only (after programming); RAM read/write.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; RAM is VOLATILE not permanent; ROM isn't faster than RAM."
+          ],
+          a: "ROM = read-only/non-volatile; RAM = read/write/volatile.",
+          v: "Modern FLASH blurs the line — it's re-writable non-volatile 'ROM' ✓. The key trade: RAM is fast but loses data on power-off (working memory); ROM/flash persists (firmware, storage)."
+
+        }), ref: "p.407" },
       { q: "Flash memory cell stores data as:",
         choices: ["Charge on floating gate", "Magnetic field", "Optical state", "Mechanical"], correct: 0,
-        solution: S({ c: "Floating-gate transistor: trapped charge changes threshold voltage.", s: ["Erase: high voltage tunnels charge off (slow).", "Wears out after thousands to millions of erase cycles."], a: "Charge on floating gate" }), ref: "p.407" },
+        solution: S({
+          c: "A flash cell is a floating-gate transistor: charge trapped on an electrically isolated 'floating' gate shifts the transistor's threshold voltage, which encodes the stored bit(s).",
+          s: [
+            "<b>Step 1 — Match.</b> Charge on a floating gate.",
+            "<b>Step 2 — Distractor audit.</b> Magnetic is hard-disk/tape; optical is CD/DVD; mechanical isn't a memory mechanism."
+          ],
+          a: "Trapped charge on a floating gate.",
+          v: "The trapped charge persists with no power (non-volatile), but each program/erase cycle slightly damages the oxide ✓ — which is why flash and SSDs WEAR OUT after thousands-to-millions of cycles, and use wear-leveling to spread the damage."
+
+        }), ref: "p.407" },
       { q: "BCD (Binary-Coded Decimal): each decimal digit takes:",
         choices: ["$4$ bits", "$8$ bits", "$3$ bits", "$10$ bits"], correct: 0,
-        solution: S({ c: "BCD: 0-9 in 4 bits each. Easier human-readable, slight waste vs pure binary.", s: ["Used in: calculators, digital meters, some financial systems."], a: "$4$ bits" }), ref: "p.388" },
+        solution: S({
+          c: "BCD encodes each decimal digit (0-9) in its own 4-bit binary group. Four bits cover 0-15, enough for 0-9 (with 10-15 unused/wasted).",
+          s: [
+            "<b>Step 1 — Match.</b> 4 bits per digit.",
+            "<b>Step 2 — Distractor audit.</b> 3 bits only reach 7; 8 and 10 bits are more than one decimal digit needs."
+          ],
+          a: "4 bits per decimal digit.",
+          v: "BCD trades efficiency for easy decimal display/conversion ✓ — slight waste (6 of 16 codes unused) but no binary↔decimal rounding, which is why it appears in calculators, digital clocks, and some financial systems."
+
+        }), ref: "p.388" },
       { q: "Gray code 4-bit: how many bits change between consecutive codes?",
         choices: ["$1$", "$2$", "Variable", "$4$"], correct: 0,
-        solution: S({ c: "Reflected binary code: each transition changes only 1 bit.", s: ["Used in: rotary encoders to avoid intermediate erroneous states."], a: "$1$" }), ref: "p.388" },
+        solution: S({
+          c: "Gray code (reflected binary) is designed so that consecutive values differ in EXACTLY ONE bit.",
+          s: [
+            "<b>Step 1 — Match.</b> 1 bit.",
+            "<b>Step 2 — Distractor audit.</b> Ordinary binary changes MANY bits at some steps (e.g. 0111→1000 flips all 4); 'variable' and '4' describe binary, not Gray."
+          ],
+          a: "Exactly 1 bit.",
+          v: "The single-bit change is what makes Gray code essential for ROTARY ENCODERS and ADCs ✓ — if multiple bits changed at once, transient misreads during the transition could give wildly wrong positions. One bit = no ambiguous intermediate states."
+
+        }), ref: "p.388" },
       { q: "Hexadecimal place values:", choices: ["1, 16, 256, ...", "1, 8, 64, ...", "1, 10, 100, ...", "1, 2, 4, ..."], correct: 0,
-        solution: S({ c: "Base 16: digit position $i$ has value $16^i$.", s: [""], a: "$16^0, 16^1, ...$" }), ref: "p.388" },
+        solution: S({
+          c: "Hexadecimal is base-16, so digit position $i$ (from the right, starting at 0) has place value $16^i$: 1, 16, 256, 4096, …",
+          s: [
+            "<b>Step 1 — Match.</b> 1, 16, 256, …",
+            "<b>Step 2 — Distractor audit.</b> 1,8,64 is octal (base 8); 1,10,100 is decimal; 1,2,4 is binary."
+          ],
+          a: "$16^0, 16^1, 16^2, \\ldots$ = 1, 16, 256, …",
+          v: "Each hex digit = exactly 4 bits, which is why hex is the compact shorthand for binary ✓ — one hex digit per nibble, two per byte (so 0xFF = 255 = one byte of all 1s)."
+
+        }), ref: "p.388" },
       { q: "Edge-triggered FF vs level-triggered latch:",
         choices: ["FF samples at edge (transition); latch transparent during level", "Same", "Latch is faster", "FF can't be clocked"], correct: 0,
-        solution: S({ c: "Latch: output follows input while enable is high. Flip-flop: only samples on clock edge.", s: ["FF: glitch-tolerant. Latch: transparent."], a: "Edge vs level" }), ref: "p.391" },
+        solution: S({
+          c: "A LATCH is level-sensitive: its output follows the input the whole time the enable is asserted (transparent). A FLIP-FLOP is edge-triggered: it samples the input only at the clock EDGE (rising or falling).",
+          s: [
+            "<b>Step 1 — Match.</b> FF samples at the edge; latch is transparent during the level.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; latch isn't reliably 'faster' in a useful sense; FFs are definitely clockable."
+          ],
+          a: "Edge-triggered (FF) vs level-transparent (latch).",
+          v: "Edge-triggering makes FFs glitch-tolerant and the backbone of synchronous design ✓ — inputs only matter at the clock instant, so combinational glitches between edges are ignored. Latches are simpler/smaller but trickier to time."
+
+        }), ref: "p.391" },
       { q: "Asynchronous reset:", choices: ["Independent of clock — immediate", "Edge-triggered", "Synchronous to clock", "Variable timing"], correct: 0,
-        solution: S({ c: "Async reset: assert anytime → immediate output to 0. No clock needed.", s: ["Issue: release timing must be away from clock edge to avoid metastability."], a: "Clock-independent" }), ref: "p.391" },
+        solution: S({
+          c: "An ASYNCHRONOUS reset forces the output to 0 IMMEDIATELY whenever asserted, independent of the clock — it doesn't wait for an edge.",
+          s: [
+            "<b>Step 1 — Match.</b> Independent of clock — immediate.",
+            "<b>Step 2 — Distractor audit.</b> 'Edge-triggered' / 'synchronous to clock' describe SYNCHRONOUS reset; 'variable timing' is wrong."
+          ],
+          a: "Clock-independent, immediate.",
+          v: "Async reset is great for power-on initialization (works before the clock is even running) ✓ — but its RELEASE must be timed away from the clock edge to avoid metastability, a classic FPGA design gotcha."
+
+        }), ref: "p.391" },
       { q: "Multiplexer truth table for 2-to-1 with select S:",
         choices: ["Output = A if S=0, B if S=1", "Output = always A", "Output = A AND B", "Output = $\\bar{S}$"], correct: 0,
-        solution: S({ c: "MUX selects between data inputs based on select line.", s: ["Boolean: $Y = \\bar{S}A + SB$."], a: "S selects A or B" }), ref: "p.390" },
+        solution: S({
+          c: "A 2-to-1 multiplexer routes one of two data inputs to the output based on the select line: output = A when S=0, B when S=1. Boolean: $Y = \\bar S A + S B$.",
+          s: [
+            "<b>Step 1 — Match.</b> Output = A if S=0, B if S=1.",
+            "<b>Step 2 — Distractor audit.</b> 'Always A' ignores the select; 'A AND B' is a gate, not a MUX; '$\\bar S$' is just the inverted select."
+          ],
+          a: "S selects A (S=0) or B (S=1).",
+          v: "MUXes are universal building blocks — a 2:1 MUX can even implement any logic gate ✓, and they're how CPUs steer data (register selection, ALU input routing). The select line is the 'traffic cop'."
+
+        }), ref: "p.390" },
       { q: "Convert $\\text{1A}_{16}$ to octal:", choices: ["$32_8$", "$26_8$", "$12_8$", "$42_8$"], correct: 0,
-        solution: S({ c: "Hex → binary → octal.", s: ["1A in binary: 0001 1010.", "Group in 3s (from right): 011 010 = 32₈."], a: "$32_8$", v: "Check: 1A₁₆ = 26₁₀ = 32₈ ✓" }), ref: "p.388" },
+        solution: S({
+          c: "Convert between non-decimal bases via BINARY as a bridge: hex digit → 4 bits, then regroup the bits into 3s for octal.",
+          s: [
+            "<b>Step 1 — Hex to binary.</b> 1A₁₆ = 0001 1010.",
+            "<b>Step 2 — Regroup in 3s (from right).</b> 011 010.",
+            "<b>Step 3 — Each group to octal.</b> 011=3, 010=2 → 32₈.",
+            "<b>Step 4 — Distractor audit.</b> 26₈, 12₈, 42₈ come from regrouping errors."
+          ],
+          a: "32₈",
+          v: "Decimal cross-check: 1A₁₆ = 1×16+10 = 26₁₀ = 3×8+2 = 32₈ ✓. Binary is the universal bridge — hex groups bits in 4s, octal in 3s, so going hex↔octal directly is error-prone; route through binary."
+
+        }), ref: "p.388" },
     ],
 
     // CompSys — +10
     16: [
       { q: "Page replacement algorithm LRU:", choices: ["Least Recently Used", "Last Read Update", "Long-Running Unit", "Other"], correct: 0,
-        solution: S({ c: "LRU: evict the page not accessed for longest. Approximates optimal but tracking is costly.", s: ["Variants: LRU-k, second-chance, clock."], a: "Least Recently Used" }), ref: "p.408" },
+        solution: S({
+          c: "When memory is full and a new page is needed, a page-replacement algorithm picks a victim to evict. LRU = Least Recently Used: evict the page that hasn't been accessed for the longest time.",
+          s: [
+            "<b>Step 1 — Match.</b> Least Recently Used.",
+            "<b>Step 2 — Distractor audit.</b> The other expansions are invented."
+          ],
+          a: "Least Recently Used.",
+          v: "LRU exploits LOCALITY — recently-used pages are likely to be used again ✓, approximating the optimal (but unrealizable) 'evict what's needed furthest in the future' policy. Exact LRU is costly to track, so real systems use approximations (clock/second-chance)."
+
+        }), ref: "p.408" },
       { q: "Cache write policy: write-through vs write-back:",
         choices: ["Through: writes immediately to memory; back: only on eviction", "Same", "Back is slower", "Through is for caches"], correct: 0,
-        solution: S({ c: "Write-through: every write goes to memory (simple, slow). Write-back: dirty bit tracks; write to memory on eviction (fast, complex).", s: [""], a: "Immediate vs deferred memory write" }), ref: "p.407" },
+        solution: S({
+          c: "WRITE-THROUGH updates main memory on every write (simple, always consistent, but slow). WRITE-BACK updates only the cache, marking it 'dirty', and writes to memory only when the line is evicted (fast, but needs coherency care).",
+          s: [
+            "<b>Step 1 — Match.</b> Through = immediate to memory; back = deferred until eviction.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; write-back is FASTER (fewer memory writes); both are cache policies."
+          ],
+          a: "Write-through (immediate) vs write-back (deferred).",
+          v: "Write-back wins on performance by coalescing repeated writes to the same line ✓, but the dirty data living only in cache complicates multi-core coherency and crash recovery — which write-through avoids at a speed cost."
+
+        }), ref: "p.407" },
       { q: "CPU clock speed effect on power:",
         choices: ["Roughly proportional to clock (linear)", "Squared", "Cubed", "No relation"], correct: 0,
-        solution: S({ c: "Dynamic power: $P = CV^2 f$. Linear in frequency f.", s: ["But also: higher f often needs higher V → $V^2$ super-linear. Hence sub-cubic overall."], a: "Linear in $f$ (V constant)" }), ref: "p.408" },
+        solution: S({
+          c: "Dynamic CPU power is $P = CV^2 f$ — LINEAR in clock frequency $f$ (at fixed voltage). More switching per second means proportionally more power.",
+          s: [
+            "<b>Step 1 — Match.</b> Roughly proportional to clock (linear in f).",
+            "<b>Step 2 — Distractor audit.</b> Squared/cubed overstate the direct frequency dependence; 'no relation' is wrong."
+          ],
+          a: "Linear in $f$ (at constant V).",
+          v: "But there's a catch: pushing higher $f$ usually requires higher $V$, and power goes as $V^2$ — so real frequency increases cost MORE than linearly (toward cubic) ✓. This is exactly why CPUs went multi-core instead of just clocking ever higher."
+
+        }), ref: "p.408" },
       { q: "Two-level cache (L1 + L2): typical sizes:",
         choices: ["L1: tens of KB; L2: hundreds KB to MBs", "Both 1 MB", "L1 bigger", "Same"], correct: 0,
-        solution: S({ c: "Modern CPU: L1 32-64 KB (per core), L2 256 KB - 1 MB (per core), L3 4-32 MB (shared).", s: [""], a: "L1 small, L2 medium" }), ref: "p.407" },
+        solution: S({
+          c: "The cache hierarchy trades size for speed: L1 is tiny and fastest (tens of KB per core), L2 is larger and slightly slower (hundreds of KB to ~1 MB per core), L3 is large and shared (MBs).",
+          s: [
+            "<b>Step 1 — Match.</b> L1 tens of KB; L2 hundreds KB to MBs.",
+            "<b>Step 2 — Distractor audit.</b> 'Both 1 MB' and 'L1 bigger' invert the hierarchy; 'same' ignores the size/speed gradient."
+          ],
+          a: "L1 small (~32-64 KB), L2 medium (256 KB-1 MB).",
+          v: "Each level trades capacity for latency: L1 ~1-4 cycles, L2 ~10, L3 ~40, DRAM ~200+ ✓. Small-and-fast close to the core, big-and-slower further out — the same principle as the whole memory hierarchy."
+
+        }), ref: "p.407" },
       { q: "Branch predictor accuracy in modern CPUs:",
         choices: ["95-99% typically", "50% (random)", "Always 100%", "Below 70%"], correct: 0,
-        solution: S({ c: "Modern predictors (perceptron, TAGE) achieve 95-99% on real workloads.", s: ["Critical: misprediction costs 15-20 cycles."], a: "95-99%" }), ref: "p.408" },
+        solution: S({
+          c: "Modern branch predictors (TAGE, perceptron-based) achieve 95-99% accuracy on typical workloads by learning branch history patterns.",
+          s: [
+            "<b>Step 1 — Match.</b> 95-99%.",
+            "<b>Step 2 — Distractor audit.</b> 50% would be random (useless); 100% is unattainable; below 70% would cripple a deep pipeline."
+          ],
+          a: "95-99% typically.",
+          v: "Why such high accuracy is vital: each misprediction flushes the pipeline at a cost of ~15-20 cycles ✓ — so even the residual 1-5% miss rate is a major performance factor, and a 1% accuracy gain is worth real silicon."
+
+        }), ref: "p.408" },
       { q: "DMA (Direct Memory Access):", choices: ["I/O device writes to memory without CPU", "CPU controls all I/O", "Faster CPU", "Memory expansion"], correct: 0,
-        solution: S({ c: "DMA controller transfers data between I/O and memory without CPU intervention.", s: ["CPU free for other work during transfer.", "Used: disk I/O, network, audio."], a: "I/O ↔ memory without CPU" }), ref: "p.408" },
+        solution: S({
+          c: "DMA lets an I/O device transfer data directly to/from memory WITHOUT the CPU moving each byte. A DMA controller handles the transfer, freeing the CPU for other work.",
+          s: [
+            "<b>Step 1 — Match.</b> I/O device writes to memory without CPU.",
+            "<b>Step 2 — Distractor audit.</b> 'CPU controls all I/O' is the opposite (programmed I/O); DMA isn't a faster CPU or memory expansion."
+          ],
+          a: "I/O ↔ memory transfer without CPU involvement.",
+          v: "Without DMA, the CPU would waste cycles copying every byte from disk/network ✓ — DMA offloads that, signaling the CPU with an interrupt only when the whole block is done. Essential for high-throughput disk, network, and audio."
+
+        }), ref: "p.408" },
       { q: "Interrupt latency:", choices: ["Time from event to handler start", "Total interrupt processing time", "Memory access", "Variable always"], correct: 0,
-        solution: S({ c: "Interrupt latency: response time from hardware signal to ISR execution.", s: ["Affected by: pending interrupts, CPU state, ISR priority."], a: "Event to handler" }), ref: "p.408" },
+        solution: S({
+          c: "Interrupt latency is the time from when the hardware event SIGNALS to when the interrupt service routine (ISR) actually STARTS executing.",
+          s: [
+            "<b>Step 1 — Match.</b> Time from event to handler start.",
+            "<b>Step 2 — Distractor audit.</b> 'Total processing time' is the full ISR duration (a different metric); memory access and 'variable always' aren't the definition."
+          ],
+          a: "Event-to-handler-start delay.",
+          v: "Low, predictable latency is critical in REAL-TIME systems (motor control, safety) ✓ — it's affected by higher-priority pending interrupts, whether interrupts are currently disabled, and CPU pipeline state. Deterministic latency matters more than raw speed for control."
+
+        }), ref: "p.408" },
       { q: "Memory address ' 0x1000 ' in decimal:", choices: ["$4096$", "$1000$", "$10$", "$256$"], correct: 0,
-        solution: S({ c: "Hex 1000 = $16^3 = 4096$.", s: [""], a: "$4096$" }), ref: "p.388" },
+        solution: S({
+          c: "0x1000 is hexadecimal. The leading 1 sits in the $16^3$ place: $1\\times16^3 = 4096$.",
+          s: [
+            "<b>Step 1 — Evaluate.</b> $1\\times16^3 + 0 + 0 + 0 = 4096$.",
+            "<b>Step 2 — Distractor audit.</b> 1000 reads it as decimal; 10 and 256 mis-place the digit (256 = $16^2$)."
+          ],
+          a: "4096.",
+          v: "Worth memorizing the hex landmarks: 0x100 = 256, 0x400 = 1024 (1 KB), 0x1000 = 4096 (4 KB — a common page size) ✓. That's why memory pages and alignment boundaries are quoted in round hex numbers."
+
+        }), ref: "p.388" },
       { q: "Spin lock vs sleep-based lock:",
         choices: ["Spin: busy-wait; sleep: yield to OS scheduler", "Same", "Sleep is busy", "Spin is for memory"], correct: 0,
-        solution: S({ c: "Spinlock: CPU loops checking until lock free (low latency, wastes CPU). Sleep-based: thread sleeps, OS wakes when available (higher latency, no CPU waste).", s: ["Use spinlock for very short critical sections."], a: "Busy-wait vs yield" }), ref: "p.408" },
+        solution: S({
+          c: "A SPINLOCK busy-waits — the thread loops checking the lock, burning CPU but reacting instantly. A SLEEP-based lock yields to the OS scheduler, wasting no CPU but incurring wake-up latency.",
+          s: [
+            "<b>Step 1 — Match.</b> Spin = busy-wait; sleep = yield to scheduler.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; sleep is NOT busy; spinlocks are for CPU sync, not memory."
+          ],
+          a: "Spin = busy-wait; sleep = yield.",
+          v: "Use a spinlock only for VERY short critical sections where the wake-up overhead would exceed the wait ✓ — common in kernel/multicore code. For longer waits, sleeping is far better than wasting a core spinning."
+
+        }), ref: "p.408" },
       { q: "Multicore CPU sharing L3 cache:", choices: ["Each core has private L1/L2; shared L3", "All private", "Single cache", "L1 shared"], correct: 0,
-        solution: S({ c: "Modern multicore: L1/L2 per core (low latency), L3 shared across cores (capacity, coherency).", s: [""], a: "Private L1/L2, shared L3" }), ref: "p.407" },
+        solution: S({
+          c: "In a modern multicore CPU, each core has its own private L1 and L2 (for low-latency local access), while the larger L3 is SHARED across all cores (for capacity and inter-core data sharing).",
+          s: [
+            "<b>Step 1 — Match.</b> Private L1/L2 per core; shared L3.",
+            "<b>Step 2 — Distractor audit.</b> 'All private' misses the shared L3; 'single cache' and 'L1 shared' don't match real designs."
+          ],
+          a: "Private L1/L2, shared L3.",
+          v: "The shared L3 lets cores exchange data without going to slow DRAM ✓, but it raises CACHE COHERENCY challenges — protocols like MESI keep each core's private caches consistent when they touch the same memory."
+
+        }), ref: "p.407" },
     ],
 
     // Software — +10
     17: [
       { q: "Hash function should be:",
         choices: ["Uniform distribution + deterministic + fast", "Slow", "Random", "Just unique"], correct: 0,
-        solution: S({ c: "Good hash: same input → same output (deterministic), spread keys uniformly (low collisions), compute fast.", s: ["Cryptographic hashes also need irreversibility."], a: "Uniform + deterministic + fast" }), ref: "p.415" },
+        solution: S({
+          c: "A good (non-cryptographic) hash function is DETERMINISTIC (same input → same output), DISTRIBUTES keys uniformly (minimizing collisions), and is FAST to compute.",
+          s: [
+            "<b>Step 1 — Match.</b> Uniform distribution + deterministic + fast.",
+            "<b>Step 2 — Distractor audit.</b> 'Slow' is undesirable; 'random' breaks determinism (you couldn't find the key again); 'just unique' is impossible in general (pigeonhole)."
+          ],
+          a: "Uniform, deterministic, and fast.",
+          v: "Uniformity keeps hash-table operations near $O(1)$ by avoiding collision pileups ✓. CRYPTOGRAPHIC hashes add more requirements (irreversibility, collision-resistance) at the cost of speed — a different tool for a different job."
+
+        }), ref: "p.415" },
       { q: "Greedy algorithm characteristic:", choices: ["Locally optimal choice each step", "Considers all options globally", "Random", "Recursion"], correct: 0,
-        solution: S({ c: "Greedy: pick locally best option; may not yield global optimum.", s: ["Works for: minimum spanning tree (Kruskal/Prim), Dijkstra, Huffman coding.", "Fails for: 0-1 knapsack, TSP."], a: "Locally optimal" }), ref: "p.415" },
+        solution: S({
+          c: "A GREEDY algorithm makes the locally-optimal choice at each step, hoping it leads to a global optimum. It's simple and fast but doesn't always find the best overall solution.",
+          s: [
+            "<b>Step 1 — Match.</b> Locally optimal choice each step.",
+            "<b>Step 2 — Distractor audit.</b> 'Considers all options globally' is brute force/DP; 'random' and 'recursion' aren't the defining trait."
+          ],
+          a: "Locally-optimal choice at each step.",
+          v: "Greedy is PROVABLY optimal for some problems (Dijkstra, Kruskal/Prim MST, Huffman coding) but FAILS others (0-1 knapsack, TSP) ✓ — knowing which is which is the skill. When greedy fails, dynamic programming usually rescues it."
+
+        }), ref: "p.415" },
       { q: "Dynamic programming benefit over plain recursion:",
         choices: ["Avoids re-computing same subproblems (memoization)", "Always uses less code", "Faster I/O", "Removes recursion"], correct: 0,
-        solution: S({ c: "DP: solve each subproblem once, cache, reuse.", s: ["Fibonacci: naive recursive $O(2^n)$ → DP $O(n)$.", "Examples: shortest path, knapsack, edit distance."], a: "Memoization" }), ref: "p.415" },
+        solution: S({
+          c: "Dynamic programming solves each subproblem ONCE and caches the result (memoization), avoiding the exponential re-computation that plain recursion suffers on overlapping subproblems.",
+          s: [
+            "<b>Step 1 — Match.</b> Avoids re-computing the same subproblems.",
+            "<b>Step 2 — Distractor audit.</b> DP isn't about less code, faster I/O, or removing recursion (it can BE recursive, just memoized)."
+          ],
+          a: "Memoization (reuse of subproblem results).",
+          v: "The Fibonacci example is dramatic: naive recursion is $O(2^n)$, DP is $O(n)$ ✓ — same recursion tree, but caching collapses the repeated branches. DP applies when a problem has overlapping subproblems AND optimal substructure."
+
+        }), ref: "p.415" },
       { q: "Linear search vs binary search:",
         choices: ["Linear $O(n)$ unsorted; Binary $O(\\log n)$ requires sorted", "Same", "Binary always faster", "Linear for sorted only"], correct: 0,
-        solution: S({ c: "Binary search requires sorted input. Cuts search space in half each step.", s: ["Linear: any array. Binary: sorted."], a: "Linear $O(n)$, Binary $O(\\log n)$ sorted" }), ref: "p.415" },
+        solution: S({
+          c: "LINEAR search scans every element — $O(n)$ — and works on ANY array. BINARY search halves the search space each step — $O(\\log n)$ — but REQUIRES sorted input.",
+          s: [
+            "<b>Step 1 — Match.</b> Linear $O(n)$ on unsorted; binary $O(\\log n)$ requires sorted.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; binary isn't 'always faster' (needs sorting first); the sorted-requirement is on BINARY, not linear."
+          ],
+          a: "Linear $O(n)$ (any); binary $O(\\log n)$ (sorted).",
+          v: "The trade: if you search once, linear may win (no sort needed); if you search REPEATEDLY, sort once ($O(n\\log n)$) then binary-search many times ✓. Binary search on a million items takes only ~20 comparisons."
+
+        }), ref: "p.415" },
       { q: "Stack memory typical size for a thread:",
         choices: ["Few KB to MBs (OS-dependent)", "Always 1 GB", "Always 64 bytes", "Unlimited"], correct: 0,
-        solution: S({ c: "Thread stack: typically 1-8 MB (Linux default), few KB to MB on embedded.", s: ["Recursion depth limited by stack size.", "Configurable per OS / language."], a: "Few KB - MBs" }), ref: "p.408" },
+        solution: S({
+          c: "Each thread gets a fixed stack, typically a few KB to a few MB (Linux default ~8 MB; embedded systems much smaller). It holds local variables and call frames.",
+          s: [
+            "<b>Step 1 — Match.</b> Few KB to MBs (OS-dependent).",
+            "<b>Step 2 — Distractor audit.</b> 'Always 1 GB' is far too large; '64 bytes' far too small; 'unlimited' is wrong — stacks are bounded."
+          ],
+          a: "Few KB to MBs (OS/config-dependent).",
+          v: "This bound is why deep recursion causes STACK OVERFLOW ✓ — each call consumes a frame, and runaway depth exhausts the fixed stack. Heavy data should go on the heap (dynamically sized) instead."
+
+        }), ref: "p.408" },
       { q: "Iterative vs recursive: factorial:",
         choices: ["Iterative more memory-efficient; recursive more readable", "Same", "Recursive is faster", "Iterative is slower"], correct: 0,
-        solution: S({ c: "Recursion: clean but stack overhead. Iteration: minimal memory.", s: ["Tail-call optimization (in some languages): recursion equivalent to loop."], a: "Iterative: less mem; Recursive: cleaner" }), ref: "p.415" },
+        solution: S({
+          c: "Computing factorial iteratively (a loop) uses constant memory; recursively it's cleaner to read but each call adds a stack frame (memory overhead, risk of overflow).",
+          s: [
+            "<b>Step 1 — Match.</b> Iterative is more memory-efficient; recursive is more readable.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; recursion isn't faster (call overhead); iteration isn't slower in any meaningful way here."
+          ],
+          a: "Iterative: less memory; recursive: cleaner.",
+          v: "In languages with TAIL-CALL optimization, tail-recursion compiles to a loop — erasing the memory penalty ✓. Otherwise, deep recursion risks stack overflow, so iteration is the safe choice for large inputs."
+
+        }), ref: "p.415" },
       { q: "Big-O of sum of arithmetic series $1+2+...+n$:",
         choices: ["$O(1)$ closed form, but $O(n)$ if computed iteratively", "$O(n^2)$ always", "$O(\\log n)$", "$O(n!)$"], correct: 0,
-        solution: S({ c: "Closed form: $n(n+1)/2$ — constant time. Loop sum: linear.", s: [""], a: "$O(1)$ formula" }), ref: "p.415" },
+        solution: S({
+          c: "The sum $1+2+\\cdots+n$ has the CLOSED FORM $n(n+1)/2$, computable in $O(1)$ (constant time). Only if you loop and add term-by-term is it $O(n)$.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(1)$ with the formula; $O(n)$ if summed iteratively.",
+            "<b>Step 2 — Distractor audit.</b> $O(n^2)$, $O(\\log n)$, $O(n!)$ don't describe either approach."
+          ],
+          a: "$O(1)$ via the closed-form formula.",
+          v: "This is the classic lesson that a smarter ALGORITHM beats brute force: Gauss's $n(n+1)/2$ turns an n-step loop into one multiplication ✓ — recognizing closed forms can collapse complexity dramatically."
+
+        }), ref: "p.415" },
       { q: "Object-oriented programming pillars (4):",
         choices: ["Encapsulation, Inheritance, Polymorphism, Abstraction", "Speed, Stability, Security, Scale", "Code, Data, Files, Network", "Bits, Bytes, Words, Pages"], correct: 0,
-        solution: S({ c: "Standard OOP concepts: hide internals (Enc), reuse code (Inh), uniform interface (Poly), simplify (Abs).", s: [""], a: "E, I, P, A" }), ref: "p.415" },
+        solution: S({
+          c: "The four pillars of OOP: ENCAPSULATION (hide internal data behind interfaces), INHERITANCE (derive new classes from existing ones), POLYMORPHISM (one interface, many implementations), ABSTRACTION (expose only essential features).",
+          s: [
+            "<b>Step 1 — Match.</b> Encapsulation, Inheritance, Polymorphism, Abstraction.",
+            "<b>Step 2 — Distractor audit.</b> The other lists are invented buzzwords."
+          ],
+          a: "Encapsulation, Inheritance, Polymorphism, Abstraction.",
+          v: "Together they manage COMPLEXITY: encapsulation protects state, inheritance reuses code, polymorphism enables flexible extension, abstraction hides detail ✓ — the foundation of Java, C++, Python class design."
+
+        }), ref: "p.415" },
       { q: "Linked list reverse: time complexity:",
         choices: ["$O(n)$", "$O(1)$", "$O(\\log n)$", "$O(n^2)$"], correct: 0,
-        solution: S({ c: "Visit each node once, swap pointers.", s: [""], a: "$O(n)$" }), ref: "p.415" },
+        solution: S({
+          c: "Reversing a singly-linked list requires visiting each node once and re-pointing its 'next' link — a single pass, $O(n)$, with $O(1)$ extra space.",
+          s: [
+            "<b>Step 1 — Match.</b> $O(n)$.",
+            "<b>Step 2 — Distractor audit.</b> $O(1)$ is impossible (every node's pointer must change); $O(\\log n)$ and $O(n^2)$ misjudge the single pass."
+          ],
+          a: "$O(n)$.",
+          v: "It's done in-place with three pointers (prev, curr, next) — $O(n)$ time, $O(1)$ space ✓, a favorite interview question. You can't beat $O(n)$ since every node's link must be touched."
+
+        }), ref: "p.415" },
       { q: "Recursive descent parser used for:",
         choices: ["Recursive grammar parsing", "Iterative algorithms", "Memory management", "OS scheduling"], correct: 0,
-        solution: S({ c: "Recursive descent: top-down parser using recursive functions per grammar rule.", s: ["Used in: compilers, interpreters, JSON/XML parsing."], a: "Grammar parsing" }), ref: "p.415" },
+        solution: S({
+          c: "A recursive-descent parser is a top-down parser built from a set of mutually-recursive functions, one per grammar rule. It's used to parse structured, recursively-defined languages.",
+          s: [
+            "<b>Step 1 — Match.</b> Recursive grammar parsing.",
+            "<b>Step 2 — Distractor audit.</b> It's not for iterative algorithms, memory management, or OS scheduling — it's a PARSING technique."
+          ],
+          a: "Parsing recursive grammars (top-down).",
+          v: "Each grammar production becomes a function that calls others — naturally handling nested structure ✓. It's how many compilers, interpreters, and JSON/XML/expression parsers are built by hand (for grammars without left-recursion)."
+
+        }), ref: "p.415" },
     ],
   };
 
