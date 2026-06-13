@@ -114,6 +114,10 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
   standard, 4 checkpoints. TWO broken answer keys repaired: RL transient (computed 3.16 A but
   correct:0 said 1.97 A) and unbalanced Y-to-Delta (computed 18.33 ohm but choice said 13.33 ohm)
   — both had embedded meta-commentary admitting the mismatch, now removed. Integrity scan 101/101.
+- **2026-06-12 — extra4 (Round 5) IN PROGRESS: Ch 1-6 done (77/194).** RESUME AT CH 7 (Linear
+  Systems, 10 q), then Ch 8-17. NOTE: this file uses COMPACT INLINE format — solutions end with
+  ' }), ref:' on the same line, so the replacer anchor is ' }), ref:' (not the multi-line '\n        })').
+  Keep solutions compact (drill-style questions). Same teach-from-zero standard otherwise.
 - **Remaining upgrade targets:** questions.js (164), extra4 (194),
   extra5 (209), extra6 (181), extra7 (222), extra8 (191) — standard S() format; extra9/extra10
   (~60 q) use template-literal SVG helpers and need their own careful session.

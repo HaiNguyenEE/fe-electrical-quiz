@@ -585,80 +585,310 @@
     5: [
       { q: "Aluminum vs copper as a conductor: aluminum has ___ conductivity:",
         choices: ["Lower (about 60% of Cu)", "Higher", "Same", "Zero"], correct: 0,
-        solution: S({ c: "Cu $\\sigma \\approx 5.96\\times 10^7$ S/m. Al $\\sigma \\approx 3.5\\times 10^7$ S/m. Ratio: 58.7%.", s: ["Al is lighter and cheaper, used in transmission lines.", "Cu is more conductive, used in motor windings, buildings."], a: "Al ≈ 60% of Cu", v: "Same current handling: aluminum wire needs to be ~1.6× larger cross-section." }), ref: "Handbook p.354" },
+        solution: S({
+          c: "Conductivity benchmark: copper $\\sigma \\approx 5.96\\times10^{7}$ S/m, aluminum $\\approx 3.5\\times10^{7}$ S/m — aluminum conducts at roughly 60% of copper.",
+          s: [
+            "<b>Step 1 — Take the ratio.</b> $3.5/5.96 \\approx 0.59$ → ~60%.",
+            "<b>Step 2 — Why aluminum still wins overhead.</b> Per unit WEIGHT it actually conducts better (≈2× lighter), so transmission lines are aluminum; buildings and windings stay copper.",
+            "<b>Step 3 — Distractor audit.</b> 'Higher'/'same' invert or ignore the data; zero is absurd for a metal."
+          ],
+          a: "Lower — about 60% of copper.",
+          v: "Design consequence: equal-resistance aluminum needs ~1.6× the cross-section ✓ — consistent with the resistivity ratio seen from the other side ($\\rho_{Al}/\\rho_{Cu} \\approx 1.6$)."
+
+        }), ref: "Handbook p.354" },
       { q: "Ohm's law in terms of current density:",
         choices: ["$\\vec{J} = \\sigma\\vec{E}$", "$V = IR$", "$\\vec{F} = q\\vec{E}$", "$P = IV$"], correct: 0,
-        solution: S({ c: "Microscopic form: current density proportional to E-field via conductivity.", s: ["Integrated form: $V = IR$ (over a uniform conductor of length $L$, area $A$, where $R = \\rho L/A$).", "Choice C is Lorentz force, not Ohm's law."], a: "$\\vec{J} = \\sigma\\vec{E}$", v: "$\\sigma$ is the constant of proportionality. In free space, no current flows (vacuum has $\\sigma = 0$)." }), ref: "Handbook p.354" },
+        solution: S({
+          c: "Ohm's law has two faces: the FIELD (microscopic) form $\\vec J = \\sigma\\vec E$ — current density proportional to local field — and the CIRCUIT form $V = IR$ you get by integrating it over a uniform conductor.",
+          s: [
+            "<b>Step 1 — Match.</b> 'In terms of current density' = $\\vec J = \\sigma\\vec E$.",
+            "<b>Step 2 — See the connection.</b> Integrate: $V = EL$, $I = JA$ → $V = (\\rho L/A)I = IR$ — the circuit law falls out.",
+            "<b>Step 3 — Distractor audit.</b> $V = IR$ is the integrated cousin (right law, wrong form for the question); $\\vec F = q\\vec E$ is the Lorentz force; $P = IV$ is power."
+          ],
+          a: "$\\vec J = \\sigma\\vec E$",
+          v: "Unit check: (S/m)(V/m) = A/m² ✓. The field form is the one that generalizes — to non-uniform conductors, semiconductors, and electromagnetic field solvers."
+
+        }), ref: "Handbook p.354" },
       { q: "Power dissipation density in resistive material:",
         choices: ["$\\sigma E^2$ (W/m³)", "$\\sigma E$", "$E/\\sigma$", "$\\rho J$"], correct: 0,
-        solution: S({ c: "Power per unit volume: $p = \\vec{J}\\cdot\\vec{E} = \\sigma E^2$.", s: ["Integrated over volume: total $P = I^2 R$."], a: "$\\sigma E^2$ (W/m³)", v: "Material limits set max E-field (else dielectric breakdown)." }), ref: "Handbook p.354" },
+        solution: S({
+          c: "Power per unit VOLUME in a conductor: $p = \\vec J\\cdot\\vec E = \\sigma E^{2}$ (equivalently $\\rho J^{2}$) — the local, field version of $P = I^{2}R$.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\sigma E^{2}$, in W/m³.",
+            "<b>Step 2 — Connect to the circuit form.</b> Integrate over the conductor's volume → total $P = I^{2}R$ ✓.",
+            "<b>Step 3 — Distractor audit.</b> $\\sigma E$ is just current density (A/m²); $E/\\sigma$ has no meaning; $\\rho J$ misses a factor of J."
+          ],
+          a: "$p = \\sigma E^{2}$ (W/m³).",
+          v: "Unit check: (S/m)(V/m)² = (A/V·m)(V²/m²) = W/m³ ✓. Where the local view matters: hot spots in busbars and fuses — power concentrates where E (or J) is largest, not uniformly."
+
+        }), ref: "Handbook p.354" },
       { q: "Magnetic permeability of free space $\\mu_0$:",
         choices: ["$4\\pi \\times 10^{-7}$ H/m", "$8.85 \\times 10^{-12}$ F/m", "$1$", "$3 \\times 10^8$"], correct: 0,
-        solution: S({ c: "Memorize: $\\mu_0 = 4\\pi \\times 10^{-7}$ H/m ≈ $1.257 \\times 10^{-6}$ H/m.", s: ["Choice B is $\\varepsilon_0$ (permittivity).", "These define $c = 1/\\sqrt{\\mu_0 \\varepsilon_0}$."], a: "$\\mu_0 = 4\\pi \\times 10^{-7}$ H/m", v: "Modern definitions (post-2019 SI redefinition) make $\\mu_0$ measured, not exactly $4\\pi \\times 10^{-7}$, but very close." }), ref: "Handbook p.355" },
+        solution: S({
+          c: "The two vacuum constants must never swap: $\\mu_0 = 4\\pi\\times10^{-7}$ H/m (permeability — magnetic) and $\\varepsilon_0 = 8.854\\times10^{-12}$ F/m (permittivity — electric).",
+          s: [
+            "<b>Step 1 — Match.</b> $\\mu_0 = 4\\pi\\times10^{-7} \\approx 1.257\\times10^{-6}$ H/m.",
+            "<b>Step 2 — Distractor audit.</b> $8.85\\times10^{-12}$ is $\\varepsilon_0$ (the classic swap); 1 is the RELATIVE permeability of vacuum; $3\\times10^{8}$ is $c$."
+          ],
+          a: "$\\mu_0 = 4\\pi\\times10^{-7}$ H/m",
+          v: "Cross-check that binds all three constants: $c = 1/\\sqrt{\\mu_0\\varepsilon_0} = 3\\times10^{8}$ m/s ✓ — remember any two, derive the third. (Post-2019 SI makes $\\mu_0$ a measured value, but it differs from $4\\pi\\times10^{-7}$ only in the 10th digit.)"
+
+        }), ref: "Handbook p.355" },
     ],
 
     // ====================== Ch 6: Circuits — +20 ======================
     6: [
       { q: "Source transformation: $V_{Th} = 24$ V, $R_{Th} = 8$Ω → Norton equivalent:",
         choices: ["$I_N = 3$ A, $R_N = 8$Ω", "$I_N = 24$ A", "$I_N = 8$ A", "$I_N = 3$ A, $R_N = 1/8$Ω"], correct: 0,
-        solution: S({ c: "$I_N = V_{Th}/R_{Th}$, $R_N = R_{Th}$.", s: ["$I_N = 24/8 = 3$ A.", "$R_N = 8\\ \\Omega$."], a: "$I_N = 3$ A, $R_N = 8\\ \\Omega$" }), ref: "Handbook p.357" },
+        solution: S({
+          c: "Thevenin → Norton: $I_N = V_{Th}/R_{Th}$, resistance unchanged ($R_N = R_{Th}$) — two interchangeable masks for one circuit.",
+          s: [
+            "<b>Step 1 — Convert.</b> $I_N = 24/8 = 3$ A; $R_N = 8\\,\\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> 24 A and 8 A misuse the division; '$R_N = 1/8$' wrongly inverts the resistance."
+          ],
+          a: "$I_N = 3$ A, $R_N = 8\\,\\Omega$",
+          v: "Two-terminal test: short → Thevenin gives $24/8 = 3$ A = $I_N$ ✓; open → Norton gives $3\\times8 = 24$ V = $V_{Th}$ ✓ — equivalent at both extremes, hence for every load."
+
+        }), ref: "Handbook p.357" },
       { q: "If $I = 2$ A flows through a 5Ω resistor for 30 s, energy dissipated:",
         choices: ["$600$ J", "$60$ J", "$300$ J", "$10$ J"], correct: 0,
-        solution: S({ c: "$W = Pt = I^2 R \\cdot t$.", s: ["$P = 4 \\cdot 5 = 20$ W.", "$W = 20 \\cdot 30 = 600$ J."], a: "$600$ J" }), ref: "Handbook p.356" },
+        solution: S({
+          c: "Energy = power × time, with $P = I^{2}R$ for a resistor.",
+          s: [
+            "<b>Step 1 — Power.</b> $P = 2^{2}\\times5 = 20$ W.",
+            "<b>Step 2 — Energy.</b> $W = 20\\times30 = 600$ J.",
+            "<b>Step 3 — Distractor audit.</b> 60 J uses $P = I\\!R$ unsquared ($2\\times5\\times$... loosely); 300 halves; 10 J is $I^{2}R/2$ noise."
+          ],
+          a: "$W = 600$ J",
+          v: "Alternative route: $V = IR = 10$ V → $P = VI = 20$ W ✓ same energy. Scale feel: 600 J warms ~1.4 g of water by 100°C — a small resistor would get HOT ✓."
+
+        }), ref: "Handbook p.356" },
       { q: "Power delivered by an ideal 12V battery if it pushes 0.5 A through external circuit:",
         choices: ["$6$ W", "$24$ W", "$12$ W", "$2$ W"], correct: 0,
-        solution: S({ c: "$P = VI$ for ideal source.", s: ["$P = 12 \\cdot 0.5 = 6$ W."], a: "$6$ W" }), ref: "Handbook p.356" },
+        solution: S({
+          c: "Source power: $P = VI$ — voltage across the source times current through it.",
+          s: [
+            "<b>Step 1 — Multiply.</b> $P = 12\\times0.5 = 6$ W.",
+            "<b>Step 2 — Distractor audit.</b> 24 W inverts the current ($12/0.5$); 12 W forgets the current; 2 W has no route."
+          ],
+          a: "$P = 6$ W",
+          v: "Conservation check: whatever the battery delivers, the external circuit dissipates — 6 W out = 6 W consumed ✓. ('Ideal' matters: a real battery would ALSO burn $I^{2}r$ internally — the next question's subject.)"
+
+        }), ref: "Handbook p.356" },
       { q: "Internal resistance of 9V battery: drops to 8.5V when delivering 0.5 A. Internal R:",
         choices: ["$1\\ \\Omega$", "$0.5\\ \\Omega$", "$17\\ \\Omega$", "$0.05\\ \\Omega$"], correct: 0,
-        solution: S({ c: "$V_{terminal} = V_{EMF} - I R_{internal}$.", s: ["Drop: $9 - 8.5 = 0.5$ V over internal R at 0.5 A.", "$R_{internal} = 0.5/0.5 = 1\\ \\Omega$."], a: "$1\\ \\Omega$", v: "Why batteries warm up under load — $I^2 R$ heat dissipated internally." }), ref: "Handbook p.357" },
+        solution: S({
+          c: "A real battery = ideal EMF in series with internal resistance: $V_{terminal} = EMF - IR_{int}$. The sag under load REVEALS $R_{int}$.",
+          s: [
+            "<b>Step 1 — Measure the sag.</b> $9 - 8.5 = 0.5$ V lost internally at 0.5 A.",
+            "<b>Step 2 — Ohm's law on the sag.</b> $R_{int} = 0.5/0.5 = 1\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 0.5 Ω halves; 17 Ω divides terminal voltage by current ($8.5/0.5$ — the LOAD's resistance); 0.05 slips a decade."
+          ],
+          a: "$R_{int} = 1\\,\\Omega$",
+          v: "Why batteries warm up: $I^{2}R_{int} = 0.25$ W of heat inside the cell ✓. Diagnostic use: a 'dead' battery often shows fine open-circuit voltage but huge $R_{int}$ — sag under load is the real health test."
+
+        }), ref: "Handbook p.357" },
       { q: "Three 4Ω resistors all in parallel:",
         choices: ["$4/3 \\approx 1.33\\ \\Omega$", "$12\\ \\Omega$", "$4\\ \\Omega$", "$1\\ \\Omega$"], correct: 0,
-        solution: S({ c: "Equal R in parallel: $R/n$.", s: ["$4/3 = 1.33\\ \\Omega$."], a: "$1.33\\ \\Omega$" }), ref: "Handbook p.356" },
+        solution: S({
+          c: "Shortcut for EQUAL resistors in parallel: $R_{eq} = R/n$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $4/3 \\approx 1.33\\,\\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> 12 Ω is the SERIES sum; 4 Ω forgets the combination; 1 Ω over-divides."
+          ],
+          a: "$R_{eq} = 4/3 \\approx 1.33\\,\\Omega$",
+          v: "Bound check: below the smallest branch (4 Ω) ✓. The $R/n$ shortcut also explains paralleling for power: three equal resistors share current equally, tripling the wattage rating at a third the resistance."
+
+        }), ref: "Handbook p.356" },
       { q: "Current through 6Ω in parallel with 12Ω (combined fed by 30V source):",
         choices: ["$I_{6}=5$ A, $I_{12}=2.5$ A", "Both 5 A", "$I_6=2.5$ A", "Both 2.5 A"], correct: 0,
-        solution: S({ c: "Same voltage (30V) across both parallel branches. $I = V/R$.", s: ["$I_6 = 30/6 = 5$ A.", "$I_{12} = 30/12 = 2.5$ A."], a: "$I_6 = 5$ A, $I_{12} = 2.5$ A", v: "Total: 7.5 A. $R_{eq} = 30/7.5 = 4\\ \\Omega$ — between 6 and 12 ✓" }), ref: "Handbook p.356" },
+        solution: S({
+          c: "Parallel branches share the same VOLTAGE; each draws its own current by Ohm's law: $I = V/R$ per branch.",
+          s: [
+            "<b>Step 1 — Each branch.</b> $I_6 = 30/6 = 5$ A; $I_{12} = 30/12 = 2.5$ A.",
+            "<b>Step 2 — Read the pattern.</b> The SMALLER resistance carries the LARGER current — inverse sharing.",
+            "<b>Step 3 — Distractor audit.</b> 'Both 5' or 'both 2.5' would need equal resistances."
+          ],
+          a: "$I_6 = 5$ A, $I_{12} = 2.5$ A",
+          v: "KCL closure: total 7.5 A from the source → $R_{eq} = 30/7.5 = 4\\,\\Omega = 6\\|12$ ✓ — currents, voltage, and equivalent resistance all reconcile."
+
+        }), ref: "Handbook p.356" },
       { q: "RL transient: starting from $i=0$ at $t=0$, with $V=12$ V, $R=4\\ \\Omega$, $L=8$ mH. Steady-state current:",
         choices: ["$3$ A", "$12$ A", "$0.375$ A", "$8$ mA"], correct: 0,
-        solution: S({ c: "At steady state, inductor acts as wire (no voltage across L). $I = V/R$.", s: ["$I_{ss} = 12/4 = 3$ A."], a: "$3$ A", v: "Time constant: $\\tau = L/R = 0.008/4 = 2$ ms." }), ref: "Handbook p.358" },
+        solution: S({
+          c: "At DC steady state an inductor is a WIRE (zero volts across it, since $V = L\\,di/dt$ and the current has stopped changing) — the final current is set by the resistor alone: $I_{ss} = V/R$.",
+          s: [
+            "<b>Step 1 — Replace L with a wire.</b> Circuit reduces to 12 V across 4 Ω.",
+            "<b>Step 2 — Ohm.</b> $I_{ss} = 12/4 = 3$ A.",
+            "<b>Step 3 — Distractor audit.</b> 12 A forgets R's value... ($12/1$); 0.375 misuses L; 8 mA echoes the inductance."
+          ],
+          a: "$I_{ss} = 3$ A",
+          v: "Timing context: $\\tau = L/R = 8\\,\\text{mH}/4 = 2$ ms — the current reaches 95% of 3 A within 6 ms ✓. Steady-state rules to keep paired: inductor → short, capacitor → open."
+
+        }), ref: "Handbook p.358" },
       { q: "RC circuit time constant in seconds, $R = 100$ Ω, $C = 1$ mF:",
         choices: ["$0.1$ s", "$10^{-4}$ s", "$1$ s", "$10$ s"], correct: 0,
-        solution: S({ c: "$\\tau = RC$. Watch units: 1 mF = $10^{-3}$ F.", s: ["$\\tau = 100 \\cdot 10^{-3} = 0.1$ s."], a: "$0.1$ s" }), ref: "Handbook p.358" },
+        solution: S({
+          c: "$\\tau = RC$ — the only trap is the unit prefix: 1 mF = $10^{-3}$ F (MILLIfarad, an unusually large but legitimate value).",
+          s: [
+            "<b>Step 1 — Multiply.</b> $\\tau = 100\\times10^{-3} = 0.1$ s.",
+            "<b>Step 2 — Distractor audit.</b> $10^{-4}$ s misreads mF as µF — exactly the planted error; 1 s and 10 s slip further."
+          ],
+          a: "$\\tau = 0.1$ s",
+          v: "Prefix discipline: m = $10^{-3}$, µ = $10^{-6}$, n = $10^{-9}$ — the mF/µF confusion is the most common RC-problem error on the exam ✓ (memory aid: kΩ·mF = s, kΩ·µF = ms)."
+
+        }), ref: "Handbook p.358" },
       { q: "60 Hz AC, peak $V_m = 170$ V. RMS value:",
         choices: ["$120$ V", "$170$ V", "$240$ V", "$85$ V"], correct: 0,
-        solution: S({ c: "$V_{RMS} = V_m/\\sqrt{2}$.", s: ["$170/1.414 \\approx 120$ V."], a: "$120$ V", v: "Standard US household — $170$ V peak = $120$ V RMS." }), ref: "Handbook p.360" },
+        solution: S({
+          c: "For a sinusoid, RMS (the DC-equivalent heating value) is peak over root-two: $V_{rms} = V_m/\\sqrt2$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $170/1.414 \\approx 120$ V.",
+            "<b>Step 2 — Distractor audit.</b> 170 confuses peak with RMS; 240 MULTIPLIES by √2 (wrong direction); 85 halves instead."
+          ],
+          a: "$V_{rms} = 120$ V",
+          v: "This IS the US wall outlet: '120 V' on the label is RMS; the waveform actually swings ±170 V ✓. Direction memory: RMS is always SMALLER than peak for a sine (peak/1.414)."
+
+        }), ref: "Handbook p.360" },
       { q: "$V_m = 100$, $I_m = 5$ at $\\theta = 0°$ phase between. Average power:",
         choices: ["$250$ W", "$500$ W", "$70.7$ W", "$0$ W"], correct: 0,
-        solution: S({ c: "$P_{avg} = (V_m I_m / 2) \\cos\\theta = V_{rms} I_{rms} \\cos\\theta$.", s: ["$P = 100 \\cdot 5 \\cdot \\cos 0° / 2 = 500/2 = 250$ W."], a: "$250$ W", v: "$pf = 1$ (resistive) → all of apparent power is real." }), ref: "Handbook p.362" },
+        solution: S({
+          c: "Average AC power from PEAK quantities carries a ÷2: $P = \\dfrac{V_mI_m}{2}\\cos\\theta$ (the ÷2 converts peak·peak to rms·rms).",
+          s: [
+            "<b>Step 1 — Apply with θ = 0.</b> $P = \\dfrac{100\\times5}{2}\\times1 = 250$ W.",
+            "<b>Step 2 — Distractor audit.</b> 500 W forgets the ÷2 (uses peaks as if RMS); 70.7 misapplies √2; 0 would need θ = 90°."
+          ],
+          a: "$P = 250$ W",
+          v: "RMS route confirms: $V_{rms}I_{rms} = (70.7)(3.54) = 250$ W ✓ — the ÷2 and the two ÷√2's are the same correction."
+
+        }), ref: "Handbook p.362" },
       { q: "Capacitor in DC steady state acts as:",
         choices: ["Open circuit", "Short", "$1\\ \\Omega$", "Variable resistor"], correct: 0,
-        solution: S({ c: "At DC, $\\omega = 0$ → $Z_C = 1/(j\\omega C) \\to \\infty$ (open).", s: ["Inductor at DC: $Z_L = j\\omega L = 0$ (short)."], a: "Open circuit", v: "These limiting behaviors simplify DC analysis of mixed circuits." }), ref: "Handbook p.358" },
+        solution: S({
+          c: "At DC ($\\omega = 0$), capacitive impedance $Z_C = 1/(j\\omega C)$ blows up to infinity — the capacitor is an OPEN circuit: fully charged, zero current.",
+          s: [
+            "<b>Step 1 — Match.</b> Open circuit.",
+            "<b>Step 2 — Time-domain view.</b> $i = C\\,dv/dt$: voltage stopped changing → current = 0 — same conclusion without phasors.",
+            "<b>Step 3 — Distractor audit.</b> 'Short' is the INDUCTOR's DC behavior (the mirror twin); fixed or variable resistance has no basis."
+          ],
+          a: "Open circuit.",
+          v: "The DC-analysis recipe this enables: redraw the circuit with caps OPEN and inductors SHORTED, then solve resistively — the standard first move on every steady-state problem ✓."
+
+        }), ref: "Handbook p.358" },
       { q: "Inductor in DC steady state:",
         choices: ["Short circuit (acts as wire)", "Open circuit", "Capacitor", "Negative R"], correct: 0,
-        solution: S({ c: "DC: $Z_L = j\\omega L = 0$.", s: ["No voltage across (V = L di/dt; with i constant, V = 0)."], a: "Short", v: "Useful for finding DC operating points: replace caps with opens, inductors with shorts." }), ref: "Handbook p.358" },
+        solution: S({
+          c: "At DC, inductive impedance $Z_L = j\\omega L = 0$ — the inductor is a plain WIRE: constant current, zero voltage across it ($v = L\\,di/dt = 0$).",
+          s: [
+            "<b>Step 1 — Match.</b> Short circuit (acts as wire).",
+            "<b>Step 2 — Distractor audit.</b> 'Open' is the CAPACITOR's DC role — the pair the FE loves to swap; the rest are noise."
+          ],
+          a: "Short circuit.",
+          v: "Pairing to lock: DC steady state — L short, C open; at very HIGH frequency they swap roles (L blocks, C passes) ✓ — two lines that solve a dozen exam questions."
+
+        }), ref: "Handbook p.358" },
       { q: "Three sources in parallel: 12V, 12V, 12V all ideal. Output across all:",
         choices: ["$12$ V (but circulating currents possible)", "$36$ V", "$4$ V", "Indeterminate"], correct: 0,
-        solution: S({ c: "Ideal sources at same V: voltage is 12V, but real (non-ideal) sources may have circulating current.", s: ["Practical: never parallel ideal voltage sources without small series R to limit current."], a: "12 V (with caveat about circulating)", v: "Why batteries in parallel need close matching and small internal R." }), ref: "Handbook p.356" },
+        solution: S({
+          c: "Ideal equal voltage sources in parallel agree on the node voltage: 12 V. The caveat that matters in practice: REAL sources with slightly different EMFs drive circulating currents through each other's internal resistances.",
+          s: [
+            "<b>Step 1 — Match.</b> 12 V output (with the circulating-current caveat).",
+            "<b>Step 2 — Why not 36 V.</b> SERIES stacks voltages; parallel does not — parallel shares CURRENT capability.",
+            "<b>Step 3 — Distractor audit.</b> 4 V wrongly divides; 'indeterminate' overstates — equal ideal sources are consistent."
+          ],
+          a: "12 V — but real paralleled sources need matching (circulating currents).",
+          v: "Practice rule this encodes: parallel batteries must be same chemistry/age/charge, and battery banks use balancing — a 0.5-V mismatch across two 50-mΩ internal resistances circulates 5 A of pure waste heat ✓."
+
+        }), ref: "Handbook p.356" },
       { q: "Three resistors equal value 10Ω each: one config gives 30Ω, another gives 3.33Ω. Which is which?",
         choices: ["Series→30, Parallel→3.33", "Reversed", "Both 10", "Cannot tell"], correct: 0,
-        solution: S({ c: "Series adds; parallel: R/n.", s: ["Series: $10+10+10=30\\ \\Omega$.", "Parallel: $10/3 = 3.33\\ \\Omega$."], a: "Series=30, Parallel=3.33" }), ref: "Handbook p.356" },
+        solution: S({
+          c: "The two extremes of combining $n$ equal resistors: SERIES multiplies ($nR$), PARALLEL divides ($R/n$).",
+          s: [
+            "<b>Step 1 — Series.</b> $3\\times10 = 30\\,\\Omega$.",
+            "<b>Step 2 — Parallel.</b> $10/3 = 3.33\\,\\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 'Reversed' swaps the rules; 'both 10' ignores combination."
+          ],
+          a: "Series → 30 Ω; parallel → 3.33 Ω.",
+          v: "Sanity bounds that never fail: series result > largest element; parallel result < smallest element ✓ — a 5-second check that catches swapped formulas every time."
+
+        }), ref: "Handbook p.356" },
       { q: "Impedance $Z = 30 + j40$. Convert to polar:",
         choices: ["$50\\angle 53.13°$", "$70\\angle 45°$", "$50\\angle 30°$", "$30\\angle 53°$"], correct: 0,
-        solution: S({ c: "$|Z| = \\sqrt{R^2 + X^2}$, $\\theta = \\arctan(X/R)$.", s: ["$|Z| = \\sqrt{900+1600} = 50$.", "$\\theta = \\arctan(40/30) = 53.13°$."], a: "$50\\angle 53.13°$", v: "3-4-5 right triangle with phase angle of 53.13°." }), ref: "Handbook p.360" },
+        solution: S({
+          c: "Rectangular → polar: magnitude $|Z| = \\sqrt{R^{2}+X^{2}}$, angle $\\theta = \\arctan(X/R)$.",
+          s: [
+            "<b>Step 1 — Magnitude.</b> $\\sqrt{900+1600} = 50$.",
+            "<b>Step 2 — Angle.</b> $\\arctan(40/30) = 53.13°$.",
+            "<b>Step 3 — Distractor audit.</b> $70\\angle45°$ adds parts and guesses the angle; $50\\angle30°$ uses the wrong arctan; $30\\angle53°$ takes R as the magnitude."
+          ],
+          a: "$Z = 50\\angle53.13°\\,\\Omega$",
+          v: "The 3-4-5 family at work again (×10) ✓ — and the positive angle says INDUCTIVE: current will lag by 53°, power factor 0.6, all readable from this one conversion."
+
+        }), ref: "Handbook p.360" },
       { q: "Apparent power S in VA when $V = 240$ V RMS, $I = 10$ A RMS:",
         choices: ["$2400$ VA", "$1697$ VA", "$48{,}000$ VA", "$24$ kW"], correct: 0,
-        solution: S({ c: "$|S| = V_{rms} \\cdot I_{rms}$ (RMS values).", s: ["$|S| = 240 \\cdot 10 = 2400$ VA."], a: "$2400$ VA", v: "Units: VA (apparent), W (real), VAR (reactive)." }), ref: "Handbook p.362" },
+        solution: S({
+          c: "Apparent power = RMS volts × RMS amps: $|S| = V_{rms}I_{rms}$, in VOLT-AMPERES — what the wiring carries regardless of power factor.",
+          s: [
+            "<b>Step 1 — Multiply.</b> $240\\times10 = 2400$ VA.",
+            "<b>Step 2 — Distractor audit.</b> 1697 wrongly divides by √2 (the values are ALREADY RMS); 48,000 multiplies twice; '24 kW' has both wrong value and wrong UNIT — S is VA, not W."
+          ],
+          a: "$|S| = 2400$ VA",
+          v: "Unit discipline: VA (apparent), W (real $= S\\cos\\theta$), VAR (reactive $= S\\sin\\theta$) ✓ — transformers and breakers are rated in VA/kVA precisely because heating follows current independent of pf."
+
+        }), ref: "Handbook p.362" },
       { q: "Two impedances in series: $Z_1 = 10\\angle 0°$, $Z_2 = 10\\angle 90°$. Total:",
         choices: ["$10 + j10$ = $14.14\\angle 45°$", "$20\\angle 45°$", "$100\\angle 90°$", "$0$"], correct: 0,
-        solution: S({ c: "Series Z adds as complex numbers (convert to rectangular first if needed).", s: ["$Z_1 = 10$, $Z_2 = j10$.", "Sum: $10 + j10 = 14.14\\angle 45°$."], a: "$14.14\\angle 45°$" }), ref: "Handbook p.360" },
+        solution: S({
+          c: "Series impedances ADD as complex numbers — convert polar to rectangular first, since addition lives in rectangular.",
+          s: [
+            "<b>Step 1 — Convert.</b> $10\\angle0° = 10$; $10\\angle90° = j10$.",
+            "<b>Step 2 — Add.</b> $10 + j10$.",
+            "<b>Step 3 — Back to polar.</b> $\\sqrt{200}\\angle\\arctan(1) = 14.14\\angle45°$.",
+            "<b>Step 4 — Distractor audit.</b> $20\\angle45°$ adds magnitudes (the forbidden shortcut); $100\\angle90°$ MULTIPLIES; 0 would need opposite phasors."
+          ],
+          a: "$Z = 10 + j10 = 14.14\\angle45°\\,\\Omega$",
+          v: "Bound check: vector sum (14.14) < scalar sum (20) for non-aligned parts ✓. Rule of thumb: rectangular for add/subtract, polar for multiply/divide — switching forms IS the technique."
+
+        }), ref: "Handbook p.360" },
       { q: "Inductive impedance at 1 kHz: $L = 1$ mH. $X_L$:",
         choices: ["$\\approx 6.28\\ \\Omega$", "$1\\ \\Omega$", "$1000\\ \\Omega$", "$0.159$"], correct: 0,
-        solution: S({ c: "$X_L = \\omega L = 2\\pi f L$.", s: ["$X_L = 2\\pi(1000)(10^{-3}) = 2\\pi \\approx 6.283\\ \\Omega$."], a: "$\\approx 6.28\\ \\Omega$" }), ref: "Handbook p.360" },
+        solution: S({
+          c: "Inductive reactance: $X_L = \\omega L = 2\\pi fL$ — grows linearly with frequency.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $X_L = 2\\pi(1000)(10^{-3}) = 2\\pi \\approx 6.28\\,\\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> 1 Ω forgets $2\\pi f$; 1000 Ω misuses f alone; 0.159 is $1/2\\pi$ — the CAPACITIVE pattern leaking in."
+          ],
+          a: "$X_L \\approx 6.28\\,\\Omega$",
+          v: "Scaling check: at 10 kHz it would be 62.8 Ω — ten times the frequency, ten times the reactance ✓ (linear in f, unlike $X_C \\propto 1/f$)."
+
+        }), ref: "Handbook p.360" },
       { q: "Capacitive impedance at 1 kHz: $C = 1$ µF. $X_C$:",
         choices: ["$\\approx 159\\ \\Omega$", "$1000\\ \\Omega$", "$0.159\\ \\Omega$", "$6.28\\ \\Omega$"], correct: 0,
-        solution: S({ c: "$X_C = 1/(\\omega C) = 1/(2\\pi f C)$.", s: ["$X_C = 1/(2\\pi \\cdot 1000 \\cdot 10^{-6}) = 1/(6.28 \\times 10^{-3}) \\approx 159\\ \\Omega$."], a: "$\\approx 159\\ \\Omega$", v: "Cap reactance decreases with frequency; inductor reactance increases." }), ref: "Handbook p.360" },
+        solution: S({
+          c: "Capacitive reactance: $X_C = \\dfrac{1}{\\omega C} = \\dfrac{1}{2\\pi fC}$ — SHRINKS as frequency rises.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $X_C = \\dfrac{1}{2\\pi(1000)(10^{-6})} = \\dfrac{1}{6.28\\times10^{-3}} \\approx 159\\,\\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> 1000 echoes f; 0.159 inverts the answer; 6.28 is the INDUCTIVE twin from the previous question."
+          ],
+          a: "$X_C \\approx 159\\,\\Omega$",
+          v: "Opposite trends to lock as a pair: $X_L\\uparrow$ with f, $X_C\\downarrow$ with f — they CROSS at resonance ($f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$), the fact every filter and tank circuit is built on ✓. (The 159 ↔ $1/2\\pi$ ≈ 0.159 numerology recurs constantly — recognize it.)"
+
+        }), ref: "Handbook p.360" },
       { q: "AC source $v = 100\\cos\\omega t$ V, current $i = 10\\cos(\\omega t - 30°)$. Real power:",
         choices: ["$\\approx 433$ W", "$1000$ W", "$500$ W", "$250$ W"], correct: 0,
-        solution: S({ c: "$P = (V_m I_m / 2) \\cos\\theta$.", s: ["$\\theta = 30°$ (current lags 30°).", "$P = (100 \\cdot 10/2)\\cos 30° = 500 \\cdot 0.866 = 433$ W."], a: "$\\approx 433$ W" }), ref: "Handbook p.362" },
+        solution: S({
+          c: "Real power with a phase shift: $P = \\dfrac{V_mI_m}{2}\\cos\\theta$ — θ is the angle BETWEEN voltage and current (here 30°, current lagging).",
+          s: [
+            "<b>Step 1 — Read θ.</b> $i$ lags $v$ by 30°.",
+            "<b>Step 2 — Apply.</b> $P = \\dfrac{100\\times10}{2}\\cos30° = 500\\times0.866 = 433$ W.",
+            "<b>Step 3 — Distractor audit.</b> 1000 W uses peaks with no ÷2 and no pf; 500 W forgets the power factor; 250 W uses $\\cos60°$."
+          ],
+          a: "$P \\approx 433$ W",
+          v: "Triangle completion: $S = 500$ VA, $Q = 500\\sin30° = 250$ VAR, and $\\sqrt{433^{2}+250^{2}} = 500$ ✓. The lag direction also labels the load: inductive (ELI) ✓."
+
+        }), ref: "Handbook p.362" },
     ],
 
     // ====================== Ch 7: Linear Systems — +10 ======================
