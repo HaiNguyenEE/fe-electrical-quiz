@@ -170,3 +170,27 @@ Folder `/Volumes/Extreme SSD 1/Clauds/FE` contains 374 JPG pages of the FE Elect
 - **ALL 11 standard question files now teach-from-zero / Step-format:** questions.js + extra,
   extra2-extra13. extra9/extra10 were the last remaining and are now done. The entire standard
   question bank is on the teach-from-zero standard.
+- **2026-06-13 — FULL-BANK QA AUDIT (all 1,823 questions, 14 files):** built Node harnesses to
+  check structure, answer-key vs correct-choice consistency, numeric choice-equivalence, duplicate
+  choices, format coverage, and meta-commentary. Found 0 structural errors. KEY FINDING: quiz.js
+  SHUFFLES the 4 choices every render (line 97), so any choice text that references a POSITION
+  ("Both A and C", "Same as A") is broken as a correct answer. Fixed 9 correctness bugs +
+  5 duplicate-distractors + 3 meta-commentary leftovers + 1 wording, across 8 files:
+  (1) extra5 vector magnitude — `√49` and "Same as A" both = 7 → rebuilt distractors;
+  (2) extra5 `5cosωt−12sinωt` — `√169` = 13 = correct → replaced with `√119`;
+  (3) extra11 Laplace time-shift — `X(s)/e^{3s}` ≡ `e^{−3s}X(s)` → replaced with `e^{+3s}X(s)`;
+  (4) extra11 free-space impedance — `120π` = `377` ("same as A") → replaced with `300 Ω`;
+  (5) extra3 solenoid — `μ₀nI` = `μ₀NI/L` (+ "Both A and B") → replaced with wire/n² wrong forms;
+  (6) extra5 encoder — A & B both true → merged into one position-independent correct choice;
+  (7) extra8 phasor — peak & RMS both valid → question now specifies PEAK convention;
+  (8) extra7 geometric gradient — choice said `$8,530`, solution gives `$8,200` → relabeled;
+  (9) extra8 Newton-Raphson — choice said `2.001`, solution gives `2.005` → relabeled;
+  (10) questions.js polar `6∠30°` — "Both A and C" (correct:3, positional) → 4 distinct numeric choices;
+  duplicate-distractors fixed: extra8 THD (`Bandwidth` ×2), extra7 red-queen + extra8 ace
+  (`4/52`=`1/13`), questions.js RC (`0.01 s`=`10 ms`), extra6 hypergeometric (`2/5`=`0.4`);
+  meta-commentary cleaned: extra12 Lagrange (`✓ wait:`), antenna (`hmm…no—`), two's-complement
+  (`wait, it ADDS 1 twice`); extra8 BCD choice reworded. Post-fix: 0 dup-of-correct, 0 dup
+  distractors, 0 real meta; all 1,823 intact, node syntax OK on all 8 files.
+  NOTE: 132 solutions (mostly extra11/12/13) still lack the explicit "Distractor audit" step —
+  their solutions are detailed but not 100% format-identical to extra–extra10 (deferred,
+  format-only, not a bug).
