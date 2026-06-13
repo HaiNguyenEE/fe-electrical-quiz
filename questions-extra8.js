@@ -717,185 +717,460 @@
     7: [
       { q: "Bode plot magnitude in dB for first-order pole at break frequency:",
         choices: ["$-3$ dB exact, asymptote intersects at $0$ dB", "$0$ dB exact", "$-20$ dB", "$-6$ dB"], correct: 0,
-        solution: S({ c: "At pole: exact -3 dB. Asymptotes meet at 0 dB.", s: [""], a: "$-3$ dB at break" }), ref: "p.366" },
+        solution: S({
+          c: "At the break (corner) frequency, a first-order pole is EXACTLY -3 dB below the low-frequency asymptote; the straight-line asymptotes meet at 0 dB there.",
+          s: ["<b>Step 1 — Match.</b> -3 dB exact (asymptotes meet at 0 dB).","<b>Step 2 — Distractor audit.</b> 0 dB is the asymptote (not exact); -20 dB is a decade above; -6 dB is wrong."],
+          a: "-3 dB at the break.",
+          v: "The -3 dB (half-power) point DEFINES the corner frequency - the actual curve sags 3 dB below the idealized straight-line asymptotes at that single point."
+        }), ref: "p.366" },
       { q: "Frequency at which 2nd-order system magnitude peaks (for $\\zeta < 0.707$):",
         choices: ["$\\omega_r = \\omega_n\\sqrt{1-2\\zeta^2}$", "$\\omega_n$", "$\\omega_d$", "$2\\omega_n$"], correct: 0,
-        solution: S({ c: "Resonant frequency: slightly less than $\\omega_n$. Exists only for under-damped enough ($\\zeta < 0.707$).", s: [""], a: "$\\omega_n\\sqrt{1-2\\zeta^2}$" }), ref: "p.366" },
+        solution: S({
+          c: "The RESONANT peak frequency is $\\omega_r = \\omega_n\\sqrt{1-2\\zeta^2}$ - slightly below $\\omega_n$, and it only EXISTS when $\\zeta < 0.707$.",
+          s: ["<b>Step 1 — Match.</b> $\\omega_r = \\omega_n\\sqrt{1-2\\zeta^2}$.","<b>Step 2 — Distractor audit.</b> $\\omega_n$ is the natural freq; $\\omega_d$ is the DAMPED (transient) freq; $2\\omega_n$ is wrong."],
+          a: "$\\omega_r = \\omega_n\\sqrt{1-2\\zeta^2}$.",
+          v: "Note THREE distinct frequencies: $\\omega_n$ (natural), $\\omega_d=\\omega_n\\sqrt{1-\\zeta^2}$ (damped ringing), $\\omega_r=\\omega_n\\sqrt{1-2\\zeta^2}$ (frequency-response peak). Above $\\zeta=0.707$ there's no peak at all."
+        }), ref: "p.366" },
       { q: "Peak magnitude: $M_r = $",
         choices: ["$1/(2\\zeta\\sqrt{1-\\zeta^2})$", "$1$", "$1/\\zeta$", "$\\omega_n$"], correct: 0,
-        solution: S({ c: "Peak in frequency response.", s: ["High Q (low $\\zeta$): large peak."], a: "$1/(2\\zeta\\sqrt{1-\\zeta^2})$" }), ref: "p.366" },
+        solution: S({
+          c: "The resonant peak magnitude (for $\\zeta<0.707$) is $M_r = \\dfrac{1}{2\\zeta\\sqrt{1-\\zeta^2}}$ - it grows large as damping shrinks.",
+          s: ["<b>Step 1 — Match.</b> $1/(2\\zeta\\sqrt{1-\\zeta^2})$.","<b>Step 2 — Distractor audit.</b> 1, $1/\\zeta$, $\\omega_n$ aren't the peak formula."],
+          a: "$M_r = 1/(2\\zeta\\sqrt{1-\\zeta^2})$.",
+          v: "Low damping (high Q) means a tall, sharp resonant peak - $\\zeta=0.1$ gives $M_r\\approx5$ (a 5x amplification at resonance). This is why lightly-damped systems can over-respond to inputs near $\\omega_r$."
+        }), ref: "p.366" },
       { q: "Laplace of derivative $f'(t)$:",
         choices: ["$sF(s) - f(0^-)$", "$F(s)/s$", "$F(s) + f(0)$", "$sf(0)$"], correct: 0,
-        solution: S({ c: "Differentiation rule.", s: [""], a: "$sF(s) - f(0)$" }), ref: "p.56" },
+        solution: S({
+          c: "Laplace differentiation rule: $\\mathcal L\\{f'(t)\\} = sF(s) - f(0^-)$ - multiply by s, subtract the initial value.",
+          s: ["<b>Step 1 — Match.</b> $sF(s) - f(0^-)$.","<b>Step 2 — Distractor audit.</b> $F(s)/s$ is integration; the others are wrong."],
+          a: "$sF(s) - f(0)$.",
+          v: "The $-f(0)$ term carries the INITIAL CONDITION into the solution - which is exactly why Laplace transforms solve initial-value ODEs so cleanly (algebra instead of calculus)."
+        }), ref: "p.56" },
       { q: "Laplace of $\\int_0^t f(\\tau) d\\tau$:",
         choices: ["$F(s)/s$", "$sF(s)$", "$F(s)$", "$1/F(s)$"], correct: 0,
-        solution: S({ c: "Integration: divide by $s$.", s: [""], a: "$F(s)/s$" }), ref: "p.56" },
+        solution: S({
+          c: "Laplace integration rule: dividing by s. $\\mathcal L\\{\\int_0^t f\\,d\\tau\\} = F(s)/s$.",
+          s: ["<b>Step 1 — Match.</b> $F(s)/s$.","<b>Step 2 — Distractor audit.</b> $sF(s)$ is differentiation; the others are wrong."],
+          a: "$F(s)/s$.",
+          v: "Differentiation = multiply by s, integration = divide by s - the s-domain turns calculus into algebra. The $1/s$ factor is literally an integrator block."
+        }), ref: "p.56" },
       { q: "Laplace shifting: $\\mathcal{L}\\{e^{-at}f(t)\\}$:",
         choices: ["$F(s+a)$", "$F(s-a)$", "$F(s)/a$", "$e^{-a}F(s)$"], correct: 0,
-        solution: S({ c: "Frequency shifting / first shifting theorem.", s: [""], a: "$F(s+a)$" }), ref: "p.56" },
+        solution: S({
+          c: "First shifting theorem (frequency shift): multiplying by $e^{-at}$ in time replaces $s$ with $s+a$ in the transform: $F(s+a)$.",
+          s: ["<b>Step 1 — Match.</b> $F(s+a)$.","<b>Step 2 — Distractor audit.</b> $F(s-a)$ has the wrong sign; the others don't follow the theorem."],
+          a: "$F(s+a)$.",
+          v: "An $e^{-at}$ envelope shifts the poles LEFT by a (more stable / faster decay) - which is how you get damped sinusoids like $e^{-at}\\sin(\\omega t)$ from plain sines."
+        }), ref: "p.56" },
       { q: "Final value of step response $y(t)$ for stable LTI system: ",
         choices: ["DC gain × input magnitude", "Always 0", "Always 1", "Unbounded"], correct: 0,
-        solution: S({ c: "Final value = $H(0)$ × step magnitude.", s: ["Provided system is stable (all poles in LHP)."], a: "$H(0) \\cdot $step" }), ref: "p.56" },
+        solution: S({
+          c: "For a stable system, the step response settles to the DC gain times the step magnitude: $y(\\infty) = H(0)\\times(\\text{step})$.",
+          s: ["<b>Step 1 — Match.</b> DC gain x input magnitude.","<b>Step 2 — Distractor audit.</b> Not 'always 0/1'; unbounded only for unstable systems."],
+          a: "$H(0)\\times$ step.",
+          v: "This is the Final Value Theorem result - valid only if the system is STABLE (all poles in the LHP). The dynamics fade and only the DC behavior remains."
+        }), ref: "p.56" },
       { q: "Settling time relationship to $\\zeta\\omega_n$ in 2nd-order system:",
         choices: ["$t_s \\approx 4/(\\zeta\\omega_n)$ for 2% settling", "$1/\\zeta$", "$\\omega_n$", "Independent"], correct: 0,
-        solution: S({ c: "Envelope decays as $e^{-\\zeta\\omega_n t}$. 2% in $\\sim 4$ time constants of $\\zeta\\omega_n$.", s: [""], a: "$4/(\\zeta\\omega_n)$" }), ref: "p.366" },
+        solution: S({
+          c: "The response envelope decays as $e^{-\\zeta\\omega_n t}$, so 2% settling takes about 4 of those time constants: $t_s \\approx 4/(\\zeta\\omega_n)$.",
+          s: ["<b>Step 1 — Match.</b> $t_s \\approx 4/(\\zeta\\omega_n)$ (2%).","<b>Step 2 — Distractor audit.</b> $1/\\zeta$, $\\omega_n$ alone, 'independent' miss the product."],
+          a: "$t_s \\approx 4/(\\zeta\\omega_n)$.",
+          v: "$\\zeta\\omega_n$ (the pole's real part) governs settling - push poles further LEFT to settle faster. Use 3 instead of 4 for the 5% band."
+        }), ref: "p.366" },
       { q: "Underdamped 2nd-order: peak time $t_p = ?$",
         choices: ["$\\pi/\\omega_d$", "$\\omega_n$", "$0$", "$\\zeta$"], correct: 0,
-        solution: S({ c: "First maximum at $t = \\pi/\\omega_d$ where $\\omega_d = \\omega_n\\sqrt{1-\\zeta^2}$.", s: [""], a: "$\\pi/\\omega_d$" }), ref: "p.366" },
+        solution: S({
+          c: "The first overshoot peak occurs at $t_p = \\pi/\\omega_d$, where $\\omega_d = \\omega_n\\sqrt{1-\\zeta^2}$ is the damped frequency.",
+          s: ["<b>Step 1 — Match.</b> $\\pi/\\omega_d$.","<b>Step 2 — Distractor audit.</b> $\\omega_n$, 0, $\\zeta$ aren't a time."],
+          a: "$t_p = \\pi/\\omega_d$.",
+          v: "Peak time is half the damped oscillation PERIOD (the first crest) - higher $\\omega_d$ means a faster-peaking, snappier response. Only underdamped systems overshoot and have a peak time."
+        }), ref: "p.366" },
       { q: "Rise time of overdamped 2nd-order system:",
         choices: ["Slower than critically damped", "Faster", "Same", "Zero"], correct: 0,
-        solution: S({ c: "Overdamped: real poles, slow response. Critically damped: fastest non-oscillatory.", s: [""], a: "Slower" }), ref: "p.366" },
+        solution: S({
+          c: "An OVERDAMPED system (two real poles, $\\zeta>1$) rises SLOWER than a critically-damped one - it's sluggish, with no overshoot.",
+          s: ["<b>Step 1 — Match.</b> Slower than critically damped.","<b>Step 2 — Distractor audit.</b> Not faster, same, or zero."],
+          a: "Slower than critically damped.",
+          v: "Critical damping ($\\zeta=1$) is the FASTEST response with NO overshoot - overdamped is slower (over-braked), underdamped is faster but overshoots/rings. Critical is the sweet spot for no-overshoot speed."
+        }), ref: "p.366" },
     ],
 
     // Signal — +10
     8: [
       { q: "Discrete Fourier Transform (DFT) of N samples produces:",
         choices: ["N complex frequency bins", "N real bins", "1 number", "Infinite"], correct: 0,
-        solution: S({ c: "DFT: $N$ time samples → $N$ frequency samples.", s: [""], a: "N bins" }), ref: "p.376" },
+        solution: S({
+          c: "An N-point DFT produces N complex frequency bins (magnitude and phase at each).",
+          s: ["<b>Step 1 — Match.</b> N complex frequency bins.","<b>Step 2 — Distractor audit.</b> Bins are COMPLEX not real; not 1 number or infinite."],
+          a: "N complex bins.",
+          v: "Each bin carries magnitude AND phase. For a real input the bins are conjugate-symmetric, so only N/2+1 are independent - but the DFT itself outputs N complex values."
+        }), ref: "p.376" },
       { q: "FFT complexity vs direct DFT:",
         choices: ["$O(N\\log N)$ vs $O(N^2)$", "Same", "FFT slower", "Direct faster"], correct: 0,
-        solution: S({ c: "FFT exploits symmetries.", s: ["For $N = 1024$: FFT ~10k ops, DFT ~10^6."], a: "$N\\log N$ vs $N^2$" }), ref: "p.376" },
+        solution: S({
+          c: "The Fast Fourier Transform computes the DFT in $O(N\\log N)$ vs the direct $O(N^2)$ - by recursively exploiting symmetry (divide and conquer).",
+          s: ["<b>Step 1 — Match.</b> $O(N\\log N)$ vs $O(N^2)$.","<b>Step 2 — Distractor audit.</b> Not 'same'; FFT is faster, not slower."],
+          a: "$O(N\\log N)$ vs $O(N^2)$.",
+          v: "For N=1024: ~10,000 ops (FFT) vs ~1,000,000 (direct) - a 100x speedup that made real-time spectral analysis practical. The savings grow with N."
+        }), ref: "p.376" },
       { q: "Sinc function $\\text{sinc}(x) = \\sin(\\pi x)/(\\pi x)$. Value at $x = 0$:",
         choices: ["$1$ (limit)", "$0$", "Undefined", "$\\infty$"], correct: 0,
-        solution: S({ c: "Removable singularity. $\\lim_{x\\to 0}\\sin(\\pi x)/(\\pi x) = 1$.", s: ["First zeros: $x = \\pm 1, \\pm 2, ...$"], a: "$1$" }), ref: "p.376" },
+        solution: S({
+          c: "At $x=0$, sinc is a removable singularity (0/0) whose limit is 1: $\\lim_{x\\to0}\\dfrac{\\sin(\\pi x)}{\\pi x}=1$.",
+          s: ["<b>Step 1 — Match.</b> 1 (the limit).","<b>Step 2 — Distractor audit.</b> 0 is where it CROSSES at integer x; not undefined or infinite."],
+          a: "$1$.",
+          v: "sinc(0)=1, with zeros at every nonzero integer x - this shape is the impulse response of an ideal low-pass filter and the heart of the sampling/reconstruction theorem."
+        }), ref: "p.376" },
       { q: "Ideal LPF impulse response in time domain:",
         choices: ["Sinc function (non-causal)", "Delta", "Step", "Exponential"], correct: 0,
-        solution: S({ c: "Rectangular in freq ↔ sinc in time. Ideal LPF requires infinite-length sinc → non-causal.", s: ["Why real LPF approximations: Butterworth, Chebyshev."], a: "Sinc" }), ref: "p.376" },
+        solution: S({
+          c: "An ideal (brick-wall) low-pass filter has a SINC impulse response - the inverse Fourier transform of a rectangular passband. It extends infinitely in BOTH directions, making it non-causal.",
+          s: ["<b>Step 1 — Match.</b> Sinc (non-causal).","<b>Step 2 — Distractor audit.</b> Delta is a pass-through; step and exponential aren't the ideal LPF response."],
+          a: "Sinc function (non-causal).",
+          v: "Because the sinc extends to t<0, an ideal LPF can't be built (would need to respond before the input) - which is why real filters (Butterworth, Chebyshev) APPROXIMATE it with causal, finite responses."
+        }), ref: "p.376" },
       { q: "Sampled signal spectrum is:",
         choices: ["Periodic with period $f_s$", "Constant", "Single tone", "Random"], correct: 0,
-        solution: S({ c: "Sampling in time = periodic replication in frequency.", s: [""], a: "Periodic" }), ref: "p.375" },
+        solution: S({
+          c: "Sampling a signal in time makes its spectrum PERIODIC, repeating every $f_s$ (the sample rate) - the spectrum is replicated at each multiple of $f_s$.",
+          s: ["<b>Step 1 — Match.</b> Periodic with period $f_s$.","<b>Step 2 — Distractor audit.</b> Not constant, single-tone, or random."],
+          a: "Periodic (period $f_s$).",
+          v: "These spectral REPLICAS are why aliasing happens: if the original spectrum is wider than $f_s/2$, adjacent copies overlap and corrupt the baseband - hence the Nyquist requirement and anti-alias filtering."
+        }), ref: "p.375" },
       { q: "Anti-aliasing filter ideal cutoff:",
         choices: ["$f_s/2$ (Nyquist)", "$f_s$", "$2f_s$", "$0$"], correct: 0,
-        solution: S({ c: "Remove everything above Nyquist before sampling.", s: ["Practical: cut off well below to allow filter roll-off."], a: "$f_s/2$" }), ref: "p.375" },
+        solution: S({
+          c: "The ideal anti-aliasing cutoff is the Nyquist frequency $f_s/2$ - remove everything above it before sampling.",
+          s: ["<b>Step 1 — Match.</b> $f_s/2$ (Nyquist).","<b>Step 2 — Distractor audit.</b> $f_s$, $2f_s$ are too high; 0 removes everything."],
+          a: "$f_s/2$.",
+          v: "In practice you cut off somewhat BELOW $f_s/2$ to leave room for the filter's finite roll-off (the transition band) - which is partly why CD audio samples at 44.1 kHz for a 20-kHz limit."
+        }), ref: "p.375" },
       { q: "Decimation by factor $M$: input rate $f_s$ → output rate:",
         choices: ["$f_s/M$", "$Mf_s$", "$f_s$", "$0$"], correct: 0,
-        solution: S({ c: "Keep every M-th sample.", s: ["Must pre-filter to prevent aliasing."], a: "$f_s/M$" }), ref: "p.375" },
+        solution: S({
+          c: "Decimation by M keeps every Mth sample, so the output rate is $f_s/M$.",
+          s: ["<b>Step 1 — Match.</b> $f_s/M$.","<b>Step 2 — Distractor audit.</b> $Mf_s$ is interpolation (upsampling); $f_s$ is unchanged; 0 is wrong."],
+          a: "$f_s/M$.",
+          v: "You MUST low-pass filter first (to below the new Nyquist $f_s/2M$) or discarded high frequencies alias - decimation is the downsampling half of multirate DSP."
+        }), ref: "p.375" },
       { q: "Interpolation by factor $L$: insert zeros between samples then:",
         choices: ["LPF to remove images", "Multiply", "Done", "Decimate"], correct: 0,
-        solution: S({ c: "Zero-stuffing creates spectral images. LPF removes them.", s: ["Result: new samples at original signal's interpolated values."], a: "LPF" }), ref: "p.375" },
+        solution: S({
+          c: "Interpolation (upsampling) by L: insert L-1 zeros between samples, then LOW-PASS FILTER to remove the spectral images that zero-stuffing creates.",
+          s: ["<b>Step 1 — Match.</b> LPF to remove images.","<b>Step 2 — Distractor audit.</b> 'Multiply', 'done', 'decimate' skip the essential filtering step."],
+          a: "Low-pass filter (to remove images).",
+          v: "Zero-stuffing alone creates copies of the spectrum; the LPF (interpolation filter) smooths them out, computing the in-between sample values - the upsampling counterpart to decimation."
+        }), ref: "p.375" },
       { q: "Total harmonic distortion (THD): measure of:",
         choices: ["Signal purity (lower = cleaner)", "Bandwidth", "Phase", "Bandwidth"], correct: 0,
-        solution: S({ c: "THD = ratio of harmonic powers to fundamental.", s: ["Audio amplifiers: <0.01% THD desirable. Lossy comp: higher."], a: "Signal purity" }), ref: "p.371" },
+        solution: S({
+          c: "THD measures signal PURITY - the ratio of total harmonic power to the fundamental. Lower THD = cleaner, more linear signal.",
+          s: ["<b>Step 1 — Match.</b> Signal purity (lower = cleaner).","<b>Step 2 — Distractor audit.</b> Not bandwidth or phase."],
+          a: "Signal purity.",
+          v: "Quality audio amps target THD below 0.01%; nonlinear distortion adds harmonics not present in the original - THD quantifies how much. It's a key spec for amplifiers and power systems."
+        }), ref: "p.371" },
       { q: "Quantization noise PSD in ADC: approximately:",
         choices: ["$\\Delta^2/(12 f_s)$", "$\\Delta$", "$0$", "$\\infty$"], correct: 0,
-        solution: S({ c: "Quantization noise variance $\\Delta^2/12$ spread uniformly over $[0, f_s/2]$.", s: ["Oversampling: spread same noise over wider band → less in signal band → SNR boost."], a: "$\\Delta^2/(12 f_s)$" }), ref: "p.375" },
+        solution: S({
+          c: "ADC quantization noise has variance $\\Delta^2/12$ (uniform over one step $\\Delta$), spread across the band $[0, f_s/2]$, giving a power spectral density $\\approx \\Delta^2/(12 f_s)$.",
+          s: ["<b>Step 1 — Match.</b> $\\Delta^2/(12 f_s)$.","<b>Step 2 — Distractor audit.</b> $\\Delta$ alone, 0, infinity aren't the PSD."],
+          a: "$\\Delta^2/(12 f_s)$.",
+          v: "This is why OVERSAMPLING boosts SNR: the same total noise ($\\Delta^2/12$) spreads over a WIDER band, so less of it falls in the signal band - the principle behind sigma-delta converters."
+        }), ref: "p.375" },
     ],
 
     // Electronics — +15
     9: [
       { q: "Diode equation (Shockley): $I_D = I_S(e^{V_D/(nV_T)} - 1)$. At room temp, $nV_T \\approx$:",
         choices: ["$25-50$ mV typically", "$0.7$ V", "$1$ V", "$1$ mV"], correct: 0,
-        solution: S({ c: "Thermal voltage $V_T = kT/q \\approx 25.85$ mV at 300K. Ideality factor $n \\in [1, 2]$.", s: [""], a: "$\\sim 25$-50 mV" }), ref: "p.383" },
+        solution: S({
+          c: "The thermal voltage $V_T=kT/q\\approx25.85$ mV at 300 K; with ideality factor $n$ (1 to 2), $nV_T$ is roughly 25-50 mV.",
+          s: ["<b>Step 1 — Match.</b> 25-50 mV.","<b>Step 2 — Distractor audit.</b> 0.7 V is the FORWARD DROP (not $nV_T$); 1 V and 1 mV are off."],
+          a: "$\\sim 25$-50 mV.",
+          v: "This small $nV_T$ is why diode current changes ~10x per ~60 mV ($\\approx 2.3 nV_T$) - the steep exponential. Don't confuse it with the ~0.7 V conduction drop."
+        }), ref: "p.383" },
       { q: "BJT $V_{BE}$ has temperature coefficient approximately:",
         choices: ["$-2$ mV/°C", "$+2$ mV/°C", "$0$", "$+0.7$ V"], correct: 0,
-        solution: S({ c: "$V_{BE}$ decreases ~2 mV per °C rise.", s: ["Used in bandgap references and temperature sensors."], a: "$-2$ mV/°C" }), ref: "p.384" },
+        solution: S({
+          c: "$V_{BE}$ DECREASES about 2 mV for each degC rise (at fixed current).",
+          s: ["<b>Step 1 — Match.</b> -2 mV/degC.","<b>Step 2 — Distractor audit.</b> +2 mV/degC has wrong sign; 0 ignores it; +0.7 V is the drop, not a coefficient."],
+          a: "$-2$ mV/degC.",
+          v: "This predictable -2 mV/degC is exploited in bandgap voltage references (cancelled against a +temp-coef term) and in BJT temperature sensors. It also drives thermal runaway in power BJTs."
+        }), ref: "p.384" },
       { q: "Op amp input offset voltage typical:",
         choices: ["Few mV (precision: ~µV)", "$V_{cc}$", "$0$ exactly", "$1$ V"], correct: 0,
-        solution: S({ c: "$V_{OS}$: small DC error required at inputs for zero output.", s: ["General-purpose: 1-10 mV. Precision (chopper-stabilized): <µV."], a: "Few mV" }), ref: "p.380" },
+        solution: S({
+          c: "Input offset voltage $V_{OS}$ is the small DC voltage needed between inputs to zero the output - typically a few mV (precision parts reach microvolts).",
+          s: ["<b>Step 1 — Match.</b> Few mV (precision ~uV).","<b>Step 2 — Distractor audit.</b> Not $V_{cc}$, not exactly 0, not 1 V."],
+          a: "A few mV.",
+          v: "$V_{OS}$ limits DC accuracy in high-gain circuits (it gets amplified too). Chopper-stabilized/auto-zero op-amps trim it to <1 uV for precision instrumentation."
+        }), ref: "p.380" },
       { q: "MOSFET $V_{GS}(\\text{th})$ for power MOSFETs typically:",
         choices: ["$1$-$4$ V", "$0$", "$10$ V", "$-5$ V"], correct: 0,
-        solution: S({ c: "Power MOSFET threshold: enough to overcome bulk-channel barrier but low enough for logic-level drive.", s: ["Logic-level MOSFETs: $V_{th} \\approx 1-2$ V to drive from 3.3V."], a: "$1-4$ V" }), ref: "p.386" },
+        solution: S({
+          c: "Power MOSFET threshold voltage is typically 1-4 V - high enough to stay off from noise, low enough to switch.",
+          s: ["<b>Step 1 — Match.</b> 1-4 V.","<b>Step 2 — Distractor audit.</b> 0 would be always-on; 10 V is too high; -5 V is a p-channel/depletion value."],
+          a: "$1$-$4$ V.",
+          v: "'Logic-level' MOSFETs are specified at the low end (~1-2 V threshold) so a 3.3 V or 5 V microcontroller can fully turn them on without a gate driver."
+        }), ref: "p.386" },
       { q: "BJT in cutoff has $V_{BE}$:",
         choices: ["Less than 0.5 V", "Greater than 0.7", "$V_{CE}$", "$0$ exactly"], correct: 0,
-        solution: S({ c: "Below conduction threshold, BJT off.", s: ["Active: $V_{BE} \\approx 0.7$ V. Saturation: $V_{BE} \\approx 0.8$ V (slightly higher)."], a: "$V_{BE} < 0.5$ V" }), ref: "p.384" },
+        solution: S({
+          c: "In CUTOFF the base-emitter junction is below its conduction threshold, so $V_{BE} < 0.5$ V and the transistor is off.",
+          s: ["<b>Step 1 — Match.</b> Less than 0.5 V.","<b>Step 2 — Distractor audit.</b> >0.7 V is active/saturation; $V_{CE}$ is a different terminal; 'exactly 0' is too strict."],
+          a: "$V_{BE} < 0.5$ V.",
+          v: "The region map by $V_{BE}$: <0.5 V cutoff, ~0.7 V active, ~0.8 V saturation. Cutoff and saturation are the two switch states; active is the amplifying region."
+        }), ref: "p.384" },
       { q: "Photovoltaic cell short-circuit current $I_{SC}$:",
         choices: ["Proportional to light intensity", "Constant", "Proportional to voltage", "Random"], correct: 0,
-        solution: S({ c: "More photons → more electron-hole pairs → more current.", s: ["Open-circuit voltage: logarithmic with intensity."], a: "$\\propto$ light intensity" }), ref: "p.383" },
+        solution: S({
+          c: "A solar cell's short-circuit current is PROPORTIONAL to light intensity (more photons -> more electron-hole pairs -> more current).",
+          s: ["<b>Step 1 — Match.</b> Proportional to light intensity.","<b>Step 2 — Distractor audit.</b> Not constant or proportional to voltage; not random."],
+          a: "Proportional to light intensity.",
+          v: "$I_{SC}$ scales linearly with illumination, while open-circuit VOLTAGE rises only LOGARITHMICALLY - which is why solar output is current-driven and panels are rated at standard 1000 W/m^2."
+        }), ref: "p.383" },
       { q: "Differential amplifier CMRR is improved by:",
         choices: ["Matched components and current source tail", "Higher gain", "Larger transistors", "Faster"], correct: 0,
-        solution: S({ c: "Mismatch in differential pair degrades CMRR. Current source tail much higher impedance than resistor.", s: ["Modern op-amps achieve >100 dB CMRR."], a: "Matching + current source" }), ref: "p.380" },
+        solution: S({
+          c: "CMRR improves with well-MATCHED components and a high-impedance CURRENT-SOURCE tail (vs a plain resistor) in the differential pair.",
+          s: ["<b>Step 1 — Match.</b> Matched components + current-source tail.","<b>Step 2 — Distractor audit.</b> Higher gain, larger transistors, or speed don't directly set CMRR."],
+          a: "Matching and a current-source tail.",
+          v: "Mismatch lets common-mode signals leak to the output; the current-source tail presents huge impedance to common-mode while passing the difference - modern op-amps reach >100 dB CMRR this way."
+        }), ref: "p.380" },
       { q: "Op amp output stage: push-pull complementary BJTs operate in:",
         choices: ["Class AB (slight bias to eliminate crossover)", "Class A", "Class B", "Class C"], correct: 0,
-        solution: S({ c: "Class AB: small standing current eliminates crossover distortion of pure Class B.", s: [""], a: "Class AB" }), ref: "p.384" },
+        solution: S({
+          c: "Op-amp output stages use CLASS AB - a small standing bias current keeps both transistors slightly on, eliminating the crossover distortion of pure Class B.",
+          s: ["<b>Step 1 — Match.</b> Class AB.","<b>Step 2 — Distractor audit.</b> Class A is inefficient (always on); Class B has crossover distortion; Class C is for RF."],
+          a: "Class AB.",
+          v: "Class AB gets near Class B's efficiency (~78%) while smoothing the handoff near zero crossing where Class B would distort - the standard for linear audio/op-amp output stages."
+        }), ref: "p.384" },
       { q: "Transistor as switch in saturation: power loss approximately:",
         choices: ["$V_{CE,sat} \\cdot I_C$ (low)", "$V_{CC} \\cdot I_C$ (high)", "$0$", "$V_{CC}^2/R$"], correct: 0,
-        solution: S({ c: "In saturation: low $V_{CE} \\approx 0.2$ V → low power loss.", s: ["Cutoff: $I_C \\approx 0$ → also low loss.", "Linear region (transition): high loss — minimize switching time."], a: "$V_{CE,sat} I_C$" }), ref: "p.384" },
+        solution: S({
+          c: "In saturation $V_{CE}$ collapses to ~0.2 V, so conduction loss is small: $P \\approx V_{CE,sat}\\cdot I_C$.",
+          s: ["<b>Step 1 — Match.</b> $V_{CE,sat}\\cdot I_C$ (low).","<b>Step 2 — Distractor audit.</b> $V_{CC}\\cdot I_C$ would be huge (linear region); 0 is ideal; $V_{CC}^2/R$ misapplies."],
+          a: "$V_{CE,sat}\\cdot I_C$ (low).",
+          v: "A switch is efficient in BOTH end states - saturation (low V) and cutoff (low I) dissipate little. The loss happens during the TRANSITION (linear region), so fast switching minimizes it."
+        }), ref: "p.384" },
       { q: "Boost converter output ripple voltage:",
         choices: ["Depends on output cap, load, switching freq", "Constant", "Zero", "Equal to input"], correct: 0,
-        solution: S({ c: "Ripple $\\Delta V = I_o D / (C f_{sw})$.", s: ["Higher $C$, higher $f$ → less ripple."], a: "Multiple factors" }), ref: "p.383" },
+        solution: S({
+          c: "Output ripple depends on the output capacitor, load current, duty cycle, and switching frequency: $\\Delta V \\approx I_o D/(C f_{sw})$.",
+          s: ["<b>Step 1 — Match.</b> Depends on output cap, load, switching freq.","<b>Step 2 — Distractor audit.</b> It's not constant, zero, or equal to input."],
+          a: "Depends on C, load, and $f_{sw}$.",
+          v: "Bigger output capacitance or higher switching frequency reduces ripple - the design trade is cost/size vs ripple. The output cap supplies the load while the switch is off."
+        }), ref: "p.383" },
       { q: "Voltage-controlled current source: ideal output impedance:",
         choices: ["Infinite", "Zero", "$R$", "Variable"], correct: 0,
-        solution: S({ c: "Ideal current source: I doesn't depend on V → infinite Z.", s: ["Real: finite output Z. MOSFET in saturation approximates."], a: "Infinite" }), ref: "p.380" },
+        solution: S({
+          c: "An ideal current source delivers the same current regardless of load voltage, so its output impedance is INFINITE.",
+          s: ["<b>Step 1 — Match.</b> Infinite.","<b>Step 2 — Distractor audit.</b> Zero is an ideal VOLTAGE source; R and 'variable' are non-ideal."],
+          a: "Infinite.",
+          v: "Infinite output impedance = current independent of voltage (a flat horizontal I-V line). A MOSFET in saturation approximates it; real sources have large but finite output Z."
+        }), ref: "p.380" },
       { q: "Ideal current source output current:",
         choices: ["Independent of load voltage", "Linear in V", "Zero", "Equal to V"], correct: 0,
-        solution: S({ c: "Definition of ideal current source.", s: [""], a: "Constant" }), ref: "p.356" },
+        solution: S({
+          c: "An ideal current source pushes a FIXED current regardless of the load voltage across it.",
+          s: ["<b>Step 1 — Match.</b> Independent of load voltage.","<b>Step 2 — Distractor audit.</b> Not linear in V (that's a resistor), not zero, not equal to V."],
+          a: "Constant (load-independent).",
+          v: "The dual of an ideal voltage source (fixed V, any current). The current source fixes I and lets V be whatever the load demands - the source supplies whatever voltage is needed."
+        }), ref: "p.356" },
       { q: "Photodiode reverse-biased: current proportional to:",
         choices: ["Optical power incident on junction", "Bias voltage", "Temperature only", "Random"], correct: 0,
-        solution: S({ c: "Photodiode in reverse bias: photocurrent $\\propto$ light, mostly independent of bias.", s: [""], a: "Optical power" }), ref: "p.383" },
+        solution: S({
+          c: "A reverse-biased photodiode's photocurrent is proportional to the INCIDENT OPTICAL POWER, largely independent of the bias voltage.",
+          s: ["<b>Step 1 — Match.</b> Optical power on the junction.","<b>Step 2 — Distractor audit.</b> Not the bias voltage (it just sets the operating mode), not temperature-only, not random."],
+          a: "Incident optical power.",
+          v: "This linear light-to-current response makes the photodiode an excellent optical sensor - reverse bias widens the depletion region for speed and keeps the photocurrent proportional to light."
+        }), ref: "p.383" },
       { q: "Op amp bandwidth-gain tradeoff: high gain implies:",
         choices: ["Low bandwidth (constant GBW)", "High bandwidth", "Same", "Unrelated"], correct: 0,
-        solution: S({ c: "Gain × Bandwidth = constant (GBW product).", s: ["Op amp 741: GBW ~1 MHz. Modern: 100s MHz to GHz."], a: "Low BW" }), ref: "p.380" },
+        solution: S({
+          c: "Gain x Bandwidth = constant (the GBW product), so HIGH closed-loop gain means LOW bandwidth.",
+          s: ["<b>Step 1 — Match.</b> Low bandwidth.","<b>Step 2 — Distractor audit.</b> Not high bandwidth, same, or unrelated - they trade off inversely."],
+          a: "Low bandwidth.",
+          v: "With GBW = 1 MHz, gain 100 gives 10 kHz bandwidth, gain 10 gives 100 kHz. To get both high gain AND bandwidth, cascade lower-gain stages."
+        }), ref: "p.380" },
       { q: "Class D amplifier efficiency typical:",
         choices: ["$> 90\\%$ (switching mode)", "$25\\%$", "$50\\%$", "$78\\%$"], correct: 0,
-        solution: S({ c: "Class D: transistors fully on or off → low dissipation.", s: ["Output filter recovers analog signal."], a: "$> 90\\%$" }), ref: "p.384" },
+        solution: S({
+          c: "Class D (switching) amplifiers reach >90% efficiency because the transistors are fully ON or OFF, dissipating little power.",
+          s: ["<b>Step 1 — Match.</b> >90% (switching mode).","<b>Step 2 — Distractor audit.</b> 25% is Class A; 50% is transformer Class A; 78% is Class B."],
+          a: ">90%.",
+          v: "Like a switch (low loss in both states), Class D modulates a high-frequency PWM signal then filters it back to analog - the high efficiency is why it dominates modern audio and motor drives."
+        }), ref: "p.384" },
     ],
 
     // Power — +15
     10: [
       { q: "Single-phase service voltage in US households (RMS, line to neutral):",
         choices: ["$120$ V", "$240$ V", "$208$ V", "$480$ V"], correct: 0,
-        solution: S({ c: "US standard 120/240V split-phase.", s: ["Europe: 230V line-neutral, 400V line-line."], a: "$120$ V" }), ref: "p.363" },
+        solution: S({
+          c: "US homes use 120/240 V split-phase: line-to-neutral is 120 V (and line-to-line 240 V).",
+          s: ["<b>Step 1 — Match.</b> 120 V.","<b>Step 2 — Distractor audit.</b> 240 V is line-to-line; 208/480 are three-phase systems."],
+          a: "120 V.",
+          v: "A center-tapped transformer gives two 120 V legs (180 deg apart) for outlets and 240 V across them for big appliances. Europe uses 230 V line-neutral."
+        }), ref: "p.363" },
       { q: "Common 3-phase voltages in US commercial:",
         choices: ["208/120 (small), 480/277 (large)", "230/400", "Only 600V", "12kV"], correct: 0,
-        solution: S({ c: "US: 208Y/120 small building, 480Y/277 large.", s: [""], a: "208 or 480" }), ref: "p.363" },
+        solution: S({
+          c: "US commercial three-phase: 208Y/120 V for smaller buildings, 480Y/277 V for larger ones.",
+          s: ["<b>Step 1 — Match.</b> 208/120 (small), 480/277 (large).","<b>Step 2 — Distractor audit.</b> 230/400 is European; 'only 600V' and 12kV are wrong for this scale."],
+          a: "208 or 480 (Y systems).",
+          v: "The pairs follow the wye $\\sqrt3$ rule: $208/\\sqrt3=120$, $480/\\sqrt3=277$. The line-line value runs motors; the line-neutral value runs lighting (277 V) and outlets (120 V)."
+        }), ref: "p.363" },
       { q: "Transmission line model: short line (<80 km), use:",
         choices: ["Series impedance only", "Distributed", "ABCD", "Pi model"], correct: 0,
-        solution: S({ c: "Short line: capacitance negligible. Just R+jX.", s: ["Medium (80-250 km): nominal-π. Long: distributed."], a: "Series Z only" }), ref: "p.363" },
+        solution: S({
+          c: "For a SHORT line (<80 km), shunt capacitance is negligible - model it as just the series impedance R + jX.",
+          s: ["<b>Step 1 — Match.</b> Series impedance only.","<b>Step 2 — Distractor audit.</b> Pi-model is for MEDIUM lines (80-250 km); distributed/ABCD for LONG lines."],
+          a: "Series impedance only.",
+          v: "The model ladder: short -> series R+jX; medium -> add shunt C (nominal-pi); long -> distributed parameters (ABCD). Capacitance matters more as length grows."
+        }), ref: "p.363" },
       { q: "Per-unit system advantage:",
         choices: ["Transformer impedances same on both sides", "Faster computation", "Lower voltage", "Eliminate Y/Δ"], correct: 0,
-        solution: S({ c: "PU normalizes to base — voltage-level-independent.", s: ["Reduces calculation errors crossing transformer boundaries."], a: "Transformer-independent" }), ref: "p.363" },
+        solution: S({
+          c: "In per-unit, a transformer's impedance is the SAME on both sides (the turns-ratio scaling cancels), so transformers 'disappear' from the impedance diagram.",
+          s: ["<b>Step 1 — Match.</b> Transformer impedances same on both sides.","<b>Step 2 — Distractor audit.</b> Not just 'faster' or 'lower voltage'; it doesn't eliminate Y/Delta."],
+          a: "Transformer-independent impedances.",
+          v: "Per-unit normalizes everything to common bases, removing the $a^2$ impedance jumps at each transformer - hugely simplifying multi-voltage power-flow and fault calculations."
+        }), ref: "p.363" },
       { q: "Power flow analysis: P-V curves represent:",
         choices: ["Voltage stability margin (knee point = collapse)", "Frequency", "Reactive", "Random"], correct: 0,
-        solution: S({ c: "P-V (nose) curves: at heavy load, voltage drops; knee = stability limit.", s: ["Operating beyond knee: voltage collapse."], a: "V stability" }), ref: "p.363" },
+        solution: S({
+          c: "P-V (nose) curves show voltage stability: as load power rises, voltage drops; the 'knee' (nose tip) is the maximum loadable point - beyond it, voltage collapses.",
+          s: ["<b>Step 1 — Match.</b> Voltage stability margin (knee = collapse).","<b>Step 2 — Distractor audit.</b> Not frequency, reactive-only, or random."],
+          a: "Voltage stability margin.",
+          v: "Operating near the knee is dangerous - a small load increase triggers voltage collapse (a cause of major blackouts). The distance from the operating point to the knee is the stability margin."
+        }), ref: "p.363" },
       { q: "Symmetrical components: positive, negative, zero sequence describe:",
         choices: ["Unbalanced 3-φ system decomposition", "Frequency components", "Harmonics", "Phase shifts"], correct: 0,
-        solution: S({ c: "Fortescue's theorem: any unbalanced 3-φ = sum of three balanced sets.", s: ["Used in fault analysis."], a: "Unbalance decomposition" }), ref: "p.363" },
+        solution: S({
+          c: "Fortescue's theorem: ANY unbalanced three-phase set decomposes into three BALANCED sets - positive, negative, and zero sequence.",
+          s: ["<b>Step 1 — Match.</b> Unbalanced 3-phase decomposition.","<b>Step 2 — Distractor audit.</b> Not frequency components, harmonics, or simple phase shifts."],
+          a: "Unbalanced-system decomposition.",
+          v: "This is the master tool for UNBALANCED fault analysis - each sequence network is balanced and analyzable separately, then combined per the fault type (L-G, L-L, etc.)."
+        }), ref: "p.363" },
       { q: "Three-phase balanced load: zero-sequence current:",
         choices: ["Zero (no neutral current)", "Equal to phase current", "Maximum", "Random"], correct: 0,
-        solution: S({ c: "Balanced operation: only positive sequence present.", s: ["Zero-sequence: indicates ground fault or single-phase load on 3-φ."], a: "Zero" }), ref: "p.363" },
+        solution: S({
+          c: "A balanced three-phase load has ONLY positive-sequence current; the zero-sequence (and negative-sequence) components are ZERO.",
+          s: ["<b>Step 1 — Match.</b> Zero (no neutral current).","<b>Step 2 — Distractor audit.</b> Not equal to phase current, maximum, or random."],
+          a: "Zero.",
+          v: "Zero-sequence current is the in-phase component that flows in the neutral/ground - its presence SIGNALS a ground fault or unbalance, which is why ground-fault relays detect it."
+        }), ref: "p.363" },
       { q: "Three-phase L-G fault: dominant current type:",
         choices: ["Has positive, negative, AND zero sequence (all equal)", "Just positive", "Random", "AC only"], correct: 0,
-        solution: S({ c: "Line-to-ground fault: all three sequence currents equal at fault point.", s: ["Used in protection relay settings."], a: "All three equal" }), ref: "p.363" },
+        solution: S({
+          c: "In a single line-to-ground fault, all three sequence currents (positive, negative, zero) are EQUAL at the fault point.",
+          s: ["<b>Step 1 — Match.</b> All three sequences equal.","<b>Step 2 — Distractor audit.</b> 'Just positive' is balanced operation; not random or AC-only."],
+          a: "Positive = negative = zero sequence.",
+          v: "This equality means the three sequence networks connect in SERIES for an L-G fault - the standard analysis that sets protective-relay ground-fault settings."
+        }), ref: "p.363" },
       { q: "Transformer connection $\\Delta-Y$: phase shift between primary and secondary line voltages:",
         choices: ["$30°$ (typical)", "$0$", "$90°$", "$120°$"], correct: 0,
-        solution: S({ c: "$\\Delta-Y$ (ANSI standard): secondary lags primary by 30°.", s: ["Different connection: leading 30°. Always 30° multiple."], a: "$30°$" }), ref: "p.364" },
+        solution: S({
+          c: "A delta-wye transformer introduces a 30-degree phase shift between primary and secondary line voltages (ANSI standard: secondary lags by 30).",
+          s: ["<b>Step 1 — Match.</b> 30 degrees.","<b>Step 2 — Distractor audit.</b> 0 is for Y-Y or Delta-Delta; 90/120 are wrong."],
+          a: "30 degrees.",
+          v: "This 30-degree shift matters when PARALLELING transformers - only same-shift groups can be paralleled, or circulating currents flow. It's always a multiple of 30 for standard connections."
+        }), ref: "p.364" },
       { q: "Power transformer voltage ratio determined by:",
         choices: ["Turns ratio", "Frequency", "Load", "Phase"], correct: 0,
-        solution: S({ c: "$V_1/V_2 = N_1/N_2$ for ideal.", s: ["Practical: tap changers adjust ratio slightly to regulate output."], a: "Turns ratio" }), ref: "p.364" },
+        solution: S({
+          c: "The voltage ratio equals the turns ratio: $V_1/V_2 = N_1/N_2$ (for an ideal transformer).",
+          s: ["<b>Step 1 — Match.</b> Turns ratio.","<b>Step 2 — Distractor audit.</b> Not frequency, load, or phase."],
+          a: "Turns ratio.",
+          v: "Voltage scales with turns, current inversely - power is (nearly) conserved. Real transformers add tap-changers to trim the ratio for output-voltage regulation under varying load."
+        }), ref: "p.364" },
       { q: "Synchronous machine: damper windings function:",
         choices: ["Damp rotor oscillations, aid starting", "Cooling", "Insulation", "Excitation"], correct: 0,
-        solution: S({ c: "Damper bars: induced currents oppose rotor angle swings.", s: ["Also enable line-start (induction starting) for synchronous motors."], a: "Damping + starting" }), ref: "p.365" },
+        solution: S({
+          c: "Damper (amortisseur) windings carry induced currents that OPPOSE rotor-angle oscillations, damping swings - and they also enable induction-style line starting.",
+          s: ["<b>Step 1 — Match.</b> Damp rotor oscillations, aid starting.","<b>Step 2 — Distractor audit.</b> Not cooling, insulation, or excitation."],
+          a: "Damping + starting.",
+          v: "When the rotor swings off synchronous speed, the dampers see slip and induce currents that brake the swing - improving transient stability. They also let a synchronous motor self-start as an induction motor."
+        }), ref: "p.365" },
       { q: "DC motor speed proportional to:",
         choices: ["Back EMF (~ armature voltage at constant field)", "Current", "Torque", "Power"], correct: 0,
-        solution: S({ c: "$E_b = k\\phi\\omega$. For constant flux: $\\omega \\propto E_b$.", s: ["Speed control via $V_a$ (for $\\omega < $ base) or field weakening (for $\\omega > $ base)."], a: "Back EMF" }), ref: "p.365" },
+        solution: S({
+          c: "Back-EMF relates to speed by $E_b = k\\phi\\omega$; at constant field flux, speed is proportional to back-EMF (which tracks the applied armature voltage).",
+          s: ["<b>Step 1 — Match.</b> Back-EMF (~ armature voltage at constant field).","<b>Step 2 — Distractor audit.</b> Current/torque relate to LOAD; power is V x I."],
+          a: "Back-EMF (~ armature voltage).",
+          v: "This gives two speed-control regimes: vary armature VOLTAGE below base speed (constant torque), or WEAKEN the field above base speed (constant power, less torque)."
+        }), ref: "p.365" },
       { q: "Induction motor: rotor current frequency vs line frequency:",
         choices: ["$f_r = s \\cdot f_{line}$", "Same", "Constant", "Doubled"], correct: 0,
-        solution: S({ c: "Rotor sees slip frequency.", s: ["At rated slip 3%: rotor current at 1.8 Hz (60 Hz line)."], a: "$s \\cdot f_{line}$" }), ref: "p.365" },
+        solution: S({
+          c: "Rotor current frequency is the SLIP frequency: $f_r = s\\cdot f_{line}$, where s is the slip.",
+          s: ["<b>Step 1 — Match.</b> $f_r = s\\cdot f_{line}$.","<b>Step 2 — Distractor audit.</b> Not the same as line frequency, constant, or doubled."],
+          a: "$f_r = s\\cdot f_{line}$.",
+          v: "At standstill (s=1) the rotor sees full line frequency; running near synchronous (s small) it sees a low slip frequency - e.g. 3% slip on 60 Hz gives 1.8 Hz rotor current."
+        }), ref: "p.365" },
       { q: "Motor starting torque for NEMA design B:",
         choices: ["~125-150% FLT", "$100\\%$", "$300\\%$", "$50\\%$"], correct: 0,
-        solution: S({ c: "Standard squirrel-cage motor.", s: ["Design A, B, C, D differ in torque-speed curves.", "Design D: high slip, high torque for cranes."], a: "$125-150\\%$" }), ref: "p.365" },
+        solution: S({
+          c: "NEMA Design B (the standard general-purpose squirrel-cage motor) has starting torque around 125-150% of full-load torque.",
+          s: ["<b>Step 1 — Match.</b> ~125-150% FLT.","<b>Step 2 — Distractor audit.</b> 100% is too low for starting; 300% is Design C/D; 50% wouldn't start loads."],
+          a: "$\\approx 125$-150% FLT.",
+          v: "NEMA designs A/B/C/D tailor the torque-speed curve: Design D (high slip) gives ~300% starting torque for cranes/hoists; Design B balances starting torque, efficiency, and inrush for general use."
+        }), ref: "p.365" },
       { q: "Synchronous condenser purpose:",
         choices: ["Provide reactive power (no active load) for voltage support", "Cooling", "Filtering harmonics", "Active power generation"], correct: 0,
-        solution: S({ c: "Synchronous machine spinning at no-load — adjustable Q via excitation.", s: ["Modern: SVCs (static VAR compensators) often replace."], a: "Reactive support" }), ref: "p.365" },
+        solution: S({
+          c: "A synchronous condenser is a synchronous machine spinning at no mechanical load, used purely to supply/absorb REACTIVE power (adjustable via its excitation) for voltage support.",
+          s: ["<b>Step 1 — Match.</b> Provide reactive power for voltage support.","<b>Step 2 — Distractor audit.</b> Not cooling, harmonic filtering, or active-power generation."],
+          a: "Reactive power / voltage support.",
+          v: "Over-excited it supplies VARs (like a capacitor); under-excited it absorbs them - continuously adjustable, unlike fixed capacitor banks. Modern static VAR compensators (SVCs) often replace them."
+        }), ref: "p.365" },
     ],
 
     // EM — +5
     11: [
       { q: "Reflection coefficient at quarter-wave transformer ($Z_0 = \\sqrt{Z_s Z_L}$):",
         choices: ["Zero (matched)", "$1$", "$-1$", "Variable"], correct: 0,
-        solution: S({ c: "Quarter-wave matching: $Z_{in} = Z_0^2/Z_L = Z_s$ → matched.", s: ["Used at single frequency to match dissimilar impedances."], a: "Zero" }), ref: "p.368" },
+        solution: S({
+          c: "A quarter-wave transformer with $Z_0=\\sqrt{Z_s Z_L}$ matches source to load: input impedance $Z_{in}=Z_0^2/Z_L=Z_s$, so reflection is ZERO.",
+          s: ["<b>Step 1 — Match.</b> Zero (matched).","<b>Step 2 — Distractor audit.</b> 1 is open, -1 is short; with proper $Z_0$ it's matched."],
+          a: "Zero (matched).",
+          v: "The quarter-wave section transforms impedance via $Z_{in}=Z_0^2/Z_L$ - choosing $Z_0$ as the geometric mean matches two real impedances at ONE frequency. A staple of RF matching."
+        }), ref: "p.368" },
       { q: "Smith chart represents:",
         choices: ["Normalized impedance on complex plane (and reflection coefficient)", "Power vs frequency", "Voltage", "Time"], correct: 0,
-        solution: S({ c: "Smith chart: graphical tool for transmission line and matching calcs.", s: ["Constant-R and constant-X circles overlay Γ disk."], a: "Norm. Z + Γ" }), ref: "p.368" },
+        solution: S({
+          c: "The Smith chart plots NORMALIZED impedance on the complex reflection-coefficient plane - a graphical tool for transmission-line and matching calculations.",
+          s: ["<b>Step 1 — Match.</b> Normalized impedance (and reflection coefficient).","<b>Step 2 — Distractor audit.</b> Not power-vs-frequency, voltage, or time."],
+          a: "Normalized Z and reflection coefficient.",
+          v: "Constant-resistance and constant-reactance circles overlay the gamma disk - letting you read impedance, VSWR, and design matching networks graphically. Still taught despite modern software."
+        }), ref: "p.368" },
       { q: "Standing wave ratio (SWR): for $|\\Gamma|=0.5$:",
         choices: ["$3$", "$0.5$", "$1.5$", "$2$"], correct: 0,
-        solution: S({ c: "$SWR = (1+|\\Gamma|)/(1-|\\Gamma|)$.", s: ["$1.5/0.5 = 3$."], a: "$3$" }), ref: "p.368" },
+        solution: S({
+          c: "VSWR relates to reflection coefficient: $SWR = \\dfrac{1+|\\Gamma|}{1-|\\Gamma|}$.",
+          s: ["<b>Step 1 — Apply.</b> $(1+0.5)/(1-0.5) = 1.5/0.5 = 3$.","<b>Step 2 — Distractor audit.</b> 0.5 is gamma itself; 1.5 and 2 misuse the formula."],
+          a: "$SWR = 3$.",
+          v: "SWR ranges 1 (perfect match, gamma=0) to infinity (total reflection, |gamma|=1). SWR=3 means a noticeable mismatch - antenna systems typically target SWR < 2."
+        }), ref: "p.368" },
       { q: "Half-wave dipole input impedance:",
         choices: ["$\\approx 73 + j42$ Ω", "$50$ Ω exactly", "$0$", "Infinite"], correct: 0,
-        solution: S({ c: "Half-wave dipole: ~73 Ω resistive, slight inductive.", s: ["Folded dipole: ~300 Ω. Useful for matching."], a: "$\\sim 73$ Ω" }), ref: "p.368" },
+        solution: S({
+          c: "A half-wave dipole has input impedance ~73 + j42 ohms (about 73 ohms resistive, slightly inductive).",
+          s: ["<b>Step 1 — Match.</b> ~73 + j42 ohms.","<b>Step 2 — Distractor audit.</b> Not exactly 50 ohms, 0, or infinite."],
+          a: "$\\approx 73 + j42$ ohms.",
+          v: "The ~73 ohm resistive part is close to (but not exactly) 50 ohm coax - hence small mismatch. A FOLDED dipole multiplies this to ~300 ohms, handy for matching to twin-lead/baluns."
+        }), ref: "p.368" },
       { q: "Antenna radiation pattern: dipole has:",
         choices: ["Donut/toroidal pattern (omnidirectional in plane perpendicular to wire)", "Forward only", "Spherical", "Random"], correct: 0,
-        solution: S({ c: "Dipole maximum perpendicular to wire; null along wire axis.", s: [""], a: "Donut" }), ref: "p.368" },
+        solution: S({
+          c: "A dipole radiates in a DONUT (toroidal) pattern - omnidirectional in the plane perpendicular to the wire, with nulls along the wire's axis.",
+          s: ["<b>Step 1 — Match.</b> Donut/toroidal pattern.","<b>Step 2 — Distractor audit.</b> Not forward-only (that's a Yagi/directional), spherical (isotropic ideal), or random."],
+          a: "Donut (toroidal) pattern.",
+          v: "Maximum radiation broadside (perpendicular to the wire), zero off the ends - which is why you orient a dipole's length perpendicular to the direction you want to reach."
+        }), ref: "p.368" },
     ],
 
     // Control — +10
