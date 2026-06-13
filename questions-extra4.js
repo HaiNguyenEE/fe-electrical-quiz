@@ -229,92 +229,356 @@
     // ====================== Ch 2: Probability — +12 ======================
     2: [
       { q: "Mean of {3, 5, 7, 9}:", choices: ["$6$", "$5$", "$7$", "$24$"], correct: 0,
-        solution: S({ c: "Sum/count.", s: ["$(3+5+7+9)/4 = 24/4 = 6$."], a: "$6$", v: "Equally spaced numbers → mean = median = midpoint." }), ref: "Handbook p.63" },
+        solution: S({
+          c: "Mean = sum ÷ count — the balance point of the data.",
+          s: [
+            "<b>Step 1 — Sum.</b> $3+5+7+9 = 24$.",
+            "<b>Step 2 — Divide by 4.</b> $24/4 = 6$.",
+            "<b>Step 3 — Distractor audit.</b> 5 and 7 are data values; 24 is the un-divided sum."
+          ],
+          a: "$6$",
+          v: "Structure bonus: the data are equally spaced, so mean = median = midpoint of (3,9) = 6 ✓ — symmetric data make all the centers coincide."
+
+        }), ref: "Handbook p.63" },
       { q: "Mode of {2, 3, 3, 4, 5, 5, 5}:", choices: ["$5$", "$3$", "$4$", "Multiple"], correct: 0,
-        solution: S({ c: "Mode = most frequent value.", s: ["5 appears 3 times; 3 appears 2 times; others once.", "Mode = 5."], a: "$5$", v: "Bimodal: two equally-frequent modes. None: all different." }), ref: "Handbook p.63" },
+        solution: S({
+          c: "Mode = the most FREQUENT value (not the largest, not the middle).",
+          s: [
+            "<b>Step 1 — Tally.</b> 5 appears ×3; 3 appears ×2; 2 and 4 once each.",
+            "<b>Step 2 — Pick the winner.</b> Mode = 5.",
+            "<b>Step 3 — Distractor audit.</b> 3 is runner-up; 4 is the median; 'multiple' would need a tie for first."
+          ],
+          a: "$5$",
+          v: "Vocabulary completeness: a two-way tie = bimodal; all values distinct = no mode ✓. Mode is the only center that works for CATEGORICAL data (most common color, etc.) — its real claim to existence."
+
+        }), ref: "Handbook p.63" },
       { q: "P(at least one head in 3 fair coin flips):",
         choices: ["$7/8$", "$1/8$", "$1/2$", "$3/8$"], correct: 0,
-        solution: S({ c: "$P(\\ge 1) = 1 - P(\\text{none})$. Easier than direct sum.", s: ["$P(\\text{0 heads}) = (1/2)^3 = 1/8$.", "$P(\\ge 1) = 1 - 1/8 = 7/8$."], a: "$7/8$", v: "General: probability of any event happening at least once → use complement." }), ref: "Handbook p.65" },
+        solution: S({
+          c: "'At least one' is the complement trick's home turf: $P(\\ge1) = 1 - P(\\text{none})$ — one subtraction beats summing seven cases.",
+          s: [
+            "<b>Step 1 — Probability of NO heads.</b> $(1/2)^{3} = 1/8$ (TTT).",
+            "<b>Step 2 — Complement.</b> $1 - 1/8 = 7/8$.",
+            "<b>Step 3 — Distractor audit.</b> 1/8 is the complement itself; 1/2 is one flip; 3/8 is EXACTLY one head."
+          ],
+          a: "$7/8$",
+          v: "Direct count confirms: of 8 outcomes only TTT lacks a head → 7/8 ✓. Reflex to build: the phrase 'at least one' should trigger the complement before any summing starts."
+
+        }), ref: "Handbook p.65" },
       { q: "Conditional prob $P(B|A) = 0.6$, $P(A) = 0.4$. $P(A \\cap B)$ = ",
         choices: ["$0.24$", "$0.6$", "$0.4$", "$1.0$"], correct: 0,
-        solution: S({ c: "$P(A \\cap B) = P(A) \\cdot P(B|A)$.", s: ["$0.4 \\cdot 0.6 = 0.24$."], a: "$0.24$" }), ref: "Handbook p.65" },
+        solution: S({
+          c: "The multiplication rule — the definition of conditional probability rearranged: $P(A\\cap B) = P(A)\\,P(B|A)$.",
+          s: [
+            "<b>Step 1 — Multiply.</b> $0.4\\times0.6 = 0.24$.",
+            "<b>Step 2 — Distractor audit.</b> 0.6 and 0.4 echo the givens; 1.0 adds them."
+          ],
+          a: "$P(A\\cap B) = 0.24$",
+          v: "Counting check per 100 trials: A happens 40 times; of those, 60% also have B → 24 of 100 ✓. The joint can never exceed either marginal (0.24 < 0.4 ✓) — a free sanity bound."
+
+        }), ref: "Handbook p.65" },
       { q: "Quality control: 100 widgets, 3 defective. Probability 1 random widget is defective:",
         choices: ["$0.03$", "$0.3$", "$0.97$", "$3$"], correct: 0,
-        solution: S({ c: "P = favorable/total.", s: ["$P = 3/100 = 0.03$."], a: "$0.03 (3\\%)$" }), ref: "Handbook p.64" },
+        solution: S({
+          c: "Classical probability: favorable ÷ total, for equally likely draws.",
+          s: [
+            "<b>Step 1 — Divide.</b> $3/100 = 0.03$.",
+            "<b>Step 2 — Distractor audit.</b> 0.3 misplaces the decimal; 0.97 is the GOOD-widget probability (complement); 3 forgets to divide."
+          ],
+          a: "$0.03$ (3%)",
+          v: "Complement closure: $0.03 + 0.97 = 1$ ✓. This 3% is also the defect RATE the binomial/Poisson questions build on — same number, next level up."
+
+        }), ref: "Handbook p.64" },
       { q: "Continuous uniform distribution on $[0, 10]$. Mean and std dev:",
         choices: ["$\\mu=5, \\sigma\\approx 2.89$", "$\\mu=5, \\sigma=10/12$", "$\\mu=10, \\sigma=5$", "$\\mu=5, \\sigma=5$"], correct: 0,
-        solution: S({ c: "Uniform $U(a,b)$: $\\mu = (a+b)/2$, $\\sigma^2 = (b-a)^2/12$.", s: ["$\\mu = 5$.", "$\\sigma^2 = 100/12 = 8.33$.", "$\\sigma = \\sqrt{8.33} \\approx 2.89$."], a: "$\\mu=5, \\sigma\\approx 2.89$" }), ref: "Handbook p.67" },
+        solution: S({
+          c: "Uniform $U(a,b)$ formulas to recall as a pair: mean $\\mu = \\dfrac{a+b}{2}$ (the midpoint), variance $\\sigma^{2} = \\dfrac{(b-a)^{2}}{12}$ — note the 12, and that σ needs the square root.",
+          s: [
+            "<b>Step 1 — Mean.</b> $(0+10)/2 = 5$.",
+            "<b>Step 2 — Variance then SD.</b> $\\sigma^{2} = 100/12 = 8.33$ → $\\sigma = 2.89$.",
+            "<b>Step 3 — Distractor audit.</b> '$\\sigma = 10/12$' forgets BOTH the square and the root; '$\\sigma = 5$' guesses the mean; '$\\mu = 10$' takes the endpoint."
+          ],
+          a: "$\\mu = 5$, $\\sigma \\approx 2.89$",
+          v: "Plausibility: σ ≈ 29% of the range is the uniform's signature ($1/\\sqrt{12} = 0.289$) ✓ — narrower than half-range because mass near the center contributes small deviations."
+
+        }), ref: "Handbook p.67" },
       { q: "Poisson process with rate $\\lambda = 2$ events/hour. P(exactly 3 events in 1 hour):",
         choices: ["$\\approx 0.180$", "$\\approx 0.667$", "$\\approx 0.135$", "$\\approx 0.500$"], correct: 0,
-        solution: S({ c: "Poisson: $P(k) = \\lambda^k e^{-\\lambda}/k!$.", s: ["$P(3) = 2^3 e^{-2}/3! = 8(0.1353)/6 = 0.1804$."], a: "$\\approx 0.180$", v: "Mean of Poisson is $\\lambda$; here mean = 2, so 3 is slightly above mean." }), ref: "Handbook p.66" },
+        solution: S({
+          c: "Poisson counts random arrivals: $P(k) = \\dfrac{\\lambda^{k}e^{-\\lambda}}{k!}$ with $\\lambda$ = expected count in the window.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $P(3) = \\dfrac{2^{3}e^{-2}}{3!} = \\dfrac{8\\times0.1353}{6}$.",
+            "<b>Step 2 — Evaluate.</b> $= 0.180$.",
+            "<b>Step 3 — Distractor audit.</b> 0.135 is $e^{-2}$ alone (that's $P(0)$); 0.667 is $\\lambda/3$; 0.5 is a shrug."
+          ],
+          a: "$P(3) \\approx 0.180$",
+          v: "Shape check: the mean is 2, so $P(2) = 0.271$ should exceed $P(3) = 0.180$, which exceeds $P(4) = 0.090$ ✓ — the answer sits correctly on the downhill side of the peak."
+
+        }), ref: "Handbook p.66" },
       { q: "Standard error of mean: $\\sigma=10$, $n=25$. SE = ",
         choices: ["$2$", "$10$", "$0.4$", "$25$"], correct: 0,
-        solution: S({ c: "$SE = \\sigma/\\sqrt{n}$.", s: ["$10/\\sqrt{25} = 10/5 = 2$."], a: "$2$" }), ref: "Handbook p.69" },
+        solution: S({
+          c: "Standard error of the mean: $SE = \\sigma/\\sqrt n$ — sample averages wobble less than individuals, by the root of the sample size.",
+          s: [
+            "<b>Step 1 — Apply.</b> $10/\\sqrt{25} = 10/5 = 2$.",
+            "<b>Step 2 — Distractor audit.</b> 10 forgets the $\\sqrt n$ entirely; 0.4 divides by $n$ instead of $\\sqrt n$ (the classic); 25 echoes $n$."
+          ],
+          a: "$SE = 2$",
+          v: "Behavior check: to halve this SE you'd need $n = 100$ — four times the data for double the precision, the $\\sqrt{}$ law of statistics ✓."
+
+        }), ref: "Handbook p.69" },
       { q: "Linear regression: $y = mx + b$. Best fit minimizes:",
         choices: ["Sum of squared residuals", "Sum of residuals", "Maximum residual", "Slope"], correct: 0,
-        solution: S({ c: "Least squares: minimize $\\sum (y_i - \\hat{y}_i)^2$.", s: ["Squaring penalizes large errors more.", "Yields normal equations for slope and intercept."], a: "Sum of squared residuals", v: "Robust regression uses absolute deviations to be less sensitive to outliers." }), ref: "Handbook p.69" },
+        solution: S({
+          c: "'Least squares' is literal: the best-fit line minimizes the SUM OF SQUARED residuals $\\sum(y_i - \\hat y_i)^{2}$ — squaring keeps signs from cancelling and penalizes big misses hardest.",
+          s: [
+            "<b>Step 1 — Match.</b> Sum of squared residuals.",
+            "<b>Step 2 — Why not the others.</b> Plain sum of residuals is ZERO for any line through the mean point (positives cancel negatives); minimizing the max residual is a different (minimax) criterion; the slope is an OUTPUT, not the objective.",
+            "<b>Step 3 — The payoff.</b> Squaring makes the calculus clean — normal equations with closed-form slope/intercept."
+          ],
+          a: "Sum of squared residuals.",
+          v: "The robustness footnote worth knowing: squared loss is outlier-sensitive (one wild point drags the line); absolute-deviation regression resists outliers but loses the closed form ✓ — choice of loss IS a modeling decision."
+
+        }), ref: "Handbook p.69" },
       { q: "Correlation coefficient range:",
         choices: ["$-1 \\le r \\le 1$", "$0 \\le r \\le 1$", "$-\\infty \\le r \\le \\infty$", "$0 \\le r \\le 100$"], correct: 0,
-        solution: S({ c: "Pearson correlation: -1 (perfect negative) to +1 (perfect positive). 0 = no linear correlation.", s: ["Sign indicates direction.", "Magnitude indicates strength."], a: "$[-1, 1]$", v: "$r^2$ (coefficient of determination): fraction of variance explained." }), ref: "Handbook p.69" },
+        solution: S({
+          c: "Pearson's $r$ is normalized covariance — bounded by construction: $-1 \\le r \\le 1$. Sign gives direction, magnitude gives strength of LINEAR association.",
+          s: [
+            "<b>Step 1 — Match.</b> $[-1, 1]$.",
+            "<b>Step 2 — Anchor the endpoints.</b> $r = \\pm1$: points exactly on a line (slope sign = r's sign); $r = 0$: no LINEAR relationship.",
+            "<b>Step 3 — Distractor audit.</b> $[0,1]$ forgets negative correlation; unbounded confuses $r$ with covariance; $[0,100]$ confuses with percentages."
+          ],
+          a: "$-1 \\le r \\le 1$",
+          v: "Two cautions packed in one symbol: $r = 0$ does NOT mean independent (a perfect parabola scores ~0), and $r^{2}$ — the variance-explained fraction — is the companion the FE asks next ✓."
+
+        }), ref: "Handbook p.69" },
       { q: "Z-score $z = 2$ corresponds to:",
         choices: ["$\\approx 97.7\\%$ percentile", "$\\approx 95\\%$", "$\\approx 50\\%$", "$\\approx 99.7\\%$"], correct: 0,
-        solution: S({ c: "Standard normal: $P(Z \\le 2) = 0.9772$.", s: ["By empirical rule: ~95% within $\\pm 2\\sigma$. Above 0 is half of remaining... actually $P(Z \\le 2) = 0.9772$."], a: "$\\approx 97.7\\%$ percentile", v: "Memorize: $z=1 \\to 84\\%$, $z=2 \\to 97.5\\%$, $z=3 \\to 99.85\\%$." }), ref: "Handbook p.67" },
+        solution: S({
+          c: "A z-score's percentile is the cumulative normal: $P(Z \\le 2) = \\Phi(2) = 0.9772$ — the value is 2 SDs above the mean, beating ~97.7% of the distribution.",
+          s: [
+            "<b>Step 1 — Look up.</b> $\\Phi(2) = 0.9772 \\to$ 97.7th percentile.",
+            "<b>Step 2 — Reconcile with the 95% rule.</b> ±2σ holds ~95%, leaving 2.5% in EACH tail → below +2σ is $95 + 2.5 = 97.5\\%$ ✓ (table value 97.72).",
+            "<b>Step 3 — Distractor audit.</b> 95% is the TWO-sided coverage; 50% is z = 0; 99.7% is the ±3σ band."
+          ],
+          a: "$\\approx 97.7$th percentile.",
+          v: "The one-sided ladder to memorize: $z = 1 \\to 84\\%$, $z = 2 \\to 97.7\\%$, $z = 3 \\to 99.87\\%$ — converts instantly between z and percentile in either direction ✓."
+
+        }), ref: "Handbook p.67" },
       { q: "Hypothesis testing: $\\alpha = 0.05$. Reject $H_0$ when:",
         choices: ["p-value < 0.05", "p-value > 0.05", "Statistic = 0", "Statistic > $\\alpha$"], correct: 0,
-        solution: S({ c: "$\\alpha$ = significance level (type I error rate). Reject null if observed result is too unlikely under it.", s: ["p-value: probability of observing data as extreme as we did, assuming $H_0$ true.", "If p < $\\alpha$: reject $H_0$ (evidence against null)."], a: "p < 0.05", v: "Common $\\alpha$ = 0.05 (5% false-positive rate). Stricter: 0.01 or 0.001 in critical applications." }), ref: "Handbook p.70" },
+        solution: S({
+          c: "The decision rule of significance testing: reject $H_0$ when the p-value (how surprising the data would be IF $H_0$ were true) falls below the pre-chosen threshold α.",
+          s: [
+            "<b>Step 1 — Match.</b> Reject when $p < \\alpha = 0.05$.",
+            "<b>Step 2 — Read the two numbers correctly.</b> α = the false-alarm rate you accept in advance; p = the evidence strength computed from data. Small p = data too unlikely under $H_0$ → reject.",
+            "<b>Step 3 — Distractor audit.</b> '$p > 0.05$' inverts the rule (that's FAIL to reject); the statistic-based options compare incomparable quantities."
+          ],
+          a: "Reject $H_0$ when p-value < 0.05.",
+          v: "Interpretation guardrails the FE may probe: failing to reject ≠ proving $H_0$; and α = 0.05 means 1-in-20 true nulls get falsely rejected — stricter fields use 0.01 or tighter ✓."
+
+        }), ref: "Handbook p.70" },
     ],
 
     // ====================== Ch 3: Ethics — +5 ======================
     3: [
       { q: "An engineer is asked to falsify test data. They should:",
         choices: ["Refuse, document, and report through proper channels", "Comply and report later", "Modify slightly", "Resign quietly"], correct: 0,
-        solution: S({ c: "Falsifying data violates the engineer's duty to be truthful and to protect public welfare.", s: ["Document the request.", "Refuse to falsify.", "Report to supervisor or licensing board as appropriate."], a: "Refuse and report.", v: "Whistleblower protections exist in most jurisdictions." }), ref: "Handbook p.5" },
+        solution: S({
+          c: "Falsifying test data is a double violation: dishonesty (statements must be truthful) and endangerment (decisions built on fake data put the public at risk). The compliant sequence: refuse, document, report.",
+          s: [
+            "<b>Step 1 — Refuse.</b> No qualifier — 'slightly modified' data is falsified data.",
+            "<b>Step 2 — Document.</b> Record who asked, what, when — the paper trail protects both the public and the engineer.",
+            "<b>Step 3 — Report through channels.</b> Supervisor → management → licensing board, escalating as needed. Distractors fail: 'comply now, report later' makes you a participant; quiet resignation leaves the falsified data in play."
+          ],
+          a: "Refuse, document, and report through proper channels.",
+          v: "The pattern from every data-integrity scandal (emissions cheating, test-lab fraud): engineers who complied 'temporarily' became co-defendants ✓ — refusal at the first request is also the cheapest exit."
+
+        }), ref: "Handbook p.5" },
       { q: "A licensed PE acts as expert witness in litigation. They must:",
         choices: ["Be impartial and truthful regardless of who hired them", "Support the hiring party", "Stay silent on weaknesses", "Match opposing expert"], correct: 0,
-        solution: S({ c: "Engineer testimony must be objective. Bias toward client/employer violates code.", s: ["Engineers are educators in court — must explain facts impartially.", "Even adversely affecting hiring party's case if facts demand."], a: "Be impartial and truthful.", v: "Some PE codes explicitly require this; misrepresentation can result in license suspension." }), ref: "Handbook p.5" },
+        solution: S({
+          c: "An expert witness serves the COURT, not the client who pays: testimony must be objective, complete, and truthful — including facts that hurt the hiring side.",
+          s: [
+            "<b>Step 1 — Match.</b> Impartial and truthful, regardless of retention.",
+            "<b>Step 2 — Why.</b> The expert's role is educator to judge/jury; advocacy is the LAWYER's job. Slanted expertise is misrepresentation under the code.",
+            "<b>Step 3 — Distractor audit.</b> 'Support the hiring party' converts expert into advocate; concealing weaknesses is testimony-by-omission; 'matching' the opposing expert abandons independent judgment."
+          ],
+          a: "Be impartial and truthful regardless of who hired them.",
+          v: "Enforcement reality: boards have suspended licenses over slanted testimony, and courts disqualify experts who act as advocates ✓. Practical tell of a good expert: their report reads the same no matter which side commissioned it."
+
+        }), ref: "Handbook p.5" },
       { q: "Continuing education for licensed PEs is typically:",
         choices: ["Required (specific PDH hours per renewal)", "Optional", "Only for management", "Not regulated"], correct: 0,
-        solution: S({ c: "Most US states require Professional Development Hours (PDH) annually or per renewal cycle to maintain license.", s: ["Typical: 15-30 PDH per 2-year renewal.", "Some require ethics-specific hours."], a: "Required (varies by state)", v: "NCEES tracks PDH for engineers practicing across state lines." }), ref: "Handbook p.11" },
+        solution: S({
+          c: "Licensure is maintained, not just earned: most US states require Professional Development Hours (PDH) each renewal cycle — typically 15-30 PDH per 2 years, sometimes with mandatory ethics content.",
+          s: [
+            "<b>Step 1 — Match.</b> Required, with specific hour counts per renewal.",
+            "<b>Step 2 — Distractor audit.</b> 'Optional' understates a license CONDITION; 'only management' and 'not regulated' have no basis."
+          ],
+          a: "Required — specific PDH per renewal (varies by state).",
+          v: "Why it exists: codes, materials, and tools change faster than careers — competence (the thing the license certifies) decays without upkeep ✓. NCEES tracks PDH centrally for multi-state practitioners."
+
+        }), ref: "Handbook p.11" },
       { q: "An engineer's primary professional obligation is to:",
         choices: ["Public health, safety, and welfare", "Employer", "Profession", "Self"], correct: 0,
-        solution: S({ c: "NCEES Model Rule #1.", s: ["Hierarchy: Public > Client/Employer > Profession > Self."], a: "Public", v: "Sometimes called the engineer's 'paramount obligation'." }), ref: "Handbook p.5" },
+        solution: S({
+          c: "The first canon, verbatim concept: hold PARAMOUNT the safety, health, and welfare of the PUBLIC — above employer, profession, and self.",
+          s: [
+            "<b>Step 1 — Match.</b> Public health, safety, and welfare.",
+            "<b>Step 2 — The hierarchy.</b> Public > client/employer > profession > self — the tiebreaker for nearly every ethics scenario.",
+            "<b>Step 3 — Distractor audit.</b> Employer is a REAL duty (faithful agent) but subordinate; profession and self rank lower still."
+          ],
+          a: "The public's health, safety, and welfare.",
+          v: "Why 'paramount': licensure exists BECAUSE the public can't evaluate engineering work — the license is a public trust, so the public ranks first by construction ✓. Expect 2-3 FE questions to reduce to this one line."
+
+        }), ref: "Handbook p.5" },
       { q: "Whose stamp/seal goes on engineering drawings?",
         choices: ["The PE who prepared or thoroughly reviewed the work", "Senior partner", "Owner", "Any licensed person"], correct: 0,
-        solution: S({ c: "Stamp = professional responsibility for the work.", s: ["Stamping someone else's unreviewed work = plan stamping (prohibited).", "Only stamp work you have prepared or fully checked."], a: "Engineer in responsible charge.", v: "Some firms have multiple PEs each responsible for different sections of large projects." }), ref: "Handbook p.5" },
+        solution: S({
+          c: "The seal belongs to the engineer in RESPONSIBLE CHARGE — the licensee who prepared the work or thoroughly reviewed and directed it. Authority over the work, not seniority, decides.",
+          s: [
+            "<b>Step 1 — Match.</b> The PE who prepared or thoroughly reviewed it.",
+            "<b>Step 2 — Distractor audit.</b> 'Senior partner' — rank confers nothing without review; 'owner' isn't a licensee role; 'any licensed person' invites plan stamping — sealing unreviewed work, a leading cause of license discipline.",
+            "<b>Step 3 — Large-project reality.</b> Multi-discipline jobs carry MULTIPLE seals — each PE stamps the sheets they actually controlled."
+          ],
+          a: "The PE who prepared or thoroughly reviewed the work (responsible charge).",
+          v: "Test of responsible charge boards actually apply: could this engineer answer detailed questions about the design's assumptions and calculations? If not, the seal was a rubber stamp ✓."
+
+        }), ref: "Handbook p.5" },
     ],
 
     // ====================== Ch 4: Econ — +10 ======================
     4: [
       { q: "$P = \\$5000$, $i = 6\\%$/yr, $n = 10$ yrs. Future value:",
         choices: ["$\\approx \\$8954$", "$\\$8000$", "$\\$5300$", "$\\$5600$"], correct: 0,
-        solution: S({ c: "$F = P(1+i)^n$.", s: ["$(1.06)^{10} = 1.7908$.", "$F = 5000 \\cdot 1.7908 = 8954$."], a: "$\\approx \\$8954$" }), ref: "Handbook p.230" },
+        solution: S({
+          c: "Single-payment compounding: $F = P(1+i)^{n}$ — each year multiplies the balance by 1.06.",
+          s: [
+            "<b>Step 1 — Growth factor.</b> $(1.06)^{10} = 1.7908$.",
+            "<b>Step 2 — Scale.</b> $F = 5000\\times1.7908 = \\$8{,}954$.",
+            "<b>Step 3 — Distractor audit.</b> \\$8,000 is SIMPLE interest ($5000(1+0.6)$); \\$5,300 is ONE year; \\$5,600 is two years' simple."
+          ],
+          a: "$F \\approx \\$8{,}954$",
+          v: "Rule-of-72 check: at 6%, doubling takes ~12 years — 10 years should land a bit short of double ($\\$10{,}000$), and \\$8,954 does ✓."
+
+        }), ref: "Handbook p.230" },
       { q: "Annual deposits of $1000 for 20 years at 7%. Future value:",
         choices: ["$\\approx \\$40{,}995$", "$\\$20{,}000$", "$\\$70{,}000$", "$\\$33{,}066$"], correct: 0,
-        solution: S({ c: "$F = A \\cdot (F/A, i, n)$ where $(F/A) = ((1+i)^n - 1)/i$.", s: ["$(1.07)^{20} = 3.8697$.", "$(F/A) = (3.8697 - 1)/0.07 = 40.995$.", "$F = 1000 \\cdot 40.995 = \\$40{,}995$."], a: "$\\approx \\$40{,}995$", v: "Compounding earns more than just $\\$20{,}000$ principal — interest on interest." }), ref: "Handbook p.231" },
+        solution: S({
+          c: "Future worth of an annuity: $F = A\\cdot\\dfrac{(1+i)^{n}-1}{i}$ — every deposit compounds from ITS year to the end.",
+          s: [
+            "<b>Step 1 — Factor.</b> $(1.07)^{20} = 3.8697$ → $(F/A) = 2.8697/0.07 = 40.995$.",
+            "<b>Step 2 — Scale.</b> $F = 1000\\times40.995 = \\$40{,}995$.",
+            "<b>Step 3 — Distractor audit.</b> \\$20,000 is bare principal (no interest); \\$70,000 over-compounds; \\$33,066 garbles the factor."
+          ],
+          a: "$F \\approx \\$40{,}995$",
+          v: "Bracket check: must exceed \\$20,000 (deposits) but stay below a \\$20,000 lump invested 20 years ($\\times3.87 = \\$77{,}000$-ish)... more precisely below $1000\\times20\\times(1.07)^{20}$; \\$41k sits sensibly — interest roughly DOUBLED the contributions over 20 years at 7% ✓."
+
+        }), ref: "Handbook p.231" },
       { q: "Sinking fund: save annually to accumulate $\\$50{,}000$ in 5 years at $i=6\\%$. Annual deposit:",
         choices: ["$\\approx \\$8870$", "$\\$10{,}000$", "$\\$5000$", "$\\$12{,}500$"], correct: 0,
-        solution: S({ c: "$A = F/(F/A, i, n)$.", s: ["$(F/A, 6\\%, 5) = (1.06^5 - 1)/0.06 = 5.6371$.", "$A = 50000/5.6371 = 8869.8$."], a: "$\\approx \\$8870$" }), ref: "Handbook p.231" },
+        solution: S({
+          c: "A sinking fund asks the annuity question in reverse: what equal annual deposit $A$ grows to a target $F$? $A = F\\big/\\dfrac{(1+i)^{n}-1}{i}$ — divide by the (F/A) factor.",
+          s: [
+            "<b>Step 1 — Factor.</b> $(F/A, 6\\%, 5) = (1.06^{5}-1)/0.06 = 5.6371$.",
+            "<b>Step 2 — Divide.</b> $A = 50{,}000/5.6371 = \\$8{,}870$.",
+            "<b>Step 3 — Distractor audit.</b> \\$10,000 ignores interest ($50k/5$); \\$5,000 and \\$12,500 have no consistent route."
+          ],
+          a: "$A \\approx \\$8{,}870$ per year.",
+          v: "Sense check: interest contributes the gap between $5\\times8870 = \\$44{,}350$ deposited and \\$50,000 reached — about \\$5,650 of growth, reasonable for 6% over 5 years ✓. Sinking funds are how bond issuers and HOAs pre-fund big obligations."
+
+        }), ref: "Handbook p.231" },
       { q: "Net present value (NPV) decision rule:",
         choices: ["Accept if NPV > 0", "Accept if NPV = 0", "Accept if NPV < 0", "Reject all"], correct: 0,
-        solution: S({ c: "NPV > 0 means project earns more than required rate of return.", s: ["NPV = 0: break-even, indifferent.", "NPV < 0: lose money compared to alternative investment at $i$."], a: "Accept if NPV > 0", v: "When choosing between mutually exclusive projects: pick highest NPV." }), ref: "Handbook p.232" },
+        solution: S({
+          c: "NPV discounts every cash flow to today at the required rate and nets them. The rule is one line: ACCEPT when NPV > 0 — the project beats the alternative of earning $i$ elsewhere.",
+          s: [
+            "<b>Step 1 — Match.</b> Accept if NPV > 0.",
+            "<b>Step 2 — The boundary cases.</b> NPV = 0: earns EXACTLY the required rate — indifferent; NPV < 0: destroys value relative to the benchmark — reject.",
+            "<b>Step 3 — Mutually exclusive add-on.</b> When only one project can be chosen: pick the LARGEST positive NPV."
+          ],
+          a: "Accept if NPV > 0.",
+          v: "Why NPV is the gold standard: it measures dollars of wealth added at your actual cost of capital, and unlike IRR it never gives multiple/misleading answers on odd cash-flow patterns ✓."
+
+        }), ref: "Handbook p.232" },
       { q: "MARR (minimum attractive rate of return) is:",
         choices: ["Threshold below which projects are rejected", "Maximum possible return", "Market rate only", "Always zero"], correct: 0,
-        solution: S({ c: "MARR = company's required rate of return, often based on cost of capital + risk premium.", s: ["Reject projects with IRR < MARR.", "Set above safest alternative (e.g., T-bills) by enough to compensate for project risk."], a: "Minimum required return.", v: "Typical MARR: 10-15% for mature firms; higher for startups/risky industries." }), ref: "Handbook p.232" },
+        solution: S({
+          c: "MARR — minimum attractive rate of return — is the firm's hurdle: the return a project must clear to deserve capital, set from cost of capital plus a risk premium.",
+          s: [
+            "<b>Step 1 — Match.</b> The threshold below which projects are rejected (IRR < MARR → no).",
+            "<b>Step 2 — Where the number comes from.</b> Safe alternative (e.g., bonds) + risk premium for the venture class; typically 10-15% for established firms, higher for risky plays.",
+            "<b>Step 3 — Distractor audit.</b> 'Maximum return' inverts; 'market rate only' ignores risk adjustment; zero would approve everything."
+          ],
+          a: "The minimum required return — the accept/reject threshold.",
+          v: "Consistency across tools: discounting at MARR makes 'NPV > 0' and 'IRR > MARR' the SAME test for well-behaved projects ✓ — one hurdle, two phrasings."
+
+        }), ref: "Handbook p.232" },
       { q: "Depreciation reduces:",
         choices: ["Taxable income (saving taxes)", "Asset value to zero immediately", "Loan principal", "Revenue"], correct: 0,
-        solution: S({ c: "Depreciation is a non-cash expense that reduces reported income for tax purposes.", s: ["Tax savings: $D \\times t$ where $t$ = tax rate.", "Methods: straight-line, MACRS, double-declining."], a: "Taxable income → tax savings", v: "After-tax cash flow analysis includes depreciation tax shield." }), ref: "Handbook p.230" },
+        solution: S({
+          c: "Depreciation is a NON-CASH expense: no money leaves when you book it, but it reduces TAXABLE income — so it saves real cash through lower taxes: the 'depreciation tax shield' $= D\\times t$.",
+          s: [
+            "<b>Step 1 — Match.</b> Reduces taxable income → saves taxes.",
+            "<b>Step 2 — Quantify.</b> \\$10,000 of depreciation at a 25% tax rate saves \\$2,500 of actual cash.",
+            "<b>Step 3 — Distractor audit.</b> Asset value falls per the SCHEDULE, not to zero at once; loan principal and revenue are untouched by an accounting entry."
+          ],
+          a: "Taxable income — generating tax savings ($D\\times t$).",
+          v: "Why MACRS front-loads: earlier deductions = earlier tax savings = higher PRESENT value of the shield ✓ — the time value of money applied to the tax code, and the whole reason depreciation method choice matters in project analysis."
+
+        }), ref: "Handbook p.230" },
       { q: "Payback period for $\\$10{,}000$ investment returning $\\$2{,}500$/yr:",
         choices: ["4 years (simple)", "5 years", "$25\\%$", "Cannot tell"], correct: 0,
-        solution: S({ c: "Simple payback = initial cost / annual return (ignores time value).", s: ["$10{,}000/2{,}500 = 4$ years."], a: "4 years", v: "Discounted payback would be longer because future $\\$2500$ is worth less now." }), ref: "Handbook p.232" },
+        solution: S({
+          c: "Simple payback = initial cost ÷ annual return — how long until the cash returns equal the outlay, IGNORING time value.",
+          s: [
+            "<b>Step 1 — Divide.</b> $10{,}000/2{,}500 = 4$ years.",
+            "<b>Step 2 — Distractor audit.</b> 5 years pads arbitrarily; 25% is the reciprocal dressed as a rate; 'cannot tell' — simple payback needs exactly these two numbers."
+          ],
+          a: "4 years (simple).",
+          v: "The metric's honest limits: ignores discounting (discounted payback runs LONGER) and ignores everything AFTER payback — a project earning forever and one dying at year 5 score identically ✓. Use as a quick risk screen, never the final word."
+
+        }), ref: "Handbook p.232" },
       { q: "Tax credit vs tax deduction (simplistic): a $\\$1000$ credit saves $\\$1000$; a $\\$1000$ deduction saves:",
         choices: ["$\\$1000 \\times$ marginal tax rate", "$\\$1000$", "Nothing", "Twice as much"], correct: 0,
-        solution: S({ c: "Credit: dollar-for-dollar reduction in tax owed. Deduction: reduces taxable income, save (deduction × tax rate).", s: ["E.g., 25% bracket: $\\$1000$ deduction saves $\\$250$."], a: "Deduction × tax rate", v: "Credits typically more valuable than equivalent deductions." }), ref: "Handbook p.230" },
+        solution: S({
+          c: "A CREDIT subtracts from the tax BILL dollar-for-dollar; a DEDUCTION subtracts from taxable INCOME — its cash value is deduction × marginal tax rate.",
+          s: [
+            "<b>Step 1 — Apply.</b> \\$1,000 deduction at a 25% bracket saves $1000\\times0.25 = \\$250$.",
+            "<b>Step 2 — Compare.</b> The \\$1,000 CREDIT saves \\$1,000 — four times more at this bracket.",
+            "<b>Step 3 — Distractor audit.</b> '\\$1000' confuses deduction with credit; 'nothing' and 'twice' have no mechanism."
+          ],
+          a: "Deduction × marginal tax rate.",
+          v: "General ranking: credits ≥ equal-size deductions always (equality only at a 100% tax rate) ✓. Engineering-economics tie-in: depreciation is a DEDUCTION — its shield formula $D\\times t$ is exactly this question's answer."
+
+        }), ref: "Handbook p.230" },
       { q: "If MARR is 10%, project with IRR of 8% should be:",
         choices: ["Rejected", "Accepted", "Studied more", "Postponed"], correct: 0,
-        solution: S({ c: "Accept if IRR > MARR.", s: ["IRR 8% < MARR 10% → reject (project doesn't meet minimum threshold)."], a: "Rejected" }), ref: "Handbook p.232" },
+        solution: S({
+          c: "The IRR decision rule: accept if IRR ≥ MARR — the project must out-earn the hurdle.",
+          s: [
+            "<b>Step 1 — Compare.</b> IRR 8% < MARR 10% → reject.",
+            "<b>Step 2 — Distractor audit.</b> 'Accept' inverts the rule; 'study more'/'postpone' dodge a complete comparison — the numbers already decide."
+          ],
+          a: "Rejected.",
+          v: "Equivalent check: discounting the project's cash flows at 10% would give NPV < 0 (since IRR — the zero-NPV rate — is only 8%) ✓ — the two rules agree, as they must for conventional cash flows."
+
+        }), ref: "Handbook p.232" },
       { q: "Real interest rate from nominal 8% and inflation 3%:",
         choices: ["$\\approx 4.85\\%$", "$5\\%$", "$11\\%$", "$2.7\\%$"], correct: 0,
-        solution: S({ c: "Fisher: $(1+i_r) = (1+i_n)/(1+f)$.", s: ["$(1+i_r) = 1.08/1.03 = 1.04854$.", "$i_r = 4.854\\%$."], a: "$\\approx 4.85\\%$", v: "Approximation $i_r \\approx i_n - f = 5\\%$ is close but not exact." }), ref: "Handbook p.230" },
+        solution: S({
+          c: "Fisher equation, exact form: $1 + i_{real} = \\dfrac{1 + i_{nominal}}{1 + f}$ — purchasing-power growth is nominal growth deflated by inflation.",
+          s: [
+            "<b>Step 1 — Divide.</b> $1.08/1.03 = 1.04854$.",
+            "<b>Step 2 — Subtract 1.</b> $i_{real} = 4.85\\%$.",
+            "<b>Step 3 — Distractor audit.</b> 5% is the SUBTRACTION approximation (close, but the exam offers the exact value); 11% adds inflation; 2.7% has no route."
+          ],
+          a: "$\\approx 4.85\\%$",
+          v: "Round trip: $(1.0485)(1.03) = 1.0800$ ✓. The gap between 5% and 4.85% is the cross-term $i_r\\times f$ — small at low rates, large in high-inflation economies, which is when the exact Fisher form earns its keep."
+
+        }), ref: "Handbook p.230" },
     ],
 
     // ====================== Ch 5: Materials — +4 ======================
