@@ -756,165 +756,622 @@
     7: [
       { q: "Laplace transform of $\\cos(2t)$:",
         choices: ["$s/(s^2+4)$", "$2/(s^2+4)$", "$s/(s^2-4)$", "$1/(s-2)$"], correct: 0,
-        solution: S({ c: "$\\mathcal{L}\\{\\cos\\omega t\\} = s/(s^2+\\omega^2)$. $\\omega = 2$.", s: [""], a: "$s/(s^2+4)$" }), ref: "p.56" },
+        solution: S({
+          c: "Standard Laplace pair: $\\mathcal L\\{\\cos\\omega t\\} = \\dfrac{s}{s^2+\\omega^2}$. Here $\\omega=2$ so $\\omega^2=4$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $s/(s^2+4)$.",
+            "<b>Step 2 — Distractor audit.</b> $2/(s^2+4)$ is $\\sin2t$ (numerator $\\omega$, not $s$); $s/(s^2-4)$ is $\\cosh2t$; $1/(s-2)$ is $e^{2t}$."
+          ],
+          a: "$s/(s^2+4)$",
+          v: "Cosine→s in numerator, sine→ω in numerator — the distinguishing detail ✓. The $+\\omega^2$ (not $-\\omega^2$) keeps the poles imaginary ($\\pm j2$), giving oscillation rather than the hyperbolic growth of $s^2-4$."
+
+        }), ref: "p.56" },
       { q: "Transfer function $H(s) = 1$ corresponds to:",
         choices: ["Identity (passthrough)", "Differentiator", "Integrator", "Delay"], correct: 0,
-        solution: S({ c: "Constant H = output equals input.", s: [""], a: "Passthrough" }), ref: "p.365" },
+        solution: S({
+          c: "A transfer function of exactly 1 means output = input at every frequency — a passthrough (identity) system.",
+          s: [
+            "<b>Step 1 — Match.</b> Identity / passthrough.",
+            "<b>Step 2 — Distractor audit.</b> Differentiator is $H=s$; integrator is $H=1/s$; delay is $H=e^{-\\tau s}$."
+          ],
+          a: "Identity (passthrough).",
+          v: "$H=1$ has flat 0-dB magnitude and 0° phase everywhere ✓ — it changes nothing. It's the reference baseline against which gain ($H=K$) and dynamics (poles/zeros) are measured."
+
+        }), ref: "p.365" },
       { q: "Two systems in series total transfer function:",
         choices: ["$H_1 \\cdot H_2$ (multiplication)", "Addition", "Average", "Subtraction"], correct: 0,
-        solution: S({ c: "Series cascade: output of one = input of next. TF multiply.", s: [""], a: "$H_1 H_2$" }), ref: "p.365" },
+        solution: S({
+          c: "When LTI systems are CASCADED (series), their transfer functions MULTIPLY: $H = H_1 H_2$ (the output of one feeds the input of the next).",
+          s: [
+            "<b>Step 1 — Match.</b> $H_1\\cdot H_2$.",
+            "<b>Step 2 — Distractor audit.</b> Addition is for PARALLEL paths; average/subtraction aren't block-diagram rules."
+          ],
+          a: "$H_1 H_2$ (multiply).",
+          v: "On a Bode plot, cascading means magnitudes (in dB) and phases ADD, since multiplication becomes addition on the log scale ✓ — which is why you build Bode plots by stacking each factor's contribution."
+
+        }), ref: "p.365" },
       { q: "Steady-state response of LTI system to $\\cos\\omega t$:",
         choices: ["$|H(j\\omega)|\\cos(\\omega t + \\angle H)$", "$\\cos\\omega t$", "Always 0", "$H(0)$"], correct: 0,
-        solution: S({ c: "SS sine in → sine out, scaled by |H| and shifted by ∠H.", s: ["This is why Bode plots characterize LTI systems."], a: "$|H|\\cos(\\omega t+\\angle H)$" }), ref: "p.365" },
+        solution: S({
+          c: "An LTI system's steady-state response to a sinusoid is ANOTHER sinusoid at the SAME frequency, scaled by $|H(j\\omega)|$ and phase-shifted by $\\angle H(j\\omega)$: output $= |H|\\cos(\\omega t + \\angle H)$.",
+          s: [
+            "<b>Step 1 — Match.</b> $|H(j\\omega)|\\cos(\\omega t + \\angle H)$.",
+            "<b>Step 2 — Distractor audit.</b> Plain $\\cos\\omega t$ ignores gain/phase; 'always 0' and '$H(0)$' (DC gain) are wrong."
+          ],
+          a: "$|H(j\\omega)|\\cos(\\omega t + \\angle H)$.",
+          v: "This 'eigenfunction' property — sinusoid in, same-frequency sinusoid out — is EXACTLY why frequency-domain (Bode) analysis works ✓. $|H|$ and $\\angle H$ at each ω fully characterize a linear system."
+
+        }), ref: "p.365" },
       { q: "Pole at $s = 5$ (RHP):",
         choices: ["Unstable — exponentially growing $e^{5t}$", "Stable", "Marginal", "Oscillatory"], correct: 0,
-        solution: S({ c: "RHP pole → exponential growth.", s: [""], a: "Unstable" }), ref: "p.365" },
+        solution: S({
+          c: "A pole at $s=\\sigma$ produces a time term $e^{\\sigma t}$. A RIGHT-half-plane pole ($\\sigma>0$) gives $e^{+5t}$ — exponential GROWTH → unstable.",
+          s: [
+            "<b>Step 1 — Match.</b> Unstable, growing $e^{5t}$.",
+            "<b>Step 2 — Distractor audit.</b> Stable needs LHP ($\\sigma<0$); marginal is on the axis ($\\sigma=0$); oscillatory needs an imaginary part."
+          ],
+          a: "Unstable (exponential growth).",
+          v: "The rule in one line: LHP poles decay (stable), jω-axis poles sustain (marginal), RHP poles grow (unstable) ✓ — any single RHP pole makes the whole system unstable regardless of the others."
+
+        }), ref: "p.365" },
       { q: "Pole on imaginary axis:",
         choices: ["Marginally stable (pure oscillation)", "Stable", "Unstable", "Critically damped"], correct: 0,
-        solution: S({ c: "$s = \\pm j\\omega$: pure sinusoid, no decay or growth.", s: [""], a: "Marginal" }), ref: "p.365" },
+        solution: S({
+          c: "Poles exactly on the imaginary axis ($s=\\pm j\\omega$) give $e^{\\pm j\\omega t}$ — pure sinusoids that neither grow nor decay. This is MARGINAL stability.",
+          s: [
+            "<b>Step 1 — Match.</b> Marginally stable (pure oscillation).",
+            "<b>Step 2 — Distractor audit.</b> Stable requires decay (LHP); unstable requires growth (RHP); 'critically damped' is a real-pole, non-oscillatory condition."
+          ],
+          a: "Marginally stable (undamped oscillation).",
+          v: "Marginal is the knife-edge between stable and unstable ✓ — an ideal LC oscillator sits here. In practice it's fragile: any parameter drift can tip it into instability, so true marginal stability is avoided in designs."
+
+        }), ref: "p.365" },
       { q: "Effect of negative feedback in time domain:",
         choices: ["Reduces sensitivity to gain variations, can speed up response", "Slows response", "Adds instability", "No effect"], correct: 0,
-        solution: S({ c: "Negative feedback benefits: sensitivity reduction, wider BW (gain BW tradeoff), linearization.", s: [""], a: "Reduces sensitivity" }), ref: "p.365" },
+        solution: S({
+          c: "Negative feedback trades raw gain for desirable properties: reduced SENSITIVITY to component/gain variations, wider bandwidth, lower distortion, and often faster response.",
+          s: [
+            "<b>Step 1 — Match.</b> Reduces sensitivity to gain variations; can speed response.",
+            "<b>Step 2 — Distractor audit.</b> It generally SPEEDS response (wider BW), and properly applied IMPROVES stability — 'slows'/'adds instability'/'no effect' are wrong."
+          ],
+          a: "Reduces sensitivity (and widens bandwidth).",
+          v: "The core benefit: closed-loop behavior depends mainly on the (stable, precise) feedback network, not the (variable) open-loop gain ✓ — which is why op-amp circuits are so reproducible. Excessive feedback with phase lag CAN destabilize, but that's a design fault, not the intent."
+
+        }), ref: "p.365" },
       { q: "Bandwidth of cascade of identical 1st-order LPFs (3 of them, each $\\omega_c = 100$):",
         choices: ["$\\approx 51$ rad/s (narrower than single)", "$300$", "$100$", "$33.3$"], correct: 0,
-        solution: S({ c: "Cascade reduces bandwidth: $\\omega_{c,total} = \\omega_c \\sqrt{2^{1/n}-1}$.", s: ["$n=3$: factor $\\sqrt{0.2599} = 0.51$.", "BW = $100 \\cdot 0.51 = 51$ rad/s."], a: "$\\approx 51$ rad/s" }), ref: "p.366" },
+        solution: S({
+          c: "Cascading identical low-pass stages NARROWS the overall bandwidth (each stage attenuates, so the combined −3 dB point drops): $\\omega_{c,total} = \\omega_c\\sqrt{2^{1/n}-1}$.",
+          s: [
+            "<b>Step 1 — Factor for n=3.</b> $\\sqrt{2^{1/3}-1} = \\sqrt{0.2599} = 0.51$.",
+            "<b>Step 2 — Apply.</b> $\\omega_{c,total} = 100\\times0.51 = 51$ rad/s.",
+            "<b>Step 3 — Distractor audit.</b> 300 and 100 ignore the narrowing; 33.3 wrongly assumes linear division."
+          ],
+          a: "$\\approx 51$ rad/s (narrower than one stage).",
+          v: "Each stage's gentle rolloff starts before $\\omega_c$, so three in series cross −3 dB EARLIER than one ✓ — the price of a steeper ultimate rolloff (−60 dB/dec for three stages vs −20 for one)."
+
+        }), ref: "p.366" },
       { q: "Pulse response of a system = derivative of:",
         choices: ["Step response", "Impulse response", "Ramp response", "Sine response"], correct: 0,
-        solution: S({ c: "Pulse = step minus delayed step → can be derived from step response.", s: ["Or: impulse + scaled.", "Step response = integral of impulse response."], a: "Step response" }), ref: "p.56" },
+        solution: S({
+          c: "Among the standard test responses, a narrow pulse ≈ the derivative of a step (a pulse is a step up immediately followed by a step down). So the pulse response relates to the STEP response.",
+          s: [
+            "<b>Step 1 — Match.</b> Step response.",
+            "<b>Step 2 — Distractor audit.</b> The hierarchy: impulse response is the derivative of step response; step is the integral of impulse; ramp is the integral of step."
+          ],
+          a: "Step response.",
+          v: "The integration chain ties them together: impulse → (integrate) → step → (integrate) → ramp ✓. Differentiating a step gives an impulse; a real finite pulse is the difference of two steps."
+
+        }), ref: "p.56" },
       { q: "Inverse Laplace of $4/(s^2+16)$:",
         choices: ["$\\sin 4t$", "$\\cos 4t$", "$e^{-4t}$", "$4t$"], correct: 0,
-        solution: S({ c: "Pair: $\\omega/(s^2+\\omega^2) \\leftrightarrow \\sin\\omega t$. $\\omega = 4$.", s: [""], a: "$\\sin 4t$" }), ref: "p.56" },
+        solution: S({
+          c: "Standard pair: $\\dfrac{\\omega}{s^2+\\omega^2} \\leftrightarrow \\sin\\omega t$. Here the numerator 4 matches $\\omega=4$ (since $\\omega^2=16$).",
+          s: [
+            "<b>Step 1 — Identify.</b> $\\omega=4$, numerator $=\\omega=4$ → sine form.",
+            "<b>Step 2 — Apply.</b> $\\mathcal L^{-1}\\{4/(s^2+16)\\} = \\sin4t$.",
+            "<b>Step 3 — Distractor audit.</b> $\\cos4t$ would need $s$ in the numerator; $e^{-4t}$ is $1/(s+4)$; $4t$ is $4/s^2$."
+          ],
+          a: "$\\sin 4t$",
+          v: "Cosine has $s$ on top, sine has $\\omega$ on top — the numerator tells you which ✓. The numerator conveniently equals 4, so no scaling factor is needed; otherwise you'd factor out $\\omega$."
+
+        }), ref: "p.56" },
     ],
 
     // Signal — +10
     8: [
       { q: "Z-transform of $u[n]$ (unit step):",
         choices: ["$z/(z-1) = 1/(1-z^{-1})$", "$1$", "$z$", "$0$"], correct: 0,
-        solution: S({ c: "Geometric series.", s: ["$\\sum_{n=0}^\\infty z^{-n} = 1/(1-z^{-1}) = z/(z-1)$."], a: "$z/(z-1)$" }), ref: "p.376" },
+        solution: S({
+          c: "The unit step $u[n]$ is 1 for $n\\ge0$. Its Z-transform is the geometric series $\\sum_{n=0}^\\infty z^{-n} = \\dfrac{1}{1-z^{-1}} = \\dfrac{z}{z-1}$ (for $|z|>1$).",
+          s: [
+            "<b>Step 1 — Sum the series.</b> $\\sum z^{-n} = 1/(1-z^{-1})$.",
+            "<b>Step 2 — Rewrite.</b> Multiply top and bottom by $z$: $z/(z-1)$.",
+            "<b>Step 3 — Distractor audit.</b> 1 is the unit IMPULSE $\\delta[n]$; $z$ is a time advance; 0 is wrong."
+          ],
+          a: "$z/(z-1)$",
+          v: "It's the discrete-time analog of the continuous step's $1/s$ ✓. The pole at $z=1$ (on the unit circle) reflects that the step never decays — marginally stable, like the integrator it represents."
+
+        }), ref: "p.376" },
       { q: "Z-transform region of convergence (ROC) for causal sequence:",
         choices: ["$|z| > r_{max\\,pole}$ — outside outermost pole", "Inside innermost pole", "All z", "$|z| = 1$"], correct: 0,
-        solution: S({ c: "Causal: ROC is outside outermost pole. Anti-causal: inside innermost.", s: ["For stability: ROC must include unit circle."], a: "Outside outer pole" }), ref: "p.376" },
+        solution: S({
+          c: "For a CAUSAL sequence (zero for n<0), the ROC is the region OUTSIDE the outermost pole: $|z| > r_{max\\,pole}$.",
+          s: [
+            "<b>Step 1 — Match.</b> $|z| > $ (radius of outermost pole).",
+            "<b>Step 2 — Distractor audit.</b> 'Inside innermost pole' is the ANTI-causal case; 'all z' only for finite sequences; '$|z|=1$' is just the unit circle."
+          ],
+          a: "Outside the outermost pole.",
+          v: "For STABILITY the ROC must include the unit circle ✓ — so a causal system is stable iff all poles are INSIDE $|z|=1$ (then $|z|>r_{max}$ contains $|z|=1$). ROC direction (out vs in) encodes causality."
+
+        }), ref: "p.376" },
       { q: "Digital filter stable iff:",
         choices: ["All poles inside unit circle", "All zeros inside", "Real coefficients", "Linear phase"], correct: 0,
-        solution: S({ c: "$z$-plane stability: poles inside $|z|<1$.", s: ["Continuous equivalent: poles in LHP."], a: "Poles inside |z|=1" }), ref: "p.376" },
+        solution: S({
+          c: "A discrete-time (digital) filter is stable if and only if all its poles lie INSIDE the unit circle ($|z|<1$) in the z-plane.",
+          s: [
+            "<b>Step 1 — Match.</b> All poles inside the unit circle.",
+            "<b>Step 2 — Distractor audit.</b> ZERO locations don't affect stability; real coefficients and linear phase are separate properties."
+          ],
+          a: "All poles inside $|z|=1$.",
+          v: "It's the discrete analog of 'poles in the left-half plane' for continuous systems ✓ — the bilinear transform maps the LHP to the inside of the unit circle precisely to preserve this. Zeros can sit anywhere."
+
+        }), ref: "p.376" },
       { q: "Convolution length: $L_1 = 5$ samples, $L_2 = 8$. Output length:",
         choices: ["$12$ ($L_1+L_2-1$)", "$13$", "$5$", "$40$"], correct: 0,
-        solution: S({ c: "$L_{out} = L_1 + L_2 - 1$.", s: ["$5+8-1 = 12$."], a: "$12$" }), ref: "p.376" },
+        solution: S({
+          c: "Linear convolution of two finite sequences produces an output of length $L_1 + L_2 - 1$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $5 + 8 - 1 = 12$.",
+            "<b>Step 2 — Distractor audit.</b> 13 forgets the $-1$; 5 keeps only the first input's length; 40 multiplies."
+          ],
+          a: "12 samples.",
+          v: "The $-1$ accounts for the overlap at the endpoints ✓. This matters for FFT-based fast convolution: you must zero-pad both signals to at least length 12 to avoid circular-convolution wraparound."
+
+        }), ref: "p.376" },
       { q: "DFT of length-N sequence: number of bins:",
         choices: ["$N$ (frequency resolution $f_s/N$)", "$N/2$", "Half the samples", "Infinite"], correct: 0,
-        solution: S({ c: "DFT: same number of frequency bins as time samples.", s: ["For real signals: bins are symmetric (only N/2 unique)."], a: "$N$ bins" }), ref: "p.376" },
+        solution: S({
+          c: "The DFT of an N-point sequence produces exactly N frequency bins, spaced $f_s/N$ apart.",
+          s: [
+            "<b>Step 1 — Match.</b> N bins (resolution $f_s/N$).",
+            "<b>Step 2 — Distractor audit.</b> $N/2$ counts only the UNIQUE bins for real signals (symmetry); 'infinite' confuses with the continuous transform."
+          ],
+          a: "N bins.",
+          v: "For real inputs the spectrum is conjugate-symmetric, so only $N/2+1$ bins are independent ✓ — the rest are mirror images. Frequency resolution $f_s/N$ improves with longer records, the basis of why you collect more samples for finer detail."
+
+        }), ref: "p.376" },
       { q: "Windowing in FFT used to:",
         choices: ["Reduce spectral leakage", "Increase resolution", "Speed up FFT", "Filter noise"], correct: 0,
-        solution: S({ c: "Window functions (Hann, Hamming, Blackman) reduce side lobes in FFT.", s: ["Cost: main lobe widens (slight resolution loss)."], a: "Reduce leakage" }), ref: "p.376" },
+        solution: S({
+          c: "Multiplying a finite data record by a smooth WINDOW (Hann, Hamming, Blackman) tapers its ends to zero, reducing SPECTRAL LEAKAGE — the smearing caused by the abrupt truncation of a non-integer number of cycles.",
+          s: [
+            "<b>Step 1 — Match.</b> Reduce spectral leakage.",
+            "<b>Step 2 — Distractor audit.</b> It doesn't increase resolution (it slightly WORSENS it), speed up the FFT, or filter noise."
+          ],
+          a: "Reduce spectral leakage.",
+          v: "The trade: windows shrink the side lobes (less leakage) but WIDEN the main lobe (coarser resolution) ✓ — different windows pick different points on that trade. A rectangular 'window' (no taper) has the sharpest peak but worst leakage."
+
+        }), ref: "p.376" },
       { q: "Zero-padding before FFT:",
         choices: ["Interpolates frequency bins (finer freq grid)", "Adds new frequencies", "Reduces resolution", "Errors"], correct: 0,
-        solution: S({ c: "Padding with zeros doesn't add information but creates finer-grained sampling of DTFT.", s: ["Useful for plotting / finer peak location."], a: "Interpolates spectrum" }), ref: "p.376" },
+        solution: S({
+          c: "Appending zeros before the FFT does NOT add new information — it interpolates the spectrum onto a FINER frequency grid (more closely-spaced samples of the underlying DTFT).",
+          s: [
+            "<b>Step 1 — Match.</b> Interpolates frequency bins (finer grid).",
+            "<b>Step 2 — Distractor audit.</b> It adds no new frequencies/information, doesn't reduce resolution, and causes no errors."
+          ],
+          a: "Interpolates the spectrum (finer bin spacing).",
+          v: "Key distinction: zero-padding improves the DISPLAY (smoother curve, easier peak-picking) but NOT the true RESOLUTION — that's set by the actual data length ✓. To truly resolve two close frequencies you need a longer record, not more zeros."
+
+        }), ref: "p.376" },
       { q: "Aliasing prevention by:",
         choices: ["Anti-aliasing LPF before sampling", "After-DAC filter", "Both", "High sample rate alone"], correct: 0,
-        solution: S({ c: "Anti-aliasing filter (before sampling) removes content above $f_s/2$.", s: ["Reconstruction filter (after DAC) removes images."], a: "Pre-sampling LPF" }), ref: "p.375" },
+        solution: S({
+          c: "Aliasing is prevented by an ANTI-ALIASING low-pass filter placed BEFORE the sampler, removing any content above the Nyquist frequency $f_s/2$ before it can fold down.",
+          s: [
+            "<b>Step 1 — Match.</b> Anti-aliasing LPF before sampling.",
+            "<b>Step 2 — Distractor audit.</b> The post-DAC filter is RECONSTRUCTION (removes images, doesn't prevent aliasing); high sample rate alone helps but a filter is still needed."
+          ],
+          a: "An anti-aliasing LPF before sampling.",
+          v: "Timing is everything: once high frequencies alias during sampling, NO later filter can separate them from real low-frequency content ✓ — so the filter must act BEFORE the ADC. The post-DAC filter solves the mirror problem (images)."
+
+        }), ref: "p.375" },
       { q: "Decimation by factor M:",
         choices: ["Keep every Mth sample (requires LPF first)", "Average M samples", "Random selection", "Time reverse"], correct: 0,
-        solution: S({ c: "Decimation reduces sample rate. First filter to prevent aliasing, then downsample.", s: ["Multirate processing builds on this."], a: "Every Mth sample" }), ref: "p.375" },
+        solution: S({
+          c: "Decimation reduces sample rate by keeping every Mth sample. But you must LOW-PASS FILTER first (to below the new Nyquist $f_s/2M$), or the discarded high frequencies will alias.",
+          s: [
+            "<b>Step 1 — Match.</b> Keep every Mth sample (after anti-alias LPF).",
+            "<b>Step 2 — Distractor audit.</b> It's not averaging M samples, random selection, or time reversal — it's filter-then-downsample."
+          ],
+          a: "Keep every Mth sample (filter first).",
+          v: "The filter step is the critical, often-forgotten part ✓ — downsampling lowers the Nyquist limit, so anything above the NEW limit must be removed first. Decimation + its opposite (interpolation) are the basis of multirate DSP and sample-rate conversion."
+
+        }), ref: "p.375" },
       { q: "Bilinear transform: maps:",
         choices: ["Continuous LHP to digital inside unit circle", "Time to frequency", "Linear to nonlinear", "Reverse"], correct: 0,
-        solution: S({ c: "Bilinear: $s = (2/T)(z-1)/(z+1)$ → maps stable analog to stable digital filter.", s: ["Used for: analog filter design first, then convert to digital."], a: "Stable s → stable z" }), ref: "p.376" },
+        solution: S({
+          c: "The bilinear transform $s = \\dfrac{2}{T}\\dfrac{z-1}{z+1}$ converts a continuous (analog) filter to a discrete (digital) one, mapping the entire stable LHP onto the INSIDE of the unit circle — so stability is preserved.",
+          s: [
+            "<b>Step 1 — Match.</b> Continuous LHP → digital inside unit circle.",
+            "<b>Step 2 — Distractor audit.</b> It's a complex-frequency (s↔z) map, not time↔frequency, not linear↔nonlinear."
+          ],
+          a: "Stable analog (LHP) → stable digital (inside |z|=1).",
+          v: "It lets you design in the well-understood analog domain (Butterworth, Chebyshev) then convert ✓. The one quirk is frequency WARPING — the nonlinear $\\omega$ mapping requires 'pre-warping' critical frequencies before transforming."
+
+        }), ref: "p.376" },
     ],
 
     // Electronics — +15
     9: [
       { q: "Voltage regulator dropout: difference between input and output:",
         choices: ["Min $V_{in} - V_{out}$ for proper regulation", "Always 1V", "Zero ideal", "Maximum"], correct: 0,
-        solution: S({ c: "Below dropout, output starts to follow input (no longer regulated).", s: ["Standard linear: ~2V. LDO: 0.1-0.5V."], a: "Min $V_{drop}$" }), ref: "p.383" },
+        solution: S({
+          c: "Dropout voltage is the MINIMUM input-minus-output difference a linear regulator needs to keep regulating. Below it, the output sags and follows the input.",
+          s: [
+            "<b>Step 1 — Match.</b> Minimum $V_{in}-V_{out}$ for proper regulation.",
+            "<b>Step 2 — Distractor audit.</b> Not 'always 1V' (it varies); not 'zero ideal' (even ideal LDOs need some headroom); not a maximum."
+          ],
+          a: "Minimum $V_{in}-V_{out}$ for regulation.",
+          v: "Standard linear regulators need ~2 V; LDOs (low-dropout) need only 0.1-0.5 V ✓ — crucial for battery rails (e.g. 3.7 V → 3.3 V), where a standard regulator simply couldn't fit in the headroom."
+
+        }), ref: "p.383" },
       { q: "BJT thermal runaway:",
         choices: ["Higher T → higher leakage → more current → more heat → ...", "Stable", "Fixed", "Reverse"], correct: 0,
-        solution: S({ c: "Positive temperature feedback: I_C↑ → P↑ → T↑ → leakage↑ → I_C↑. Can destroy device.", s: ["Mitigation: emitter resistor (negative feedback), heat sink, current limiting."], a: "Positive thermal feedback" }), ref: "p.384" },
+        solution: S({
+          c: "Thermal runaway is a POSITIVE feedback loop: higher temperature → more collector current/leakage → more power dissipated → even higher temperature → … which can destroy the device.",
+          s: [
+            "<b>Step 1 — Match.</b> Higher T → more current → more heat → repeat.",
+            "<b>Step 2 — Distractor audit.</b> 'Stable'/'fixed'/'reverse' miss the self-reinforcing nature."
+          ],
+          a: "Positive thermal feedback (self-reinforcing).",
+          v: "Mitigations all add NEGATIVE feedback or remove heat: an emitter resistor (current rises → $V_E$ rises → $V_{BE}$ drops → current falls), heat sinks, and current limiting ✓. BJTs are more prone than MOSFETs, whose $R_{DS,on}$ rises with T (self-limiting)."
+
+        }), ref: "p.384" },
       { q: "Op-amp open-loop gain typical:",
         choices: ["$10^5$ to $10^6$ at DC", "$1$", "$100$", "Infinite ideal"], correct: 0,
-        solution: S({ c: "Real op-amp DC gain very high (but finite). Rolls off with frequency.", s: [""], a: "$10^5$-$10^6$" }), ref: "p.380" },
+        solution: S({
+          c: "A real op-amp's open-loop DC gain is very high but FINITE — typically $10^5$ to $10^6$ (100-120 dB) — and it rolls off with frequency.",
+          s: [
+            "<b>Step 1 — Match.</b> $10^5$ to $10^6$ at DC.",
+            "<b>Step 2 — Distractor audit.</b> 1 and 100 are far too low; 'infinite' is the IDEAL assumption, not a real value."
+          ],
+          a: "$10^5$-$10^6$ at DC.",
+          v: "This huge open-loop gain is what makes the 'virtual short' approximation work in feedback circuits ✓ — the closed-loop gain is set almost entirely by the resistors, with error $\\sim 1/(A\\beta)$. Gain rolls off at −20 dB/dec above the first pole (often just a few Hz)."
+
+        }), ref: "p.380" },
       { q: "What does '741' refer to in '741 op-amp'?",
             choices: ["Classic general-purpose op-amp IC", "Pin count", "Frequency", "Manufacturer code"], correct: 0,
-        solution: S({ c: "The 741 (μA741) was Fairchild's pioneering op-amp from 1968. Industry standard for decades.", s: ["Modern equivalents: TL081, LM358, OP07 for various needs."], a: "Classic IC type" }), ref: "p.380" },
+        solution: S({
+          c: "The '741' (μA741) is a specific classic general-purpose op-amp IC — Fairchild's 1968 design that became the industry standard for decades.",
+          s: [
+            "<b>Step 1 — Match.</b> Classic general-purpose op-amp IC.",
+            "<b>Step 2 — Distractor audit.</b> It's not a pin count, frequency, or manufacturer code — it's a part-number for a specific chip."
+          ],
+          a: "A classic op-amp IC type.",
+          v: "The 741 is a teaching staple (internally: differential input, gain stage, Class-AB output) ✓. Modern jobs use better parts — TL081 (FET input), LM358 (single-supply), OP07 (precision) — but the 741 defined the template."
+
+        }), ref: "p.380" },
       { q: "BJT $\\beta$ varies with:", choices: ["Temperature, current, device-to-device", "Only voltage", "Constant", "Frequency only"], correct: 0,
-        solution: S({ c: "$\\beta$: varies 50-300× typically, depends on T, I_C, manufacturing.", s: ["Why bias designs use feedback to be insensitive."], a: "T, I, device" }), ref: "p.384" },
+        solution: S({
+          c: "A BJT's current gain $\\beta$ is NOT a fixed constant — it varies with temperature, collector current, and from device to device (typically anywhere 50-300).",
+          s: [
+            "<b>Step 1 — Match.</b> Temperature, current, device-to-device.",
+            "<b>Step 2 — Distractor audit.</b> 'Only voltage', 'constant', 'frequency only' all understate β's variability."
+          ],
+          a: "Temperature, current, and unit-to-unit.",
+          v: "This unreliability is EXACTLY why good bias designs use feedback (voltage-divider + emitter resistor) to set the Q-point nearly independent of β ✓ — you can't trust the datasheet's β to be the value in YOUR specific transistor."
+
+        }), ref: "p.384" },
       { q: "Photoresistor (LDR) resistance under bright light:",
         choices: ["Decreases (more carriers)", "Increases", "Constant", "Negative"], correct: 0,
-        solution: S({ c: "Light → photogenerated carriers → lower resistance.", s: ["Dark: high R (MΩ). Bright: low R (kΩ).", "Used in: light sensors, automatic streetlights."], a: "Decreases" }), ref: "p.383" },
+        solution: S({
+          c: "A photoresistor (LDR) drops in resistance under light: photons free extra charge carriers, increasing conductivity → lower resistance.",
+          s: [
+            "<b>Step 1 — Match.</b> Decreases (more carriers).",
+            "<b>Step 2 — Distractor audit.</b> 'Increases' is backwards; resistance isn't constant or negative."
+          ],
+          a: "Resistance decreases under light.",
+          v: "Range: dark ~MΩ, bright ~kΩ ✓ — a huge swing that's easy to read in a voltage divider. Used in automatic streetlights, camera light meters, and night-lights. (Response is slow, so not for fast signals.)"
+
+        }), ref: "p.383" },
       { q: "Op-amp slew rate effect on slewing distortion at high frequencies:",
         choices: ["Triangulates large sinusoids when SR insufficient", "No effect", "Increases gain", "Decreases impedance"], correct: 0,
-        solution: S({ c: "SR limit: cannot maintain sine shape if $dv/dt > SR$.", s: ["For sine $V_m \\sin\\omega t$: max slope $= \\omega V_m$. Need $SR > \\omega V_m$."], a: "Triangulation distortion" }), ref: "p.380" },
+        solution: S({
+          c: "Slew rate (SR) is the max rate the output can change (V/µs). If a signal demands a faster $dv/dt$ than SR, the output can't keep up — large sinusoids get distorted into triangles.",
+          s: [
+            "<b>Step 1 — Match.</b> Triangulates large sinusoids when SR is insufficient.",
+            "<b>Step 2 — The condition.</b> A sine $V_m\\sin\\omega t$ has max slope $\\omega V_m$; need $SR > \\omega V_m$ to avoid slewing.",
+            "<b>Step 3 — Distractor audit.</b> SR limiting doesn't increase gain or change impedance — it clips the slope."
+          ],
+          a: "Slew-rate distortion (sine → triangle).",
+          v: "This sets the 'full-power bandwidth' $f_{max}=SR/(2\\pi V_m)$ ✓ — big swings slew-limit at lower frequencies than small ones. It's a LARGE-signal limit, distinct from the small-signal gain-bandwidth product."
+
+        }), ref: "p.380" },
       { q: "Common-emitter input impedance:",
         choices: ["$\\approx \\beta r_e$ — typically kΩ", "Very low", "$R_C$", "Infinite"], correct: 0,
-        solution: S({ c: "Looking into base: $\\beta$ times intrinsic emitter resistance $r_e$.", s: ["At $I_E = 1$ mA, $r_e \\approx 26$ Ω, $\\beta = 100$: $Z_{in} \\approx 2.6$ kΩ.", "Higher $\\beta$ or lower current: higher input impedance."], a: "$\\beta r_e$ ~ kΩ" }), ref: "p.384" },
+        solution: S({
+          c: "Looking into the base of a common-emitter stage, you see $\\beta$ times the intrinsic emitter resistance: $Z_{in} \\approx \\beta r_e$, typically a few kΩ.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\approx \\beta r_e$, ~kΩ.",
+            "<b>Step 2 — Numbers.</b> At $I_E=1$ mA, $r_e\\approx26$ Ω; with $\\beta=100$, $Z_{in}\\approx2.6$ kΩ.",
+            "<b>Step 3 — Distractor audit.</b> 'Very low' is common-BASE; $R_C$ is the OUTPUT side; 'infinite' would be a MOSFET gate."
+          ],
+          a: "$\\approx \\beta r_e$ (kΩ range).",
+          v: "Note the impedance ladder: CB low ($r_e$), CE medium ($\\beta r_e$), CC high ($\\beta R_E$) ✓. Lower bias current raises $r_e$ and thus $Z_{in}$ — a design knob, traded against gain and noise."
+
+        }), ref: "p.384" },
       { q: "Class C amplifier conducts:",
         choices: ["< 180° (narrow pulse, very efficient at RF)", "Full 360°", "180°", "270°"], correct: 0,
-        solution: S({ c: "Class C: conducts brief pulse, very efficient (>90%). Used in RF transmitters where output is tuned.", s: ["Nonlinear — needs LC tank to recover sine wave.", "Class A=360°, AB ≈ 180-360°, B=180°, C<180°."], a: "<180°" }), ref: "p.384" },
+        solution: S({
+          c: "A Class C amplifier conducts for LESS than 180° of each cycle — a brief current pulse. This makes it very efficient (>90%) but highly nonlinear, so it needs an LC tank to reconstruct the sine.",
+          s: [
+            "<b>Step 1 — Match.</b> < 180° (narrow pulse, very efficient at RF).",
+            "<b>Step 2 — The class ladder.</b> A = 360°, AB = 180-360°, B = 180°, C < 180°.",
+            "<b>Step 3 — Distractor audit.</b> 360° is Class A; 180° is Class B; 270° isn't a standard class."
+          ],
+          a: "< 180° conduction angle.",
+          v: "Class C trades linearity for efficiency, so it only suits CONSTANT-envelope RF (FM, CW transmitters) where a tuned tank filters the pulse back into a clean sine ✓ — it would badly distort audio or AM."
+
+        }), ref: "p.384" },
       { q: "PNP transistor: emitter is at:",
         choices: ["Higher potential than collector in active region", "Lower", "Same", "Grounded"], correct: 0,
-        solution: S({ c: "PNP active: V_E > V_B > V_C. Reversed from NPN.", s: ["Current flow conventionally: out of emitter in PNP."], a: "Higher than collector" }), ref: "p.384" },
+        solution: S({
+          c: "A PNP transistor is the mirror of NPN: in active region the emitter is at the HIGHEST potential — $V_E > V_B > V_C$ — and conventional current flows OUT of the collector, into the emitter.",
+          s: [
+            "<b>Step 1 — Match.</b> Emitter higher than collector.",
+            "<b>Step 2 — Distractor audit.</b> 'Lower'/'same'/'grounded' describe NPN or arbitrary cases, not PNP active biasing."
+          ],
+          a: "Higher potential than the collector.",
+          v: "PNP is used for HIGH-SIDE switching and as the complementary half of push-pull (Class AB) output stages ✓. Everything is flipped from NPN: voltages, current directions, and the sign of $V_{BE}$."
+
+        }), ref: "p.384" },
       { q: "$V_{BE}$ for PNP in active region:",
         choices: ["$\\approx -0.7$ V (base lower than emitter)", "$+0.7$ V", "$0$", "$5$ V"], correct: 0,
-        solution: S({ c: "PNP: emitter-base forward bias means $V_E > V_B$ → $V_{BE} = V_B - V_E < 0$.", s: ["$V_{EB} \\approx +0.7$ V (in some texts)."], a: "$-0.7$ V" }), ref: "p.384" },
+        solution: S({
+          c: "For a PNP in active region the emitter is ABOVE the base, so $V_{BE} = V_B - V_E \\approx -0.7$ V (negative). Equivalently $V_{EB} \\approx +0.7$ V.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\approx -0.7$ V (base below emitter).",
+            "<b>Step 2 — Distractor audit.</b> $+0.7$ V is the NPN value; 0 means off; 5 V is breakdown territory."
+          ],
+          a: "$V_{BE} \\approx -0.7$ V.",
+          v: "The junction still needs ~0.7 V of forward bias — the sign just flips because the emitter is on top ✓. Many texts quote $V_{EB}\\approx+0.7$ V for PNP to keep the number positive; same physics, opposite reference."
+
+        }), ref: "p.384" },
       { q: "Common drain (source follower) — same as which BJT topology?",
         choices: ["Common-collector (emitter follower)", "Common-emitter", "Common-base", "None"], correct: 0,
-        solution: S({ c: "Both have output following input (≈ unity voltage gain, low Z_out, high Z_in).", s: [""], a: "Common-collector" }), ref: "p.386" },
+        solution: S({
+          c: "The common-drain (source follower) MOSFET stage is the direct analog of the BJT common-collector (emitter follower): output follows input, voltage gain ≈ 1, high $Z_{in}$, low $Z_{out}$.",
+          s: [
+            "<b>Step 1 — Match.</b> Common-collector (emitter follower).",
+            "<b>Step 2 — Distractor audit.</b> Common-emitter ↔ common-source (inverting gain); common-base ↔ common-gate; not 'none'."
+          ],
+          a: "Common-collector (emitter follower).",
+          v: "The three-way analogy: CS↔CE, CD↔CC, CG↔CB ✓ — same role, MOSFET vs BJT. Both followers are BUFFERS: unity gain but strong impedance transformation for driving loads."
+
+        }), ref: "p.386" },
       { q: "Power MOSFET avalanche rating:",
         choices: ["Max energy in unclamped inductive load", "$V_{DS}$ max", "$I_D$ max", "$R_{DS,on}$"], correct: 0,
-        solution: S({ c: "When MOSFET turns off inductive load, body diode + parasitic BJT can avalanche.", s: ["Rated $E_{AS}$ specifies how much energy device can absorb safely."], a: "Energy in inductive load" }), ref: "p.386" },
+        solution: S({
+          c: "The avalanche rating ($E_{AS}$) specifies how much ENERGY a power MOSFET can safely absorb when an unclamped inductive load forces it into breakdown at turn-off.",
+          s: [
+            "<b>Step 1 — Match.</b> Max energy in an unclamped inductive load.",
+            "<b>Step 2 — Distractor audit.</b> $V_{DS}$ max, $I_D$ max, and $R_{DS,on}$ are separate ratings — this one is about ENERGY during avalanche."
+          ],
+          a: "Max avalanche energy (inductive turn-off).",
+          v: "When you switch off an inductor, $v=L\\,di/dt$ spikes the drain into avalanche; an avalanche-rated FET can survive absorbing that energy without a snubber ✓ — valuable in motor drives and flyback supplies where inductive kickback is unavoidable."
+
+        }), ref: "p.386" },
       { q: "Differential pair (long-tail pair) at heart of op-amp:",
         choices: ["Two matched transistors, current mirror tail, high CMRR", "Single transistor", "Cascode", "Class AB"], correct: 0,
-        solution: S({ c: "Diff pair: matched pair sharing current source — high CMRR.", s: ["Front-end of op-amps, comparators, instrumentation amps.", "Followed by gain stages and output buffer."], a: "Diff pair w/ tail" }), ref: "p.380" },
+        solution: S({
+          c: "The differential (long-tail) pair is two matched transistors sharing a common current-source 'tail'. It amplifies the DIFFERENCE of two inputs while rejecting what's common — giving high CMRR.",
+          s: [
+            "<b>Step 1 — Match.</b> Two matched transistors, current-mirror tail, high CMRR.",
+            "<b>Step 2 — Distractor audit.</b> A single transistor can't reject common-mode; cascode and Class AB are other stages, not the input pair."
+          ],
+          a: "Matched pair with a current-source tail.",
+          v: "It's the universal front-end of op-amps, comparators, and instrumentation amps ✓ — matching and the constant tail current are what make the common-mode rejection high. Gain stages and an output buffer follow it."
+
+        }), ref: "p.380" },
       { q: "Wien bridge oscillator: needed condition for oscillation:",
         choices: ["Loop gain = 1, phase = 0 (Barkhausen)", "Loop gain > 1", "Phase = 90°", "No feedback"], correct: 0,
-        solution: S({ c: "Barkhausen criterion: $|A\\beta| = 1$ and $\\angle(A\\beta) = 0$ at oscillation frequency.", s: ["In practice: $|A\\beta|$ slightly > 1 with AGC limiting.", "Wien bridge: $f_0 = 1/(2\\pi RC)$."], a: "Barkhausen" }), ref: "p.380" },
+        solution: S({
+          c: "Sustained oscillation requires the BARKHAUSEN criterion: loop gain magnitude $|A\\beta|=1$ AND total loop phase $=0°$ (or 360°) at the oscillation frequency.",
+          s: [
+            "<b>Step 1 — Match.</b> Loop gain = 1, phase = 0 (Barkhausen).",
+            "<b>Step 2 — Distractor audit.</b> $|A\\beta|>1$ makes the amplitude grow until clipping (needs AGC to settle to 1); phase = 90° or no feedback won't oscillate."
+          ],
+          a: "$|A\\beta|=1$, $\\angle A\\beta = 0$ (Barkhausen).",
+          v: "In practice you set $|A\\beta|$ slightly above 1 to START oscillation, then an automatic gain control (e.g. a lamp or JFET) pulls it back to exactly 1 for a clean sine ✓. Wien bridge frequency: $f_0=1/(2\\pi RC)$."
+
+        }), ref: "p.380" },
     ],
 
     // Power — +15
     10: [
       { q: "Apparent power of 480V single phase, 20 A:",
         choices: ["$9.6$ kVA", "$24$ kVA", "$5$ kVA", "$48$ kVA"], correct: 0,
-        solution: S({ c: "$|S| = V \\cdot I$.", s: ["$480 \\cdot 20 = 9600$ VA."], a: "$9.6$ kVA" }), ref: "p.362" },
+        solution: S({
+          c: "Apparent power (VA) for single-phase is simply $|S| = V\\cdot I$ — voltage times current, regardless of power factor.",
+          s: [
+            "<b>Step 1 — Apply.</b> $480\\times20 = 9600$ VA = 9.6 kVA.",
+            "<b>Step 2 — Distractor audit.</b> 24 kVA, 5 kVA, 48 kVA come from arithmetic/decimal slips."
+          ],
+          a: "9.6 kVA",
+          v: "Apparent power sets the CURRENT (and thus wire/equipment sizing), which is why transformers are rated in kVA not kW ✓. Real power $P = |S|\\cos\\theta$ would be less, depending on the load's power factor."
+
+        }), ref: "p.362" },
       { q: "Reactive power of $|S| = 10$ kVA at $pf = 0.6$:",
         choices: ["$8$ kVAR", "$6$ kVAR", "$10$ kVAR", "$4$ kVAR"], correct: 0,
-        solution: S({ c: "$\\sin\\theta = \\sqrt{1-pf^2}$. $Q = |S|\\sin\\theta$.", s: ["$\\sin = \\sqrt{0.64} = 0.8$.", "$Q = 10 \\cdot 0.8 = 8$ kVAR."], a: "$8$ kVAR" }), ref: "p.362" },
+        solution: S({
+          c: "From the power triangle, $Q = |S|\\sin\\theta$, where $\\sin\\theta=\\sqrt{1-pf^2}$ (since $pf=\\cos\\theta$).",
+          s: [
+            "<b>Step 1 — sin θ.</b> $\\sqrt{1-0.6^2} = \\sqrt{0.64} = 0.8$.",
+            "<b>Step 2 — Apply.</b> $Q = 10\\times0.8 = 8$ kVAR.",
+            "<b>Step 3 — Distractor audit.</b> 6 kVAR is the REAL power ($P=|S|\\cos\\theta$); 10 is S; 4 misuses the formula."
+          ],
+          a: "$Q = 8$ kVAR",
+          v: "It's a 6-8-10 power triangle: $P=6$ kW, $Q=8$ kVAR, $S=10$ kVA ✓. A pf of 0.6 is quite poor — Q exceeds P — making this a prime candidate for capacitor pf-correction."
+
+        }), ref: "p.362" },
       { q: "Why is high voltage used for long-distance transmission?",
         choices: ["Low current → low $I^2R$ losses", "Safety", "Easier insulation", "Cheaper equipment"], correct: 0,
-        solution: S({ c: "Power $P = VI$ fixed by load. Higher V → lower I → less I²R loss in line.", s: ["Tradeoff: insulation cost, corona losses.", "Stepped up at generation, stepped down at customer."], a: "Low I²R loss" }), ref: "p.363" },
+        solution: S({
+          c: "For a fixed power $P=VI$, raising voltage lowers the current proportionally. Since line losses are $I^2R$, lower current means dramatically less loss.",
+          s: [
+            "<b>Step 1 — Match.</b> Low current → low $I^2R$ losses.",
+            "<b>Step 2 — Distractor audit.</b> High voltage is actually HARDER to insulate and needs pricier equipment — those are costs, not the reason. Safety isn't improved by high voltage."
+          ],
+          a: "Lower current → lower $I^2R$ losses.",
+          v: "10× the voltage → 1/10 the current → 1/100 the loss ✓ — the founding equation of the power grid. The trade is insulation, clearance, and corona losses, which is why transmission steps up to hundreds of kV but distribution steps back down."
+
+        }), ref: "p.363" },
       { q: "Voltage at customer's house too low (brownout). Likely cause:",
         choices: ["High load on transformer/feeder; voltage drop", "Wiring fault inside house", "Power factor", "Air conditioner"], correct: 0,
-        solution: S({ c: "Overloaded distribution: high current → high $IZ$ drop → terminal V drops.", s: ["Heat waves cause: AC loads spike → brownouts.", "Tap changers can adjust transformer output."], a: "Feeder overload" }), ref: "p.363" },
+        solution: S({
+          c: "A brownout (sustained low voltage) usually comes from an OVERLOADED feeder/transformer: heavy current causes a large $IZ$ voltage drop along the distribution line, so the terminal voltage sags.",
+          s: [
+            "<b>Step 1 — Match.</b> High load on transformer/feeder → voltage drop.",
+            "<b>Step 2 — Distractor audit.</b> An internal house fault affects one circuit, not steady low voltage everywhere; pf and one AC unit aren't the system-level cause."
+          ],
+          a: "Feeder/transformer overload.",
+          v: "Heat waves trigger brownouts: everyone's AC draws current at once, $IZ$ drop spikes, voltage sags ✓. Utilities use tap-changing transformers and capacitor banks to hold voltage; deliberate brownouts shed load to prevent blackouts."
+
+        }), ref: "p.363" },
       { q: "Synchronous motor at no load: stator and rotor field angle:",
         choices: ["Aligned ($\\delta \\approx 0$)", "$90°$ apart", "Random", "Opposing"], correct: 0,
-        solution: S({ c: "Load angle $\\delta$ increases with load. No load → no torque → $\\delta = 0$.", s: ["Pull-out torque at $\\delta = 90°$ — beyond that, motor falls out of sync."], a: "$\\delta \\approx 0$" }), ref: "p.365" },
+        solution: S({
+          c: "The load angle δ (between stator and rotor fields) grows with mechanical load — torque is proportional to $\\sin\\delta$. At NO load there's no torque needed, so $\\delta\\approx0$ (fields aligned).",
+          s: [
+            "<b>Step 1 — Match.</b> Aligned ($\\delta\\approx0$).",
+            "<b>Step 2 — Distractor audit.</b> 90° apart is the PULL-OUT (max torque) point; 'random'/'opposing' don't describe synchronous operation."
+          ],
+          a: "$\\delta \\approx 0$ (aligned).",
+          v: "As load increases, δ widens; at δ=90° the motor reaches PULL-OUT torque, and beyond that it falls OUT of sync and stalls ✓. The load angle is the synchronous machine's torque 'throttle.'"
+
+        }), ref: "p.365" },
       { q: "Squirrel-cage rotor:",
         choices: ["Used in induction motors — no electrical connection to rotor", "Used in DC motors", "Synchronous machines only", "Generators"], correct: 0,
-        solution: S({ c: "Squirrel cage = short-circuited rotor bars + end rings. Induction motors most common.", s: ["No brushes/slip rings → robust, low maintenance.", "Wound rotor (slip ring) alternative for VFD use."], a: "Induction motor rotor" }), ref: "p.365" },
+        solution: S({
+          c: "A squirrel-cage rotor — shorted conductor bars joined by end rings — is the rotor of an INDUCTION motor. It has NO external electrical connection (no brushes or slip rings); currents are INDUCED in it.",
+          s: [
+            "<b>Step 1 — Match.</b> Induction motors — no electrical connection to rotor.",
+            "<b>Step 2 — Distractor audit.</b> DC motors use a commutator/armature; synchronous machines have a DC-excited rotor; it's not specific to generators."
+          ],
+          a: "The induction-motor rotor.",
+          v: "No brushes = rugged, cheap, low-maintenance — which is why the squirrel-cage induction motor is the workhorse of industry ✓. The wound-rotor (slip-ring) variant exists for special starting/speed control, but cage rotors dominate."
+
+        }), ref: "p.365" },
       { q: "VFD (Variable Frequency Drive):",
         choices: ["Varies AC frequency to control motor speed", "DC drive", "Constant freq", "Voltage only"], correct: 0,
-        solution: S({ c: "VFD: rectifies AC → DC → inverts to variable freq AC. Motor speed proportional to freq.", s: ["Used: industrial pumps, fans, conveyors, HVAC.", "Energy savings: motor speed matches load."], a: "Variable freq AC" }), ref: "p.365" },
+        solution: S({
+          c: "A VFD controls AC motor speed by varying the supply FREQUENCY (since synchronous speed $=120f/P$). Internally it rectifies AC to DC, then inverts to a variable-frequency AC output.",
+          s: [
+            "<b>Step 1 — Match.</b> Varies AC frequency to control motor speed.",
+            "<b>Step 2 — Distractor audit.</b> It's not a DC drive, not constant-frequency, and varies frequency (with voltage tracking, 'V/f') — not voltage alone."
+          ],
+          a: "Variable-frequency AC for speed control.",
+          v: "Big energy savings: a fan/pump at half speed draws roughly 1/8 the power (cube law), vs throttling at full speed ✓. VFDs keep V/f roughly constant to maintain torque, and dominate modern HVAC, pumps, and conveyors."
+
+        }), ref: "p.365" },
       { q: "Inrush current of motor on full-voltage start:",
         choices: ["5-7× full-load current", "Equal to FL", "Less than FL", "Random"], correct: 0,
-        solution: S({ c: "Locked-rotor (start) current: 5-7× FL typically. Lasts < 1 sec usually.", s: ["Mitigation: soft-starter, VFD, autotransformer starter."], a: "5-7×" }), ref: "p.365" },
+        solution: S({
+          c: "An induction motor started across-the-line draws a locked-rotor (inrush) current of about 5-7× its full-load current, lasting under a second until it spins up.",
+          s: [
+            "<b>Step 1 — Match.</b> 5-7× full-load current.",
+            "<b>Step 2 — Distractor audit.</b> Equal-to or less-than full-load would leave no starting torque; it's not random."
+          ],
+          a: "5-7× full-load current.",
+          v: "This inrush sags the line voltage (lights flicker when a big motor starts) and stresses gear ✓ — which is why soft-starters, VFDs, and Y-Δ or autotransformer starters exist to tame it on large motors."
+
+        }), ref: "p.365" },
       { q: "Capacitor-start single-phase motor:",
         choices: ["Cap creates phase shift in auxiliary winding for starting", "DC cap only", "Higher voltage", "Filtering"], correct: 0,
-        solution: S({ c: "Single-phase motors need help starting (no rotating field). Cap creates phase-shifted current in start winding → mock rotating field.", s: ["Once near speed, centrifugal switch disconnects start winding."], a: "Phase shift for starting" }), ref: "p.365" },
+        solution: S({
+          c: "A single-phase supply makes only a PULSATING field (no rotation), so the motor can't self-start. A capacitor in series with an auxiliary winding creates a PHASE-SHIFTED current, producing a temporary rotating field to start it.",
+          s: [
+            "<b>Step 1 — Match.</b> Cap creates phase shift in the auxiliary (start) winding.",
+            "<b>Step 2 — Distractor audit.</b> It's not a DC-only cap, not for higher voltage, not for filtering — its job is phase shift for starting torque."
+          ],
+          a: "Phase shift in the start winding for starting.",
+          v: "Once near speed, a centrifugal switch disconnects the start winding/capacitor ✓ — it's needed only to get the rotor moving. This is why single-phase motors need extra hardware that three-phase (inherently rotating field) motors don't."
+
+        }), ref: "p.365" },
       { q: "Stepper motor: rotates by:",
         choices: ["Discrete steps (e.g., 1.8° per pulse)", "Continuous", "Variable rates", "Random"], correct: 0,
-        solution: S({ c: "Stepper: each input pulse moves rotor by fixed angle. Open-loop positioning.", s: ["1.8° typical (200 steps/rev).", "Used in: printers, CNC, 3D printers."], a: "Discrete steps" }), ref: "p.365" },
+        solution: S({
+          c: "A stepper motor moves in DISCRETE steps — each input pulse advances the rotor by a fixed angle (commonly 1.8°, i.e. 200 steps/revolution). It positions OPEN-LOOP (no feedback needed).",
+          s: [
+            "<b>Step 1 — Match.</b> Discrete steps (e.g. 1.8°/pulse).",
+            "<b>Step 2 — Distractor audit.</b> It's not continuous rotation or random — the defining trait is precise, repeatable steps."
+          ],
+          a: "In discrete fixed-angle steps.",
+          v: "Count the pulses and you know the position — no encoder required ✓, which is why steppers run printers, CNC, and 3D printers. The trade: they can lose steps if overloaded (open-loop), and waste power holding position."
+
+        }), ref: "p.365" },
       { q: "Power transformer K-factor rating:",
         choices: ["Capability to handle harmonic currents without overheating", "Voltage rating", "kVA size", "Efficiency"], correct: 0,
-        solution: S({ c: "K-factor: extra cooling/oversizing for nonlinear loads (electronics, VFDs).", s: ["Higher K-factor (4, 13, 20) for more harmonic-rich loads."], a: "Harmonic capability" }), ref: "p.364" },
+        solution: S({
+          c: "K-factor rates a transformer's ability to serve HARMONIC-rich (nonlinear) loads without overheating. Harmonics cause extra eddy-current heating, so K-rated transformers are oversized/better-cooled.",
+          s: [
+            "<b>Step 1 — Match.</b> Capability to handle harmonic currents without overheating.",
+            "<b>Step 2 — Distractor audit.</b> It's not the voltage rating, kVA size, or efficiency — it's specifically about harmonic tolerance."
+          ],
+          a: "Harmonic-handling capability.",
+          v: "Higher K (4, 13, 20) suits loads with more harmonics — banks of computer power supplies, VFDs, LED drivers ✓. Standard transformers feeding heavy nonlinear loads can overheat from harmonic currents the nameplate kVA didn't anticipate."
+
+        }), ref: "p.364" },
       { q: "Ferromagnetic core in transformer: function:",
         choices: ["Increases flux coupling between windings", "Cooling", "Insulation", "Just structural"], correct: 0,
-        solution: S({ c: "High permeability iron core concentrates flux → tight magnetic coupling.", s: ["Air-core transformers: low coupling, used in RF where iron losses unacceptable."], a: "Flux coupling" }), ref: "p.364" },
+        solution: S({
+          c: "The high-permeability iron core concentrates and channels magnetic flux, giving tight COUPLING between primary and secondary windings (most flux links both).",
+          s: [
+            "<b>Step 1 — Match.</b> Increases flux coupling between windings.",
+            "<b>Step 2 — Distractor audit.</b> The core isn't for cooling, insulation, or mere structure — it's the magnetic flux path."
+          ],
+          a: "Concentrates flux for tight coupling.",
+          v: "Air-core transformers have low coupling but no iron losses, so they're used at RF where iron losses would be unacceptable ✓. The iron core's downside — hysteresis and eddy losses — is fought with silicon steel and laminations."
+
+        }), ref: "p.364" },
       { q: "Eddy current losses in transformer core mitigated by:",
         choices: ["Laminated core (thin insulated layers)", "Larger core", "Higher voltage", "DC operation"], correct: 0,
-        solution: S({ c: "Laminations: break up eddy current paths. Loss $\\propto t^2 f^2$.", s: [""], a: "Laminations" }), ref: "p.364" },
+        solution: S({
+          c: "Changing flux induces circulating EDDY currents in the conductive core, dissipating heat. LAMINATING the core (thin, individually-insulated layers) breaks up these current loops.",
+          s: [
+            "<b>Step 1 — Match.</b> Laminated core (thin insulated layers).",
+            "<b>Step 2 — Distractor audit.</b> A larger core or higher voltage wouldn't help; DC operation isn't an option for a transformer (it needs changing flux)."
+          ],
+          a: "Laminations (thin insulated layers).",
+          v: "Eddy loss scales as $t^2 f^2$ (lamination thickness and frequency squared) ✓ — so thinner laminations cut loss sharply, and high-frequency transformers use very thin laminations or ferrite cores. Laminations attack eddy loss; better steel attacks hysteresis."
+
+        }), ref: "p.364" },
       { q: "Hysteresis losses in transformer core:",
         choices: ["Heat from cyclic magnetization of core", "Copper resistance", "Air gap", "Insulation"], correct: 0,
-        solution: S({ c: "B-H loop area = energy lost per cycle. Heated material.", s: ["Mitigation: low-hysteresis silicon steel, ferrites (high-freq)."], a: "B-H loop area" }), ref: "p.364" },
+        solution: S({
+          c: "Hysteresis loss is the energy spent re-magnetizing the core each cycle — proportional to the AREA of the material's B-H loop. It shows up as heat.",
+          s: [
+            "<b>Step 1 — Match.</b> Heat from cyclic magnetization (B-H loop area).",
+            "<b>Step 2 — Distractor audit.</b> Copper resistance is $I^2R$ (winding) loss; air gap and insulation aren't hysteresis."
+          ],
+          a: "B-H loop area (per cycle, ×frequency).",
+          v: "Mitigated with low-hysteresis SILICON STEEL (narrow loop), or ferrites at high frequency ✓. Together with eddy loss (fought by laminations), hysteresis makes up the frequency-dependent CORE loss — distinct from the load-dependent copper loss."
+
+        }), ref: "p.364" },
       { q: "Generator regulation (no-load to full-load):",
         choices: ["$(V_{NL}-V_{FL})/V_{FL} \\times 100\\%$", "Same as efficiency", "Always 0", "Volts only"], correct: 0,
-        solution: S({ c: "Voltage regulation measures stability under load.", s: ["Low VR = good (small change). Synchronous gen: 5-15% typical."], a: "Std VR formula" }), ref: "p.365" },
+        solution: S({
+          c: "Voltage regulation measures how much terminal voltage sags from no-load to full-load: $VR = \\dfrac{V_{NL}-V_{FL}}{V_{FL}}\\times100\\%$.",
+          s: [
+            "<b>Step 1 — Match.</b> $(V_{NL}-V_{FL})/V_{FL}\\times100\\%$.",
+            "<b>Step 2 — Distractor audit.</b> It's not efficiency (that's power out/in), not always 0, and a percentage not just volts."
+          ],
+          a: "$VR = \\dfrac{V_{NL}-V_{FL}}{V_{FL}}\\times100\\%$",
+          v: "LOWER regulation is better — it means the output voltage holds steady under load ✓. Synchronous generators run 5-15% typically; an AVR (automatic voltage regulator) trims excitation to keep VR low as load swings."
+
+        }), ref: "p.365" },
     ],
 
     // EM — +8
