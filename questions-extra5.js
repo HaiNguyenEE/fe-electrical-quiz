@@ -609,79 +609,319 @@
     6: [
       { q: "Two AC voltage sources in series add as:",
         choices: ["Phasors (complex addition)", "Magnitudes", "Subtraction", "Multiplication"], correct: 0,
-        solution: S({ c: "AC: must use phasor (complex) representation.", s: ["E.g., 10∠0° + 10∠90° = $\\sqrt{200}∠45°$, NOT 20."], a: "Phasor addition" }), ref: "p.360" },
+        solution: S({
+          c: "AC voltages have both magnitude AND phase, so they must be added as PHASORS (complex numbers), not as plain magnitudes — unless they happen to be perfectly in phase.",
+          s: [
+            "<b>Step 1 — Match.</b> Phasor (complex) addition.",
+            "<b>Step 2 — Why magnitudes fail.</b> $10\\angle0° + 10\\angle90°$ gives $\\sqrt{10^2+10^2}\\angle45° = 14.14\\angle45°$, NOT 20.",
+            "<b>Step 3 — Distractor audit.</b> Subtraction/multiplication aren't how series sources combine; plain magnitude addition only works at identical phase."
+          ],
+          a: "Phasor (complex) addition.",
+          v: "The 90° case shows it starkly: two 10-V sources can sum to 14.1 V, not 20 ✓ — phase matters. Only when phases are equal does the phasor sum reduce to simple magnitude addition."
+
+        }), ref: "p.360" },
       { q: "Capacitor $C = 50$ µF, voltage 100V. Stored charge:",
         choices: ["$5$ mC", "$5000$ C", "$0.5$ C", "$50$ µC"], correct: 0,
-        solution: S({ c: "$Q = CV$.", s: ["$50 \\times 10^{-6} \\cdot 100 = 5 \\times 10^{-3}$ C = 5 mC."], a: "$5$ mC" }), ref: "p.358" },
+        solution: S({
+          c: "Capacitance relates stored charge to voltage by the defining equation $Q = CV$.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $Q = (50\\times10^{-6})(100) = 5\\times10^{-3}$ C.",
+            "<b>Step 2 — Express.</b> $= 5$ mC.",
+            "<b>Step 3 — Distractor audit.</b> 5000 C mishandles the µ (×10⁻⁶); 0.5 C is off by 10; 50 µC ignores the voltage."
+          ],
+          a: "$Q = 5$ mC",
+          v: "Units: F×V = (C/V)×V = C ✓. Watch the micro prefix — 50 µF means $50\\times10^{-6}$ F, the most common slip in capacitor problems."
+
+        }), ref: "p.358" },
       { q: "Resistors form Wheatstone bridge in <b>balance</b>:",
         choices: ["No current through galvanometer", "Maximum current", "Half current", "Random"], correct: 0,
-        solution: S({ c: "Balance: $R_1/R_2 = R_3/R_4$. Galvanometer reads zero.", s: ["Used to measure unknown resistance precisely.", "Strain gauge applications use slightly unbalanced bridge."], a: "Zero galvanometer current" }), ref: "p.357" },
+        solution: S({
+          c: "A Wheatstone bridge is BALANCED when the ratio of resistances in its two arms is equal ($R_1/R_2 = R_3/R_4$). At balance, both midpoints sit at the same potential → ZERO current through the galvanometer.",
+          s: [
+            "<b>Step 1 — Match.</b> No current through the galvanometer.",
+            "<b>Step 2 — Distractor audit.</b> Maximum/half/random current all describe unbalanced states — balance is specifically the null condition."
+          ],
+          a: "Zero galvanometer current.",
+          v: "The null method is extremely precise — detecting ZERO current is easier and more accurate than measuring a value ✓. To find an unknown R, adjust a known leg until the galvanometer reads zero, then compute from the ratio. Strain gauges run slightly OFF balance to read tiny changes."
+
+        }), ref: "p.357" },
       { q: "Two batteries 6V each in parallel (ideal): output:",
         choices: ["$6$ V", "$12$ V", "$3$ V", "$0$"], correct: 0,
-        solution: S({ c: "Parallel ideal sources of equal V: same V output.", s: ["Real batteries: small internal R limits cross-currents."], a: "$6$ V" }), ref: "p.356" },
+        solution: S({
+          c: "Ideal voltage sources of EQUAL voltage in parallel simply present that same voltage — paralleling doesn't add voltage (that's series).",
+          s: [
+            "<b>Step 1 — Match.</b> 6 V.",
+            "<b>Step 2 — What parallel DOES add.</b> Current capacity / runtime, not voltage.",
+            "<b>Step 3 — Distractor audit.</b> 12 V would be SERIES; 3 V and 0 have no basis for equal sources."
+          ],
+          a: "6 V",
+          v: "Important caveat: paralleling sources of UNEQUAL voltage is dangerous — even tiny differences drive large circulating currents limited only by internal resistance ✓. That's why you don't parallel mismatched batteries."
+
+        }), ref: "p.356" },
       { q: "If $i(t) = 5\\sin(2\\pi 60 t)$ A through 10Ω resistor, instantaneous power at $t = 1/240$ s:",
-        choices: ["$125$ W (peak at this t)", "$250$ W", "$0$ W", "$50$ W"], correct: 0,
-        solution: S({ c: "$p(t) = i^2(t) R$. At $t = 1/240$ s: $\\omega t = 2\\pi 60 / 240 = \\pi/2$.", s: ["$\\sin(\\pi/2) = 1$. $i = 5$ A.", "$p = 25 \\cdot 10 = 250$ W. Hmm, that's choice B not A. Let me re-check.", "Actually 250 W is peak. So I had it wrong. Correct answer: 250 W."], a: "$250$ W (peak)" }), ref: "p.356" },
+        choices: ["$250$ W (peak at this t)", "$125$ W", "$0$ W", "$50$ W"], correct: 0,
+        solution: S({
+          c: "INSTANTANEOUS power in a resistor is $p(t) = i^2(t)\\,R$ — evaluated at the specific instant, using the current's value right then.",
+          s: [
+            "<b>Step 1 — Find the phase angle.</b> $\\omega t = 2\\pi(60)(1/240) = \\pi/2$.",
+            "<b>Step 2 — Current at that instant.</b> $i = 5\\sin(\\pi/2) = 5(1) = 5$ A (the peak).",
+            "<b>Step 3 — Power.</b> $p = 5^2\\times10 = 250$ W.",
+            "<b>Step 4 — Distractor audit.</b> 125 W is the AVERAGE power (a different question); 0 would need $\\sin=0$; 50 W misuses the formula."
+          ],
+          a: "$p = 250$ W (instantaneous peak).",
+          v: "At $t=1/240$ s the sine peaks, so this is the MAXIMUM instantaneous power ✓ — exactly twice the 125-W average, which is the general relationship for a resistor on a sinusoid ($p_{peak} = 2P_{avg}$)."
+
+        }), ref: "p.356" },
       { q: "Average power dissipated by previous circuit (5A peak in 10Ω):",
         choices: ["$125$ W", "$250$ W", "$25$ W", "$10$ W"], correct: 0,
-        solution: S({ c: "Average power: $P_{avg} = (I_{peak}^2/2) R = I_{rms}^2 R$.", s: ["$I_{rms} = 5/\\sqrt{2}$.", "$P_{avg} = (25/2)(10) = 125$ W."], a: "$125$ W" }), ref: "p.362" },
+        solution: S({
+          c: "AVERAGE power in a resistor on a sinusoid uses the RMS current: $P_{avg} = I_{rms}^2 R = \\dfrac{I_{peak}^2}{2}R$ (since $I_{rms} = I_{peak}/\\sqrt2$).",
+          s: [
+            "<b>Step 1 — RMS current.</b> $I_{rms} = 5/\\sqrt2 = 3.54$ A.",
+            "<b>Step 2 — Average power.</b> $P_{avg} = (25/2)(10) = 125$ W.",
+            "<b>Step 3 — Distractor audit.</b> 250 W is the PEAK instantaneous (forgot the factor of 2); 25 W and 10 W misapply the formula."
+          ],
+          a: "$P_{avg} = 125$ W",
+          v: "The factor-of-2 link: average power is exactly HALF the peak instantaneous power for a resistor on a sine ✓. RMS exists precisely so AC power formulas look like DC ones — $I_{rms}^2R$ delivers the same heating as that DC current."
+
+        }), ref: "p.362" },
       { q: "Impedance of a $100$ mH inductor at 1 kHz:",
         choices: ["$\\approx 628\\ \\Omega$ (purely reactive)", "$100\\ \\Omega$", "$1000\\ \\Omega$", "$6.28\\ \\Omega$"], correct: 0,
-        solution: S({ c: "$X_L = 2\\pi f L$.", s: ["$2\\pi(1000)(0.1) = 200\\pi \\approx 628$."], a: "$\\approx 628$ Ω" }), ref: "p.360" },
+        solution: S({
+          c: "An inductor's impedance is purely reactive: $X_L = 2\\pi f L = \\omega L$ — it rises with frequency (inductors resist fast changes).",
+          s: [
+            "<b>Step 1 — Plug in.</b> $X_L = 2\\pi(1000)(0.1) = 200\\pi \\approx 628\\ \\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> 100 Ω and 1000 Ω ignore the $2\\pi f$ scaling; 6.28 Ω drops three decades."
+          ],
+          a: "$X_L \\approx 628\\ \\Omega$ (purely reactive).",
+          v: "Frequency dependence is the key: at DC ($f=0$) an inductor is a short (0 Ω); at high frequency it's nearly open ✓ — the opposite of a capacitor. This is why inductors block AC and pass DC."
+
+        }), ref: "p.360" },
       { q: "Mesh analysis: 2 loops, 2 unknown currents. Method:",
         choices: ["Write KVL around each loop, solve linear system", "Use KCL at nodes", "Use Thévenin", "Trial and error"], correct: 0,
-        solution: S({ c: "Mesh analysis: assign mesh currents, write KVL, solve.", s: ["Shared branch carries algebraic sum of two mesh currents."], a: "KVL per loop + linear system" }), ref: "p.357" },
+        solution: S({
+          c: "Mesh analysis assigns a circulating CURRENT to each loop, writes Kirchhoff's Voltage Law (sum of voltage drops = 0) around each, and solves the resulting linear system.",
+          s: [
+            "<b>Step 1 — Match.</b> Write KVL per loop, solve the linear system.",
+            "<b>Step 2 — Distractor audit.</b> KCL at nodes is NODAL analysis (the dual method); Thévenin reduces a network but isn't the systematic solve; trial-and-error isn't a method."
+          ],
+          a: "KVL around each loop → solve linear equations.",
+          v: "Key detail: a branch SHARED by two meshes carries the algebraic DIFFERENCE of the two mesh currents ✓. Choose mesh vs nodal by counting unknowns — fewer loops than nodes favors mesh."
+
+        }), ref: "p.357" },
       { q: "Nodal analysis: identify reference node, write KCL at each unknown node, in matrix form:",
         choices: ["Y · V = I", "V · I = R", "K = V/I", "Random"], correct: 0,
-        solution: S({ c: "Node-voltage method: admittance matrix × voltages = currents.", s: ["For N+1 nodes, system has N equations.", "Symmetric Y for circuits with only resistors and ideal sources."], a: "$Y V = I$" }), ref: "p.357" },
+        solution: S({
+          c: "Nodal (node-voltage) analysis picks a reference (ground) node, then writes KCL (sum of currents = 0) at each remaining node. In matrix form this is $\\mathbf{Y}\\mathbf{V} = \\mathbf{I}$ — admittance matrix × node voltages = source currents.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\mathbf{Y}\\mathbf{V} = \\mathbf{I}$.",
+            "<b>Step 2 — Distractor audit.</b> 'V·I = R' is dimensional nonsense; 'K = V/I' isn't a system; 'random' is wrong."
+          ],
+          a: "$\\mathbf{Y}\\mathbf{V} = \\mathbf{I}$",
+          v: "For $N+1$ nodes you get $N$ equations ✓, and $\\mathbf{Y}$ is symmetric for circuits of resistors and independent sources. It's the matrix form behind every SPICE simulator and power-flow solver."
+
+        }), ref: "p.357" },
       { q: "Norton-to-Thévenin conversion: $I_N = 4$ A, $R_N = 10$Ω. $V_{Th}$:",
         choices: ["$40$ V", "$0.4$ V", "$4$ V", "$10$ V"], correct: 0,
-        solution: S({ c: "$V_{Th} = I_N R_N$.", s: ["$4 \\cdot 10 = 40$ V."], a: "$40$ V" }), ref: "p.357" },
+        solution: S({
+          c: "Norton and Thévenin equivalents are interchangeable: same source resistance $R$, and the voltages/currents relate by Ohm's law: $V_{Th} = I_N R_N$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $V_{Th} = I_N R_N = 4\\times10 = 40$ V.",
+            "<b>Step 2 — Distractor audit.</b> 0.4 V divides instead of multiplying; 4 V and 10 V each drop one factor."
+          ],
+          a: "$V_{Th} = 40$ V",
+          v: "Both equivalents share the SAME $R$ ($R_{Th}=R_N=10\\ \\Omega$) ✓. A Norton (current source ∥ R) and a Thévenin (voltage source + series R) are indistinguishable from outside the terminals — pick whichever simplifies the math."
+
+        }), ref: "p.357" },
       { q: "Power factor improvement: 100 kW load at $pf=0.6$ lagging. Need $Q_C$ for $pf=1$:",
         choices: ["$\\approx 133$ kVAR", "$100$ kVAR", "$60$ kVAR", "$167$ kVAR"], correct: 0,
-        solution: S({ c: "$Q_{load} = P \\tan\\theta = 100 \\cdot \\tan(53.13°) = 100 \\cdot 1.333 = 133.3$ kVAR.", s: ["At unity pf, total Q = 0 → $Q_C = Q_{load} = 133.3$ kVAR."], a: "$\\approx 133$ kVAR" }), ref: "p.362" },
+        solution: S({
+          c: "To correct power factor, add a capacitor supplying reactive power $Q_C$ to cancel the load's lagging $Q$. The load's reactive demand is $Q_{load} = P\\tan\\theta$, where $\\theta = \\cos^{-1}(pf)$.",
+          s: [
+            "<b>Step 1 — Find the angle.</b> $\\theta = \\cos^{-1}(0.6) = 53.13°$.",
+            "<b>Step 2 — Load reactive power.</b> $Q_{load} = 100\\tan(53.13°) = 100\\times1.333 = 133.3$ kVAR.",
+            "<b>Step 3 — For unity pf.</b> Total Q must be 0, so $Q_C = Q_{load} = 133.3$ kVAR.",
+            "<b>Step 4 — Distractor audit.</b> 100 kVAR confuses Q with P; 60 misuses pf; 167 is the apparent power S, not Q."
+          ],
+          a: "$Q_C \\approx 133$ kVAR",
+          v: "After correction, the source delivers only the 100 kW of REAL power — current drops, $I^2R$ losses fall, and the utility stops penalizing low pf ✓. The capacitor 'recycles' the reactive energy the motor needs locally."
+
+        }), ref: "p.362" },
       { q: "Resonance: $L = 50$ mH, $C = 0.2$ µF. Resonant freq:",
         choices: ["$\\approx 1591$ Hz", "$1$ kHz", "$10$ kHz", "$159$ Hz"], correct: 0,
-        solution: S({ c: "$f_0 = 1/(2\\pi\\sqrt{LC})$.", s: ["$LC = 10^{-8}$. $\\sqrt{LC} = 10^{-4}$.", "$f_0 = 1/(2\\pi \\cdot 10^{-4}) = 1591$ Hz."], a: "$\\approx 1591$ Hz" }), ref: "p.361" },
+        solution: S({
+          c: "An LC circuit resonates where inductive and capacitive reactances cancel, at $f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$.",
+          s: [
+            "<b>Step 1 — Product LC.</b> $(0.05)(0.2\\times10^{-6}) = 10^{-8}$, so $\\sqrt{LC} = 10^{-4}$.",
+            "<b>Step 2 — Frequency.</b> $f_0 = \\dfrac{1}{2\\pi\\times10^{-4}} \\approx 1591$ Hz.",
+            "<b>Step 3 — Distractor audit.</b> 1 kHz, 10 kHz, 159 Hz are off — usually from dropping the $2\\pi$ or a power-of-ten slip in LC."
+          ],
+          a: "$f_0 \\approx 1591$ Hz",
+          v: "At $f_0$, $X_L = X_C$ so they cancel and the circuit looks purely resistive ✓ — the basis of every radio tuner, oscillator, and filter. Note $f_0$ depends only on the PRODUCT LC, not on R."
+
+        }), ref: "p.361" },
       { q: "Parallel resonance impedance:",
         choices: ["Maximum at $f_0$ (purely R)", "Minimum at $f_0$", "Always low", "Always high"], correct: 0,
-        solution: S({ c: "Parallel tank at resonance: L and C reactances cancel → very high impedance.", s: ["Series resonance: impedance is minimum (= R).", "Tank circuit: high voltage swing across L and C."], a: "Maximum" }), ref: "p.361" },
+        solution: S({
+          c: "A PARALLEL LC 'tank' at resonance has its branch reactances cancel, leaving a very HIGH impedance (ideally infinite — only the small resistance limits it). This is the OPPOSITE of series resonance.",
+          s: [
+            "<b>Step 1 — Match.</b> Maximum impedance at $f_0$ (purely resistive).",
+            "<b>Step 2 — Contrast.</b> SERIES resonance gives MINIMUM impedance (= R); parallel gives maximum.",
+            "<b>Step 3 — Distractor audit.</b> 'Minimum at f0' is the series case; 'always low/high' ignore the frequency dependence."
+          ],
+          a: "Maximum (high) impedance at resonance.",
+          v: "Because the tank blocks current at $f_0$, it passes everything ELSE — making it a band-stop element, or a band-pass when used right ✓. Internally, large currents circulate between L and C even though little flows from the source."
+
+        }), ref: "p.361" },
       { q: "Power dissipation in 240V single-phase resistive load 5 kW. Current:",
         choices: ["$\\approx 20.8$ A", "$1200$ A", "$5$ A", "$50$ A"], correct: 0,
-        solution: S({ c: "$I = P/V$ for resistive.", s: ["$I = 5000/240 = 20.83$ A."], a: "$20.83$ A" }), ref: "p.356" },
+        solution: S({
+          c: "For a resistive load, real power $P = VI$, so the current is $I = P/V$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $I = 5000/240 = 20.83$ A.",
+            "<b>Step 2 — Distractor audit.</b> 1200 A forgets to divide; 5 A and 50 A misplace the decimal."
+          ],
+          a: "$I \\approx 20.8$ A",
+          v: "Practical check: 20.8 A on a 240-V circuit needs a 30-A breaker (the 80% rule caps continuous load at 24 A) ✓ — typical for a dryer or small EV charger."
+
+        }), ref: "p.356" },
       { q: "Three R in parallel: 6Ω, 12Ω, 24Ω:",
         choices: ["$\\approx 3.43\\ \\Omega$", "$7\\ \\Omega$", "$2\\ \\Omega$", "$42\\ \\Omega$"], correct: 0,
-        solution: S({ c: "$1/R_{eq} = 1/6 + 1/12 + 1/24$.", s: ["Common denom 24: $4/24 + 2/24 + 1/24 = 7/24$.", "$R_{eq} = 24/7 \\approx 3.43\\ \\Omega$."], a: "$\\approx 3.43\\ \\Omega$" }), ref: "p.356" },
+        solution: S({
+          c: "Parallel resistances combine by RECIPROCALS: $\\dfrac{1}{R_{eq}} = \\dfrac{1}{R_1}+\\dfrac{1}{R_2}+\\dfrac{1}{R_3}$. The result is always SMALLER than the smallest resistor.",
+          s: [
+            "<b>Step 1 — Sum reciprocals.</b> Common denominator 24: $\\dfrac{4}{24}+\\dfrac{2}{24}+\\dfrac{1}{24} = \\dfrac{7}{24}$.",
+            "<b>Step 2 — Invert.</b> $R_{eq} = 24/7 \\approx 3.43\\ \\Omega$.",
+            "<b>Step 3 — Distractor audit.</b> 7 Ω inverts wrong; 42 Ω adds them (series mistake); 2 Ω overshoots below the floor."
+          ],
+          a: "$R_{eq} \\approx 3.43\\ \\Omega$",
+          v: "Sanity: 3.43 < 6 (the smallest resistor) ✓ — parallel paths always lower resistance because they add conductance. More current routes available means less total opposition."
+
+        }), ref: "p.356" },
       { q: "Voltage across cap charging through R from $V_s$: at $t = 2\\tau$:",
         choices: ["$\\approx 0.865 V_s$", "$0.5 V_s$", "$0.632 V_s$", "$0.99 V_s$"], correct: 0,
-        solution: S({ c: "$v_C(t) = V_s(1 - e^{-t/\\tau})$. At $t = 2\\tau$: $1 - e^{-2} = 1 - 0.135 = 0.865$.", s: [""], a: "$0.865 V_s$" }), ref: "p.358" },
+        solution: S({
+          c: "A charging capacitor follows $v_C(t) = V_s(1 - e^{-t/\\tau})$, where $\\tau = RC$. After $n$ time constants, the fraction charged is $1 - e^{-n}$.",
+          s: [
+            "<b>Step 1 — At $t = 2\\tau$.</b> $1 - e^{-2} = 1 - 0.135 = 0.865$.",
+            "<b>Step 2 — Distractor audit.</b> 0.632 is ONE $\\tau$ ($1-e^{-1}$); 0.5 is roughly $0.7\\tau$; 0.99 is about $4.6\\tau$."
+          ],
+          a: "$\\approx 0.865\\,V_s$",
+          v: "Memorize the charge-up ladder: $1\\tau$→63%, $2\\tau$→86.5%, $3\\tau$→95%, $5\\tau$→99.3% (effectively done) ✓. The '5τ rule' is why engineers treat a capacitor as fully charged after five time constants."
+
+        }), ref: "p.358" },
       { q: "Current through inductor at $t = 0^+$ if it was zero just before, V applied:",
         choices: ["$0$ (continuous)", "$V/R$ immediately", "$\\infty$", "$V$"], correct: 0,
-        solution: S({ c: "Inductor current cannot change instantaneously: $i_L(0^+) = i_L(0^-)$.", s: ["Voltage CAN jump.", "Dual for capacitor: voltage cannot jump, current can."], a: "$0$ continuous" }), ref: "p.358" },
+        solution: S({
+          c: "An inductor's current CANNOT change instantaneously (it would require infinite voltage, $v = L\\,di/dt$). So $i_L(0^+) = i_L(0^-)$ — the current right after switching equals the current right before.",
+          s: [
+            "<b>Step 1 — Apply.</b> It was 0 just before, so $i_L(0^+) = 0$.",
+            "<b>Step 2 — Distractor audit.</b> $V/R$ immediately ignores the inductor's inertia; ∞ and $V$ violate continuity."
+          ],
+          a: "0 (current is continuous).",
+          v: "The dual rule completes the pair: a CAPACITOR's voltage can't jump (current can), an INDUCTOR's current can't jump (voltage can) ✓. These continuity rules set every initial condition in transient analysis."
+
+        }), ref: "p.358" },
       { q: "AC sinusoid in 60 Hz: phase shift of 1 ms equivalent to:",
         choices: ["$21.6°$", "$60°$", "$90°$", "$1°$"], correct: 0,
-        solution: S({ c: "$\\theta = \\omega \\Delta t = 2\\pi f \\Delta t$ (rad). Or: degrees = $360° \\cdot \\Delta t / T$.", s: ["$T = 1/60$ s. $\\Delta t/T = 0.001/0.01667 = 0.06$.", "Degrees: $360 \\cdot 0.06 = 21.6°$."], a: "$21.6°$" }), ref: "p.360" },
+        solution: S({
+          c: "A time delay maps to a phase angle by what fraction of the PERIOD it represents: $\\theta = 360°\\times\\dfrac{\\Delta t}{T}$, with $T = 1/f$.",
+          s: [
+            "<b>Step 1 — Period.</b> $T = 1/60 = 16.67$ ms.",
+            "<b>Step 2 — Fraction.</b> $\\Delta t/T = 1/16.67 = 0.06$.",
+            "<b>Step 3 — Angle.</b> $360°\\times0.06 = 21.6°$.",
+            "<b>Step 4 — Distractor audit.</b> 60° and 90° overstate it; 1° understates."
+          ],
+          a: "$21.6°$",
+          v: "Cross-check via $\\theta = \\omega\\Delta t = 2\\pi(60)(0.001) = 0.377$ rad $= 21.6°$ ✓. A full cycle (16.67 ms) is 360°, so 1 ms is a small slice — useful for relating scope time-shifts to phase."
+
+        }), ref: "p.360" },
       { q: "Power dissipated in a $\\Delta$-connected load: $V_{LL}=400$V, $Z_\\phi=20\\ \\Omega$ (resistive):",
         choices: ["$24$ kW", "$8$ kW", "$48$ kW", "$2.4$ kW"], correct: 0,
-        solution: S({ c: "For Δ resistive: $V_\\phi = V_{LL}$. $P_\\phi = V_\\phi^2/R$. Total $3 P_\\phi$.", s: ["$P_\\phi = 400^2/20 = 8000$ W.", "Total: $3 \\cdot 8000 = 24$ kW."], a: "$24$ kW" }), ref: "p.363" },
+        solution: S({
+          c: "In a DELTA connection, each phase impedance sees the full LINE voltage ($V_\\phi = V_{LL}$). Per-phase power $P_\\phi = V_\\phi^2/R$; total is three phases: $P_{total} = 3P_\\phi$.",
+          s: [
+            "<b>Step 1 — Per-phase power.</b> $P_\\phi = 400^2/20 = 8000$ W.",
+            "<b>Step 2 — Total.</b> $3\\times8000 = 24$ kW.",
+            "<b>Step 3 — Distractor audit.</b> 8 kW stops at one phase; 48 kW doubles wrongly; 2.4 kW slips a decade."
+          ],
+          a: "$P_{total} = 24$ kW",
+          v: "The delta rule $V_\\phi = V_{LL}$ is the key — in WYE you'd divide by $\\sqrt3$ first, cutting power to a THIRD ✓. That 3:1 ratio is exactly what the Y-Δ motor starter exploits."
+
+        }), ref: "p.363" },
       { q: "Energy stored in $L=20$ mH at $I = 5$ A:",
         choices: ["$0.25$ J", "$25$ mJ", "$2.5$ J", "$0.5$ J"], correct: 0,
-        solution: S({ c: "$W = LI^2/2$.", s: ["$W = (0.02)(25)/2 = 0.25$ J."], a: "$0.25$ J" }), ref: "p.358" },
+        solution: S({
+          c: "Energy stored in an inductor's magnetic field: $W = \\tfrac12 L I^2$.",
+          s: [
+            "<b>Step 1 — Plug in.</b> $W = \\tfrac12(0.02)(5^2) = \\tfrac12(0.02)(25) = 0.25$ J.",
+            "<b>Step 2 — Distractor audit.</b> 25 mJ forgets the $I^2$ properly; 2.5 J is off by 10; 0.5 J forgets the ½."
+          ],
+          a: "$W = 0.25$ J",
+          v: "Note energy scales with $I^2$ — doubling current QUADRUPLES stored energy ✓. The capacitor analog is $W = \\tfrac12 CV^2$; both store energy in fields (magnetic for L, electric for C)."
+
+        }), ref: "p.358" },
       { q: "AC circuit: $V = 100∠0°$, $Z = 25∠-30°$. Current:",
         choices: ["$4∠30°$ A", "$4∠-30°$ A", "$2500∠-30°$", "$100∠30°$"], correct: 0,
-        solution: S({ c: "$I = V/Z$. Magnitudes divide, angles subtract.", s: ["$|I| = 100/25 = 4$ A.", "$\\angle I = 0° - (-30°) = +30°$."], a: "$4∠30°$ A", v: "Negative Z angle → capacitive → I leads V." }), ref: "p.360" },
+        solution: S({
+          c: "Ohm's law in phasor form: $I = V/Z$. Divide the MAGNITUDES, SUBTRACT the angles.",
+          s: [
+            "<b>Step 1 — Magnitude.</b> $|I| = 100/25 = 4$ A.",
+            "<b>Step 2 — Angle.</b> $\\angle I = 0° - (-30°) = +30°$.",
+            "<b>Step 3 — Distractor audit.</b> $4\\angle-30°$ adds the angle instead of subtracting; $2500\\angle-30°$ multiplies magnitudes; $100\\angle30°$ forgets to divide."
+          ],
+          a: "$I = 4\\angle30°$ A",
+          v: "Current LEADS voltage (positive angle) → the load is CAPACITIVE, consistent with $Z$'s negative angle ✓ ('ICE': in a Capacitor, I leads E). Phasor division is just polar arithmetic — divide magnitudes, subtract angles."
+
+        }), ref: "p.360" },
       { q: "Apparent power $|S| = 10$ kVA, $P = 8$ kW. Q:",
         choices: ["$6$ kVAR", "$2$ kVAR", "$18$ kVAR", "$8$ kVAR"], correct: 0,
-        solution: S({ c: "$|S|^2 = P^2 + Q^2$. Solve.", s: ["$Q = \\sqrt{100 - 64} = \\sqrt{36} = 6$ kVAR."], a: "$6$ kVAR" }), ref: "p.362" },
+        solution: S({
+          c: "The power triangle: apparent power S (kVA), real power P (kW), and reactive power Q (kVAR) form a right triangle with $|S|^2 = P^2 + Q^2$.",
+          s: [
+            "<b>Step 1 — Solve for Q.</b> $Q = \\sqrt{|S|^2 - P^2} = \\sqrt{10^2 - 8^2} = \\sqrt{100-64} = \\sqrt{36} = 6$ kVAR.",
+            "<b>Step 2 — Distractor audit.</b> 2 kVAR subtracts instead of using Pythagoras; 18 adds wrongly; 8 just echoes P."
+          ],
+          a: "$Q = 6$ kVAR",
+          v: "It's a 6-8-10 right triangle ✓, and the power factor is $P/|S| = 8/10 = 0.8$. The three powers ALWAYS relate by this triangle — knowing any two gives the third."
+
+        }), ref: "p.362" },
       { q: "Open circuit voltage between A and B, after removing load: this is...",
         choices: ["Thévenin voltage $V_{Th}$", "Norton current", "Short-circuit current", "Reactance"], correct: 0,
-        solution: S({ c: "Open-circuit voltage at terminals = Thévenin equivalent voltage source.", s: [""], a: "$V_{Th}$" }), ref: "p.357" },
+        solution: S({
+          c: "The Thévenin equivalent of any linear network is a voltage source $V_{Th}$ in series with $R_{Th}$. $V_{Th}$ is defined as the OPEN-CIRCUIT voltage at the terminals (load removed).",
+          s: [
+            "<b>Step 1 — Match.</b> Thévenin voltage $V_{Th}$.",
+            "<b>Step 2 — Distractor audit.</b> Norton current is the SHORT-circuit current (the dual); short-circuit current isn't the open-circuit voltage; reactance is unrelated."
+          ],
+          a: "$V_{Th}$ (open-circuit terminal voltage).",
+          v: "The companion measurement: short the terminals to get $I_N$ (Norton), and $R_{Th} = V_{Th}/I_N$ ✓ — two measurements fully characterize any linear two-terminal network."
+
+        }), ref: "p.357" },
       { q: "Short-circuit current at terminals = ",
         choices: ["Norton current $I_N$", "Thévenin voltage", "Resistance", "Zero"], correct: 0,
-        solution: S({ c: "Short-circuit (zero load impedance) → all current flows through short = Norton equivalent.", s: [""], a: "$I_N$" }), ref: "p.357" },
+        solution: S({
+          c: "Shorting the output terminals (zero load impedance) forces all available current through the short — this is the NORTON current $I_N$, the dual of Thévenin's open-circuit voltage.",
+          s: [
+            "<b>Step 1 — Match.</b> Norton current $I_N$.",
+            "<b>Step 2 — Distractor audit.</b> Thévenin voltage is the OPEN-circuit case; resistance and zero aren't the short-circuit current."
+          ],
+          a: "$I_N$ (Norton current).",
+          v: "Together the pair defines the source: $R_{Th} = R_N = V_{Th}/I_N$ ✓. Open-circuit gives the voltage source; short-circuit gives the current source — same network, two viewpoints."
+
+        }), ref: "p.357" },
       { q: "Time constant of RL circuit: $R=100$, $L = 2$ H:",
         choices: ["$0.02$ s = 20 ms", "$200$ s", "$0.005$ s", "$50$ ms"], correct: 0,
-        solution: S({ c: "$\\tau = L/R$.", s: ["$\\tau = 2/100 = 0.02$ s."], a: "$0.02$ s" }), ref: "p.358" },
+        solution: S({
+          c: "An RL circuit's time constant is $\\tau = L/R$ (contrast with RC's $\\tau = RC$). It sets how fast the current rises or decays.",
+          s: [
+            "<b>Step 1 — Divide.</b> $\\tau = L/R = 2/100 = 0.02$ s = 20 ms.",
+            "<b>Step 2 — Distractor audit.</b> 200 s multiplies instead of dividing; 0.005 s and 50 ms invert or mis-scale."
+          ],
+          a: "$\\tau = 20$ ms",
+          v: "Don't mix the forms: RL uses $L/R$, RC uses $RC$ ✓ — both give seconds. After $5\\tau$ (here 100 ms) the inductor current has essentially reached its final steady value $V/R$."
+
+        }), ref: "p.358" },
     ],
 
     // Linear Sys — +10
