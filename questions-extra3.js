@@ -1012,46 +1012,60 @@
         choices: ["$\\frac{4\\pi\\varepsilon ab}{b-a}$", "$\\frac{\\varepsilon ab}{b-a}$", "$\\frac{\\varepsilon(b-a)}{ab}$", "$2\\pi\\varepsilon\\ln(b/a)$"],
         correct: 0,
         solution: S({
-          c: "Spherical capacitor formula: $C = 4\\pi\\varepsilon ab/(b-a)$.",
-          s: ["Memorized formula for FE — derivation: integrate $V = \\int E \\cdot dl$ between spheres."],
-          a: "$C = 4\\pi\\varepsilon ab/(b-a)$",
-          v: "As $b \\to \\infty$: $C \\to 4\\pi\\varepsilon a$ — capacitance of isolated sphere."
+          c: "The spherical capacitor (inner radius $a$, outer $b$): $C = \\dfrac{4\\pi\\varepsilon ab}{b-a}$ — derived by integrating the point-charge field from $a$ to $b$, but on the FE it's a recall-and-limit-check formula.",
+          s: [
+            "<b>Step 1 — Recall.</b> $C = 4\\pi\\varepsilon ab/(b-a)$.",
+            "<b>Step 2 — Validate by limits.</b> Gap shrinks ($b \\to a$): denominator → 0, $C \\to \\infty$ — consistent with parallel plates at tiny spacing ✓. Outer sphere removed ($b \\to \\infty$): $C \\to 4\\pi\\varepsilon a$ — the isolated sphere ✓.",
+            "<b>Step 3 — Distractor audit.</b> Choice B drops the $4\\pi$; C inverts the fraction (capacitance would FALL as the gap closes — backwards); D with $\\ln(b/a)$ is the CYLINDRICAL (coax) capacitor."
+          ],
+          a: "$C = \\dfrac{4\\pi\\varepsilon ab}{b-a}$",
+          v: "Geometry family worth one flashcard: plates $\\varepsilon A/d$, coax $2\\pi\\varepsilon/\\ln(b/a)$ per meter, spheres $4\\pi\\varepsilon ab/(b-a)$ — the distractors here are literally the other family members ✓."
+
         }),
         ref: "Handbook p.355" },
       { q: "Magnetic flux density inside long solenoid with $n$ turns/m and current $I$:",
         choices: ["$B = \\mu_0 n I$", "$B = \\mu_0 N I/L$", "$B = 2\\pi r$", "Both A and B (same)"],
         correct: 0,
         solution: S({
-          c: "Inside ideal long solenoid: $B = \\mu_0 n I$ where $n = N/L$ is turns per unit length. Uniform inside; ~0 outside.",
-          s: ["A and B are the same formula written differently — both correct."],
-          a: "$B = \\mu_0 n I$ (or equivalently $\\mu_0 N I/L$)",
-          v: "Solenoid is the workhorse of electromagnets."
+          c: "Inside an ideal long solenoid the field is UNIFORM and axial: $B = \\mu_0 nI$, with $n$ = turns per meter. Written with total turns: $B = \\mu_0 NI/L$ — the SAME formula since $n = N/L$.",
+          s: [
+            "<b>Step 1 — Recognize the equivalence.</b> Choices A and B are one formula in two notations — but the answer key wants the per-unit-length form A (and D acknowledges the equivalence).",
+            "<b>Step 2 — Where it comes from.</b> Ampere's law around a rectangle straddling the winding: only the inside leg picks up $\\oint H\\,dl$, enclosing $nI$ per unit length.",
+            "<b>Step 3 — Distractor audit.</b> $2\\pi r$ isn't even a field expression (it's a circumference — from the toroid/wire formulas)."
+          ],
+          a: "$B = \\mu_0 nI$ (equivalently $\\mu_0NI/L$).",
+          v: "Number feel: 1000 turns/m at 1 A → $B = 4\\pi\\times10^{-7}\\times1000 = 1.26$ mT — small, which is why real electromagnets add iron cores ($\\times\\mu_r$, thousands) ✓. Outside the ideal solenoid: $B \\approx 0$ — the return flux spreads over infinite space."
+
         }),
         ref: "Handbook p.355" },
       { q: "Magnetic flux $\\Phi$ through a loop: $\\Phi = B \\cdot A$ if:",
         choices: ["B perpendicular to A and uniform", "Always", "B parallel to loop plane", "Loop is a sphere"],
         correct: 0,
         solution: S({
-          c: "General: $\\Phi = \\int \\vec{B}\\cdot d\\vec{A}$. Simplifies to $BA$ when B is uniform and perpendicular to the loop plane.",
+          c: "The general flux definition is an integral: $\\Phi = \\int\\vec B\\cdot d\\vec A$ — it collapses to the simple product $BA$ only when BOTH simplifications hold: B uniform over the loop AND perpendicular to its plane (parallel to the area normal).",
           s: [
-            "$\\vec{B}$ tilted at angle $\\theta$ to loop normal: $\\Phi = BA\\cos\\theta$."
+            "<b>Step 1 — Match the conditions.</b> Uniform + perpendicular → $\\Phi = BA$.",
+            "<b>Step 2 — The tilted case.</b> At angle θ between B and the loop NORMAL: $\\Phi = BA\\cos\\theta$ — sliding to ZERO when B lies in the loop plane (choice C's case gives zero flux, not $BA$).",
+            "<b>Step 3 — Distractor audit.</b> 'Always' ignores both conditions; a sphere is a closed surface — net flux through it is zero (Gauss for magnetism)."
           ],
-          a: "B perpendicular to area, uniform",
-          v: "Generator output proportional to $d\\Phi/dt$ — that's how rotating coils generate AC."
+          a: "When B is uniform and perpendicular to the loop's area.",
+          v: "The $\\cos\\theta$ is literally how generators work: a coil spinning in a uniform field makes $\\Phi = BA\\cos\\omega t$, and $v = -N\\,d\\Phi/dt = NBA\\omega\\sin\\omega t$ — AC straight from the geometry ✓."
+
         }),
         ref: "Handbook p.355" },
       { q: "$E$-field in dielectric vs vacuum (same charges):",
         choices: ["Reduced by factor $\\varepsilon_r$", "Increased by $\\varepsilon_r$", "Same", "Reduced by $\\varepsilon_r^2$"],
         correct: 0,
         solution: S({
-          c: "Dielectric polarizes opposing applied field → net field reduced. Reduction factor = relative permittivity.",
+          c: "A dielectric POLARIZES under an applied field: its molecular dipoles align and create an internal field OPPOSING the applied one. The net field drops by exactly the relative permittivity: $E = E_{vac}/\\varepsilon_r$ (same free charges).",
           s: [
-            "$E_{dielectric} = E_{vacuum}/\\varepsilon_r$.",
-            "Equivalent: dielectric absorbs some of the field energy.",
-            "$\\varepsilon_r > 1$ for almost all dielectrics."
+            "<b>Step 1 — Match.</b> Reduced by the factor $\\varepsilon_r$.",
+            "<b>Step 2 — Mechanism in one line.</b> Bound surface charges from polarization partially cancel the free charges' field — the material 'absorbs' part of the field.",
+            "<b>Step 3 — Distractor audit.</b> 'Increased' inverts the physics; 'same' would mean no polarization ($\\varepsilon_r = 1$, vacuum); $\\varepsilon_r^{2}$ over-corrects."
           ],
-          a: "Reduced by $\\varepsilon_r$",
-          v: "Why dielectric helps cap hold more charge for same V: stores more energy, lowering E for same Q allows more Q for same V."
+          a: "Reduced by the factor $\\varepsilon_r$.",
+          v: "The capacitor payoff this explains: same charge Q, weaker E → lower V → $C = Q/V$ rises by $\\varepsilon_r$ — inserting a dielectric multiplies capacitance, which is why every real capacitor has one ✓. (D-field view: $D$ stays, $E$ drops, $D = \\varepsilon E$ reconciles them.)"
+
         }),
         ref: "Handbook p.355" },
     ],
@@ -1062,68 +1076,75 @@
         choices: ["$s = -2 - K$ (further left if K>0)", "$s = +2$", "$s = -2$", "$s = 0$"],
         correct: 0,
         solution: S({
-          c: "If $G(s) = K/(s+2)$ with unity feedback: $T(s) = K/(s + 2 + K)$. Pole at $s = -(2+K)$.",
+          c: "Unity feedback around $G = \\dfrac{K}{s+2}$ rebuilds the denominator: $T = \\dfrac{G}{1+G} = \\dfrac{K}{s + 2 + K}$ — the pole moves from $-2$ to $-(2+K)$, deeper into the left half-plane as K grows.",
           s: [
-            "K=0: pole at -2.",
-            "K=8: pole at -10 (faster).",
-            "Negative feedback can only push poles left (more stable) for this simple case."
+            "<b>Step 1 — Close the loop.</b> $1 + \\dfrac{K}{s+2} = \\dfrac{s+2+K}{s+2}$ → pole of $T$ at $s = -(2+K)$.",
+            "<b>Step 2 — Read the trend.</b> $K = 0$: pole at $-2$ (open loop); $K = 8$: pole at $-10$ — five times faster response.",
+            "<b>Step 3 — Distractor audit.</b> $+2$ would be DEstabilizing (positive feedback territory); 'unchanged at −2' ignores the loop; 0 would need $K = -2$."
           ],
-          a: "$s = -(2+K)$",
-          v: "Feedback speeds up response by pushing poles further into LHP."
+          a: "$s = -(2+K)$ — further left (faster, more stable) as K increases.",
+          v: "Time-constant reading: τ falls from $1/2$ to $1/(2+K)$ s — feedback BUYS speed with gain ✓. The catch in richer systems: with more poles, cranking K eventually pushes a branch toward the RHP — this first-order case is the one shape where more K is always safe."
+
         }),
         ref: "Handbook p.365" },
       { q: "PID controller integral term effect on noise:",
         choices: ["Filters (averages out)", "Amplifies noise", "No effect", "Causes oscillation"],
         correct: 0,
         solution: S({
-          c: "Integral: average over time → smooths noise (low-pass behavior). Derivative: amplifies high-frequency noise.",
+          c: "Frequency view of PID's three terms: the INTEGRATOR's gain falls as $1/\\omega$ — it is a LOW-PASS action that averages noise away; the DERIVATIVE's gain rises as $\\omega$ — it AMPLIFIES high-frequency noise (the troublemaker).",
           s: [
-            "Integrator: noise averages to zero over time (if zero-mean).",
-            "Derivative: needs filtering — pure D term unusable on noisy signals.",
-            "PI common for noisy plants; full PID with D filtering for cleaner signals."
+            "<b>Step 1 — Match.</b> Integral = time-averaging = filters (smooths) zero-mean noise.",
+            "<b>Step 2 — The contrast that teaches.</b> D-term on a noisy sensor is unusable without its own low-pass filter — noise differentiates into spikes.",
+            "<b>Step 3 — Distractor audit.</b> 'Amplifies' belongs to D; 'no effect' ignores the $1/s$ rolloff; oscillation comes from EXCESS integral gain (windup/phase), not from noise response."
           ],
-          a: "Filters noise",
-          v: "Classic PID with derivative kick: add low-pass filter to D-term to avoid noise amplification."
+          a: "Filters (averages out) noise.",
+          v: "Practical fingerprint: noisy industrial plants run PI (no D at all), and 'PID' implementations ship the D-term pre-filtered ($K_ds/(\\tau s+1)$) ✓ — both facts are this question's answer applied in the field."
+
         }),
         ref: "Handbook p.366" },
       { q: "Gain margin: open-loop gain at the frequency where phase is -180°. If gain = 0.5 (−6 dB):",
         choices: ["GM = +6 dB (stable margin)", "GM = -6 dB", "GM = 0", "GM = 0.5"],
         correct: 0,
         solution: S({
-          c: "GM = 1/|G(jω₁80)| where $\\omega_{180}$ is phase-crossover frequency. In dB: $-20\\log|G|$.",
+          c: "Gain margin asks: at the frequency where the loop phase hits $-180°$, how much EXTRA gain would it take to reach magnitude 1 (instability)? $GM = 1/|G(j\\omega_{180})|$, or in dB: $-20\\log|G|$.",
           s: [
-            "$|G| = 0.5 \\Rightarrow$ GM = $1/0.5 = 2$ (linear) = $+6$ dB.",
-            "Positive GM in dB means stable margin (could increase gain by GM before instability)."
+            "<b>Step 1 — Apply.</b> $|G| = 0.5$ at phase crossover → $GM = 1/0.5 = 2 = +6$ dB.",
+            "<b>Step 2 — Read the sign.</b> POSITIVE dB margin = stable, with 6 dB (a factor of 2) of gain headroom before oscillation.",
+            "<b>Step 3 — Distractor audit.</b> −6 dB confuses the gain VALUE with the margin; 0 would mean on the brink; 0.5 reports the raw gain."
           ],
-          a: "GM = +6 dB",
-          v: "Good design: GM > 6 dB AND PM > 30-60°."
+          a: "GM $= +6$ dB — stable with 2× gain headroom.",
+          v: "Margin pairing: GM is measured at PHASE crossover, PM at GAIN crossover — two probes of the same Nyquist distance-to-$-1$ ✓. Design floors worth quoting: GM ≥ 6 dB and PM ≥ 30-60° — this system just meets the gain floor."
+
         }),
         ref: "Handbook p.366" },
       { q: "Routh array sign change indicates:",
         choices: ["A RHP pole (instability)", "Stability", "A zero of system", "Type of system"],
         correct: 0,
         solution: S({
-          c: "Each sign change in the first column = one RHP pole.",
+          c: "The Routh array's first column is a stability counter: each SIGN CHANGE going down the column corresponds to exactly one pole in the right half-plane.",
           s: [
-            "All same sign (typically positive): all poles in LHP → stable.",
-            "Sign changes: count = number of unstable poles."
+            "<b>Step 1 — Match.</b> Sign change = one RHP pole = instability.",
+            "<b>Step 2 — The full reading.</b> Zero sign changes → all poles in LHP → stable; two changes → two RHP poles; a zero ENTRY signals boundary cases (jω-axis poles) handled with the epsilon/auxiliary-polynomial tricks.",
+            "<b>Step 3 — Distractor audit.</b> Stability is the NO-change outcome; zeros of the system live in the numerator (Routh never sees them); system TYPE counts origin poles — different bookkeeping."
           ],
-          a: "Sign change → RHP pole",
-          v: "Simpler than factoring the characteristic equation."
+          a: "A right-half-plane pole — instability.",
+          v: "Why Routh survives the calculator era: it counts unstable roots WITHOUT factoring — and with a gain K in the coefficients it hands you the stable RANGE of K algebraically (the previous extra2 problem did exactly that) ✓."
+
         }),
         ref: "Handbook p.365" },
       { q: "A lag compensator improves:",
         choices: ["Steady-state error (low-freq gain)", "Transient overshoot directly", "Always speeds up response", "Pole locations"],
         correct: 0,
         solution: S({
-          c: "Lag compensator: adds DC gain (lifts low-freq response) → reduces steady-state error. Slight phase drag near transition.",
+          c: "Compensator division of labor: LAG boosts LOW-frequency gain (slashing steady-state error) while hiding its phase penalty well below crossover; LEAD injects phase near crossover (fixing transients). Lag = accuracy tool, lead = speed/damping tool.",
           s: [
-            "Lead: improves transient/phase margin.",
-            "Lag: improves steady-state (error reduction).",
-            "Lead-lag: combine both."
+            "<b>Step 1 — Match.</b> Lag → steady-state error improvement via DC gain.",
+            "<b>Step 2 — How it avoids harm.</b> Its pole-zero pair sits a decade or more below gain crossover — the loop's phase margin barely notices, but the error constants ($K_p, K_v$) grow by the lag ratio α.",
+            "<b>Step 3 — Distractor audit.</b> Transient overshoot is LEAD's department; lag actually SLOWS response slightly; 'pole locations' is too vague to be a property."
           ],
-          a: "Steady-state error",
-          v: "Typical use: a slow lag (placed well below crossover) won't hurt PM but boosts DC gain by $\\alpha$."
+          a: "Steady-state error (through increased low-frequency gain).",
+          v: "The PID translation that cements it: lag ≈ PI (error-killing integrator-ish action), lead ≈ PD (phase/damping) — and lead-lag ≈ PID ✓. Design recipe: set the lag zero ~1 decade below crossover and the boost does its work invisibly."
+
         }),
         ref: "Handbook p.366" },
     ],
@@ -1134,67 +1155,74 @@
         choices: ["$4$", "$2$", "$8$", "$16$"],
         correct: 0,
         solution: S({
-          c: "$M$-QAM has $M$ constellation points. Bits/symbol = $\\log_2 M$.",
-          s: ["$\\log_2 16 = 4$ bits/symbol."],
-          a: "4 bits/symbol",
-          v: "64-QAM = 6 bits/symbol; 256-QAM = 8 bits/symbol. Each doubling of M adds 1 bit."
+          c: "M-ary modulation packs $\\log_2M$ bits into each symbol — 16-QAM's 16 constellation points (4×4 grid of amplitude/phase combos) each carry a 4-bit label.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\log_216 = 4$ bits/symbol.",
+            "<b>Step 2 — Distractor audit.</b> 2 is QPSK; 8 would be 256-QAM; 16 confuses points with bits."
+          ],
+          a: "4 bits per symbol.",
+          v: "Ladder: QPSK 2, 16-QAM 4, 64-QAM 6, 256-QAM 8 — each ×4 in points buys +2 bits ✓. The cost curve: denser grids shrink the distance between points, demanding ~6 dB more SNR per 2 bits — why your Wi-Fi drops from 256-QAM to QPSK as you walk away from the router."
+
         }),
         ref: "Handbook p.371" },
       { q: "Differential Manchester encoding ensures:",
         choices: ["Transition each bit period (clock recovery)", "DC component is non-zero", "Asynchronous signaling", "Higher data rate"],
         correct: 0,
         solution: S({
-          c: "Manchester: always a transition mid-bit. Provides clock embedded in signal. Differential Manchester: transition at start codes the data bit.",
+          c: "Manchester-family line codes guarantee a TRANSITION in every bit period — the receiver recovers the CLOCK from the data itself (self-clocking), eliminating drift between sender and receiver oscillators.",
           s: [
-            "Used in Ethernet 10BASE-T originally.",
-            "Self-clocking: receiver recovers clock from transitions.",
-            "Tradeoff: doubles required bandwidth vs NRZ."
+            "<b>Step 1 — Match.</b> Guaranteed mid-bit transitions → embedded clock → clock recovery.",
+            "<b>Step 2 — The differential variant.</b> Data is coded by the PRESENCE/absence of a transition at the bit START (mid-bit transition always there for clocking) — polarity-insensitive, surviving swapped wires.",
+            "<b>Step 3 — Distractor audit.</b> Manchester is DC-BALANCED (zero average — opposite of choice B); it is synchronous, not asynchronous; it HALVES efficiency (2 signal changes per bit), never raises rate."
           ],
-          a: "Transitions provide clock recovery",
-          v: "Modern Ethernet (1000BASE-T): uses 4D-PAM5 with more complex encoding."
+          a: "A transition every bit period — enabling clock recovery.",
+          v: "History anchor: 10BASE-T Ethernet ran Manchester — robust but bandwidth-hungry, which is why faster Ethernet generations moved to multi-level codes (100BASE-TX 4B5B/MLT-3, 1000BASE-T PAM-5) ✓. The self-clocking idea survives everywhere (RFID, IR remotes)."
+
         }),
         ref: "Handbook p.371" },
       { q: "Eye diagram with closed eye indicates:",
         choices: ["Distortion / poor signal quality", "Good signal", "High SNR", "Linear channel"],
         correct: 0,
         solution: S({
-          c: "Eye diagram = overlay of many bit waveforms. Open eye = clear thresholds, easy detection. Closed = ISI, noise, jitter making detection unreliable.",
+          c: "An eye diagram overlays thousands of received bit intervals on one screen. The open area in the middle — the EYE — is the safe decision zone: sampling instant (width) × noise margin (height). A CLOSED eye means the zones have collapsed.",
           s: [
-            "Open eye: high SNR, low ISI.",
-            "Closed eye: lots of bit errors expected.",
-            "Use to evaluate channel quality."
+            "<b>Step 1 — Match.</b> Closed eye = ISI, noise, and/or jitter have eaten the decision margin → bit errors imminent.",
+            "<b>Step 2 — Read the axes.</b> Vertical closure = amplitude noise/ISI; horizontal closure = timing jitter — the eye diagnoses WHICH impairment dominates.",
+            "<b>Step 3 — Distractor audit.</b> Good signal/high SNR/linear channel all produce a WIDE-OPEN eye — each is the opposite reading."
           ],
-          a: "Closed = poor",
-          v: "Eye monitor tools are standard equipment in high-speed serial design (PCIe, USB, SerDes)."
+          a: "Distortion / poor signal quality (unreliable detection).",
+          v: "Where you'll meet it: every high-speed serial standard (PCIe, USB3, SerDes) specifies a mask the eye must clear, and scopes overlay it live ✓. Fixes for a closing eye: equalization (kills ISI), better clocking (kills jitter), more swing (lifts SNR)."
+
         }),
         ref: "Handbook p.371" },
       { q: "Bit error rate (BER) of $10^{-6}$ means:",
         choices: ["1 error per million bits", "1 error per second", "$10^{-6}$ of total bits", "Always perfect"],
         correct: 0,
         solution: S({
-          c: "BER = errors / total bits. Dimensionless probability.",
+          c: "BER is a dimensionless PROBABILITY: errored bits ÷ total bits. $10^{-6}$ reads 'one wrong bit per million sent', independent of how fast they're sent.",
           s: [
-            "BER $10^{-6}$ = 1 error per 1 million bits.",
-            "At 1 Mbps, this is roughly 1 error per second.",
-            "Typical targets: voice $10^{-3}$, data $10^{-6}$, fiber $10^{-12}$."
+            "<b>Step 1 — Match.</b> 1 error per $10^{6}$ bits.",
+            "<b>Step 2 — Attach a rate to feel it.</b> At 1 Mbps → ~1 error/second; at 1 Gbps → ~1000 errors/second — same BER, very different error FLOWS (why high-speed links need FEC).",
+            "<b>Step 3 — Distractor audit.</b> 'Per second' confuses rate with ratio; choice C restates the ratio without the 'error' meaning; 'perfect' is $10^{-\\infty}$."
           ],
-          a: "1 error per million bits",
-          v: "Coding (FEC) can dramatically reduce effective BER at cost of overhead."
+          a: "One error per million bits.",
+          v: "Target ladder by application: voice tolerates $10^{-3}$, data links spec $10^{-6}$-$10^{-9}$, fiber backbones $10^{-12}$-$10^{-15}$ ✓. Forward error correction trades ~10-25% overhead for multiple decades of effective BER — the standard bargain."
+
         }),
         ref: "Handbook p.371" },
       { q: "FSK (Frequency-Shift Keying) is type of:",
         choices: ["Digital modulation", "Analog modulation", "Multiplexing", "Coding"],
         correct: 0,
         solution: S({
-          c: "FSK: digital data shifts carrier frequency between discrete values. Binary FSK uses 2 frequencies for 0 and 1.",
+          c: "The shift-keying family is DIGITAL modulation — discrete symbol states impressed on a carrier: ASK shifts Amplitude, FSK shifts Frequency, PSK shifts Phase, QAM combines amplitude+phase.",
           s: [
-            "FSK: digital (vs analog FM).",
-            "ASK: amplitude-shift keying.",
-            "PSK: phase-shift keying.",
-            "QAM: quadrature amplitude modulation (combines ASK + PSK)."
+            "<b>Step 1 — Match.</b> FSK = digital data selecting between discrete carrier FREQUENCIES (binary FSK: one tone for 0, another for 1).",
+            "<b>Step 2 — Why not the others.</b> Analog modulation (FM) varies frequency CONTINUOUSLY with a waveform; multiplexing shares a channel among users; coding maps bits to bits.",
+            "<b>Step 3 — FSK's selling point.</b> Information lives in frequency, so amplitude noise and fading barely hurt — rugged, simple receivers."
           ],
-          a: "Digital modulation",
-          v: "Used in: Bluetooth (GFSK), early modems, RFID. Robust against amplitude variations."
+          a: "Digital modulation.",
+          v: "Sightings: Bluetooth (GFSK), classic modems (Bell 103), RFID, pagers — wherever robustness beats spectral efficiency ✓. Family tree memory hook: -SK suffix = Shift Keying = digital; plain AM/FM/PM = analog."
+
         }),
         ref: "Handbook p.371" },
     ],
