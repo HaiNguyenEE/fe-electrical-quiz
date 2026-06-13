@@ -6,153 +6,603 @@
     // Math — +20
     1: [
       { q: "Roots of $x^2-6x+10=0$:", choices: ["$3\\pm j$", "$3\\pm 2$", "$5,1$", "$\\pm 10$"], correct: 0,
-        solution: S({ c: "Quadratic formula with negative discriminant.", s: ["$\\Delta = 36-40 = -4$.", "$x = (6 \\pm 2j)/2 = 3 \\pm j$."], a: "$3 \\pm j$" }), ref: "p.35" },
+        solution: S({
+          c: "The quadratic formula $x = \\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$ solves any $ax^2+bx+c=0$. When the discriminant $b^2-4ac$ is NEGATIVE, the roots are a complex-conjugate pair.",
+          s: [
+            "<b>Step 1 — Discriminant.</b> $\\Delta = (-6)^2 - 4(1)(10) = 36 - 40 = -4 < 0$ → complex roots.",
+            "<b>Step 2 — Apply formula.</b> $x = \\dfrac{6 \\pm \\sqrt{-4}}{2} = \\dfrac{6 \\pm 2j}{2} = 3 \\pm j$.",
+            "<b>Step 3 — Distractor audit.</b> $3\\pm2$ pretends $\\Delta$ was $+4$; $5,1$ would need $\\Delta=16$; $\\pm10$ ignores the formula."
+          ],
+          a: "$x = 3 \\pm j$",
+          v: "Vieta check: sum of roots $= 6 = -b/a$ ✓ and product $= (3+j)(3-j) = 9+1 = 10 = c/a$ ✓. Negative discriminant ALWAYS gives conjugate pairs — real coefficients guarantee it."
+
+        }), ref: "p.35" },
       { q: "$\\sin 75° = ?$ (use $\\sin(A+B)$):", choices: ["$\\frac{\\sqrt{6}+\\sqrt{2}}{4}$", "$\\frac{\\sqrt{6}-\\sqrt{2}}{4}$", "$\\sqrt{2}/2$", "$1$"], correct: 0,
-        solution: S({ c: "$\\sin 75° = \\sin(45°+30°) = \\sin45\\cos30 + \\cos45\\sin30$.", s: ["$= (\\sqrt{2}/2)(\\sqrt{3}/2) + (\\sqrt{2}/2)(1/2)$.", "$= \\sqrt{6}/4 + \\sqrt{2}/4 = (\\sqrt{6}+\\sqrt{2})/4$."], a: "$(\\sqrt{6}+\\sqrt{2})/4 \\approx 0.966$" }), ref: "p.37" },
+        solution: S({
+          c: "The angle-addition identity $\\sin(A+B) = \\sin A\\cos B + \\cos A\\sin B$ lets you find exact values of 'odd' angles by splitting them into known ones (here 75° = 45° + 30°).",
+          s: [
+            "<b>Step 1 — Split.</b> $\\sin 75° = \\sin(45°+30°) = \\sin45\\cos30 + \\cos45\\sin30$.",
+            "<b>Step 2 — Plug exact values.</b> $= \\dfrac{\\sqrt2}{2}\\cdot\\dfrac{\\sqrt3}{2} + \\dfrac{\\sqrt2}{2}\\cdot\\dfrac{1}{2} = \\dfrac{\\sqrt6 + \\sqrt2}{4}$.",
+            "<b>Step 3 — Distractor audit.</b> $(\\sqrt6-\\sqrt2)/4$ is $\\sin15°$ (sign flipped); $\\sqrt2/2$ is $\\sin45°$; 1 is $\\sin90°$."
+          ],
+          a: "$\\dfrac{\\sqrt6+\\sqrt2}{4} \\approx 0.966$",
+          v: "Sanity: 75° is near 90°, so the sine should be near 1 — and 0.966 is ✓. The companion $\\sin15° = (\\sqrt6-\\sqrt2)/4 \\approx 0.259$ uses the same split with subtraction."
+
+        }), ref: "p.37" },
       { q: "Express $5\\cos\\omega t - 12\\sin\\omega t$ as $A\\cos(\\omega t + \\phi)$. Find A:",
         choices: ["$13$", "$17$", "$7$", "$\\sqrt{169}$"], correct: 0,
-        solution: S({ c: "$a\\cos x - b\\sin x = R\\cos(x+\\phi)$ where $R = \\sqrt{a^2+b^2}$, $\\tan\\phi = b/a$.", s: ["$R = \\sqrt{25+144} = \\sqrt{169} = 13$."], a: "$A = 13$", v: "$\\phi = \\arctan(12/5) \\approx 67.38°$. 5-12-13 right triangle." }), ref: "p.37" },
+        solution: S({
+          c: "Any sum $a\\cos x - b\\sin x$ combines into a single sinusoid $R\\cos(x+\\phi)$ with amplitude $R = \\sqrt{a^2+b^2}$ and phase $\\tan\\phi = b/a$ — the phasor-addition trick used constantly in AC analysis.",
+          s: [
+            "<b>Step 1 — Amplitude.</b> $R = \\sqrt{5^2 + 12^2} = \\sqrt{25+144} = \\sqrt{169} = 13$.",
+            "<b>Step 2 — Distractor audit.</b> 17 adds the coefficients ($5+12$); 7 subtracts them; $\\sqrt{169}$ is correct but unsimplified (= 13, the intended answer)."
+          ],
+          a: "$A = 13$",
+          v: "It's the 5-12-13 Pythagorean triple ✓ — the two orthogonal components (cosine and sine) add like perpendicular legs. Phase: $\\phi = \\arctan(12/5) \\approx 67.4°$."
+
+        }), ref: "p.37" },
       { q: "If $z = 2e^{j\\pi/4}$, find $z^2$:",
         choices: ["$4 e^{j\\pi/2} = 4j$", "$4 + j$", "$2\\sqrt{2}$", "$4 e^{j\\pi/4}$"], correct: 0,
-        solution: S({ c: "Exponent: $z^n = r^n e^{jn\\theta}$.", s: ["$(2)^2 e^{j\\pi/2} = 4 e^{j90°} = 4(0+j) = 4j$."], a: "$4j$" }), ref: "p.36" },
+        solution: S({
+          c: "In polar form, raising a complex number to a power is easy: $z^n = r^n e^{jn\\theta}$ — magnitude gets powered, angle gets multiplied (De Moivre's theorem).",
+          s: [
+            "<b>Step 1 — Power the magnitude, multiply the angle.</b> $z^2 = 2^2 e^{j\\cdot2\\cdot\\pi/4} = 4e^{j\\pi/2}$.",
+            "<b>Step 2 — Convert to rectangular.</b> $e^{j\\pi/2} = \\cos90° + j\\sin90° = j$, so $z^2 = 4j$.",
+            "<b>Step 3 — Distractor audit.</b> $4+j$ mishandles the conversion; $2\\sqrt2$ is just $|z^2|$-ish nonsense; $4e^{j\\pi/4}$ forgot to double the angle."
+          ],
+          a: "$z^2 = 4e^{j\\pi/2} = 4j$",
+          v: "Polar makes powers/roots trivial while rectangular makes addition easy — knowing when to switch is the whole game ✓. Multiplying by $j$ = rotating 90° CCW, which is exactly what doubling a 45° angle to 90° does."
+
+        }), ref: "p.36" },
       { q: "Magnitude of vector $\\vec{v} = 2\\hat{i}+3\\hat{j}+6\\hat{k}$:",
         choices: ["$7$", "$11$", "$\\sqrt{49}$", "Same as A"], correct: 0,
-        solution: S({ c: "$|\\vec{v}| = \\sqrt{x^2+y^2+z^2}$.", s: ["$\\sqrt{4+9+36} = \\sqrt{49} = 7$."], a: "$7$" }), ref: "p.38" },
+        solution: S({
+          c: "A vector's magnitude (length) is the root-sum-of-squares of its components: $|\\vec v| = \\sqrt{x^2+y^2+z^2}$ — the Pythagorean theorem in 3-D.",
+          s: [
+            "<b>Step 1 — Square and sum.</b> $2^2 + 3^2 + 6^2 = 4 + 9 + 36 = 49$.",
+            "<b>Step 2 — Root.</b> $\\sqrt{49} = 7$.",
+            "<b>Step 3 — Distractor audit.</b> 11 adds the components ($2+3+6$); $\\sqrt{49}$ is correct unsimplified (=7); 'same as A' is a non-answer."
+          ],
+          a: "$|\\vec v| = 7$",
+          v: "It's a 2-3-6-7 Pythagorean quadruple ✓. The formula generalizes the 2-D hypotenuse: each added dimension just contributes one more squared term under the root."
+
+        }), ref: "p.38" },
       { q: "Unit vector in direction of $\\vec{v} = 6\\hat{i}+8\\hat{j}$:",
         choices: ["$(0.6, 0.8)$", "$(6, 8)$", "$(1, 1)$", "$(3, 4)$"], correct: 0,
-        solution: S({ c: "$\\hat{u} = \\vec{v}/|\\vec{v}|$.", s: ["$|\\vec{v}| = \\sqrt{36+64} = 10$.", "$\\hat{u} = (6/10, 8/10) = (0.6, 0.8)$."], a: "$(0.6, 0.8)$" }), ref: "p.38" },
+        solution: S({
+          c: "A UNIT vector points the same way but has length 1: divide the vector by its own magnitude, $\\hat u = \\vec v/|\\vec v|$.",
+          s: [
+            "<b>Step 1 — Magnitude.</b> $|\\vec v| = \\sqrt{6^2+8^2} = \\sqrt{100} = 10$ (a 6-8-10 triangle).",
+            "<b>Step 2 — Divide each component.</b> $\\hat u = (6/10,\\ 8/10) = (0.6,\\ 0.8)$.",
+            "<b>Step 3 — Distractor audit.</b> $(6,8)$ is the original (length 10); $(1,1)$ isn't even unit length; $(3,4)$ is $\\vec v/2$ (length 5)."
+          ],
+          a: "$\\hat u = (0.6,\\ 0.8)$",
+          v: "Confirm length 1: $\\sqrt{0.6^2+0.8^2} = \\sqrt{0.36+0.64} = \\sqrt1 = 1$ ✓. Unit vectors carry pure DIRECTION — multiply by any scalar to get a vector of that length pointing the same way."
+
+        }), ref: "p.38" },
       { q: "$\\dfrac{d}{dx}[\\sin^2 x]$ = ",
         choices: ["$2\\sin x \\cos x = \\sin 2x$", "$2\\cos x$", "$\\sin 2x/2$", "$2\\sin x$"], correct: 0,
-        solution: S({ c: "Chain rule: $\\frac{d}{dx}u^2 = 2u\\,du/dx$ with $u=\\sin x$.", s: ["$= 2\\sin x \\cdot \\cos x = \\sin 2x$."], a: "$\\sin 2x$" }), ref: "p.47" },
+        solution: S({
+          c: "The chain rule differentiates a composed function: $\\dfrac{d}{dx}u^2 = 2u\\dfrac{du}{dx}$. Here the outer function is 'square', the inner is $\\sin x$.",
+          s: [
+            "<b>Step 1 — Apply.</b> With $u=\\sin x$: $2\\sin x\\cdot\\cos x$.",
+            "<b>Step 2 — Simplify.</b> $2\\sin x\\cos x = \\sin 2x$ (double-angle identity).",
+            "<b>Step 3 — Distractor audit.</b> $2\\cos x$ forgets the inner derivative chain; $\\sin2x/2$ halves wrongly; $2\\sin x$ drops the $\\cos x$ factor."
+          ],
+          a: "$2\\sin x\\cos x = \\sin 2x$",
+          v: "Both forms are identical — the question rewards knowing the double-angle identity ✓. Forgetting the inner $\\cos x$ (chain rule) is the single most common derivative mistake."
+
+        }), ref: "p.47" },
       { q: "$\\int \\sec^2 x \\, dx$:",
         choices: ["$\\tan x + C$", "$\\sec x + C$", "$\\cot x + C$", "$-\\cos x + C$"], correct: 0,
-        solution: S({ c: "Recognize derivative of tangent.", s: ["$\\dfrac{d}{dx}\\tan x = \\sec^2 x$ → antiderivative is $\\tan x$."], a: "$\\tan x + C$" }), ref: "p.49" },
+        solution: S({
+          c: "Integration is reverse differentiation — recognize $\\sec^2 x$ as the KNOWN derivative of $\\tan x$, so its antiderivative is $\\tan x$.",
+          s: [
+            "<b>Step 1 — Recall.</b> $\\dfrac{d}{dx}\\tan x = \\sec^2 x$, hence $\\int\\sec^2 x\\,dx = \\tan x + C$.",
+            "<b>Step 2 — Distractor audit.</b> $\\sec x + C$ is wrong (that pairs with $\\sec x\\tan x$); $\\cot x$ pairs with $-\\csc^2 x$; $-\\cos x$ pairs with $\\sin x$."
+          ],
+          a: "$\\tan x + C$",
+          v: "Differentiate back: $\\dfrac{d}{dx}\\tan x = \\sec^2 x$ ✓. The '+C' matters — every indefinite integral has an arbitrary constant since the derivative of a constant is zero."
+
+        }), ref: "p.49" },
       { q: "Maclaurin series of $\\sin x$, first 3 nonzero terms:",
         choices: ["$x - x^3/6 + x^5/120$", "$1 + x + x^2/2$", "$\\cos 0 + ...$", "$x + x^2/2$"], correct: 0,
-        solution: S({ c: "$\\sin x = \\sum (-1)^n x^{2n+1}/(2n+1)!$.", s: ["$n=0$: $x$.", "$n=1$: $-x^3/6$.", "$n=2$: $+x^5/120$."], a: "$x - x^3/6 + x^5/120$", v: "Small $x$: $\\sin x \\approx x$ (linear approximation)." }), ref: "p.50" },
+        solution: S({
+          c: "A Maclaurin series expresses a function as an infinite polynomial about $x=0$. For sine: $\\sin x = x - \\dfrac{x^3}{3!} + \\dfrac{x^5}{5!} - \\cdots$ — odd powers only, alternating signs.",
+          s: [
+            "<b>Step 1 — Write the first three terms.</b> $x - \\dfrac{x^3}{6} + \\dfrac{x^5}{120}$ (since $3!=6$, $5!=120$).",
+            "<b>Step 2 — Distractor audit.</b> $1+x+x^2/2$ is $e^x$; the others are malformed or truncated cosine-like series."
+          ],
+          a: "$x - \\dfrac{x^3}{6} + \\dfrac{x^5}{120}$",
+          v: "The famous small-angle approximation $\\sin x \\approx x$ is just the FIRST term ✓ — valid because higher terms shrink fast when $x$ is small (e.g. at $x=0.1$, the $x^3/6$ term is only $1.7\\times10^{-4}$)."
+
+        }), ref: "p.50" },
       { q: "Solve $\\dfrac{dy}{dx} = y$, $y(0) = 2$:",
         choices: ["$y = 2e^x$", "$y = e^{2x}$", "$y = 2x$", "$y = 2+x$"], correct: 0,
-        solution: S({ c: "Separable: $dy/y = dx$ → $\\ln y = x + C$ → $y = Ae^x$.", s: ["$y(0) = A = 2$.", "Solution: $y = 2e^x$."], a: "$y = 2e^x$" }), ref: "p.54" },
+        solution: S({
+          c: "This is a SEPARABLE first-order ODE: gather all $y$ on one side, all $x$ on the other, integrate both. The classic result is exponential growth.",
+          s: [
+            "<b>Step 1 — Separate and integrate.</b> $\\dfrac{dy}{y} = dx \\Rightarrow \\ln y = x + C \\Rightarrow y = Ae^x$.",
+            "<b>Step 2 — Apply initial condition.</b> $y(0) = Ae^0 = A = 2$, so $y = 2e^x$.",
+            "<b>Step 3 — Distractor audit.</b> $e^{2x}$ solves $y'=2y$ (wrong rate); $2x$ and $2+x$ aren't exponential at all."
+          ],
+          a: "$y = 2e^x$",
+          v: "Check: $y' = 2e^x = y$ ✓ and $y(0)=2$ ✓. 'Rate of change proportional to amount' is the signature of exponential behavior — RC/RL circuits, radioactive decay, and population growth all share this ODE."
+
+        }), ref: "p.54" },
       { q: "Rank-nullity for $3\\times 4$ matrix with rank 2: nullity =",
         choices: ["$2$", "$1$", "$3$", "$4$"], correct: 0,
-        solution: S({ c: "Rank + Nullity = number of columns. For $m\\times n$: rank + nullity = $n$.", s: ["$2 + \\text{nullity} = 4$. Nullity = 2."], a: "$2$" }), ref: "p.57" },
+        solution: S({
+          c: "The rank-nullity theorem: for any $m\\times n$ matrix, $\\text{rank} + \\text{nullity} = n$ (number of COLUMNS). Rank = dimension of the column space (independent outputs); nullity = dimension of the null space (solutions to $Ax=0$).",
+          s: [
+            "<b>Step 1 — Identify n.</b> A $3\\times4$ matrix has $n=4$ columns.",
+            "<b>Step 2 — Solve.</b> $\\text{rank} + \\text{nullity} = 4 \\Rightarrow 2 + \\text{nullity} = 4 \\Rightarrow \\text{nullity} = 2$.",
+            "<b>Step 3 — Distractor audit.</b> Using ROWS (3) instead of columns gives wrong answers; 4 forgets to subtract the rank."
+          ],
+          a: "Nullity = 2",
+          v: "Meaning: the system $Ax=0$ has a 2-parameter family of solutions ✓. Use COLUMNS not rows — the theorem counts the input-space dimension, which equals the number of columns."
+
+        }), ref: "p.57" },
       { q: "Eigenvector for $A = \\begin{pmatrix}3&0\\\\0&5\\end{pmatrix}$ corresponding to $\\lambda=3$:",
         choices: ["$\\binom{1}{0}$", "$\\binom{0}{1}$", "$\\binom{1}{1}$", "$\\binom{3}{5}$"], correct: 0,
-        solution: S({ c: "Diagonal matrix: standard basis vectors are eigenvectors. $\\lambda=3$ → first column → $e_1$.", s: ["Verify: $A e_1 = (3,0)^T = 3 e_1$ ✓"], a: "$(1, 0)^T$" }), ref: "p.58" },
+        solution: S({
+          c: "An eigenvector $v$ satisfies $Av = \\lambda v$ — the matrix only STRETCHES it, no rotation. For a DIAGONAL matrix, the standard basis vectors are the eigenvectors, with the diagonal entries as eigenvalues.",
+          s: [
+            "<b>Step 1 — Match eigenvalue to position.</b> $\\lambda=3$ sits in the first diagonal slot → eigenvector $e_1 = (1,0)^T$.",
+            "<b>Step 2 — Distractor audit.</b> $(0,1)^T$ goes with $\\lambda=5$; $(1,1)^T$ mixes both directions (not an eigenvector); $(3,5)^T$ confuses eigenvalues with the vector."
+          ],
+          a: "$(1,\\ 0)^T$",
+          v: "Verify: $A(1,0)^T = (3\\cdot1,\\ 5\\cdot0)^T = (3,0)^T = 3(1,0)^T$ ✓. Diagonal matrices are the easiest eigen-problems — the work is already done; you just read off the answer."
+
+        }), ref: "p.58" },
       { q: "Length of curve $y=x^{3/2}$ from $x=0$ to $1$:",
         choices: ["$\\frac{13\\sqrt{13}-8}{27} \\approx 1.44$", "$1$", "$\\sqrt{2}$", "$2$"], correct: 0,
-        solution: S({ c: "Arc length: $L = \\int_0^1 \\sqrt{1 + (dy/dx)^2}\\,dx$.", s: ["$dy/dx = (3/2)x^{1/2}$. $(dy/dx)^2 = 9x/4$.", "$\\int_0^1 \\sqrt{1 + 9x/4}\\,dx = (2/3) \\cdot 4/9 \\cdot [(1+9x/4)^{3/2}]_0^1 = (8/27)(13/4)^{3/2} - (8/27)$.", "$(13/4)^{3/2} = 13\\sqrt{13}/8$. Result: $(13\\sqrt{13}-8)/27 \\approx 1.44$."], a: "$\\approx 1.44$" }), ref: "p.49" },
+        solution: S({
+          c: "Arc length of a curve $y=f(x)$ is $L = \\int_a^b \\sqrt{1 + (dy/dx)^2}\\,dx$ — summing tiny hypotenuses $\\sqrt{dx^2+dy^2}$ along the curve.",
+          s: [
+            "<b>Step 1 — Derivative.</b> $dy/dx = \\tfrac32 x^{1/2}$, so $(dy/dx)^2 = \\tfrac94 x$.",
+            "<b>Step 2 — Set up.</b> $L = \\int_0^1 \\sqrt{1 + \\tfrac94 x}\\,dx$.",
+            "<b>Step 3 — Integrate.</b> $= \\tfrac{8}{27}\\big[(1+\\tfrac94 x)^{3/2}\\big]_0^1 = \\tfrac{8}{27}\\big[(13/4)^{3/2} - 1\\big] = \\dfrac{13\\sqrt{13}-8}{27} \\approx 1.44$.",
+            "<b>Step 4 — Distractor audit.</b> 1 is the straight x-distance; $\\sqrt2\\approx1.41$ is the chord-ish guess; 2 overshoots."
+          ],
+          a: "$\\approx 1.44$",
+          v: "Sanity: the curve rises from $(0,0)$ to $(1,1)$, so its length must EXCEED the straight chord $\\sqrt2\\approx1.41$ — and 1.44 does ✓, by just the right small margin for a gently bending curve."
+
+        }), ref: "p.49" },
       { q: "$\\lim_{x\\to\\infty} (1 + 1/x)^x$:",
         choices: ["$e$", "$1$", "$0$", "$\\infty$"], correct: 0,
-        solution: S({ c: "Famous limit defining $e \\approx 2.718$.", s: ["Take log: $x \\ln(1+1/x) \\to x \\cdot 1/x = 1$ as $x \\to \\infty$.", "So limit is $e^1 = e$."], a: "$e$" }), ref: "p.47" },
+        solution: S({
+          c: "This is the LIMIT that DEFINES Euler's number $e \\approx 2.718$. It's an indeterminate $1^\\infty$ form — resolve it by taking the logarithm.",
+          s: [
+            "<b>Step 1 — Take log.</b> $\\ln L = \\lim_{x\\to\\infty} x\\ln(1+1/x)$.",
+            "<b>Step 2 — Evaluate.</b> For large $x$, $\\ln(1+1/x)\\approx 1/x$, so $x\\cdot(1/x) = 1$. Thus $\\ln L = 1 \\Rightarrow L = e$.",
+            "<b>Step 3 — Distractor audit.</b> 1 is the naive '$1^\\infty=1$' trap (it's indeterminate, not 1); 0 and ∞ misjudge the competing effects."
+          ],
+          a: "$e$",
+          v: "The tension that makes it nontrivial: the base $\\to1$ (would give 1) while the exponent $\\to\\infty$ (would give ∞) — they balance exactly at $e$ ✓. This limit underlies continuous compound interest: $e^{rt}$."
+
+        }), ref: "p.47" },
       { q: "Number of solutions to $x^2 = -4$ in real numbers:",
         choices: ["$0$ (none)", "$1$", "$2$", "$\\infty$"], correct: 0,
-        solution: S({ c: "Real squares are non-negative.", s: ["Complex: $x = \\pm 2j$ — two complex solutions.", "Real: no solutions."], a: "$0$ real solutions" }), ref: "p.35" },
+        solution: S({
+          c: "The square of any REAL number is non-negative ($x^2 \\ge 0$), so it can never equal a negative value. Real solutions: none.",
+          s: [
+            "<b>Step 1 — Reason over the reals.</b> $x^2 \\ge 0$ for all real $x$, but $-4 < 0$ → no real $x$ works.",
+            "<b>Step 2 — Distractor audit.</b> 1, 2, ∞ all assume real solutions exist. (Over the COMPLEX numbers there are exactly two: $x = \\pm2j$.)"
+          ],
+          a: "0 real solutions",
+          v: "The complex picture completes it: $x = \\pm2j$ since $(2j)^2 = 4j^2 = -4$ ✓. This gap — real equations with no real roots — is precisely why complex numbers were invented."
+
+        }), ref: "p.35" },
       { q: "$\\int 0^\\infty e^{-x}\\,dx$:",
         choices: ["$1$", "$0$", "$\\infty$", "$e$"], correct: 0,
-        solution: S({ c: "Improper integral. $\\int e^{-x} dx = -e^{-x}$.", s: ["At ∞: $-e^{-\\infty} = 0$. At 0: $-1$. Difference: $0 - (-1) = 1$."], a: "$1$" }), ref: "p.49" },
+        solution: S({
+          c: "An IMPROPER integral with an infinite limit: evaluate the antiderivative and take the limit at $\\infty$. Here $\\int e^{-x}dx = -e^{-x}$.",
+          s: [
+            "<b>Step 1 — Antiderivative.</b> $\\int_0^\\infty e^{-x}dx = \\big[-e^{-x}\\big]_0^\\infty$.",
+            "<b>Step 2 — Evaluate limits.</b> At $\\infty$: $-e^{-\\infty} = 0$. At 0: $-e^0 = -1$. Difference: $0 - (-1) = 1$.",
+            "<b>Step 3 — Distractor audit.</b> 0 forgets the lower limit; ∞ misjudges the decay; $e$ is unrelated."
+          ],
+          a: "1",
+          v: "The integral CONVERGES because $e^{-x}$ decays fast enough to enclose finite area ✓. This unit-area exponential is the backbone of the exponential probability distribution (rate 1)."
+
+        }), ref: "p.49" },
       { q: "Gradient $\\nabla (x^2 + y^2)$ at $(1, 2)$:",
         choices: ["$(2, 4)$", "$(1, 2)$", "$(2, 2)$", "$(5)$"], correct: 0,
-        solution: S({ c: "Partial derivatives.", s: ["$\\partial/\\partial x = 2x = 2$. $\\partial/\\partial y = 2y = 4$."], a: "$(2, 4)$" }), ref: "p.38" },
+        solution: S({
+          c: "The gradient $\\nabla f = (\\partial f/\\partial x,\\ \\partial f/\\partial y)$ is the vector of partial derivatives — it points in the direction of STEEPEST increase of $f$.",
+          s: [
+            "<b>Step 1 — Partials.</b> $\\partial/\\partial x(x^2+y^2) = 2x$; $\\partial/\\partial y = 2y$.",
+            "<b>Step 2 — Evaluate at (1,2).</b> $(2\\cdot1,\\ 2\\cdot2) = (2,\\ 4)$.",
+            "<b>Step 3 — Distractor audit.</b> $(1,2)$ is the point itself; $(2,2)$ mis-differentiates; $(5)$ is the scalar value $f(1,2)=5$, not the gradient."
+          ],
+          a: "$(2,\\ 4)$",
+          v: "The gradient points 'uphill' — from $(1,2)$ the function climbs fastest toward $(2,4)$ direction, radially outward from the origin ✓, which makes sense for the bowl-shaped $x^2+y^2$."
+
+        }), ref: "p.38" },
       { q: "$\\vec{F}=2\\hat{i}+3\\hat{j}$, $\\vec{G}=\\hat{i}-\\hat{j}$. $\\vec{F}\\cdot\\vec{G}$:",
         choices: ["$-1$", "$5$", "$2$", "$1$"], correct: 0,
-        solution: S({ c: "Component dot product.", s: ["$(2)(1) + (3)(-1) = 2 - 3 = -1$."], a: "$-1$" }), ref: "p.38" },
+        solution: S({
+          c: "The DOT product multiplies matching components and sums: $\\vec F\\cdot\\vec G = F_xG_x + F_yG_y$. It yields a SCALAR and measures alignment.",
+          s: [
+            "<b>Step 1 — Multiply components.</b> $(2)(1) + (3)(-1) = 2 - 3 = -1$.",
+            "<b>Step 2 — Distractor audit.</b> 5 forgets the minus sign on $G_y$; 2 and 1 drop a term."
+          ],
+          a: "$\\vec F\\cdot\\vec G = -1$",
+          v: "The NEGATIVE result means the vectors point more than 90° apart (obtuse angle) ✓ — since $\\vec F\\cdot\\vec G = |F||G|\\cos\\theta$, a negative dot product signals $\\cos\\theta<0$. A zero dot product would mean perpendicular."
+
+        }), ref: "p.38" },
       { q: "Newton's method iteration $x_{n+1} = x_n - f(x_n)/f'(x_n)$: useful for:",
         choices: ["Finding roots numerically", "Definite integrals", "Eigenvalues only", "Matrix inversion"], correct: 0,
-        solution: S({ c: "Newton's method: converges quadratically (when it converges) to roots of $f(x)=0$.", s: ["Need: good initial guess; derivative nonzero.", "Variant for systems: Newton-Raphson."], a: "Roots of equations" }), ref: "p.61" },
+        solution: S({
+          c: "Newton's method finds ROOTS of $f(x)=0$ numerically: from a guess $x_n$, it follows the tangent line down to the axis: $x_{n+1} = x_n - f(x_n)/f'(x_n)$.",
+          s: [
+            "<b>Step 1 — Match.</b> Finding roots numerically.",
+            "<b>Step 2 — Distractor audit.</b> Definite integrals use quadrature (trapezoidal/Simpson); eigenvalues and matrix inversion use other algorithms — Newton is specifically a root-finder."
+          ],
+          a: "Finding roots of equations numerically.",
+          v: "It converges QUADRATICALLY (digits of accuracy roughly double each step) near a simple root ✓ — but needs a good initial guess and $f'\\ne0$, or it can diverge. The power-flow Newton-Raphson solver is the multivariable version."
+
+        }), ref: "p.61" },
       { q: "Volume of revolution: $y = x$ rotated about x-axis from 0 to 1:",
         choices: ["$\\pi/3$", "$\\pi$", "$\\pi/2$", "$\\pi/4$"], correct: 0,
-        solution: S({ c: "Disk method: $V = \\pi\\int_0^1 y^2\\,dx = \\pi\\int x^2\\,dx$.", s: ["$\\pi[x^3/3]_0^1 = \\pi/3$."], a: "$\\pi/3$" }), ref: "p.49" },
+        solution: S({
+          c: "The DISK method finds the volume of a solid of revolution about the x-axis: $V = \\pi\\int_a^b y^2\\,dx$ — stacking thin circular disks of radius $y$, each with area $\\pi y^2$.",
+          s: [
+            "<b>Step 1 — Set up.</b> $y=x$, so $V = \\pi\\int_0^1 x^2\\,dx$.",
+            "<b>Step 2 — Integrate.</b> $\\pi\\big[x^3/3\\big]_0^1 = \\pi/3$.",
+            "<b>Step 3 — Distractor audit.</b> $\\pi$ forgets to integrate; $\\pi/2$ and $\\pi/4$ use wrong powers."
+          ],
+          a: "$V = \\pi/3$",
+          v: "The solid is a cone (radius 1, height 1); the geometry formula $V = \\tfrac13\\pi r^2 h = \\tfrac13\\pi(1)(1) = \\pi/3$ ✓ matches the calculus exactly — a satisfying cross-check."
+
+        }), ref: "p.49" },
     ],
 
     // Prob — +10
     2: [
       { q: "Two dice rolled. P(sum = 11):", choices: ["$2/36 = 1/18$", "$1/36$", "$3/36$", "$1/6$"], correct: 0,
-        solution: S({ c: "Outcomes summing to 11: (5,6), (6,5). 2 ways out of 36.", s: ["$P = 2/36 = 1/18$."], a: "$1/18$" }), ref: "p.64" },
+        solution: S({
+          c: "Probability of an event = (favorable outcomes)/(total outcomes). Two dice give $6\\times6 = 36$ equally-likely ordered outcomes.",
+          s: [
+            "<b>Step 1 — List favorable.</b> Sum 11 comes only from (5,6) and (6,5) → 2 ways.",
+            "<b>Step 2 — Divide.</b> $P = 2/36 = 1/18$.",
+            "<b>Step 3 — Distractor audit.</b> $1/36$ counts only one ordering; $3/36$ over-counts; $1/6$ is a single die's face probability."
+          ],
+          a: "$P = 1/18$",
+          v: "Order matters here — (5,6) and (6,5) are distinct rolls ✓. Only the sum of 7 has more combinations (six), making it the most likely two-dice total; 11 is near the rare high end."
+
+        }), ref: "p.64" },
       { q: "Coin flipped 5 times. P(4 heads):", choices: ["$5/32$", "$1/32$", "$1/5$", "$4/5$"], correct: 0,
-        solution: S({ c: "Binomial: $\\binom{5}{4}(0.5)^5$.", s: ["$\\binom{5}{4} = 5$. $(0.5)^5 = 1/32$.", "Product: 5/32."], a: "$5/32$" }), ref: "p.66" },
+        solution: S({
+          c: "The BINOMIAL formula gives the probability of exactly $k$ successes in $n$ independent trials: $P = \\binom{n}{k}p^k(1-p)^{n-k}$. For a fair coin $p=0.5$.",
+          s: [
+            "<b>Step 1 — Count arrangements.</b> $\\binom{5}{4} = 5$ ways to place 4 heads among 5 flips.",
+            "<b>Step 2 — Probability of each.</b> $(0.5)^5 = 1/32$ (every specific 5-flip sequence is equally likely).",
+            "<b>Step 3 — Multiply.</b> $5\\times1/32 = 5/32$.",
+            "<b>Step 4 — Distractor audit.</b> $1/32$ forgets the $\\binom{5}{4}$ count; $1/5$ and $4/5$ aren't binomial."
+          ],
+          a: "$P = 5/32 \\approx 0.156$",
+          v: "Symmetry check: $P(4\\text{ heads}) = P(1\\text{ head})$ for a fair coin, both $5/32$ ✓. The $\\binom{n}{k}$ factor is the key — it counts the DIFFERENT orderings that give the same head count."
+
+        }), ref: "p.66" },
       { q: "Standard normal: $P(-1 < Z < 1)$:", choices: ["$\\approx 68\\%$", "$\\approx 95\\%$", "$50\\%$", "$\\approx 99.7\\%$"], correct: 0,
-        solution: S({ c: "Empirical rule: $\\pm 1\\sigma$ contains ~68% of probability.", s: [""], a: "$\\approx 68\\%$" }), ref: "p.67" },
+        solution: S({
+          c: "The EMPIRICAL (68-95-99.7) rule for a normal distribution: about 68% of values fall within $\\pm1\\sigma$ of the mean, 95% within $\\pm2\\sigma$, 99.7% within $\\pm3\\sigma$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $-1<Z<1$ is exactly $\\pm1\\sigma$ → ≈68%.",
+            "<b>Step 2 — Distractor audit.</b> 95% is $\\pm2\\sigma$; 99.7% is $\\pm3\\sigma$; 50% is just one side of the mean."
+          ],
+          a: "$\\approx 68\\%$",
+          v: "These three numbers are worth memorizing cold — they appear constantly in quality control, measurement error, and confidence intervals ✓. The precise value is 68.27%."
+
+        }), ref: "p.67" },
       { q: "Sample of 10, mean 50, std 5. 95% CI on mean (z-based):",
         choices: ["$50 \\pm 3.1$", "$50 \\pm 5$", "$50 \\pm 10$", "$50 \\pm 50$"], correct: 0,
-        solution: S({ c: "$\\bar{x} \\pm z \\cdot s/\\sqrt{n}$. $z_{0.025} = 1.96$.", s: ["$1.96 \\cdot 5/\\sqrt{10} = 1.96 \\cdot 1.581 = 3.10$."], a: "$50 \\pm 3.1$" }), ref: "p.69" },
+        solution: S({
+          c: "A confidence interval for the mean is $\\bar x \\pm z\\cdot\\dfrac{s}{\\sqrt n}$. The $\\sqrt n$ in the denominator (the STANDARD ERROR) shrinks the interval as samples grow. For 95%, $z = 1.96$.",
+          s: [
+            "<b>Step 1 — Standard error.</b> $s/\\sqrt n = 5/\\sqrt{10} = 5/3.162 = 1.581$.",
+            "<b>Step 2 — Margin.</b> $1.96\\times1.581 = 3.10$.",
+            "<b>Step 3 — Interval.</b> $50 \\pm 3.1$.",
+            "<b>Step 4 — Distractor audit.</b> $\\pm5$ forgets to divide by $\\sqrt n$; $\\pm10$ and $\\pm50$ are way off."
+          ],
+          a: "$50 \\pm 3.1$",
+          v: "Note the $\\sqrt n$ effect: quadrupling the sample to 40 would HALVE the margin to ~1.55 ✓ — diminishing returns, which is why precision is expensive. (Strictly, small $n$ uses the t-distribution, but the problem specifies z.)"
+
+        }), ref: "p.69" },
       { q: "Probability density function (PDF) integrates to:", choices: ["$1$ over its support", "$0$", "Variable", "$\\infty$"], correct: 0,
-        solution: S({ c: "By definition, total probability = 1.", s: ["$\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$."], a: "$1$" }), ref: "p.66" },
+        solution: S({
+          c: "A probability density function describes a continuous random variable. Its DEFINING property: the total area under it equals 1 — something must happen with certainty.",
+          s: [
+            "<b>Step 1 — State.</b> $\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1$ over its support.",
+            "<b>Step 2 — Distractor audit.</b> 0 would mean nothing happens; 'variable' or ∞ violate the normalization requirement."
+          ],
+          a: "1 (over its support).",
+          v: "This is why a PDF's height can exceed 1 (it's a DENSITY, not a probability) as long as the total AREA is 1 ✓ — probabilities come from integrating over an interval, not from reading the curve's height."
+
+        }), ref: "p.66" },
       { q: "Median splits data into:", choices: ["Two equal halves by count", "Equal sum halves", "Quartiles", "Random"], correct: 0,
-        solution: S({ c: "Median: 50th percentile.", s: ["Robust to outliers (unlike mean)."], a: "Two equal halves" }), ref: "p.63" },
+        solution: S({
+          c: "The median is the MIDDLE value (50th percentile) when data is sorted — half the data points fall below it, half above, by COUNT.",
+          s: [
+            "<b>Step 1 — Match.</b> Two equal halves by count.",
+            "<b>Step 2 — Distractor audit.</b> 'Equal sum halves' isn't the median's definition; quartiles split into four; 'random' is wrong."
+          ],
+          a: "Two equal halves by count.",
+          v: "The median's superpower: it's ROBUST to outliers — one billionaire doesn't move the median income, but wrecks the mean ✓. That's why 'median household income' is the standard economic measure."
+
+        }), ref: "p.63" },
       { q: "Range of distribution = ", choices: ["Max - Min", "$\\sigma^2$", "$\\bar{x}$", "Median - Mode"], correct: 0,
-        solution: S({ c: "Range: simplest measure of spread.", s: ["$R = x_{max} - x_{min}$.", "Robust measure: IQR (75th - 25th percentile)."], a: "Max - Min" }), ref: "p.63" },
+        solution: S({
+          c: "The RANGE is the simplest measure of spread: the difference between the largest and smallest values.",
+          s: [
+            "<b>Step 1 — Match.</b> $R = x_{max} - x_{min}$.",
+            "<b>Step 2 — Distractor audit.</b> $\\sigma^2$ is variance; $\\bar x$ is the mean (center, not spread); median−mode isn't a standard measure."
+          ],
+          a: "$\\text{Max} - \\text{Min}$",
+          v: "Range's weakness: it depends on only TWO points, so a single outlier dominates it ✓ — which is why the more robust IQR (75th − 25th percentile) is often preferred for describing spread."
+
+        }), ref: "p.63" },
       { q: "Pearson's $r = 0.95$ between X and Y. Interpretation:",
         choices: ["Strong positive linear relationship", "No relationship", "Causation", "X causes Y"], correct: 0,
-        solution: S({ c: "$r$ close to ±1: strong linear association.", s: ["Correlation does NOT imply causation.", "Could be common cause, coincidence, or chance."], a: "Strong positive correlation" }), ref: "p.69" },
+        solution: S({
+          c: "Pearson's correlation coefficient $r$ ranges from $-1$ to $+1$ and measures LINEAR association. Near $+1$ means a strong positive linear relationship (as X rises, Y rises).",
+          s: [
+            "<b>Step 1 — Interpret 0.95.</b> Very close to +1 → strong positive linear relationship.",
+            "<b>Step 2 — Distractor audit.</b> 'No relationship' would be $r\\approx0$; 'causation' / 'X causes Y' are the cardinal error — correlation is NOT causation."
+          ],
+          a: "Strong positive linear correlation.",
+          v: "Critical caveat: high $r$ could come from a hidden common cause, coincidence, or reverse causation ✓ — establishing causation needs controlled experiments, not just correlation. Also, $r$ only catches LINEAR patterns."
+
+        }), ref: "p.69" },
       { q: "Standard deviation vs variance:",
         choices: ["$\\sigma = \\sqrt{\\sigma^2}$", "Same", "$\\sigma$ squared", "Always related as ratio"], correct: 0,
-        solution: S({ c: "$\\sigma$ = SD, $\\sigma^2$ = variance. SD has same units as data; variance is squared.", s: ["", ""], a: "$\\sigma = \\sqrt{\\sigma^2}$" }), ref: "p.63" },
+        solution: S({
+          c: "Variance $\\sigma^2$ is the average squared deviation from the mean; standard deviation $\\sigma$ is its square root — so $\\sigma = \\sqrt{\\sigma^2}$.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\sigma = \\sqrt{\\sigma^2}$.",
+            "<b>Step 2 — Distractor audit.</b> 'Same' is false; '$\\sigma$ squared' reverses the relationship; 'always a ratio' is meaningless."
+          ],
+          a: "$\\sigma = \\sqrt{\\sigma^2}$",
+          v: "Why we report SD over variance: SD shares the data's UNITS (meters, volts), while variance is in units² ✓ — so SD is directly comparable to the mean, e.g. '50 ± 5 V'."
+
+        }), ref: "p.63" },
       { q: "Combinations $C(n,r)$ formula:", choices: ["$n!/[r!(n-r)!]$", "$n!/r!$", "$n^r$", "$r!$"], correct: 0,
-        solution: S({ c: "Standard combinations.", s: [""], a: "$n!/(r!(n-r)!)$", v: "Permutations: $n!/(n-r)!$ (order matters)." }), ref: "p.64" },
+        solution: S({
+          c: "Combinations count selections where ORDER DOESN'T matter: $C(n,r) = \\dfrac{n!}{r!(n-r)!}$. The $r!$ in the denominator removes the orderings that permutations would over-count.",
+          s: [
+            "<b>Step 1 — Match.</b> $n!/[r!(n-r)!]$.",
+            "<b>Step 2 — Distractor audit.</b> $n!/r!$ is incomplete; $n^r$ is for ordered-with-repetition; $r!$ alone is just orderings of $r$ items."
+          ],
+          a: "$C(n,r) = \\dfrac{n!}{r!(n-r)!}$",
+          v: "Compare with PERMUTATIONS $P(n,r) = n!/(n-r)!$ where order matters — combinations divide that by $r!$ ✓. Picking a committee = combination; ranking 1st/2nd/3rd = permutation."
+
+        }), ref: "p.64" },
     ],
 
     // Ethics — +4
     3: [
       { q: "An engineer accepting a bonus from a supplier for selecting their product violates:",
         choices: ["Conflict of interest rule", "No rule", "Patent law", "Antitrust"], correct: 0,
-        solution: S({ c: "Faithful agent rule (Canon 4) — engineer must act in client's interest, not personal gain from outside parties.", s: ["", ""], a: "Conflict of interest" }), ref: "p.4" },
+        solution: S({
+          c: "A core engineering-ethics canon: the engineer acts as a FAITHFUL AGENT for the client/employer. Taking payment from a supplier to favor their product corrupts that duty — a conflict of interest.",
+          s: [
+            "<b>Step 1 — Match.</b> Conflict of interest.",
+            "<b>Step 2 — Distractor audit.</b> Patent law and antitrust govern different issues; 'no rule' is wrong — this is a textbook violation."
+          ],
+          a: "Conflict of interest.",
+          v: "The fix is disclosure and recusal: an engineer must reveal any outside interest that could bias a professional judgment, and step aside if needed ✓ — appearance of bias is itself a problem, not just actual bias."
+
+        }), ref: "p.4" },
       { q: "PE working in a state without license: must:",
         choices: ["Obtain license or comity from that state", "Continue with existing license", "Notify NCEES", "Stop all work"], correct: 0,
-        solution: S({ c: "Engineering practice is state-regulated. Must be licensed in each state where you practice as PE.", s: ["Most states offer comity (acceptance of license from another state) with paperwork."], a: "Get state license/comity" }), ref: "p.11" },
+        solution: S({
+          c: "Engineering licensure is regulated STATE BY STATE. To practice (and stamp documents) as a PE in a given state, you must hold that state's license — usually obtainable by COMITY (reciprocity) if you're already licensed elsewhere.",
+          s: [
+            "<b>Step 1 — Match.</b> Obtain that state's license or comity.",
+            "<b>Step 2 — Distractor audit.</b> An existing out-of-state license doesn't automatically extend; notifying NCEES isn't sufficient; 'stop all work' is overkill (comity exists)."
+          ],
+          a: "Get licensed in that state (via comity).",
+          v: "Comity streamlines it — states recognize each other's PEs with paperwork rather than re-examination ✓. NCEES maintains a records system that makes multi-state licensure far easier."
+
+        }), ref: "p.11" },
       { q: "Reporting a colleague's incompetence:",
         choices: ["Required when public safety threatened", "Optional always", "Forbidden", "Only after firing"], correct: 0,
-        solution: S({ c: "Canon 1 (public welfare) overrides loyalty to colleagues when safety is at stake.", s: ["Document first, attempt internal resolution, escalate to state board if needed."], a: "Required when safety at risk" }), ref: "p.5" },
+        solution: S({
+          c: "The FIRST canon of engineering ethics: hold paramount the safety, health, and welfare of the PUBLIC. This duty OVERRIDES loyalty to a colleague or employer when public safety is genuinely threatened.",
+          s: [
+            "<b>Step 1 — Match.</b> Required when public safety is at risk.",
+            "<b>Step 2 — Distractor audit.</b> 'Optional always' and 'forbidden' subordinate safety to loyalty; 'only after firing' delays a safety duty."
+          ],
+          a: "Required when public safety is threatened.",
+          v: "The professional path: document concerns, attempt internal resolution first, then escalate to the state board if unaddressed ✓ — 'whistleblowing' is a last resort, but mandatory when lives are at stake."
+
+        }), ref: "p.5" },
       { q: "Plagiarism in engineering reports:",
         choices: ["Ethics violation (must cite sources)", "Acceptable if same firm", "OK for figures", "Allowed in drafts"], correct: 0,
-        solution: S({ c: "Engineering work must give credit where due — academic integrity applies to professional work.", s: ["Copyright + ethics issue."], a: "Ethics violation" }), ref: "p.5" },
+        solution: S({
+          c: "Engineering work demands giving CREDIT where due. Presenting others' work, data, or designs as your own is both an ethics violation (honesty/integrity canon) and a copyright issue.",
+          s: [
+            "<b>Step 1 — Match.</b> Ethics violation — must cite sources.",
+            "<b>Step 2 — Distractor audit.</b> 'Acceptable if same firm', 'OK for figures', 'allowed in drafts' all rationalize uncredited copying — none are valid."
+          ],
+          a: "Ethics violation (cite your sources).",
+          v: "Professional integrity isn't just academic — misattributed analysis in a sealed engineering report can carry legal liability and license consequences ✓, on top of the ethical breach."
+
+        }), ref: "p.5" },
     ],
 
     // Econ — +8
     4: [
       { q: "Bond: face value $1000, coupon 5%, YTM 6%, 10 years. Price:",
         choices: ["Below $1000 (premium pricing inverted)", "Above $1000", "Exactly $1000", "Cannot determine"], correct: 0,
-        solution: S({ c: "Bond pricing: discount cash flows at YTM. YTM > coupon → bond sells at discount.", s: ["Higher YTM (market rate) makes the fixed 5% coupons worth less → price < par.", "Inverse relationship between YTM and price."], a: "Below par" }), ref: "p.230" },
+        solution: S({
+          c: "A bond's price is the present value of its future cash flows (coupons + face value), discounted at the YIELD TO MATURITY. The key rule: when YTM > coupon rate, the bond sells at a DISCOUNT (below par).",
+          s: [
+            "<b>Step 1 — Compare rates.</b> YTM 6% > coupon 5% → discount bond.",
+            "<b>Step 2 — Why.</b> The fixed 5% coupons look stingy next to the 6% market rate, so buyers will only pay LESS than $1000 to make up the difference.",
+            "<b>Step 3 — Distractor audit.</b> 'Above $1000' is a premium (would need YTM < coupon); 'exactly $1000' needs YTM = coupon."
+          ],
+          a: "Below par (under $1000).",
+          v: "The inverse price-yield relationship is the bedrock of bond math: rates UP → prices DOWN, always ✓. It's why rising interest rates hurt existing bondholders."
+
+        }), ref: "p.230" },
       { q: "Effective annual rate of 12% nominal, compounded quarterly:",
         choices: ["$\\approx 12.55\\%$", "$12\\%$", "$13\\%$", "$\\approx 12.68\\%$"], correct: 0,
-        solution: S({ c: "$EAR = (1 + r/m)^m - 1$.", s: ["$EAR = (1.03)^4 - 1 = 1.1255 - 1 = 12.55\\%$."], a: "$12.55\\%$" }), ref: "p.230" },
+        solution: S({
+          c: "Compounding more often than annually makes the EFFECTIVE rate exceed the nominal: $EAR = (1 + r/m)^m - 1$, where $m$ = compounding periods per year.",
+          s: [
+            "<b>Step 1 — Per-period rate.</b> $r/m = 12\\%/4 = 3\\%$ per quarter.",
+            "<b>Step 2 — Compound.</b> $EAR = (1.03)^4 - 1 = 1.1255 - 1 = 12.55\\%$.",
+            "<b>Step 3 — Distractor audit.</b> 12% ignores compounding; 12.68% is continuous compounding ($e^{0.12}-1$); 13% is a round guess."
+          ],
+          a: "$EAR \\approx 12.55\\%$",
+          v: "The gap (12.55 vs 12) is interest earning interest ✓. More frequent compounding raises EAR toward the continuous limit $e^r - 1 = 12.75\\%$ — the ceiling no finite schedule can pass."
+
+        }), ref: "p.230" },
       { q: "Sinking fund factor $(A/F, i, n)$:",
         choices: ["$i/((1+i)^n - 1)$", "$(1+i)^n - 1$", "$i(1+i)^n$", "$1/(1+i)^n$"], correct: 0,
-        solution: S({ c: "Annual amount to accumulate F: inverse of $(F/A)$.", s: ["$(F/A) = ((1+i)^n - 1)/i$, so $(A/F) = i/((1+i)^n - 1)$."], a: "$i/((1+i)^n - 1)$" }), ref: "p.231" },
+        solution: S({
+          c: "The sinking-fund factor $(A/F)$ finds the equal ANNUAL deposit $A$ needed to accumulate a future sum $F$. It's the reciprocal of the uniform-series compound-amount factor $(F/A)$.",
+          s: [
+            "<b>Step 1 — Recall $(F/A)$.</b> $(F/A) = \\dfrac{(1+i)^n - 1}{i}$.",
+            "<b>Step 2 — Invert.</b> $(A/F) = \\dfrac{i}{(1+i)^n - 1}$.",
+            "<b>Step 3 — Distractor audit.</b> $(1+i)^n-1$ is part of $(F/A)$; $i(1+i)^n$ is the capital-recovery numerator; $1/(1+i)^n$ is the single-payment $(P/F)$."
+          ],
+          a: "$(A/F) = \\dfrac{i}{(1+i)^n - 1}$",
+          v: "Real use: 'how much to set aside each year to replace a $50k machine in 10 years?' ✓ — that's a sinking fund. The $(A/F)$ and $(F/A)$ factors are reciprocals, an easy memory anchor."
+
+        }), ref: "p.231" },
       { q: "Internal rate of return (IRR) is found by:",
         choices: ["Solving NPV = 0 for $i$", "Setting cash flows to zero", "Maximizing NPV", "Adding all returns"], correct: 0,
-        solution: S({ c: "IRR: discount rate at which project's NPV is zero.", s: ["Typically solved iteratively (no closed form).", "Decision: IRR > MARR → accept."], a: "NPV = 0" }), ref: "p.232" },
+        solution: S({
+          c: "The IRR is the discount rate that makes a project's NET PRESENT VALUE equal to zero — the breakeven rate where discounted inflows exactly offset outflows.",
+          s: [
+            "<b>Step 1 — Match.</b> Solve NPV = 0 for $i$.",
+            "<b>Step 2 — Distractor audit.</b> 'Setting cash flows to zero' is meaningless; 'maximizing NPV' is a different criterion; 'adding all returns' ignores time value."
+          ],
+          a: "The rate $i$ that makes NPV = 0.",
+          v: "Decision rule: accept if IRR > MARR (minimum acceptable rate) ✓. IRR usually needs ITERATIVE solving (no closed form), and watch out — non-conventional cash flows can produce multiple IRRs."
+
+        }), ref: "p.232" },
       { q: "MACRS depreciation: advantage over straight-line:",
         choices: ["Accelerated (front-loaded) tax shield", "Slower", "Simpler", "Required by law"], correct: 0,
-        solution: S({ c: "Modified Accelerated Cost Recovery System: deducts more in early years → larger tax savings sooner.", s: ["Time value of money: tax savings worth more today than tomorrow.", "US standard for most assets."], a: "Accelerated tax savings" }), ref: "p.230" },
+        solution: S({
+          c: "MACRS (Modified Accelerated Cost Recovery System) front-loads depreciation: bigger deductions in early years. That accelerates the TAX SHIELD — tax savings arrive sooner.",
+          s: [
+            "<b>Step 1 — Match.</b> Accelerated (front-loaded) tax shield.",
+            "<b>Step 2 — Why sooner is better.</b> Time value of money: a tax dollar saved this year is worth more than one saved in 5 years.",
+            "<b>Step 3 — Distractor audit.</b> It's not slower or simpler than straight-line; 'required by law' is wrong (it's the standard, but the ADVANTAGE asked is the timing)."
+          ],
+          a: "Accelerated tax savings (front-loaded).",
+          v: "The total depreciation is the SAME as straight-line — only the TIMING differs ✓. Pulling deductions forward boosts a project's NPV without changing the lifetime tax total."
+
+        }), ref: "p.230" },
       { q: "$\\$5{,}000$ now vs $\\$3{,}000$ now + $\\$3{,}000$ in 2 years at $i = 5\\%$. Which is bigger PW?",
         choices: ["$5{,}000$ vs $\\$5{,}721$ → second option", "Same", "First option", "Need IRR"], correct: 0,
-        solution: S({ c: "PW of option 2 = $3000 + 3000/(1.05)^2 = 3000 + 2721 = 5721$.", s: ["Option 2 > Option 1 → option 2 better."], a: "Second option" }), ref: "p.231" },
+        solution: S({
+          c: "To compare cash flows at different times, bring them to a common point — here PRESENT WORTH, discounting future amounts by $1/(1+i)^n$.",
+          s: [
+            "<b>Step 1 — PW of option 1.</b> $\\$5{,}000$ (already present).",
+            "<b>Step 2 — PW of option 2.</b> $3000 + \\dfrac{3000}{(1.05)^2} = 3000 + 2721 = \\$5{,}721$.",
+            "<b>Step 3 — Compare.</b> $5721 > 5000$ → option 2 wins.",
+            "<b>Step 4 — Distractor audit.</b> 'Same' ignores discounting; 'first option' forgets option 2's total is larger nominally; IRR isn't needed for a PW comparison."
+          ],
+          a: "Second option (PW $5,721 > $5,000).",
+          v: "Even though $3000$ now plus $3000$ later DISCOUNTS to $5721$, its nominal total is $6000$ ✓ — splitting and delaying still beats a smaller lump sum here because the delayed portion is only lightly discounted at 5%."
+
+        }), ref: "p.231" },
       { q: "Salvage value at end of life is treated as:",
         choices: ["Cash inflow at year n", "Initial cost reduction", "Always zero", "Tax-free always"], correct: 0,
-        solution: S({ c: "Salvage = recoverable value at disposal.", s: ["Adds to terminal cash flow.", "May have tax implications (recapture of depreciation)."], a: "Inflow at year n" }), ref: "p.232" },
+        solution: S({
+          c: "Salvage value is the recoverable worth of an asset at disposal. In cash-flow analysis it's a positive INFLOW occurring at the end of the project (year $n$).",
+          s: [
+            "<b>Step 1 — Match.</b> Cash inflow at year $n$.",
+            "<b>Step 2 — Distractor audit.</b> It's not an initial cost reduction (it happens at the END); not always zero; not always tax-free (depreciation recapture may apply)."
+          ],
+          a: "An inflow at year $n$.",
+          v: "Tax subtlety: if you sell ABOVE book value, the gain is taxable (depreciation recapture) ✓ — so salvage's after-tax value can be less than the sale price. It's discounted back like any future cash flow."
+
+        }), ref: "p.232" },
       { q: "Benefit-cost ratio (BCR) > 1 means:",
         choices: ["Project economically justified", "Project loses money", "Indifferent", "Need IRR"], correct: 0,
-        solution: S({ c: "BCR = PV(benefits) / PV(costs).", s: ["BCR > 1: benefits exceed costs.", "Government projects often use BCR analysis."], a: "Economically justified" }), ref: "p.232" },
+        solution: S({
+          c: "The benefit-cost ratio is $BCR = \\dfrac{PV(\\text{benefits})}{PV(\\text{costs})}$. A ratio above 1 means discounted benefits exceed discounted costs — the project is economically justified.",
+          s: [
+            "<b>Step 1 — Match.</b> Economically justified.",
+            "<b>Step 2 — Distractor audit.</b> 'Loses money' would be BCR < 1; 'indifferent' is BCR = 1; IRR isn't required to read a BCR."
+          ],
+          a: "The project is economically justified.",
+          v: "BCR is the standard tool for PUBLIC projects (highways, dams) where benefits and costs accrue to society ✓. Caveat: BCR ranks poorly for mutually-exclusive projects of different scale — use incremental analysis there."
+
+        }), ref: "p.232" },
     ],
 
     // Materials — +5
     5: [
       { q: "Doping silicon with boron (Group III) creates:",
         choices: ["p-type (holes as majority)", "n-type", "Intrinsic", "Insulator"], correct: 0,
-        solution: S({ c: "Acceptor impurity → introduces holes.", s: ["B has 3 valence electrons; replacing Si (4 valence) leaves a missing electron = hole."], a: "p-type" }), ref: "p.354" },
+        solution: S({
+          c: "Doping adds impurity atoms to control conductivity. Boron (Group III, 3 valence electrons) replacing a silicon atom (4 valence) leaves a 'missing electron' = a HOLE. Holes are positive majority carriers → p-type.",
+          s: [
+            "<b>Step 1 — Count valence electrons.</b> B has 3 vs Si's 4 → one bond short → a hole.",
+            "<b>Step 2 — Match.</b> p-type (holes majority).",
+            "<b>Step 3 — Distractor audit.</b> n-type needs Group V (P, As) donors; 'intrinsic' is undoped; doping never makes an insulator."
+          ],
+          a: "p-type (holes are majority carriers).",
+          v: "Mnemonic: Boron = 'aBsent electron' = positive holes = p-type ✓. Group V donors (one EXTRA electron) make n-type — and a p-n junction of the two is the diode/transistor foundation."
+
+        }), ref: "p.354" },
       { q: "Intrinsic Si carrier density at 300K vs 400K:",
         choices: ["Much higher at 400K (exponential)", "Lower", "Same", "Linearly higher"], correct: 0,
-        solution: S({ c: "$n_i \\propto T^{3/2} e^{-E_g/(2kT)}$ — exponential temperature dependence.", s: ["At higher T, more thermal energy → more carriers.", "Why semiconductor leakage increases dramatically with T."], a: "Exponentially higher" }), ref: "p.354" },
+        solution: S({
+          c: "Intrinsic carrier concentration depends STRONGLY (exponentially) on temperature: $n_i \\propto T^{3/2}e^{-E_g/(2kT)}$. Heating gives electrons enough thermal energy to jump the band gap.",
+          s: [
+            "<b>Step 1 — Identify the dominant term.</b> The exponential $e^{-E_g/2kT}$ dwarfs the $T^{3/2}$ factor.",
+            "<b>Step 2 — Conclude.</b> 400 K → far MORE carriers than 300 K (exponentially, not linearly).",
+            "<b>Step 3 — Distractor audit.</b> 'Lower' and 'same' contradict the physics; 'linearly higher' understates the exponential rise."
+          ],
+          a: "Exponentially higher at 400 K.",
+          v: "This is exactly why chip leakage current soars with temperature and why power devices need cooling ✓ — and why germanium (small band gap) was abandoned for silicon, which tolerates heat better."
+
+        }), ref: "p.354" },
       { q: "Resistivity of insulator typically:",
         choices: ["$> 10^8$ Ω·m", "$\\sim 1$ Ω·m", "$\\sim 10^{-8}$ Ω·m", "Zero"], correct: 0,
-        solution: S({ c: "Conductors $\\rho \\sim 10^{-8}$, semiconductors $\\sim 10^{-4}$ to $10^3$, insulators $> 10^8$ Ω·m.", s: ["", ""], a: "$> 10^8$ Ω·m" }), ref: "p.354" },
+        solution: S({
+          c: "Resistivity $\\rho$ spans an enormous range across material classes: conductors $\\sim10^{-8}$ Ω·m, semiconductors $\\sim10^{-4}$ to $10^3$, insulators $>10^8$ Ω·m.",
+          s: [
+            "<b>Step 1 — Match.</b> $> 10^8$ Ω·m for insulators.",
+            "<b>Step 2 — Distractor audit.</b> $\\sim1$ Ω·m is semiconductor-ish; $\\sim10^{-8}$ is a metal (e.g. copper); zero would be a superconductor."
+          ],
+          a: "$> 10^8$ Ω·m",
+          v: "The 16+ order-of-magnitude span from copper ($10^{-8}$) to good insulators ($10^{8}$+) is one of the widest ranges of any physical property ✓ — semiconductors sit in the controllable middle, which is what makes them useful."
+
+        }), ref: "p.354" },
       { q: "Hall effect measures:",
         choices: ["Carrier type and density", "Resistance", "Capacitance", "Voltage"], correct: 0,
-        solution: S({ c: "Hall effect: magnetic field + current creates transverse voltage proportional to carrier density.", s: ["Sign reveals carrier type (electron vs hole).", "Magnitude gives concentration."], a: "Carrier type/density" }), ref: "p.354" },
+        solution: S({
+          c: "The Hall effect: pass current through a conductor in a perpendicular magnetic field, and the Lorentz force pushes carriers sideways, creating a transverse 'Hall voltage'. Its SIGN reveals carrier TYPE; its magnitude gives carrier DENSITY.",
+          s: [
+            "<b>Step 1 — Match.</b> Carrier type and density.",
+            "<b>Step 2 — Distractor audit.</b> Resistance, capacitance, and plain voltage are measured by other means — the Hall effect's unique payoff is identifying the carriers themselves."
+          ],
+          a: "Carrier type and concentration.",
+          v: "The sign of the Hall voltage was the historical PROOF that current in p-type material is carried by positive holes ✓. Hall sensors are also everywhere today — position, speed, and current sensing in motors and phones."
+
+        }), ref: "p.354" },
       { q: "Permittivity of free space $\\varepsilon_0$:",
         choices: ["$8.85\\times 10^{-12}$ F/m", "$1$ F/m", "$8.85 \\times 10^{-9}$", "$10^{-7}$"], correct: 0,
-        solution: S({ c: "Memorize.", s: [""], a: "$8.85\\times 10^{-12}$ F/m" }), ref: "p.355" },
+        solution: S({
+          c: "The permittivity of free space $\\varepsilon_0 = 8.85\\times10^{-12}$ F/m is a fundamental constant linking electric fields to their sources — it appears in Coulomb's law, capacitance, and wave propagation.",
+          s: [
+            "<b>Step 1 — Match.</b> $8.85\\times10^{-12}$ F/m.",
+            "<b>Step 2 — Distractor audit.</b> The exponent is the trap: $10^{-9}$ and $10^{-7}$ are off by orders of magnitude; 1 F/m is absurdly large."
+          ],
+          a: "$\\varepsilon_0 = 8.85\\times10^{-12}$ F/m",
+          v: "Worth memorizing alongside its partner $\\mu_0 = 4\\pi\\times10^{-7}$ H/m — together they set the speed of light: $c = 1/\\sqrt{\\mu_0\\varepsilon_0} \\approx 3\\times10^8$ m/s ✓. A parallel-plate capacitor's $C = \\varepsilon_0\\varepsilon_r A/d$ uses it directly."
+
+        }), ref: "p.355" },
     ],
 
     // Circuits — +25
