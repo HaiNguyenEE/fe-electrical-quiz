@@ -1096,13 +1096,13 @@
         })
       },
       { q: "Time-shifted signal $x(t-3)$ corresponds in Laplace to:",
-        choices: ["$e^{-3s}X(s)$", "$X(s)/e^{3s}$ (same thing)", "$X(s) - 3$", "$3X(s)$"],
+        choices: ["$e^{-3s}X(s)$", "$e^{+3s}X(s)$", "$X(s) - 3$", "$3X(s)$"],
         correct: 0,
         solution: S({
           c: "Laplace time-shift theorem: delaying a signal by $a$ multiplies its transform by $e^{-as}$: $\\mathcal L\\{x(t-a)u(t-a)\\} = e^{-as}X(s)$. A delay does not change WHAT the signal is — only WHEN — and that timing lives in the complex exponential.",
           s: [
             "<b>Step 1 — Apply with a = 3.</b> $x(t-3) \\leftrightarrow e^{-3s}X(s)$.",
-            "<b>Step 2 — Distractor audit.</b> $X(s) - 3$ confuses shifting with subtraction; $3X(s)$ confuses it with scaling; choice B, $X(s)/e^{3s}$, is actually the SAME thing as A ($e^{-3s} = 1/e^{3s}$) — the exam wants the standard form."
+            "<b>Step 2 — Distractor audit.</b> $e^{+3s}X(s)$ has the wrong sign (that is a time ADVANCE, $x(t+3)$); $X(s) - 3$ confuses shifting with subtraction; $3X(s)$ confuses it with scaling."
           ],
           a: "$e^{-3s}X(s)$",
           v: "Frequency-domain meaning: on the $j\\omega$ axis, $|e^{-3j\\omega}| = 1$ — a pure delay changes NO amplitudes, only adds linear phase $-3\\omega$ ✓. Discrete-time cousin: a $k$-sample delay multiplies the z-transform by $z^{-k}$ — same idea, different domain."
@@ -1736,14 +1736,14 @@
         })
       },
       { q: "Characteristic impedance of free space:",
-        choices: ["$377\\,\\Omega$", "$50\\,\\Omega$", "$75\\,\\Omega$", "$120\\pi\\,\\Omega$ — same as A"],
+        choices: ["$377\\,\\Omega$", "$50\\,\\Omega$", "$75\\,\\Omega$", "$300\\,\\Omega$"],
         correct: 0,
         solution: S({
           c: "A traveling EM wave carries E and H fields in a fixed ratio set by the medium: $\\eta = \\sqrt{\\mu/\\varepsilon}$. For vacuum: $\\eta_0 = \\sqrt{\\mu_0/\\varepsilon_0} = 120\\pi \\approx 377\\,\\Omega$ — the 'impedance' space presents to a wave.",
           s: [
             "<b>Step 1 — Evaluate.</b> $\\sqrt{(4\\pi\\times10^{-7})/(8.854\\times10^{-12})} = \\sqrt{1.42\\times10^{5}} = 376.7\\,\\Omega$.",
-            "<b>Step 2 — The exact form.</b> $\\eta_0 = \\mu_0c = 120\\pi\\,\\Omega$ — so choices A (377) and D ($120\\pi$) are THE SAME NUMBER; pick the listed standard form A.",
-            "<b>Step 3 — Distractor audit.</b> 50 Ω and 75 Ω are CABLE impedances (coax geometry), not properties of space — a deliberate confusion of transmission-line $Z_0$ with wave impedance of a medium."
+            "<b>Step 2 — Exact form.</b> Equivalently $\\eta_0 = \\mu_0 c = 120\\pi\\,\\Omega$ — the same 377 Ω written exactly.",
+            "<b>Step 3 — Distractor audit.</b> 50 Ω, 75 Ω, and 300 Ω are CABLE impedances (coax and twin-lead geometry), not properties of space — a deliberate confusion of transmission-line $Z_0$ with the wave impedance of a medium."
           ],
           a: "$\\eta_0 \\approx 377\\,\\Omega$ ($= 120\\pi$)",
           v: "Meaning check: for a plane wave in air, $|E|/|H| = 377$ — e.g. a 1-V/m field travels with $H = 2.65$ mA/m ✓. Antenna relevance: radiation resistance formulas are full of $120\\pi$ because the antenna must 'match into' this impedance of space."
