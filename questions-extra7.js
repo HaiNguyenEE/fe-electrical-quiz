@@ -689,159 +689,404 @@
     6: [
       { q: "Sum of currents into a node = 0 is:",
         choices: ["Kirchhoff's Current Law (KCL)", "KVL", "Ohm's", "Tellegen"], correct: 0,
-        solution: S({ c: "KCL: conservation of charge at node.", s: ["KVL: conservation of energy around loop."], a: "KCL" }), ref: "p.356" },
+        solution: S({
+          c: "Kirchhoff's Current Law (KCL): currents into a node equal currents out (net = 0) — charge conservation.",
+          s: ["<b>Step 1 — Match.</b> KCL.","<b>Step 2 — Distractor audit.</b> KVL is voltages around a loop; Ohm's is V=IR; Tellegen is a power theorem."],
+          a: "Kirchhoff's Current Law.",
+          v: "KCL (nodes/charge) and KVL (loops/energy) are the two pillars of circuit analysis - KCL drives nodal analysis."
+        }), ref: "p.356" },
       { q: "Three identical resistors $R$ in star (Y): equivalent in $\\Delta$:",
         choices: ["$3R$", "$R$", "$R/3$", "$9R$"], correct: 0,
-        solution: S({ c: "$Y$ to $\\Delta$ (balanced): $Z_\\Delta = 3 Z_Y$.", s: [""], a: "$3R$" }), ref: "p.363" },
+        solution: S({
+          c: "For a BALANCED load, the Y-to-Delta conversion is $Z_\\Delta = 3Z_Y$.",
+          s: ["<b>Step 1 — Apply.</b> $Z_\\Delta = 3R$.","<b>Step 2 — Distractor audit.</b> $R/3$ is the reverse (Delta to Y); $R$ and $9R$ are wrong factors."],
+          a: "$3R$",
+          v: "Direction matters: Y to Delta multiply by 3, Delta to Y divide by 3 (balanced) - simplifies three-phase and bridge networks."
+        }), ref: "p.363" },
       { q: "Cap initially at 0V charges to $V_s = 24$V via $R = 1$ kΩ, $C = 1000$ µF. Time to reach 12V:",
         choices: ["$\\approx 0.693$ s", "$1$ s", "$5$ s", "$0.5$ s"], correct: 0,
-        solution: S({ c: "$v(t) = V_s(1-e^{-t/\\tau})$. Solve for $v = V_s/2$: $e^{-t/\\tau} = 0.5$, $t/\\tau = \\ln 2$.", s: ["$\\tau = 10^3 \\cdot 10^{-3} = 1$ s.", "$t = \\ln 2 \\cdot 1 = 0.693$ s."], a: "$0.693$ s", v: "$\\ln 2 \\approx 0.693$ — half-life equivalent." }), ref: "p.358" },
+        solution: S({
+          c: "Charging: $v(t)=V_s(1-e^{-t/\\tau})$. Reaching HALF the final voltage needs $e^{-t/\\tau}=0.5$, so $t=\\tau\\ln2$.",
+          s: ["<b>Step 1 — Time constant.</b> $\\tau = RC = 10^3\\times10^{-3} = 1$ s.","<b>Step 2 — Half-voltage time.</b> $t=\\tau\\ln2 = 0.693$ s.","<b>Step 3 — Distractor audit.</b> 1 s is one full tau (63%); 5 s is about 5 tau (99%); 0.5 s is a guess."],
+          a: "$t \\approx 0.693$ s",
+          v: "$\\ln2\\approx0.693$ is the half-life of exponential charging - reaching 50% always takes $0.693\\tau$, like radioactive half-life."
+        }), ref: "p.358" },
       { q: "Maximum power transferred to load from $V_{Th} = 10$ V, $R_{Th} = 5$Ω:",
         choices: ["$5$ W (when $R_L = 5$Ω)", "$10$ W", "$20$ W", "$2$ W"], correct: 0,
-        solution: S({ c: "$P_{max} = V_{Th}^2/(4 R_{Th})$.", s: ["$100/20 = 5$ W."], a: "$5$ W" }), ref: "p.360" },
+        solution: S({
+          c: "Maximum power transfer occurs when $R_L=R_{Th}$, delivering $P_{max}=V_{Th}^2/(4R_{Th})$.",
+          s: ["<b>Step 1 — Apply.</b> $100/(4\\times5)=5$ W.","<b>Step 2 — Distractor audit.</b> 10 W and 20 W forget the factor of 4; 2 W is wrong."],
+          a: "$P_{max}=5$ W (at $R_L=5\\ \\Omega$).",
+          v: "At the match, efficiency is only 50% (half the power is lost in $R_{Th}$) - matching suits signals; power systems want $R_L \\gg R_{source}$ for efficiency."
+        }), ref: "p.360" },
       { q: "Series RLC at resonance, current is:",
         choices: ["Maximum, in phase with V", "Minimum", "Lagging", "Leading"], correct: 0,
-        solution: S({ c: "At resonance: $Z = R$ (purely resistive, min). Current max, in phase.", s: [""], a: "Max, in phase" }), ref: "p.361" },
+        solution: S({
+          c: "At series resonance $X_L=X_C$ cancel, leaving $Z=R$ (minimum impedance), so current is MAXIMUM and in phase with V.",
+          s: ["<b>Step 1 — Match.</b> Maximum, in phase with V.","<b>Step 2 — Distractor audit.</b> 'Minimum' current is PARALLEL resonance; lagging/leading mean off-resonance reactance."],
+          a: "Maximum and in phase.",
+          v: "Series resonance = min Z = max current; parallel = max Z = min current (the dual) - purely resistive at $f_0$, so pf = 1."
+        }), ref: "p.361" },
       { q: "Inductor $V = L\\,di/dt$. If $i(t) = 3\\sin(100t)$ A, $L = 50$ mH, peak voltage:",
         choices: ["$15$ V", "$50$ V", "$3$ V", "$300$ V"], correct: 0,
-        solution: S({ c: "$di/dt = 300\\cos(100t)$. Peak $= 300$.", s: ["$V_{peak} = L \\cdot 300 = 0.05 \\cdot 300 = 15$ V."], a: "$15$ V" }), ref: "p.358" },
+        solution: S({
+          c: "Inductor voltage is $V=L\\,di/dt$; the peak of the derivative sets the peak voltage.",
+          s: ["<b>Step 1 — Derivative.</b> $di/dt=300\\cos(100t)$; peak 300 A/s.","<b>Step 2 — Voltage.</b> $V_{peak}=0.05\\times300=15$ V.","<b>Step 3 — Distractor audit.</b> 50, 3, 300 V drop or misplace a factor."],
+          a: "$V_{peak}=15$ V",
+          v: "Equivalently $V_{peak}=\\omega L I_{peak}=X_L I_{peak}$; voltage leads current by 90 degrees (peaks when current is zero-crossing fastest)."
+        }), ref: "p.358" },
       { q: "Two capacitors $C_1=2$ µF and $C_2=4$ µF in parallel, then series with $C_3=6$ µF. Total:",
         choices: ["$3$ µF", "$12$ µF", "$2$ µF", "$1$ µF"], correct: 0,
-        solution: S({ c: "Parallel: add. Series: reciprocal sum.", s: ["$C_1\\|C_2 = 6$ µF.", "Series with $C_3=6$: $6 \\cdot 6/(6+6) = 3$ µF."], a: "$3$ µF" }), ref: "p.358" },
+        solution: S({
+          c: "Capacitors ADD in parallel and combine by RECIPROCALS in series (opposite of resistors).",
+          s: ["<b>Step 1 — Parallel.</b> $C_1+C_2=6$ uF.","<b>Step 2 — Series with C3.</b> $(6\\times6)/(6+6)=3$ uF.","<b>Step 3 — Distractor audit.</b> 12 uF adds all (all-parallel); 2 and 1 uF mis-combine."],
+          a: "$3$ uF",
+          v: "Two equal caps in series give half - capacitance is opposite to resistance. Work inside-out: combine the parallel pair first, then the series step."
+        }), ref: "p.358" },
       { q: "Z = 50 + j20 Ω in polar form:",
         choices: ["$\\approx 53.85\\angle 21.8°$", "$70\\angle 45°$", "$50\\angle 20°$", "$30\\angle 90°$"], correct: 0,
-        solution: S({ c: "$|Z|=\\sqrt{2500+400} = \\sqrt{2900}$. $\\angle = \\arctan(20/50)$.", s: ["$|Z| \\approx 53.85$. $\\arctan(0.4) \\approx 21.8°$."], a: "$53.85\\angle 21.8°$" }), ref: "p.360" },
+        solution: S({
+          c: "Rectangular to polar: magnitude $|Z|=\\sqrt{R^2+X^2}$, angle $\\theta=\\arctan(X/R)$.",
+          s: ["<b>Step 1 — Magnitude.</b> $\\sqrt{2500+400}=\\sqrt{2900}=53.85$.","<b>Step 2 — Angle.</b> $\\arctan(20/50)=21.8$ deg.","<b>Step 3 — Distractor audit.</b> $70\\angle45$ adds components; $50\\angle20$ drops reactance from magnitude; $30\\angle90$ wrong."],
+          a: "$\\approx 53.85\\angle 21.8°$",
+          v: "Positive angle means inductive (current lags) - polar form is best for multiply/divide of impedances; rectangular for series addition."
+        }), ref: "p.360" },
       { q: "Three-phase Y source, $V_{LN} = 120$ V, $Z_\\phi = 8\\ \\Omega$ resistive. Total power:",
         choices: ["$5400$ W", "$1800$ W", "$15$ W", "$45$ W"], correct: 0,
-        solution: S({ c: "Per phase: $I_\\phi = V/Z = 15$ A. $P_\\phi = I^2 R = 225 \\cdot 8 = 1800$ W. Total $3 \\times$.", s: ["$3 \\cdot 1800 = 5400$ W."], a: "$5400$ W" }), ref: "p.363" },
+        solution: S({
+          c: "Per-phase: phase current $I_\\phi=V_\\phi/Z$, phase power $P_\\phi=I_\\phi^2 R$, total $=3P_\\phi$.",
+          s: ["<b>Step 1 — Phase current.</b> $120/8=15$ A.","<b>Step 2 — Phase power.</b> $15^2\\times8=1800$ W.","<b>Step 3 — Total.</b> $3\\times1800=5400$ W.","<b>Step 4 — Distractor audit.</b> 1800 W is one phase; 15 and 45 are sub-results."],
+          a: "$P_{total}=5400$ W",
+          v: "For a resistive wye load, total power is 3x the per-phase power - equals $\\sqrt3 V_{LL}I_L$ with pf=1. Per-phase is the cleanest route."
+        }), ref: "p.363" },
       { q: "AC sinusoid $v(t) = 50\\sin(\\omega t + 30°)$. Phasor:",
         choices: ["$50\\angle 30°$ (peak) or $35.4\\angle 30°$ (RMS)", "$50\\angle 0°$", "$30\\angle 50°$", "$50\\angle -30°$"], correct: 0,
-        solution: S({ c: "Phasor: magnitude (peak or RMS) and phase angle.", s: ["Peak phasor: $50\\angle 30°$.", "RMS: divide by $\\sqrt{2}$."], a: "$50\\angle 30°$ (peak)" }), ref: "p.360" },
+        solution: S({
+          c: "A phasor captures amplitude and phase: $50\\sin(\\omega t+30°) \\to 50\\angle30°$ (peak) or $35.4\\angle30°$ (RMS).",
+          s: ["<b>Step 1 — Match.</b> $50\\angle30°$ (peak) or $35.4\\angle30°$ (RMS).","<b>Step 2 — Distractor audit.</b> $50\\angle0$ drops phase; $30\\angle50$ swaps magnitude/angle; $50\\angle-30$ flips sign."],
+          a: "$50\\angle 30°$ (peak).",
+          v: "Phasors drop the shared time dependence, turning calculus into algebra - be consistent with peak vs RMS throughout."
+        }), ref: "p.360" },
       { q: "Reactive power Q for $V_{rms}=100$, $I_{rms}=5$, $\\theta = 60°$ (V leads I):",
         choices: ["$\\approx 433$ VAR", "$250$ VAR", "$500$ VAR", "$\\approx 250$ W"], correct: 0,
-        solution: S({ c: "$Q = V \\cdot I \\cdot \\sin\\theta$. Inductive load (V leads I) → Q positive.", s: ["$100 \\cdot 5 \\cdot \\sin 60° = 500 \\cdot 0.866 = 433$ VAR."], a: "$\\approx 433$ VAR" }), ref: "p.362" },
+        solution: S({
+          c: "Reactive power $Q=V_{rms}I_{rms}\\sin\\theta$. With V leading I (inductive), Q is positive.",
+          s: ["<b>Step 1 — Apply.</b> $100\\times5\\times\\sin60° = 500\\times0.866 = 433$ VAR.","<b>Step 2 — Distractor audit.</b> 250 VAR uses cos (real power); 500 VAR forgets sin; '250 W' mislabels units."],
+          a: "$Q \\approx 433$ VAR (inductive).",
+          v: "Q uses sin, P uses cos - here S=500 VA splits into P=250 W and Q=433 VAR ($\\sqrt{250^2+433^2}=500$)."
+        }), ref: "p.362" },
       { q: "Average power for $V_{rms}=100$, $I_{rms}=5$, $\\theta=60°$:",
         choices: ["$250$ W", "$500$ W", "$\\approx 433$ W", "$0$"], correct: 0,
-        solution: S({ c: "$P = VI\\cos\\theta$.", s: ["$100 \\cdot 5 \\cdot 0.5 = 250$ W."], a: "$250$ W" }), ref: "p.362" },
+        solution: S({
+          c: "Average (real) power $P=V_{rms}I_{rms}\\cos\\theta$, where $\\cos\\theta$ is the power factor.",
+          s: ["<b>Step 1 — Apply.</b> $100\\times5\\times\\cos60° = 500\\times0.5 = 250$ W.","<b>Step 2 — Distractor audit.</b> 500 W forgets pf; 433 W used sin (that's Q); 0 needs 90 deg."],
+          a: "$P = 250$ W",
+          v: "Same V, I, theta as the Q question - P uses cos (250 W), Q uses sin (433 VAR). pf 0.5 means only half the 500 VA is real power."
+        }), ref: "p.362" },
       { q: "Two impedances $Z_1 = 6+j8$ and $Z_2 = 8+j6$ in parallel. Total Z:",
         choices: ["$\\approx 5.04\\angle 45°$ (computed)", "$14+j14$", "$7+j7$", "$50$"], correct: 0,
-        solution: S({ c: "Parallel: $Z_1 Z_2/(Z_1+Z_2)$.", s: ["$Z_1 + Z_2 = 14+j14 = 14\\sqrt{2}\\angle 45°$.", "$Z_1 Z_2 = 10\\angle 53.13° \\cdot 10\\angle 36.87° = 100\\angle 90°$.", "Ratio: $100\\angle 90° / (14\\sqrt{2}\\angle 45°) = 5.05\\angle 45°$."], a: "$\\approx 5.05\\angle 45°$" }), ref: "p.360" },
+        solution: S({
+          c: "Parallel impedances: $Z=\\dfrac{Z_1 Z_2}{Z_1+Z_2}$, easiest in polar (multiply over add).",
+          s: ["<b>Step 1 — Sum.</b> $Z_1+Z_2=14+j14=14\\sqrt2\\angle45°$.","<b>Step 2 — Product.</b> $10\\angle53.13° \\times 10\\angle36.87° = 100\\angle90°$.","<b>Step 3 — Divide.</b> $100\\angle90° / (19.8\\angle45°) = 5.05\\angle45°$.","<b>Step 4 — Distractor audit.</b> $14+j14$ is the SUM; $7+j7$ halves it; 50 is wrong."],
+          a: "$\\approx 5.05\\angle 45°$",
+          v: "Both inputs have magnitude 10; their symmetric mix lands at 45 degrees - product-over-sum in polar keeps the arithmetic clean."
+        }), ref: "p.360" },
       { q: "Total power dissipated in a 3-phase 480 V Y-source delivering 30 A at pf 0.9:",
         choices: ["$\\approx 22.4$ kW", "$13.0$ kW", "$15$ kW", "$25$ kW"], correct: 0,
-        solution: S({ c: "$P = \\sqrt{3} V_{LL} I_L \\cos\\theta$.", s: ["$\\sqrt{3} \\cdot 480 \\cdot 30 \\cdot 0.9 = 22{,}448$ W."], a: "$22.4$ kW" }), ref: "p.363" },
+        solution: S({
+          c: "Three-phase real power: $P=\\sqrt3\\,V_{LL}I_L\\cos\\theta$.",
+          s: ["<b>Step 1 — Apply.</b> $\\sqrt3\\times480\\times30\\times0.9 = 22{,}448$ W.","<b>Step 2 — Distractor audit.</b> 13.0 kW drops the $\\sqrt3$; 15 and 25 kW are off."],
+          a: "$P \\approx 22.4$ kW",
+          v: "The $\\sqrt3$ is the three-phase signature - single-phase would be just $VI\\cos\\theta$. Apparent power here is 24.9 kVA."
+        }), ref: "p.363" },
       { q: "Voltage drop on 100 ft #14 AWG copper (R ≈ 0.253 Ω/100 ft each way = 0.506 round trip) at 15 A:",
         choices: ["$\\approx 7.6$ V", "$3.8$ V", "$15$ V", "$0.25$ V"], correct: 0,
-        solution: S({ c: "$V_{drop} = I \\cdot R$ (both directions).", s: ["$15 \\cdot 0.506 = 7.59$ V."], a: "$\\approx 7.6$ V", v: "NEC: drop should be < 3% of nominal (120V → < 3.6V). This exceeds — need bigger wire." }), ref: "p.354" },
+        solution: S({
+          c: "Voltage drop $V=I\\times R_{roundtrip}$ (current flows out AND back, so use the round-trip resistance).",
+          s: ["<b>Step 1 — Apply.</b> $15\\times0.506 = 7.59$ V.","<b>Step 2 — Distractor audit.</b> 3.8 V uses one-way R; 15 V and 0.25 V are wrong."],
+          a: "$\\approx 7.6$ V",
+          v: "NEC recommends drop under 3% (about 3.6 V on 120 V) - 7.6 V exceeds it, signaling the need for heavier wire on a long run."
+        }), ref: "p.354" },
       { q: "Three resistors in series: 5Ω, 10Ω, 15Ω. Current with 60V source:",
         choices: ["$2$ A", "$4$ A", "$6$ A", "$0.5$ A"], correct: 0,
-        solution: S({ c: "Series: $R_{total} = 30$. $I = V/R$.", s: ["$60/30 = 2$ A."], a: "$2$ A" }), ref: "p.356" },
+        solution: S({
+          c: "Series resistances ADD; then Ohm's law: $I=V/R_{total}$.",
+          s: ["<b>Step 1 — Total.</b> $5+10+15=30\\ \\Omega$.","<b>Step 2 — Current.</b> $60/30=2$ A.","<b>Step 3 — Distractor audit.</b> 4, 6, 0.5 A misuse the total."],
+          a: "$I = 2$ A",
+          v: "In series the SAME current flows through all elements - 2 A here drops 10 V, 20 V, 30 V across the three (summing to 60 V, KVL)."
+        }), ref: "p.356" },
       { q: "Energy delivered by 12V battery providing 2A for 1 hr:",
         choices: ["$86.4$ kJ (or 24 Wh)", "$24$ J", "$24$ kWh", "$86.4$ J"], correct: 0,
-        solution: S({ c: "$W = Pt$. $P = VI = 24$ W. $t = 3600$ s.", s: ["$W = 24 \\cdot 3600 = 86{,}400$ J = 86.4 kJ = 24 Wh."], a: "$86.4$ kJ" }), ref: "p.356" },
+        solution: S({
+          c: "Energy $W=Pt$, with $P=VI$ and time in seconds (or use watt-hours directly).",
+          s: ["<b>Step 1 — Power.</b> $P=12\\times2=24$ W.","<b>Step 2 — Energy.</b> $24\\times3600 = 86{,}400$ J = 86.4 kJ = 24 Wh.","<b>Step 3 — Distractor audit.</b> 24 J forgets time; 24 kWh is off by 1000; 86.4 J drops a factor."],
+          a: "$86.4$ kJ (= 24 Wh)",
+          v: "Watt-hours and joules both work: 24 W for 1 h = 24 Wh = 86.4 kJ (since 1 Wh = 3600 J) - batteries are rated in Ah/Wh for this reason."
+        }), ref: "p.356" },
       { q: "Calculate phasor impedance: 100Ω resistor, 200mH inductor in series at 50 Hz:",
         choices: ["$100 + j62.8$ Ω", "$100 + j10$", "$100\\angle 90°$", "$200\\angle 0°$"], correct: 0,
-        solution: S({ c: "$X_L = 2\\pi f L$.", s: ["$X_L = 2\\pi(50)(0.2) = 62.83$ Ω.", "$Z = 100 + j62.83$ Ω."], a: "$100+j62.8$ Ω" }), ref: "p.360" },
+        solution: S({
+          c: "Series R-L impedance: $Z=R+jX_L$ with $X_L=2\\pi f L$.",
+          s: ["<b>Step 1 — Reactance.</b> $X_L=2\\pi(50)(0.2)=62.83\\ \\Omega$.","<b>Step 2 — Combine.</b> $Z=100+j62.8\\ \\Omega$.","<b>Step 3 — Distractor audit.</b> $100+j10$ drops the $2\\pi f$; $100\\angle90$ and $200\\angle0$ are wrong."],
+          a: "$Z = 100+j62.8\\ \\Omega$",
+          v: "Inductive reactance rises with frequency - at DC this would be just 100 ohms (inductor a short), at high frequency it dominates."
+        }), ref: "p.360" },
       { q: "Cap and inductor in parallel at resonance:",
         choices: ["Acts as open circuit (infinite Z)", "Short", "Just R", "Acts as wire"], correct: 0,
-        solution: S({ c: "Parallel LC at $\\omega_0$: ideally infinite impedance (tank).", s: ["With losses: very high but finite Q-dependent peak."], a: "Open at $\\omega_0$" }), ref: "p.361" },
+        solution: S({
+          c: "An ideal parallel LC 'tank' at resonance has $X_L=X_C$ cancelling, giving (ideally) INFINITE impedance - an open circuit.",
+          s: ["<b>Step 1 — Match.</b> Acts as an open circuit (infinite Z).","<b>Step 2 — Distractor audit.</b> 'Short' is series resonance; 'just R'/'wire' ignore the tank behavior."],
+          a: "Open circuit at $\\omega_0$.",
+          v: "With real losses it's a very high but finite peak (Q-dependent) - the tank blocks the resonant frequency while passing others, the basis of band-stop/pass filters."
+        }), ref: "p.361" },
       { q: "Power factor of $Z = 6 + j8$ (in series):",
         choices: ["$0.6$ lagging", "$0.8$", "$1.0$", "$0.6$ leading"], correct: 0,
-        solution: S({ c: "$\\theta = \\arctan(8/6) = 53.13°$. $pf = \\cos = 0.6$. Inductive: lagging.", s: [""], a: "$0.6$ lagging" }), ref: "p.362" },
+        solution: S({
+          c: "Power factor $=\\cos\\theta$ where $\\theta=\\arctan(X/R)$. Positive reactance means inductive, so LAGGING.",
+          s: ["<b>Step 1 — Angle.</b> $\\theta=\\arctan(8/6)=53.13°$.","<b>Step 2 — pf.</b> $\\cos53.13°=0.6$, lagging (inductive).","<b>Step 3 — Distractor audit.</b> 0.8 is $\\sin$ (or R/X mixup); 1.0 is purely resistive; '0.6 leading' would be capacitive."],
+          a: "$0.6$ lagging.",
+          v: "It's a 3-4-5-style triangle: R=6, X=8, |Z|=10, so pf=R/|Z|=0.6 - inductive loads always lag (current behind voltage)."
+        }), ref: "p.362" },
       { q: "Star-to-delta transformation with $Z_Y = 9+j12$ each: $Z_\\Delta$:",
         choices: ["$27 + j36$ each", "$3 + j4$ each", "$9+j12$ each", "$81+j144$ each"], correct: 0,
-        solution: S({ c: "Balanced: $Z_\\Delta = 3 Z_Y$.", s: ["$3(9+j12) = 27+j36$."], a: "$27+j36$" }), ref: "p.363" },
+        solution: S({
+          c: "Balanced Y-to-Delta: $Z_\\Delta = 3Z_Y$ (multiply each impedance by 3).",
+          s: ["<b>Step 1 — Apply.</b> $3(9+j12)=27+j36$.","<b>Step 2 — Distractor audit.</b> $3+j4$ DIVIDES by 3 (Delta to Y); $9+j12$ unchanged; $81+j144$ multiplies wrongly."],
+          a: "$27+j36$ each.",
+          v: "Y to Delta multiplies by 3 (both real and imaginary parts scale) - the reverse, Delta to Y, divides by 3."
+        }), ref: "p.363" },
       { q: "Power dissipated by 100Ω resistor with $i = 2 + 3\\sin(\\omega t)$ A:",
         choices: ["$\\approx 850$ W (DC²+AC²RMS²)R", "$400$ W", "$900$ W", "$700$ W"], correct: 0,
-        solution: S({ c: "$P = I_{rms}^2 R$. $I_{rms}^2 = I_{DC}^2 + I_{AC,RMS}^2 = 4 + 9/2 = 8.5$.", s: ["$P = 8.5 \\cdot 100 = 850$ W."], a: "$\\approx 850$ W" }), ref: "p.360" },
+        solution: S({
+          c: "RMS of DC+AC combines in quadrature: $I_{rms}^2 = I_{DC}^2 + I_{AC,rms}^2$. Then $P=I_{rms}^2 R$.",
+          s: ["<b>Step 1 — RMS squared.</b> $2^2 + (3/\\sqrt2)^2 = 4 + 4.5 = 8.5$.","<b>Step 2 — Power.</b> $8.5\\times100 = 850$ W.","<b>Step 3 — Distractor audit.</b> 400 W is DC only; 900 W adds peaks; 700 W is wrong."],
+          a: "$\\approx 850$ W",
+          v: "DC and AC contributions are orthogonal, so their squared values add (never add the amplitudes linearly) - same rule as combining independent error sources."
+        }), ref: "p.360" },
       { q: "Energy in 1µH inductor at 100 mA:",
         choices: ["$5$ nJ", "$5$ µJ", "$5$ mJ", "$0.1$ µJ"], correct: 0,
-        solution: S({ c: "$W = LI^2/2$.", s: ["$10^{-6} \\cdot 0.01/2 = 5 \\cdot 10^{-9} = 5$ nJ."], a: "$5$ nJ" }), ref: "p.358" },
+        solution: S({
+          c: "Inductor energy $W=\\tfrac12 LI^2$.",
+          s: ["<b>Step 1 — Apply.</b> $\\tfrac12(10^{-6})(0.1^2) = \\tfrac12(10^{-6})(0.01) = 5\\times10^{-9}$ J.","<b>Step 2 — Distractor audit.</b> 5 uJ and 5 mJ slip decades; 0.1 uJ is wrong."],
+          a: "$5$ nJ",
+          v: "Tiny energy (nanojoules) at small L and modest current - the $I^2$ dependence means current dominates the stored energy."
+        }), ref: "p.358" },
       { q: "$V_{rms}$ of triangular wave with peak $V_m$:",
         choices: ["$V_m/\\sqrt{3}$", "$V_m/\\sqrt{2}$", "$V_m$", "$V_m/2$"], correct: 0,
-        solution: S({ c: "Triangular wave RMS factor: $1/\\sqrt{3} \\approx 0.577$.", s: ["Sine: $1/\\sqrt{2} \\approx 0.707$.", "Square: 1.", "Sawtooth: $1/\\sqrt{3}$."], a: "$V_m/\\sqrt{3}$" }), ref: "p.360" },
+        solution: S({
+          c: "RMS depends on waveform shape. A triangular (or sawtooth) wave has RMS $=V_m/\\sqrt3$.",
+          s: ["<b>Step 1 — Match.</b> $V_m/\\sqrt3 \\approx 0.577 V_m$.","<b>Step 2 — Distractor audit.</b> $V_m/\\sqrt2$ is a SINE; $V_m$ is a square wave; $V_m/2$ is half-wave-rectified sine."],
+          a: "$V_m/\\sqrt3$",
+          v: "RMS factor ladder: square=1, sine=$1/\\sqrt2$=0.707, triangle/sawtooth=$1/\\sqrt3$=0.577 - flatter waveforms have higher RMS for the same peak."
+        }), ref: "p.360" },
       { q: "Time constant of RL circuit with 200Ω and 50 mH:",
         choices: ["$0.25$ ms", "$250$ s", "$10$ s", "$5$ ms"], correct: 0,
-        solution: S({ c: "$\\tau = L/R$.", s: ["$0.05/200 = 0.00025$ s = 0.25 ms."], a: "$0.25$ ms" }), ref: "p.358" },
+        solution: S({
+          c: "RL time constant is $\\tau=L/R$ (not RC - that's the capacitor form).",
+          s: ["<b>Step 1 — Apply.</b> $\\tau=0.05/200=0.00025$ s = 0.25 ms.","<b>Step 2 — Distractor audit.</b> 250 s multiplies; 10 s and 5 ms misuse the formula."],
+          a: "$\\tau = 0.25$ ms",
+          v: "RL uses L/R, RC uses RC - both yield seconds. After 5 tau (1.25 ms) the inductor current essentially reaches its final value."
+        }), ref: "p.358" },
     ],
 
     // Linear Sys — +12
     7: [
       { q: "Inverse Laplace of $1/(s+a)^2$:",
         choices: ["$te^{-at}$", "$e^{-at}$", "$te^{at}$", "$1/(at)$"], correct: 0,
-        solution: S({ c: "Pair: $t^n e^{-at} \\leftrightarrow n!/(s+a)^{n+1}$.", s: ["$n=1$: $te^{-at} \\leftrightarrow 1/(s+a)^2$."], a: "$te^{-at}$" }), ref: "p.56" },
+        solution: S({
+          c: "Standard pair: $\\dfrac{n!}{(s+a)^{n+1}} \\leftrightarrow t^n e^{-at}$. For $n=1$, $1/(s+a)^2 \\leftrightarrow te^{-at}$.",
+          s: ["<b>Step 1 — Match n=1.</b> $te^{-at}$.","<b>Step 2 — Distractor audit.</b> $e^{-at}$ is $1/(s+a)$; $te^{at}$ has wrong sign; $1/(at)$ is not a transform pair."],
+          a: "$te^{-at}$",
+          v: "The repeated pole at $s=-a$ produces the extra factor of $t$ - the signature of a double pole (critically-damped response)."
+        }), ref: "p.56" },
       { q: "Transfer function order = highest power of $s$ in denominator. For $H(s) = 1/(s^3+2s^2+5s+1)$:",
         choices: ["$3$rd order", "$1$st", "$5$th", "$2$nd"], correct: 0,
-        solution: S({ c: "Highest exponent of $s$ in denominator.", s: [""], a: "$3$rd" }), ref: "p.365" },
+        solution: S({
+          c: "System ORDER = highest power of $s$ in the denominator (= number of poles = number of state variables).",
+          s: ["<b>Step 1 — Match.</b> Highest power is $s^3$ -> 3rd order.","<b>Step 2 — Distractor audit.</b> 1st/2nd undercount; 5th confuses with a coefficient."],
+          a: "3rd order.",
+          v: "Order sets the number of independent energy-storage elements and the complexity of the dynamics - a 3rd-order system needs 3 state variables."
+        }), ref: "p.365" },
       { q: "DC gain of $H(s) = 12/(s^2+5s+6)$:",
         choices: ["$2$", "$12$", "$6$", "$1$"], correct: 0,
-        solution: S({ c: "$H(0) = 12/6 = 2$.", s: [""], a: "$2$" }), ref: "p.366" },
+        solution: S({
+          c: "DC gain = $H(0)$ (substitute $s=0$, the steady-state/zero-frequency response).",
+          s: ["<b>Step 1 — Set s=0.</b> $12/(0+0+6)=2$.","<b>Step 2 — Distractor audit.</b> 12 is the numerator; 6 the constant term; 1 is wrong."],
+          a: "$H(0)=2$",
+          v: "Apply a 1 V step and the output settles to 2 - the $s$-terms (dynamics) vanish at DC, leaving constant/constant."
+        }), ref: "p.366" },
       { q: "Two systems in parallel: $H_1 = 3$, $H_2 = -2$. Total:",
         choices: ["$1$", "$-6$", "$5$", "$-2/3$"], correct: 0,
-        solution: S({ c: "Parallel TF adds.", s: ["$3 + (-2) = 1$."], a: "$1$" }), ref: "p.365" },
+        solution: S({
+          c: "PARALLEL transfer functions ADD: $H = H_1 + H_2$ (series would multiply).",
+          s: ["<b>Step 1 — Add.</b> $3 + (-2) = 1$.","<b>Step 2 — Distractor audit.</b> $-6$ multiplies (series); 5 and $-2/3$ are wrong combinations."],
+          a: "$1$",
+          v: "Parallel paths sum their outputs; series paths multiply - the two basic block-diagram reduction rules."
+        }), ref: "p.365" },
       { q: "Phase of $H(s) = 1/(s+1)$ at $\\omega = 1$:",
         choices: ["$-45°$", "$0°$", "$-90°$", "$+45°$"], correct: 0,
-        solution: S({ c: "Pole at corner frequency: phase contribution is -45°.", s: [""], a: "$-45°$" }), ref: "p.366" },
+        solution: S({
+          c: "A first-order pole contributes phase $-\\arctan(\\omega/\\omega_c)$. AT the corner ($\\omega=\\omega_c$), that's exactly $-45°$.",
+          s: ["<b>Step 1 — At corner.</b> $\\omega=1=\\omega_c$ -> $-\\arctan(1) = -45°$.","<b>Step 2 — Distractor audit.</b> $0°$ is far below the corner; $-90°$ is far above; $+45°$ would be a zero."],
+          a: "$-45°$",
+          v: "The corner-frequency landmarks: a pole gives $-45°$ at $\\omega_c$, approaching $-90°$ a decade above and $0°$ a decade below."
+        }), ref: "p.366" },
       { q: "Bandwidth of overdamped 2nd-order system: dominant pole at $s = -2$. BW:",
         choices: ["$\\approx 2$ rad/s (dominant pole approximation)", "$\\sqrt{2}$", "$1$", "Infinite"], correct: 0,
-        solution: S({ c: "Dominant pole approximation: BW $\\approx |p_{dominant}|$.", s: ["Valid when other poles much further from origin."], a: "$\\approx 2$ rad/s" }), ref: "p.366" },
+        solution: S({
+          c: "Dominant-pole approximation: when one pole is much closer to the origin than the others, the bandwidth is set by it: $BW \\approx |p_{dominant}|$.",
+          s: ["<b>Step 1 — Apply.</b> $BW \\approx 2$ rad/s.","<b>Step 2 — Distractor audit.</b> $\\sqrt2$ and 1 are unrelated; 'infinite' ignores the pole."],
+          a: "$\\approx 2$ rad/s",
+          v: "The slowest pole (nearest the origin) dominates the response - valid when other poles are several times farther out."
+        }), ref: "p.366" },
       { q: "Pole at $s = -2 \\pm j5$. Natural frequency $\\omega_n$:",
         choices: ["$\\sqrt{29} \\approx 5.39$ rad/s", "$5$", "$2$", "$7$"], correct: 0,
-        solution: S({ c: "$\\omega_n = $ distance from origin.", s: ["$\\sqrt{4+25} = \\sqrt{29}$."], a: "$\\approx 5.39$ rad/s" }), ref: "p.366" },
+        solution: S({
+          c: "For complex poles $-\\sigma \\pm j\\omega_d$, the natural frequency is the DISTANCE from the origin: $\\omega_n = \\sqrt{\\sigma^2 + \\omega_d^2}$.",
+          s: ["<b>Step 1 — Apply.</b> $\\sqrt{2^2+5^2} = \\sqrt{29} = 5.39$ rad/s.","<b>Step 2 — Distractor audit.</b> 5 is the imaginary part ($\\omega_d$); 2 the real part; 7 wrongly adds."],
+          a: "$\\omega_n = \\sqrt{29} \\approx 5.39$ rad/s",
+          v: "$\\omega_n$ is the pole's radius; the imaginary part $\\omega_d=5$ is the DAMPED (ringing) frequency, always less than $\\omega_n$."
+        }), ref: "p.366" },
       { q: "Damping ratio $\\zeta$ for pole at $-2 \\pm j5$:",
         choices: ["$2/\\sqrt{29} \\approx 0.371$", "$0.5$", "$0.707$", "$1.0$"], correct: 0,
-        solution: S({ c: "$\\zeta = |\\text{Re}|/\\omega_n$.", s: ["$2/\\sqrt{29} \\approx 0.371$."], a: "$\\approx 0.371$" }), ref: "p.366" },
+        solution: S({
+          c: "Damping ratio $\\zeta = \\dfrac{|\\text{Re}|}{\\omega_n} = \\dfrac{\\sigma}{\\sqrt{\\sigma^2+\\omega_d^2}}$ = cosine of the angle from the negative-real axis.",
+          s: ["<b>Step 1 — Apply.</b> $2/\\sqrt{29} = 0.371$.","<b>Step 2 — Distractor audit.</b> 0.5, 0.707, 1.0 are common ζ values but not this pole's."],
+          a: "$\\zeta \\approx 0.371$",
+          v: "ζ < 1 means underdamped (the $\\pm j5$ confirms oscillation) - this ζ≈0.37 gives noticeable overshoot (~28%)."
+        }), ref: "p.366" },
       { q: "Final value of $y(t)$ for $Y(s) = 5/(s(s+2))$:",
         choices: ["$2.5$", "$5$", "$0$", "$\\infty$"], correct: 0,
-        solution: S({ c: "FVT: $\\lim_{s\\to 0} sY = 5/2 = 2.5$.", s: [""], a: "$2.5$" }), ref: "p.56" },
+        solution: S({
+          c: "Final Value Theorem: $\\lim_{t\\to\\infty} y(t) = \\lim_{s\\to0} sY(s)$ (valid for stable systems).",
+          s: ["<b>Step 1 — Multiply by s.</b> $sY = 5/(s+2)$.","<b>Step 2 — Let s->0.</b> $5/2 = 2.5$.","<b>Step 3 — Distractor audit.</b> 5 forgets the limit; 0 misreads; infinity needs an unstable pole."],
+          a: "$y(\\infty) = 2.5$",
+          v: "The $1/s$ factor signals a step input; the system settles to 2.5 - FVT is a shortcut for steady state when the system is stable."
+        }), ref: "p.56" },
       { q: "Initial value $y(0^+)$ for $Y(s) = 2s/(s^2+1)$:",
         choices: ["$2$", "$0$", "$1$", "$\\infty$"], correct: 0,
-        solution: S({ c: "IVT: $\\lim_{s\\to\\infty} sY(s)$.", s: ["$\\lim 2s^2/(s^2+1) = 2$."], a: "$2$" }), ref: "p.56" },
+        solution: S({
+          c: "Initial Value Theorem: $y(0^+) = \\lim_{s\\to\\infty} sY(s)$.",
+          s: ["<b>Step 1 — Form sY.</b> $s\\cdot 2s/(s^2+1) = 2s^2/(s^2+1)$.","<b>Step 2 — Let s->infinity.</b> $\\to 2$.","<b>Step 3 — Distractor audit.</b> 0, 1, infinity mis-evaluate the limit."],
+          a: "$y(0^+) = 2$",
+          v: "IVT (s->infinity) probes the instant of t=0; FVT (s->0) probes t->infinity - the two ends of the time response, read off in the s-domain."
+        }), ref: "p.56" },
       { q: "BIBO stability requires:",
         choices: ["Bounded input → bounded output", "Linear", "Time-invariant", "Causal"], correct: 0,
-        solution: S({ c: "BIBO = Bounded-Input Bounded-Output.", s: ["For LTI: all poles in LHP."], a: "Bounded I/O" }), ref: "p.365" },
+        solution: S({
+          c: "BIBO = Bounded-Input, Bounded-Output: every bounded input produces a bounded output.",
+          s: ["<b>Step 1 — Match.</b> Bounded input -> bounded output.","<b>Step 2 — Distractor audit.</b> Linearity, time-invariance, and causality are SEPARATE properties, not the BIBO definition."],
+          a: "Bounded input -> bounded output.",
+          v: "For an LTI system, BIBO stability is equivalent to all poles lying in the left-half plane (continuous) or inside the unit circle (discrete)."
+        }), ref: "p.365" },
       { q: "Pole-zero cancellation may cause:",
         choices: ["Hidden modes (uncontrollable/unobservable)", "Always stable", "Infinite gain", "Phase shift"], correct: 0,
-        solution: S({ c: "If unstable pole is canceled by zero, internal state may still grow → BIBO stable but internally unstable.", s: [""], a: "Hidden modes" }), ref: "p.365" },
+        solution: S({
+          c: "Canceling a pole with a zero can HIDE internal modes - if an UNSTABLE pole is canceled, the system looks BIBO-stable from input/output but a state can still grow (uncontrollable or unobservable mode).",
+          s: ["<b>Step 1 — Match.</b> Hidden modes (uncontrollable/unobservable).","<b>Step 2 — Distractor audit.</b> It does NOT guarantee stability; not infinite gain; not merely a phase shift."],
+          a: "Hidden (uncontrollable/unobservable) modes.",
+          v: "This is why you never cancel a right-half-plane pole with a zero - the internal state still blows up even though the transfer function looks fine."
+        }), ref: "p.365" },
     ],
 
     // Signal — +12
     8: [
       { q: "Nyquist rate for signal up to 20 kHz:",
         choices: ["$> 40$ kHz", "$20$ kHz", "$10$ kHz", "$80$ kHz"], correct: 0,
-        solution: S({ c: "$f_s > 2 f_{max}$.", s: [""], a: "$> 40$ kHz" }), ref: "p.375" },
+        solution: S({
+          c: "Nyquist: sample at MORE than twice the highest frequency, $f_s > 2 f_{max}$.",
+          s: ["<b>Step 1 — Apply.</b> $> 2\\times20 = 40$ kHz.","<b>Step 2 — Distractor audit.</b> 20 kHz and 10 kHz are too slow (aliasing); 80 kHz works but isn't the minimum."],
+          a: "$> 40$ kHz",
+          v: "This is exactly why CD audio uses 44.1 kHz for a 20-kHz hearing limit - the margin above 40 kHz leaves room for the anti-alias filter rolloff."
+        }), ref: "p.375" },
       { q: "Anti-aliasing filter type:",
         choices: ["Low-pass before sampler", "High-pass", "Notch", "Bandpass after"], correct: 0,
-        solution: S({ c: "Anti-aliasing: remove frequencies above Nyquist before sampling.", s: [""], a: "LPF" }), ref: "p.375" },
+        solution: S({
+          c: "An anti-aliasing filter is a LOW-PASS placed BEFORE the sampler, removing content above the Nyquist frequency so it cannot fold into the band.",
+          s: ["<b>Step 1 — Match.</b> Low-pass before the sampler.","<b>Step 2 — Distractor audit.</b> High-pass/notch remove the wrong band; a post-sampler filter is too late for aliasing."],
+          a: "Low-pass, before sampling.",
+          v: "Timing is everything: once high frequencies alias during sampling, no later filter can separate them from real low-frequency content."
+        }), ref: "p.375" },
       { q: "DFT bin spacing for $N$-point DFT, $f_s$ sampling:",
         choices: ["$f_s/N$ Hz", "$f_s$", "$2 f_s$", "$1$ Hz"], correct: 0,
-        solution: S({ c: "Frequency resolution = $f_s/N$.", s: ["E.g., 1024-point at 8 kHz: bins every 7.8 Hz."], a: "$f_s/N$" }), ref: "p.376" },
+        solution: S({
+          c: "DFT frequency resolution (bin spacing) is $f_s/N$ - the sample rate divided by the number of points.",
+          s: ["<b>Step 1 — Match.</b> $f_s/N$ Hz.","<b>Step 2 — Distractor audit.</b> $f_s$, $2f_s$, and a fixed 1 Hz ignore the dependence on N."],
+          a: "$f_s/N$ Hz.",
+          v: "More points (or longer record) = finer resolution - e.g. 1024 points at 8 kHz gives 7.8-Hz bins. True resolution comes from record LENGTH, not zero-padding."
+        }), ref: "p.376" },
       { q: "Hanning window vs rectangular: tradeoff:",
         choices: ["Hanning: less leakage but wider main lobe", "Same", "Hanning is faster", "Rect is better"], correct: 0,
-        solution: S({ c: "Windowing reduces spectral leakage at cost of frequency resolution.", s: [""], a: "Less leakage, wider main lobe" }), ref: "p.376" },
+        solution: S({
+          c: "A Hanning (Hann) window tapers the data ends to zero, REDUCING spectral leakage - but at the cost of a WIDER main lobe (coarser frequency resolution).",
+          s: ["<b>Step 1 — Match.</b> Hanning: less leakage, wider main lobe.","<b>Step 2 — Distractor audit.</b> Not 'same'; not faster; rectangular has the sharpest peak but worst leakage, so 'rect is better' is one-sided."],
+          a: "Less leakage, wider main lobe.",
+          v: "Every window picks a point on the leakage-vs-resolution trade - rectangular = sharp peak/bad leakage; Hann/Hamming/Blackman = progressively less leakage, wider lobes."
+        }), ref: "p.376" },
       { q: "FIR filter: impulse response length 10. Group delay:",
         choices: ["$4.5$ samples (constant if symmetric)", "$10$", "$5$", "$0$"], correct: 0,
-        solution: S({ c: "Linear-phase FIR (symmetric coefficients): group delay = $(N-1)/2$.", s: ["$N=10$: delay = 4.5 samples."], a: "$4.5$ samples" }), ref: "p.376" },
+        solution: S({
+          c: "A linear-phase (symmetric-coefficient) FIR filter has constant group delay $(N-1)/2$ samples.",
+          s: ["<b>Step 1 — Apply.</b> $(10-1)/2 = 4.5$ samples.","<b>Step 2 — Distractor audit.</b> 10 is the full length; 5 and 0 misuse the formula."],
+          a: "$4.5$ samples.",
+          v: "Constant group delay (no phase distortion) is FIR's headline advantage over IIR - the whole signal is just delayed by $(N-1)/2$, preserving waveform shape."
+        }), ref: "p.376" },
       { q: "Aliasing of 8 kHz signal sampled at 6 kHz:",
         choices: ["Apparent $2$ kHz ($|8-6|$)", "$8$ kHz", "$0$", "$14$ kHz"], correct: 0,
-        solution: S({ c: "$8 > 3 = f_s/2$, alias to $|8-6| = 2$ kHz.", s: [""], a: "$2$ kHz" }), ref: "p.375" },
+        solution: S({
+          c: "Above Nyquist ($f_s/2 = 3$ kHz), the signal folds: $f_{alias} = |f - f_s|$.",
+          s: ["<b>Step 1 — Check.</b> 8 kHz > 3 kHz -> aliases.","<b>Step 2 — Fold.</b> $|8-6| = 2$ kHz.","<b>Step 3 — Distractor audit.</b> 8 ignores aliasing; 0 and 14 miscompute the fold."],
+          a: "$2$ kHz",
+          v: "An 8-kHz tone masquerades as 2 kHz, indistinguishable from a real 2-kHz signal - which is why the anti-alias filter must remove it BEFORE sampling."
+        }), ref: "p.375" },
       { q: "Magnitude response of $H(j\\omega) = 1/(1 + j\\omega/\\omega_c)$ at $\\omega = \\omega_c$:",
         choices: ["$1/\\sqrt{2} = -3$ dB", "$1$", "$0$", "$1/2$"], correct: 0,
-        solution: S({ c: "1st-order LPF at corner.", s: ["$|H| = 1/\\sqrt{1+1} = 1/\\sqrt{2}$. dB: $-3.01$."], a: "$-3$ dB" }), ref: "p.375" },
+        solution: S({
+          c: "At the corner frequency, a first-order low-pass has magnitude $1/\\sqrt{1+1} = 1/\\sqrt2 = 0.707$, i.e. $-3$ dB.",
+          s: ["<b>Step 1 — Apply.</b> $|H| = 1/\\sqrt{1+(\\omega_c/\\omega_c)^2} = 1/\\sqrt2$.","<b>Step 2 — dB.</b> $20\\log(0.707) = -3.01$ dB.","<b>Step 3 — Distractor audit.</b> 1 is DC; 0 is far above; 1/2 is the -6 dB point."],
+          a: "$1/\\sqrt2 = -3$ dB",
+          v: "The -3 dB (half-POWER) point DEFINES the cutoff frequency - amplitude is 0.707 of max, power is half."
+        }), ref: "p.375" },
       { q: "$\\delta[n]$ Fourier transform (DTFT):",
         choices: ["Constant 1 (flat spectrum)", "$\\delta(\\omega)$", "$1/(j\\omega)$", "Cosine"], correct: 0,
-        solution: S({ c: "Impulse has flat spectrum.", s: [""], a: "$1$" }), ref: "p.376" },
+        solution: S({
+          c: "The unit impulse has a FLAT spectrum: its DTFT is constant (= 1) at all frequencies.",
+          s: ["<b>Step 1 — Match.</b> Constant 1 (flat spectrum).","<b>Step 2 — Distractor audit.</b> $\\delta(\\omega)$ is the transform of a CONSTANT (DC); $1/(j\\omega)$ is an integrator; cosine is wrong."],
+          a: "Constant 1 (flat).",
+          v: "An impulse contains ALL frequencies equally - which is why the impulse response fully characterizes a system (feeding it 'every frequency at once')."
+        }), ref: "p.376" },
       { q: "Bode plot 1st-order pole at $\\omega = 10$. Asymptotic mag at $\\omega = 100$:",
         choices: ["$-20$ dB", "$0$ dB", "$-3$ dB", "$-40$ dB"], correct: 0,
-        solution: S({ c: "1 decade above corner: -20 dB.", s: [""], a: "$-20$ dB" }), ref: "p.366" },
+        solution: S({
+          c: "A first-order pole rolls off at $-20$ dB/decade above its corner. One decade above (10 -> 100), that's $-20$ dB.",
+          s: ["<b>Step 1 — Apply.</b> 1 decade past the corner -> $-20$ dB.","<b>Step 2 — Distractor audit.</b> 0 dB is at/below the corner; $-3$ dB is AT the corner; $-40$ dB is two decades up."],
+          a: "$-20$ dB",
+          v: "Each pole adds $-20$ dB/decade of slope above its corner - stack poles for steeper rolloff (two poles -> $-40$ dB/dec)."
+        }), ref: "p.366" },
       { q: "Bode plot 1st-order zero at 10. Asymptotic mag at $\\omega = 100$:",
         choices: ["$+20$ dB", "$0$", "$-20$", "$+3$"], correct: 0,
-        solution: S({ c: "Zero contributes +20 dB/decade above corner.", s: [""], a: "$+20$ dB" }), ref: "p.366" },
+        solution: S({
+          c: "A first-order ZERO rises at $+20$ dB/decade above its corner - the mirror image of a pole.",
+          s: ["<b>Step 1 — Apply.</b> 1 decade above 10 -> $+20$ dB.","<b>Step 2 — Distractor audit.</b> 0 is at/below corner; $-20$ is a pole; $+3$ is the at-corner value."],
+          a: "$+20$ dB",
+          v: "Poles bend the magnitude DOWN ($-20$ dB/dec), zeros bend it UP ($+20$ dB/dec) - a Bode plot is just the sum of these straight-line asymptotes."
+        }), ref: "p.366" },
       { q: "Group delay of $H(s) = 1$ (unity):",
         choices: ["$0$", "$\\infty$", "$1$", "Undefined"], correct: 0,
-        solution: S({ c: "Constant H = no delay or phase shift.", s: [""], a: "$0$" }), ref: "p.366" },
+        solution: S({
+          c: "Group delay is $-d\\phi/d\\omega$ (rate of phase change). A constant transfer function has zero phase everywhere, so zero group delay.",
+          s: ["<b>Step 1 — Match.</b> 0.","<b>Step 2 — Distractor audit.</b> infinity, 1, undefined are wrong - flat 0 phase gives 0 delay."],
+          a: "$0$",
+          v: "A pure passthrough delays nothing - any frequency-dependent phase (poles/zeros/delay) would create nonzero group delay and possibly waveform distortion."
+        }), ref: "p.366" },
       { q: "Z-transform of $a^n u[n]$:",
         choices: ["$1/(1-az^{-1}) = z/(z-a)$", "$1$", "$z/(z+a)$", "$a^n/z$"], correct: 0,
-        solution: S({ c: "Geometric Z-transform.", s: [""], a: "$z/(z-a)$" }), ref: "p.376" },
+        solution: S({
+          c: "Geometric sequence Z-transform: $\\sum a^n z^{-n} = \\dfrac{1}{1-az^{-1}} = \\dfrac{z}{z-a}$ (for $|z|>|a|$).",
+          s: ["<b>Step 1 — Match.</b> $z/(z-a)$.","<b>Step 2 — Distractor audit.</b> 1 is the impulse; $z/(z+a)$ flips the sign of a; $a^n/z$ is not a transform."],
+          a: "$z/(z-a)$",
+          v: "The pole at $z=a$ governs stability: $|a|<1$ (pole inside unit circle) means the sequence decays - the discrete analog of $1/(s+a)$ for $e^{-at}$."
+        }), ref: "p.376" },
     ],
 
     // Electronics — +20
