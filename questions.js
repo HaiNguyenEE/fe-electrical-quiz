@@ -1934,12 +1934,13 @@ const QUESTION_BANK = {
           choices: ["$10$ kHz", "$5$ kHz", "$1$ MHz", "$2$ MHz"],
           correct: 0,
           solution: S({
-            c: "AM (DSB-LC) bandwidth: $BW = 2 f_m$ where $f_m$ is the highest message frequency. The carrier $f_c$ doesn't affect bandwidth.",
+            c: "Standard AM (DSB-LC) bandwidth: $BW=2f_m$ (twice the highest message frequency); the carrier frequency doesn't affect it.",
             s: [
-              "$BW = 2 \\cdot 5{,}000 = 10{,}000$ Hz $= 10$ kHz."
+              "<b>Step 1 — Apply.</b> $BW=2(5)=10$ kHz.",
+              "<b>Step 2 — Distractor audit.</b> $5$ kHz is SSB; $1$ MHz is the carrier; $2$ MHz is wrong."
             ],
-            a: "$BW = 10$ kHz",
-            v: "Two sidebands at $f_c \\pm f_m$ require total bandwidth $2 f_m$. The carrier is in the middle."
+            a: "$BW=10$ kHz",
+            v: "Two sidebands at $f_c\\pm f_m$ span $2f_m$, with the carrier in the middle. SSB halves this by sending one sideband."
           }),
           ref: "Handbook p.371" },
 
@@ -1947,12 +1948,13 @@ const QUESTION_BANK = {
           choices: ["$1.005$ MHz", "$0.995$ MHz", "$1.05$ MHz", "$5$ kHz"],
           correct: 0,
           solution: S({
-            c: "AM produces two sidebands: $f_{USB} = f_c + f_m$ (upper), $f_{LSB} = f_c - f_m$ (lower).",
+            c: "AM creates sidebands at $f_{USB}=f_c+f_m$ and $f_{LSB}=f_c-f_m$.",
             s: [
-              "$f_{USB} = 1{,}000{,}000 + 5{,}000 = 1{,}005{,}000$ Hz $= 1.005$ MHz."
+              "<b>Step 1 — Apply.</b> $f_{USB}=1{,}000{,}000+5{,}000=1.005$ MHz.",
+              "<b>Step 2 — Distractor audit.</b> $0.995$ MHz is the LOWER sideband; $1.05$ MHz adds 50 kHz; $5$ kHz is just $f_m$."
             ],
-            a: "$f_{USB} = 1.005$ MHz",
-            v: "$f_{LSB} = 0.995$ MHz. Each sideband carries the same info — that's why SSB (single-sideband) is half the bandwidth of AM."
+            a: "$f_{USB}=1.005$ MHz",
+            v: "Both sidebands carry identical information ($f_{LSB}=0.995$ MHz) - which is why SSB transmits just one, halving bandwidth and power."
           }),
           ref: "Handbook p.371" },
 
@@ -1960,13 +1962,14 @@ const QUESTION_BANK = {
           choices: ["$64$ kbps", "$32$ kbps", "$8$ kbps", "$128$ kbps"],
           correct: 0,
           solution: S({
-            c: "PCM bit rate: $R_b = f_s \\cdot n_{bits}$. Nyquist sampling: $f_s = 2 f_{max}$.",
+            c: "PCM bit rate $=f_s\\times n_{bits}$, with Nyquist sampling $f_s=2f_{max}$.",
             s: [
-              "$f_s = 2 \\cdot 4 = 8$ kHz.",
-              "$R_b = 8{,}000 \\cdot 8 = 64{,}000$ bps $= 64$ kbps."
+              "<b>Step 1 — Sample rate.</b> $f_s=2(4)=8$ kHz.",
+              "<b>Step 2 — Bit rate.</b> $8000\\times8=64{,}000$ bps = 64 kbps.",
+              "<b>Step 3 — Distractor audit.</b> $32$ kbps uses 4 bits; $8$ kbps drops the bit-depth; $128$ kbps doubles."
             ],
-            a: "$R_b = 64$ kbps",
-            v: "This is exactly the G.711 telephone codec rate — μ-law/A-law 8 kHz × 8 bits."
+            a: "$R_b=64$ kbps",
+            v: "This is exactly the G.711 telephone codec rate (8 kHz x 8-bit mu-law) - the 64-kbps DS0 channel that built the digital phone network."
           }),
           ref: "Handbook p.371" },
 
@@ -1974,13 +1977,13 @@ const QUESTION_BANK = {
           choices: ["$\\approx 50$ dB", "$\\approx 6$ dB", "$\\approx 24$ dB", "$\\approx 100$ dB"],
           correct: 0,
           solution: S({
-            c: "Quantization SNR for uniform quantization of a full-scale sinusoid: $\\text{SQNR} \\approx 6.02\\,n + 1.76$ dB (memorize).",
+            c: "Quantization SNR for a full-scale sinusoid: $\\text{SQNR}\\approx6.02n+1.76$ dB.",
             s: [
-              "Plug $n = 8$ bits: $6.02 \\cdot 8 + 1.76 = 48.16 + 1.76 = 49.92$ dB.",
-              "Each additional bit adds ~6 dB."
+              "<b>Step 1 — Apply.</b> $6.02(8)+1.76=49.92$ dB.",
+              "<b>Step 2 — Distractor audit.</b> $6$ dB is ONE bit's worth; $24$ dB is ~4 bits; $100$ dB needs ~16 bits."
             ],
-            a: "$\\approx 50$ dB",
-            v: "CD audio 16-bit gives $\\approx 98$ dB SQNR — well beyond audible noise floor."
+            a: "$\\approx50$ dB",
+            v: "Each extra bit adds ~6 dB - which is why 16-bit CD audio reaches ~98 dB SQNR, far below the audible noise floor."
           }),
           ref: "Handbook p.371" },
 
@@ -1988,12 +1991,13 @@ const QUESTION_BANK = {
           choices: ["$5$", "$15$", "$0.2$", "$75$"],
           correct: 0,
           solution: S({
-            c: "FM modulation index (for tone modulation): $\\beta = \\Delta f / f_m$ where $\\Delta f$ is peak frequency deviation.",
+            c: "FM modulation index (tone modulation): $\\beta=\\Delta f/f_m$ - peak deviation over modulating frequency.",
             s: [
-              "$\\beta = 75/15 = 5$."
+              "<b>Step 1 — Apply.</b> $\\beta=75/15=5$.",
+              "<b>Step 2 — Distractor audit.</b> $15$ is $f_m$; $0.2$ inverts the ratio; $75$ is $\\Delta f$."
             ],
-            a: "$\\beta = 5$",
-            v: "Commercial FM broadcasting uses $\\Delta f = 75$ kHz max, audio up to 15 kHz, so $\\beta_{max} \\approx 5$."
+            a: "$\\beta=5$",
+            v: "Commercial FM caps deviation at 75 kHz with 15-kHz audio, giving $\\beta_{max}\\approx5$ - 'wideband' FM, which is what gives FM its noise immunity."
           }),
           ref: "Handbook p.371" },
 
@@ -2001,12 +2005,13 @@ const QUESTION_BANK = {
           choices: ["$180$ kHz", "$150$ kHz", "$30$ kHz", "$75$ kHz"],
           correct: 0,
           solution: S({
-            c: "Carson's rule for FM bandwidth: $BW \\approx 2(\\Delta f + f_m)$. Approximation, captures ~98% of signal power.",
+            c: "Carson's rule for FM bandwidth: $BW\\approx2(\\Delta f+f_m)$ - captures ~98% of the signal power.",
             s: [
-              "$BW = 2(75 + 15) = 2 \\cdot 90 = 180$ kHz."
+              "<b>Step 1 — Apply.</b> $2(75+15)=180$ kHz.",
+              "<b>Step 2 — Distractor audit.</b> $150$ kHz uses only $\\Delta f$; $30$ kHz uses only $f_m$; $75$ kHz is the deviation alone."
             ],
-            a: "$BW \\approx 180$ kHz",
-            v: "FCC allocates 200 kHz per FM station — Carson's rule (180 kHz) plus guard band."
+            a: "$BW\\approx180$ kHz",
+            v: "The FCC allocates 200 kHz per FM station - Carson's 180 kHz plus a guard band ✓. Note the carrier frequency never enters the bandwidth."
           }),
           ref: "Handbook p.371" },
 
@@ -2014,12 +2019,13 @@ const QUESTION_BANK = {
           choices: ["$11.1\\%$", "$50\\%$", "$25\\%$", "$100\\%$"],
           correct: 0,
           solution: S({
-            c: "AM efficiency (fraction of power in sidebands, the only part carrying information): $\\eta = \\dfrac{m^2}{2 + m^2}$.",
+            c: "AM efficiency (fraction of power in the information-bearing sidebands): $\\eta=\\dfrac{m^2}{2+m^2}$.",
             s: [
-              "Plug in: $\\eta = (0.5)^2 / (2 + (0.5)^2) = 0.25/2.25 \\approx 0.111 = 11.1\\%$."
+              "<b>Step 1 — Apply.</b> $\\eta=0.25/(2+0.25)=0.25/2.25\\approx0.111=11.1\\%$.",
+              "<b>Step 2 — Distractor audit.</b> $50\\%$, $25\\%$, $100\\%$ overstate AM's poor efficiency."
             ],
-            a: "$\\eta \\approx 11.1\\%$",
-            v: "Max efficiency at $m=1$: $\\eta = 1/3 = 33.3\\%$. Most AM power is wasted in the carrier (which carries no info)."
+            a: "$\\eta\\approx11.1\\%$",
+            v: "Even at full modulation ($m=1$) efficiency is only 1/3 - the carrier (carrying NO information) wastes most of the power, motivating DSB-SC and SSB."
           }),
           ref: "Handbook p.371" },
 
@@ -2027,14 +2033,14 @@ const QUESTION_BANK = {
           choices: ["Multiplexing", "Modulation", "Coding", "Filtering"],
           correct: 0,
           solution: S({
-            c: "Multiplexing: techniques to share a channel among multiple signals.",
+            c: "TDM/FDM/CDM are MULTIPLEXING techniques - ways to share one channel among many signals.",
             s: [
-              "TDM (Time Division Multiplexing): users take turns in time slots.",
-              "FDM (Frequency Division): each user on a different frequency band.",
-              "CDM (Code Division): users separated by orthogonal codes (CDMA cell networks)."
+              "<b>Step 1 — Match.</b> Multiplexing.",
+              "<b>Step 2 — The three.</b> TDM = time slots; FDM = separate frequency bands; CDM = orthogonal codes (CDMA).",
+              "<b>Step 3 — Distractor audit.</b> Modulation (AM/FM/PSK) puts a signal on a carrier; coding and filtering are different operations."
             ],
-            a: "Multiplexing techniques",
-            v: "Modulation (AM, FM, PSK) — different concept: how to put a signal onto a carrier."
+            a: "Multiplexing techniques.",
+            v: "Modern 4G/5G OFDMA combines time AND frequency multiplexing in a resource grid - these axes can be mixed, not just chosen one at a time."
           }),
           ref: "Handbook p.371" },
       ],
@@ -2047,14 +2053,15 @@ const QUESTION_BANK = {
           choices: ["$30$", "$32$", "$28$", "$62$"],
           correct: 0,
           solution: S({
-            c: "Subnet math: host bits $h = 32 - \\text{prefix}$. Total addresses $= 2^h$. Subtract 2 for network address (all-0 host) and broadcast (all-1 host).",
+            c: "Subnet hosts: host bits $h=32-\\text{prefix}$, total $=2^h$, then subtract 2 (network + broadcast).",
             s: [
-              "Host bits: $32 - 27 = 5$.",
-              "Total addresses: $2^5 = 32$.",
-              "Usable hosts: $32 - 2 = 30$."
+              "<b>Step 1 — Host bits.</b> $32-27=5$.",
+              "<b>Step 2 — Total.</b> $2^5=32$.",
+              "<b>Step 3 — Usable.</b> $32-2=30$.",
+              "<b>Step 4 — Distractor audit.</b> $32$ is TOTAL (forgets -2); $62$ is a /26; $28$ is wrong."
             ],
-            a: "$30$ usable hosts",
-            v: "Common subnet sizes: /24 → 254 hosts; /25 → 126; /26 → 62; /27 → 30; /28 → 14; /29 → 6; /30 → 2 (point-to-point)."
+            a: "30 usable hosts.",
+            v: "Subnet ladder: /24->254, /25->126, /26->62, /27->30, /28->14, /30->2 (point-to-point). The -2 removes the network and broadcast addresses."
           }),
           ref: "Handbook p.393" },
 
@@ -2062,14 +2069,13 @@ const QUESTION_BANK = {
           choices: ["Layer 3 (Network)", "Layer 2 (Data Link)", "Layer 4 (Transport)", "Layer 7 (Application)"],
           correct: 0,
           solution: S({
-            c: "OSI layers and devices: L1 (Physical) = hubs, cables; L2 (Data Link) = switches, bridges; L3 (Network) = routers; L4 (Transport) = TCP/UDP; L5-7 = software.",
+            c: "Routers forward by IP address, which is Layer 3 (Network) information.",
             s: [
-              "Routers read the IP packet header (which is Layer 3 info) to forward.",
-              "MAC addresses (L2) are used only on each local hop.",
-              "Therefore routers operate at L3."
+              "<b>Step 1 — Match.</b> Layer 3 (Network).",
+              "<b>Step 2 — Distractor audit.</b> L2 (data link) is switches (MAC); L4 is TCP/UDP; L7 is applications."
             ],
-            a: "Layer 3 (Network)",
-            v: "Modern 'L3 switches' are essentially routers in switch hardware — both forward by IP."
+            a: "Layer 3 (Network).",
+            v: "MAC addresses (L2) only matter per local hop; routers read the IP header to choose the path. Modern 'L3 switches' are routers in switch hardware."
           }),
           ref: "Handbook p.399" },
 
@@ -2077,14 +2083,13 @@ const QUESTION_BANK = {
           choices: ["Layer 2 (Data Link)", "Layer 3 (Network)", "Layer 1 (Physical)", "Layer 7 (Application)"],
           correct: 0,
           solution: S({
-            c: "Switches forward Ethernet frames based on MAC address tables (CAM table). MAC is Layer 2.",
+            c: "Switches forward Ethernet frames by MAC address (a CAM table) - MAC is Layer 2.",
             s: [
-              "Switch learns: when a frame arrives on a port, record source MAC → port.",
-              "Switch forwards: look up destination MAC in table → send to that port.",
-              "No IP involvement → not L3."
+              "<b>Step 1 — Match.</b> Layer 2 (Data Link).",
+              "<b>Step 2 — Distractor audit.</b> L3 is routers (IP); L1 is hubs (just repeat bits); L7 is applications."
             ],
-            a: "Layer 2 (Data Link)",
-            v: "Hubs are L1 (just repeat signals to all ports). Switches are smarter — they selectively forward."
+            a: "Layer 2 (Data Link).",
+            v: "A switch LEARNS source MAC->port and FORWARDS by destination MAC - no IP involvement. Hubs (L1) blindly repeat to all ports; switches forward selectively."
           }),
           ref: "Handbook p.399" },
 
@@ -2092,14 +2097,13 @@ const QUESTION_BANK = {
           choices: ["All People Seem To Need Data Processing", "Please Do Not Throw Sausage Pizza Away", "Sally Stops Twins Daring Pizzas Plenty", "Apple Pizza Stems"],
           correct: 0,
           solution: S({
-            c: "OSI layers (top → bottom): <b>A</b>pplication, <b>P</b>resentation, <b>S</b>ession, <b>T</b>ransport, <b>N</b>etwork, <b>D</b>ata Link, <b>P</b>hysical.",
+            c: "OSI top-to-bottom: Application, Presentation, Session, Transport, Network, Data Link, Physical.",
             s: [
-              "Top→bottom: APSTNDP → 'All People Seem To Need Data Processing'.",
-              "Bottom→top: PDNTSPA → 'Please Do Not Throw Sausage Pizza Away'.",
-              "Both are standard mnemonics."
+              "<b>Step 1 — Match.</b> 'All People Seem To Need Data Processing' (APSTNDP, top->bottom).",
+              "<b>Step 2 — Distractor audit.</b> 'Please Do Not Throw Sausage Pizza Away' is also valid but BOTTOM->top; the other two are nonsense."
             ],
-            a: "All People Seem To Need Data Processing (top → bottom)",
-            v: "Note: choice B is correct but in reverse order (bottom → top)."
+            a: "All People Seem To Need Data Processing.",
+            v: "Both directions are standard mnemonics - just track which way (top-down vs bottom-up) the question asks. The 7 layers from top: A-P-S-T-N-D-P."
           }),
           ref: "Handbook p.399" },
 
@@ -2107,14 +2111,13 @@ const QUESTION_BANK = {
           choices: ["Connection-oriented, reliable", "Connectionless, fast", "Stateless", "Broadcast-only"],
           correct: 0,
           solution: S({
-            c: "TCP (Transmission Control Protocol): reliable, ordered delivery via 3-way handshake (SYN, SYN-ACK, ACK) and ACKs. UDP: connectionless, unreliable, fast (no handshake).",
+            c: "TCP is connection-oriented and reliable: a 3-way handshake plus sequence numbers, ACKs, and retransmission guarantee ordered delivery.",
             s: [
-              "TCP features: connection setup, sequence numbers, ACKs, retransmission, flow control, congestion control.",
-              "Use cases: web (HTTP), email (SMTP), file transfer (FTP).",
-              "UDP use cases: video streaming, gaming, VoIP — where speed matters more than reliability."
+              "<b>Step 1 — Match.</b> Connection-oriented, reliable.",
+              "<b>Step 2 — Distractor audit.</b> 'Connectionless, fast' and 'stateless' describe UDP; 'broadcast-only' is wrong."
             ],
-            a: "Connection-oriented, reliable",
-            v: "Both run over IP (L3). TCP/UDP are L4."
+            a: "Connection-oriented, reliable.",
+            v: "TCP adds flow/congestion control too - used for web, email, file transfer. UDP (connectionless) suits streaming/gaming/VoIP. Both run over IP; both are Layer 4."
           }),
           ref: "Handbook p.400" },
 
@@ -2122,13 +2125,13 @@ const QUESTION_BANK = {
           choices: ["$256$", "$24$", "$254$", "$65,536$"],
           correct: 0,
           solution: S({
-            c: "Subnet size: $2^{(32 - \\text{prefix})}$ total addresses.",
+            c: "Total addresses in a subnet $=2^{(32-\\text{prefix})}$.",
             s: [
-              "$2^{32-24} = 2^8 = 256$ total.",
-              "Usable: $256 - 2 = 254$ (choice C is usable, not total)."
+              "<b>Step 1 — Apply.</b> $2^{32-24}=2^8=256$.",
+              "<b>Step 2 — Distractor audit.</b> $254$ is USABLE (256-2); $24$ is the prefix; $65{,}536$ is a /16."
             ],
-            a: "$256$ total addresses",
-            v: "/24 is the common 'class C' size."
+            a: "256 total addresses.",
+            v: "The /24 is the familiar 'class C' block - 256 total, 254 usable after removing network and broadcast addresses."
           }),
           ref: "Handbook p.393" },
 
@@ -2136,14 +2139,13 @@ const QUESTION_BANK = {
           choices: ["Filtering network traffic", "Routing", "Switching", "Encryption only"],
           correct: 0,
           solution: S({
-            c: "Firewall: enforces traffic policies (allow/deny rules) at network boundaries. Can be packet-filter (L3/L4) or stateful or application-aware (L7).",
+            c: "A firewall enforces traffic policy (allow/deny rules) at network boundaries - filtering packets by address, port, or application.",
             s: [
-              "Common rules: block incoming from internet except port 80/443.",
-              "Stateful firewalls track connection state to distinguish initiation from response.",
-              "Next-generation firewalls do deep packet inspection."
+              "<b>Step 1 — Match.</b> Filtering network traffic.",
+              "<b>Step 2 — Distractor audit.</b> Routing and switching are forwarding functions; encryption is VPN/TLS (though firewalls may add it)."
             ],
-            a: "Filtering network traffic",
-            v: "Encryption is the job of VPN/TLS, though many firewalls support VPN too."
+            a: "Filtering network traffic.",
+            v: "Firewalls range from simple packet filters (L3/L4 by IP/port) to stateful (tracking connections) to next-gen (deep packet inspection at L7)."
           }),
           ref: "Handbook p.412" },
       ],
