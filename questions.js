@@ -1077,14 +1077,13 @@ const QUESTION_BANK = {
           choices: ["$\\omega/(s^2+\\omega^2)$", "$s/(s^2+\\omega^2)$", "$1/(s^2+\\omega^2)$", "$\\omega/s$"],
           correct: 0,
           solution: S({
-            c: "Standard Laplace pairs (must memorize): $\\mathcal{L}\\{\\sin\\omega t\\} = \\dfrac{\\omega}{s^2+\\omega^2}$, $\\mathcal{L}\\{\\cos\\omega t\\} = \\dfrac{s}{s^2+\\omega^2}$.",
+            c: "Memorize the pair: $\\mathcal L\\{\\sin\\omega t\\}=\\dfrac{\\omega}{s^2+\\omega^2}$ (numerator $\\omega$); cosine has $s$ on top.",
             s: [
-              "Sine pair: $\\omega$ in numerator.",
-              "Cosine pair: $s$ in numerator.",
-              "Both share the same denominator $s^2+\\omega^2$."
+              "<b>Step 1 — Match.</b> $\\omega/(s^2+\\omega^2)$.",
+              "<b>Step 2 — Distractor audit.</b> $s/(s^2+\\omega^2)$ is COSINE; $1/(s^2+\\omega^2)$ drops the $\\omega$; $\\omega/s$ is wrong."
             ],
             a: "$\\dfrac{\\omega}{s^2+\\omega^2}$",
-            v: "Reality check: as $s\\to 0$ (DC), the transform value goes to $\\omega/\\omega^2 = 1/\\omega$ — sine has zero DC content but the integral isn't zero, that's why."
+            v: "Cosine -> s on top, sine -> omega on top - the single distinguishing detail. The $+\\omega^2$ keeps poles imaginary ($\\pm j\\omega$), giving oscillation."
           }),
           ref: "Handbook p.56" },
 
@@ -1092,14 +1091,14 @@ const QUESTION_BANK = {
           choices: ["$3162$ rad/s", "$1000$ rad/s", "$5000$ rad/s", "$500$ rad/s"],
           correct: 0,
           solution: S({
-            c: "Resonance occurs when inductive and capacitive reactances cancel: $\\omega_0 L = 1/(\\omega_0 C)$ → $\\omega_0 = 1/\\sqrt{LC}$.",
+            c: "Resonance is where $X_L=X_C$ cancel: $\\omega_0=1/\\sqrt{LC}$.",
             s: [
-              "Compute $LC = (10\\times 10^{-3})(10\\times 10^{-6}) = 10^{-7}$.",
-              "$\\sqrt{LC} = \\sqrt{10^{-7}} = 3.162 \\times 10^{-4}$ s.",
-              "Reciprocal: $\\omega_0 = 1/3.162\\times 10^{-4} \\approx 3162$ rad/s."
+              "<b>Step 1 — Product.</b> $LC=(0.01)(10^{-5})=10^{-7}$; $\\sqrt{LC}=3.162\\times10^{-4}$.",
+              "<b>Step 2 — Reciprocal.</b> $\\omega_0=1/3.162\\times10^{-4}\\approx3162$ rad/s.",
+              "<b>Step 3 — Distractor audit.</b> $1000$, $5000$, $500$ rad/s come from LC or root slips."
             ],
-            a: "$\\omega_0 \\approx 3162$ rad/s",
-            v: "In Hz: $f_0 = \\omega_0/(2\\pi) \\approx 503$ Hz. At resonance, $Z = R$ (purely resistive)."
+            a: "$\\omega_0\\approx3162$ rad/s",
+            v: "In Hz: $f_0=\\omega_0/2\\pi\\approx503$ Hz. At $\\omega_0$ the impedance is purely resistive ($Z=R$)."
           }),
           ref: "Handbook p.361" },
 
@@ -1107,13 +1106,14 @@ const QUESTION_BANK = {
           choices: ["$3.16$", "$10$", "$1$", "$31.6$"],
           correct: 0,
           solution: S({
-            c: "Quality factor (series RLC): $Q = \\omega_0 L / R$. High Q = narrow bandwidth = sharp resonance.",
+            c: "Series-RLC quality factor: $Q=\\omega_0 L/R$. High Q -> sharp, narrow resonance.",
             s: [
-              "$\\omega_0 L = 3162 \\cdot 0.01 = 31.62$.",
-              "$Q = 31.62 / 10 = 3.162$."
+              "<b>Step 1 — Numerator.</b> $\\omega_0 L=3162(0.01)=31.62$.",
+              "<b>Step 2 — Divide by R.</b> $31.62/10=3.16$.",
+              "<b>Step 3 — Distractor audit.</b> $10$ ignores $\\omega_0 L$; $1$ and $31.6$ mis-divide."
             ],
-            a: "$Q \\approx 3.16$",
-            v: "Typical Q: RLC filter ~10, crystal oscillator > 10,000. Higher Q = more selective."
+            a: "$Q\\approx3.16$",
+            v: "Q scale: an RLC filter is ~10, a crystal exceeds 10,000 - higher Q means a more selective (narrower-band) resonance."
           }),
           ref: "Handbook p.361" },
 
@@ -1121,13 +1121,13 @@ const QUESTION_BANK = {
           choices: ["$1000$ rad/s", "$3162$ rad/s", "$316$ rad/s", "$10$ rad/s"],
           correct: 0,
           solution: S({
-            c: "3-dB bandwidth and Q: $BW = \\omega_0/Q$. High Q → narrow BW. The two -3 dB cutoff frequencies are $\\omega_0 \\pm BW/2$.",
+            c: "The -3 dB bandwidth relates to Q by $BW=\\omega_0/Q$ - high Q gives narrow BW.",
             s: [
-              "$BW = \\omega_0/Q = 3162/3.162 = 1000$ rad/s.",
-              "In Hz: $BW \\approx 159$ Hz."
+              "<b>Step 1 — Apply.</b> $BW=3162/3.16=1000$ rad/s.",
+              "<b>Step 2 — Distractor audit.</b> $3162$ is $\\omega_0$ itself; $316$ and $10$ misuse Q."
             ],
-            a: "$BW = 1000$ rad/s",
-            v: "Lower cutoff $\\approx \\omega_0 - BW/2 = 2662$ rad/s; upper $\\approx 3662$ rad/s."
+            a: "$BW=1000$ rad/s",
+            v: "The half-power cutoffs sit at $\\omega_0\\pm BW/2$ (~2662 and 3662 rad/s). Doubling Q would halve the bandwidth - the selectivity trade."
           }),
           ref: "Handbook p.361" },
 
@@ -1135,13 +1135,14 @@ const QUESTION_BANK = {
           choices: ["$e^{-2t}$", "$e^{2t}$", "$\\sin 2t$", "$2t$"],
           correct: 0,
           solution: S({
-            c: "Pair: $\\mathcal{L}\\{e^{at}\\} = \\dfrac{1}{s-a}$. So $1/(s+2) = 1/(s-(-2)) \\to e^{-2t}$.",
+            c: "Pair: $\\mathcal L\\{e^{at}\\}=\\dfrac{1}{s-a}$. So $1/(s+2)=1/(s-(-2))\\to e^{-2t}$.",
             s: [
-              "Match form: $1/(s-a)$ with $a = -2$.",
-              "Inverse: $e^{at} = e^{-2t}$."
+              "<b>Step 1 — Match.</b> $a=-2$.",
+              "<b>Step 2 — Invert.</b> $e^{-2t}$.",
+              "<b>Step 3 — Distractor audit.</b> $e^{2t}$ has wrong sign (would grow); $\\sin2t$ needs $s^2+4$; $2t$ is $2/s^2$."
             ],
-            a: "$f(t) = e^{-2t}$",
-            v: "Decaying exponential. Pole at $s=-2$ in LHP → stable."
+            a: "$f(t)=e^{-2t}$",
+            v: "Pole at $s=-2$ (left-half plane) -> a decaying, stable exponential. The pole's sign is everything."
           }),
           ref: "Handbook p.56" },
 
@@ -1149,15 +1150,15 @@ const QUESTION_BANK = {
           choices: ["$6/[s(s+2)]$", "$6/(s+2)$", "$6/s^2$", "$6s/(s^2+2)$"],
           correct: 0,
           solution: S({
-            c: "Laplace turns ODEs into algebraic equations. Use $\\mathcal{L}\\{y'\\} = sY(s) - y(0)$ and standard table for forcing terms.",
+            c: "Laplace turns the ODE into algebra using $\\mathcal L\\{y'\\}=sY-y(0)$ and $\\mathcal L\\{6\\}=6/s$.",
             s: [
-              "Transform: $sY(s) - y(0) + 2Y(s) = 6/s$ (constant 6 transforms to $6/s$).",
-              "Apply $y(0)=0$: $sY + 2Y = 6/s$.",
-              "Factor: $Y(s)(s+2) = 6/s$.",
-              "Solve: $Y(s) = \\dfrac{6}{s(s+2)}$."
+              "<b>Step 1 — Transform.</b> $sY-0+2Y=6/s$.",
+              "<b>Step 2 — Factor.</b> $Y(s+2)=6/s$.",
+              "<b>Step 3 — Solve.</b> $Y(s)=\\dfrac{6}{s(s+2)}$.",
+              "<b>Step 4 — Distractor audit.</b> $6/(s+2)$ forgets the $1/s$ forcing; $6/s^2$ and $6s/(s^2+2)$ mishandle the transform."
             ],
-            a: "$Y(s) = \\dfrac{6}{s(s+2)}$",
-            v: "Partial fractions: $\\dfrac{6}{s(s+2)} = \\dfrac{3}{s} - \\dfrac{3}{s+2}$, so $y(t) = 3(1 - e^{-2t})$."
+            a: "$Y(s)=\\dfrac{6}{s(s+2)}$",
+            v: "Partial fractions give $3/s-3/(s+2)$, so $y(t)=3(1-e^{-2t})$ - rising to the steady state $6/2=3$ ✓."
           }),
           ref: "Handbook p.56" },
 
@@ -1165,13 +1166,13 @@ const QUESTION_BANK = {
           choices: ["$2$", "$10$", "$5$", "$0.5$"],
           correct: 0,
           solution: S({
-            c: "DC gain = transfer function value at $s = 0$ (zero frequency).",
+            c: "DC gain = $H(0)$ (the steady-state response to a constant input).",
             s: [
-              "Substitute $s = 0$: $H(0) = 10/(0+5) = 10/5 = 2$.",
-              "DC gain interpretation: a constant input is multiplied by 2 at steady state."
+              "<b>Step 1 — Set s=0.</b> $H(0)=10/(0+5)=2$.",
+              "<b>Step 2 — Distractor audit.</b> $10$ is the numerator; $5$ the pole; $0.5$ inverts."
             ],
             a: "DC gain = 2",
-            v: "Time constant: $\\tau = 1/5 = 0.2$ s. After $5\\tau = 1$ s, output ≈ 99% of $2 \\cdot \\text{input}$."
+            v: "A constant input is scaled by 2 at steady state. Time constant $\\tau=1/5=0.2$ s; after $5\\tau=1$ s the output is ~99% of $2\\times$input."
           }),
           ref: "Handbook p.365" },
 
@@ -1179,14 +1180,13 @@ const QUESTION_BANK = {
           choices: ["$R$", "$\\omega L$", "$0$", "$\\infty$"],
           correct: 0,
           solution: S({
-            c: "At $\\omega = \\omega_0$: $X_L = X_C$. Reactive parts cancel: $Z = R + jX_L - jX_C = R$.",
+            c: "At $\\omega_0$, $X_L=X_C$ so the reactances cancel: $Z=R+j(X_L-X_C)=R$ - purely resistive (minimum impedance).",
             s: [
-              "$X_L = \\omega_0 L$ and $X_C = 1/(\\omega_0 C)$ are equal by definition of resonance.",
-              "Net imaginary impedance = 0.",
-              "$Z = R$ — purely resistive."
+              "<b>Step 1 — Match.</b> $Z=R$.",
+              "<b>Step 2 — Distractor audit.</b> $\\omega L$ is the inductive reactance (cancelled at $\\omega_0$); $0$ is series resonance taken too far; $\\infty$ is PARALLEL resonance."
             ],
-            a: "$Z = R$",
-            v: "At resonance, current is maximum (since $Z$ is minimum) and in phase with voltage."
+            a: "$Z=R$",
+            v: "Minimum impedance at resonance -> MAXIMUM current, in phase with voltage (pf=1). Parallel resonance is the dual (max Z)."
           }),
           ref: "Handbook p.361" },
       ],
@@ -1199,14 +1199,13 @@ const QUESTION_BANK = {
           choices: ["$> 8$ kHz", "$2$ kHz", "$4$ kHz", "$16$ kHz"],
           correct: 0,
           solution: S({
-            c: "Nyquist-Shannon sampling theorem: to perfectly reconstruct a band-limited signal of maximum frequency $f_{max}$, the sampling rate must satisfy $f_s > 2 f_{max}$.",
+            c: "Nyquist-Shannon: to reconstruct a band-limited signal of max frequency $f_{max}$, sample at $f_s>2f_{max}$.",
             s: [
-              "Required: $f_s > 2 \\cdot 4{,}000 = 8{,}000$ Hz.",
-              "So sampling must be strictly greater than 8 kHz.",
-              "If $f_s \\le 8$ kHz, aliasing occurs (high frequencies fold back as lower frequencies)."
+              "<b>Step 1 — Apply.</b> $f_s>2(4)=8$ kHz.",
+              "<b>Step 2 — Distractor audit.</b> $2$/$4$ kHz are too slow (aliasing); $16$ kHz works but isn't the minimum."
             ],
-            a: "$f_s > 8$ kHz",
-            v: "CD audio uses $f_s = 44.1$ kHz to capture audio up to ~22 kHz (human hearing limit)."
+            a: "$f_s>8$ kHz",
+            v: "Below $2f_{max}$, high frequencies fold back as false low ones - irreversibly. CD audio samples at 44.1 kHz for a ~22 kHz limit."
           }),
           ref: "Handbook p.375" },
 
@@ -1214,14 +1213,14 @@ const QUESTION_BANK = {
           choices: ["$30$ Hz", "$70$ Hz", "$170$ Hz", "$50$ Hz"],
           correct: 0,
           solution: S({
-            c: "If $f_{signal} > f_s/2$, aliasing occurs. The apparent frequency 'folds' around $f_s/2$: $f_{alias} = |f_{signal} - k \\cdot f_s|$ for nearest integer $k$.",
+            c: "Above Nyquist ($f_s/2$), a signal aliases (folds): $f_{alias}=|f-kf_s|$ for the nearest integer k.",
             s: [
-              "Nyquist freq: $f_s/2 = 50$ Hz.",
-              "Signal at 70 Hz > 50 Hz → aliasing.",
-              "Folded: $f_{alias} = |70 - 100| = 30$ Hz."
+              "<b>Step 1 — Nyquist.</b> $f_s/2=50$ Hz; 70>50 -> aliases.",
+              "<b>Step 2 — Fold.</b> $|70-100|=30$ Hz.",
+              "<b>Step 3 — Distractor audit.</b> $70$ Hz ignores aliasing; $170$ Hz adds; $50$ Hz is the Nyquist limit."
             ],
-            a: "Apparent $f = 30$ Hz",
-            v: "Imagine a strobe light. This is the same effect — under-sampled wheels appear to rotate backward in movies."
+            a: "Apparent $f=30$ Hz",
+            v: "Same effect as a strobe or the 'wagon-wheel' illusion in film - under-sampling makes a fast signal masquerade as a slow one."
           }),
           ref: "Handbook p.375" },
 
@@ -1229,14 +1228,14 @@ const QUESTION_BANK = {
           choices: ["$1592$ Hz", "$10$ kHz", "$159$ Hz", "$100$ Hz"],
           correct: 0,
           solution: S({
-            c: "First-order RC low-pass filter cutoff: $f_c = \\dfrac{1}{2\\pi RC}$. At $f_c$, output is -3 dB (about 0.707 of input).",
+            c: "First-order RC low-pass cutoff: $f_c=\\dfrac{1}{2\\pi RC}$ - the -3 dB point.",
             s: [
-              "$RC = 10^3 \\cdot 10^{-7} = 10^{-4}$ s.",
-              "$\\omega_c = 1/RC = 10^4$ rad/s.",
-              "$f_c = \\omega_c/(2\\pi) = 10^4/(2\\pi) \\approx 1591.5$ Hz."
+              "<b>Step 1 — RC.</b> $10^3\\times10^{-7}=10^{-4}$ s.",
+              "<b>Step 2 — Cutoff.</b> $f_c=1/(2\\pi\\times10^{-4})\\approx1592$ Hz.",
+              "<b>Step 3 — Distractor audit.</b> $159$ Hz drops the $1/2\\pi$ vs $\\omega_c$ confusion; $10$ kHz uses $\\omega_c$ not $f_c$; $100$ Hz is off."
             ],
-            a: "$f_c \\approx 1592$ Hz",
-            v: "Above $f_c$, gain falls at -20 dB/decade."
+            a: "$f_c\\approx1592$ Hz",
+            v: "Above $f_c$ the gain falls at -20 dB/decade. Note $\\omega_c=1/RC=10^4$ rad/s; divide by $2\\pi$ for Hz."
           }),
           ref: "Handbook p.375" },
 
@@ -1244,14 +1243,14 @@ const QUESTION_BANK = {
           choices: ["$-3$ dB", "$0$ dB", "$-6$ dB", "$-20$ dB"],
           correct: 0,
           solution: S({
-            c: "Definition: cutoff (or 'corner') frequency is where the magnitude is reduced by $\\sqrt{2}$. In dB: $20\\log_{10}(1/\\sqrt{2}) = -3.01$ dB.",
+            c: "The cutoff (corner) frequency is DEFINED as where magnitude drops by $\\sqrt2$: $20\\log(1/\\sqrt2)=-3.01$ dB.",
             s: [
-              "At $\\omega = \\omega_c$: $|H(j\\omega_c)| = 1/\\sqrt{2} \\approx 0.707$.",
-              "Convert to dB: $20\\log_{10}(0.707) \\approx -3.01$ dB.",
-              "Hence 'cutoff' is the −3 dB point."
+              "<b>Step 1 — Magnitude.</b> $|H(j\\omega_c)|=1/\\sqrt2\\approx0.707$.",
+              "<b>Step 2 — dB.</b> $20\\log(0.707)\\approx-3$ dB.",
+              "<b>Step 3 — Distractor audit.</b> $0$ dB is the passband; $-6$ dB is half-amplitude; $-20$ dB is a decade past cutoff."
             ],
             a: "$-3$ dB",
-            v: "Power-wise, half of input power is lost at $f_c$ — the half-power frequency."
+            v: "It's the HALF-POWER point - power $\\propto V^2$, so $0.707^2=0.5$ means half the input power. That's why the cutoff is the -3 dB frequency."
           }),
           ref: "Handbook p.375" },
 
@@ -1259,13 +1258,13 @@ const QUESTION_BANK = {
           choices: ["$1$", "$1/(1-z^{-1})$", "$z$", "$0$"],
           correct: 0,
           solution: S({
-            c: "Z-transform: $X(z) = \\sum_{n=-\\infty}^{\\infty} x[n] z^{-n}$. For unit impulse $\\delta[n]$ which is 1 only at $n=0$:",
+            c: "Z-transform $X(z)=\\sum x[n]z^{-n}$. The unit impulse is 1 only at $n=0$, so the sum collapses to a constant 1.",
             s: [
-              "$X(z) = \\sum \\delta[n] z^{-n} = \\delta[0] z^0 = 1$.",
-              "Result: a constant 1 — flat over all frequencies."
+              "<b>Step 1 — Evaluate.</b> $\\sum\\delta[n]z^{-n}=\\delta[0]z^0=1$.",
+              "<b>Step 2 — Distractor audit.</b> $1/(1-z^{-1})$ is the unit STEP; $z$ is a time-advance; 0 is wrong."
             ],
-            a: "$X(z) = 1$",
-            v: "Mirror of Laplace: $\\mathcal{L}\\{\\delta(t)\\} = 1$."
+            a: "$X(z)=1$",
+            v: "Flat over all frequencies - the discrete mirror of $\\mathcal L\\{\\delta(t)\\}=1$. An impulse contains every frequency equally, which is why it probes a system fully."
           }),
           ref: "Handbook p.376" },
 
@@ -1273,14 +1272,14 @@ const QUESTION_BANK = {
           choices: ["$-3$ dB", "$3$ dB", "$-6$ dB", "$0$ dB"],
           correct: 0,
           solution: S({
-            c: "dB conversion for voltage/current: $\\text{dB} = 20\\log_{10}(\\text{ratio})$. For power: $10\\log_{10}$.",
+            c: "Decibels for voltage/current: $\\text{dB}=20\\log_{10}(\\text{ratio})$ (power uses $10\\log$).",
             s: [
-              "$0.707 = 1/\\sqrt{2}$.",
-              "$\\log_{10}(1/\\sqrt{2}) = -\\log_{10}(\\sqrt{2}) = -0.5 \\log_{10} 2 = -0.5 \\cdot 0.301 = -0.1505$.",
-              "Multiply by 20: $\\approx -3.01$ dB."
+              "<b>Step 1 — Recognize.</b> $0.707=1/\\sqrt2$.",
+              "<b>Step 2 — Compute.</b> $20\\log(1/\\sqrt2)=-10\\log2=-3.01$ dB.",
+              "<b>Step 3 — Distractor audit.</b> $+3$ dB has wrong sign; $-6$ dB is half-amplitude; $0$ dB is unity."
             ],
-            a: "$\\approx -3$ dB",
-            v: "Memorize: $\\times \\sqrt{2} \\to +3$ dB; $\\times 2 \\to +6$ dB; $\\times 10 \\to +20$ dB."
+            a: "$\\approx-3$ dB",
+            v: "Memorize: $\\times\\sqrt2\\to+3$ dB, $\\times2\\to+6$ dB, $\\times10\\to+20$ dB - the dB shortcuts used constantly in filters and gain."
           }),
           ref: "Handbook p.375" },
 
@@ -1288,14 +1287,13 @@ const QUESTION_BANK = {
           choices: ["$-20$ dB/decade", "$-40$ dB/decade", "$-10$ dB/decade", "$-6$ dB/decade"],
           correct: 0,
           solution: S({
-            c: "An $n$-th order filter rolls off at $-20n$ dB/decade (or $-6n$ dB/octave) in the stop-band.",
+            c: "An nth-order filter rolls off at $-20n$ dB/decade ($-6n$ dB/octave) in the stop-band.",
             s: [
-              "1st order: $-20$ dB/decade (a 10x increase in frequency drops magnitude 10x).",
-              "2nd order: $-40$ dB/decade.",
-              "Higher order → steeper rolloff but more complex."
+              "<b>Step 1 — Apply.</b> 1st order -> $-20$ dB/decade.",
+              "<b>Step 2 — Distractor audit.</b> $-40$ dB/dec is 2nd order; $-10$ dB/dec doesn't occur; $-6$ dB/dec confuses octave with decade."
             ],
             a: "$-20$ dB/decade",
-            v: "Equivalent: $-6$ dB/octave (each doubling of frequency halves magnitude)."
+            v: "Equivalent to $-6$ dB/octave (each doubling of frequency halves the amplitude). Steeper rolloff needs higher order = more poles."
           }),
           ref: "Handbook p.375" },
 
@@ -1303,13 +1301,13 @@ const QUESTION_BANK = {
           choices: ["$> 20$ kHz", "$10$ kHz", "$5$ kHz", "$40$ kHz"],
           correct: 0,
           solution: S({
-            c: "Nyquist: $f_s > 2 f_{max}$.",
+            c: "Nyquist: $f_s>2f_{max}$.",
             s: [
-              "$f_{max} = 10$ kHz.",
-              "$f_s > 2 \\cdot 10 = 20$ kHz."
+              "<b>Step 1 — Apply.</b> $f_s>2(10)=20$ kHz.",
+              "<b>Step 2 — Distractor audit.</b> $10$/$5$ kHz are too slow; $40$ kHz works but exceeds the minimum."
             ],
-            a: "$f_s > 20$ kHz",
-            v: "In practice, use $f_s \\ge 2.2 f_{max}$ to leave a guard band and tolerate finite anti-alias filter rolloff."
+            a: "$f_s>20$ kHz",
+            v: "In practice use $f_s\\ge2.2f_{max}$ to leave a guard band for the anti-alias filter's finite rolloff ✓ - exactly why CD's 44.1 kHz exceeds 40 kHz."
           }),
           ref: "Handbook p.375" },
       ],
