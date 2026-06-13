@@ -2011,68 +2011,263 @@
     14: [
       { q: "$/16$ subnet has __ usable hosts:",
         choices: ["$65{,}534$", "$65{,}536$", "$16{,}382$", "$254$"], correct: 0,
-        solution: S({ c: "Host bits = 32 - 16 = 16. Total = $2^{16}$, usable = total - 2.", s: ["$65536 - 2 = 65534$."], a: "$65{,}534$" }), ref: "Handbook p.393" },
+        solution: S({
+          c: "An IPv4 address is 32 bits. The CIDR prefix /16 fixes the first 16 bits as NETWORK, leaving 32−16 = 16 HOST bits. Usable hosts = $2^{(host\\ bits)} - 2$ (subtract the all-zeros network address and all-ones broadcast address).",
+          s: [
+            "<b>Step 1 — Host bits.</b> $32 - 16 = 16$.",
+            "<b>Step 2 — Total addresses.</b> $2^{16} = 65{,}536$.",
+            "<b>Step 3 — Subtract reserved 2.</b> $65{,}536 - 2 = 65{,}534$ usable.",
+            "<b>Step 4 — Distractor audit.</b> 65,536 forgets the −2; 16,382 is a /18 ($2^{14}-2$); 254 is a /24."
+          ],
+          a: "65,534 usable hosts.",
+          v: "Why exactly two are unusable: the all-host-bits-0 address NAMES the network, the all-host-bits-1 is its BROADCAST — neither can be assigned to a machine ✓. The formula $2^h - 2$ works for every prefix length."
+
+        }), ref: "Handbook p.393" },
       { q: "Loopback IPv4 address:",
         choices: ["$127.0.0.1$", "$0.0.0.0$", "$255.255.255.255$", "$10.0.0.1$"], correct: 0,
-        solution: S({ c: "Loopback: refers to local host. $127.0.0.0/8$ all reserved for loopback.", s: ["Doesn't leave the host's network stack.", "IPv6 loopback: ::1."], a: "$127.0.0.1$" }), ref: "Handbook p.394" },
+        solution: S({
+          c: "The loopback address refers a host to ITSELF — packets sent there never touch the wire, looping back inside the network stack. The conventional one is 127.0.0.1.",
+          s: [
+            "<b>Step 1 — Match.</b> 127.0.0.1.",
+            "<b>Step 2 — Distractor audit.</b> 0.0.0.0 means 'this host/any' (used to bind all interfaces); 255.255.255.255 is limited broadcast; 10.0.0.1 is an ordinary private-range address."
+          ],
+          a: "127.0.0.1 (IPv6: ::1).",
+          v: "Scope worth knowing: the ENTIRE 127.0.0.0/8 block is reserved for loopback — 16 million addresses all pointing home ✓. It's how you test a local server ('localhost') with no network at all."
+
+        }), ref: "Handbook p.394" },
       { q: "MAC address bits:",
         choices: ["$48$", "$32$", "$64$", "$128$"], correct: 0,
-        solution: S({ c: "Standard IEEE MAC: 48 bits, usually 6 hex pairs.", s: ["First 3 bytes: OUI (organization).", "Last 3 bytes: vendor-assigned."], a: "$48$ bits" }), ref: "Handbook p.399" },
+        solution: S({
+          c: "A standard IEEE MAC (Media Access Control) address — the hardware address burned into a network interface — is 48 bits, written as six hex byte-pairs (e.g. 00:1A:2B:3C:4D:5E).",
+          s: [
+            "<b>Step 1 — Match.</b> 48 bits.",
+            "<b>Step 2 — How the 48 split.</b> First 3 bytes = OUI (manufacturer ID assigned by IEEE); last 3 bytes = device serial set by the vendor.",
+            "<b>Step 3 — Distractor audit.</b> 32 bits is an IPv4 address (different layer); 64 and 128 confuse it with IPv6's 128-bit address or EUI-64."
+          ],
+          a: "48 bits.",
+          v: "Layer check that keeps the two address types straight: MAC = Layer-2, fixed to the hardware, used within a local segment; IP = Layer-3, assigned by the network, used to route between segments ✓. ARP is the bridge that maps one to the other."
+
+        }), ref: "Handbook p.399" },
       { q: "Network packet routing decision is made at:",
         choices: ["L3 (Network) — IP", "L2 (Data link)", "L4 (Transport)", "L7 (Application)"], correct: 0,
-        solution: S({ c: "Routers use IP (L3) to forward across networks.", s: ["Within local network: L2 (switches use MAC)."], a: "L3" }), ref: "Handbook p.399" },
+        solution: S({
+          c: "Forwarding a packet BETWEEN networks is a Layer-3 (Network) decision, made on the IP destination address — that's the router's job.",
+          s: [
+            "<b>Step 1 — Match.</b> L3 (Network) — IP.",
+            "<b>Step 2 — Contrast with L2.</b> Within ONE local network, switches forward by MAC address (L2). Routing means crossing between networks → L3.",
+            "<b>Step 3 — Distractor audit.</b> L4 (transport, TCP/UDP ports) handles end-to-end delivery, not path choice; L7 (application) is HTTP/DNS, far above routing."
+          ],
+          a: "Layer 3 (Network), using IP addresses.",
+          v: "The mental model: switches = within-neighborhood (MAC/L2); routers = between-city highways (IP/L3) ✓. A packet's journey alternates — L2 hop to the local router, L3 decision, L2 hop on the next segment, repeat."
+
+        }), ref: "Handbook p.399" },
       { q: "Default web port for HTTPS:",
         choices: ["$443$", "$80$", "$22$", "$25$"], correct: 0,
-        solution: S({ c: "HTTPS = HTTP over TLS, standard on port 443.", s: ["HTTP: 80 (unencrypted)."], a: "$443$" }), ref: "Handbook p.394" },
+        solution: S({
+          c: "Well-known TCP ports map services to fixed numbers so clients know where to knock. HTTPS (HTTP secured with TLS) lives on port 443.",
+          s: [
+            "<b>Step 1 — Match.</b> 443.",
+            "<b>Step 2 — Distractor audit.</b> 80 is plain HTTP (unencrypted); 22 is SSH; 25 is SMTP (email)."
+          ],
+          a: "Port 443.",
+          v: "A few more worth memorizing for the exam: 80 HTTP, 443 HTTPS, 22 SSH, 25 SMTP, 53 DNS, 21 FTP ✓ — the 'well-known' range is 0-1023, reserved for these standard services."
+
+        }), ref: "Handbook p.394" },
       { q: "Subnet mask $255.255.255.0$ corresponds to CIDR:",
         choices: ["$/24$", "$/16$", "$/8$", "$/32$"], correct: 0,
-        solution: S({ c: "$255 = 11111111_2 = 8$ ones each octet. Three full octets = 24 bits.", s: ["$255.255.255.0 = /24$."], a: "$/24$" }), ref: "Handbook p.393" },
+        solution: S({
+          c: "A subnet mask marks NETWORK bits with 1s. Each octet of 255 is binary 11111111 = eight 1-bits, and CIDR notation /N just counts those network bits.",
+          s: [
+            "<b>Step 1 — Count the 255s.</b> 255.255.255.0 = three full octets of ones = $3\\times8 = 24$ bits.",
+            "<b>Step 2 — Write CIDR.</b> /24.",
+            "<b>Step 3 — Distractor audit.</b> /16 is 255.255.0.0; /8 is 255.0.0.0; /32 (255.255.255.255) is a single host."
+          ],
+          a: "/24.",
+          v: "Cross-check via host count: /24 leaves 8 host bits → $2^8-2 = 254$ usable — the familiar size of a home/office subnet ✓. Mask and prefix are two notations for the identical split."
+
+        }), ref: "Handbook p.393" },
       { q: "TCP 3-way handshake messages:",
         choices: ["SYN, SYN-ACK, ACK", "SYN, ACK, FIN", "GET, OK, BYE", "REQ, RESP, ACK"], correct: 0,
-        solution: S({ c: "TCP connection: client SYN → server SYN-ACK → client ACK.", s: ["After handshake: data transfer with sequence numbers + ACKs."], a: "SYN, SYN-ACK, ACK" }), ref: "Handbook p.400" },
+        solution: S({
+          c: "TCP opens a reliable connection with a three-message handshake that synchronizes sequence numbers both ways: SYN → SYN-ACK → ACK.",
+          s: [
+            "<b>Step 1 — Trace it.</b> Client sends SYN (here's my starting sequence #); server replies SYN-ACK (acknowledges, sends its own #); client sends ACK (acknowledges server's #). Connection established.",
+            "<b>Step 2 — Distractor audit.</b> FIN belongs to connection TEARDOWN (a separate exchange); GET/OK/BYE and REQ/RESP/ACK are made-up — those aren't TCP segment flags."
+          ],
+          a: "SYN, SYN-ACK, ACK.",
+          v: "Why three and not two: each side must both ANNOUNCE its sequence number and CONFIRM it received the other's — three messages is the minimum that does both ✓. Teardown uses FIN/ACK pairs, often four messages."
+
+        }), ref: "Handbook p.400" },
       { q: "Wireshark is:",
         choices: ["Network packet analyzer/sniffer", "Firewall", "VPN", "Router"], correct: 0,
-        solution: S({ c: "Wireshark captures and dissects network traffic. Open-source.", s: ["Used for debugging, security analysis, learning protocols."], a: "Packet sniffer" }), ref: "Handbook p.412" },
+        solution: S({
+          c: "Wireshark is a packet analyzer (sniffer): it captures raw network traffic off an interface and dissects each packet protocol-by-protocol for inspection.",
+          s: [
+            "<b>Step 1 — Match.</b> Network packet analyzer / sniffer.",
+            "<b>Step 2 — Distractor audit.</b> A firewall FILTERS traffic; a VPN ENCRYPTS/tunnels it; a router FORWARDS it — Wireshark only OBSERVES, changing nothing."
+          ],
+          a: "An open-source packet sniffer/analyzer.",
+          v: "What it's actually for: debugging protocols, diagnosing slow connections, security forensics, and learning how TCP/HTTP/DNS really look on the wire ✓ — you'd literally watch the SYN/SYN-ACK/ACK handshake fly by in its capture window."
+
+        }), ref: "Handbook p.412" },
     ],
 
     // ====================== Ch 15: Digital — +12 ======================
     15: [
       { q: "Binary 10001 in decimal:",
         choices: ["$17$", "$15$", "$19$", "$32$"], correct: 0,
-        solution: S({ c: "Place values.", s: ["$16 + 0 + 0 + 0 + 1 = 17$."], a: "$17$" }), ref: "Handbook p.388" },
+        solution: S({
+          c: "A binary number is a sum of powers of 2: each 1-bit contributes $2^{position}$, counting positions from 0 at the right.",
+          s: [
+            "<b>Step 1 — Label positions.</b> $1\\,0\\,0\\,0\\,1$ → bits at positions 4,3,2,1,0.",
+            "<b>Step 2 — Add the 1-bits.</b> position 4 → $2^4 = 16$; position 0 → $2^0 = 1$. Sum $= 17$.",
+            "<b>Step 3 — Distractor audit.</b> 15 and 19 are off-by-counting errors; 32 would be $2^5$ (one bit too far left)."
+          ],
+          a: "17.",
+          v: "Reverse check: 17 = 16 + 1 → bits 4 and 0 set → 10001 ✓. Quick instinct: a 1 followed by zeros is exactly $2^{(\\#zeros)}$, so 10000 = 16 and the trailing 1 just adds one."
+
+        }), ref: "Handbook p.388" },
       { q: "Decimal 200 in binary:",
         choices: ["$11001000$", "$11000100$", "$10101010$", "$11111000$"], correct: 0,
-        solution: S({ c: "Decompose.", s: ["$200 = 128 + 64 + 8 = 2^7+2^6+2^3$.", "Binary: 11001000."], a: "$11001000$" }), ref: "Handbook p.388" },
+        solution: S({
+          c: "Convert decimal → binary by subtracting the largest fitting power of 2 repeatedly (or equivalently, decompose into powers of 2).",
+          s: [
+            "<b>Step 1 — Greedy decompose.</b> $200 = 128 + 72 = 128 + 64 + 8 = 2^7 + 2^6 + 2^3$.",
+            "<b>Step 2 — Set those bits.</b> positions 7,6,3 → 1 1 0 0 1 0 0 0.",
+            "<b>Step 3 — Distractor audit.</b> 11000100 = 196; 10101010 = 170; 11111000 = 248 — each flips the wrong bits."
+          ],
+          a: "11001000.",
+          v: "Add it back: $128 + 64 + 8 = 200$ ✓. Sanity: 200 < 256 = $2^8$, so it fits in 8 bits exactly — and an even number must end in 0, which 11001000 does."
+
+        }), ref: "Handbook p.388" },
       { q: "$\\text{4A}_{16} + \\text{B5}_{16}$ = ?",
         choices: ["$\\text{FF}_{16}$", "$\\text{F0}_{16}$", "$\\text{100}_{16}$", "$\\text{AB}_{16}$"], correct: 0,
-        solution: S({ c: "Convert to decimal, add, convert back.", s: ["4A = 74. B5 = 181. Sum = 255 = FF.", "Equivalently: 4 + B = F (15); A + 5 = F (15)."], a: "$\\text{FF}$" }), ref: "Handbook p.388" },
+        solution: S({
+          c: "Hex arithmetic: each hex digit is 4 bits (0-F = 0-15). Convert to decimal, add, convert back — or add digit-columns with carry.",
+          s: [
+            "<b>Step 1 — To decimal.</b> 4A = $4\\times16 + 10 = 74$; B5 = $11\\times16 + 5 = 181$.",
+            "<b>Step 2 — Add.</b> $74 + 181 = 255$.",
+            "<b>Step 3 — Back to hex.</b> $255 = FF$ (both nibbles all-ones).",
+            "<b>Step 4 — Distractor audit.</b> F0 = 240; 100₁₆ = 256 (one too many); AB = 171 — none equal 255."
+          ],
+          a: "FF₁₆.",
+          v: "Column check confirms with no carry: low nibble A+5 = F (15), high nibble 4+B = F (15) → FF ✓. Worth remembering: FF = 255 = the largest 8-bit value, which is why it caps a byte."
+
+        }), ref: "Handbook p.388" },
       { q: "How many minterms in a 4-variable Boolean function (max):",
         choices: ["$16$", "$4$", "$8$", "$32$"], correct: 0,
-        solution: S({ c: "$2^n$ rows in truth table → up to $2^n$ minterms.", s: ["Each row could be 0 or 1; rows where output is 1 = minterms."], a: "$16$" }), ref: "Handbook p.389" },
+        solution: S({
+          c: "A function of $n$ variables has a truth table with $2^n$ rows. A MINTERM is a row where the output is 1; the maximum number of them is therefore $2^n$ (every row outputs 1).",
+          s: [
+            "<b>Step 1 — Apply.</b> $2^4 = 16$ rows → up to 16 minterms.",
+            "<b>Step 2 — Distractor audit.</b> 4 confuses variables with rows; 8 is $2^3$ (three variables); 32 is $2^5$."
+          ],
+          a: "16.",
+          v: "Boundary cases that frame it: 0 minterms = the constant-0 function; 16 minterms = constant-1; anything between is a real logic function ✓. This 16 is also why a 4-variable Karnaugh map has exactly 16 cells."
+
+        }), ref: "Handbook p.389" },
       { q: "JK flip-flop with J=0, K=0:",
         choices: ["Hold", "Set", "Reset", "Toggle"], correct: 0,
-        solution: S({ c: "JK truth table: 0,0=hold; 1,0=set; 0,1=reset; 1,1=toggle.", s: [""], a: "Hold" }), ref: "Handbook p.391" },
+        solution: S({
+          c: "The JK flip-flop is the universal edge-triggered storage cell. Its four input combinations: 00 = HOLD (no change), 10 = SET (Q→1), 01 = RESET (Q→0), 11 = TOGGLE (Q flips).",
+          s: [
+            "<b>Step 1 — Look up 00.</b> J=0, K=0 → Hold (output keeps its previous value).",
+            "<b>Step 2 — Distractor audit.</b> Set is 10; Reset is 01; Toggle is 11 — the question asks the one input pair that does NOTHING."
+          ],
+          a: "Hold — output unchanged.",
+          v: "Why JK beats the SR latch: it gives the otherwise-forbidden 11 input a USEFUL job (toggle) instead of an illegal state ✓ — which is exactly what makes JK flip-flops the building block of counters."
+
+        }), ref: "Handbook p.391" },
       { q: "SR latch input S=1, R=1 (simultaneously):",
         choices: ["Forbidden (indeterminate)", "Set", "Reset", "Toggle"], correct: 0,
-        solution: S({ c: "Simultaneous S=R=1: both outputs forced HIGH → race condition when released.", s: ["JK FF resolves this by toggling instead."], a: "Forbidden" }), ref: "Handbook p.391" },
+        solution: S({
+          c: "An SR (Set-Reset) latch is built from cross-coupled NOR (or NAND) gates. Asserting Set AND Reset at once is FORBIDDEN: it forces both outputs to the same level, breaking the Q/Q̄ complement, and the next state is indeterminate (a race) when the inputs release together.",
+          s: [
+            "<b>Step 1 — Match.</b> Forbidden / indeterminate.",
+            "<b>Step 2 — Why it's illegal.</b> The latch's whole job is to hold Q and its complement; S=R=1 makes Q = Q̄, a contradiction — and which value 'wins' on release depends on tiny timing differences.",
+            "<b>Step 3 — Distractor audit.</b> Set (10) and Reset (01) are the single-input cases; toggle isn't even an SR behavior."
+          ],
+          a: "Forbidden (indeterminate output).",
+          v: "The historical fix proves the point: the JK flip-flop redefines that same 11 input as a clean TOGGLE, eliminating the forbidden state ✓ — which is why JK, not SR, underlies real sequential logic."
+
+        }), ref: "Handbook p.391" },
       { q: "Ripple carry adder for 4-bit numbers: number of full adders needed:",
         choices: ["$4$", "$8$", "$16$", "$3$"], correct: 0,
-        solution: S({ c: "One full adder per bit position.", s: ["LSB can use half-adder if no carry in.", "MSB carries out as overflow."], a: "$4$ full adders" }), ref: "Handbook p.390" },
+        solution: S({
+          c: "A ripple-carry adder chains one FULL ADDER per bit position; each full adder sums two input bits plus the carry rippling in from the bit below.",
+          s: [
+            "<b>Step 1 — One per bit.</b> 4-bit numbers → 4 full adders.",
+            "<b>Step 2 — The chain.</b> Carry-out of bit 0 feeds carry-in of bit 1, and so on; the final carry-out is the overflow/5th bit.",
+            "<b>Step 3 — Distractor audit.</b> 8 and 16 over-count; 3 forgets the carry must propagate through every position (the LSB could be a half-adder, but 'full adders for the design' is 4)."
+          ],
+          a: "4 full adders.",
+          v: "The cost this structure reveals: carry must ripple end-to-end, so delay grows LINEARLY with bit width ✓ — which is precisely why fast machines use carry-lookahead adders to compute carries in parallel."
+
+        }), ref: "Handbook p.390" },
       { q: "Demultiplexer (1-to-N) with 4 outputs needs ___ select lines:",
         choices: ["$2$", "$4$", "$3$", "$1$"], correct: 0,
-        solution: S({ c: "$\\log_2 N$ select lines.", s: ["$\\log_2 4 = 2$."], a: "$2$" }), ref: "Handbook p.390" },
+        solution: S({
+          c: "A demultiplexer routes one input to one of N outputs; to address N outputs you need enough select lines to count them in binary: $\\lceil\\log_2 N\\rceil$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\log_2 4 = 2$ select lines.",
+            "<b>Step 2 — Distractor audit.</b> 4 confuses select lines with outputs; 3 would address 8; 1 addresses only 2."
+          ],
+          a: "2 select lines.",
+          v: "The pattern across the family: 2 selects → 4 outputs, 3 → 8, 4 → 16 ✓ — identical to a multiplexer's selects and to the address-bits-vs-memory-locations relationship ($2^{addr}$ = locations)."
+
+        }), ref: "Handbook p.390" },
       { q: "Bit-shift left by 1: equivalent to:",
         choices: ["Multiplying by 2", "Dividing by 2", "Adding 1", "Bit complement"], correct: 0,
-        solution: S({ c: "$1010_2 \\to 10100_2$. $10_{10} \\to 20_{10}$.", s: ["Right shift = divide by 2.", "Arithmetic right shift preserves sign bit."], a: "$\\times 2$" }), ref: "Handbook p.389" },
+        solution: S({
+          c: "Shifting a binary number LEFT by one position appends a 0 on the right and moves every digit up one power of 2 — that MULTIPLIES the value by 2 (just as appending a 0 in decimal multiplies by 10).",
+          s: [
+            "<b>Step 1 — Example.</b> $1010_2 = 10 \\to 10100_2 = 20$. Doubled.",
+            "<b>Step 2 — Distractor audit.</b> Dividing by 2 is a RIGHT shift (opposite direction); 'adding 1' sets a bit, not a shift; complement flips bits."
+          ],
+          a: "Multiply by 2.",
+          v: "Why hardware loves it: a shift is just rewiring — far cheaper than a multiplier — so compilers turn $x\\times2$ into $x\\ll1$ ✓. Caution: right shifts need the ARITHMETIC variant (sign-extend) to divide signed numbers correctly."
+
+        }), ref: "Handbook p.389" },
       { q: "Tri-state buffer outputs:",
         choices: ["High, Low, or High-impedance", "Just High or Low", "Always Low", "Random"], correct: 0,
-        solution: S({ c: "Tri-state has Enable input. When disabled: output is high-Z (effectively disconnected).", s: ["Allows multiple drivers on shared bus — only one active at a time."], a: "0, 1, or Hi-Z" }), ref: "Handbook p.391" },
+        solution: S({
+          c: "A tri-state buffer has a third output state beyond 0 and 1: high-impedance (Hi-Z), an electrically DISCONNECTED state. An Enable input chooses between driving (0/1) and floating (Hi-Z).",
+          s: [
+            "<b>Step 1 — Match.</b> High, Low, or High-impedance.",
+            "<b>Step 2 — What Hi-Z is for.</b> Many devices can share one bus wire if all but one sit in Hi-Z — the active driver 'owns' the bus while the others electrically vanish.",
+            "<b>Step 3 — Distractor audit.</b> 'Just High or Low' is an ordinary buffer (no third state); 'always Low' and 'random' aren't buffer behaviors."
+          ],
+          a: "0, 1, or Hi-Z.",
+          v: "The failure it prevents: two outputs driving opposite levels onto one wire = bus contention (a short, possibly damaging) ✓ — Hi-Z is what makes shared data buses, in memory and CPUs, physically possible."
+
+        }), ref: "Handbook p.391" },
       { q: "Convert 0.625 (decimal) to binary fraction:",
         choices: ["$0.101_2$", "$0.110_2$", "$0.011_2$", "$0.111_2$"], correct: 0,
-        solution: S({ c: "Multiply by 2 repeatedly, collect integer parts.", s: ["$0.625 \\times 2 = 1.25$ → 1, keep 0.25.", "$0.25 \\times 2 = 0.5$ → 0, keep 0.5.", "$0.5 \\times 2 = 1.0$ → 1, done.", "Read: 0.101."], a: "$0.101_2$", v: "$1/2 + 1/8 = 0.5 + 0.125 = 0.625$ ✓" }), ref: "Handbook p.388" },
+        solution: S({
+          c: "Convert a decimal FRACTION to binary by repeatedly multiplying by 2; each step's INTEGER part (0 or 1) is the next binary digit after the point, reading top-down.",
+          s: [
+            "<b>Step 1 — ×2.</b> $0.625\\times2 = 1.25$ → digit 1, keep 0.25.",
+            "<b>Step 2 — ×2.</b> $0.25\\times2 = 0.5$ → digit 0, keep 0.5.",
+            "<b>Step 3 — ×2.</b> $0.5\\times2 = 1.0$ → digit 1, fraction hits 0, stop.",
+            "<b>Step 4 — Read top-down.</b> 0.101₂. Distractors 0.110/0.011/0.111 mis-order or mis-count the bits."
+          ],
+          a: "0.101₂.",
+          v: "Place-value check: $2^{-1} + 2^{-3} = 0.5 + 0.125 = 0.625$ ✓. Note many decimals (like 0.1) NEVER terminate in binary — 0.625 is lucky because it's a clean sum of $1/2$ and $1/8$."
+
+        }), ref: "Handbook p.388" },
       { q: "Synchronous counter advantages over async ripple:",
         choices: ["No accumulated propagation delay, glitch-free", "Simpler", "Fewer connections", "Lower power"], correct: 0,
-        solution: S({ c: "Sync: all FFs change on same clock edge → outputs change together.", s: ["Async ripple: each FF triggers next → delays add up, transient states appear.", "Sync more complex but reliable."], a: "No accumulated delay" }), ref: "Handbook p.391" },
+        solution: S({
+          c: "In a SYNCHRONOUS counter every flip-flop is clocked by the SAME edge, so all bits update simultaneously. An ASYNCHRONOUS (ripple) counter clocks each stage from the previous one, so delays add up and fleeting wrong states appear during transitions.",
+          s: [
+            "<b>Step 1 — Match.</b> No accumulated propagation delay → glitch-free, faster.",
+            "<b>Step 2 — Why ripple glitches.</b> Counting 0111→1000, the carry must ripple through every bit one delay at a time, so the output momentarily shows invalid combinations — bad for downstream decoding.",
+            "<b>Step 3 — Distractor audit.</b> Synchronous is NOT simpler or fewer-connections (it needs extra steering logic) and not inherently lower-power — its win is timing reliability."
+          ],
+          a: "No accumulated delay — all bits change together, glitch-free.",
+          v: "The trade stated plainly: sync costs more gates but its settling time is ONE flip-flop delay regardless of width, while ripple's grows with bit count ✓ — which is why high-speed and decoded counters are synchronous."
+
+        }), ref: "Handbook p.391" },
     ],
 
     // ====================== Ch 16: CompSys — +12 ======================
