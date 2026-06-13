@@ -7,178 +7,682 @@
     1: [
       { q: "Find $|z|$ for $z = -3 + 4j$:",
         choices: ["$5$", "$1$", "$\\sqrt{7}$", "$25$"], correct: 0,
-        solution: S({ c: "Magnitude $|a+bj| = \\sqrt{a^2+b^2}$.", s: ["$\\sqrt{9+16} = 5$."], a: "$5$" }), ref: "p.36" },
+        solution: S({
+          c: "The magnitude (modulus) of a complex number is $|a+bj| = \\sqrt{a^2+b^2}$ — the distance from the origin in the complex plane. The signs don't matter (they're squared).",
+          s: [
+            "<b>Step 1 — Square and sum.</b> $(-3)^2 + 4^2 = 9+16 = 25$.",
+            "<b>Step 2 — Root.</b> $\\sqrt{25} = 5$.",
+            "<b>Step 3 — Distractor audit.</b> 1 is $|{-3}|-|4|$ confusion; $\\sqrt7$ forgets to square; 25 forgets the root."
+          ],
+          a: "$|z| = 5$",
+          v: "It's a 3-4-5 triangle ✓ — the negative real part just places z in the second quadrant, but magnitude (a distance) is always positive."
+
+        }), ref: "p.36" },
       { q: "$(1+j)^4 = ?$", choices: ["$-4$", "$4$", "$4j$", "$2$"], correct: 0,
-        solution: S({ c: "Convert to polar: $1+j = \\sqrt{2}\\angle 45°$. Raise to power.", s: ["$(\\sqrt{2})^4 = 4$. Angle: $4 \\cdot 45° = 180°$.", "$4\\angle 180° = -4$."], a: "$-4$" }), ref: "p.36" },
+        solution: S({
+          c: "Powers of complex numbers are easy in POLAR form (De Moivre): $z^n = r^n\\angle(n\\theta)$. Convert, raise, convert back.",
+          s: [
+            "<b>Step 1 — To polar.</b> $1+j = \\sqrt2\\angle45°$.",
+            "<b>Step 2 — Raise to 4.</b> $(\\sqrt2)^4 = 4$; angle $4\\times45° = 180°$ → $4\\angle180°$.",
+            "<b>Step 3 — To rectangular.</b> $4\\angle180° = -4$.",
+            "<b>Step 4 — Distractor audit.</b> 4 forgets the angle; $4j$ would be 90°; 2 mishandles the magnitude."
+          ],
+          a: "$-4$",
+          v: "Cross-check by squaring twice: $(1+j)^2 = 1+2j+j^2 = 2j$; then $(2j)^2 = -4$ ✓. Polar wins for high powers; rectangular for low ones."
+
+        }), ref: "p.36" },
       { q: "Solve $x^2 + 4x + 13 = 0$:",
         choices: ["$x = -2 \\pm 3j$", "$x = -2 \\pm \\sqrt{13}$", "$x = 2 \\pm 3j$", "$x = \\pm \\sqrt{17}$"], correct: 0,
-        solution: S({ c: "Discriminant negative → complex conjugate roots.", s: ["$\\Delta = 16-52 = -36$. $\\sqrt{-36} = 6j$.", "$x = (-4 \\pm 6j)/2 = -2 \\pm 3j$."], a: "$-2 \\pm 3j$" }), ref: "p.35" },
+        solution: S({
+          c: "Quadratic formula with a NEGATIVE discriminant yields complex-conjugate roots.",
+          s: [
+            "<b>Step 1 — Discriminant.</b> $\\Delta = 16-52 = -36 < 0$ → complex.",
+            "<b>Step 2 — Root of negative.</b> $\\sqrt{-36} = 6j$.",
+            "<b>Step 3 — Apply.</b> $x = (-4\\pm6j)/2 = -2\\pm3j$.",
+            "<b>Step 4 — Distractor audit.</b> $-2\\pm\\sqrt{13}$ assumes positive Δ; $2\\pm3j$ has the wrong sign; $\\pm\\sqrt{17}$ is unrelated."
+          ],
+          a: "$x = -2 \\pm 3j$",
+          v: "Vieta: sum $= -4 = -b/a$ ✓, product $= (-2)^2+3^2 = 13 = c/a$ ✓. Real coefficients always give conjugate-pair complex roots."
+
+        }), ref: "p.35" },
       { q: "$\\det\\begin{pmatrix}3&-1&2\\\\0&4&5\\\\0&0&6\\end{pmatrix}$:",
         choices: ["$72$", "$24$", "$30$", "$0$"], correct: 0,
-        solution: S({ c: "Upper triangular: product of diagonal.", s: ["$3 \\cdot 4 \\cdot 6 = 72$."], a: "$72$" }), ref: "p.57" },
+        solution: S({
+          c: "The determinant of a TRIANGULAR matrix (all zeros below — or above — the diagonal) is simply the PRODUCT of the diagonal entries.",
+          s: [
+            "<b>Step 1 — Multiply diagonal.</b> $3\\times4\\times6 = 72$.",
+            "<b>Step 2 — Distractor audit.</b> 24 and 30 are partial products; 0 would need a zero on the diagonal."
+          ],
+          a: "$\\det = 72$",
+          v: "The off-diagonal entries (−1, 2, 5) are irrelevant for a triangular matrix ✓ — which is exactly why Gaussian elimination reduces to triangular form to compute determinants efficiently."
+
+        }), ref: "p.57" },
       { q: "Inverse of identity matrix:",
         choices: ["Itself", "Zero matrix", "Doesn't exist", "Transpose"], correct: 0,
-        solution: S({ c: "$I \\cdot I = I$, so $I^{-1} = I$.", s: [""], a: "$I^{-1} = I$" }), ref: "p.57" },
+        solution: S({
+          c: "The identity matrix $I$ satisfies $I\\cdot I = I$, so it is its own inverse: $I^{-1} = I$.",
+          s: [
+            "<b>Step 1 — Match.</b> Itself.",
+            "<b>Step 2 — Distractor audit.</b> Zero matrix has no inverse; 'doesn't exist' is wrong ($\\det I=1\\ne0$); transpose happens to equal I too but the defining property is self-inverse."
+          ],
+          a: "$I^{-1} = I$",
+          v: "I is the multiplicative identity for matrices — like 1 for numbers ($1^{-1}=1$) ✓. Any matrix times I is unchanged, and I times itself is I."
+
+        }), ref: "p.57" },
       { q: "$\\dfrac{d}{dx}[\\ln(x^2+1)]$:",
         choices: ["$2x/(x^2+1)$", "$1/(x^2+1)$", "$2x$", "$\\ln(2x)$"], correct: 0,
-        solution: S({ c: "Chain rule: $\\frac{d}{dx}\\ln u = u'/u$.", s: ["$u = x^2+1$, $u' = 2x$.", "Result: $2x/(x^2+1)$."], a: "$2x/(x^2+1)$" }), ref: "p.47" },
+        solution: S({
+          c: "Chain rule for logarithms: $\\dfrac{d}{dx}\\ln u = \\dfrac{u'}{u}$.",
+          s: [
+            "<b>Step 1 — Inner derivative.</b> $u = x^2+1 \\Rightarrow u' = 2x$.",
+            "<b>Step 2 — Apply.</b> $\\dfrac{2x}{x^2+1}$.",
+            "<b>Step 3 — Distractor audit.</b> $1/(x^2+1)$ forgets the inner $u'$; $2x$ forgets the $/u$; $\\ln(2x)$ is nonsense."
+          ],
+          a: "$\\dfrac{2x}{x^2+1}$",
+          v: "The $u'/u$ form is THE log-derivative pattern ✓ — always multiply by the derivative of the inside. Forgetting that inner factor is the classic chain-rule slip."
+
+        }), ref: "p.47" },
       { q: "$\\int_0^{\\pi} \\sin x\\,dx = ?$",
         choices: ["$2$", "$0$", "$\\pi$", "$1$"], correct: 0,
-        solution: S({ c: "Antideriv: $-\\cos x$. Evaluate.", s: ["$-\\cos\\pi - (-\\cos 0) = -(-1)-(-1) = 1+1 = 2$."], a: "$2$" }), ref: "p.49" },
+        solution: S({
+          c: "Definite integral: find the antiderivative ($-\\cos x$) and evaluate at the limits.",
+          s: [
+            "<b>Step 1 — Antiderivative.</b> $\\int\\sin x\\,dx = -\\cos x$.",
+            "<b>Step 2 — Evaluate.</b> $[-\\cos x]_0^\\pi = -\\cos\\pi-(-\\cos0) = -(-1)+1 = 2$.",
+            "<b>Step 3 — Distractor audit.</b> 0 would be the integral over a full $2\\pi$; π and 1 mis-evaluate."
+          ],
+          a: "2",
+          v: "Geometrically it's the area under one sine hump (0 to π), which is exactly 2 ✓ — a useful number to remember. Over $0$ to $2\\pi$ it cancels to 0 (equal positive and negative humps)."
+
+        }), ref: "p.49" },
       { q: "Find slope of $y = e^{2x}$ at $x = 0$:",
         choices: ["$2$", "$1$", "$0$", "$e$"], correct: 0,
-        solution: S({ c: "$y' = 2e^{2x}$. At $x=0$: $2 \\cdot 1 = 2$.", s: [""], a: "$2$" }), ref: "p.47" },
+        solution: S({
+          c: "Slope = derivative. For $e^{2x}$, the chain rule gives $y' = 2e^{2x}$.",
+          s: [
+            "<b>Step 1 — Differentiate.</b> $y' = 2e^{2x}$.",
+            "<b>Step 2 — Evaluate at 0.</b> $2e^0 = 2(1) = 2$.",
+            "<b>Step 3 — Distractor audit.</b> 1 forgets the factor of 2; 0 is wrong; $e$ misreads."
+          ],
+          a: "slope $= 2$",
+          v: "The 2 comes from the chain rule (derivative of the exponent $2x$) ✓ — $e^x$ alone would have slope 1 at x=0, but the '2x' doubles it."
+
+        }), ref: "p.47" },
       { q: "$\\sum_{k=0}^{\\infty}(0.4)^k = ?$",
         choices: ["$5/3 \\approx 1.667$", "$0.4$", "$\\infty$", "$1$"], correct: 0,
-        solution: S({ c: "Geometric series $|r|<1$: $\\sum = 1/(1-r)$.", s: ["$1/(1-0.4) = 1/0.6 = 5/3$."], a: "$5/3$" }), ref: "p.50" },
+        solution: S({
+          c: "An infinite geometric series with $|r|<1$ converges to $\\dfrac{1}{1-r}$ (first term 1 here, ratio r).",
+          s: [
+            "<b>Step 1 — Identify.</b> $r = 0.4$, $|r|<1$ → converges.",
+            "<b>Step 2 — Apply.</b> $\\dfrac{1}{1-0.4} = \\dfrac{1}{0.6} = \\dfrac53 \\approx 1.667$.",
+            "<b>Step 3 — Distractor audit.</b> 0.4 is just one term; ∞ would need $|r|\\ge1$; 1 ignores the sum."
+          ],
+          a: "$5/3 \\approx 1.667$",
+          v: "Sanity: $1 + 0.4 + 0.16 + \\dots$ clearly exceeds 1 but stays bounded ✓. The formula $1/(1-r)$ underlies everything from compound interest to RC-filter impulse sums."
+
+        }), ref: "p.50" },
       { q: "Solve $y'' - 4y' + 4y = 0$:",
         choices: ["$y = (C_1+C_2 x)e^{2x}$", "$y = C_1 e^{2x} + C_2 e^{-2x}$", "$y = C\\cos 2x$", "$y = C e^{4x}$"], correct: 0,
-        solution: S({ c: "Char eq: $r^2-4r+4 = (r-2)^2 = 0$. Repeated root $r=2$.", s: ["Solution form: $(C_1 + C_2 x)e^{rx}$.", "Result: $(C_1+C_2 x)e^{2x}$."], a: "$(C_1+C_2 x)e^{2x}$" }), ref: "p.55" },
+        solution: S({
+          c: "For a linear homogeneous ODE, form the CHARACTERISTIC equation. A REPEATED root $r$ gives the solution form $(C_1 + C_2 x)e^{rx}$ (the extra $x$ provides the second independent solution).",
+          s: [
+            "<b>Step 1 — Characteristic eq.</b> $r^2-4r+4 = (r-2)^2 = 0$ → double root $r=2$.",
+            "<b>Step 2 — Write solution.</b> $(C_1 + C_2 x)e^{2x}$.",
+            "<b>Step 3 — Distractor audit.</b> $C_1e^{2x}+C_2e^{-2x}$ is for DISTINCT roots; $\\cos2x$ needs imaginary roots; $Ce^{4x}$ misreads the root."
+          ],
+          a: "$(C_1+C_2 x)e^{2x}$",
+          v: "The $C_2 x$ term is the signature of a repeated root ✓ — without it you'd have only one independent solution. This is the critically-damped case in vibration/circuit problems."
+
+        }), ref: "p.55" },
       { q: "Vector projection of $\\vec{a}=(3,4)$ onto $\\vec{b}=(1,0)$:",
         choices: ["$(3, 0)$", "$(0, 4)$", "$(3, 4)$", "$5$"], correct: 0,
-        solution: S({ c: "$\\text{proj}_b a = (a \\cdot \\hat{b})\\hat{b}$.", s: ["$\\hat{b} = (1,0)$. $a\\cdot\\hat{b} = 3$.", "Projection: $(3,0)$."], a: "$(3, 0)$" }), ref: "p.38" },
+        solution: S({
+          c: "The projection of $\\vec a$ onto $\\vec b$ is the 'shadow' of a along b's direction: $\\text{proj}_b a = (\\vec a\\cdot\\hat b)\\hat b$. Projecting onto a coordinate axis just keeps that component.",
+          s: [
+            "<b>Step 1 — Unit vector.</b> $\\hat b = (1,0)$ (already unit).",
+            "<b>Step 2 — Dot then scale.</b> $\\vec a\\cdot\\hat b = 3$, so projection $= 3(1,0) = (3,0)$.",
+            "<b>Step 3 — Distractor audit.</b> $(0,4)$ projects onto the y-axis; $(3,4)$ is a unchanged; 5 is $|\\vec a|$."
+          ],
+          a: "$(3, 0)$",
+          v: "Projecting onto the x-axis simply drops the y-component ✓ — the result keeps only how much of $\\vec a$ points along $\\vec b$. The scalar projection here is 3 (the dot product)."
+
+        }), ref: "p.38" },
       { q: "$\\sin(\\pi/6) + \\cos(\\pi/3)$:",
         choices: ["$1$", "$0$", "$\\sqrt{3}/2$", "$1/2$"], correct: 0,
-        solution: S({ c: "Standard angles.", s: ["$\\sin 30° = 1/2$. $\\cos 60° = 1/2$.", "Sum: 1."], a: "$1$" }), ref: "p.37" },
+        solution: S({
+          c: "Evaluate using the standard special-angle values: $\\sin30° = 1/2$ and $\\cos60° = 1/2$.",
+          s: [
+            "<b>Step 1 — Values.</b> $\\sin(\\pi/6)=\\sin30°=1/2$; $\\cos(\\pi/3)=\\cos60°=1/2$.",
+            "<b>Step 2 — Sum.</b> $1/2 + 1/2 = 1$.",
+            "<b>Step 3 — Distractor audit.</b> 0, $\\sqrt3/2$, 1/2 each drop or mis-evaluate a term."
+          ],
+          a: "1",
+          v: "Note $\\sin30° = \\cos60°$ — they're co-function complements ($\\sin\\theta=\\cos(90°-\\theta)$) ✓, which is why both equal 1/2. Memorizing the 30-60-90 values pays off constantly."
+
+        }), ref: "p.37" },
       { q: "Average value of $f(x) = x^2$ on $[0,2]$:",
         choices: ["$4/3$", "$2$", "$8/3$", "$4$"], correct: 0,
-        solution: S({ c: "Mean value: $(1/(b-a))\\int_a^b f\\,dx$.", s: ["$(1/2)\\int_0^2 x^2 dx = (1/2)(8/3) = 4/3$."], a: "$4/3$" }), ref: "p.49" },
+        solution: S({
+          c: "The average value of a function over $[a,b]$ is $\\dfrac{1}{b-a}\\int_a^b f\\,dx$ — total area divided by width.",
+          s: [
+            "<b>Step 1 — Integrate.</b> $\\int_0^2 x^2\\,dx = [x^3/3]_0^2 = 8/3$.",
+            "<b>Step 2 — Divide by width.</b> $\\dfrac{1}{2}\\cdot\\dfrac{8}{3} = \\dfrac{4}{3}$.",
+            "<b>Step 3 — Distractor audit.</b> 8/3 forgets to divide; 2 and 4 misuse the formula."
+          ],
+          a: "$4/3$",
+          v: "Sanity: $f$ ranges 0 to 4 on this interval, and 4/3≈1.33 sits in that range (below the midpoint since x² is convex) ✓. The average is the height of a rectangle with the same area."
+
+        }), ref: "p.49" },
       { q: "Solve $2^x = 32$:",
         choices: ["$x = 5$", "$x = 16$", "$x = \\log 32$", "$x = 32$"], correct: 0,
-        solution: S({ c: "$32 = 2^5$.", s: [""], a: "$x = 5$" }), ref: "p.36" },
+        solution: S({
+          c: "Solve an exponential equation by expressing both sides as the same base, then equating exponents.",
+          s: [
+            "<b>Step 1 — Same base.</b> $32 = 2^5$.",
+            "<b>Step 2 — Equate exponents.</b> $2^x = 2^5 \\Rightarrow x = 5$.",
+            "<b>Step 3 — Distractor audit.</b> 16 is $32/2$; $\\log32$ is unsimplified; 32 is the right side."
+          ],
+          a: "$x = 5$",
+          v: "Check: $2^5 = 32$ ✓. When the numbers aren't clean powers, take logs of both sides instead: $x = \\log_2 32 = \\ln32/\\ln2 = 5$."
+
+        }), ref: "p.36" },
       { q: "$\\log(100) - \\log(10)$ (base 10):",
         choices: ["$1$", "$10$", "$2$", "$90$"], correct: 0,
-        solution: S({ c: "Log subtraction = log division.", s: ["$\\log(100/10) = \\log 10 = 1$."], a: "$1$" }), ref: "p.36" },
+        solution: S({
+          c: "Logarithm subtraction equals the log of the quotient: $\\log A - \\log B = \\log(A/B)$.",
+          s: [
+            "<b>Step 1 — Combine.</b> $\\log(100/10) = \\log 10$.",
+            "<b>Step 2 — Evaluate.</b> $\\log_{10}10 = 1$.",
+            "<b>Step 3 — Distractor audit.</b> 10 and 90 confuse log with the numbers; 2 would be $\\log100$ alone."
+          ],
+          a: "1",
+          v: "Or directly: $\\log100 = 2$, $\\log10 = 1$, difference $= 1$ ✓. The log laws (sum↔product, difference↔quotient) turn multiplication into addition — the original purpose of logarithms."
+
+        }), ref: "p.36" },
       { q: "Area enclosed by $y = x^2$ and $y = 4$:",
         choices: ["$32/3$", "$8$", "$16$", "$4$"], correct: 0,
-        solution: S({ c: "Intersection at $x = \\pm 2$. Area = $\\int_{-2}^2 (4-x^2)dx$.", s: ["$[4x - x^3/3]_{-2}^2 = (8-8/3) - (-8+8/3) = 32/3$."], a: "$32/3$" }), ref: "p.49" },
+        solution: S({
+          c: "Area between two curves: $\\int (\\text{top} - \\text{bottom})\\,dx$ over the interval where they bound a region. Find the intersection points first.",
+          s: [
+            "<b>Step 1 — Intersections.</b> $x^2 = 4 \\Rightarrow x = \\pm2$.",
+            "<b>Step 2 — Integrate top minus bottom.</b> $\\int_{-2}^2 (4-x^2)\\,dx = [4x - x^3/3]_{-2}^2 = (8-8/3)-(-8+8/3) = 32/3$.",
+            "<b>Step 3 — Distractor audit.</b> 8, 16, 4 come from sign or limit errors."
+          ],
+          a: "$32/3$",
+          v: "By symmetry you could compute $2\\int_0^2(4-x^2)dx = 2(16/3) = 32/3$ ✓ — the region is symmetric about the y-axis. Always integrate (upper curve − lower curve)."
+
+        }), ref: "p.49" },
       { q: "Derivative of $\\sec x$:",
         choices: ["$\\sec x \\tan x$", "$-\\csc x \\cot x$", "$\\tan^2 x$", "$\\sec^2 x$"], correct: 0,
-        solution: S({ c: "Standard derivative.", s: ["$\\sec x = 1/\\cos x$. Differentiate: $\\sin x / \\cos^2 x = \\sec x \\tan x$."], a: "$\\sec x \\tan x$" }), ref: "p.47" },
+        solution: S({
+          c: "Standard derivative: $\\dfrac{d}{dx}\\sec x = \\sec x\\tan x$.",
+          s: [
+            "<b>Step 1 — Derive.</b> $\\sec x = 1/\\cos x$; quotient/chain rule gives $\\sin x/\\cos^2 x = \\sec x\\tan x$.",
+            "<b>Step 2 — Distractor audit.</b> $-\\csc x\\cot x$ is the derivative of $\\csc x$; $\\sec^2x$ is the derivative of $\\tan x$; $\\tan^2x$ is wrong."
+          ],
+          a: "$\\sec x\\tan x$",
+          v: "The reciprocal-trig derivatives pair up: $(\\sec x)'=\\sec x\\tan x$, $(\\csc x)'=-\\csc x\\cot x$ ✓ — note the minus sign goes with the 'co' functions."
+
+        }), ref: "p.47" },
       { q: "$\\int 1/(x \\ln x)\\,dx$:",
         choices: ["$\\ln|\\ln x| + C$", "$\\ln x + C$", "$\\ln^2 x + C$", "$1/x^2 + C$"], correct: 0,
-        solution: S({ c: "Substitution $u = \\ln x$, $du = dx/x$.", s: ["$\\int (1/u) du = \\ln|u| + C = \\ln|\\ln x| + C$."], a: "$\\ln|\\ln x| + C$" }), ref: "p.49" },
+        solution: S({
+          c: "Recognize a substitution: when the derivative of part of the integrand appears elsewhere. Here $u=\\ln x$ gives $du = dx/x$, which is already present.",
+          s: [
+            "<b>Step 1 — Substitute.</b> $u=\\ln x$, $du = dx/x$ → integral becomes $\\int (1/u)\\,du$.",
+            "<b>Step 2 — Integrate.</b> $\\ln|u|+C = \\ln|\\ln x|+C$.",
+            "<b>Step 3 — Distractor audit.</b> $\\ln x+C$, $\\ln^2x+C$, $1/x^2+C$ don't differentiate back correctly."
+          ],
+          a: "$\\ln|\\ln x| + C$",
+          v: "Differentiate to check: $\\dfrac{d}{dx}\\ln(\\ln x) = \\dfrac{1}{\\ln x}\\cdot\\dfrac1x = \\dfrac{1}{x\\ln x}$ ✓. Spotting that $dx/x$ is the derivative of $\\ln x$ is the key insight."
+
+        }), ref: "p.49" },
       { q: "Limit $\\lim_{x\\to\\infty} x e^{-x}$:",
         choices: ["$0$", "$\\infty$", "$1$", "$e$"], correct: 0,
-        solution: S({ c: "Exponential decay beats polynomial growth. L'Hopital confirms.", s: ["$\\lim x/e^x \\to 1/e^x \\to 0$."], a: "$0$" }), ref: "p.47" },
+        solution: S({
+          c: "Exponential growth ALWAYS beats polynomial growth. So $xe^{-x} = x/e^x \\to 0$ as $x\\to\\infty$ (the $e^x$ in the denominator wins).",
+          s: [
+            "<b>Step 1 — Rewrite.</b> $xe^{-x} = x/e^x$, an $\\infty/\\infty$ form.",
+            "<b>Step 2 — L'Hôpital.</b> $\\lim x/e^x = \\lim 1/e^x = 0$.",
+            "<b>Step 3 — Distractor audit.</b> ∞ assumes x wins; 1 and e mis-evaluate."
+          ],
+          a: "0",
+          v: "The hierarchy of growth: $e^x \\gg x^n \\gg \\ln x$ for large x ✓ — exponentials dominate any polynomial. This is why $xe^{-x}$ rises, peaks (at x=1), then decays to zero."
+
+        }), ref: "p.47" },
       { q: "$\\vec{A}\\cdot\\vec{B}$ if both unit vectors at 60° angle:",
         choices: ["$1/2$", "$\\sqrt{3}/2$", "$1$", "$0$"], correct: 0,
-        solution: S({ c: "$\\vec{A}\\cdot\\vec{B} = |A||B|\\cos\\theta$.", s: ["$1 \\cdot 1 \\cdot \\cos 60° = 0.5$."], a: "$1/2$" }), ref: "p.38" },
+        solution: S({
+          c: "The dot product of two vectors is $\\vec A\\cdot\\vec B = |A||B|\\cos\\theta$. For unit vectors, it's just $\\cos\\theta$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $1\\times1\\times\\cos60° = 0.5$.",
+            "<b>Step 2 — Distractor audit.</b> $\\sqrt3/2$ is $\\cos30°$; 1 is $\\cos0°$ (parallel); 0 is $\\cos90°$ (perpendicular)."
+          ],
+          a: "$1/2$",
+          v: "The dot product directly measures alignment: 1 = parallel, 0 = perpendicular, −1 = opposite ✓. At 60° the vectors are 'half aligned,' giving 0.5."
+
+        }), ref: "p.38" },
     ],
 
     // Prob — +12
     2: [
       { q: "P(rolling two 6s in a row with fair die):",
         choices: ["$1/36$", "$1/6$", "$2/36$", "$1/12$"], correct: 0,
-        solution: S({ c: "Independent: multiply.", s: ["$(1/6)(1/6) = 1/36$."], a: "$1/36$" }), ref: "p.64" },
+        solution: S({
+          c: "Independent events multiply: $P(A\\text{ and }B) = P(A)\\times P(B)$. Each die roll is independent.",
+          s: [
+            "<b>Step 1 — Apply.</b> $(1/6)(1/6) = 1/36$.",
+            "<b>Step 2 — Distractor audit.</b> $1/6$ is one roll; $2/36$ would be 'either'; $1/12$ is wrong."
+          ],
+          a: "$1/36$",
+          v: "Successive independent rolls multiply ✓ — each 6 is 1/6, two in a row is $1/6\\times1/6$. Order/independence matters: this is 'AND' (multiply), not 'OR' (add)."
+
+        }), ref: "p.64" },
       { q: "Variance of {1, 2, 3, 4, 5} (population):",
         choices: ["$2$", "$2.5$", "$5$", "$10$"], correct: 0,
-        solution: S({ c: "$\\sigma^2 = (1/n)\\sum (x_i-\\bar{x})^2$.", s: ["$\\bar{x} = 3$. Deviations: ±2, ±1, 0.", "$(4+1+0+1+4)/5 = 10/5 = 2$."], a: "$2$" }), ref: "p.63" },
+        solution: S({
+          c: "Population variance: $\\sigma^2 = \\dfrac{1}{n}\\sum(x_i-\\bar x)^2$ — the mean of the squared deviations from the mean.",
+          s: [
+            "<b>Step 1 — Mean.</b> $\\bar x = 15/5 = 3$.",
+            "<b>Step 2 — Squared deviations.</b> $(-2)^2,(-1)^2,0,1^2,2^2 = 4,1,0,1,4$; sum = 10.",
+            "<b>Step 3 — Divide by n.</b> $10/5 = 2$.",
+            "<b>Step 4 — Distractor audit.</b> 2.5 uses $n-1$ (sample variance); 5 and 10 skip the average."
+          ],
+          a: "$\\sigma^2 = 2$",
+          v: "Note POPULATION variance divides by $n$; SAMPLE variance divides by $n-1$ (giving 2.5 here) ✓ — the problem specifies population, so use n."
+
+        }), ref: "p.63" },
       { q: "Number of ways to arrange 4 letters from {A,B,C,D,E}:",
         choices: ["$P(5,4) = 120$", "$24$", "$625$", "$5$"], correct: 0,
-        solution: S({ c: "Permutations: $P(n,r) = n!/(n-r)!$.", s: ["$5!/1! = 120$."], a: "$120$" }), ref: "p.64" },
+        solution: S({
+          c: "Arrangements where ORDER matters = PERMUTATIONS: $P(n,r) = \\dfrac{n!}{(n-r)!}$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $P(5,4) = 5!/1! = 120$.",
+            "<b>Step 2 — Distractor audit.</b> 24 is $4!$ (arranging a fixed 4); 625 is $5^4$ (with repetition); 5 is just n."
+          ],
+          a: "$P(5,4) = 120$",
+          v: "Order matters here (arrange = sequence) → permutation, not combination ✓. If order DIDN'T matter, it'd be $C(5,4)=5$. The $/(n-r)!$ removes the one unused letter's slot."
+
+        }), ref: "p.64" },
       { q: "P(red queen from a deck):",
         choices: ["$2/52 = 1/26$", "$4/52$", "$1/52$", "$1/13$"], correct: 0,
-        solution: S({ c: "Red queens: hearts + diamonds = 2.", s: [""], a: "$2/52$" }), ref: "p.64" },
+        solution: S({
+          c: "Probability = favorable / total. A standard deck has 52 cards; red queens are the queen of hearts and queen of diamonds = 2.",
+          s: [
+            "<b>Step 1 — Count.</b> 2 red queens.",
+            "<b>Step 2 — Divide.</b> $2/52 = 1/26$.",
+            "<b>Step 3 — Distractor audit.</b> $4/52$ counts ALL queens; $1/52$ is one card; $1/13$ counts all queens differently."
+          ],
+          a: "$2/52 = 1/26$",
+          v: "Red = hearts + diamonds (2 of the 4 queens) ✓. Being specific about the qualifier (red AND queen) narrows 4 queens to 2."
+
+        }), ref: "p.64" },
       { q: "Continuous uniform on [0,1]. P(X > 0.7):",
         choices: ["$0.3$", "$0.7$", "$0.5$", "$1$"], correct: 0,
-        solution: S({ c: "Uniform: $P(X > a) = 1-a$.", s: ["$1 - 0.7 = 0.3$."], a: "$0.3$" }), ref: "p.67" },
+        solution: S({
+          c: "For a uniform distribution on $[0,1]$, probability equals length of the interval. $P(X>a) = 1-a$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $P(X>0.7) = 1-0.7 = 0.3$.",
+            "<b>Step 2 — Distractor audit.</b> 0.7 is $P(X<0.7)$; 0.5 ignores the threshold; 1 is the whole range."
+          ],
+          a: "0.3",
+          v: "On a uniform [0,1], probability IS the sub-interval length ✓ — the region above 0.7 has length 0.3. The PDF is flat at height 1, so area = width."
+
+        }), ref: "p.67" },
       { q: "Sample size for 95% CI with margin $\\pm 2$, $\\sigma = 10$:",
         choices: ["$n \\approx 96$", "$25$", "$10$", "$100$"], correct: 0,
-        solution: S({ c: "Margin = $z \\sigma/\\sqrt{n}$. Solve for n.", s: ["$2 = 1.96 \\cdot 10/\\sqrt{n}$.", "$\\sqrt{n} = 9.8$, $n = 96.04 \\approx 97$."], a: "$\\approx 96$" }), ref: "p.69" },
+        solution: S({
+          c: "Margin of error $= z\\sigma/\\sqrt n$. Solve for $n$: $n = (z\\sigma/E)^2$. For 95%, $z=1.96$.",
+          s: [
+            "<b>Step 1 — Set up.</b> $2 = 1.96\\times10/\\sqrt n$.",
+            "<b>Step 2 — Solve.</b> $\\sqrt n = 19.6/2 = 9.8$ → $n = 96.04$.",
+            "<b>Step 3 — Round UP.</b> $n \\approx 96$-97 (always round up for required sample size).",
+            "<b>Step 4 — Distractor audit.</b> 25, 10, 100 come from dropping z or the square."
+          ],
+          a: "$n \\approx 96$",
+          v: "The $n\\propto1/E^2$ relationship: halving the margin QUADRUPLES the required sample ✓ — precision is expensive. Always round n UP to guarantee the margin is met."
+
+        }), ref: "p.69" },
       { q: "Two events independent: $P(A \\cap B) = ?$",
         choices: ["$P(A) \\cdot P(B)$", "$P(A) + P(B)$", "$\\max(P(A), P(B))$", "$0$"], correct: 0,
-        solution: S({ c: "Independence definition.", s: [""], a: "$P(A)P(B)$" }), ref: "p.64" },
+        solution: S({
+          c: "INDEPENDENCE is DEFINED by $P(A\\cap B) = P(A)\\cdot P(B)$ — one event's occurrence doesn't change the other's probability.",
+          s: [
+            "<b>Step 1 — Match.</b> $P(A)\\cdot P(B)$.",
+            "<b>Step 2 — Distractor audit.</b> $P(A)+P(B)$ overcounts (and applies to mutually exclusive UNIONs via inclusion-exclusion); max and 0 are wrong."
+          ],
+          a: "$P(A)P(B)$",
+          v: "Contrast with MUTUALLY EXCLUSIVE events, where $P(A\\cap B)=0$ ✓ — independent and mutually-exclusive are DIFFERENT (in fact, two events with nonzero probability can't be both)."
+
+        }), ref: "p.64" },
       { q: "Skewness of normal distribution:",
         choices: ["$0$ (symmetric)", "$1$", "Positive", "Negative"], correct: 0,
-        solution: S({ c: "Normal: symmetric bell curve.", s: ["Skewed right: positive skew (tail to right).", "Skewed left: negative."], a: "$0$" }), ref: "p.67" },
+        solution: S({
+          c: "Skewness measures asymmetry. The normal distribution is perfectly symmetric (bell curve), so its skewness is 0.",
+          s: [
+            "<b>Step 1 — Match.</b> 0 (symmetric).",
+            "<b>Step 2 — Distractor audit.</b> Positive skew = long right tail; negative = long left tail; the normal has neither."
+          ],
+          a: "0 (symmetric).",
+          v: "For a normal, mean = median = mode (all at the center) ✓ — a hallmark of zero skew. Right-skewed data (e.g. income) has mean > median; left-skewed the reverse."
+
+        }), ref: "p.67" },
       { q: "Maximum likelihood estimate (MLE):",
         choices: ["Parameter value that maximizes likelihood of observed data", "Sample mean only", "Median", "Mode"], correct: 0,
-        solution: S({ c: "MLE: find $\\theta$ maximizing $L(\\theta|x_1,...,x_n)$.", s: ["For normal: MLE of $\\mu$ = sample mean.", "For Poisson: MLE of $\\lambda$ = sample mean."], a: "Max likelihood param" }), ref: "p.69" },
+        solution: S({
+          c: "The MLE is the parameter value that makes the OBSERVED data most probable — it maximizes the likelihood function $L(\\theta\\,|\\,\\text{data})$.",
+          s: [
+            "<b>Step 1 — Match.</b> Parameter value that maximizes likelihood of observed data.",
+            "<b>Step 2 — Distractor audit.</b> Sample mean, median, mode are specific estimators — sometimes they EQUAL the MLE, but MLE is the general maximization principle."
+          ],
+          a: "The parameter maximizing the data likelihood.",
+          v: "Conveniently, the MLE of a normal's mean (and a Poisson's rate) IS the sample mean ✓ — but in general you maximize $L$ (often via its log) over θ. MLE underpins regression and ML classifiers."
+
+        }), ref: "p.69" },
       { q: "Coefficient of variation: $\\sigma/\\mu$. For data with $\\mu = 50$, $\\sigma = 10$:",
         choices: ["$0.2$ or 20%", "$5$", "$60$", "$40$"], correct: 0,
-        solution: S({ c: "CV = $\\sigma/\\mu$.", s: ["$10/50 = 0.2$."], a: "$0.2 = 20\\%$" }), ref: "p.63" },
+        solution: S({
+          c: "Coefficient of variation $CV = \\sigma/\\mu$ — a UNITLESS measure of relative spread, letting you compare variability across different scales.",
+          s: [
+            "<b>Step 1 — Apply.</b> $CV = 10/50 = 0.2 = 20\\%$.",
+            "<b>Step 2 — Distractor audit.</b> 5 inverts it ($\\mu/\\sigma$); 60 and 40 are sum/difference confusions."
+          ],
+          a: "$0.2$ (20%).",
+          v: "CV's value is dimensionlessness: a SD of 10 is 'large' for a mean of 50 (20%) but tiny for a mean of 10,000 (0.1%) ✓ — CV captures that relative sense, useful for comparing datasets with different units."
+
+        }), ref: "p.63" },
       { q: "Chebyshev's inequality: $P(|X-\\mu| \\ge k\\sigma) \\le ?$",
         choices: ["$1/k^2$", "$1/k$", "$1/2k$", "$0$"], correct: 0,
-        solution: S({ c: "Chebyshev: holds for any distribution.", s: ["For $k=2$: at most 25% of data more than 2 SD from mean.", "Compare to normal: only ~5% beyond 2 SD."], a: "$1/k^2$" }), ref: "p.66" },
+        solution: S({
+          c: "Chebyshev's inequality bounds how much data lies far from the mean, for ANY distribution: $P(|X-\\mu|\\ge k\\sigma) \\le 1/k^2$.",
+          s: [
+            "<b>Step 1 — Match.</b> $1/k^2$.",
+            "<b>Step 2 — Distractor audit.</b> $1/k$, $1/2k$, 0 aren't the bound."
+          ],
+          a: "$\\le 1/k^2$",
+          v: "For $k=2$: at most 25% of ANY distribution lies beyond 2 SD ✓ — vs only ~5% for a normal specifically. Chebyshev is loose but UNIVERSAL (no distribution assumption), which is its power."
+
+        }), ref: "p.66" },
       { q: "Bayes: $P(A|B) = \\dfrac{P(B|A)P(A)}{P(B)}$ — describes:",
         choices: ["Inverse conditional probability", "Joint probability", "Marginal", "Independence"], correct: 0,
-        solution: S({ c: "Bayes inverts conditional: $P(B|A) \\to P(A|B)$.", s: ["Used: medical diagnosis, ML classifiers."], a: "Inverse conditional" }), ref: "p.65" },
+        solution: S({
+          c: "Bayes' theorem INVERTS a conditional probability — it computes $P(A|B)$ from $P(B|A)$, the prior $P(A)$, and the evidence $P(B)$.",
+          s: [
+            "<b>Step 1 — Match.</b> Inverse conditional probability.",
+            "<b>Step 2 — Distractor audit.</b> Joint is $P(A\\cap B)$; marginal is $P(A)$; independence is a separate concept."
+          ],
+          a: "Inverse conditional probability.",
+          v: "It's how you update beliefs with evidence — medical tests (P(disease|positive) from P(positive|disease)), spam filters, and ML classifiers all run on Bayes ✓. The famous base-rate trap comes from ignoring the prior $P(A)$."
+
+        }), ref: "p.65" },
     ],
 
     // Ethics — +5
     3: [
       { q: "Engineer accepts a private gift from contractor on stamped project:",
         choices: ["Conflict of interest — refuse or disclose", "OK if small", "OK after project ends", "Required"], correct: 0,
-        solution: S({ c: "Rule 4: faithful agent. Gifts from vendors compromise objectivity.", s: [""], a: "Conflict — refuse/disclose" }), ref: "p.4" },
+        solution: S({
+          c: "The 'faithful agent' canon forbids accepting anything that could compromise objectivity. A gift from a contractor on a project you're sealing is a conflict of interest.",
+          s: [
+            "<b>Step 1 — Match.</b> Conflict of interest — refuse or disclose.",
+            "<b>Step 2 — Distractor audit.</b> 'OK if small', 'OK after project', 'required' all rationalize a compromise of objectivity."
+          ],
+          a: "Conflict of interest — refuse or disclose.",
+          v: "Even the APPEARANCE of bias is a problem ✓ — a token gift can taint the perception of impartial engineering judgment. The safe course is to decline (or fully disclose and recuse if needed)."
+
+        }), ref: "p.4" },
       { q: "PE works for company A but moonlights for company B (same industry):",
         choices: ["Possible conflict of interest — disclose to A", "Always forbidden", "Always allowed", "Just disclose to B"], correct: 0,
-        solution: S({ c: "Moonlighting in same industry creates real or perceived conflicts.", s: ["Most employers require disclosure or prohibit competing work."], a: "Disclose to primary employer" }), ref: "p.4" },
+        solution: S({
+          c: "Moonlighting for a competitor in the same industry creates a real or perceived conflict of interest, which must be DISCLOSED to the primary employer.",
+          s: [
+            "<b>Step 1 — Match.</b> Possible conflict — disclose to employer A.",
+            "<b>Step 2 — Distractor audit.</b> 'Always forbidden' / 'always allowed' are too absolute; disclosing only to B misses the primary obligation."
+          ],
+          a: "Disclose to the primary employer.",
+          v: "Transparency resolves most conflicts — the employer can then judge whether it's acceptable ✓. Many employment agreements explicitly require disclosure or bar competing outside work."
+
+        }), ref: "p.4" },
       { q: "Engineer signs project but actual work was done by unlicensed person without review:",
         choices: ["Plan-stamping — major ethics violation", "OK if engineer is supervisor", "Acceptable", "Common practice"], correct: 0,
-        solution: S({ c: "Plan stamping: signing work you didn't prepare or review = ethics violation, potential criminal fraud.", s: ["Strictly prohibited by every US state engineering board."], a: "Plan-stamping = violation" }), ref: "p.5" },
+        solution: S({
+          c: "Signing/sealing work you did not prepare OR supervise and review is 'plan-stamping' — a serious ethics violation and potential criminal fraud.",
+          s: [
+            "<b>Step 1 — Match.</b> Plan-stamping — major ethics violation.",
+            "<b>Step 2 — Distractor audit.</b> It's only acceptable if the PE genuinely SUPERVISED and REVIEWED the work in 'responsible charge' — not the case here ('without review')."
+          ],
+          a: "Plan-stamping (a major violation).",
+          v: "The PE's seal certifies that a licensed professional took responsible charge ✓ — stamping unreviewed work betrays that guarantee and is prohibited by every US state board, with license-revocation and legal consequences."
+
+        }), ref: "p.5" },
       { q: "An engineer is asked to investigate a structure they previously designed:",
         choices: ["Conflict — should recuse or disclose", "Must accept", "Cannot accept", "Charge double"], correct: 0,
-        solution: S({ c: "Self-investigation bias. Disclose and let client decide if to proceed with independent reviewer.", s: [""], a: "Conflict — disclose" }), ref: "p.4-5" },
+        solution: S({
+          c: "Investigating your OWN prior design creates a self-interest bias (you may downplay your own errors). The ethical response is to disclose the conflict and recuse or bring in an independent reviewer.",
+          s: [
+            "<b>Step 1 — Match.</b> Conflict — recuse or disclose.",
+            "<b>Step 2 — Distractor audit.</b> 'Must accept' / 'cannot accept' are too rigid; 'charge double' is irrelevant."
+          ],
+          a: "Conflict of interest — disclose/recuse.",
+          v: "Objectivity is compromised when you investigate your own work ✓ — disclosure lets the client decide whether to proceed (often with an independent third party for credibility). The appearance of bias matters as much as actual bias."
+
+        }), ref: "p.4-5" },
       { q: "Continuing education requirement varies by state, but commonly:",
         choices: ["15-30 PDH per 2-year renewal cycle", "Optional", "100 PDH/year", "None"], correct: 0,
-        solution: S({ c: "Most state boards require PDH (Professional Development Hours) to maintain license.", s: ["Some require ethics-specific hours."], a: "15-30 PDH/cycle" }), ref: "p.11" },
+        solution: S({
+          c: "Most state boards require Professional Development Hours (PDH) to renew a PE license — commonly around 15-30 PDH per 2-year cycle (some mandate ethics-specific hours).",
+          s: [
+            "<b>Step 1 — Match.</b> 15-30 PDH per 2-year renewal.",
+            "<b>Step 2 — Distractor audit.</b> 'Optional' and 'none' are wrong for most states; '100 PDH/year' is excessive."
+          ],
+          a: "≈15-30 PDH per 2-year cycle.",
+          v: "Continuing education keeps licensees current with codes, technology, and ethics ✓ — exact requirements vary by state, so engineers track their PDH and retain documentation for audits."
+
+        }), ref: "p.11" },
     ],
 
     // Econ — +10
     4: [
       { q: "Find effective annual rate from 1% per month nominal:",
         choices: ["$\\approx 12.68\\%$", "$12\\%$", "$13\\%$", "$10\\%$"], correct: 0,
-        solution: S({ c: "$EAR = (1+r/m)^m - 1$.", s: ["$(1.01)^{12} - 1 = 0.1268$ = 12.68%."], a: "$12.68\\%$" }), ref: "p.230" },
+        solution: S({
+          c: "Effective annual rate from a periodic rate: $EAR = (1+r_{period})^m - 1$. Here 1%/month for 12 months.",
+          s: [
+            "<b>Step 1 — Apply.</b> $(1.01)^{12} - 1 = 1.1268 - 1 = 0.1268 = 12.68\\%$.",
+            "<b>Step 2 — Distractor audit.</b> 12% is the nominal (12×1%, ignoring compounding); 13% rounds up; 10% is wrong."
+          ],
+          a: "$EAR \\approx 12.68\\%$",
+          v: "The 0.68% gap above 12% is interest earning interest each month ✓ — a credit card 'at 1% a month' really costs 12.68% a year, a common consumer-finance gotcha."
+
+        }), ref: "p.230" },
       { q: "Project: invest $\\$8000$ now, receive $\\$3000$/yr for 4 yrs. At $i=10\\%$, NPV:",
         choices: ["$\\approx \\$1{,}510$ (accept)", "$\\$4000$", "$\\$-1000$", "$\\$12{,}000$"], correct: 0,
-        solution: S({ c: "$NPV = -P + A(P/A, 10\\%, 4)$.", s: ["$(P/A, 10\\%, 4) = 3.1699$.", "$NPV = -8000 + 3000 \\cdot 3.1699 = -8000 + 9510 = 1510$."], a: "NPV $\\approx \\$1510$" }), ref: "p.232" },
+        solution: S({
+          c: "NPV = present value of inflows minus initial cost. Use the uniform-series present-worth factor: $NPV = -P + A(P/A,i,n)$.",
+          s: [
+            "<b>Step 1 — (P/A) factor.</b> $(P/A,10\\%,4) = 3.1699$.",
+            "<b>Step 2 — Compute.</b> $NPV = -8000 + 3000(3.1699) = -8000 + 9510 = \\$1510$.",
+            "<b>Step 3 — Decide.</b> NPV > 0 → ACCEPT.",
+            "<b>Step 4 — Distractor audit.</b> $\\$4000$ ignores discounting; $-\\$1000$ has wrong sign; $\\$12{,}000$ is undiscounted total inflow."
+          ],
+          a: "NPV $\\approx \\$1510$ (accept).",
+          v: "Positive NPV means the project earns MORE than the 10% required return ✓ — the discounted inflows ($9510) exceed the $8000 cost. The undiscounted total ($12,000) overstates value by ignoring time."
+
+        }), ref: "p.232" },
       { q: "Inflation-adjusted return: nominal 8%, inflation 3%. Real return:",
         choices: ["$\\approx 4.85\\%$", "$5\\%$", "$11\\%$", "$24\\%$"], correct: 0,
-        solution: S({ c: "$(1+i_r) = (1+i_n)/(1+f)$.", s: ["$1.08/1.03 = 1.0485$.", "$i_r = 4.85\\%$."], a: "$\\approx 4.85\\%$" }), ref: "p.230" },
+        solution: S({
+          c: "The real (inflation-adjusted) return uses the EXACT Fisher relation: $1+i_r = \\dfrac{1+i_n}{1+f}$, not simple subtraction.",
+          s: [
+            "<b>Step 1 — Apply.</b> $1.08/1.03 = 1.0485$ → $i_r = 4.85\\%$.",
+            "<b>Step 2 — Distractor audit.</b> 5% is the rough approximation ($8\\%-3\\%$); 11% adds; 24% multiplies."
+          ],
+          a: "$i_r \\approx 4.85\\%$",
+          v: "The simple '$8-3=5\\%$' is a decent APPROXIMATION but the exact Fisher value is 4.85% ✓ — the difference grows at higher rates, where dividing (not subtracting) matters."
+
+        }), ref: "p.230" },
       { q: "Annual operating cost grows at $g = 5\\%$/year. PW of $\\$1000$ first-year cost over 10 years at $i = 8\\%$:",
         choices: ["$\\approx \\$8{,}530$ (geom gradient)", "$\\$10000$", "$\\$1000$", "$\\$3000$"], correct: 0,
-        solution: S({ c: "Geometric gradient formula: $P = A_1 \\cdot [(1-(1+g)^n/(1+i)^n)/(i-g)]$.", s: ["$g=0.05, i=0.08, n=10$. Compute factor.", "$(1+g)/(1+i) = 1.05/1.08 = 0.9722$. $(0.9722)^{10} = 0.7541$.", "Factor: $(1 - 0.7541)/(0.08 - 0.05) = 0.2459/0.03 = 8.197$.", "$P = 1000 \\cdot 8.197 = \\$8197$. Close to 8530 depending on rounding."], a: "$\\approx \\$8200$" }), ref: "p.231" },
+        solution: S({
+          c: "A GEOMETRIC GRADIENT (cash flow growing at rate g) has present worth $P = A_1\\dfrac{1-[(1+g)/(1+i)]^n}{i-g}$ (for $i\\ne g$).",
+          s: [
+            "<b>Step 1 — Ratio.</b> $(1+g)/(1+i) = 1.05/1.08 = 0.9722$; $(0.9722)^{10} = 0.754$.",
+            "<b>Step 2 — Factor.</b> $(1-0.754)/(0.08-0.05) = 0.246/0.03 = 8.20$.",
+            "<b>Step 3 — Apply.</b> $P = 1000\\times8.20 \\approx \\$8200$.",
+            "<b>Step 4 — Distractor audit.</b> $\\$10000$ ignores discounting; $\\$1000$ is one year; $\\$3000$ is far off."
+          ],
+          a: "$\\approx \\$8200$",
+          v: "Geometric gradients model costs/revenues that grow at a steady percentage (inflation-linked O&M, escalating rents) ✓ — distinct from an ARITHMETIC gradient (fixed dollar increase each year)."
+
+        }), ref: "p.231" },
       { q: "MACRS vs straight-line for asset depreciation: MACRS gives:",
         choices: ["Higher early depreciation (accelerated)", "Lower depreciation", "Same total", "Random"], correct: 0,
-        solution: S({ c: "MACRS: accelerated → bigger tax shield early on.", s: ["Both methods sum to same total depreciation over life."], a: "Accelerated early" }), ref: "p.230" },
+        solution: S({
+          c: "MACRS (the US accelerated method) front-loads depreciation — larger deductions in early years — vs straight-line's equal annual amounts. The lifetime TOTAL is the same.",
+          s: [
+            "<b>Step 1 — Match.</b> Higher early depreciation (accelerated).",
+            "<b>Step 2 — Distractor audit.</b> Not lower depreciation; total is the SAME (just timed differently), so 'same total' is true but not the distinguishing answer; not random."
+          ],
+          a: "Accelerated (front-loaded) depreciation.",
+          v: "Earlier deductions = earlier tax savings = higher NPV (time value of money) ✓ — the same total deduction, but worth more pulled forward. This is why MACRS is favored over straight-line for tax purposes."
+
+        }), ref: "p.230" },
       { q: "Capitalized cost (infinite series): $A = \\$500$/yr at $i=5\\%$:",
         choices: ["$\\$10{,}000$", "$\\$1000$", "$\\$5000$", "$\\$25{,}000$"], correct: 0,
-        solution: S({ c: "Perpetuity: $P = A/i$.", s: ["$500/0.05 = 10000$."], a: "$\\$10{,}000$" }), ref: "p.231" },
+        solution: S({
+          c: "Capitalized cost = present worth of a PERPETUITY (infinite uniform series): $P = A/i$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $P = 500/0.05 = \\$10{,}000$.",
+            "<b>Step 2 — Distractor audit.</b> $\\$1000$ and $\\$5000$ misdivide; $\\$25{,}000$ uses the wrong rate."
+          ],
+          a: "$\\$10{,}000$",
+          v: "A perpetuity's value is finite because distant payments discount toward zero ✓ — $10,000 invested at 5% throws off $500/yr forever. Used for endowments, perpetual maintenance, and 'forever' infrastructure costs."
+
+        }), ref: "p.231" },
       { q: "Sunk cost in economic analysis:",
         choices: ["Past cost — irrelevant to future decisions", "Future cost", "Critical to include", "Doubled"], correct: 0,
-        solution: S({ c: "Sunk costs are non-recoverable past expenses. Rational decision-making ignores them.", s: [""], a: "Irrelevant (past)" }), ref: "p.232" },
+        solution: S({
+          c: "A sunk cost is a past, non-recoverable expense. Rational forward-looking decisions IGNORE sunk costs — only future cash flows matter.",
+          s: [
+            "<b>Step 1 — Match.</b> Past cost — irrelevant to future decisions.",
+            "<b>Step 2 — Distractor audit.</b> It's not a future cost; 'critical to include' is the sunk-cost FALLACY; not doubled."
+          ],
+          a: "Irrelevant (past, non-recoverable).",
+          v: "The 'sunk cost fallacy' is throwing good money after bad because you've 'already invested so much' ✓ — economically, only incremental future costs and benefits should drive the decision."
+
+        }), ref: "p.232" },
       { q: "Choose between two equal-life projects via:",
         choices: ["Highest NPV (same i, same n)", "Higher cost", "Lower cost only", "Highest revenue"], correct: 0,
-        solution: S({ c: "Mutually exclusive, equal lives: pick higher NPV.", s: ["Unequal lives: convert to EUAW first."], a: "Highest NPV" }), ref: "p.232" },
+        solution: S({
+          c: "For mutually-exclusive projects with the SAME life and discount rate, pick the one with the HIGHEST NPV (it adds the most value).",
+          s: [
+            "<b>Step 1 — Match.</b> Highest NPV.",
+            "<b>Step 2 — Distractor audit.</b> Highest/lowest cost and highest revenue ignore the net value; NPV captures both."
+          ],
+          a: "Highest NPV.",
+          v: "NPV directly measures value added ✓. For UNEQUAL lives, you can't compare NPVs directly — convert to equivalent uniform annual worth (EUAW) first, or use a common analysis period."
+
+        }), ref: "p.232" },
       { q: "Property tax based on:",
         choices: ["Assessed value × mill rate", "Income", "Sales", "Inflation"], correct: 0,
-        solution: S({ c: "Property tax: annual based on local assessed value × tax rate (mills).", s: ["1 mill = $1 per $1000 of assessed value."], a: "Assessment × rate" }), ref: "p.232" },
+        solution: S({
+          c: "Property tax = assessed value × tax (mill) rate, where 1 mill = $1 per $1000 of assessed value.",
+          s: [
+            "<b>Step 1 — Match.</b> Assessed value × mill rate.",
+            "<b>Step 2 — Distractor audit.</b> Income tax is on income; sales tax on purchases; property tax is value-based, not inflation-based."
+          ],
+          a: "Assessed value × mill rate.",
+          v: "It's an annual recurring cost in engineering-economy cash flows for facilities/land ✓. The 'mill' unit (thousandths) is the standard quote — e.g. a 20-mill rate on a $200k assessment is $4,000/yr."
+
+        }), ref: "p.232" },
       { q: "Working capital is:",
         choices: ["Current assets minus current liabilities", "Total revenue", "Net income", "Depreciation"], correct: 0,
-        solution: S({ c: "Working capital: short-term liquidity measure.", s: ["Positive WC: can cover short-term obligations.", "Negative WC: cash flow issues likely."], a: "CA − CL" }), ref: "p.230" },
+        solution: S({
+          c: "Working capital = current assets − current liabilities — a measure of short-term liquidity (can the firm cover near-term obligations?).",
+          s: [
+            "<b>Step 1 — Match.</b> Current assets minus current liabilities.",
+            "<b>Step 2 — Distractor audit.</b> Revenue, net income, and depreciation are income-statement items, not the liquidity balance."
+          ],
+          a: "Current assets − current liabilities.",
+          v: "Positive working capital means short-term bills are covered; negative signals possible cash-flow trouble ✓. In project economics, working capital is often an upfront outlay RECOVERED at project end."
+
+        }), ref: "p.230" },
     ],
 
     // Materials — +6
     5: [
       { q: "Hole mobility in Si vs electron mobility:",
         choices: ["Hole mobility lower (~480 vs ~1350 cm²/V·s)", "Same", "Higher", "Zero"], correct: 0,
-        solution: S({ c: "Electrons more mobile in Si.", s: [""], a: "Lower (1/3)" }), ref: "p.354" },
+        solution: S({
+          c: "In silicon, electrons move more easily than holes: electron mobility ~1350 cm²/V·s vs hole mobility ~480 cm²/V·s (roughly 1/3).",
+          s: [
+            "<b>Step 1 — Match.</b> Hole mobility lower (~480 vs ~1350).",
+            "<b>Step 2 — Distractor audit.</b> Not 'same', not 'higher', not 'zero' — holes are slower carriers."
+          ],
+          a: "Hole mobility is lower (~1/3 of electrons).",
+          v: "This is why nMOS (electron-channel) transistors are faster than pMOS (hole-channel) of the same size ✓ — and why CMOS designers make pMOS wider to balance the speeds. Mobility sets carrier drift velocity per field."
+
+        }), ref: "p.354" },
       { q: "Temperature coefficient of resistance for metals:",
         choices: ["Positive (R increases with T)", "Negative", "Zero", "Random"], correct: 0,
-        solution: S({ c: "Metals: positive temp coefficient (~0.4%/°C for Cu).", s: ["Semiconductors: negative (more carriers freed).", "Used for: PTC thermistors as temp sensors."], a: "Positive" }), ref: "p.354" },
+        solution: S({
+          c: "Metals have a POSITIVE temperature coefficient: resistance RISES with temperature (~0.4%/°C for copper) as lattice vibrations scatter electrons more.",
+          s: [
+            "<b>Step 1 — Match.</b> Positive (R increases with T).",
+            "<b>Step 2 — Distractor audit.</b> SEMICONDUCTORS have negative coefficients (heat frees more carriers); not zero or random."
+          ],
+          a: "Positive.",
+          v: "Opposite of semiconductors ✓ — metals resist MORE when hot (more phonon scattering), semiconductors LESS (more carriers). This is exploited in PTC thermistors (temperature sensing, inrush limiting)."
+
+        }), ref: "p.354" },
       { q: "Energy needed to free electron in Si:",
         choices: ["$\\ge E_g \\approx 1.12$ eV", "0", "100 eV", "Any energy"], correct: 0,
-        solution: S({ c: "Bandgap energy minimum to promote electron from valence to conduction band.", s: ["Photon $\\lambda \\le hc/E_g \\approx 1.1$ µm."], a: "$\\ge 1.12$ eV" }), ref: "p.354" },
+        solution: S({
+          c: "To promote an electron from the valence band to the conduction band in silicon, you need at least the BANDGAP energy $E_g \\approx 1.12$ eV.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\ge E_g \\approx 1.12$ eV.",
+            "<b>Step 2 — Distractor audit.</b> 0 would be a metal (no gap); 100 eV is enormous; 'any energy' is wrong (below $E_g$ nothing happens)."
+          ],
+          a: "$\\ge 1.12$ eV.",
+          v: "The corresponding photon wavelength is $hc/E_g \\approx 1.1$ µm (near-IR) ✓ — light shorter than this can free carriers (the basis of silicon photodetectors/solar cells), longer passes through unabsorbed."
+
+        }), ref: "p.354" },
       { q: "p-n junction reverse breakdown:",
         choices: ["Sharp current increase at $V_{BR}$", "Linear", "Slow", "No effect"], correct: 0,
-        solution: S({ c: "Beyond $V_{BR}$: avalanche or Zener breakdown. Sharp current increase.", s: ["Used: Zener regulator, surge protectors."], a: "Sharp at $V_{BR}$" }), ref: "p.354" },
+        solution: S({
+          c: "Beyond a critical reverse voltage $V_{BR}$, a p-n junction breaks down (avalanche or Zener), and reverse current rises SHARPLY while voltage stays near $V_{BR}$.",
+          s: [
+            "<b>Step 1 — Match.</b> Sharp current increase at $V_{BR}$.",
+            "<b>Step 2 — Distractor audit.</b> Not linear, not slow, not 'no effect' — breakdown is abrupt."
+          ],
+          a: "Sharp current rise at $V_{BR}$.",
+          v: "This 'flat voltage, steep current' behavior is exactly what makes ZENER diodes useful as voltage references/regulators ✓, and the basis of TVS/surge protectors. Controlled breakdown is a feature, not always a failure."
+
+        }), ref: "p.354" },
       { q: "Drift current in semiconductor: $J_n =$",
         choices: ["$q n \\mu_n E$", "$q n E^2$", "$\\mu_n E$", "$n/E$"], correct: 0,
-        solution: S({ c: "Drift current density (electrons): $J = qnv_d = qn\\mu E$.", s: [""], a: "$qn\\mu_n E$" }), ref: "p.354" },
+        solution: S({
+          c: "Drift current density (electrons) = charge × density × drift velocity, and drift velocity = mobility × field: $J_n = qn\\mu_n E$.",
+          s: [
+            "<b>Step 1 — Match.</b> $qn\\mu_n E$.",
+            "<b>Step 2 — Distractor audit.</b> $qnE^2$, $\\mu_n E$, $n/E$ have wrong dependences (drift is linear in E, includes q and n)."
+          ],
+          a: "$J_n = qn\\mu_n E$",
+          v: "Drift current is the field-driven flow ✓; its companion is DIFFUSION current (driven by concentration gradients, $J=qD\\,dn/dx$). Together they govern all semiconductor device operation. Note conductivity $\\sigma = qn\\mu$, so $J = \\sigma E$ — Ohm's law."
+
+        }), ref: "p.354" },
       { q: "Resistor temperature coefficient $\\alpha$: for Cu ~$0.00393$/°C. R at 100°C if $R_0 = 100\\ \\Omega$ at 0°C:",
         choices: ["$\\approx 139.3\\ \\Omega$", "$100\\ \\Omega$", "$200\\ \\Omega$", "$110\\ \\Omega$"], correct: 0,
-        solution: S({ c: "$R = R_0(1 + \\alpha\\Delta T)$.", s: ["$R = 100(1 + 0.00393 \\cdot 100) = 100 \\cdot 1.393 = 139.3$ Ω."], a: "$\\approx 139.3\\ \\Omega$" }), ref: "p.354" },
+        solution: S({
+          c: "Resistance changes with temperature as $R = R_0(1 + \\alpha\\Delta T)$, where $\\alpha$ is the temperature coefficient and $\\Delta T$ the change from the reference.",
+          s: [
+            "<b>Step 1 — Apply.</b> $R = 100(1 + 0.00393\\times100) = 100(1.393) = 139.3\\ \\Omega$.",
+            "<b>Step 2 — Distractor audit.</b> 100 Ω ignores the rise; 200 Ω overestimates; 110 Ω uses a wrong α."
+          ],
+          a: "$R \\approx 139.3\\ \\Omega$",
+          v: "Copper resistance rises ~39% over a 100°C climb ✓ — significant for motor windings and power cables, where hot-resistance must be accounted for. This positive α is the metal signature."
+
+        }), ref: "p.354" },
     ],
 
     // Circuits — +25
