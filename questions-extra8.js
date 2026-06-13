@@ -24,7 +24,7 @@
           v: "The 1-4-2-4-...-1 weight pattern requires pairs of intervals - which is why Simpson's needs even n. It's far more accurate ($O(h^4)$) than the trapezoid rule for smooth functions."
         }), ref: "p.61" },
       { q: "Newton-Raphson root-finding: $f(x) = x^3 - 8$, $x_0 = 2.1$. Next iterate:",
-        choices: ["$\\approx 2.001$", "$2$", "$1.9$", "$2.2$"], correct: 0,
+        choices: ["$\\approx 2.005$", "$2$", "$1.9$", "$2.2$"], correct: 0,
         solution: S({
           c: "Newton-Raphson: $x_{n+1} = x_n - f(x_n)/f'(x_n)$, with $f'(x)=3x^2$ here.",
           s: ["<b>Step 1 — Evaluate.</b> $f(2.1)=9.261-8=1.261$; $f'(2.1)=3(4.41)=13.23$.","<b>Step 2 — Iterate.</b> $2.1 - 1.261/13.23 = 2.005$.","<b>Step 3 — Distractor audit.</b> 2 is the exact root (limit, not one step); 1.9 and 2.2 are off."],
@@ -228,10 +228,10 @@
           v: "Null hypothesis: all group means are equal. ANOVA extends the two-sample t-test to 3+ groups without inflating the Type I error from multiple pairwise tests."
         }), ref: "p.70" },
       { q: "P(at least one ace in 5-card hand):",
-        choices: ["$1 - C(48,5)/C(52,5) \\approx 0.341$", "$4/52$", "$1/13$", "$5/52$"], correct: 0,
+        choices: ["$1 - C(48,5)/C(52,5) \\approx 0.341$", "$4/52$", "$20/52$", "$5/52$"], correct: 0,
         solution: S({
           c: "Use the COMPLEMENT: $P(\\ge 1) = 1 - P(\\text{none})$, where P(no aces) = $C(48,5)/C(52,5)$.",
-          s: ["<b>Step 1 — No aces.</b> $C(48,5)/C(52,5) = 1{,}712{,}304/2{,}598{,}960 = 0.659$.","<b>Step 2 — Complement.</b> $1 - 0.659 = 0.341$.","<b>Step 3 — Distractor audit.</b> $4/52$, $1/13$, $5/52$ are single-card probabilities."],
+          s: ["<b>Step 1 — No aces.</b> $C(48,5)/C(52,5) = 1{,}712{,}304/2{,}598{,}960 = 0.659$.","<b>Step 2 — Complement.</b> $1 - 0.659 = 0.341$.","<b>Step 3 — Distractor audit.</b> $4/52$, $20/52$, $5/52$ are naive single-/scaled-card probabilities that ignore the without-replacement counting."],
           a: "$\\approx 0.341$",
           v: "'At least one' problems are almost always easier via the complement (none) - directly summing P(exactly 1)+P(2)+... is far more work."
         }), ref: "p.65" },
@@ -651,11 +651,11 @@
           a: "VA (S), W (P), VAR (Q).",
           v: "Distinct units flag the distinct concepts: P does real work (W), Q sloshes energy back and forth (VAR), S is the total the source must supply (VA). Equipment is rated in VA/kVA because that sets the current."
         }), ref: "p.362" },
-      { q: "Phasor representation of $5\\cos(\\omega t - 30°)$ V:",
-        choices: ["$5\\angle -30°$ V (peak phasor)", "$5\\angle 30°$", "$3.54\\angle -30°$ (RMS)", "Both A and C valid"], correct: 0,
+      { q: "Phasor representation of $5\\cos(\\omega t - 30°)$ V using the PEAK convention:",
+        choices: ["$5\\angle -30°$ V", "$5\\angle 30°$ V", "$3.54\\angle -30°$ V", "$5\\angle -60°$ V"], correct: 0,
         solution: S({
-          c: "Phasor = amplitude at phase angle. Using the PEAK convention, $5\\cos(\\omega t-30°) \\to 5\\angle-30°$ (RMS convention would give $3.54\\angle-30°$).",
-          s: ["<b>Step 1 — Match.</b> $5\\angle-30°$ (peak).","<b>Step 2 — Distractor audit.</b> $5\\angle+30°$ flips the sign; RMS is also valid but the question's first answer uses peak."],
+          c: "Phasor = amplitude at phase angle. Using the PEAK convention, $5\\cos(\\omega t-30°) \\to 5\\angle-30°$.",
+          s: ["<b>Step 1 — Match.</b> Peak amplitude 5 at angle $-30°$ → $5\\angle-30°$.","<b>Step 2 — Distractor audit.</b> $5\\angle+30°$ flips the sign; $3.54\\angle-30°$ is the RMS magnitude (wrong under the stated peak convention); $5\\angle-60°$ doubles the angle."],
           a: "$5\\angle-30°$ (peak phasor).",
           v: "Phasors assume a COSINE reference; sine would shift -90 first. Stay consistent with peak OR RMS throughout a problem - mixing them is a classic error."
         }), ref: "p.360" },
@@ -864,10 +864,10 @@
           v: "Zero-stuffing alone creates copies of the spectrum; the LPF (interpolation filter) smooths them out, computing the in-between sample values - the upsampling counterpart to decimation."
         }), ref: "p.375" },
       { q: "Total harmonic distortion (THD): measure of:",
-        choices: ["Signal purity (lower = cleaner)", "Bandwidth", "Phase", "Bandwidth"], correct: 0,
+        choices: ["Signal purity (lower = cleaner)", "Bandwidth", "Phase", "Noise floor"], correct: 0,
         solution: S({
           c: "THD measures signal PURITY - the ratio of total harmonic power to the fundamental. Lower THD = cleaner, more linear signal.",
-          s: ["<b>Step 1 — Match.</b> Signal purity (lower = cleaner).","<b>Step 2 — Distractor audit.</b> Not bandwidth or phase."],
+          s: ["<b>Step 1 — Match.</b> Signal purity (lower = cleaner).","<b>Step 2 — Distractor audit.</b> Bandwidth, phase, and noise floor are separate specs — THD is specifically harmonic content relative to the fundamental."],
           a: "Signal purity.",
           v: "Quality audio amps target THD below 0.01%; nonlinear distortion adds harmonics not present in the original - THD quantifies how much. It's a key spec for amplifiers and power systems."
         }), ref: "p.371" },
@@ -1428,10 +1428,10 @@
           v: "The select lines scale logarithmically: $N$ data inputs need $\\log_2 N$ selects (8->3, 16->4, 32->5). The selects form the binary 'address' of which input to route through."
         }), ref: "p.390" },
       { q: "BCD adder for 9 + 1: result needs correction (add 6) because:",
-        choices: ["10 > 9 valid BCD; must produce '10' as two digits", "BCD only goes to 9", "Same as binary", "Random"], correct: 0,
+        choices: ["The sum $1010$ is an invalid BCD code, so $+6$ forces a carry into the next decade", "BCD digits can legally exceed 9", "BCD addition is identical to plain binary", "The correction is arbitrary"], correct: 0,
         solution: S({
           c: "$9+1=10$, but binary 1010 isn't a valid BCD digit (BCD only encodes 0-9). Adding 6 (0110) corrects it, producing a carry into the next decade and 0000 in this one.",
-          s: ["<b>Step 1 — Reason.</b> Result >9 is invalid BCD -> add 6 to roll over to '10' as two BCD digits.","<b>Step 2 — Distractor audit.</b> 'BCD only goes to 9' is true but the MECHANISM is the +6 correction/carry; not same as binary."],
+          s: ["<b>Step 1 — Reason.</b> The 4-bit sum $1010$ lands in the invalid range (10-15), so adding 6 skips that gap and carries a 1 into the next decade.","<b>Step 2 — Distractor audit.</b> BCD digits CANNOT exceed 9 (that's why the fix exists); BCD addition is NOT the same as plain binary; the $+6$ is a precise rule, not arbitrary."],
           a: "Carry to the next decade (add 6).",
           v: "BCD wastes codes 1010-1111, so any sum landing there needs the +6 fix to skip the gap - this is how BCD adders keep each 4-bit group a valid decimal digit, used in displays and finance."
         }), ref: "p.390" },
