@@ -1409,60 +1409,245 @@
     10: [
       { q: "Voltage drop calculation: $V_{drop} = I \\cdot Z_{line}$. For 100 A on $0.1+j0.05$ Ω/km line over 5 km:",
         choices: ["$|V_{drop}| \\approx 55.9$ V", "$50$ V", "$25$ V", "$500$ V"], correct: 0,
-        solution: S({ c: "Total Z: $(0.1+j0.05) \\cdot 5 = 0.5+j0.25$ Ω. $V = IZ$.", s: ["$|V| = 100 \\cdot \\sqrt{0.5^2 + 0.25^2} = 100\\cdot 0.559 = 55.9$ V."], a: "$\\approx 55.9$ V" }), ref: "p.363" },
+        solution: S({
+          c: "Line voltage drop is the phasor product $V = I\\cdot Z_{line}$, where $Z$ is complex ($R+jX$). Total impedance = per-km impedance × length; magnitude uses $|Z| = \\sqrt{R^2+X^2}$.",
+          s: [
+            "<b>Step 1 — Total impedance.</b> $(0.1+j0.05)\\times5 = 0.5+j0.25\\ \\Omega$.",
+            "<b>Step 2 — Magnitude of Z.</b> $|Z| = \\sqrt{0.5^2+0.25^2} = \\sqrt{0.3125} = 0.559\\ \\Omega$.",
+            "<b>Step 3 — Drop.</b> $|V| = 100\\times0.559 = 55.9$ V.",
+            "<b>Step 4 — Distractor audit.</b> 50 V uses only R; 25 V uses only X; 500 V slips a decade."
+          ],
+          a: "$|V_{drop}| \\approx 55.9$ V",
+          v: "Both R and X matter — ignoring the reactance (using just 50 V) underestimates the drop by ~12% ✓. On real transmission lines X often EXCEEDS R, so the reactive part dominates voltage regulation."
+
+        }), ref: "p.363" },
       { q: "Transformer kVA rating limited by:", choices: ["Heat dissipation (winding/core)", "Voltage only", "Customer demand", "Phase"], correct: 0,
-        solution: S({ c: "Insulation degrades at high temp. kVA rating ensures temperature stays within limit.", s: [""], a: "Heat" }), ref: "p.364" },
+        solution: S({
+          c: "A transformer's kVA rating is set by HEAT — the $I^2R$ copper losses and core losses must not raise winding temperature past what the insulation can tolerate long-term.",
+          s: [
+            "<b>Step 1 — Match.</b> Heat dissipation (winding/core).",
+            "<b>Step 2 — Distractor audit.</b> Voltage is a SEPARATE rating (insulation breakdown); customer demand and phase aren't the physical limit on the device."
+          ],
+          a: "Heat (thermal limit of insulation).",
+          v: "This is why transformers are rated in kVA (apparent power, which sets the CURRENT) not kW — heating depends on current regardless of power factor ✓. Better cooling (oil, forced air) directly raises the safe kVA."
+
+        }), ref: "p.364" },
       { q: "Auto-transformer vs isolation transformer:", choices: ["Auto shares winding; isolation has separate", "Same", "Auto bigger", "Isolation cheaper"], correct: 0,
-        solution: S({ c: "Auto: single winding tapped for primary/secondary. Smaller, lighter, more efficient, no isolation.", s: ["Iso: two separate windings → galvanic isolation."], a: "Shared vs separate winding" }), ref: "p.364" },
+        solution: S({
+          c: "An AUTOTRANSFORMER uses a single tapped winding shared between primary and secondary; an ISOLATION transformer has two electrically separate windings, providing galvanic isolation.",
+          s: [
+            "<b>Step 1 — Match.</b> Auto shares one winding; isolation has separate windings.",
+            "<b>Step 2 — Distractor audit.</b> Not 'same'; the autotransformer is actually SMALLER/lighter for a given rating; cost isn't the defining difference."
+          ],
+          a: "Shared winding (auto) vs separate windings (isolation).",
+          v: "The trade: autotransformers are smaller, cheaper, and more efficient but offer NO isolation (a fault couples through) ✓ — fine for modest voltage ratios (variac, motor starting), unsafe where isolation is required for safety."
+
+        }), ref: "p.364" },
       { q: "Three-phase open delta (V-V) capacity vs full delta:",
         choices: ["About $57.7\\%$ ($1/\\sqrt{3}$)", "$50\\%$", "$100\\%$", "$67\\%$"], correct: 0,
-        solution: S({ c: "V-V: only 2 single-phase transformers serve 3-phase load. Capacity reduced.", s: ["$57.7\\% = 1/\\sqrt{3}$.", "Used as backup or for small 3-phase loads."], a: "$\\approx 58\\%$" }), ref: "p.364" },
+        solution: S({
+          c: "An open-delta (V-V) bank uses only TWO single-phase transformers to serve a three-phase load. It still delivers 3-phase power but at reduced capacity: $1/\\sqrt3 \\approx 57.7\\%$ of the full three-transformer delta.",
+          s: [
+            "<b>Step 1 — Match.</b> ≈57.7% ($1/\\sqrt3$).",
+            "<b>Step 2 — Distractor audit.</b> 50% is the naive 2-of-3 guess; 67% and 100% overstate it — the actual factor is $1/\\sqrt3$, not 2/3."
+          ],
+          a: "≈ 58% of full-delta capacity.",
+          v: "It's a useful fallback: if one of three transformers fails, the other two keep 3-phase service running at 58% ✓ — or it's a deliberate economy for small/growing 3-phase loads with room to add the third unit later."
+
+        }), ref: "p.364" },
       { q: "Y-connection with neutral wire purpose:",
         choices: ["Return path for unbalanced load", "Just additional ground", "Increases voltage", "Decreases"], correct: 0,
-        solution: S({ c: "Neutral carries unbalanced current; balanced load → near-zero neutral current.", s: ["Allows single-phase loads at $V_{LN}$ to share 3-phase service."], a: "Unbalanced return" }), ref: "p.363" },
+        solution: S({
+          c: "In a wye (Y) system, the neutral provides a RETURN PATH for unbalanced phase currents. With a perfectly balanced load the three phase currents cancel and neutral current is ~zero.",
+          s: [
+            "<b>Step 1 — Match.</b> Return path for unbalanced load.",
+            "<b>Step 2 — Distractor audit.</b> It's more than 'just a ground'; it doesn't increase or decrease voltage."
+          ],
+          a: "Return path for unbalanced currents.",
+          v: "The neutral is what lets single-phase loads (at $V_{LN}$) tap a three-phase service ✓ — your 120-V outlets pull from one phase to neutral. Balanced three-phase needs no neutral current, which is why transmission can omit it."
+
+        }), ref: "p.363" },
       { q: "Surge protective device (SPD) clamps voltage:",
         choices: ["At certain peak (e.g., MOV trigger)", "Linearly", "To zero", "Doubles"], correct: 0,
-        solution: S({ c: "MOV (metal oxide varistor): non-linear V-I; conducts heavily above clamp voltage to shunt surge.", s: ["Located near sensitive equipment; sacrificial."], a: "Clamps above threshold" }), ref: "p.354" },
+        solution: S({
+          c: "An SPD (often a metal-oxide varistor, MOV) has a non-linear V-I curve: nearly open below its clamp voltage, but suddenly conducting heavily ABOVE it — shunting surge energy away to hold the voltage near a safe peak.",
+          s: [
+            "<b>Step 1 — Match.</b> Clamps at a threshold peak (MOV trigger).",
+            "<b>Step 2 — Distractor audit.</b> 'Linearly' describes a resistor (an MOV is non-linear); 'to zero' would be a short; 'doubles' is wrong."
+          ],
+          a: "Clamps voltage above a threshold.",
+          v: "MOVs are SACRIFICIAL — each surge degrades them slightly until they eventually fail ✓, which is why surge strips wear out. Placed close to sensitive gear, they divert lightning/switching transients to ground."
+
+        }), ref: "p.354" },
       { q: "Synchronous motor speed depends on:", choices: ["Line frequency and pole count only", "Load", "Voltage", "Slip"], correct: 0,
-        solution: S({ c: "Sync motor: rotor locks to rotating field. No slip.", s: ["Constant speed regardless of load (within capacity)."], a: "$f$ and poles" }), ref: "p.365" },
+        solution: S({
+          c: "A synchronous motor's rotor LOCKS to the rotating stator field, so its speed is fixed by line frequency and pole count alone: $N_s = 120f/P$. No slip, regardless of load.",
+          s: [
+            "<b>Step 1 — Match.</b> Line frequency and pole count only.",
+            "<b>Step 2 — Distractor audit.</b> Load, voltage, and slip affect INDUCTION motors, not the locked speed of a synchronous one (slip = 0 by definition)."
+          ],
+          a: "$N_s = 120f/P$ — frequency and poles.",
+          v: "This rock-steady speed makes synchronous motors ideal for constant-speed drives and clocks ✓; the trade-off is they don't self-start and need separate starting means. Induction motors, by contrast, slip a few percent under load."
+
+        }), ref: "p.365" },
       { q: "Induction motor efficiency degrades when:", choices: ["Lightly loaded (well below FL)", "Fully loaded", "Started", "At sync speed"], correct: 0,
-        solution: S({ c: "Best efficiency near full load. Lightly loaded: fixed losses (core, friction) dominate.", s: ["VFD with VSD setting matches motor speed to load."], a: "Lightly loaded" }), ref: "p.365" },
+        solution: S({
+          c: "An induction motor is most efficient near FULL load. Lightly loaded, the FIXED losses (core hysteresis/eddy, friction, windage) become a large fraction of the small output → efficiency drops.",
+          s: [
+            "<b>Step 1 — Match.</b> Lightly loaded (well below full load).",
+            "<b>Step 2 — Distractor audit.</b> Fully loaded is the EFFICIENT regime; starting is transient; at sync speed it produces no torque (induction motors run slightly below sync)."
+          ],
+          a: "When lightly loaded.",
+          v: "This is why oversizing motors wastes energy — a motor at 25% load runs well below its efficiency peak ✓. Variable-frequency drives help by matching speed/torque to the actual load, trimming fixed losses."
+
+        }), ref: "p.365" },
       { q: "Generator excitation (field current) controls:",
         choices: ["Terminal voltage (and reactive power)", "Frequency", "Active power", "Speed"], correct: 0,
-        solution: S({ c: "Field current → magnetic flux → induced EMF. AVR (automatic voltage regulator) controls excitation.", s: ["Active P: prime-mover input.", "Reactive Q: excitation."], a: "Voltage / Q" }), ref: "p.365" },
+        solution: S({
+          c: "A synchronous generator's FIELD current (excitation) sets the magnetic flux and thus the induced EMF — controlling TERMINAL VOLTAGE and REACTIVE power output. Active power and frequency come from the prime mover instead.",
+          s: [
+            "<b>Step 1 — Match.</b> Terminal voltage and reactive power (Q).",
+            "<b>Step 2 — Distractor audit.</b> Frequency and speed are set by the prime mover/grid; active power P comes from mechanical input torque — not excitation."
+          ],
+          a: "Terminal voltage / reactive power Q.",
+          v: "The clean division: prime mover → P and frequency; excitation → V and Q ✓. An over-excited generator supplies reactive power (looks capacitive to the grid); under-excited, it absorbs it. The AVR automates this."
+
+        }), ref: "p.365" },
       { q: "Three-phase symmetrical fault current is computed via:",
         choices: ["Per-phase analysis (positive sequence)", "All three phases separately", "Average", "Single-phase analysis only"], correct: 0,
-        solution: S({ c: "Symmetric 3-φ fault: balanced → positive-sequence only, single-line diagram works.", s: ["Unsymmetric faults: need symmetrical components (pos, neg, zero seq)."], a: "Positive sequence" }), ref: "p.363" },
+        solution: S({
+          c: "A balanced (symmetrical) three-phase fault keeps all three phases identical, so only the POSITIVE-sequence network matters — a single per-phase (one-line) analysis suffices.",
+          s: [
+            "<b>Step 1 — Match.</b> Per-phase / positive-sequence analysis.",
+            "<b>Step 2 — Distractor audit.</b> Analyzing all three separately is redundant for a balanced fault; 'average' and 'single-phase load analysis' miss the symmetry tool."
+          ],
+          a: "Positive-sequence (per-phase) analysis.",
+          v: "UNsymmetrical faults (line-to-ground, line-to-line) break the balance and require symmetrical COMPONENTS — decomposing into positive, negative, and zero sequence networks ✓. The symmetric 3-phase fault is the easy case and often the worst-case magnitude."
+
+        }), ref: "p.363" },
       { q: "AC and DC fuse difference:",
         choices: ["DC fuse must handle longer arc time (no zero-crossings)", "Same", "AC fuse easier to break", "DC has no fuses"], correct: 0,
-        solution: S({ c: "AC current naturally goes through zero 100-120 times/sec, helping arc extinction. DC: must force arc out → DC fuses larger or special design.", s: [""], a: "DC harder to interrupt" }), ref: "p.364" },
+        solution: S({
+          c: "AC current naturally passes through ZERO 100-120 times a second, which helps an arc self-extinguish. DC has no zero-crossings, so a DC fuse/breaker must FORCE the arc out — needing larger gaps or special arc-quenching design.",
+          s: [
+            "<b>Step 1 — Match.</b> DC fuse must handle a longer, harder-to-quench arc.",
+            "<b>Step 2 — Distractor audit.</b> 'Same' is false; AC is EASIER to break (zero-crossings help); 'DC has no fuses' is wrong."
+          ],
+          a: "DC is harder to interrupt (no zero-crossings).",
+          v: "This is a real safety issue in solar/battery (DC) systems — a DC breaker rated for the same current is bigger and pricier than its AC cousin ✓, and using an AC-only device on DC can let a sustained arc start a fire."
+
+        }), ref: "p.364" },
       { q: "Three-phase Y source voltage to ground for $V_{LL}=480$ V:",
         choices: ["$\\approx 277$ V", "$480$ V", "$240$ V", "$120$ V"], correct: 0,
-        solution: S({ c: "$V_{LN} = V_{LL}/\\sqrt{3}$.", s: ["$480/\\sqrt{3} = 277.1$ V."], a: "$\\approx 277$ V" }), ref: "p.363" },
+        solution: S({
+          c: "In a wye system, line-to-neutral (phase) voltage is the line-to-line voltage divided by $\\sqrt3$: $V_{LN} = V_{LL}/\\sqrt3$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $V_{LN} = 480/\\sqrt3 = 277$ V.",
+            "<b>Step 2 — Distractor audit.</b> 480 V is the line-to-line (delta phase); 240 and 120 are other common voltages, not this ratio."
+          ],
+          a: "$V_{LN} \\approx 277$ V",
+          v: "480Y/277 is THE standard US commercial system — 480 V three-phase for motors, 277 V line-to-neutral for fluorescent/LED lighting ✓. The $\\sqrt3$ factor between line and phase voltage is wye's signature (in delta they're equal)."
+
+        }), ref: "p.363" },
       { q: "Power factor (PF) in transmission affects:",
         choices: ["Line loss (lower PF → more line current → more loss)", "Frequency", "Insulation", "Tower height"], correct: 0,
-        solution: S({ c: "For same real power P, lower PF means more S → more I → more $I^2 R$ loss.", s: ["Why utilities charge PF penalty."], a: "Line losses" }), ref: "p.363" },
+        solution: S({
+          c: "For a fixed real power P, a LOWER power factor means a larger apparent power S and thus MORE line current ($I = S/V$). Since losses are $I^2R$, low PF directly increases transmission losses.",
+          s: [
+            "<b>Step 1 — Match.</b> Line losses (lower PF → more current → more $I^2R$).",
+            "<b>Step 2 — Distractor audit.</b> PF doesn't change frequency, insulation, or tower height — it's about current and loss."
+          ],
+          a: "Line losses (via increased current).",
+          v: "This is exactly why utilities PENALIZE industrial customers for poor power factor ✓ — the extra reactive current heats their lines and transformers without delivering useful power. Capacitor banks correct PF and cut that waste."
+
+        }), ref: "p.363" },
       { q: "Single-phase transformer 240V/24V, 100VA. Maximum primary current:",
         choices: ["$\\approx 0.417$ A", "$4.17$ A", "$0.1$ A", "$1$ A"], correct: 0,
-        solution: S({ c: "$I_1 = S/V_1$.", s: ["$100/240 = 0.4167$ A."], a: "$\\approx 0.42$ A" }), ref: "p.364" },
+        solution: S({
+          c: "A transformer's VA rating caps the current on each side: $I = S/V$. On the primary, $I_1 = S/V_1$.",
+          s: [
+            "<b>Step 1 — Divide.</b> $I_1 = 100/240 = 0.417$ A.",
+            "<b>Step 2 — Distractor audit.</b> 4.17 A uses the SECONDARY voltage (24 V) by mistake; 0.1 A and 1 A are arbitrary."
+          ],
+          a: "$I_1 \\approx 0.42$ A",
+          v: "Cross-check the secondary: $I_2 = 100/24 = 4.17$ A — exactly 10× the primary, matching the 240/24 = 10:1 turns ratio ✓ (low-voltage side carries proportionally more current). VA is conserved across the transformer."
+
+        }), ref: "p.364" },
       { q: "Power triangle: tan θ =",
         choices: ["$Q/P$", "$P/Q$", "$S/P$", "$P/S$"], correct: 0,
-        solution: S({ c: "Power triangle: P (real, horizontal), Q (reactive, vertical), S (apparent, hypotenuse). $\\tan\\theta = Q/P$.", s: [""], a: "$Q/P$" }), ref: "p.362" },
+        solution: S({
+          c: "The power triangle: real power P (horizontal), reactive power Q (vertical), apparent power S (hypotenuse). The angle θ between P and S satisfies $\\tan\\theta = Q/P$.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\tan\\theta = Q/P$ (opposite over adjacent).",
+            "<b>Step 2 — Distractor audit.</b> $P/Q$ inverts it; $S/P$ is $1/\\cos\\theta$ (=$\\sec\\theta$); $P/S$ is $\\cos\\theta$ (the power factor)."
+          ],
+          a: "$\\tan\\theta = Q/P$",
+          v: "The companion relations: $\\cos\\theta = P/S$ is the power factor, $\\sin\\theta = Q/S$ ✓. Knowing the triangle lets you convert between P, Q, S, and PF — the core of AC power and pf-correction problems."
+
+        }), ref: "p.362" },
       { q: "Three-phase service main breaker rated at 200 A. Max balanced load (480 V):",
         choices: ["$\\approx 166$ kVA", "$96$ kVA", "$33$ kVA", "$580$ kVA"], correct: 0,
-        solution: S({ c: "$|S|_{max} = \\sqrt{3} V_{LL} I_L$.", s: ["$\\sqrt{3}(480)(200) = 166{,}277$ VA $\\approx 166$ kVA."], a: "$\\approx 166$ kVA" }), ref: "p.363" },
+        solution: S({
+          c: "Maximum three-phase apparent power from a given line current: $|S| = \\sqrt3\\,V_{LL}\\,I_L$.",
+          s: [
+            "<b>Step 1 — Apply.</b> $\\sqrt3\\times480\\times200 = 166{,}277$ VA.",
+            "<b>Step 2 — Express.</b> ≈ 166 kVA.",
+            "<b>Step 3 — Distractor audit.</b> 96 kVA drops the $\\sqrt3$ (and mis-scales); 33 kVA is way low; 580 kVA over-multiplies."
+          ],
+          a: "$|S| \\approx 166$ kVA",
+          v: "The $\\sqrt3$ is the three-phase signature — single-phase would just be $V\\times I$ ✓. In practice the continuous load is derated to 80% (≈133 kVA) per code, but the breaker's instantaneous capacity is the full 166 kVA."
+
+        }), ref: "p.363" },
       { q: "Service factor (SF) on motor nameplate of 1.15 means:",
         choices: ["Can run at 115% of nameplate HP continuously (with derating)", "Always 15% extra", "Starts at 1.15× speed", "PF of 1.15"], correct: 0,
-        solution: S({ c: "SF: extra capacity built into motor.", s: ["1.0 SF: rated only at nameplate.", "1.15-1.25 SF: typical for general-purpose."], a: "115% continuous capacity" }), ref: "p.365" },
+        solution: S({
+          c: "A motor's SERVICE FACTOR is the overload margin built into it. SF = 1.15 means the motor can run continuously at 115% of its nameplate horsepower (with some derating of life/temperature).",
+          s: [
+            "<b>Step 1 — Match.</b> Can run at 115% of rated HP continuously.",
+            "<b>Step 2 — Distractor audit.</b> It's not 'always 15% extra' (it's a ceiling, with caveats), not a speed multiplier, not a power factor."
+          ],
+          a: "115% continuous capacity (with derating).",
+          v: "Running in the service-factor zone shortens insulation life and lowers efficiency/PF, so it's for occasional overloads, not steady use ✓. SF 1.0 means no margin; 1.15-1.25 is typical for general-purpose industrial motors."
+
+        }), ref: "p.365" },
       { q: "Motor torque-speed curve: starting (locked-rotor) torque vs full-load torque:",
         choices: ["Usually higher (150-300% of FLT)", "Lower", "Same", "Zero"], correct: 0,
-        solution: S({ c: "Standard 3-φ induction: locked-rotor torque > full-load torque to handle starting transients.", s: ["NEMA design classes A/B/C/D vary the torque shape."], a: "Higher than FLT" }), ref: "p.365" },
+        solution: S({
+          c: "A standard induction motor's LOCKED-ROTOR (starting) torque is HIGHER than its full-load torque — typically 150-300% of FLT — so it can overcome inertia and break the load free at startup.",
+          s: [
+            "<b>Step 1 — Match.</b> Higher (150-300% of full-load torque).",
+            "<b>Step 2 — Distractor audit.</b> 'Lower', 'same', 'zero' would leave the motor unable to start under load."
+          ],
+          a: "Higher than full-load torque (150-300%).",
+          v: "NEMA design classes (A/B/C/D) tailor the torque-speed shape: Design C/D give high starting torque for hard-starting loads (conveyors, crushers) ✓. The high starting torque comes with high inrush CURRENT (6-8× FLC), which is why soft-starters exist."
+
+        }), ref: "p.365" },
       { q: "DC motor speed control via:",
         choices: ["Armature voltage (below base) or field weakening (above)", "Frequency", "Phase", "Pole switching"], correct: 0,
-        solution: S({ c: "Armature V: linear speed control below base speed at constant torque. Field weakening: speed up but reduced torque.", s: [""], a: "$V_a$ or field weakening" }), ref: "p.365" },
+        solution: S({
+          c: "DC motor speed has two control regimes: BELOW base speed, vary the ARMATURE voltage (constant-torque); ABOVE base speed, weaken the FIELD current (constant-power, reduced torque).",
+          s: [
+            "<b>Step 1 — Match.</b> Armature voltage (below base) or field weakening (above).",
+            "<b>Step 2 — Distractor audit.</b> Frequency/phase/pole-switching are AC-motor methods — DC motors run on DC, so frequency is irrelevant."
+          ],
+          a: "Armature voltage, then field weakening.",
+          v: "The two regimes give a wide speed range: armature control holds full torque up to base speed, then field weakening trades torque for extra speed ✓ — the classic constant-torque-then-constant-power profile used in traction and machine tools."
+
+        }), ref: "p.365" },
       { q: "Wye load with $V_{LL}=400$V, balanced, $Z_\\phi = 100\\angle 30°$. Total real power:",
         choices: ["$\\approx 1{,}386$ W", "$1600$ W", "$2000$ W", "$\\approx 800$ W"], correct: 0,
-        solution: S({ c: "$V_\\phi = 400/\\sqrt{3} = 231$. $I_\\phi = 231/100 = 2.31$ A. $P_\\phi = V_\\phi I_\\phi \\cos\\theta$.", s: ["$P_\\phi = 231 \\cdot 2.31 \\cdot \\cos 30° = 462.04$ W.", "Total $3 \\cdot 462 = 1386$ W."], a: "$\\approx 1386$ W" }), ref: "p.363" },
+        solution: S({
+          c: "Per-phase three-phase power: find phase voltage $V_\\phi = V_{LL}/\\sqrt3$, phase current $I_\\phi = V_\\phi/|Z|$, then $P = 3V_\\phi I_\\phi\\cos\\theta$ where θ is the impedance angle.",
+          s: [
+            "<b>Step 1 — Phase voltage.</b> $V_\\phi = 400/\\sqrt3 = 231$ V.",
+            "<b>Step 2 — Phase current.</b> $I_\\phi = 231/100 = 2.31$ A.",
+            "<b>Step 3 — Power.</b> $P = 3\\times231\\times2.31\\times\\cos30° = 3\\times462\\times0.866 = 1386$ W.",
+            "<b>Step 4 — Distractor audit.</b> 1600 W forgets $\\cos30°$; 2000 W ignores both the angle and details; 800 W mis-scales."
+          ],
+          a: "$P \\approx 1386$ W",
+          v: "The $\\cos30° = 0.866$ power factor (from the 30° impedance angle) is essential — without it you'd overstate power by 15% ✓. Reactive power here is $Q = 3V_\\phi I_\\phi\\sin30° = 800$ VAR."
+
+        }), ref: "p.363" },
     ],
 
     // EM — +10
