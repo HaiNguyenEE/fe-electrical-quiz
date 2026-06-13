@@ -1654,63 +1654,267 @@
     11: [
       { q: "Magnetic flux through 100-turn coil increases from 0 to 0.01 Wb in 0.1 s. EMF:",
         choices: ["$10$ V", "$0.01$ V", "$1$ V", "$100$ V"], correct: 0,
-        solution: S({ c: "$\\text{EMF} = -N\\,d\\Phi/dt$.", s: ["$|\\text{EMF}| = 100 \\cdot 0.01/0.1 = 10$ V."], a: "$10$ V" }), ref: "p.355" },
+        solution: S({
+          c: "Faraday's law of induction: a coil of $N$ turns develops EMF $= N\\,d\\Phi/dt$ — the number of turns times the rate of flux change.",
+          s: [
+            "<b>Step 1 — Rate of change.</b> $d\\Phi/dt = 0.01/0.1 = 0.1$ Wb/s.",
+            "<b>Step 2 — Multiply by turns.</b> $|EMF| = 100\\times0.1 = 10$ V.",
+            "<b>Step 3 — Distractor audit.</b> 0.01 V and 1 V forget the turns or the time; 100 V over-multiplies."
+          ],
+          a: "$|EMF| = 10$ V",
+          v: "Two levers raise induced voltage: more TURNS or faster flux CHANGE ✓ — the basis of every generator and transformer. The minus sign (Lenz) just says the induced current opposes the change."
+
+        }), ref: "p.355" },
       { q: "Inductor L stores energy proportional to:", choices: ["$I^2$", "$I$", "$V^2$", "$Q^2$"], correct: 0,
-        solution: S({ c: "$W = \\frac{1}{2}LI^2$.", s: [""], a: "$\\propto I^2$" }), ref: "p.355" },
+        solution: S({
+          c: "Energy in an inductor's magnetic field is $W = \\tfrac12 LI^2$ — proportional to the SQUARE of current.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\propto I^2$.",
+            "<b>Step 2 — Distractor audit.</b> $\\propto I$ misses the square; $V^2$ is the CAPACITOR's law; $Q^2$ isn't the inductor's variable."
+          ],
+          a: "$W \\propto I^2$ (specifically $\\tfrac12 LI^2$).",
+          v: "The $I^2$ means doubling current QUADRUPLES stored energy ✓ — and abruptly interrupting that current releases it as a high-voltage spike ($v=L\\,di/dt$), the reason flyback diodes protect switches driving inductive loads."
+
+        }), ref: "p.355" },
       { q: "Capacitor C stores energy proportional to:", choices: ["$V^2$", "$V$", "$I$", "$Q$"], correct: 0,
-        solution: S({ c: "$W = \\frac{1}{2}CV^2 = Q^2/(2C)$.", s: [""], a: "$\\propto V^2$" }), ref: "p.358" },
+        solution: S({
+          c: "Energy in a capacitor's electric field is $W = \\tfrac12 CV^2 = Q^2/(2C)$ — proportional to the SQUARE of voltage.",
+          s: [
+            "<b>Step 1 — Match.</b> $\\propto V^2$.",
+            "<b>Step 2 — Distractor audit.</b> $\\propto V$ misses the square; $I$ is the inductor's variable; $Q$ alone is linear (the energy goes as $Q^2$)."
+          ],
+          a: "$W \\propto V^2$ (specifically $\\tfrac12 CV^2$).",
+          v: "Note the duality: inductor stores $\\tfrac12 LI^2$ (current), capacitor stores $\\tfrac12 CV^2$ (voltage) ✓. The $V^2$ is why high-voltage capacitor banks store dangerous energy even at modest capacitance."
+
+        }), ref: "p.358" },
       { q: "Magnetic permeability of iron core (relative):",
         choices: ["$\\mu_r$ several hundred to thousands", "$\\mu_r = 1$", "$\\mu_r < 1$", "$\\mu_r = 0$"], correct: 0,
-        solution: S({ c: "Ferromagnetic materials: $\\mu_r$ in hundreds (steel) to thousands+ (Permalloy).", s: ["Most metals/dielectrics: $\\mu_r \\approx 1$.", "Superconductors: $\\mu_r = 0$ (perfect diamagnetism)."], a: "Hundreds to thousands" }), ref: "p.355" },
+        solution: S({
+          c: "Relative permeability $\\mu_r$ compares a material's magnetic response to vacuum. FERROMAGNETIC materials (iron, steel) have $\\mu_r$ in the hundreds to thousands, hugely concentrating magnetic flux.",
+          s: [
+            "<b>Step 1 — Match.</b> Several hundred to thousands.",
+            "<b>Step 2 — Distractor audit.</b> $\\mu_r=1$ is non-magnetic (air, copper); $\\mu_r<1$ is weak diamagnetism; $\\mu_r=0$ is a perfect diamagnet (superconductor)."
+          ],
+          a: "Hundreds to thousands.",
+          v: "This is WHY transformers and motors use iron cores — the high $\\mu_r$ multiplies inductance and channels flux where you want it ✓. Special alloys (Permalloy, mu-metal) reach tens of thousands for magnetic shielding."
+
+        }), ref: "p.355" },
       { q: "EM wave: E and B fields are:", choices: ["Perpendicular to each other and direction of propagation", "Parallel", "Inclined 45°", "Opposite directions"], correct: 0,
-        solution: S({ c: "Transverse EM wave: E, B, and propagation k form right-handed orthogonal triad.", s: [""], a: "Mutually perpendicular" }), ref: "p.355" },
+        solution: S({
+          c: "An electromagnetic wave is TRANSVERSE: the electric field E, magnetic field B, and propagation direction k are mutually PERPENDICULAR, forming a right-handed triad.",
+          s: [
+            "<b>Step 1 — Match.</b> Perpendicular to each other and to propagation.",
+            "<b>Step 2 — Distractor audit.</b> 'Parallel', '45°', 'opposite' all violate the transverse orthogonal structure of EM waves."
+          ],
+          a: "Mutually perpendicular (E ⊥ B ⊥ k).",
+          v: "The cross product $\\vec E\\times\\vec B$ points along propagation — that's the Poynting vector, the direction of energy flow ✓. This orthogonality is a direct consequence of Maxwell's equations in free space."
+
+        }), ref: "p.355" },
       { q: "Ampere's law: $\\oint \\vec{B}\\cdot d\\vec{l} = \\mu_0 I_{enc}$. Useful for:",
         choices: ["Symmetric current distributions", "Random distributions", "Linear charges", "Point charges"], correct: 0,
-        solution: S({ c: "Symmetry (cylindrical, planar, axial) allows direct integration.", s: ["E.g., long wire, solenoid, toroid."], a: "Symmetric situations" }), ref: "p.355" },
+        solution: S({
+          c: "Ampère's law $\\oint\\vec B\\cdot d\\vec l = \\mu_0 I_{enc}$ relates the magnetic field circulation to enclosed current. It's most USEFUL when SYMMETRY (cylindrical, planar, toroidal) lets you pull B out of the integral.",
+          s: [
+            "<b>Step 1 — Match.</b> Symmetric current distributions.",
+            "<b>Step 2 — Distractor audit.</b> Random distributions lack the symmetry to evaluate the integral; line/point CHARGES are electrostatics (Gauss's law territory)."
+          ],
+          a: "Symmetric current distributions.",
+          v: "Classic uses: long straight wire ($B = \\mu_0 I/2\\pi r$), solenoid ($B = \\mu_0 nI$), toroid ✓ — each has a symmetry that makes B constant along a chosen loop. It's the magnetic analog of how Gauss's law exploits symmetry for E."
+
+        }), ref: "p.355" },
       { q: "Skin depth in copper at 60 Hz:", choices: ["$\\approx 8.5$ mm", "$0.5$ mm", "$10$ µm", "$100$ m"], correct: 0,
-        solution: S({ c: "$\\delta = \\sqrt{2/(\\mu\\sigma\\omega)}$.", s: ["At 60 Hz for Cu: 8.5 mm.", "At 60 Hz, current essentially uniform in wires up to 16 mm radius."], a: "$\\approx 8.5$ mm" }), ref: "p.368" },
+        solution: S({
+          c: "At AC, current crowds toward a conductor's surface. The SKIN DEPTH $\\delta = \\sqrt{2/(\\mu\\sigma\\omega)}$ is where current density falls to 1/e of the surface value — and it SHRINKS as frequency rises. For copper at 60 Hz, $\\delta \\approx 8.5$ mm.",
+          s: [
+            "<b>Step 1 — Match.</b> ≈ 8.5 mm.",
+            "<b>Step 2 — Distractor audit.</b> 0.5 mm and 10 µm are skin depths at much HIGHER frequencies; 100 m is absurd for a conductor."
+          ],
+          a: "$\\delta \\approx 8.5$ mm",
+          v: "At 60 Hz, 8.5 mm means current is nearly uniform in ordinary wires (radius < ~16 mm) ✓ — skin effect barely matters. But at MHz frequencies $\\delta$ drops to microns, which is why RF conductors are hollow tubes or use litz wire."
+
+        }), ref: "p.368" },
       { q: "Charge stored when 5V applied to 10µF capacitor:",
         choices: ["$50$ µC", "$5$ µC", "$2$ µC", "$50$ C"], correct: 0,
-        solution: S({ c: "$Q = CV$.", s: ["$10 \\cdot 10^{-6} \\cdot 5 = 50 \\cdot 10^{-6}$ C = 50 µC."], a: "$50$ µC" }), ref: "p.358" },
+        solution: S({
+          c: "Capacitor charge follows $Q = CV$.",
+          s: [
+            "<b>Step 1 — Multiply.</b> $Q = (10\\times10^{-6})(5) = 50\\times10^{-6}$ C = 50 µC.",
+            "<b>Step 2 — Distractor audit.</b> 5 µC and 2 µC mishandle the multiply; 50 C forgets the micro prefix entirely."
+          ],
+          a: "$Q = 50$ µC",
+          v: "Units: µF × V = µC ✓ — the micro prefix carries straight through. The stored energy here is $\\tfrac12 CV^2 = \\tfrac12(10\\,\\mu F)(25) = 125$ µJ."
+
+        }), ref: "p.358" },
       { q: "Mutual inductance: two coils with $L_1$, $L_2$, coupling $k=1$:",
         choices: ["$M = \\sqrt{L_1 L_2}$", "$M = L_1+L_2$", "$M = 0$", "$M$ undefined"], correct: 0,
-        solution: S({ c: "$M = k\\sqrt{L_1 L_2}$. Perfect coupling: $k=1$.", s: [""], a: "$\\sqrt{L_1 L_2}$" }), ref: "p.355" },
+        solution: S({
+          c: "Mutual inductance between two coupled coils is $M = k\\sqrt{L_1 L_2}$, where the coupling coefficient $k$ (0 to 1) measures what fraction of flux is shared. Perfect coupling ($k=1$) gives $M = \\sqrt{L_1 L_2}$.",
+          s: [
+            "<b>Step 1 — Apply k=1.</b> $M = \\sqrt{L_1 L_2}$.",
+            "<b>Step 2 — Distractor audit.</b> $L_1+L_2$ is series-aiding self-inductance, not mutual; $M=0$ is zero coupling; 'undefined' is wrong."
+          ],
+          a: "$M = \\sqrt{L_1 L_2}$",
+          v: "$k=1$ (all flux linked) is the ideal transformer limit ✓ — real transformers reach $k > 0.99$ with tight iron cores, while loosely-coupled air-core coils may have $k < 0.5$. Leakage inductance is the unshared part."
+
+        }), ref: "p.355" },
       { q: "Force on charged particle in E and B field (Lorentz):",
         choices: ["$\\vec{F} = q(\\vec{E} + \\vec{v}\\times\\vec{B})$", "$qE$ only", "$qvB$ only", "$0$"], correct: 0,
-        solution: S({ c: "Full Lorentz force law.", s: ["E contribution: $qE$ in direction of E (for positive q).", "B contribution: $qv\\times B$, perpendicular to both v and B."], a: "$q(\\vec{E} + \\vec{v}\\times\\vec{B})$" }), ref: "p.355" },
+        solution: S({
+          c: "The Lorentz force is the complete force on a charge: $\\vec F = q(\\vec E + \\vec v\\times\\vec B)$ — an electric part (along E) plus a magnetic part (perpendicular to both velocity and B).",
+          s: [
+            "<b>Step 1 — Match.</b> $q(\\vec E + \\vec v\\times\\vec B)$.",
+            "<b>Step 2 — Distractor audit.</b> '$qE$ only' drops the magnetic force; '$qvB$ only' drops the electric force; 0 is wrong."
+          ],
+          a: "$\\vec F = q(\\vec E + \\vec v\\times\\vec B)$",
+          v: "Key insight: the magnetic force does NO work (it's always ⊥ to velocity) — it bends the path but can't change speed ✓. This is why cyclotrons use B to steer and E to accelerate. It also explains the motor force $F = BIL$."
+
+        }), ref: "p.355" },
     ],
 
     // Control — +12
     12: [
       { q: "Closed-loop pole location of $G(s)=K/(s(s+10))$ for $K = 25$ (unity feedback):",
         choices: ["$s = -5 \\pm j0$ (critically damped, double pole)", "$s = \\pm 5j$", "$s = -10, 0$", "$s = -25$"], correct: 0,
-        solution: S({ c: "Closed loop: $s^2+10s+K=0$. Discriminant = $100-4K$.", s: ["$K=25$: disc=$0$, double pole at $s = -10/2 = -5$.", "$K<25$: real distinct. $K>25$: complex."], a: "$s = -5$ (double)" }), ref: "p.366" },
+        solution: S({
+          c: "For unity feedback, closed-loop poles are roots of $1+G(s)=0$. Here that gives $s^2+10s+K=0$. The discriminant $100-4K$ decides the response type: >0 overdamped, =0 critically damped, <0 underdamped.",
+          s: [
+            "<b>Step 1 — Characteristic equation.</b> $s(s+10)+K = s^2+10s+K = 0$.",
+            "<b>Step 2 — Discriminant at K=25.</b> $100-4(25) = 0$ → a repeated (double) real root.",
+            "<b>Step 3 — Pole.</b> $s = -10/2 = -5$ (double).",
+            "<b>Step 4 — Distractor audit.</b> $\\pm5j$ needs $K>25$; $-10,0$ are the OPEN-loop poles; $-25$ ignores the quadratic."
+          ],
+          a: "$s = -5$ (double pole, critically damped).",
+          v: "K=25 is exactly the critical-damping boundary: below it the poles are real/distinct (overdamped, sluggish), above it complex (underdamped, overshoot) ✓ — critical damping gives the fastest response with NO overshoot."
+
+        }), ref: "p.366" },
       { q: "Type-0, $K_p = 4$. Step error:", choices: ["$1/5 = 0.2$", "$1/4$", "$0$", "$4$"], correct: 0,
-        solution: S({ c: "$e_{ss} = 1/(1+K_p)$.", s: ["$1/5 = 0.2$."], a: "$0.2$" }), ref: "p.366" },
+        solution: S({
+          c: "A Type-0 system (no integrators) has a finite steady-state error to a step input: $e_{ss} = \\dfrac{1}{1+K_p}$, where $K_p$ is the static position error constant.",
+          s: [
+            "<b>Step 1 — Apply.</b> $e_{ss} = 1/(1+4) = 1/5 = 0.2$.",
+            "<b>Step 2 — Distractor audit.</b> $1/4$ forgets the +1; 0 would need an integrator (Type-1); 4 is just $K_p$."
+          ],
+          a: "$e_{ss} = 0.2$",
+          v: "20% steady error is large — it's why Type-0 systems need high gain (or an added integrator) for accuracy ✓. Adding one integrator makes it Type-1, driving step error to exactly zero (at the cost of a finite ramp error)."
+
+        }), ref: "p.366" },
       { q: "Bode plot first-order pole at 100 rad/s: at $\\omega=1000$:",
         choices: ["$\\approx -20$ dB and $-84°$ phase", "$0$ dB", "$-3$ dB", "$+20$ dB"], correct: 0,
-        solution: S({ c: "Far above pole: mag falls at -20 dB/dec; phase approaches -90°.", s: ["1 decade above: -20 dB, ~-84° (asymptotically -90°)."], a: "$-20$ dB, $-84°$" }), ref: "p.366" },
+        solution: S({
+          c: "A first-order pole contributes −20 dB/decade magnitude rolloff and −90° of phase (asymptotically) above its corner frequency. One DECADE above the pole (1000 vs 100), magnitude is ≈ −20 dB and phase ≈ −84°.",
+          s: [
+            "<b>Step 1 — Magnitude.</b> 1 decade past the 100 rad/s corner → −20 dB.",
+            "<b>Step 2 — Phase.</b> Phase reaches −45° AT the corner and approaches −90° far above; one decade up it's about −84°.",
+            "<b>Step 3 — Distractor audit.</b> 0 dB and −3 dB are near/at the corner; +20 dB is a zero, not a pole."
+          ],
+          a: "$\\approx -20$ dB and $-84°$.",
+          v: "Memorize the corner landmarks: AT the pole, −3 dB and −45°; a decade BELOW, ~0 dB/0°; a decade ABOVE, ~−20 dB/−84° ✓. The phase changes gradually over two decades around the corner, lagging the magnitude transition."
+
+        }), ref: "p.366" },
       { q: "Pure delay $e^{-\\tau s}$ in time domain:", choices: ["Shifts signal by $\\tau$ later", "Differentiates", "Integrates", "Inverts"], correct: 0,
-        solution: S({ c: "Delay operator: output at time $t$ = input at $t - \\tau$.", s: ["In Laplace: $\\mathcal{L}\\{x(t-\\tau)\\} = e^{-\\tau s}X(s)$."], a: "Time shift by $\\tau$" }), ref: "p.56" },
+        solution: S({
+          c: "Multiplying by $e^{-\\tau s}$ in the Laplace domain corresponds to a pure TIME DELAY: the output is the input shifted later by $\\tau$ — $\\mathcal L\\{x(t-\\tau)\\} = e^{-\\tau s}X(s)$.",
+          s: [
+            "<b>Step 1 — Match.</b> Shifts the signal $\\tau$ later in time.",
+            "<b>Step 2 — Distractor audit.</b> Differentiation is $\\times s$; integration is $\\div s$; inversion is a sign change — none is a delay."
+          ],
+          a: "A time shift by $\\tau$ (later).",
+          v: "Pure delay is a control engineer's nemesis: it adds phase lag without attenuation, eroding phase margin and destabilizing loops ✓ — transport lag in pipelines, network latency, and dead time all behave this way."
+
+        }), ref: "p.56" },
       { q: "Bode phase of $e^{-\\tau s}$:", choices: ["Linearly decreasing: $-\\omega\\tau$", "Constant -90°", "Zero", "Linearly increasing"], correct: 0,
-        solution: S({ c: "$\\angle e^{-j\\omega\\tau} = -\\omega\\tau$ (linear in $\\omega$).", s: ["Magnitude: 1 (unchanged)."], a: "$-\\omega\\tau$" }), ref: "p.56" },
+        solution: S({
+          c: "A pure delay $e^{-\\tau s}$ has unit magnitude but phase $\\angle e^{-j\\omega\\tau} = -\\omega\\tau$ — phase lag that grows LINEARLY (and without bound) with frequency.",
+          s: [
+            "<b>Step 1 — Match.</b> Linearly decreasing: $-\\omega\\tau$.",
+            "<b>Step 2 — Distractor audit.</b> Constant −90° is an integrator; zero ignores the delay; 'increasing' has the wrong sign."
+          ],
+          a: "$\\angle = -\\omega\\tau$ (linear lag).",
+          v: "Magnitude stays 1 (a delay doesn't attenuate), but the ever-growing phase lag is what makes delays so destabilizing ✓ — at high frequency the lag becomes enormous, which is why dead time so sharply limits achievable bandwidth."
+
+        }), ref: "p.56" },
       { q: "PID with too high $K_p$:", choices: ["Oscillation or instability", "Fast and stable", "Slow", "No effect"], correct: 0,
-        solution: S({ c: "High $K_p$: high gain → low phase margin → oscillation/instability.", s: ["Typical tuning: increase $K_p$ until oscillation, back off."], a: "Oscillation/instability" }), ref: "p.366" },
+        solution: S({
+          c: "Cranking proportional gain $K_p$ too high pushes the loop's gain crossover up where phase lag is large → phase margin collapses → the system oscillates or goes unstable.",
+          s: [
+            "<b>Step 1 — Match.</b> Oscillation or instability.",
+            "<b>Step 2 — Distractor audit.</b> 'Fast and stable' ignores the margin loss; 'slow' and 'no effect' are wrong — high gain speeds response but at stability's expense."
+          ],
+          a: "Oscillation or instability.",
+          v: "This is literally the basis of Ziegler-Nichols tuning: raise $K_p$ until sustained oscillation (the ULTIMATE gain), then back off ✓. The trade — more gain means faster response but less stability margin — is the central tension in controller design."
+
+        }), ref: "p.366" },
       { q: "Ziegler-Nichols method:", choices: ["Empirical PID tuning rules", "Theoretical optimal", "Adaptive control", "Robust control"], correct: 0,
-        solution: S({ c: "Ziegler-Nichols (1942): empirical formulas based on ultimate gain and period.", s: ["Quick but conservative.", "Modern alternatives: IMC, lambda tuning, auto-tuning."], a: "Empirical PID tuning" }), ref: "p.366" },
+        solution: S({
+          c: "Ziegler-Nichols (1942) is a set of EMPIRICAL PID tuning rules — formulas based on the measured ultimate gain and oscillation period (or an open-loop step response), not on a theoretical optimum.",
+          s: [
+            "<b>Step 1 — Match.</b> Empirical PID tuning rules.",
+            "<b>Step 2 — Distractor audit.</b> Not 'theoretical optimal'; not adaptive or robust control — those are distinct, more advanced approaches."
+          ],
+          a: "Empirical PID tuning rules.",
+          v: "Z-N gives a quick starting point but tends to be aggressive (oscillatory) ✓ — engineers then fine-tune, or use gentler modern methods (IMC, lambda tuning, relay auto-tuning) for less overshoot."
+
+        }), ref: "p.366" },
       { q: "Cascade control structure:", choices: ["Inner fast loop + outer slower loop", "Single loop", "Parallel paths", "Random"], correct: 0,
-        solution: S({ c: "Cascade: outer loop sets reference for inner (faster) loop.", s: ["Used: temperature control with inner flow control; position control with inner velocity loop."], a: "Inner + outer loops" }), ref: "p.365" },
+        solution: S({
+          c: "Cascade control nests two loops: a fast INNER loop regulates a secondary variable, and a slower OUTER loop sets the inner loop's setpoint. The inner loop rejects disturbances before they reach the main output.",
+          s: [
+            "<b>Step 1 — Match.</b> Inner fast loop + outer slower loop.",
+            "<b>Step 2 — Distractor audit.</b> Single loop, parallel paths, and 'random' don't capture the nested setpoint structure."
+          ],
+          a: "Nested inner (fast) + outer (slow) loops.",
+          v: "Classic example: a temperature (outer) loop commands a flow (inner) loop — the fast flow loop squashes supply-pressure upsets before they disturb temperature ✓. The inner loop must be several times faster than the outer for cascade to help."
+
+        }), ref: "p.365" },
       { q: "State-space representation of order 2 system: number of state variables:",
         choices: ["$2$", "$1$", "$3$", "Variable"], correct: 0,
-        solution: S({ c: "Order = number of states.", s: ["For 2nd-order system: typically position + velocity as states."], a: "$2$" }), ref: "p.365" },
+        solution: S({
+          c: "In state-space form, the number of STATE VARIABLES equals the system ORDER (the number of independent energy-storage elements, or the highest derivative). A 2nd-order system has 2 states.",
+          s: [
+            "<b>Step 1 — Match.</b> 2 state variables.",
+            "<b>Step 2 — Distractor audit.</b> 1 and 3 mismatch the order; 'variable' is wrong — it's fixed by the order."
+          ],
+          a: "2 state variables.",
+          v: "Typical choice for a mechanical 2nd-order system: position and velocity ✓ — two independent quantities you need to predict the future. Each capacitor or inductor in a circuit, or each integrator in a block diagram, adds one state."
+
+        }), ref: "p.365" },
       { q: "Observability of a system: can:", choices: ["Reconstruct full state from outputs and inputs", "Predict future inputs", "Reverse time", "Always controllable"], correct: 0,
-        solution: S({ c: "Observability: can we 'see' all states by observing outputs?", s: ["Test: observability matrix has full rank.", "Dual concept: controllability."], a: "Reconstruct state" }), ref: "p.365" },
+        solution: S({
+          c: "OBSERVABILITY asks: can you reconstruct the system's full internal STATE just from measuring its outputs (and knowing the inputs)? If yes over some interval, the system is observable.",
+          s: [
+            "<b>Step 1 — Match.</b> Reconstruct full state from outputs and inputs.",
+            "<b>Step 2 — Distractor audit.</b> It's not about predicting future inputs or reversing time; 'always controllable' confuses it with the DUAL property."
+          ],
+          a: "Reconstruct the internal state from outputs.",
+          v: "Test: the observability matrix must have full rank ✓. Its dual is CONTROLLABILITY (can inputs drive the state anywhere?). Observability is what makes state ESTIMATORS (Kalman filters, observers) possible when you can't measure every state directly."
+
+        }), ref: "p.365" },
       { q: "Step response overshoot vs $\\zeta$: $\\zeta = 0.4$ gives:",
         choices: ["$\\approx 25\\%$ overshoot", "$5\\%$", "$0\\%$", "$50\\%$"], correct: 0,
-        solution: S({ c: "$M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^2}}$. $\\zeta=0.4$: $e^{-\\pi(0.4)/\\sqrt{0.84}} = e^{-1.37} \\approx 0.254$.", s: [""], a: "$\\approx 25\\%$" }), ref: "p.366" },
+        solution: S({
+          c: "Percent overshoot of a 2nd-order step response depends only on damping ratio: $M_p = e^{-\\pi\\zeta/\\sqrt{1-\\zeta^2}}$.",
+          s: [
+            "<b>Step 1 — Radical.</b> $\\sqrt{1-0.16} = \\sqrt{0.84} = 0.917$.",
+            "<b>Step 2 — Exponent.</b> $-\\pi(0.4)/0.917 = -1.37$.",
+            "<b>Step 3 — Overshoot.</b> $e^{-1.37} = 0.254 \\to 25\\%$.",
+            "<b>Step 4 — Distractor audit.</b> 5% is ζ≈0.69; 0% needs ζ≥1; 50% is ζ≈0.22."
+          ],
+          a: "$\\approx 25\\%$ overshoot.",
+          v: "Calibration ladder worth memorizing: ζ=0.4→25%, 0.5→16%, 0.6→9.5%, 0.707→4.3% ✓ — lower damping means bigger overshoot. ζ=0.7 is the popular design target (small overshoot, fast settling)."
+
+        }), ref: "p.366" },
       { q: "Discrete-time controller sampling period $T_s$. Effect on stability:",
         choices: ["Larger $T_s$ → less stable (digital delay)", "Smaller is worse", "No effect", "Always stable"], correct: 0,
-        solution: S({ c: "Sampling acts as delay → phase margin reduces with larger $T_s$.", s: ["Rule of thumb: $T_s \\le T_{rise}/10$ to behave like continuous."], a: "Larger Ts → less stable" }), ref: "p.376" },
+        solution: S({
+          c: "Sampling introduces an effective DELAY of about $T_s/2$, which eats into phase margin. A LARGER sampling period $T_s$ → more delay → LESS stable.",
+          s: [
+            "<b>Step 1 — Match.</b> Larger $T_s$ → less stable (digital delay).",
+            "<b>Step 2 — Distractor audit.</b> 'Smaller is worse' is backwards; 'no effect' and 'always stable' ignore the sampling delay."
+          ],
+          a: "Larger $T_s$ reduces stability.",
+          v: "Design rule of thumb: sample at least 10× faster than the closed-loop bandwidth ($T_s \\le T_{rise}/10$) so the digital controller behaves like its continuous design ✓. Too slow a sample rate can destabilize an otherwise-fine controller."
+
+        }), ref: "p.376" },
     ],
 
     // Comm — +12
